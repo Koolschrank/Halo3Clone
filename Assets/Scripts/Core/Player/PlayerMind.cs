@@ -1,0 +1,296 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+
+public class PlayerMind : MonoBehaviour
+{
+    public UnityEvent OnPlayerDeath;
+
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Arm_FPSView armsView;
+    [SerializeField] WeaponSway weaponSway;
+    [SerializeField] PlayerFOV playerFOV;
+    [SerializeField] PlayerInput playerInput;
+
+    [SerializeField] Transform spectatorCameraOffset;
+    [SerializeField] LookAtTarget spectatorTarget;
+
+    [Header("UI")]
+    [SerializeField] Transform UIContainer;
+    [SerializeField] HealthUI healthUI;
+    [SerializeField] ShildUI shildUI;
+    [SerializeField] WeaponUI weaponUI;
+    [SerializeField] PickUpUI pickUpUI;
+    [SerializeField] DamageIndicatorUI damageIndicatorUI;
+    [SerializeField] crosshairUI crosshairUI;
+    [SerializeField] CooldownUI granadeCooldown;
+
+    GameObject playerModel;
+    PlayerMovement playerMovement;
+    PlayerAim playerAim;
+    PlayerArms playerArms;
+    Health playerHealth;
+    BulletSpawner bulletSpawner;
+    PlayerPickUpScan playerPickUpScan;
+    PlayerInventory playerInventory;
+
+
+
+    int firstPersonLayer;
+    int thirdPersonLayer;
+
+    // set Player model
+    public void SetPlayerModel(GameObject model)
+    {
+        playerModel = model;
+    }
+
+    // set movement
+    public void SetPlayerMovement(PlayerMovement movement)
+    {
+        playerMovement = movement;
+        weaponSway.SetUp(playerMovement);
+    }
+
+    public void SetSpectatorTarget(Transform target)
+    {
+        spectatorTarget.SetTarget(target);
+    }
+
+    public void SetPlayerInventory(PlayerInventory inventory)
+    {
+        if (playerInventory != null)
+        {
+            playerInventory.OnGranadeChargeChanged -= granadeCooldown.UpdateCooldown;
+        }
+
+        playerInventory = inventory;
+        inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
+    }
+
+
+
+
+    // set aim
+    public void SetPlayerAim(PlayerAim aim)
+    {
+        playerAim = aim;
+    }
+
+    // set arms
+    public void SetPlayerArms(PlayerArms arms)
+    {
+        playerArms = arms;
+        armsView.SetUp(arms);
+        weaponUI.SetUp(arms);
+        arms.OnZoomIn += playerFOV.ZoomIn;
+        arms.OnZoomOut += playerFOV.ZoomOut;
+
+    }
+
+    // set bullet spawner
+    public void SetBulletSpawner(BulletSpawner spawner)
+    {
+        if (bulletSpawner != null)
+        {
+            bulletSpawner.OnTargetAcquired -= crosshairUI.OnTargetAcquired;
+            bulletSpawner.OnTargetLost -= crosshairUI.OnTargetLost;
+            crosshairUI.OnTargetLost(null);
+        }
+
+
+        bulletSpawner = spawner;
+
+        bulletSpawner.OnTargetAcquired += crosshairUI.OnTargetAcquired;
+        bulletSpawner.OnTargetLost += crosshairUI.OnTargetLost;
+    }
+
+    // set health
+    public void SetHealth(Health health)
+    {
+        if (playerHealth != null)
+        {
+            playerHealth.OnDeath -= PlayerDeath;
+        }
+
+        playerHealth = health;
+        healthUI.SetUp(playerHealth);
+        shildUI.SetUp(playerHealth as CharacterHealth);
+        // connect health on death unity event with this function
+        playerHealth.OnDeath += PlayerDeath;
+
+        playerHealth.OnDamageTaken += damageIndicatorUI.AddDamageIndicator;
+    }
+
+    public void PlayerDeath()
+    {
+        OnPlayerDeath?.Invoke();
+    }
+
+    // set pick up scan
+    public void SetPickUpScan(PlayerPickUpScan pickUpScan)
+    {
+        playerPickUpScan = pickUpScan;
+        pickUpUI.SetUp(pickUpScan);
+    }
+
+
+
+
+    private void Start()
+    {
+        PlayerManager.instance.AddPlayer(this);
+    }
+    public void Move(InputAction.CallbackContext context)
+    {
+        if (playerMovement == null) return;
+
+        Vector2 movement = context.ReadValue<Vector2>();
+        playerMovement.UpdateMoveInput(movement);
+    }
+
+    public void Aim(InputAction.CallbackContext context)
+    {
+        if (playerAim == null) return;
+
+        Vector2 look = context.ReadValue<Vector2>();
+        playerAim.UpdateAimInput(look);
+    }
+
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (playerMovement == null) return;
+
+        playerMovement.TryJump();
+    }
+
+    public void WeaponTrigger(InputAction.CallbackContext context)
+    {
+        if (playerArms == null) return;
+        playerArms.UpdateWeaponTrigger(context.ReadValue<float>()> 0);
+    }
+
+    public void WeaponReload(InputAction.CallbackContext context)
+    {
+
+        if (context.performed)
+        {
+            if (playerArms == null) return;
+            playerArms.PressReloadButton();
+        }
+    }
+
+    public void WeaponSwitch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerArms.PressSwitchButton();
+        }
+    }
+
+    public void WeaponPickUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerArms.TryPickUpWeapon();
+        }
+    }
+
+    public void ThrowGranade(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerArms.PressGranadeButton();
+        }
+    }
+
+    public void Crouch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerMovement.ToggleCrouch();
+        }
+    }
+
+    public void MeleeAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerArms.PressMeleeButton();
+        }
+    }
+
+    // zoom
+    public void Zoom(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerArms.PressZoomButton();
+        }
+    }
+
+    public void SetLayers(int FPS_Layer, int ThirdPerson_Layer)
+    {
+        firstPersonLayer = FPS_Layer;
+        thirdPersonLayer = ThirdPerson_Layer;
+
+
+        UpdateLayers();
+    }
+
+    public void UpdateLayers()
+    {
+        if (transform != null && playerModel != null)
+        {
+            UtilityFunctions.SetLayerRecursively(gameObject, firstPersonLayer);
+            UtilityFunctions.SetLayerRecursively(playerModel, thirdPersonLayer);
+        }
+    }
+
+    public void EnableLayerInCamera(int layer)
+    {
+        playerCamera.cullingMask |= 1 << layer;
+    }
+
+
+    public void RespawnWithDelay(float delay)
+    {
+        StartCoroutine(RespawnDelay(delay));
+    }
+
+    public void SwitchToSpectatorCamera()
+    {
+        // add camera to spectator camera offset as child
+        transform.SetParent(null);
+        playerCamera.transform.SetParent(spectatorCameraOffset);
+        playerCamera.transform.localPosition = Vector3.zero;
+        playerCamera.transform.localRotation = Quaternion.identity;
+        armsView.gameObject.SetActive(false);
+        UIContainer.gameObject.SetActive(false);
+    }
+
+    public void SwitchToPlayerCamera()
+    {
+        playerCamera.transform.SetParent(transform);
+        playerCamera.transform.localPosition = Vector3.zero;
+        playerCamera.transform.localRotation = Quaternion.identity;
+        armsView.gameObject.SetActive(true);
+        UIContainer.gameObject.SetActive(true);
+
+    }
+    IEnumerator RespawnDelay(float delay)
+    {
+        SwitchToSpectatorCamera();
+        yield return new WaitForSeconds(delay);
+        Respawn();
+    }
+
+    public void Respawn()
+    {
+        PlayerManager.instance.RespawnPlayer(this);
+        SwitchToPlayerCamera();
+    }
+
+
+}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: BaseWeapon
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 2a3e0cbb444078b4ea95c93f444b0966, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 54245a2b12894ed41b5df1dda442b33e, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: 02e1c6e11b7f26a45b9af10e7362627a, type: 3}
+  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: d0d50155b6402bc4dbd9438144eef083, type: 3}
+  weaponName: Assult Rifle
+  shootType: 1
+  fireRate: 0.1
+  bulletsPerShot: 1
+  magazineSize: 30
+  maxAmmoInReserve: 500
+  reloadTime: 2.2
+  inaccuracy: 0.06
+  switchOutTime: 0.3
+  switchInTime: 0.6
+  canZoom: 0
+  zoomFOV: 0
+  meleeData: {fileID: 0}
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}

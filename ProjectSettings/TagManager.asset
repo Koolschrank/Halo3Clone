@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Manager
+  - Water
+  - UI
+  - PickUp
+  - Player
+  - Visual
+  - PickUp
+  - HitBox
+  - FPS_ViewObject
+  - 3rdPerson_ViewObject
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Player1_FPS
+  - Player1_ThirdPerson
+  - Player2_FPS
+  - Player2_ThirdPerson
+  - Player3_FPS
+  - Player3_ThirdPerson
+  - Player4_FPS
+  - Player4_ThirdPerson
+  - DeadPlayerLayer
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1682300895
+    locked: 0
+  m_RenderingLayers:
+  - Default

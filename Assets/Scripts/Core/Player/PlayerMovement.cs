@@ -1,0 +1,169 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerMovement : MonoBehaviour
+{
+
+    public Action OnJump;
+    public Action OnCrouch;
+    public Action OnStandUp;
+    public Action<Vector3> OnMoveUpdated;
+    public Action<Vector2> OnAimUpdated;
+
+    // character controller 
+    [Header("References")]
+    [SerializeField] CharacterController cc;
+    [SerializeField] Transform head;
+    [SerializeField] Transform head_normalPosition;
+    [SerializeField] Transform head_crouchPosition;
+    [Header("Settings")]
+    // movement speed
+    [SerializeField] float maxMoveSpeed = 12f;
+    [SerializeField] float moveSpeedCrouchMultiplier = 0.4f;
+    [SerializeField] float acceleration_ground = 10f;
+    [SerializeField] float acceleration_air = 5f;
+    [SerializeField] float deceleration_ground = 10f;
+    [SerializeField] float deceleration_air = 5f;
+
+    [SerializeField] float jumpPower = 9.8f;
+    [SerializeField] float jumpCooldown = 0.5f;
+    float jumpCooldownTimer = 0;
+    [SerializeField] float gravity = 9.8f;
+    [SerializeField] float crouchSpeed = 0.5f;
+
+
+    Vector3 moveVelocity = Vector3.zero;
+    float gravityVelocity = 0;
+    Vector2 moveInput = Vector2.zero;
+
+    public float MaxMoveSpeed => maxMoveSpeed;
+    bool inCrouch = false;
+
+    
+
+
+    // update
+    void Update()
+    {
+        UpdateCrouch();
+        UpdateMove();
+        UpdateGravity();
+
+        var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
+        cc.Move(moveVector * Time.deltaTime);
+
+        OnMoveUpdated?.Invoke(moveVector);
+    }
+
+    private void UpdateCrouch()
+    {
+
+        
+        if ( inCrouch)
+        {
+            head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Time.deltaTime);
+        }
+        else
+        {
+            head.transform.position = Vector3.MoveTowards(head.transform.position, head_normalPosition.position, crouchSpeed * Time.deltaTime);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
+
+    }
+
+
+    private void UpdateMove()
+    {
+        Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
+        Vector3 moveInput = new Vector3(input.x, 0, input.y);
+        Vector3 camForward = head.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        
+        Vector3 move = camForward * moveInput.z + head.transform.right * moveInput.x;
+
+
+        if (move.magnitude == 0)
+        {
+            var deceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
+            moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration * Time.deltaTime);
+        }
+        else
+        {
+            var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
+            var speedMultiplier = maxMoveSpeed;
+            if (inCrouch)
+            {
+                speedMultiplier *= moveSpeedCrouchMultiplier;
+            }
+
+            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier, acceleration * Time.deltaTime);
+        }
+
+        
+    }
+
+    private void UpdateGravity()
+    {
+
+        if (cc.isGrounded && jumpCooldownTimer <= 0)
+        {
+            gravityVelocity = -0.1f;
+        }
+        else
+        {
+            gravityVelocity -= gravity * Time.deltaTime;
+        }
+
+        if (jumpCooldownTimer > 0)
+        {
+            jumpCooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    public void TryJump()
+    {
+        if (cc.isGrounded && jumpCooldownTimer <= 0)
+        {
+            gravityVelocity = jumpPower;
+            jumpCooldownTimer = jumpCooldown;
+            OnJump?.Invoke();
+            if (inCrouch)
+            {
+                ToggleCrouch();
+            }
+        }
+    }
+
+    // player input funtion
+    public void UpdateMoveInput(Vector2 input)
+    {
+        moveInput = input;
+    }
+
+
+    public void ToggleCrouch()
+    {
+
+
+        
+        if (inCrouch)
+        {
+            inCrouch = false;
+            OnStandUp?.Invoke();
+            
+        }
+        else if(cc.isGrounded)
+        {
+            inCrouch = true;
+            OnCrouch?.Invoke();
+        }
+    }
+
+
+}

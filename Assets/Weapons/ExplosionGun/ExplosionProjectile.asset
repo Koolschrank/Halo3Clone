@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f08c177aac84104eb895c68e5a6e446, type: 3}
+  m_Name: ExplosionProjectile
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 691827347594146763, guid: d4b498d6425f4a24c9152638f143fd0b, type: 3}
+  bulletVisual: {fileID: 163348909714712760, guid: 3718a7ba4d2dde54a9b384e71f12b59a, type: 3}

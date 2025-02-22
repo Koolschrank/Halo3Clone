@@ -1,0 +1,331 @@
+using UnityEngine;
+using UnityEngine.Animations.Rigging;
+
+public class PlayerAnimation : MonoBehaviour
+{
+    [Header("Reverences")]
+    [SerializeField] Transform lookTransform;
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerArms playerArms;
+    [SerializeField] CharacterController cc;
+    [SerializeField] Animator animator;
+    [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] Transform aimTarget;
+    [SerializeField] Transform weaponSocket;
+    
+    GameObject weaponVisual;
+    [SerializeField] Transform backpackWeaponSocket;
+    GameObject backpackWeaponVisual;
+
+    [SerializeField] MultiAimConstraint rightHandWeaponGrip;
+    
+    [SerializeField] TwoBoneIKConstraint leftHandWeaponGrip;
+
+    [Header("Settings")]
+    [SerializeField] float landRaycastDistance = 2.5f;
+    [SerializeField] LayerMask groundLayer;
+
+    bool rightHandGripActive = true;
+    bool leftHandGripActive = true;
+
+    [Header("Settings")]
+    [SerializeField] float gripChangeTime = 0.1f;
+
+    [Header("Granade")]
+    [SerializeField] Transform granadeSocket;
+    GameObject granadeVisual;
+
+
+
+    // start
+    public void Start()
+    {
+        playerMovement.OnJump += Jump;
+        playerMovement.OnCrouch += () => UpdateCrouch(true);
+        playerMovement.OnStandUp += () => UpdateCrouch(false);
+        
+
+        // connect reload
+        playerArms.OnWeaponReloadStarted += Reload;
+        // connect switch weapon
+        playerArms.OnWeaponUnequipStarted += SwitchOutWeapon;
+        playerArms.OnWeaponEquipStarted += SwitchInWeapon;
+        // throw granade
+        playerArms.OnGranadeThrowStarted += ThrowGranadeStart;
+        playerArms.OnGranadeThrow += ThrowGranade;
+        playerArms.OnMeleeWithWeaponStarted += Melee;
+        playerInventory.OnWeaponAddedToInventory += PutWeaponInBackpack;
+
+        if (weaponVisual == null)
+        {
+            var weapon = playerArms.GetWeaponInHand();
+            var switchInTime = playerArms.GetWeaponInHandSwitchInTime();
+            SwitchInWeapon(weapon, switchInTime);
+        }
+        if (backpackWeaponVisual == null)
+        {
+            var weapon = playerInventory.GetWeapon();
+            if (weapon != null)
+            {
+                PutWeaponInBackpack(weapon);
+            }
+        }
+    }
+
+    public void Update()
+    {
+        UpdateInAir();
+        UpdateMove();
+        UpdateGrip();
+        UpdateAim();
+    }
+
+    public void UpdateAim()
+    {
+        var forward = lookTransform.transform.forward;
+        var position = lookTransform.transform.position;
+        var targetPosition = position + forward * 10;
+        aimTarget.position = targetPosition;
+    }
+
+
+    public void UpdateInAir()
+    {
+        animator.SetBool("InAir", !cc.isGrounded);
+
+        if (!cc.isGrounded && cc.velocity.y < 0)
+        {
+            // shoot a raycast down to check if player is grounded
+            if (Physics.Raycast(cc.transform.position, Vector3.down, landRaycastDistance, groundLayer))
+            {
+                animator.SetTrigger("Land");
+            }
+        }
+        else
+        {
+            animator.ResetTrigger("Land");
+        }
+    }
+
+    public void UpdateMove()
+    {
+        var velocity = cc.velocity;
+        var maxSpeed = playerMovement.MaxMoveSpeed;
+
+        float forwardVelocity = Vector3.Dot(velocity, transform.forward);
+        float rightVelocity = Vector3.Dot(velocity, transform.right);
+
+        animator.SetFloat("MoveX", forwardVelocity / maxSpeed);
+        animator.SetFloat("MoveZ", rightVelocity / maxSpeed);
+    }
+
+    public void UpdateGrip()
+    {
+        var rightHandGripChangeThisFrame = Time.deltaTime / gripChangeTime;
+        var leftHandGripChangeThisFrame = Time.deltaTime / gripChangeTime;
+
+        if (!rightHandGripActive)
+        {
+            rightHandGripChangeThisFrame = -rightHandGripChangeThisFrame;
+        }
+        rightHandWeaponGrip.weight = Mathf.Clamp(rightHandWeaponGrip.weight + rightHandGripChangeThisFrame, 0, 1);
+
+        if (!leftHandGripActive)
+        {
+            leftHandGripChangeThisFrame = -leftHandGripChangeThisFrame;
+        }
+
+        leftHandWeaponGrip.weight = Mathf.Clamp(leftHandWeaponGrip.weight + leftHandGripChangeThisFrame, 0, 1);
+    }
+
+    public void Jump()
+    {
+        animator.SetTrigger("Jump");
+    }
+
+    public void Reload(Weapon_Arms weapon,float animationDuration)
+    {
+        var reloadClip = GetAnimationClipByName("Reload");
+        var animationLenght = GetAnimationLenght(reloadClip);
+        SetAnimationSpeed(reloadClip, animationLenght, animationDuration);
+        animator.SetTrigger("Reload");
+    }
+
+    public void SwitchOutWeapon(Weapon_Arms weapon, float animationDuration)
+    {
+        var switchOutClip = GetAnimationClipByName("SwitchOut");
+        var animationLenght = GetAnimationLenght(switchOutClip);
+        SetAnimationSpeed(switchOutClip, animationLenght, animationDuration);
+
+        animator.SetTrigger("SwitchOut");
+    }
+
+    public void SwitchInWeapon(Weapon_Arms weapon, float animationDuration)
+    {
+        var child = transform.GetChild(0);
+
+        var switchInClip = GetAnimationClipByName("SwitchIn");
+        var animationLenght = GetAnimationLenght(switchInClip);
+        SetAnimationSpeed(switchInClip, animationLenght, animationDuration);
+
+        animator.SetTrigger("SwitchIn");
+
+
+
+        if (weaponVisual != null)
+        {
+            Destroy(weaponVisual.gameObject);
+        }
+
+        weaponVisual = Instantiate(weapon.WeaponModel, weaponSocket);
+        weaponVisual.transform.localPosition = Vector3.zero;
+        weaponVisual.transform.localRotation = Quaternion.identity;
+        if (weaponVisual.TryGetComponent<Weapon_Model>(out Weapon_Model weaponModel))
+        {
+            weaponModel.SetUp(weapon);
+        }
+        UtilityFunctions.SetLayerRecursively(weaponVisual, gameObject.layer);
+    }
+
+    public void Melee(Weapon_Arms weapon, float animationDuration)
+    {
+        var meleeClip = GetAnimationClipByName("Melee");
+        var animationLenght = GetAnimationLenght(meleeClip);
+        SetAnimationSpeed(meleeClip, animationLenght, animationDuration);
+        animator.SetTrigger("Melee");
+    }
+
+    public void PutWeaponInBackpack(Weapon_Arms weapon)
+    {
+        if (backpackWeaponVisual != null)
+        {
+            Destroy(backpackWeaponVisual.gameObject);
+        }
+        backpackWeaponVisual = Instantiate(weapon.WeaponModel, backpackWeaponSocket);
+        backpackWeaponVisual.transform.localPosition = Vector3.zero;
+        backpackWeaponVisual.transform.localRotation = Quaternion.identity;
+        UtilityFunctions.SetLayerRecursively(backpackWeaponVisual, gameObject.layer);
+    }
+
+    public void ThrowGranadeStart(GranadeStats granade)
+    {
+        float animationDuration =granade.ThrowDelay;
+
+        var throughInClip = GetAnimationClipByName("Throw");
+        var animationLenght = GetAnimationLenght(throughInClip);
+        SetAnimationSpeed(throughInClip, animationLenght, animationDuration);
+
+
+        animator.SetTrigger("ThrowGranade");
+
+        // set LeftArm Layer weight to 1
+        animator.SetLayerWeight(2, 1);
+        DisableLeftHandGrip();
+
+        granadeVisual = Instantiate(granade.GranadeClonePrefab, granadeSocket);
+        granadeVisual.transform.localPosition = Vector3.zero;
+        granadeVisual.transform.localRotation = Quaternion.identity;
+        UtilityFunctions.SetLayerRecursively(granadeVisual, gameObject.layer);
+    }
+
+    public void ThrowGranade(GameObject granade, GranadeStats granadeStats)
+    {
+        if (granadeVisual == null)
+        {
+            return;
+        }
+
+        // unparent granade
+        granadeVisual.transform.parent = null;
+        var granadeScript = granade.GetComponent<Granade>();
+        granadeScript.AddGranadeCopy(granadeVisual.transform);
+        granadeVisual = null;
+        
+    }
+
+    public void DisableLeftHandLayer()
+    {
+        animator.SetLayerWeight(2, 0);
+    }
+
+    public void Die()
+    {
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down * landRaycastDistance);
+    }
+
+
+
+    AnimationClip GetAnimationClipByName(string animationName)
+    {
+        animationName = GetTextAfterLastUnderscore(animationName);
+
+
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            var clipName = GetTextAfterLastUnderscore(clip.name);
+            if (clipName == animationName)
+            {
+                return clip; // Return the matching AnimationClip
+            }
+        }
+        return null; // Return null if not found
+    }
+
+    public float GetAnimationLenght(AnimationClip animationClip)
+    {
+        return animationClip.length;
+    }
+
+    public void SetAnimationSpeed(AnimationClip clip, float animationLenght, float animationTime)
+    {
+        //AnimationSpeed
+        var speed = animationLenght / animationTime;
+
+        animator.SetFloat("AnimationSpeed", speed); // Adjust speed of animation using a float parameter
+
+    }
+
+    string GetTextAfterLastUnderscore(string input)
+    {
+        int index = input.LastIndexOf('_');
+
+        return index >= 0 ? input.Substring(index + 1) : input; // Return original if no "_"
+    }
+
+
+    public void SetLeftHandGrip(bool value)
+    {
+        leftHandGripActive = value;
+    }
+
+    public void DisableRightHandGrip()
+    {
+        rightHandGripActive = false;
+    }
+
+    public void DisableLeftHandGrip()
+    {
+        leftHandGripActive = false;
+    }
+
+    public void EnableRightHandGrip()
+    {
+        rightHandGripActive = true;
+    }
+
+    public void EnableLeftHandGrip()
+    {
+        leftHandGripActive = true;
+    }
+
+    public void UpdateCrouch(bool value)
+    {
+        animator.SetBool("Crouch", value);
+    }
+}
