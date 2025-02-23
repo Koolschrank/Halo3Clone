@@ -103,6 +103,7 @@ public class BulletSpawner : MonoBehaviour
         DamagePackage damagePackage = new DamagePackage(bullet.Damage);
         damagePackage.origin = mainTransform.position;
         damagePackage.owner = mainTransform.gameObject;
+        damagePackage.headShotMultiplier = bullet.HeadShotMultiplier;
 
         Transform cameraTransform = transform;
         RaycastHit hit;

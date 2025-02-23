@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
-  weaponBullet: {fileID: 11400000, guid: 7330ee8aa159a2441ae600704429f243, type: 2}
+  weaponBullet: {fileID: 11400000, guid: e82e86efb629609439df6713b523eb81, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: fdade90f77645c94999b3134ae9e4740, type: 3}
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 34f45053683dfdc46b33bc95460b2076, type: 3}
   weaponName: ShotGun
   shootType: 0
-  fireRate: 0.6
+  fireRate: 0.9
   bulletsPerShot: 1
   magazineSize: 4
   maxAmmoInReserve: 12

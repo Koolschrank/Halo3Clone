@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseWeaponProjectile
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
-  weaponBullet: {fileID: 11400000, guid: 99c7feea649c9484684d08bea235b939, type: 2}
+  weaponBullet: {fileID: 11400000, guid: 86d3beba6b2a1b143a6a5bc3798fbbe9, type: 2}
   weaponFPSModel: {fileID: 3192954955445254701, guid: bdd5d426d37c06147aa0a45dbd4286cd, type: 3}
   weapon3rdPersonModel: {fileID: 4848280889717057939, guid: ce66241696224c84db4a9032c83ff6a2, type: 3}
   weaponName: Pistol

@@ -19,7 +19,7 @@ MonoBehaviour:
   weaponName: ShotGun
   shootType: 1
   fireRate: 0.8
-  bulletsPerShot: 17
+  bulletsPerShot: 20
   magazineSize: 2
   maxAmmoInReserve: 10
   reloadTime: 2
