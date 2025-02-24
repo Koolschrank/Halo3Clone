@@ -104,6 +104,7 @@ public class BulletSpawner : MonoBehaviour
         damagePackage.origin = mainTransform.position;
         damagePackage.owner = mainTransform.gameObject;
         damagePackage.headShotMultiplier = bullet.HeadShotMultiplier;
+        damagePackage.shildDamageMultiplier = bullet.ShildDamageMultiplier;
 
         Transform cameraTransform = transform;
         RaycastHit hit;
@@ -131,6 +132,7 @@ public class BulletSpawner : MonoBehaviour
                 damagePackage.forceVector = shotDirectionForThisBullet.normalized * bullet.Force;
                 damagePackage.hitPoint = hit.point;
 
+                damagePackage.damageAmount = bullet.Damage * bullet.GetDamageFalloff(hit.distance);
 
                 // if hit health
                 if (hit.collider.TryGetComponent<Health>(out Health health))

@@ -4,6 +4,7 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] float range = 5f;
     [SerializeField] float damage = 10f;
+    [SerializeField] float damageOnShildMultiplier = 1f;
     [SerializeField] AnimationCurve damageFalloff = AnimationCurve.Linear(0, 1, 1, 0);
     
     [SerializeField] float force = 10f;
@@ -44,6 +45,7 @@ public class Explosion : MonoBehaviour
             damagePackage.damageAmount = finalDamage;
             damagePackage.forceVector = forceDirection.normalized * finalForce;
             damagePackage.impactType = ImpactType.wholeBody;
+            damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
 
             if (collider.TryGetComponent<Health>(out Health health))
             {

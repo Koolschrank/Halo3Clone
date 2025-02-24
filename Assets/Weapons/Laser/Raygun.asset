@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: Raygun
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
+  weaponBullet: {fileID: 11400000, guid: d5f9c7690f86ec647a6ae50552ddc029, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: 338164222942ec64781af0cdb332d958, type: 3}
+  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e7540095be4d7b44a8400b3c6b6eb650, type: 3}
+  weaponName: Raygun
+  shootType: 1
+  fireRate: 0.03
+  bulletsPerShot: 1
+  magazineSize: 99
+  maxAmmoInReserve: 999
+  reloadTime: 2
+  inaccuracy: 0
+  switchOutTime: 0.5
+  switchInTime: 0.8
+  canZoom: 1
+  zoomFOV: 35
+  meleeData: {fileID: 0}
+  autoAim: {fileID: 11400000, guid: 5e5df1ebfbb1b36489b1ffa30cc96c04, type: 2}

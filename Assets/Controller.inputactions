@@ -272,7 +272,7 @@
                 {
                     "name": "",
                     "id": "bad0288c-5587-45d6-ba80-85a15a13dbdb",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardAndMouse",
@@ -309,6 +309,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "DropWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1b04150-b600-4b77-9570-8abff4382bdb",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardAndMouse",
                     "action": "DropWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -403,12 +414,12 @@
                 },
                 {
                     "name": "",
-                    "id": "8a8eead3-8a2b-42ae-966b-99af0d952e56",
+                    "id": "289d6799-294f-4f0b-bf75-6a48374e5319",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Zoom",
+                    "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -419,6 +430,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardAndMouse",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0aade051-62b7-4567-850c-b8f0bfe919e5",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false

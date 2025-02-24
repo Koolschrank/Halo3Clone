@@ -25,7 +25,7 @@ MonoBehaviour:
   reloadTime: 1.5
   inaccuracy: 0
   switchOutTime: 0.3
-  switchInTime: 0.3
+  switchInTime: 0.2
   canZoom: 1
   zoomFOV: 35
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}

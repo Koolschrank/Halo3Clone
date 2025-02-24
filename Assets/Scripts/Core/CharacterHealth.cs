@@ -69,9 +69,13 @@ public class CharacterHealth : Health
         }
 
         if ( currentShild > 0 ) {
-            if (damage >= currentShild)
+
+            var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
+
+            if (damageAgainstShild >= currentShild)
             {
-                damage -= currentShild + shildPopDamageNegation;
+                damageAgainstShild -= currentShild + shildPopDamageNegation;
+                damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
                 currentShild = 0;
                 OnShildChanged?.Invoke(0);
                 OnShildDepleted?.Invoke();
@@ -80,7 +84,7 @@ public class CharacterHealth : Health
             else
             {
                 
-                currentShild -= damage;
+                currentShild -= damageAgainstShild;
                 damage = 0;
                 OnShildChanged?.Invoke(ShildPercentage);
             }

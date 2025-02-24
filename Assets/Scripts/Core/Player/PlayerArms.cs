@@ -275,6 +275,8 @@ public class PlayerArms : MonoBehaviour
             TryThrowGranade();
         }
 
+        TryToggleZoom();
+
 
 
         if (armState == ArmState.Reloading)
@@ -406,29 +408,53 @@ public class PlayerArms : MonoBehaviour
         weaponInHand.ReloadFinished();
     }
 
+
+    bool zoomButtonPressed = false;
     public void PressZoomButton()
     {
-        TryToggleZoom();
+        zoomButtonPressed = true;
+        
     }
+
+    public void ReleaseZoomButton()
+    {
+        
+        zoomButtonPressed = false;
+    }
+
+
+
+    // TODO: this function can be cleared up
 
     public void TryToggleZoom()
     {
-        if (armState != ArmState.Ready && armState != ArmState.Shooting) return;
+        if (zoomButtonPressed == inZoom) return;
+
+
+        if (armState != ArmState.Ready && armState != ArmState.Shooting)
+        {
+            OnZoomOut?.Invoke(weaponInHand);
+            return;
+        }
+
+
+
         if (weaponInHand != null && weaponInHand.CanZoom)
         {
-            inZoom = !inZoom;
-            // zoom event
-            if (inZoom)
+            if (zoomButtonPressed)
             {
+                inZoom = true;
                 OnZoomIn?.Invoke(weaponInHand);
-                
             }
             else
             {
+                inZoom = false;
                 OnZoomOut?.Invoke(weaponInHand);
             }
         }
     }
+
+    
 
     public void IfZoomedInExitZoom()
     {

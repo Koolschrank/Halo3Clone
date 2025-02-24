@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float damageAmount = 10f;
     [SerializeField] float force = 10f;
+    [SerializeField] float shildDamageMultiplier = 1f;
     [SerializeField] float headShotMultiplier = 1f;
     [SerializeField] LayerMask hitLayer;
     [SerializeField] float radius = 0.1f;
@@ -40,6 +41,7 @@ public class Bullet : MonoBehaviour
         damagePackage.owner = owner;
         damagePackage.origin = transform.position;
         damagePackage.headShotMultiplier = headShotMultiplier;
+        damagePackage.shildDamageMultiplier = shildDamageMultiplier;
         lastPosition = transform.position;
 
     }

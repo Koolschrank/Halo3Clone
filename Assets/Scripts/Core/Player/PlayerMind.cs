@@ -16,6 +16,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] Transform spectatorCameraOffset;
     [SerializeField] LookAtTarget spectatorTarget;
 
+    
+
     [Header("UI")]
     [SerializeField] Transform UIContainer;
     [SerializeField] HealthUI healthUI;
@@ -221,12 +223,15 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    // zoom
     public void Zoom(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             playerArms.PressZoomButton();
+        }
+        else if (context.canceled)
+        {
+            playerArms.ReleaseZoomButton();
         }
     }
 

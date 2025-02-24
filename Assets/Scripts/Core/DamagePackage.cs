@@ -15,6 +15,7 @@ public struct DamagePackage
     public GameObject owner;
     public bool canHeadShot;
     public float headShotMultiplier;
+    public float shildDamageMultiplier;
 
     // construtor
     public DamagePackage(float damageAmount)
@@ -27,6 +28,7 @@ public struct DamagePackage
         impactType = ImpactType.singleBodyPart;
         owner = null;
         canHeadShot = false;
+        shildDamageMultiplier = 1f;
 
         OnDamageApplied = null;
         OnKill = null;
@@ -42,6 +44,7 @@ public struct DamagePackage
         this.owner = owner;
         this.canHeadShot = canHeadShot;
         this.headShotMultiplier = headShotMultiplier;
+        shildDamageMultiplier = 1f;
 
         OnDamageApplied = null;
         OnKill = null;
