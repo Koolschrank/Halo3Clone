@@ -1,4 +1,6 @@
 using UnityEngine;
+// fmod
+using FMODUnity;
 
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapon/WeaponData")]
@@ -25,6 +27,9 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float zoomFOV;
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
+
+    [Header("Sound")]
+    [SerializeField] EventReference shootSound;
 
 
 
@@ -60,6 +65,8 @@ public class Weapon_Data : ScriptableObject
     public PlayerMeleeAttack MeleeData => meleeData;
 
     public AutoAim AutoAim => autoAim;
+
+    public EventReference ShootSound => shootSound;
 
 
 }

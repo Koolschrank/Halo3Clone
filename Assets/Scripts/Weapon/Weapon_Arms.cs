@@ -435,6 +435,8 @@ public class Weapon_Arms
         {
             Debug.LogError("Unknown bullet type");
         }
+
+        AudioManager.instance.PlayOneShot(weaponData.ShootSound, bulletSpawner.transform.position);
     }
    
 
