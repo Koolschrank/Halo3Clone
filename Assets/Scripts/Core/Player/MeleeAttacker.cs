@@ -1,7 +1,11 @@
 using UnityEngine;
+using System;
 
 public class MeleeAttacker : MonoBehaviour
 {
+    public Action<PlayerMeleeAttack> OnAttackStart;
+    public Action<PlayerMeleeAttack> OnAttackHit;
+
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
     PlayerMeleeAttack meleeData;
@@ -11,6 +15,7 @@ public class MeleeAttacker : MonoBehaviour
     {
         meleeData = attackData;
         attackDelay = meleeData.Delay;
+        OnAttackStart?.Invoke(attackData);
     }
 
     // update
@@ -33,6 +38,12 @@ public class MeleeAttacker : MonoBehaviour
         var radius = attackData.MeleeRadius;
         var colliders = Physics.OverlapSphere(hitPoint, radius, attackData.EnemyLayer);
 
+        if (colliders.Length == 0)
+        {
+            return;
+        }
+        int hits = 0;
+
         foreach (var collider in colliders)
         {
             DamagePackage damagePackage = new DamagePackage(attackData.Damage);
@@ -49,6 +60,7 @@ public class MeleeAttacker : MonoBehaviour
             {
                 continue;
             }
+            hits++;
 
 
             if (collider.TryGetComponent<Health>(out Health health))
@@ -61,6 +73,11 @@ public class MeleeAttacker : MonoBehaviour
             {
                 rb.AddForce(transform.forward * attackData.Force, ForceMode.Impulse);
             }
+        }
+
+        if (hits > 0)
+        {
+            OnAttackHit?.Invoke(attackData);
         }
 
     }

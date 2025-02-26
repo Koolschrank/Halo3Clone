@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(fileName = "WeaponBulletHitscan", menuName = "Weapon/WeaponBulletHitscan")]
 public class Weapon_Bullet_Hitscan : Weapon_Bullet
@@ -16,6 +17,10 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     [SerializeField] GameObject trail;
     [SerializeField] GameObject impact;
 
+    [Header("Sound")]
+    [SerializeField] EventReference bodyHitSound;
+    [SerializeField] EventReference groundHitSound;
+
     public float Damage => damage;
 
     public float Force => force;
@@ -28,6 +33,10 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
 
     public GameObject Trail => trail;
     public GameObject Impact => impact;
+
+    // hit sound
+    public EventReference BodyHitSound => bodyHitSound;
+    public EventReference GroundHitSound => groundHitSound;
 
     public float GetDamageFalloff(float distance)
     {

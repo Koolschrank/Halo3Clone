@@ -71,7 +71,7 @@ public class BulletSpawner : MonoBehaviour
         //sphere cast
         if (Physics.SphereCast(transform.position, radius, transform.forward, out RaycastHit hit, lenght, autoAimLayerMask))
         {
-            Debug.Log($"Hit that {hit.collider.name}");
+
 
             if (hit.collider.TryGetComponent<CharacterHealth>(out CharacterHealth ch))
             {
@@ -138,6 +138,11 @@ public class BulletSpawner : MonoBehaviour
                 if (hit.collider.TryGetComponent<Health>(out Health health))
                 {
                     health.TakeDamage(damagePackage);
+                    AudioManager.instance.PlayOneShot(bullet.BodyHitSound, hit.point);
+                }
+                else
+                {
+                    AudioManager.instance.PlayOneShot(bullet.GroundHitSound, hit.point);
                 }
                 if (hit.collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
                 {
@@ -148,6 +153,8 @@ public class BulletSpawner : MonoBehaviour
                 // get normal of hit point
                 impact.transform.forward = hit.normal;
                 hitPoints[i] = hit.point;
+
+               
             }
             else
             {
@@ -185,7 +192,7 @@ public class BulletSpawner : MonoBehaviour
 
             if (projectile.TryGetComponent<Bullet>(out Bullet bullet))
             {
-                bullet.SetUp(gameObject);
+                bullet.SetUp(mainTransform.gameObject);
 
             }
             bullets[i] = projectile;

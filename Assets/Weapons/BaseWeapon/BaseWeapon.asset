@@ -32,11 +32,11 @@ MonoBehaviour:
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   shootSound:
     Guid:
-      Data1: 653112923
-      Data2: 1178020046
-      Data3: 2008632475
-      Data4: -2059630751
-    Path: event:/SFX/Gun/PistolShoot
+      Data1: 1709653785
+      Data2: 1187142050
+      Data3: -399840621
+      Data4: -352571034
+    Path: event:/SFX/Guns/AssultRifle/AssultRifleShoot
   switchInSound:
     timedSounds:
     - soundReference:
@@ -45,7 +45,7 @@ MonoBehaviour:
           Data2: 1319932922
           Data3: -82074727
           Data4: 1066587361
-        Path: event:/SFX/Gun/EnableGun
+        Path: event:/SFX/Guns/BaseGunSounds/EnableGun
       timeOfPlay: 0.7
   reloadSounds:
     timedSounds:
@@ -55,7 +55,7 @@ MonoBehaviour:
           Data2: 1258534099
           Data3: -758304624
           Data4: -855647888
-        Path: event:/SFX/Gun/Reload/MagazinPullOut
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
       timeOfPlay: 0.25
     - soundReference:
         Guid:
@@ -63,5 +63,5 @@ MonoBehaviour:
           Data2: 1228898713
           Data3: 500376759
           Data4: 1423635945
-        Path: event:/SFX/Gun/Reload/MagazinPutIn
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
       timeOfPlay: 0.65

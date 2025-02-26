@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] EventReference walkSound;
     [SerializeField] float distanceForWalkSound = 1f;
     float distanceToWalkSoundLeft = 0;
+    [SerializeField] EventReference jumpSound;
 
 
 
@@ -148,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (cc.isGrounded && jumpCooldownTimer <= 0)
         {
+            AudioManager.instance.PlayOneShot(jumpSound, transform.position);
             gravityVelocity = jumpPower;
             jumpCooldownTimer = jumpCooldown;
             OnJump?.Invoke();

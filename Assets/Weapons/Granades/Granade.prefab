@@ -260,6 +260,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   copyTransitionSpeed: 0.75
+  throwSound:
+    Guid:
+      Data1: -1854044668
+      Data2: 1286598559
+      Data3: 390050228
+      Data4: 1864634118
+    Path: event:/SFX/Granades/BaseGranade/Throw
 --- !u!114 &8572487180997942644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +284,10 @@ MonoBehaviour:
   explosionTime: 2.5
   explosionEffect: {fileID: 8386559723769285559, guid: cec942fb091dd3044b7b1320ee8b287a, type: 3}
   mainGranade: {fileID: 3890480776725438845}
+  bounceSound:
+    Guid:
+      Data1: 2049862455
+      Data2: 1121423829
+      Data3: 1488806821
+      Data4: -1878431026
+    Path: event:/SFX/Granades/BaseGranade/Bounce

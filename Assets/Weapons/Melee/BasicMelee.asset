@@ -21,3 +21,17 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  swingSound:
+    Guid:
+      Data1: 757403591
+      Data2: 1207635679
+      Data3: -205681753
+      Data4: 917383885
+    Path: event:/SFX/Guns/BaseGunSounds/Melee/MeleeSwing
+  hitSound:
+    Guid:
+      Data1: 126295664
+      Data2: 1168739592
+      Data3: 113948330
+      Data4: -301254074
+    Path: event:/SFX/Guns/BaseGunSounds/Melee/Hit

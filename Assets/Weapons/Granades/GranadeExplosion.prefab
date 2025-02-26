@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 8
   damage: 160
+  damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -100,6 +101,13 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  explosionSound:
+    Guid:
+      Data1: 2108464647
+      Data2: 1337839689
+      Data3: 1266807996
+      Data4: -1935789024
+    Path: event:/SFX/Granades/BaseGranade/Explosion
 --- !u!1001 &7918367090819076216
 PrefabInstance:
   m_ObjectHideFlags: 0

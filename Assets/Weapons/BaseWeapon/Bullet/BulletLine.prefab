@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 358489922665913075}
-  trailDuration: 0.03
+  trailDuration: 0.02

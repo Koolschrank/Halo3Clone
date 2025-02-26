@@ -47,3 +47,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   trail: {fileID: 7783241535111576775, guid: 8c3443ddb2cc34a4ba4e86f17548d3bf, type: 3}
   impact: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  hitSound:
+    Guid:
+      Data1: 1228804770
+      Data2: 1101507015
+      Data3: 19060134
+      Data4: 2125259743
+    Path: event:/SFX/Guns/BaseGunSounds/HitSounds/BodyHit

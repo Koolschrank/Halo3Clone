@@ -331,6 +331,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerArms: {fileID: 3232609274750972410}
+  meleeAttacker: {fileID: 8008512304446792098}
+  targetHitCollector: {fileID: 6138964545677116144}
+  hitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  killSound:
+    Guid:
+      Data1: -513101352
+      Data2: 1259246330
+      Data3: 1971360937
+      Data4: 133366026
+    Path: event:/SFX/HitMarker/KillHitmarker
 --- !u!1 &8289933859456780900
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +367,7 @@ GameObject:
   - component: {fileID: 7573040687501960069}
   - component: {fileID: 4471171138262044766}
   - component: {fileID: 782412234501442312}
+  - component: {fileID: 6138964545677116144}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -489,7 +506,14 @@ MonoBehaviour:
       Data3: -319476326
       Data4: -1659513558
     Path: event:/SFX/Player/PlayerFootstep
-  distanceForWalkSound: 1.2
+  distanceForWalkSound: 1.6
+  jumpSound:
+    Guid:
+      Data1: -935968898
+      Data2: 1286197034
+      Data3: -1475204457
+      Data4: 275955439
+    Path: event:/SFX/Player/Jump
 --- !u!114 &3232609274750972410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +666,32 @@ MonoBehaviour:
   shildPopParticalPrefab: {fileID: 6175688368018741305, guid: cc37801857173a24fa9b992e710f42dd, type: 3}
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
+  shildEmptySound:
+    Guid:
+      Data1: 1763954669
+      Data2: 1243319047
+      Data3: 1550878878
+      Data4: 1265935248
+    Path: event:/SFX/Player/Shild/ShildDepleted
+  shildRechargeSound:
+    Guid:
+      Data1: 1112339157
+      Data2: 1334564077
+      Data3: 1559188369
+      Data4: 346770022
+    Path: event:/SFX/Player/Shild/ShildCharge
+--- !u!114 &6138964545677116144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bd9cf34b994ab49b218954bf35e605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
 public class CharacterHealth : Health
 {
@@ -14,6 +16,14 @@ public class CharacterHealth : Health
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
 
+
+    [Header("Sound")]
+    [SerializeField] EventReference shildEmptySound;
+    EventInstance shildEmptySoundInstance;
+    [SerializeField] EventReference shildRechargeSound;
+    EventInstance shildRechargeSoundInstance;
+
+
     public Action<float> OnShildChanged;
     public Action OnShildDepleted;
 
@@ -22,19 +32,38 @@ public class CharacterHealth : Health
         base.Start();
         if (setMaxHeathOnStart)
             currentShild = maxShild;
+
+        shildEmptySoundInstance = RuntimeManager.CreateInstance(shildEmptySound);
+        shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
     }
 
     // update
     public override void Update()
     {
+        if (dead)
+            return;
+
         base.Update();
         if(shildRegenTimer > 0)
         {
             shildRegenTimer -= Time.deltaTime;
+            shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            if (shildRegenTimer <= 0)
+            {
+                shildRechargeSoundInstance.start();
+            }
         }
         else if (currentShild < maxShild)
         {
-            
+
+            if (currentShild == 0)
+            {
+                shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                
+                
+
+            }
+            shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
 
             currentShild += shildRegenAmountPerSecond * Time.deltaTime;
             currentShild = Mathf.Clamp(currentShild, 0, maxShild);
@@ -63,11 +92,14 @@ public class CharacterHealth : Health
     public override void TakeDamage(DamagePackage damagePackage)
     {
         float damage = damagePackage.damageAmount;
+        var damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         if ( currentShild <= 0 && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
         {
             damage *= damagePackage.headShotMultiplier;
         }
 
+
+        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         if ( currentShild > 0 ) {
 
             var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
@@ -80,6 +112,10 @@ public class CharacterHealth : Health
                 OnShildChanged?.Invoke(0);
                 OnShildDepleted?.Invoke();
                 Instantiate(shildPopParticalPrefab, transform.position, Quaternion.identity);
+
+               
+                shildEmptySoundInstance.start();
+
             }
             else
             {
@@ -100,25 +136,34 @@ public class CharacterHealth : Health
         if (currentHeath <= 0)
         {
             currentHeath = 0;
+            damageDealer.CharacterKill(gameObject);
             Die(damagePackage);
         }
         else
         {
+            damageDealer.CharacterHit(gameObject);
             if (hasHealthRegen)
             {
                 healthRegenTimer = healthRegenDelay;
             }
             shildRegenTimer = shildRegenDelay;
+
+            
         }
        
         OnDamageTaken?.Invoke(damagePackage);
 
     }
 
+    bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
         ragdollTrigger.Activate(damagePackage);
         base.Die();
+        dead = true;
+
+        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
     }
 

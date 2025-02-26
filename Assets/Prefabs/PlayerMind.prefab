@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1118482049791303894, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: alarmSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2267043410257924088, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Camera
       value: 

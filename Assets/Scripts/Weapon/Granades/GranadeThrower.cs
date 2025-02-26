@@ -43,7 +43,7 @@ public class GranadeThrower : MonoBehaviour
 
         if (granade.TryGetComponent<Granade>(out Granade granadeScript))
         {
-            granadeScript.SetOwner(gameObject);
+            granadeScript.SetOwner(mainTransform.gameObject);
 
         }
     }

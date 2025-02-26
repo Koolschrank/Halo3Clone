@@ -7,8 +7,13 @@ public class WeaponSoundManager : MonoBehaviour
 {
 
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] MeleeAttacker meleeAttacker;
+    [SerializeField] TargetHitCollector targetHitCollector;
     TimedSoundListInstance reloadList;
     TimedSoundListInstance switchInList;
+
+    [SerializeField] EventReference hitSound;
+    [SerializeField] EventReference killSound;
 
 
     public void Start()
@@ -16,6 +21,34 @@ public class WeaponSoundManager : MonoBehaviour
         playerArms.OnWeaponReloadStarted += Reload;
         playerArms.OnWeaponEquipStarted += SwitchIn;
         playerArms.OnWeaponShoot += Shoot;
+
+        meleeAttacker.OnAttackStart += MeleeSwing;
+        meleeAttacker.OnAttackHit += MeleeHit;
+
+        targetHitCollector.OnCharacterHit += HitTarget;
+        targetHitCollector.OnCharacterKill += KillTarget;
+    }
+
+    public void HitTarget(GameObject target)
+    {
+        Debug.Log("hit target");
+        AudioManager.instance.PlayOneShot(hitSound, transform.position);
+    }
+
+    public void KillTarget(GameObject target)
+    {
+        Debug.Log("Killed target");
+        AudioManager.instance.PlayOneShot(killSound, transform.position);
+    }
+
+    public void MeleeSwing(PlayerMeleeAttack melee)
+    {
+        AudioManager.instance.PlayOneShot(melee.SwingSound, transform.position);
+    }
+
+    public void MeleeHit(PlayerMeleeAttack melee)
+    {
+        AudioManager.instance.PlayOneShot(melee.HitSound, transform.position);
     }
 
     public void Shoot(Weapon_Arms weapon)

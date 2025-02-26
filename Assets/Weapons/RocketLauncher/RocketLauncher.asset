@@ -30,3 +30,22 @@ MonoBehaviour:
   zoomFOV: 30
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  shootSound:
+    Guid:
+      Data1: -1833630155
+      Data2: 1326298030
+      Data3: -2005167727
+      Data4: -2045833802
+    Path: event:/SFX/Guns/RocketLauncher/RocketShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+  reloadSounds:
+    timedSounds: []

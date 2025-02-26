@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(fileName = "PlayerMeleeAttack", menuName = "Player/PlayerMeleeAttack")]
 public class PlayerMeleeAttack : ScriptableObject
@@ -10,6 +11,11 @@ public class PlayerMeleeAttack : ScriptableObject
     [SerializeField] float meleeRadius = 1f;
     [SerializeField] float meleeDistance = 1f;
     [SerializeField] LayerMask enemyLayer;
+
+    [Header("Sound")]
+    [SerializeField] EventReference swingSound;
+    [SerializeField] EventReference hitSound;
+
 
     public float Damage => damage;
 
@@ -25,7 +31,8 @@ public class PlayerMeleeAttack : ScriptableObject
 
     public LayerMask EnemyLayer => enemyLayer;
 
-
+    public EventReference SwingSound => swingSound;
+    public EventReference HitSound => hitSound;
 
 
 

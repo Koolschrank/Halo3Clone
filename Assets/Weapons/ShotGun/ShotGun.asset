@@ -30,3 +30,38 @@ MonoBehaviour:
   zoomFOV: 0
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
+  shootSound:
+    Guid:
+      Data1: -1842625480
+      Data2: 1109917477
+      Data3: -1980225869
+      Data4: 1628706485
+    Path: event:/SFX/Guns/ShotGun/ShotGunShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+    - soundReference:
+        Guid:
+          Data1: 1758231728
+          Data2: 1228898713
+          Data3: 500376759
+          Data4: 1423635945
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
+      timeOfPlay: 0.65

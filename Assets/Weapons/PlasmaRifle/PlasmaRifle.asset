@@ -15,12 +15,12 @@ MonoBehaviour:
   weaponPickUp: {fileID: 1358379668584700671, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   weaponBullet: {fileID: 11400000, guid: 50da6cff0c231cb4095c42d7be1db310, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
-  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 1626380883785e44abde04b389070c1b, type: 3}
+  weapon3rdPersonModel: {fileID: 1535552099913994392, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
   weaponName: PlasmaRifle
   shootType: 1
-  fireRate: 0.13
+  fireRate: 0.1
   bulletsPerShot: 1
-  magazineSize: 18
+  magazineSize: 20
   maxAmmoInReserve: 500
   reloadTime: 1.4
   inaccuracy: 0.03
@@ -30,3 +30,38 @@ MonoBehaviour:
   zoomFOV: 0
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  shootSound:
+    Guid:
+      Data1: 440703412
+      Data2: 1220775816
+      Data3: -1088993891
+      Data4: -5924873
+    Path: event:/SFX/Guns/PlasmaRifle/PlasmaShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.2
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -619505912
+          Data2: 1140018917
+          Data3: -671243335
+          Data4: 44528707
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadStart
+      timeOfPlay: 0.2
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.6

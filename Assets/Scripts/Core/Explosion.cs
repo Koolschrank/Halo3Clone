@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class Explosion : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Explosion : MonoBehaviour
 
     DamagePackage damagePackage;
 
+    [Header("Sound")]
+    [SerializeField] EventReference explosionSound;
+
 
     public void Activate(GameObject owner)
     {
@@ -31,6 +35,7 @@ public class Explosion : MonoBehaviour
 
     public void Trigger()
     {
+        RuntimeManager.PlayOneShot(explosionSound, transform.position);
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, hitLayer);
         foreach (var collider in colliders)
         {

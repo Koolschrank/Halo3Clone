@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class TimedExplosion : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class TimedExplosion : MonoBehaviour
     [SerializeField] Granade mainGranade;
 
     float timer;
+
+    [Header("Sound")]
+    [SerializeField] EventReference bounceSound;
+    
+
 
 
     // on collision enter
@@ -29,12 +35,14 @@ public class TimedExplosion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // bounce sound
+        
+
         if (Time.time - spawnTime < collisionCooldown)
         {
             return;
         }
-
-        Debug.Log(collision.gameObject.name);
+        RuntimeManager.PlayOneShot(bounceSound, transform.position);
         if (startTimerOnFirstCollision)
         {
             timerActive = true;
@@ -57,7 +65,7 @@ public class TimedExplosion : MonoBehaviour
 
     void Explode()
     {
-        var explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        var explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity) as GameObject;
         if (explosion.TryGetComponent<Explosion>(out Explosion expo))
         {
             expo.Activate(mainGranade.GetOwner());

@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 80
   force: 400
+  shildDamageMultiplier: 1
   headShotMultiplier: 4
   hitLayer:
     serializedVersion: 2
@@ -123,3 +124,10 @@ MonoBehaviour:
   copyTransitionSpeed: 10
   hitParticle: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   destroyObjects: []
+  hitCharacterSound:
+    Guid:
+      Data1: 1228804770
+      Data2: 1101507015
+      Data3: 19060134
+      Data4: 2125259743
+    Path: event:/SFX/Guns/BaseGunSounds/HitSounds/BodyHit

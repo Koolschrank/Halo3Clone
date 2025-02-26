@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+// fmod
+using FMODUnity;
 
 public class Granade : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class Granade : MonoBehaviour
     Vector3 lastPosition;
     GameObject owner;
 
+    [Header("Sound")]
+    [SerializeField] EventReference throwSound;
+
     // set bullet copy
     public void AddGranadeCopy(Transform granadeCopy)
     {
@@ -21,6 +26,7 @@ public class Granade : MonoBehaviour
     void Start()
     {
         lastPosition = transform.position;
+        RuntimeManager.PlayOneShot(throwSound, transform.position);
     }
 
 

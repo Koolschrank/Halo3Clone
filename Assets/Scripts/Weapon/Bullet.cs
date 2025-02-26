@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using FMODUnity;
 
 public class Bullet : MonoBehaviour
 {
@@ -16,8 +17,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject hitParticle;
     [SerializeField] GameObject[] destroyObjects;
 
+    [Header("Audio")]
+    [SerializeField] EventReference bodyHitSound;
+    [SerializeField] EventReference groundHitSound;
 
-    
+
+
     Vector3 lastPosition;
     
     List<Transform> bulletCopys = new List<Transform>();
@@ -75,6 +80,11 @@ public class Bullet : MonoBehaviour
             if (hit.collider.TryGetComponent<Health>(out Health health))
             {
                 health.TakeDamage(damagePackage);
+                AudioManager.instance.PlayOneShot(bodyHitSound, hit.point);
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(groundHitSound, hit.point);
             }
             // if hit has rigidbody
             if (hit.rigidbody != null)
