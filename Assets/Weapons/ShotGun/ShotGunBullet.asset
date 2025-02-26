@@ -45,12 +45,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  trail: {fileID: 7783241535111576775, guid: 8c3443ddb2cc34a4ba4e86f17548d3bf, type: 3}
+  trail: {fileID: 7783241535111576775, guid: 3cbb8aaea6a9bce43bd21ea425f5555d, type: 3}
   impact: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
-  hitSound:
+  bodyHitSound:
     Guid:
-      Data1: 1228804770
-      Data2: 1101507015
-      Data3: 19060134
-      Data4: 2125259743
-    Path: event:/SFX/Guns/BaseGunSounds/HitSounds/BodyHit
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  groundHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

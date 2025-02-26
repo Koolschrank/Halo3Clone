@@ -18,20 +18,20 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9212859378291490076, guid: 0fd127000fb9617408bbe60392ae5fa7, type: 3}
   weaponName: BR
   shootType: 2
-  fireRate: 0.31
+  fireRate: 0.35
   bulletsPerShot: 1
-  magazineSize: 24
+  magazineSize: 21
   maxAmmoInReserve: 500
-  reloadTime: 2.5
+  reloadTime: 2.3
   inaccuracy: 0.01
   switchOutTime: 0.3
-  switchInTime: 0.6
+  switchInTime: 0.8
   canZoom: 1
   zoomFOV: 35
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   burstAmount: 3
-  burstDelay: 0.05
+  burstDelay: 0.06
   shootSound:
     Guid:
       Data1: 1709653785
@@ -58,7 +58,7 @@ MonoBehaviour:
           Data3: -758304624
           Data4: -855647888
         Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
-      timeOfPlay: 0.25
+      timeOfPlay: 0.23
     - soundReference:
         Guid:
           Data1: 1758231728
@@ -66,4 +66,12 @@ MonoBehaviour:
           Data3: 500376759
           Data4: 1423635945
         Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
-      timeOfPlay: 0.65
+      timeOfPlay: 0.55
+    - soundReference:
+        Guid:
+          Data1: 2141011032
+          Data2: 1319932922
+          Data3: -82074727
+          Data4: 1066587361
+        Path: event:/SFX/Guns/BaseGunSounds/EnableGun
+      timeOfPlay: 0.85

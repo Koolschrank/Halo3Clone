@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3672900130430235600}
   - component: {fileID: 3923588603200831397}
   - component: {fileID: 2205612260755145114}
-  - component: {fileID: 9207851313103302896}
   - component: {fileID: 2827568036898757898}
+  - component: {fileID: 9207851313103302896}
   m_Layer: 0
-  m_Name: ExplosionBullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.23, y: 3.1513803, z: 1.6371881}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,27 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9207851313103302896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691827347594146763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  radius: 0.5
-  copyTransitionSpeed: 6
-  hitParticle: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
-  destroyObjects:
-  - {fileID: 8386559723769285559, guid: fec36c7b76c3d3d439c3a3ab655eb548, type: 3}
 --- !u!114 &2827568036898757898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,4 +100,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d4ca8d111e6fb49b8961cd268b7b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 400
+--- !u!114 &9207851313103302896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691827347594146763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 20
+  force: 200
+  shildDamageMultiplier: 1
+  headShotMultiplier: 4
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 2147483777
+  radius: 0.2
+  copyTransitionSpeed: 10
+  hitParticle: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  destroyObjects: []
+  bodyHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  groundHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

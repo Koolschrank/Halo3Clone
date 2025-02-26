@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
-  m_Name: BaseWeaponProjectile
+  m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
   weaponBullet: {fileID: 11400000, guid: 86d3beba6b2a1b143a6a5bc3798fbbe9, type: 2}
@@ -18,9 +18,9 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 4848280889717057939, guid: ce66241696224c84db4a9032c83ff6a2, type: 3}
   weaponName: Pistol
   shootType: 0
-  fireRate: 0.32
+  fireRate: 0.35
   bulletsPerShot: 1
-  magazineSize: 10
+  magazineSize: 8
   maxAmmoInReserve: 100
   reloadTime: 1.5
   inaccuracy: 0
