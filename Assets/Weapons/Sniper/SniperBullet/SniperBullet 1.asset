@@ -14,10 +14,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   force: 200
+  shildDamageMultiplier: 1
   headShotMultiplier: 3
   range: 100
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  trail: {fileID: 7783241535111576775, guid: 8c3443ddb2cc34a4ba4e86f17548d3bf, type: 3}
+  rangeUntilDamageFalloff: 100
+  damageFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  trail: {fileID: 7783241535111576775, guid: 3cbb8aaea6a9bce43bd21ea425f5555d, type: 3}
   impact: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  bodyHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  groundHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
