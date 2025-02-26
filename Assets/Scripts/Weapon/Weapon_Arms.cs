@@ -342,6 +342,9 @@ public class Weapon_Arms
 
     BulletSpawner bulletSpawner;
     float shootCooldown = 0;
+    float shotsLeftInBurst = 0;
+    float shootCooldownInBurst = 0;
+
 
     public Action<int, int> OnAmmoChange;
 
@@ -400,6 +403,27 @@ public class Weapon_Arms
         }
     }
 
+    public bool UpdateBurstShot()
+    {
+        if (shotsLeftInBurst > 0 && shootCooldownInBurst > 0)
+        {
+            shootCooldownInBurst -= Time.deltaTime;
+            if (shootCooldownInBurst <= 0)
+            {
+                shotsLeftInBurst--;
+                shootCooldownInBurst = weaponData.BurstFireRate;
+                Shoot();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsInBurst()
+    {
+        return shotsLeftInBurst > 0;
+    }
+
     public bool TryShoot()
     {
         if (CanShoot())
@@ -409,6 +433,19 @@ public class Weapon_Arms
         }
         return false;
 
+    }
+
+    public bool TryBurstShoot()
+    {
+        if (CanShoot())
+        {
+            shotsLeftInBurst = weaponData.BulletsInBurst;
+            Shoot();
+            shootCooldownInBurst = weaponData.BurstFireRate;
+            shotsLeftInBurst--;
+            return true;
+        }
+        return false;
     }
 
     private void Shoot()
@@ -530,7 +567,7 @@ public class Weapon_Arms
 
     public float ZoomFOV => weaponData.ZoomFOV;
 
-    public int BulletsPerShot => weaponData.BulletsPerShot;
+    public int BulletsPerShot => weaponData.BulletsPerShoot;
 
     public AutoAim AutoAim => weaponData.AutoAim;
 

@@ -31,6 +31,10 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
 
+    [Header("Burst Values")]
+    [SerializeField] int burstAmount;
+    [SerializeField] float burstDelay;
+
     [Header("Sound")]
     [SerializeField] EventReference shootSound;
     [SerializeField] TimedSoundList switchInSound;
@@ -62,7 +66,7 @@ public class Weapon_Data : ScriptableObject
 
     public float ZoomFOV => zoomFOV;
 
-    public int BulletsPerShot => Mathf.Max(bulletsPerShot,1);
+    public int BulletsPerShoot => Mathf.Max(bulletsPerShot,1);
 
     public Weapon_Visual WeaponFPSModel => weaponFPSModel;
     public GameObject Weapon3rdPersonModel => weapon3rdPersonModel;
@@ -77,6 +81,10 @@ public class Weapon_Data : ScriptableObject
 
     public TimedSoundList ReloadSounds => reloadSounds;
 
+    public int BulletsInBurst => burstAmount;
+
+    public float BurstFireRate => burstDelay;
+
 }
 
 
@@ -85,5 +93,6 @@ public enum ShootType
 {
     Single,
     Auto,
+    Burst
 }
 

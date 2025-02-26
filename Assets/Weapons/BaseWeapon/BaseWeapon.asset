@@ -18,9 +18,9 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: d0d50155b6402bc4dbd9438144eef083, type: 3}
   weaponName: Assult Rifle
   shootType: 1
-  fireRate: 0.1
+  fireRate: 0.09
   bulletsPerShot: 1
-  magazineSize: 30
+  magazineSize: 40
   maxAmmoInReserve: 500
   reloadTime: 2.2
   inaccuracy: 0.06
@@ -30,6 +30,8 @@ MonoBehaviour:
   zoomFOV: 0
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  burstAmount: 3
+  burstDelay: 0.1
   shootSound:
     Guid:
       Data1: 1709653785

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: BR
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 98e1fea96d1e5544ab56eac7fdcd8fb1, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: baef0f2766805c746bf01a65b10be487, type: 3}
+  weapon3rdPersonModel: {fileID: 9212859378291490076, guid: 0fd127000fb9617408bbe60392ae5fa7, type: 3}
+  weaponName: BR
+  shootType: 2
+  fireRate: 0.31
+  bulletsPerShot: 1
+  magazineSize: 24
+  maxAmmoInReserve: 500
+  reloadTime: 2.5
+  inaccuracy: 0.01
+  switchOutTime: 0.3
+  switchInTime: 0.6
+  canZoom: 1
+  zoomFOV: 35
+  meleeData: {fileID: 0}
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  burstAmount: 3
+  burstDelay: 0.05
+  shootSound:
+    Guid:
+      Data1: 1709653785
+      Data2: 1187142050
+      Data3: -399840621
+      Data4: -352571034
+    Path: event:/SFX/Guns/AssultRifle/AssultRifleShoot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 2141011032
+          Data2: 1319932922
+          Data3: -82074727
+          Data4: 1066587361
+        Path: event:/SFX/Guns/BaseGunSounds/EnableGun
+      timeOfPlay: 0.7
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+    - soundReference:
+        Guid:
+          Data1: 1758231728
+          Data2: 1228898713
+          Data3: 500376759
+          Data4: 1423635945
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
+      timeOfPlay: 0.65

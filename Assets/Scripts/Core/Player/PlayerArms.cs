@@ -259,7 +259,6 @@ public class PlayerArms : MonoBehaviour
     {
         weaponInHand?.UpdateWeapon();
 
-
         // input buffers
         if (switchInputBufferTimer > 0)
         {
@@ -322,19 +321,12 @@ public class PlayerArms : MonoBehaviour
             }
         }
 
-
-
-
-
-
-
-
         if (armState == ArmState.Ready && weaponInHand != null)
         {
 
             switch (weaponInHand.ShootType)
             {
-                case ShootType.Single :
+                case ShootType.Single:
 
                     if (!wasTriggerPressed && isTriggerPressed)
                     {
@@ -343,6 +335,24 @@ public class PlayerArms : MonoBehaviour
                             if (weaponInHand.TryShoot())
                             {
                                 armState = ArmState.Shooting;
+                                OnWeaponShoot?.Invoke(weaponInHand);
+                            }
+                        }
+                        else // if try to shoot but cannot because magazine is empty reload
+                        {
+                            TryReload();
+                        }
+                    }
+                    break;
+                case ShootType.Burst:
+
+                    if (!wasTriggerPressed && isTriggerPressed)
+                    {
+                        if (weaponInHand.CanShoot())
+                        {
+                            if (weaponInHand.TryBurstShoot())
+                            {
+                                armState = ArmState.InBurstShooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
                             }
                         }
@@ -370,24 +380,31 @@ public class PlayerArms : MonoBehaviour
                     }
                     break;
             }
+        }
+        if (armState == ArmState.InBurstShooting && weaponInHand != null)
+        {
+            if (weaponInHand.UpdateBurstShot())
+            {
+                armState = ArmState.InBurstShooting;
+                OnWeaponShoot?.Invoke(weaponInHand);
+            }
 
-            if (weaponInHand.IsInShootCooldown())
+            if (!weaponInHand.IsInBurst())
             {
                 armState = ArmState.Shooting;
-            } 
-                
+            }
         }
+
+       
+                
+        
         wasTriggerPressed = isTriggerPressed;
 
-        if (armState == ArmState.Shooting && !weaponInHand.IsInShootCooldown())
+
+        if ((armState == ArmState.Shooting)&& !weaponInHand.IsInShootCooldown())
         {
             armState = ArmState.Ready;
         }
-
-        
-
-
-
 
     }
 
@@ -669,6 +686,7 @@ public class PlayerArms : MonoBehaviour
     {
         Ready,
         Shooting,
+        InBurstShooting,
         Reloading,
         SwitchingIn,
         SwitchingOut,
