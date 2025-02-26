@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
@@ -399,13 +400,15 @@ public class Weapon_Arms
         }
     }
 
-    public void TryShoot()
+    public bool TryShoot()
     {
         if (CanShoot())
         {
             Shoot();
+            return true;
         }
-        
+        return false;
+
     }
 
     private void Shoot()
@@ -435,8 +438,6 @@ public class Weapon_Arms
         {
             Debug.LogError("Unknown bullet type");
         }
-
-        AudioManager.instance.PlayOneShot(weaponData.ShootSound, bulletSpawner.transform.position);
     }
    
 
@@ -532,5 +533,12 @@ public class Weapon_Arms
     public int BulletsPerShot => weaponData.BulletsPerShot;
 
     public AutoAim AutoAim => weaponData.AutoAim;
+
+
+    public EventReference ShootSound => weaponData.ShootSound;
+
+    public TimedSoundList SwitchInSound => weaponData.SwitchInSound;
+
+    public TimedSoundList ReloadSounds => weaponData.ReloadSounds;
 
 }

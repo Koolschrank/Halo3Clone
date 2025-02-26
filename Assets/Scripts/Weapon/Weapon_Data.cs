@@ -1,6 +1,9 @@
 using UnityEngine;
 // fmod
 using FMODUnity;
+using System;
+using JetBrains.Annotations;
+using System.Collections.Generic;
 
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapon/WeaponData")]
@@ -30,6 +33,8 @@ public class Weapon_Data : ScriptableObject
 
     [Header("Sound")]
     [SerializeField] EventReference shootSound;
+    [SerializeField] TimedSoundList switchInSound;
+    [SerializeField] TimedSoundList reloadSounds;
 
 
 
@@ -68,6 +73,9 @@ public class Weapon_Data : ScriptableObject
 
     public EventReference ShootSound => shootSound;
 
+    public TimedSoundList SwitchInSound => switchInSound;
+
+    public TimedSoundList ReloadSounds => reloadSounds;
 
 }
 
@@ -78,3 +86,4 @@ public enum ShootType
     Single,
     Auto,
 }
+

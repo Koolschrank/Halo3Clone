@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.ProBuilder.MeshOperations;
@@ -208,6 +209,7 @@ public class PlayerArms : MonoBehaviour
     public Action<Weapon_Arms, float> OnWeaponUnequipStarted;
     public Action<Weapon_Arms, float> OnWeaponReloadStarted;
     public Action<Weapon_Arms, float> OnMeleeWithWeaponStarted;
+    public Action<Weapon_Arms> OnWeaponShoot;
     public Action<Weapon_Arms> OnWeaponUnequipFinished;
     public Action<Weapon_Arms> OnWeaponDroped;
     public Action<GranadeStats> OnGranadeThrowStarted;
@@ -338,7 +340,11 @@ public class PlayerArms : MonoBehaviour
                     {
                         if (weaponInHand.CanShoot())
                         {
-                            weaponInHand.TryShoot();
+                            if (weaponInHand.TryShoot())
+                            {
+                                armState = ArmState.Shooting;
+                                OnWeaponShoot?.Invoke(weaponInHand);
+                            }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
                         {
@@ -351,7 +357,11 @@ public class PlayerArms : MonoBehaviour
                     {
                         if (weaponInHand.CanShoot())
                         {
-                            weaponInHand.TryShoot();
+                            if (weaponInHand.TryShoot())
+                            {
+                                armState = ArmState.Shooting;
+                                OnWeaponShoot?.Invoke(weaponInHand);
+                            }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
                         {

@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8067625750732039895}
   - component: {fileID: 737555415851796727}
   - component: {fileID: 8008512304446792098}
+  - component: {fileID: 5352841395007449006}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -317,6 +318,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
+--- !u!114 &5352841395007449006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223324349368915893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7726a89860a7d094ba3c3b53867517ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArms: {fileID: 3232609274750972410}
 --- !u!1 &8289933859456780900
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +482,14 @@ MonoBehaviour:
   jumpCooldown: 0.2
   gravity: 15
   crouchSpeed: 4
+  walkSound:
+    Guid:
+      Data1: -890825783
+      Data2: 1319114363
+      Data3: -319476326
+      Data4: -1659513558
+    Path: event:/SFX/Player/PlayerFootstep
+  distanceForWalkSound: 1.2
 --- !u!114 &3232609274750972410
 MonoBehaviour:
   m_ObjectHideFlags: 0

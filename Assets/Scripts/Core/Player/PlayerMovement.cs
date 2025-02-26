@@ -1,6 +1,8 @@
+using FMODUnity;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity = 9.8f;
     [SerializeField] float crouchSpeed = 0.5f;
 
+    [Header("Sound")]
+    [SerializeField] EventReference walkSound;
+    [SerializeField] float distanceForWalkSound = 1f;
+    float distanceToWalkSoundLeft = 0;
+
+
+
 
     Vector3 moveVelocity = Vector3.zero;
     float gravityVelocity = 0;
@@ -39,8 +48,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float MaxMoveSpeed => maxMoveSpeed;
     bool inCrouch = false;
-
-    
 
 
     // update
@@ -54,6 +61,17 @@ public class PlayerMovement : MonoBehaviour
         cc.Move(moveVector * Time.deltaTime);
 
         OnMoveUpdated?.Invoke(moveVector);
+
+        if (moveVelocity.magnitude > 0 && cc.isGrounded)
+        {
+            distanceToWalkSoundLeft -= moveVelocity.magnitude * Time.deltaTime;
+            if (distanceToWalkSoundLeft <= 0)
+            {
+                AudioManager.instance.PlayOneShot(walkSound, transform.position);
+                distanceToWalkSoundLeft = distanceForWalkSound;
+            }
+        }
+
     }
 
     private void UpdateCrouch()
