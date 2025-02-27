@@ -25,7 +25,7 @@ MonoBehaviour:
   reloadTime: 2.6
   inaccuracy: 0.2
   switchOutTime: 0.3
-  switchInTime: 0.8
+  switchInTime: 0.6
   canZoom: 0
   zoomFOV: 0
   meleeData: {fileID: 0}
@@ -53,17 +53,33 @@ MonoBehaviour:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1232892853
-          Data2: 1258534099
-          Data3: -758304624
-          Data4: -855647888
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
-      timeOfPlay: 0.25
+          Data1: -1420753444
+          Data2: 1208158006
+          Data3: 1003640223
+          Data4: 1897514351
+        Path: event:/SFX/Guns/ShotGun/Reload/OpenBarrel
+      timeOfPlay: 0.12
     - soundReference:
         Guid:
-          Data1: 1758231728
-          Data2: 1228898713
-          Data3: 500376759
-          Data4: 1423635945
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
-      timeOfPlay: 0.65
+          Data1: -771642470
+          Data2: 1310303921
+          Data3: -1110256225
+          Data4: -1629882881
+        Path: event:/SFX/Guns/ShotGun/Reload/PutInBullets
+      timeOfPlay: 0.32
+    - soundReference:
+        Guid:
+          Data1: -1332733654
+          Data2: 1115094356
+          Data3: -1780033092
+          Data4: 1883517362
+        Path: event:/SFX/Guns/ShotGun/Reload/CloseBarrel
+      timeOfPlay: 0.6
+    - soundReference:
+        Guid:
+          Data1: -465851604
+          Data2: 1243092690
+          Data3: -348078417
+          Data4: 534116276
+        Path: event:/SFX/Guns/ShotGun/Reload/ChargeBolt
+      timeOfPlay: 0.9

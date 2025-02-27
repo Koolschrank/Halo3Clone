@@ -34,11 +34,11 @@ MonoBehaviour:
   burstDelay: 0.06
   shootSound:
     Guid:
-      Data1: 1709653785
-      Data2: 1187142050
-      Data3: -399840621
-      Data4: -352571034
-    Path: event:/SFX/Guns/AssultRifle/AssultRifleShoot
+      Data1: 2116415683
+      Data2: 1161463764
+      Data3: -1871193710
+      Data4: -835417183
+    Path: event:/SFX/Guns/BR/BRShot
   switchInSound:
     timedSounds:
     - soundReference:
@@ -47,25 +47,25 @@ MonoBehaviour:
           Data2: 1319932922
           Data3: -82074727
           Data4: 1066587361
-        Path: event:/SFX/Guns/BaseGunSounds/EnableGun
+        Path: event:/SFX/Guns/BR/EnableGun
       timeOfPlay: 0.7
   reloadSounds:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1232892853
-          Data2: 1258534099
-          Data3: -758304624
-          Data4: -855647888
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+          Data1: -616071955
+          Data2: 1220866808
+          Data3: 478305702
+          Data4: 2110580369
+        Path: event:/SFX/Guns/BR/Reload/MagazinPullOut
       timeOfPlay: 0.23
     - soundReference:
         Guid:
-          Data1: 1758231728
-          Data2: 1228898713
-          Data3: 500376759
-          Data4: 1423635945
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
+          Data1: 650216939
+          Data2: 1183236484
+          Data3: 1114888633
+          Data4: 1173373093
+        Path: event:/SFX/Guns/BR/Reload/MagazinPutIn
       timeOfPlay: 0.55
     - soundReference:
         Guid:
@@ -73,5 +73,5 @@ MonoBehaviour:
           Data2: 1319932922
           Data3: -82074727
           Data4: 1066587361
-        Path: event:/SFX/Guns/BaseGunSounds/EnableGun
+        Path: event:/SFX/Guns/BR/EnableGun
       timeOfPlay: 0.85

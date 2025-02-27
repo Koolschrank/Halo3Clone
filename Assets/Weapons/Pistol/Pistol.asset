@@ -38,32 +38,32 @@ MonoBehaviour:
       Data2: 1178020046
       Data3: 2008632475
       Data4: -2059630751
-    Path: event:/SFX/Gun/PistolShoot
+    Path: event:/SFX/Guns/Pistol/PistolShoot
   switchInSound:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 2141011032
-          Data2: 1319932922
-          Data3: -82074727
-          Data4: 1066587361
-        Path: event:/SFX/Gun/EnableGun
+          Data1: -1069721791
+          Data2: 1295931201
+          Data3: 1919505326
+          Data4: 648640732
+        Path: event:/SFX/Guns/Pistol/EnableGun
       timeOfPlay: 0.2
   reloadSounds:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1232892853
-          Data2: 1258534099
-          Data3: -758304624
-          Data4: -855647888
-        Path: event:/SFX/Gun/Reload/MagazinPullOut
+          Data1: 80687303
+          Data2: 1103882339
+          Data3: 229146760
+          Data4: -1026335697
+        Path: event:/SFX/Guns/Pistol/Reload/MagOut
       timeOfPlay: 0.15
     - soundReference:
         Guid:
-          Data1: 1758231728
-          Data2: 1228898713
-          Data3: 500376759
-          Data4: 1423635945
-        Path: event:/SFX/Gun/Reload/MagazinPutIn
+          Data1: -1962612281
+          Data2: 1111252155
+          Data3: 2136841631
+          Data4: 2081986932
+        Path: event:/SFX/Guns/Pistol/Reload/MagIn
       timeOfPlay: 0.65
