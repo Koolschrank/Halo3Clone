@@ -22,7 +22,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   magazineSize: 4
   maxAmmoInReserve: 12
-  reloadTime: 3
+  reloadTime: 2.2
   inaccuracy: 0
   switchOutTime: 0.3
   switchInTime: 0.6
@@ -30,6 +30,8 @@ MonoBehaviour:
   zoomFOV: 30
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
   autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
+  burstAmount: 0
+  burstDelay: 0
   shootSound:
     Guid:
       Data1: -1791521769
