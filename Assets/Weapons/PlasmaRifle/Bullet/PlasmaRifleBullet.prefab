@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,10 +124,17 @@ MonoBehaviour:
   copyTransitionSpeed: 10
   hitParticle: {fileID: 8030697463898779624, guid: 1694853b47a9c2c4e8e8b4d0b6a3c476, type: 3}
   destroyObjects: []
-  hitCharacterSound:
+  bodyHitSound:
     Guid:
-      Data1: 1228804770
-      Data2: 1101507015
-      Data3: 19060134
-      Data4: 2125259743
-    Path: event:/SFX/Guns/BaseGunSounds/HitSounds/BodyHit
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  groundHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
