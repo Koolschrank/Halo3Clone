@@ -46,9 +46,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 9166150554012309172}
-  muzzleFlashSpawnPoint: {fileID: 9166150554012309172}
+  muzzleFlashSpawnPoint: {fileID: 5143703293473870731}
   muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   animator: {fileID: 8242606572955927572}
+--- !u!1 &3408436383751664656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5143703293473870731}
+  m_Layer: 0
+  m_Name: ParticalSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5143703293473870731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3408436383751664656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.024, z: 0.456}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2956640438634466507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6611729117790416712
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +241,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8399624962259871654, guid: a72ab4200fefc364f8e2a8b990fc86f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9166150554012309172}
+    - targetCorrespondingSourceObject: {fileID: 8399624962259871654, guid: a72ab4200fefc364f8e2a8b990fc86f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5143703293473870731}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a72ab4200fefc364f8e2a8b990fc86f6, type: 3}
 --- !u!4 &2956640438634466507 stripped

@@ -22,6 +22,7 @@ public class CharacterHealth : Health
     EventInstance shildEmptySoundInstance;
     [SerializeField] EventReference shildRechargeSound;
     EventInstance shildRechargeSoundInstance;
+    [SerializeField] EventReference shildPopSound;
 
 
     public Action<float> OnShildChanged;
@@ -112,8 +113,8 @@ public class CharacterHealth : Health
                 OnShildChanged?.Invoke(0);
                 OnShildDepleted?.Invoke();
                 Instantiate(shildPopParticalPrefab, transform.position, Quaternion.identity);
+                AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
 
-               
                 shildEmptySoundInstance.start();
 
             }

@@ -3,6 +3,7 @@ using FMODUnity;
 
 public class Explosion : MonoBehaviour
 {
+    
     [SerializeField] float range = 5f;
     [SerializeField] float damage = 10f;
     [SerializeField] float damageOnShildMultiplier = 1f;
@@ -16,11 +17,15 @@ public class Explosion : MonoBehaviour
     // curve to control the damage falloff
 
     [SerializeField] LayerMask hitLayer;
+    [SerializeField] float timeForSelfDestruction = 5f;
 
     DamagePackage damagePackage;
 
     [Header("Sound")]
     [SerializeField] EventReference explosionSound;
+
+    [Header("extra features")]
+    [SerializeField] FireDamageOverTime fireDamageOverTime;
 
 
     public void Activate(GameObject owner)
@@ -29,6 +34,11 @@ public class Explosion : MonoBehaviour
         damagePackage.owner = owner;
         damagePackage.origin = transform.position;
         Trigger();
+
+        if (fireDamageOverTime != null)
+        {
+            fireDamageOverTime.SetOwner(owner);
+        }
 
     }
 
@@ -66,7 +76,7 @@ public class Explosion : MonoBehaviour
 
         }
 
-        Destroy(gameObject, 5);
+        Destroy(gameObject, timeForSelfDestruction);
 
     }
 

@@ -15,6 +15,8 @@ public class TimedExplosion : MonoBehaviour
 
     float timer;
 
+
+
     [Header("Sound")]
     [SerializeField] EventReference bounceSound;
     
@@ -33,7 +35,7 @@ public class TimedExplosion : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         // bounce sound
         

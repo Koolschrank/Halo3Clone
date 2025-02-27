@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponInvetorySize: 1
-  granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+  granadeStats: {fileID: 11400000, guid: 83e8cd95a0274d4409bf0f6cdcb00779, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
   rechargeGranadeTime: 1
@@ -680,6 +680,13 @@ MonoBehaviour:
       Data3: 1559188369
       Data4: 346770022
     Path: event:/SFX/Player/Shild/ShildCharge
+  shildPopSound:
+    Guid:
+      Data1: -2042617262
+      Data2: 1091550924
+      Data3: 2109988784
+      Data4: -483411535
+    Path: event:/SFX/Player/Shild/ShildPop
 --- !u!114 &6138964545677116144
 MonoBehaviour:
   m_ObjectHideFlags: 0
