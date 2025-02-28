@@ -7222,6 +7222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 569915462}
   - component: {fileID: 569915463}
+  - component: {fileID: 569915464}
   m_Layer: 0
   m_Name: LightningLight
   m_TagString: Untagged
@@ -7309,6 +7310,29 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &569915464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569915461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &570030771
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,6 +7489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599286187}
   - component: {fileID: 599286188}
+  - component: {fileID: 599286189}
   m_Layer: 0
   m_Name: LightColor
   m_TagString: Untagged
@@ -7481,7 +7506,7 @@ Transform:
   m_GameObject: {fileID: 599286186}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.68772167, z: -0, w: 0.7259745}
-  m_LocalPosition: {x: 0.007151988, y: 0.04, z: -0.0026170276}
+  m_LocalPosition: {x: 0.007151988, y: 0.3522, z: -0.0026170276}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7504,7 +7529,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -7552,6 +7577,29 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &599286189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599286186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 1
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &612156344
 GameObject:
   m_ObjectHideFlags: 0
@@ -13329,6 +13377,7 @@ GameObject:
   - component: {fileID: 810996579}
   - component: {fileID: 810996580}
   - component: {fileID: 810996581}
+  - component: {fileID: 810996582}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13514,6 +13563,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8aa3525151bb343b66b059b6095946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &810996582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810996575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!4 &812160382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8376026975730960156, guid: 9096c72bd497923479605df131852973, type: 3}
@@ -13675,7 +13768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac950cd485569740affc32a280665ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RequiresPostProcessing: 1
+  RequiresPostProcessing: 0
   RequiresCinemachine: 1
 --- !u!1 &880201757
 GameObject:
@@ -14427,6 +14520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 982220089}
   - component: {fileID: 982220088}
+  - component: {fileID: 982220090}
   m_Layer: 0
   m_Name: LightShadows
   m_TagString: Untagged
@@ -14451,7 +14545,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -14514,6 +14608,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2037073344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &982220090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982220087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &985785419
 GameObject:
   m_ObjectHideFlags: 0
@@ -14863,7 +14980,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -844176753
         Label: Looper Start
-        OriginalLabel: 
+        OriginalLabel: Looper Start
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -14945,7 +15062,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -1337714791
         Label: Light
-        OriginalLabel: 
+        OriginalLabel: Light
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -15179,7 +15296,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: 134433510
         Label: Sound
-        OriginalLabel: 
+        OriginalLabel: Sound
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -15304,7 +15421,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -323195841
         Label: Looper
-        OriginalLabel: 
+        OriginalLabel: Looper
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -21703,6 +21820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371068959}
   - component: {fileID: 1371068960}
+  - component: {fileID: 1371068961}
   m_Layer: 0
   m_Name: LightColor
   m_TagString: Untagged
@@ -21790,6 +21908,29 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1371068961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371068958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1372038378
 GameObject:
   m_ObjectHideFlags: 0
@@ -22170,7 +22311,7 @@ MonoBehaviour:
     m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
-  m_StreamingVersion: 20230301
+  m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
     TrackingTarget: {fileID: 0}
@@ -22609,8 +22750,8 @@ MonoBehaviour:
   - rid: 2
   - rid: 3
   - rid: 4
-  - rid: 5
   - rid: 6
+  - rid: 4596503409475977310
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -22625,7 +22766,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -1774466341
         Label: Animation
-        OriginalLabel: 
+        OriginalLabel: Animation Parameter
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -22729,7 +22870,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: 1764203869
         Label: Rotation
-        OriginalLabel: 
+        OriginalLabel: Rotation
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -23109,7 +23250,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: 1184252515
         Label: Particles Play
-        OriginalLabel: 
+        OriginalLabel: Particles Play
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -23195,7 +23336,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -1284870221
         Label: Sound
-        OriginalLabel: 
+        OriginalLabel: Sound
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -23325,7 +23466,7 @@ MonoBehaviour:
         Active: 1
         UniqueID: -158528929
         Label: Light
-        OriginalLabel: 
+        OriginalLabel: Light
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -23553,127 +23694,13 @@ MonoBehaviour:
         RemapShadowStrengthOne: 1
         InstantShadowStrength: 0
         ToDestinationShadowStrength: 1
-    - rid: 5
-      type: {class: MMF_ChromaticAberration, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
-      data:
-        Active: 1
-        UniqueID: -60054179
-        Label: Chromatic Aberration
-        OriginalLabel: 
-        ChannelMode: 0
-        Channel: 0
-        MMChannelDefinition: {fileID: 0}
-        Chance: 100
-        Timing:
-          TimescaleMode: 0
-          ExcludeFromHoldingPauses: 0
-          ContributeToTotalDuration: 1
-          InitialDelay: 0
-          CooldownDuration: 0
-          InterruptsOnStop: 1
-          NumberOfRepeats: 0
-          RepeatForever: 0
-          DelayBetweenRepeats: 1
-          PlayCount: 0
-          LimitPlayCount: 0
-          MaxPlayCount: 3
-          SetPlayCountToZeroOnReset: 0
-          MMFeedbacksDirectionCondition: 0
-          PlayDirection: 0
-          ConstantIntensity: 0
-          UseIntensityInterval: 0
-          IntensityIntervalMin: 0
-          IntensityIntervalMax: 0
-          Sequence: {fileID: 0}
-          TrackID: 0
-          Quantized: 0
-          TargetBPM: 120
-        AutomatedTargetAcquisition:
-          Mode: 0
-          ChildIndex: 0
-        RandomizeOutput: 0
-        RandomMultiplier: {x: 0.8, y: 1}
-        RandomizeDuration: 0
-        RandomDurationMultiplier: {x: 0.5, y: 2}
-        UseRange: 0
-        RangeDistance: 5
-        UseRangeFalloff: 0
-        RangeFalloff:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        RemapRangeFalloff: {x: 0, y: 1}
-        AutomaticShakerSetupButton:
-          ButtonText: Automatic Shaker Setup
-        Owner: {fileID: 1466540677}
-        DebugActive: 0
-        Duration: 0.15
-        ResetShakerValuesAfterShake: 1
-        ResetTargetValuesAfterShake: 1
-        RemapIntensityZero: 0
-        RemapIntensityOne: 0.07
-        Intensity:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.5
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        Amplitude: 0.2
-        RelativeIntensity: 0
     - rid: 6
       type: {class: MMF_NVPreset, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
         Active: 1
         UniqueID: -1006993239
         Label: Haptic Preset
-        OriginalLabel: 
+        OriginalLabel: Haptic Preset
         ChannelMode: 0
         Channel: 0
         MMChannelDefinition: {fileID: 0}
@@ -23749,6 +23776,119 @@ MonoBehaviour:
           OnlyPlayIfAdvancedRequirementsMet: 0
           OnlyPlayIfAmplitudeModulationSupported: 0
           OnlyPlayIfFrequencyModulationSupported: 0
+    - rid: 4596503409475977310
+      type: {class: MMF_ChromaticAberration_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
+      data:
+        Active: 1
+        UniqueID: 417152808
+        Label: Chromatic Aberration URP
+        OriginalLabel: Chromatic Aberration URP
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: Automatic Shaker Setup
+        Owner: {fileID: 1466540677}
+        DebugActive: 0
+        Duration: 0.2
+        ResetShakerValuesAfterShake: 1
+        ResetTargetValuesAfterShake: 1
+        RemapIntensityZero: 0
+        RemapIntensityOne: 1
+        Intensity:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.5
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RelativeIntensity: 0
 --- !u!4 &1466540679
 Transform:
   m_ObjectHideFlags: 0
@@ -24736,7 +24876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569802850}
-  - component: {fileID: 1569802849}
+  - component: {fileID: 1569802853}
   - component: {fileID: 1569802852}
   - component: {fileID: 1569802851}
   m_Layer: 0
@@ -24746,23 +24886,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1569802849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569802848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 2253fd3a45723c44084c347042f869cf, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!4 &1569802850
 Transform:
   m_ObjectHideFlags: 0
@@ -24787,7 +24910,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1569802848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1297b688774526f418895a2f09176619, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d01154bce0123949a8800d85a063092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ChannelMode: 0
@@ -24848,7 +24971,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1569802848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04189ce672fd8c349b61eb900b1dc0ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 485e02e02c638cf4b9ca8344fd6213a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ChannelMode: 0
@@ -24899,7 +25022,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   RemapIntensityZero: 0
-  RemapIntensityOne: 10
+  RemapIntensityOne: 1
   ShakeThreshold:
     serializedVersion: 2
     m_Curve:
@@ -24935,6 +25058,23 @@ MonoBehaviour:
     m_RotationOrder: 4
   RemapThresholdZero: 0
   RemapThresholdOne: 0
+--- !u!114 &1569802853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569802848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 97b7a4be618a01a4bb59e2160bb36ef9, type: 2}
 --- !u!1 &1585651936
 GameObject:
   m_ObjectHideFlags: 0
@@ -25027,7 +25167,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a26feb16bb9f2df41badeddb95abe94e, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30877,6 +31016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1808826516}
   - component: {fileID: 1808826517}
+  - component: {fileID: 1808826518}
   m_Layer: 0
   m_Name: LightShadows
   m_TagString: Untagged
@@ -30916,7 +31056,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -30964,6 +31104,29 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1808826518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808826515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1832010535
 GameObject:
   m_ObjectHideFlags: 0
@@ -31507,6 +31670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1996703610}
   - component: {fileID: 1996703609}
+  - component: {fileID: 1996703611}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -31525,13 +31689,13 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: 3
     m_CustomResolution: -1
     m_Strength: 1
@@ -31594,6 +31758,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1916007263}
   m_LocalEulerAnglesHint: {x: 414.6, y: 90.22, z: 0}
+--- !u!114 &1996703611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996703608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1001 &2010826016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32456,7 +32643,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 44d5f52774831c54da64bc233119bc93, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -41427,7 +41613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1893627820487142725, guid: 5c0669bd66f517143b7f3a11cbd9c17e, type: 3}
+  - {fileID: 2100000, guid: 20729848b1209504ebb9c98d05470832, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43173,7 +43359,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4237604609199654394, guid: 5c0669bd66f517143b7f3a11cbd9c17e, type: 3}
+  - {fileID: 2100000, guid: 8b000dda6e5033841a878fe092a16c32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43333,6 +43519,10 @@ PrefabInstance:
     - target: {fileID: 8376026975903138752, guid: 9096c72bd497923479605df131852973, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376026977098148595, guid: 9096c72bd497923479605df131852973, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43622,7 +43812,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5883142612633622390, guid: 5c0669bd66f517143b7f3a11cbd9c17e, type: 3}
+  - {fileID: 2100000, guid: 20729848b1209504ebb9c98d05470832, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
