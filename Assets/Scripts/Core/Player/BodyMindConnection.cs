@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class BodyMindConnection : MonoBehaviour
@@ -15,8 +16,11 @@ public class BodyMindConnection : MonoBehaviour
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
 
-    public void ConnectMind(PlayerMind mind)
+    public void ConnectMind(PlayerMind mind, CinemachineCamera camera)
     {
+        camera.Follow = mindParent.transform;
+        camera.LookAt = mindParent.transform;
+
         mind.transform.SetParent(mindParent);
         mind.SetPlayerModel(mesh);
         mind.SetPlayerMovement(playerMovement);

@@ -5,7 +5,7 @@ public class PlayerFOV : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] float zoomInSpeed = 2f;
     [SerializeField] float zoomOutSpeed = 2f;
-    float baseFOV = 75f;
+    [SerializeField] float baseFOV = 75f;
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
 
@@ -38,5 +38,10 @@ public class PlayerFOV : MonoBehaviour
             playerCamera.fieldOfView = Mathf.MoveTowards(playerCamera.fieldOfView, baseFOV, zoomOutSpeed * Time.deltaTime);
         }
 
+    }
+
+    public void EnableLayerInCamera(int layer)
+    {
+        playerCamera.cullingMask |= 1 << layer;
     }
 }

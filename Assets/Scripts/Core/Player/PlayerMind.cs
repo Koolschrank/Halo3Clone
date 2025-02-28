@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -7,16 +9,18 @@ public class PlayerMind : MonoBehaviour
 {
     public UnityEvent OnPlayerDeath;
 
-    [SerializeField] Camera playerCamera;
+    //[SerializeField] Camera playerCamera;
     [SerializeField] Arm_FPSView armsView;
     [SerializeField] WeaponSway weaponSway;
-    [SerializeField] PlayerFOV playerFOV;
+    //[SerializeField] PlayerFOV playerFOV;
     [SerializeField] PlayerInput playerInput;
 
     [SerializeField] Transform spectatorCameraOffset;
     [SerializeField] LookAtTarget spectatorTarget;
+    [SerializeField] PlayerCamera playerCamera;
+    //[SerializeField] CinemachineBrain cinemachineBrain;
 
-    
+
 
     [Header("UI")]
     [SerializeField] Transform UIContainer;
@@ -71,6 +75,10 @@ public class PlayerMind : MonoBehaviour
         inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
     }
 
+    public void SetCinemaCamera(CinemachineCamera cCam)
+    {
+        playerCamera.SetCinemachineCamera(cCam);
+    }
 
 
 
@@ -86,8 +94,8 @@ public class PlayerMind : MonoBehaviour
         playerArms = arms;
         armsView.SetUp(arms);
         weaponUI.SetUp(arms);
-        arms.OnZoomIn += playerFOV.ZoomIn;
-        arms.OnZoomOut += playerFOV.ZoomOut;
+        arms.OnZoomIn += playerCamera.ZoomIn;
+        arms.OnZoomOut += playerCamera.ZoomOut;
 
     }
 
@@ -255,7 +263,7 @@ public class PlayerMind : MonoBehaviour
 
     public void EnableLayerInCamera(int layer)
     {
-        playerCamera.cullingMask |= 1 << layer;
+        playerCamera.EnableLayerInCamera(layer);
     }
 
 
@@ -297,5 +305,14 @@ public class PlayerMind : MonoBehaviour
         SwitchToPlayerCamera();
     }
 
+    public void SetScreenRect(ScreenRectValues screen, int channel)
+    {
+        playerCamera.SetScreenRect(screen, channel);
+    }
+
+
+
 
 }
+
+
