@@ -2,9 +2,12 @@ using System;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using UnityEngine.Events;
 
 public class CharacterHealth : Health
 {
+   
+
     [SerializeField] float maxShild = 100;
     [SerializeField] float currentShild = 100;
     [SerializeField] float shildPopDamageNegation = 25;
@@ -27,6 +30,8 @@ public class CharacterHealth : Health
 
     public Action<float> OnShildChanged;
     public Action OnShildDepleted;
+    public UnityEvent OnDamageTakenUnityEvent;
+
 
     protected override void Start()
     {
@@ -98,6 +103,8 @@ public class CharacterHealth : Health
         {
             damage *= damagePackage.headShotMultiplier;
         }
+
+        OnDamageTakenUnityEvent?.Invoke();
 
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

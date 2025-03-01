@@ -32,50 +32,6 @@ Transform:
   - {fileID: 3978858796665008474}
   m_Father: {fileID: 3676879251630607992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6567960802809271366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1076377388052787134}
-  - component: {fileID: 2222353671324478291}
-  m_Layer: 0
-  m_Name: SpectatorCameraOffset
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1076377388052787134
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567960802809271366}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.30448723, y: -0, z: -0, w: 0.9525165}
-  m_LocalPosition: {x: 0, y: 3.3, z: -3.87}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3676879251630607992}
-  m_LocalEulerAnglesHint: {x: 35.455, y: 0, z: 0}
---- !u!114 &2222353671324478291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6567960802809271366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de0b353ed482654badb22dda287db78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6575293768710529257
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +66,6 @@ Transform:
   - {fileID: 4645109039399102668}
   - {fileID: 3664815395283841513}
   - {fileID: 225553704323308236}
-  - {fileID: 1076377388052787134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6762101414911299386
@@ -143,7 +98,7 @@ MonoBehaviour:
   armsView: {fileID: 4409982759675025528}
   weaponSway: {fileID: 101173681999680801}
   playerInput: {fileID: 2923737641940389727}
-  spectatorCameraOffset: {fileID: 1076377388052787134}
+  spectatorCameraOffset: {fileID: 0}
   spectatorCamera: {fileID: 0}
   playerCamera: {fileID: 7384835890734412225}
   UIContainer: {fileID: 4247939652203469467}

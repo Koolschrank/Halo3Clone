@@ -15,7 +15,6 @@ public class PlayerMind : MonoBehaviour
     //[SerializeField] PlayerFOV playerFOV;
     [SerializeField] PlayerInput playerInput;
 
-    [SerializeField] Transform spectatorCameraOffset;
     [SerializeField] CinemachineCamera spectatorCamera;
     [SerializeField] PlayerCamera playerCamera;
     //[SerializeField] CinemachineBrain cinemachineBrain;
@@ -183,7 +182,7 @@ public class PlayerMind : MonoBehaviour
 
     public void WeaponReload(InputAction.CallbackContext context)
     {
-
+        if (playerArms == null) return;
         if (context.performed)
         {
             if (playerArms == null) return;
@@ -193,6 +192,7 @@ public class PlayerMind : MonoBehaviour
 
     public void WeaponSwitch(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
         if (context.performed)
         {
             playerArms.PressSwitchButton();
@@ -201,6 +201,7 @@ public class PlayerMind : MonoBehaviour
 
     public void WeaponPickUp(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
         if (context.performed)
         {
             playerArms.TryPickUpWeapon();
@@ -209,6 +210,7 @@ public class PlayerMind : MonoBehaviour
 
     public void ThrowGranade(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
         if (context.performed)
         {
             playerArms.PressGranadeButton();
@@ -217,6 +219,7 @@ public class PlayerMind : MonoBehaviour
 
     public void Crouch(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
         if (context.performed)
         {
             playerMovement.ToggleCrouch();
@@ -225,6 +228,7 @@ public class PlayerMind : MonoBehaviour
 
     public void MeleeAttack(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
         if (context.performed)
         {
             playerArms.PressMeleeButton();

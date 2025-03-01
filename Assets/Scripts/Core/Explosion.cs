@@ -1,5 +1,6 @@
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.Events;
 
 public class Explosion : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Explosion : MonoBehaviour
     [Header("extra features")]
     [SerializeField] FireDamageOverTime fireDamageOverTime;
 
+    public UnityEvent OnExplosion;
+
 
     public void Activate(GameObject owner)
     {
@@ -45,6 +48,7 @@ public class Explosion : MonoBehaviour
 
     public void Trigger()
     {
+        OnExplosion?.Invoke();
         RuntimeManager.PlayOneShot(explosionSound, transform.position);
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, hitLayer);
         foreach (var collider in colliders)

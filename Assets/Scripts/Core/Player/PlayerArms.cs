@@ -494,6 +494,7 @@ public class PlayerArms : MonoBehaviour
 
     public void PressSwitchButton()
     {
+        Debug.Log("Switch button pressed");
         switchInputBufferTimer = switchInputBuffer;
         reloadInputBufferTimer = 0;
     }

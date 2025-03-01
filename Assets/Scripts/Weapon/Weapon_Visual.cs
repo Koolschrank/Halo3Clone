@@ -1,13 +1,22 @@
+using MoreMountains.Feedbacks;
+using MoreMountains.FeedbacksForThirdParty;
+using MoreMountains.Tools;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Weapon_Visual : Weapon_Model
 {
     [SerializeField] Animator animator;
 
+    public UnityEvent OnShoot = new UnityEvent();
+
     public override void SetUp(Weapon_Arms weapon)
     {
+
+
         base.SetUp(weapon);
         weapon.OnReloadStart += Reload;
         weapon.OnSwitchInStart += SwitchIn;
@@ -44,7 +53,9 @@ public class Weapon_Visual : Weapon_Model
             animator.Play("Shoot");
         }
 
-        
+        OnShoot.Invoke();
+
+
     }
 
     public void Reload(float time)
@@ -69,8 +80,7 @@ public class Weapon_Visual : Weapon_Model
         SetAnimationSpeed(switchInClip, animationLenght, time);
 
         animator.SetTrigger("SwitchIn");
-        Debug.Log("SwitchIn");
-        Debug.Log(child.transform.GetChild(0).name);
+        
     }
 
     public void SwitchOut(float time)
