@@ -16,10 +16,11 @@ public class BodyMindConnection : MonoBehaviour
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
 
-    public void ConnectMind(PlayerMind mind, CinemachineCamera camera)
+    public void ConnectMind(PlayerMind mind, CinemachineCamera camera, CinemachineCamera spectatorCamera)
     {
         camera.Follow = mindParent.transform;
         camera.LookAt = mindParent.transform;
+        
 
         mind.transform.SetParent(mindParent);
         mind.SetPlayerModel(mesh);
@@ -29,10 +30,13 @@ public class BodyMindConnection : MonoBehaviour
         mind.SetHealth(health);
         mind.SetPickUpScan(playerPickUpScan);
         mind.SetBulletSpawner(bulletSpawner);
-        mind.SetSpectatorTarget(spectatorCameraTarget);
+        mind.SetSpectatorTarget(spectatorCamera);
         mind.SetPlayerInventory(playerInventory);
         mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
+
+        spectatorCamera.Follow = transform  ;
+        spectatorCamera.LookAt = spectatorCameraTarget;
 
     }
 

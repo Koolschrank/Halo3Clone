@@ -20,14 +20,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - Player1_FPS
   - Player1_ThirdPerson
   - Player2_FPS
@@ -36,6 +28,14 @@ TagManager:
   - Player3_ThirdPerson
   - Player4_FPS
   - Player4_ThirdPerson
+  - Player5_FPS
+  - Player5_ThirdPerson
+  - Player6_FPS
+  - Player6_ThirdPerson
+  - Player7_FPS
+  - Player7_ThirdPerson
+  - Player8_FPS
+  - Player8_ThirdPerson
   - DeadPlayerLayer
   m_SortingLayers:
   - name: Default

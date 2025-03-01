@@ -144,7 +144,7 @@ MonoBehaviour:
   weaponSway: {fileID: 101173681999680801}
   playerInput: {fileID: 2923737641940389727}
   spectatorCameraOffset: {fileID: 1076377388052787134}
-  spectatorTarget: {fileID: 2222353671324478291}
+  spectatorCamera: {fileID: 0}
   playerCamera: {fileID: 7384835890734412225}
   UIContainer: {fileID: 4247939652203469467}
   healthUI: {fileID: 3963887290950628199}
@@ -604,7 +604,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 2
     CustomCurve:
       serializedVersion: 2

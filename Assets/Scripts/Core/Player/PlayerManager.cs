@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     List<int> playerLayers = new List<int>();
 
     [SerializeField] CinemachineCamera[] playerCameras;
+    [SerializeField] CinemachineCamera[] spectatorCameras;
     [SerializeField] ScreenRectArray[] screenRectValues;
 
     // Awake
@@ -47,7 +48,7 @@ public class PlayerManager : MonoBehaviour
     {
         // spawn player body
         var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
-        playerBody.ConnectMind(player, playerCameras[players.Count]);
+        playerBody.ConnectMind(player, playerCameras[players.Count], spectatorCameras[players.Count]);
         
 
 
@@ -78,8 +79,14 @@ public class PlayerManager : MonoBehaviour
             var playerCam = players[i];
             playerCam.SetScreenRect(screenRectValues[playerCount - 1].screenRectValues[i], i);
             var vCam = playerCameras[i];
-            vCam.Lens.FieldOfView = screenRectValues[playerCount - 1].screenRectValues[i].FOV;
+            var spectatorCam = spectatorCameras[i];
+            var fov = screenRectValues[playerCount - 1].screenRectValues[i].FOV;
+            vCam.Lens.FieldOfView = fov;
+            spectatorCam.Lens.FieldOfView = fov;
             playerCam.SetCinemaCamera(vCam);
+
+            
+            
         }
 
     }
@@ -92,7 +99,7 @@ public class PlayerManager : MonoBehaviour
     public void RespawnPlayer(PlayerMind player)
     {
         var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
-        playerBody.ConnectMind(player, GetPlayerCamera(player));
+        playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetMaterial(GetPlayerColor(player));
 
         player.UpdateLayers();
@@ -101,7 +108,7 @@ public class PlayerManager : MonoBehaviour
     public Material GetPlayerColor(PlayerMind player)
     {
         var index = players.IndexOf(player);
-        if (index > 3) return playerColors[3];
+        if (index > playerColors.Length) return playerColors[playerColors.Length -1];
         return playerColors[index];
     }
 
@@ -109,6 +116,13 @@ public class PlayerManager : MonoBehaviour
     {
         var index = players.IndexOf(player);
         return playerCameras[index];
+    }
+
+    // get player spectator camera
+    public CinemachineCamera GetPlayerSpectatorCamera(PlayerMind player)
+    {
+        var index = players.IndexOf(player);
+        return spectatorCameras[index];
     }
 }
 

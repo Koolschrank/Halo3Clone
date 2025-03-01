@@ -16,7 +16,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerInput playerInput;
 
     [SerializeField] Transform spectatorCameraOffset;
-    [SerializeField] LookAtTarget spectatorTarget;
+    [SerializeField] CinemachineCamera spectatorCamera;
     [SerializeField] PlayerCamera playerCamera;
     //[SerializeField] CinemachineBrain cinemachineBrain;
 
@@ -59,9 +59,9 @@ public class PlayerMind : MonoBehaviour
         weaponSway.SetUp(playerMovement);
     }
 
-    public void SetSpectatorTarget(Transform target)
+    public void SetSpectatorTarget(CinemachineCamera camera)
     {
-        spectatorTarget.SetTarget(target);
+        spectatorCamera = camera;
     }
 
     public void SetPlayerInventory(PlayerInventory inventory)
@@ -233,6 +233,8 @@ public class PlayerMind : MonoBehaviour
 
     public void Zoom(InputAction.CallbackContext context)
     {
+        if (playerArms == null) return;
+
         if (context.performed)
         {
             playerArms.PressZoomButton();
@@ -275,12 +277,13 @@ public class PlayerMind : MonoBehaviour
     public void SwitchToSpectatorCamera()
     {
         // add camera to spectator camera offset as child
-        transform.SetParent(null);
-        playerCamera.transform.SetParent(spectatorCameraOffset);
-        playerCamera.transform.localPosition = Vector3.zero;
-        playerCamera.transform.localRotation = Quaternion.identity;
+        //transform.SetParent(null);
+        //playerCamera.transform.SetParent(spectatorCameraOffset);
+        //playerCamera.transform.localPosition = Vector3.zero;
+        //playerCamera.transform.localRotation = Quaternion.identity;
         armsView.gameObject.SetActive(false);
         UIContainer.gameObject.SetActive(false);
+        spectatorCamera.Priority = 100;
     }
 
     public void SwitchToPlayerCamera()
@@ -290,6 +293,8 @@ public class PlayerMind : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.identity;
         armsView.gameObject.SetActive(true);
         UIContainer.gameObject.SetActive(true);
+        spectatorCamera.Priority = 0;
+
 
     }
     IEnumerator RespawnDelay(float delay)
