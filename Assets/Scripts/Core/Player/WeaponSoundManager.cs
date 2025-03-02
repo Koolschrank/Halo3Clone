@@ -31,13 +31,13 @@ public class WeaponSoundManager : MonoBehaviour
 
     public void HitTarget(GameObject target)
     {
-        Debug.Log("hit target");
+        
         AudioManager.instance.PlayOneShot(hitSound, transform.position);
     }
 
     public void KillTarget(GameObject target)
     {
-        Debug.Log("Killed target");
+       
         AudioManager.instance.PlayOneShot(killSound, transform.position);
     }
 

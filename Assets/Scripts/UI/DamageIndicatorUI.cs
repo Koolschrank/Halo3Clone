@@ -16,7 +16,7 @@ public class DamageIndicatorUI : MonoBehaviour
 
     public void AddDamageIndicator(DamagePackage damagePackage)
     {
-        Debug.Log("AddDamageIndicator");
+        
         if (!CheckIfHitIndicatorIsNeeded(damagePackage.origin, transform))
         {
             return;

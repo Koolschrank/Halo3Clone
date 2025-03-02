@@ -13,14 +13,20 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] Transform spectatorCameraTarget;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] TargetHitCollector targetHitCollector;
+    [SerializeField] PlayerTeam playerTeam;
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
+
+
+    PlayerMind mind;
 
     public void ConnectMind(PlayerMind mind, CinemachineCamera camera, CinemachineCamera spectatorCamera)
     {
         camera.Follow = mindParent.transform;
         camera.LookAt = mindParent.transform;
-        
+
+        this.mind = mind;
 
         mind.transform.SetParent(mindParent);
         mind.SetPlayerModel(mesh);
@@ -38,6 +44,14 @@ public class BodyMindConnection : MonoBehaviour
         spectatorCamera.Follow = transform  ;
         spectatorCamera.LookAt = spectatorCameraTarget;
 
+        mind.ConnectPlayerElimination(targetHitCollector);
+        SetPlayTeamIndex();
+
+    }
+
+    public void SetPlayTeamIndex()
+    {
+        playerTeam.SetTeamIndex(mind.TeamIndex);
     }
 
     public void SetMaterial(Material material)
@@ -46,5 +60,10 @@ public class BodyMindConnection : MonoBehaviour
         {
             mesh.material = material;
         }
+    }
+
+    public PlayerMind GetMind()
+    {
+        return mind;
     }
 }

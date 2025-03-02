@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Weapon_Visual : Weapon_Model
 {
@@ -15,15 +14,12 @@ public class Weapon_Visual : Weapon_Model
 
     public override void SetUp(Weapon_Arms weapon)
     {
-
-
         base.SetUp(weapon);
         weapon.OnReloadStart += Reload;
         weapon.OnSwitchInStart += SwitchIn;
         weapon.OnSwitchOutStart += SwitchOut;
         weapon.OnShot += Shoot;
         weapon.OnMeleeStart += MeleeAttackStart;
-
     }
 
     public override void OnDestroy()

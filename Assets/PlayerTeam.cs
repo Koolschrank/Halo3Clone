@@ -2,22 +2,15 @@ using UnityEngine;
 
 public class PlayerTeam : MonoBehaviour
 {
-    [SerializeField] Team team;
+    [SerializeField] int teamIndex;
 
-    public Team Team => team;
+    public int TeamIndex => teamIndex;
 
-    public void SetTeam(Team team)
+    public void SetTeamIndex(int teamIndex)
     {
-        this.team = team;
+        this.teamIndex = teamIndex;
+
     }
-}
 
 
-
-public enum Team
-{
-    None,
-    Blue,
-    Red,
-    
 }

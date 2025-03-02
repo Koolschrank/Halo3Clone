@@ -900,6 +900,8 @@ MonoBehaviour:
   bulletSpawner: {fileID: 737555415851796727}
   spectatorCameraTarget: {fileID: 3521633971492238688}
   playerInventory: {fileID: 7573040687501960069}
+  targetHitCollector: {fileID: 6138964545677116144}
+  playerTeam: {fileID: 2295363821645548979}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -989,7 +991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457a0c336a456b248beb85dfa00fbad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+  teamIndex: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

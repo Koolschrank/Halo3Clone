@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SniperBullet 1
   m_EditorClassIdentifier: 
   damage: 100
-  force: 200
+  force: 700
   shildDamageMultiplier: 1
   headShotMultiplier: 3
   range: 100

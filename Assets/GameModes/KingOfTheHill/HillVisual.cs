@@ -6,8 +6,8 @@ public class HillVisual : MonoBehaviour
     [SerializeField] MeshRenderer meshRenderer;
 
     [SerializeField] Material baseMaterial;
-    [SerializeField] Material blueMaterial;
-    [SerializeField] Material redMaterial;
+    [SerializeField] Material[] teamMaterials;
+
 
     public void Awake()
     {
@@ -30,19 +30,16 @@ public class HillVisual : MonoBehaviour
         meshRenderer.enabled = false;
     }
 
-    public void OnTeamChange(Team team)
+    public void OnTeamChange(int team)
     {
-        switch (team)
+        // if team index is out of bounds, use the base material
+        if (team < 0 || team >= teamMaterials.Length)
         {
-            case Team.None:
-                meshRenderer.material = baseMaterial;
-                break;
-            case Team.Blue:
-                meshRenderer.material = blueMaterial;
-                break;
-            case Team.Red:
-                meshRenderer.material = redMaterial;
-                break;
+            meshRenderer.material = baseMaterial;
+            return;
         }
+
+        meshRenderer.material = teamMaterials[team];
+
     }
 }

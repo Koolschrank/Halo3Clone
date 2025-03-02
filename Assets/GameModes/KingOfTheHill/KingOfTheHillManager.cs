@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class KingOfTheHillManager : MonoBehaviour
+public class KingOfTheHillManager : GameModeManager
 {
-
-    
-    [SerializeField] GameMode_KingOfTheHill gameMode;
-    
+    /*
     [SerializeField] int hillStartIndex = 0;
     [SerializeField] Hill[] hills;
     [SerializeField] float checkInterval = 0.1f;
@@ -17,6 +14,7 @@ public class KingOfTheHillManager : MonoBehaviour
     float checkTimer = 0;
     List<int> hillsAlreadyUsed = new List<int>();
     Hill currentHill;
+
 
     private void Start()
     {
@@ -28,7 +26,6 @@ public class KingOfTheHillManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameMode.ResetGame();
         hillsAlreadyUsed.Clear();
 
         foreach (Hill hill in hills)
@@ -54,14 +51,14 @@ public class KingOfTheHillManager : MonoBehaviour
             CheckCurrentHill();
             checkTimer = checkInterval;
         }
+        var gameStats = (GameMode_KingOfTheHill)gameModeStats;
+        gameStats.UpdateHillTimer();
+        gameStats.UpdateHillMoveTimer();
 
-        gameMode.UpdateHillTimer();
-        gameMode.UpdateHillMoveTimer();
-
-        if (gameMode.CanMoveHill())
+        if (gameStats.CanMoveHill())
         {
             StartRandomHill();
-            gameMode.ResetHillMoveTimer();
+            gameStats.ResetHillMoveTimer();
         }
 
 
@@ -99,14 +96,14 @@ public class KingOfTheHillManager : MonoBehaviour
         hillsAlreadyUsed.Add(index);
         hills[index].Activate();
         currentHill = hills[index];
-        SetDominatingTeam(Team.None);
+        SetDominatingTeam(-1);
         currentHill.OnTeamChanged += SetDominatingTeam;
 
     }
 
-    void SetDominatingTeam(Team team)
+    void SetDominatingTeam(int team)
     {
-        gameMode.SetDominatingTeam(team);
+        (GameMode_KingOfTheHill)gameModeStats.SetDominatingTeam(team);
     }
 
     void CheckCurrentHill()
@@ -114,5 +111,5 @@ public class KingOfTheHillManager : MonoBehaviour
         if (currentHill == null) return;
 
         currentHill.ScanHill();
-    }
+    }*/
 }

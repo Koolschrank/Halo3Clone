@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Hill : MonoBehaviour
 {
-    public Action<Team> OnTeamChanged;
+    public Action<int> OnTeamChanged;
     public Action OnActivated;
     public Action OnDeactivated;
 
@@ -14,14 +14,14 @@ public class Hill : MonoBehaviour
     
     float checkTimer = 0;
 
-    Team teamOnHill = Team.None;
+    int teamOnHill = -1;
 
     bool active = false;
 
     public void Activate()
     {
         active = true;
-        SetTeamOnHill(Team.None);
+        SetTeamOnHill(-1);
         OnActivated?.Invoke();
     }
 
@@ -29,7 +29,7 @@ public class Hill : MonoBehaviour
     public void Deactivate()
     {
         active = false;
-        SetTeamOnHill(Team.None);
+        SetTeamOnHill(-1);
         OnDeactivated?.Invoke();
     }
 
@@ -40,14 +40,14 @@ public class Hill : MonoBehaviour
             return;
         }
 
-        List<Team> playersOnHill = new List<Team>();
+        List<int> playersOnHill = new List<int>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider collider in colliders)
         {
             PlayerTeam player = collider.GetComponent<PlayerTeam>();
             if (player != null)
             {
-                playersOnHill.Add(player.Team);
+                playersOnHill.Add(player.TeamIndex);
             }
         }
 
@@ -63,42 +63,37 @@ public class Hill : MonoBehaviour
     }
 
 
-    public Team GetDominatingTeamOnHill(List<Team> playersOnHill)
+    public int GetDominatingTeamOnHill(List<int> playersOnHill)
     {
-        int blueCount = 0;
-        int redCount = 0;
-        foreach (Team team in playersOnHill)
+        int[] teamCounts = new int[8];
+        foreach (int team in playersOnHill)
         {
-            switch (team)
+            teamCounts[team] += 1;
+        }
+        // return the team with the most players on the hill
+        int max = 0;
+        int maxIndex = -1;
+        for (int i = 0; i < teamCounts.Length; i++)
+        {
+            if (teamCounts[i] > max)
             {
-                case Team.Blue:
-                    blueCount++;
-                    break;
-                case Team.Red:
-                    redCount++;
-                    break;
+                max = teamCounts[i];
+                maxIndex = i;
+            }
+            if (teamCounts[i] == max)
+            {
+                maxIndex = -1;
             }
         }
-        if (blueCount > redCount)
-        {
-            return Team.Blue;
-        }
-        else if (redCount > blueCount)
-        {
-            return Team.Red;
-        }
-        else
-        {
-            return Team.None;
-        }
+        return maxIndex;
 
     }
 
-    public void SetTeamOnHill(Team team)
+    public void SetTeamOnHill(int teamIndex)
     {
-        teamOnHill = team;
+        teamOnHill = teamIndex;
 
-        OnTeamChanged?.Invoke(team);
+        OnTeamChanged?.Invoke(teamIndex);
     }
 
     // gizmo to show the hill radius

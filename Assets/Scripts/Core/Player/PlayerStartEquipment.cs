@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +46,38 @@ public class PlayerStartEquipment : MonoBehaviour
         weapon.FillReserve();
         return weapon;
     }
+
+
+
+}
+
+
+[Serializable]
+public class Equipment
+{
+    [SerializeField] bool hasShild = true;
+    [SerializeField] bool headShotOneShot = true;
+
+
+    [SerializeField] Weapon_Data weaponInHand;
+    [SerializeField] int magazinsOfWeaponInHand = 3;
+    [SerializeField] Weapon_Data sideArm;
+    [SerializeField] int magazinsOfSideArm = 5;
+
+    [SerializeField] GranadeStats granade;
+    [SerializeField] int granadeCount = 0;
+
+    public bool HasShild => hasShild;
+    public bool HeadShotOneShot => headShotOneShot;
+
+    public Weapon_Data WeaponInHand => weaponInHand;
+    public int MagazinsOfWeaponInHand => magazinsOfWeaponInHand;
+
+    public Weapon_Data SideArm => sideArm;
+    public int MagazinsOfSideArm => magazinsOfSideArm;
+
+    public GranadeStats Granade => granade;
+    public int GranadeCount => granadeCount;
 
 
 

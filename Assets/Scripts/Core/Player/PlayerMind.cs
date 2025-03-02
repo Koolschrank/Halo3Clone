@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerMind : MonoBehaviour
 {
     public UnityEvent OnPlayerDeath;
+    public Action<PlayerMind> OnPlayerDied;
+    public Action<PlayerMind> OnPlayerElimination;
+    public Action<PlayerMind> OnTeamKill;
 
     //[SerializeField] Camera playerCamera;
     [SerializeField] Arm_FPSView armsView;
@@ -15,10 +18,10 @@ public class PlayerMind : MonoBehaviour
     //[SerializeField] PlayerFOV playerFOV;
     [SerializeField] PlayerInput playerInput;
 
-    [SerializeField] CinemachineCamera spectatorCamera;
+    CinemachineCamera spectatorCamera;
     [SerializeField] PlayerCamera playerCamera;
     //[SerializeField] CinemachineBrain cinemachineBrain;
-
+    [SerializeField] PlayerTeam team;
 
 
     [Header("UI")]
@@ -30,6 +33,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
     [SerializeField] CooldownUI granadeCooldown;
+    
 
     GameObject playerModel;
     PlayerMovement playerMovement;
@@ -135,6 +139,26 @@ public class PlayerMind : MonoBehaviour
     public void PlayerDeath()
     {
         OnPlayerDeath?.Invoke();
+        OnPlayerDied?.Invoke(this);
+    }
+
+    public void PlayerElimination(GameObject obj)
+    {
+        var otherPlayer = obj.GetComponent<PlayerTeam>();
+        if (otherPlayer != null) {
+            if (otherPlayer.TeamIndex == team.TeamIndex)
+            {
+                OnTeamKill?.Invoke(this);
+            }
+            else
+            {
+                OnPlayerElimination?.Invoke(this);
+
+            }
+        }
+        
+
+            
     }
 
     // set pick up scan
@@ -319,7 +343,26 @@ public class PlayerMind : MonoBehaviour
         playerCamera.SetScreenRect(screen, channel);
     }
 
+    public int TeamIndex { get { return team.TeamIndex; } }
 
+    public void AssignTeam(int team)
+    {
+        this.team.SetTeamIndex(team);
+    }
+
+
+    TargetHitCollector hitCollector;
+    public void ConnectPlayerElimination(TargetHitCollector hitCollector)
+    {
+        if (this.hitCollector != null)
+        {
+            this.hitCollector.OnCharacterKill -= PlayerElimination;
+        }
+
+        this.hitCollector = hitCollector;
+
+        hitCollector.OnCharacterKill += PlayerElimination;
+    }
 
 
 }

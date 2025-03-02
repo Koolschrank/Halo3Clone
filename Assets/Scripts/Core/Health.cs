@@ -96,7 +96,7 @@ public class Health : MonoBehaviour
     protected virtual void Die()
     {
         OnDeath?.Invoke();
-        Debug.Log("Dead");
+        
 
     }
 

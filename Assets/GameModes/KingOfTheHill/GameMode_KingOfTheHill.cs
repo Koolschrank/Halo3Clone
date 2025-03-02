@@ -4,7 +4,8 @@ using System;
 [CreateAssetMenu(menuName = "GameModes/KingOfTheHill")]
 public class GameMode_KingOfTheHill : GameMode
 {
-    public Action<Team> OnDominatingTeamChanged;
+    /*
+    public Action<int> OnDominatingTeamChanged;
     public Action<float> OnHillMoveTimerChanged;
 
     [SerializeField] float timeToScore = 0;
@@ -12,18 +13,10 @@ public class GameMode_KingOfTheHill : GameMode
     [SerializeField] bool moveHill = false;
     [SerializeField] float hillMoveTime = 0;
 
-    Team teamOnHill = Team.None;
+    int teamOnHill = -1;
     float timeOnHillUntilNextPointScore = 0;
     float hillMoveTimer = 0;
 
-    public override void ResetGame()
-    {
-        base.ResetGame();
-        teamOnHill = Team.None;
-        ResetHillMoveTimer();
-        ResetHillPointTimer();
-
-    }
 
     public void ResetHillMoveTimer()
     {
@@ -35,7 +28,7 @@ public class GameMode_KingOfTheHill : GameMode
         timeOnHillUntilNextPointScore = timeToScore;
     }
 
-    public void SetDominatingTeam(Team team)
+    public void SetDominatingTeam(int team)
     {
         teamOnHill = team;
         ResetHillPointTimer();
@@ -43,7 +36,7 @@ public class GameMode_KingOfTheHill : GameMode
 
     public void UpdateHillTimer()
     {
-        if (teamOnHill == Team.None)
+        if (teamOnHill == -1)
         {
             return;
         }
@@ -72,6 +65,6 @@ public class GameMode_KingOfTheHill : GameMode
 
 
 
-
+    */
 
 }

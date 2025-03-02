@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3676879251630607992}
   - component: {fileID: 6762101414911299386}
   - component: {fileID: 2923737641940389727}
+  - component: {fileID: 367694579518745841}
   m_Layer: 0
   m_Name: PlayerMind
   m_TagString: Untagged
@@ -98,9 +99,9 @@ MonoBehaviour:
   armsView: {fileID: 4409982759675025528}
   weaponSway: {fileID: 101173681999680801}
   playerInput: {fileID: 2923737641940389727}
-  spectatorCameraOffset: {fileID: 0}
   spectatorCamera: {fileID: 0}
   playerCamera: {fileID: 7384835890734412225}
+  team: {fileID: 367694579518745841}
   UIContainer: {fileID: 4247939652203469467}
   healthUI: {fileID: 3963887290950628199}
   shildUI: {fileID: 1102817728189394635}
@@ -319,6 +320,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4851948068322704465}
+--- !u!114 &367694579518745841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6575293768710529257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457a0c336a456b248beb85dfa00fbad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!1 &7104922266481455783
 GameObject:
   m_ObjectHideFlags: 0

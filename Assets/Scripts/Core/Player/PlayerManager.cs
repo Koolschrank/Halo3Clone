@@ -5,6 +5,8 @@ using Unity.Cinemachine;
 using System;
 public class PlayerManager : MonoBehaviour
 {
+    public Action<PlayerMind> OnPlayerAdded;
+
     // singelton
     public static PlayerManager instance;
 
@@ -23,6 +25,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] CinemachineCamera[] spectatorCameras;
     [SerializeField] ScreenRectArray[] screenRectValues;
 
+
     // Awake
     private void Awake()
     {
@@ -37,6 +40,8 @@ public class PlayerManager : MonoBehaviour
         currentLayer = startingLayer;
     }
 
+
+
     // get dead player layer
     public int GetDeadPlayerLayer()
     {
@@ -46,7 +51,7 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerMind player)
     {
-        // spawn player body
+        
         var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
         playerBody.ConnectMind(player, playerCameras[players.Count], spectatorCameras[players.Count]);
         
@@ -70,7 +75,6 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
         playerLayers.Add(currentLayer);
         currentLayer += 1;
-        playerBody.SetMaterial(GetPlayerColor(player));
 
 
         var playerCount = players.Count;
@@ -89,6 +93,12 @@ public class PlayerManager : MonoBehaviour
             
         }
 
+        OnPlayerAdded?.Invoke(player);
+
+
+
+        playerBody.SetPlayTeamIndex();
+        playerBody.SetMaterial(playerColors[player.TeamIndex]);
     }
 
     public Transform GetRandomSpawnPoint()
@@ -100,7 +110,7 @@ public class PlayerManager : MonoBehaviour
     {
         var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
         playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
-        playerBody.SetMaterial(GetPlayerColor(player));
+        playerBody.SetMaterial(playerColors[player.TeamIndex]);
 
         player.UpdateLayers();
     }
