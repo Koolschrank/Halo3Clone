@@ -566,6 +566,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   playerArms: {fileID: 3232609274750972410}
+  playerTeam: {fileID: 2295363821645548979}
 --- !u!114 &8008512304446792098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,12 +813,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ef2b619d26f7b4c84bb4315965b386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapons:
-  - {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
-  - {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
-  startingGranades: 1
   playerArms: {fileID: 3232609274750972410}
   playerInventory: {fileID: 7573040687501960069}
+  health: {fileID: 782412234501442312}
 --- !u!114 &4355240392448193639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +900,7 @@ MonoBehaviour:
   playerInventory: {fileID: 7573040687501960069}
   targetHitCollector: {fileID: 6138964545677116144}
   playerTeam: {fileID: 2295363821645548979}
+  playerStartEquipment: {fileID: 8050057614039648062}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -921,12 +920,14 @@ MonoBehaviour:
   currentHeath: 60
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 4
+  healthRegenDelay: 4.5
   healthRegenAmountPerSecond: 5
+  hasShild: 1
+  headShotOneShot: 1
   maxShild: 100
   currentShild: 100
   shildPopDamageNegation: 20
-  shildRegenDelay: 4
+  shildRegenDelay: 4.5
   shildRegenAmountPerSecond: 25
   shildPopParticalPrefab: {fileID: 6175688368018741305, guid: cc37801857173a24fa9b992e710f42dd, type: 3}
   headShotArea: {fileID: 2179829580235344875}

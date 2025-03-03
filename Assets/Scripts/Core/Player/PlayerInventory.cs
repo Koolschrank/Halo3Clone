@@ -92,6 +92,19 @@ public class PlayerInventory : MonoBehaviour
     public bool Full => weapons.Count >= weaponInvetorySize;
 
     // add granade
+
+    public void ChangeGranade(GranadeStats granade)
+    {
+        granadeStats = granade;
+    }
+    public void AddGranades(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            AddGranade();
+        }
+    }
+
     public void AddGranade()
     {
         if (granadeCount < granadeInventorySize)

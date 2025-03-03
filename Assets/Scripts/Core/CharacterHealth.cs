@@ -6,7 +6,10 @@ using UnityEngine.Events;
 
 public class CharacterHealth : Health
 {
-   
+
+
+    [SerializeField] bool hasShild = true;
+    [SerializeField] bool headShotOneShot = true;
 
     [SerializeField] float maxShild = 100;
     [SerializeField] float currentShild = 100;
@@ -31,6 +34,24 @@ public class CharacterHealth : Health
     public Action<float> OnShildChanged;
     public Action OnShildDepleted;
     public UnityEvent OnDamageTakenUnityEvent;
+    public Action OnShildDisabled;
+
+    public void SetHasShild(bool hasShild)
+    {
+        this.hasShild = hasShild;
+        if (!hasShild)
+        {
+            currentShild = 0;
+            maxShild = 0;
+            OnShildDisabled?.Invoke();
+
+        }
+    }
+
+    public void SetHeadShotOneShot(bool headShotOneShot)
+    {
+        this.headShotOneShot = headShotOneShot;
+    }
 
 
     protected override void Start()
@@ -50,7 +71,7 @@ public class CharacterHealth : Health
             return;
 
         base.Update();
-        if(shildRegenTimer > 0)
+        if(shildRegenTimer > 0 && hasShild)
         {
             shildRegenTimer -= Time.deltaTime;
             shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
@@ -59,7 +80,7 @@ public class CharacterHealth : Health
                 shildRechargeSoundInstance.start();
             }
         }
-        else if (currentShild < maxShild)
+        else if (currentShild < maxShild && hasShild)
         {
 
             if (currentShild == 0)
@@ -102,13 +123,17 @@ public class CharacterHealth : Health
         if ( currentShild <= 0 && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
         {
             damage *= damagePackage.headShotMultiplier;
+            if (headShotOneShot)
+            {
+                damage *= 100f;
+            }
         }
 
         OnDamageTakenUnityEvent?.Invoke();
 
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        if ( currentShild > 0 ) {
+        if (hasShild && currentShild > 0) {
 
             var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
 

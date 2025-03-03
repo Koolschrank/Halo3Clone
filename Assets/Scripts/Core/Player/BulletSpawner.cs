@@ -6,12 +6,14 @@ public class BulletSpawner : MonoBehaviour
     public Action<Transform> OnTargetAcquired;
     public Action<Transform> OnTargetLost;
 
+
     Transform target;
 
 
     [SerializeField] Transform mainTransform;
     [SerializeField] LayerMask autoAimLayerMask;
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] PlayerTeam playerTeam;
 
 
     AutoAim autoAimOfCurrentWeapon;
@@ -71,7 +73,15 @@ public class BulletSpawner : MonoBehaviour
         //sphere cast
         if (Physics.SphereCast(transform.position, radius, transform.forward, out RaycastHit hit, lenght, autoAimLayerMask))
         {
+            if (hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam pt))
+            {
+                if (pt.TeamIndex == playerTeam.TeamIndex)
+                {
+                    
+                    return null;
+                }
 
+            }
 
             if (hit.collider.TryGetComponent<CharacterHealth>(out CharacterHealth ch))
             {

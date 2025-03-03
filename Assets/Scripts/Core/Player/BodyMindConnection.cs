@@ -15,6 +15,7 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] TargetHitCollector targetHitCollector;
     [SerializeField] PlayerTeam playerTeam;
+    [SerializeField] PlayerStartEquipment playerStartEquipment;
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
 
@@ -46,6 +47,8 @@ public class BodyMindConnection : MonoBehaviour
 
         mind.ConnectPlayerElimination(targetHitCollector);
         SetPlayTeamIndex();
+        playerStartEquipment.GetEquipment(GameModeSelector.gameModeManager.GetEquipment());
+
 
     }
 

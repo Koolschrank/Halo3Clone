@@ -7,6 +7,8 @@ public class ShildUI : MonoBehaviour
     [SerializeField] Image shildBar;
 
     Color defaultColor;
+    [SerializeField] Color[] shildTeamColors;
+
     [SerializeField] Color alarmColor;
     [SerializeField] float alarmSpeed = 0.2f;
     float alarmTimer;
@@ -15,8 +17,16 @@ public class ShildUI : MonoBehaviour
 
     private void Start()
     {
-        defaultColor = shildBar.color;
+        if (defaultColor == null)
+            defaultColor = shildBar.color;
     }
+
+    public void SetTeamColor(int index)
+    {
+        defaultColor = shildTeamColors[index];
+        shildBar.color = defaultColor;
+    }
+
 
     public void SetUp(CharacterHealth health)
     {
@@ -30,9 +40,16 @@ public class ShildUI : MonoBehaviour
         this.health = health;
         health.OnShildChanged += UpdateShild;
         health.OnShildDepleted += ShildDepleted;
+        health.OnShildDisabled += DisableUI;
         UpdateShild(health.ShildPercentage);
 
 
+    }
+
+    public void DisableUI()
+    {
+        shildBar.fillAmount = 0;
+        gameObject.SetActive(false);
     }
 
     public void UpdateShild(float shildValue)

@@ -5,37 +5,39 @@ using UnityEngine;
 
 public class PlayerStartEquipment : MonoBehaviour
 {
-    [Header("equpment")]
-    [SerializeField] List<Weapon_Data> startingWeapons = new List<Weapon_Data>();
-    [SerializeField] int startingGranades = 0;
-
     [Header("References")]
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] CharacterHealth health;
 
 
-    private void Start()
+
+    public void GetEquipment(Equipment equipment)
     {
-        if (startingWeapons.Count <= 0)
-            return;
+        playerArms.PickUpWeapon(
+            SpawnWeapon(
+                equipment.WeaponInHand,
+                equipment.MagazinsOfWeaponInHand));
 
-        var firstWeapon = SpawnWeapon(startingWeapons[0]);
-        playerArms.PickUpWeapon(firstWeapon);
-
-        for (int i = 1; i < startingWeapons.Count; i++)
+        if (equipment.SideArm != null)
         {
-            var weapon = SpawnWeapon(startingWeapons[i]);
-            playerInventory.AddWeapon(weapon);
+            playerInventory.AddWeapon(
+            SpawnWeapon(
+                equipment.SideArm,
+                equipment.MagazinsOfSideArm));
         }
 
-        for (int i = 0; i < startingGranades; i++)
+        if (equipment.Granade != null)
         {
-            playerInventory.AddGranade();
+            playerInventory.ChangeGranade(equipment.Granade);
+            playerInventory.AddGranades(equipment.GranadeCount);
         }
 
 
+       
 
-
+        health.SetHasShild(equipment.HasShild);
+        health.SetHeadShotOneShot(equipment.HeadShotOneShot);
 
     }
 
@@ -47,8 +49,12 @@ public class PlayerStartEquipment : MonoBehaviour
         return weapon;
     }
 
-
-
+    public Weapon_Arms SpawnWeapon(Weapon_Data data, int magazin)
+    {
+        var weapon = new Weapon_Arms(data);
+        weapon.GainMagazins(magazin);
+        return weapon;
+    }
 }
 
 

@@ -46,29 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0776b1c71aefb8544b6d9ee114ffb1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 8
-  damage: 160
+  range: 7
+  damage: 190
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.22406769
-      value: 1.0037727
-      inSlope: -0.00000020792316
-      outSlope: -0.00000020792316
-      tangentMode: 0
+      time: 0.0033340454
+      value: 1.0065918
+      inSlope: -1.0127952
+      outSlope: -1.0127952
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.2866667
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: -2.898208
-      outSlope: -2.898208
-      tangentMode: 0
+      value: -0.0028266907
+      inSlope: -1.0127952
+      outSlope: -1.0127952
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0.04000002
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

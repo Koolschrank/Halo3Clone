@@ -413,6 +413,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   shildBar: {fileID: 2453811965832679713}
+  shildTeamColors:
+  - {r: 0.44313726, g: 0.4509804, b: 1, a: 0.8627451}
+  - {r: 1, g: 0.44705883, b: 0.44313726, a: 0.8627451}
+  - {r: 0.6, g: 1, b: 0.44313726, a: 0.8627451}
+  - {r: 1, g: 0.9843137, b: 0.44313726, a: 0.8627451}
   alarmColor: {r: 1, g: 0, b: 0.0364151, a: 1}
   alarmSpeed: 0.15
 --- !u!1 &3707931495611159503
@@ -728,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4433962, g: 0.45253053, b: 1, a: 0.8627451}
+  m_Color: {r: 1, g: 0.9832863, b: 0.4431373, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

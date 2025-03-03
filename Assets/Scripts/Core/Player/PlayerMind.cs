@@ -348,6 +348,7 @@ public class PlayerMind : MonoBehaviour
     public void AssignTeam(int team)
     {
         this.team.SetTeamIndex(team);
+        shildUI.SetTeamColor(team);
     }
 
 

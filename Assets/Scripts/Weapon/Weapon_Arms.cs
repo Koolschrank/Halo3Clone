@@ -351,8 +351,6 @@ public class Weapon_Arms
     public Weapon_Arms(Weapon_Data weaponData)
     {
         this.weaponData = weaponData;
-        FillMagazine();
-        FillReserve();
     }
 
     public Weapon_Arms(Weapon_Data weaponData, int magazine, int reserve)
@@ -538,6 +536,24 @@ public class Weapon_Arms
     {
         Magazine = Mathf.Min(weaponData.MagazineSize, magazine);
         Reserve = Mathf.Min(weaponData.MaxAmmoInReserve, reserve);
+    }
+
+    public void GainMagazins(int magazins)
+    {
+        var bulletsAmount = magazins * weaponData.MagazineSize;
+
+        if (bulletsAmount >= Magazine)
+        {
+            bulletsAmount -= Magazine;
+            Magazine = weaponData.MagazineSize;
+        }
+        else
+        {
+            Magazine += bulletsAmount;
+            return;
+        }
+        Reserve += bulletsAmount;
+        OnAmmoChange?.Invoke(Magazine, Reserve);
     }
 
     public void FillMagazine()
