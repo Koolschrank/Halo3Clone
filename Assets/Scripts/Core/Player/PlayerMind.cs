@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -33,6 +34,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
     [SerializeField] CooldownUI granadeCooldown;
+    [SerializeField] TeamWinUI teamWinUI;
     
 
     GameObject playerModel;
@@ -48,6 +50,13 @@ public class PlayerMind : MonoBehaviour
 
     int firstPersonLayer;
     int thirdPersonLayer;
+
+    public void Start()
+    {
+        GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
+
+        PlayerManager.instance.AddPlayer(this);
+    }
 
     // set Player model
     public void SetPlayerModel(GameObject model)
@@ -169,12 +178,6 @@ public class PlayerMind : MonoBehaviour
     }
 
 
-
-
-    private void Start()
-    {
-        PlayerManager.instance.AddPlayer(this);
-    }
     public void Move(InputAction.CallbackContext context)
     {
         if (playerMovement == null) return;

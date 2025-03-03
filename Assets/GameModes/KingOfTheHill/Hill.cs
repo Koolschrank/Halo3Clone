@@ -11,6 +11,7 @@ public class Hill : MonoBehaviour
 
 
     [SerializeField] float radius = 10;
+    [SerializeField] LayerMask LayerMask;
     
     float checkTimer = 0;
 
@@ -35,13 +36,14 @@ public class Hill : MonoBehaviour
 
     public void ScanHill()
     {
+        Debug.Log("Scanning hill");
         if (!active)
         {
             return;
         }
 
         List<int> playersOnHill = new List<int>();
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, LayerMask);
         foreach (Collider collider in colliders)
         {
             PlayerTeam player = collider.GetComponent<PlayerTeam>();
@@ -56,6 +58,8 @@ public class Hill : MonoBehaviour
         {
             SetTeamOnHill(dominatingTeam);
         }
+
+        
 
 
 
@@ -80,7 +84,7 @@ public class Hill : MonoBehaviour
                 max = teamCounts[i];
                 maxIndex = i;
             }
-            if (teamCounts[i] == max)
+            else if (teamCounts[i] == max)
             {
                 maxIndex = -1;
             }

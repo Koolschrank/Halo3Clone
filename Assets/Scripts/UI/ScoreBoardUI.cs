@@ -27,6 +27,7 @@ public class ScoreBoardUI : MonoBehaviour
         for (int i = 0; i < GameModeSelector.gameModeManager.GetTeamsWithPlayers(); i++)
         {
             scoreBars[i].gameObject.SetActive(true);
+            scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore());
         }
     }
 

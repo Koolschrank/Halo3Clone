@@ -16817,7 +16817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb11a1852fafe154e941541ba6420852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: {fileID: 11400000, guid: 12e2246d1299bf94ab2b2611d6633a6d, type: 2}
+  gameMode: {fileID: 11400000, guid: b3b691cdb854dbe41973632627ef625b, type: 2}
+  winScreenTime: 7
   deathMatchManager: {fileID: 1066225003}
   kingOfTheHillManager: {fileID: 897847650}
 --- !u!1001 &552093040
@@ -26413,6 +26414,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16f79dbab449f0499dbeae8635f1fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hillStartIndex: 0
+  hills:
+  - {fileID: 1400375304}
+  - {fileID: 1804815569}
+  - {fileID: 1012958760}
+  checkInterval: 0.1
 --- !u!1001 &898090985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29670,6 +29677,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
   m_PrefabInstance: {fileID: 1012958758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1012958760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7160846074116421294, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+  m_PrefabInstance: {fileID: 1012958758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197a0a277c27be94fa080a7f34f13033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1014002367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32470,8 +32488,28 @@ PrefabInstance:
       propertyPath: 'spawnPoints.Array.data[7]'
       value: 
       objectReference: {fileID: 101509688}
+    - target: {fileID: 2314234501713497430, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314234501713497430, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_IsGlobal
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5516329529554724374, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536287284254776631, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104346609655139652, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104346609655139652, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7528383088536497644, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
@@ -41621,6 +41659,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4445074455856710052, guid: 1abc4ba0878c4f042b07e715adcbdae8, type: 3}
   m_PrefabInstance: {fileID: 1398797895}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1400375304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7160846074116421294, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+  m_PrefabInstance: {fileID: 6835732089155359565}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197a0a277c27be94fa080a7f34f13033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1405895905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52196,6 +52245,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8105249761388792780, guid: f28a33e8e11922e499430c69747d2280, type: 3}
   m_PrefabInstance: {fileID: 1804747916}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1804815569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7160846074116421294, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+  m_PrefabInstance: {fileID: 395023907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 197a0a277c27be94fa080a7f34f13033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1806273889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52860,6 +52920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1839196900}
   - component: {fileID: 1839196899}
+  - component: {fileID: 1839196901}
   m_Layer: 0
   m_Name: PostProcessing
   m_TagString: Untagged
@@ -52879,7 +52940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsGlobal: 1
+  m_IsGlobal: 0
   priority: 0
   blendDistance: 0
   weight: 1
@@ -52899,6 +52960,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1839196901
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839196898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1844714392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61089,6 +61171,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 897847649}
     m_Modifications:
+    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+      propertyPath: teamMaterials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+      propertyPath: 'teamMaterials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 29e21aa28fa6c344d8a2f34435f27967, type: 2}
+    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+      propertyPath: 'teamMaterials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c9b59899d8f88a4ca48c660a0b7636c, type: 2}
     - target: {fileID: 1241730005603676667, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
       propertyPath: m_Name
       value: Hill

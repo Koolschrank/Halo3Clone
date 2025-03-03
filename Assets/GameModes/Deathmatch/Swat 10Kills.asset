@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
-  m_Name: BaseKingOfTheHill
+  m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
+  m_Name: Swat 10Kills
   m_EditorClassIdentifier: 
   startingEquipment:
-    hasShild: 1
-    headShotOneShot: 1
+    hasShild: 0
+    headShotOneShot: 0
     weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
     magazinsOfWeaponInHand: 3
     sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
@@ -22,8 +22,5 @@ MonoBehaviour:
     granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
     granadeCount: 1
   timeLimitInMinutes: 10
-  pointsToWin: 150
-  teamCount: 2
-  timeToScore: 0.7
-  moveHill: 1
-  hillMoveTime: 60
+  pointsToWin: 10
+  teamCount: 8

@@ -1,5 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -7,7 +9,8 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] float zoomInSpeed = 2f;
     [SerializeField] float zoomOutSpeed = 2f;
-    CinemachineCamera cCam; 
+    CinemachineCamera cCam;
+    Volume volume;
     float baseFOV = 75f;
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
@@ -18,9 +21,20 @@ public class PlayerCamera : MonoBehaviour
 
     }
 
+    public void SetVignetteIntensity(float power)
+    {
+        if (volume == null)
+            return;
+
+        volume.profile.TryGet(out Vignette vignette);
+        vignette.intensity.value = power;
+    }
+
+
     public void SetCinemachineCamera(CinemachineCamera cam)
     {
         cCam = cam;
+        volume = cCam.GetComponentInChildren<Volume>();
         SetBaseFOV(cCam.Lens.FieldOfView);
     }
 

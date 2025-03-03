@@ -1,31 +1,33 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class KingOfTheHillManager : GameModeManager
 {
-    /*
+    
     [SerializeField] int hillStartIndex = 0;
     [SerializeField] Hill[] hills;
     [SerializeField] float checkInterval = 0.1f;
-    [SerializeField] bool startOnStart = false;
 
     float checkTimer = 0;
     List<int> hillsAlreadyUsed = new List<int>();
     Hill currentHill;
 
+    public Action<int> OnDominatingTeamChanged;
+    public Action<float> OnHillMoveTimerChanged;
+    int teamOnHill = -1;
+    float timeOnHillUntilNextPointScore = 0;
+    float hillMoveTimer = 0;
 
-    private void Start()
-    {
-        if (startOnStart)
-        {
-            StartGame();
-        }
-    }
 
-    public void StartGame()
+
+    public override void ResetGame()
     {
+        base.ResetGame();
+
+
         hillsAlreadyUsed.Clear();
 
         foreach (Hill hill in hills)
@@ -34,9 +36,11 @@ public class KingOfTheHillManager : GameModeManager
         }
 
         StartHill(hillStartIndex);
+        
 
-        
-        
+
+
+
     }
     public void EndGame()
     {
@@ -52,13 +56,13 @@ public class KingOfTheHillManager : GameModeManager
             checkTimer = checkInterval;
         }
         var gameStats = (GameMode_KingOfTheHill)gameModeStats;
-        gameStats.UpdateHillTimer();
-        gameStats.UpdateHillMoveTimer();
+        UpdateHillTimer();
+        UpdateHillMoveTimer();
 
-        if (gameStats.CanMoveHill())
+        if (CanMoveHill())
         {
             StartRandomHill();
-            gameStats.ResetHillMoveTimer();
+            ResetHillMoveTimer();
         }
 
 
@@ -77,10 +81,10 @@ public class KingOfTheHillManager : GameModeManager
             hillsAlreadyUsed.Clear();
         }
 
-        int index = Random.Range(0, hills.Length);
+        int index = UnityEngine.Random.Range(0, hills.Length);
         while (hillsAlreadyUsed.Contains(index))
         {
-            index = Random.Range(0, hills.Length);
+            index = UnityEngine.Random.Range(0, hills.Length);
         }
         return index;
     }
@@ -94,22 +98,68 @@ public class KingOfTheHillManager : GameModeManager
         }
 
         hillsAlreadyUsed.Add(index);
-        hills[index].Activate();
         currentHill = hills[index];
+        currentHill.Activate();
         SetDominatingTeam(-1);
         currentHill.OnTeamChanged += SetDominatingTeam;
+        var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
+        hillMoveTimer = KTH_values.HillMoveTime;
 
     }
 
     void SetDominatingTeam(int team)
     {
-        (GameMode_KingOfTheHill)gameModeStats.SetDominatingTeam(team);
+        teamOnHill = team;
+        ResetHillPointTimer();
     }
 
     void CheckCurrentHill()
     {
         if (currentHill == null) return;
-
+        
         currentHill.ScanHill();
-    }*/
+    }
+
+    public void ResetHillMoveTimer()
+    {
+        var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
+        hillMoveTimer = KTH_values.HillMoveTime;
+    }
+
+    public void ResetHillPointTimer()
+    {
+        var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
+        timeOnHillUntilNextPointScore = KTH_values.TimeToScore;
+    }
+
+
+    public void UpdateHillTimer()
+    {
+        if (teamOnHill == -1)
+        {
+            return;
+        }
+
+        timeOnHillUntilNextPointScore -= Time.deltaTime;
+        if (timeOnHillUntilNextPointScore <= 0)
+        {
+            GainPoints(teamOnHill, 1);
+            ResetHillPointTimer();
+        }
+    }
+
+    public void UpdateHillMoveTimer()
+    {
+        var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
+        if (!KTH_values.MoveHill)
+        {
+            return;
+        }
+        hillMoveTimer -= Time.deltaTime;
+    }
+
+    public bool CanMoveHill()
+    {
+        return hillMoveTimer <= 0;
+    }
 }

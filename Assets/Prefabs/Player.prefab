@@ -920,8 +920,8 @@ MonoBehaviour:
   currentHeath: 60
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 4.5
-  healthRegenAmountPerSecond: 5
+  healthRegenDelay: 2.5
+  healthRegenAmountPerSecond: 20
   hasShild: 1
   headShotOneShot: 1
   maxShild: 100

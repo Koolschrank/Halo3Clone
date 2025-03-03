@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1576472836512430390
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,5 +151,6 @@ MonoBehaviour:
   hill: {fileID: 7160846074116421294}
   meshRenderer: {fileID: 7592890115593214561}
   baseMaterial: {fileID: 2100000, guid: 94456ca71c491f94da446600c9916eba, type: 2}
-  blueMaterial: {fileID: 2100000, guid: 29e21aa28fa6c344d8a2f34435f27967, type: 2}
-  redMaterial: {fileID: 2100000, guid: 6c9b59899d8f88a4ca48c660a0b7636c, type: 2}
+  teamMaterials:
+  - {fileID: 2100000, guid: 29e21aa28fa6c344d8a2f34435f27967, type: 2}
+  - {fileID: 2100000, guid: 6c9b59899d8f88a4ca48c660a0b7636c, type: 2}

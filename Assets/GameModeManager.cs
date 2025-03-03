@@ -124,4 +124,9 @@ public class GameModeManager : MonoBehaviour
         return teamPoints;
     }
 
+    public int GetMaxScore()
+    {
+        return gameModeStats.PointsToWin;
+    }
+
 }

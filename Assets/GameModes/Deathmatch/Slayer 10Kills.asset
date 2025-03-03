@@ -23,4 +23,4 @@ MonoBehaviour:
     granadeCount: 1
   timeLimitInMinutes: 10
   pointsToWin: 10
-  teamCount: 2
+  teamCount: 8
