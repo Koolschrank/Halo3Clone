@@ -3,10 +3,8 @@ using UnityEngine;
 public class HillVisual : MonoBehaviour
 {
     [SerializeField] Hill hill;
-    [SerializeField] MeshRenderer meshRenderer;
 
-    [SerializeField] Material baseMaterial;
-    [SerializeField] Material[] teamMaterials;
+    [SerializeField] GameObject[] teamAuras;
 
 
     public void Awake()
@@ -15,31 +13,48 @@ public class HillVisual : MonoBehaviour
         hill.OnActivated += OnActivated;
         hill.OnDeactivated += OnDeactivated;
         transform.localScale = Vector3.one * hill.Radius * 2;
-        
+        OnTeamChange(-1);
 
+
+
+    }
+
+    private void OnActivated()
+    {
+        OnTeamChange(-1);
+    }
+
+    private void OnDeactivated()
+    {
+        teamAuras[0].SetActive(false);
+        teamAuras[1].SetActive(false);
+        teamAuras[1].SetActive(false);
     }
 
     // activate and deactivate the hill
-    public void OnActivated()
-    {
-        meshRenderer.enabled = true;
-    }
 
-    public void OnDeactivated()
-    {
-        meshRenderer.enabled = false;
-    }
 
     public void OnTeamChange(int team)
     {
         // if team index is out of bounds, use the base material
-        if (team < 0 || team >= teamMaterials.Length)
+        if (team < 0)
         {
-            meshRenderer.material = baseMaterial;
+            teamAuras[0].SetActive(true);
+            teamAuras[1].SetActive(false);
+            teamAuras[2].SetActive(false);
             return;
         }
-
-        meshRenderer.material = teamMaterials[team];
+        else if (team == 0)
+        {
+            teamAuras[0].SetActive(false);
+            teamAuras[1].SetActive(true);
+            teamAuras[2].SetActive(false);
+        }
+        else {
+            teamAuras[0].SetActive(false);
+            teamAuras[1].SetActive(false);
+            teamAuras[2].SetActive(true);
+        }
 
     }
 }

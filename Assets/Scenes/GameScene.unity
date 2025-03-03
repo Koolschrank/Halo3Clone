@@ -26419,7 +26419,7 @@ MonoBehaviour:
   - {fileID: 1400375304}
   - {fileID: 1804815569}
   - {fileID: 1012958760}
-  checkInterval: 0.1
+  checkInterval: 0.05
 --- !u!1001 &898090985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61171,18 +61171,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 897847649}
     m_Modifications:
-    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: teamMaterials.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: 'teamMaterials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 29e21aa28fa6c344d8a2f34435f27967, type: 2}
-    - target: {fileID: 1089166234359021288, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: 'teamMaterials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 6c9b59899d8f88a4ca48c660a0b7636c, type: 2}
     - target: {fileID: 1241730005603676667, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
       propertyPath: m_Name
       value: Hill
