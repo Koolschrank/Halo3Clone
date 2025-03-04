@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 782412234501442312}
   - component: {fileID: 6138964545677116144}
   - component: {fileID: 2295363821645548979}
+  - component: {fileID: 1680555677729628207}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -920,14 +921,14 @@ MonoBehaviour:
   currentHeath: 60
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 2.5
-  healthRegenAmountPerSecond: 20
+  healthRegenDelay: 2
+  healthRegenAmountPerSecond: 18
   hasShild: 1
   headShotOneShot: 1
   maxShild: 100
   currentShild: 100
   shildPopDamageNegation: 20
-  shildRegenDelay: 4.5
+  shildRegenDelay: 5
   shildRegenAmountPerSecond: 25
   shildPopParticalPrefab: {fileID: 6175688368018741305, guid: cc37801857173a24fa9b992e710f42dd, type: 3}
   headShotArea: {fileID: 2179829580235344875}
@@ -993,6 +994,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamIndex: 0
+--- !u!114 &1680555677729628207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f835e1f5bba4f544fbbad1e3d88dc168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon_Ally: {fileID: 2662606287622759895, guid: d214dc898c15173448fac3eb969771f3, type: 3}
+  icon_Enemy: {fileID: 6297355074296030630, guid: 4930c2003ec96234eba6140a1b8dc078, type: 3}
+  playerTeam: {fileID: 2295363821645548979}
+  characterHealth: {fileID: 782412234501442312}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

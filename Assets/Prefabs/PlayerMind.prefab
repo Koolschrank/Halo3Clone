@@ -713,10 +713,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1370224105011794370, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2267043410257924088, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Camera
       value: 
@@ -805,6 +801,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 4851948068322704465}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 3676879251630607992}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: playerTeam
+      value: 
+      objectReference: {fileID: 367694579518745841}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 3676879251630607992}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
