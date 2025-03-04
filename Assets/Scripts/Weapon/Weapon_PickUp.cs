@@ -38,6 +38,31 @@ public class Weapon_PickUp : MonoBehaviour
         rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
+    public int AmmoInMagazine => ammoInMagazine;
+
+    public int AmmoInReserve => ammoInReserve;
+
+    public void SetAmmoInMagazin(int ammo)
+    {
+        ammoInMagazine = ammo;
+    }
+
+    public void SetAmmoInReserve(int ammo)
+    {
+        ammoInReserve = ammo;
+    }
+
+    public void SetAmmoWithMagazines(int magazines)
+    {
+        ammoInMagazine = weapon_Data.MagazineSize;
+        ammoInReserve = weapon_Data.MagazineSize * (magazines -1);
+    }
+
+    // destroy object
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
 
 }
 

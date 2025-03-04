@@ -3468,6 +3468,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
   spawnTime: 30
+  magazines: 4
 --- !u!4 &115551003
 Transform:
   m_ObjectHideFlags: 0
@@ -14680,6 +14681,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 875420519fd23124c9872c57b921a743, type: 3}
   spawnTime: 30
+  magazines: 5
 --- !u!4 &452580323
 Transform:
   m_ObjectHideFlags: 0
@@ -19151,6 +19153,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
+  magazines: 4
 --- !u!4 &667111752
 Transform:
   m_ObjectHideFlags: 0
@@ -35036,6 +35039,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
   spawnTime: 90
+  magazines: 4
 --- !u!4 &1201303959
 Transform:
   m_ObjectHideFlags: 0
@@ -36781,6 +36785,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 30
+  magazines: 7
 --- !u!4 &1262811909
 Transform:
   m_ObjectHideFlags: 0
@@ -38478,6 +38483,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
+  magazines: 4
 --- !u!4 &1307745615
 Transform:
   m_ObjectHideFlags: 0
@@ -42779,6 +42785,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 30
+  magazines: 7
 --- !u!4 &1447105713
 Transform:
   m_ObjectHideFlags: 0
@@ -44152,6 +44159,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 875420519fd23124c9872c57b921a743, type: 3}
   spawnTime: 30
+  magazines: 5
 --- !u!4 &1480850288
 Transform:
   m_ObjectHideFlags: 0
@@ -60551,6 +60559,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
   spawnTime: 50
+  magazines: 4
 --- !u!4 &2124811854
 Transform:
   m_ObjectHideFlags: 0

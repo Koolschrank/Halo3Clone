@@ -594,4 +594,54 @@ public class Weapon_Arms
 
     public TimedSoundList ReloadSounds => weaponData.ReloadSounds;
 
+    public bool IsSameWeapon(Weapon_Data otherWeapon)
+    {
+        return weaponData == otherWeapon;
+    }
+
+    public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
+    {
+        var missingAmmo = weaponData.ReserveSize - Reserve;
+        // first use up ammo from other reserve
+        if (missingAmmo > 0)
+        {
+            var ammoInPickUpReserve = weaponAmmoToTransfer.AmmoInReserve;
+            if (ammoInPickUpReserve > missingAmmo)
+            {
+                Reserve += missingAmmo;
+                ammoInPickUpReserve -= missingAmmo;
+                missingAmmo = 0;
+                weaponAmmoToTransfer.SetAmmoInReserve(ammoInPickUpReserve);
+            }
+            else
+            {
+                Reserve += ammoInPickUpReserve;
+                missingAmmo -= ammoInPickUpReserve;
+                ammoInPickUpReserve = 0;
+                weaponAmmoToTransfer.SetAmmoInReserve(ammoInPickUpReserve);
+
+                var ammoInPickUpMagazine = weaponAmmoToTransfer.AmmoInMagazine;
+                if (missingAmmo > 0)
+                {
+                    if (ammoInPickUpMagazine > missingAmmo)
+                    {
+                        Reserve += missingAmmo;
+                        ammoInPickUpMagazine -= missingAmmo;
+                        missingAmmo = 0;
+                        weaponAmmoToTransfer.SetAmmoInMagazin(ammoInPickUpMagazine);
+                    }
+                    else
+                    {
+                        Reserve += ammoInPickUpMagazine;
+                        missingAmmo -= ammoInPickUpMagazine;
+                        ammoInPickUpMagazine = 0;
+                        weaponAmmoToTransfer.SetAmmoInMagazin(ammoInPickUpMagazine);
+                        weaponAmmoToTransfer.DestroyObject();
+                    }
+                }
+            }
+        }
+
+        
+    }
 }

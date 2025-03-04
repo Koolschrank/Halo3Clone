@@ -191,8 +191,9 @@ public class CharacterHealth : Health
     bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
-        ragdollTrigger.Activate(damagePackage);
         base.Die();
+        ragdollTrigger.Activate(damagePackage);
+        
         dead = true;
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

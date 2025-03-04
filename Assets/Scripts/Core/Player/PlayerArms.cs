@@ -219,6 +219,7 @@ public class PlayerArms : MonoBehaviour
 
 
     [Header("References")]
+    [SerializeField] CharacterHealth characterHealth;
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] Controller controller;
@@ -253,6 +254,7 @@ public class PlayerArms : MonoBehaviour
     private void Start()
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
+        characterHealth.OnDeath += DropWeaponWithNoForce;
     }
 
     void Update()
@@ -544,19 +546,32 @@ public class PlayerArms : MonoBehaviour
 
     }
 
-    void DropWeapon()
+    void DropWeaponWithNoForce()
     {
         if (weaponInHand == null) return;
+        var pickUp = LetGoOfWeapon();
+    }
+
+    void DropWeapon()
+    {
+
+        if (weaponInHand == null) return;
+        var pickUp = LetGoOfWeapon();
+        pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
+    }
+
+    Weapon_PickUp LetGoOfWeapon()
+    {
+        if (weaponInHand == null) return null;
         IfZoomedInExitZoom();
         OnWeaponDroped?.Invoke(weaponInHand);
 
         var pickUpVersion = weaponInHand.PickUpVersion;
         var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
-        pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
+        pickUp.SetAmmo(weaponInHand.Magazine, weaponInHand.Reserve);
+
         weaponInHand = null;
-
-        
-
+        return pickUp;
     }
 
     public void PickUpWeapon(Weapon_Arms weapon)

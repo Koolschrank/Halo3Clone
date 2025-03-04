@@ -68,6 +68,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpsInRange: []
   pickUpCooldown: 0.5
+  playerArms: {fileID: 3232609274750972410}
+  playerInventory: {fileID: 7573040687501960069}
 --- !u!1 &2050298198174422752
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +438,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.1
+--- !u!1 &3176874470464784944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905413014460542580}
+  m_Layer: 7
+  m_Name: InvetoryDropPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1905413014460542580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176874470464784944}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.36806315, w: 0.92980075}
+  m_LocalPosition: {x: 0, y: 0.182, z: -0.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5698032335818744442}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -43.192}
 --- !u!1 &6425339757055830967
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +691,7 @@ Transform:
   - {fileID: 8712196350449165927}
   - {fileID: 4151376091086984915}
   - {fileID: 3378977877229724622}
+  - {fileID: 1905413014460542580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7069479133818603356
@@ -791,6 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009f7143e21328a4cb8b360c6ad01e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterHealth: {fileID: 782412234501442312}
   bulletSpawner: {fileID: 737555415851796727}
   granadeThrower: {fileID: 625404246279802593}
   inventory: {fileID: 7573040687501960069}
@@ -876,7 +911,9 @@ MonoBehaviour:
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
-  rechargeGranadeTime: 1
+  rechargeGranadeTime: 10
+  weaponDropPoint: {fileID: 1905413014460542580}
+  characterHealth: {fileID: 782412234501442312}
 --- !u!114 &4471171138262044766
 MonoBehaviour:
   m_ObjectHideFlags: 0

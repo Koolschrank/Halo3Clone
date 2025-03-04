@@ -10,6 +10,9 @@ public class PlayerPickUpScan : MonoBehaviour
     [SerializeField] float pickUpCooldown = 0.5f;
     float lastPickUpTime = -100f;
 
+    [SerializeField] PlayerArms playerArms;
+    [SerializeField] PlayerInventory playerInventory;
+
     public Action<Weapon_PickUp> OnWeaponPickUpUpdate;
     public Action OnWeaponPickUp;
 
@@ -27,8 +30,18 @@ public class PlayerPickUpScan : MonoBehaviour
         var pickUp = other.GetComponent<Weapon_PickUp>();
         if (pickUp != null)
         {
-            pickUpsInRange.Add(pickUp);
-            TrySendPickUpUpdate();
+            if (CheckIfPlayerOwnsWeapon(pickUp))
+            {
+                TransferAmmoFromWeaponOnGroundToPlayer(pickUp);
+            }
+            else
+            {
+                pickUpsInRange.Add(pickUp);
+                TrySendPickUpUpdate();
+            }
+
+
+            
 
 
         }
@@ -44,6 +57,36 @@ public class PlayerPickUpScan : MonoBehaviour
         }
     }
 
+    public bool CheckIfPlayerOwnsWeapon(Weapon_PickUp pickup)
+    {
+        var weaponData = pickup.WeaponData;
+
+        var weaponInHand = playerArms.GetWeaponInHand();
+        if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData))
+            return true;
+        var weaponInInventory = playerInventory.GetWeapon();
+        if (weaponInInventory != null && weaponInInventory.IsSameWeapon(weaponData))
+            return true;
+        return false;
+
+    }
+
+    public void TransferAmmoFromWeaponOnGroundToPlayer(Weapon_PickUp pickUp)
+    {
+        var weaponInHand = playerArms.GetWeaponInHand();
+        if (weaponInHand != null && weaponInHand.IsSameWeapon(pickUp.WeaponData))
+        {
+            weaponInHand.TransferAmmo(pickUp);
+        }
+        else
+        {
+            var weaponInInventory = playerInventory.GetWeapon();
+            if (weaponInInventory != null && weaponInInventory.IsSameWeapon(pickUp.WeaponData))
+            {
+                weaponInInventory.TransferAmmo(pickUp);
+            }
+        }
+    }
     public bool CanPickUpWeapon()
     {
         return pickUpsInRange.Count > 0;

@@ -5,6 +5,7 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] bool spawnOnStart;
     [SerializeField] GameObject weaponPrefab;
     [SerializeField] float spawnTime;
+    [SerializeField] int magazines = 4;
     float spawnTimer;
 
     Weapon_PickUp weapon;
@@ -33,6 +34,7 @@ public class WeaponSpawner : MonoBehaviour
     public void SpawnWeapon()
     {
         weapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity).GetComponent<Weapon_PickUp>();
+        weapon.SetAmmoWithMagazines(magazines);
         weapon.OnPickUp += WeaponPickedUp;
     }
 

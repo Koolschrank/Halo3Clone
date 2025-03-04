@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public Action<Weapon_Arms> OnWeaponAddedToInventory;
+    public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
     public Action<float> OnGranadeChargeChanged;
 
@@ -16,10 +17,30 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] int granadeInventorySize = 1;
     [SerializeField] bool rechargeGranades = false;
     [SerializeField] float rechargeGranadeTime = 5;
+    [SerializeField] Transform weaponDropPoint;
+    [SerializeField] CharacterHealth characterHealth;
     float rechargeGranadeTimer;
     int granadeCount = 0;
 
     public bool HasWeapon => weapons.Count > 0;
+
+    // start
+    public void Start()
+    {
+        characterHealth.OnDeath += DropWeapon;
+    }
+
+    public void DropWeapon()
+    {
+        if (weapons.Count > 0)
+        {
+            Weapon_PickUp pickUp = Instantiate(weapons[0].PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
+            pickUp.SetAmmo(weapons[0].Magazine, weapons[0].Reserve);
+            OnWeaponDrop?.Invoke(weapons[0]);
+            weapons.RemoveAt(0);
+            
+        }
+    }
 
     public void Update()
     {

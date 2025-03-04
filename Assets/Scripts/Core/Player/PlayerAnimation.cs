@@ -54,7 +54,10 @@ public class PlayerAnimation : MonoBehaviour
         playerArms.OnGranadeThrowStarted += ThrowGranadeStart;
         playerArms.OnGranadeThrow += ThrowGranade;
         playerArms.OnMeleeWithWeaponStarted += Melee;
+        playerArms.OnWeaponDroped += DropWeapon;
         playerInventory.OnWeaponAddedToInventory += PutWeaponInBackpack;
+        playerInventory.OnWeaponDrop += DropInvetoryWeapon;
+
 
         if (weaponVisual == null)
         {
@@ -158,6 +161,22 @@ public class PlayerAnimation : MonoBehaviour
         SetAnimationSpeed(switchOutClip, animationLenght, animationDuration);
 
         animator.SetTrigger("SwitchOut");
+    }
+
+    public void DropWeapon(Weapon_Arms weapon)
+    {
+        if (weaponVisual != null)
+        {
+            Destroy(weaponVisual.gameObject);
+        }
+    }
+
+    public void DropInvetoryWeapon(Weapon_Arms weapon)
+    {
+        if (backpackWeaponVisual != null)
+        {
+            Destroy(backpackWeaponVisual.gameObject);
+        }
     }
 
     public void SwitchInWeapon(Weapon_Arms weapon, float animationDuration)
