@@ -82,6 +82,8 @@ public class PlayerCamera : MonoBehaviour
         playerCamera.rect = new Rect(screen.x, screen.y, screen.width, screen.height);
         cinemachineBrain.ChannelMask += 1 << channel + 1;
 
+        playerCamera.targetDisplay = screen.targetDisplay;
+
         //playerFOV.SetFOV(screen.FOV);
     }
 

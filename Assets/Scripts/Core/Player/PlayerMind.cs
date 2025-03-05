@@ -35,7 +35,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] crosshairUI crosshairUI;
     [SerializeField] CooldownUI granadeCooldown;
     [SerializeField] TeamWinUI teamWinUI;
-    
+    [SerializeField] HitMarkerUI hitMarkerUI;
+
 
     GameObject playerModel;
     PlayerMovement playerMovement;
@@ -361,11 +362,17 @@ public class PlayerMind : MonoBehaviour
         if (this.hitCollector != null)
         {
             this.hitCollector.OnCharacterKill -= PlayerElimination;
+
+            this.hitCollector.OnCharacterHit -= hitMarkerUI.ShowHitMarker;
+            this.hitCollector.OnCharacterKill -= hitMarkerUI.ShowKillMarker;
+
         }
 
         this.hitCollector = hitCollector;
 
         hitCollector.OnCharacterKill += PlayerElimination;
+        hitCollector.OnCharacterHit += hitMarkerUI.ShowHitMarker;
+        hitCollector.OnCharacterKill += hitMarkerUI.ShowKillMarker;
     }
 
 

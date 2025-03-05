@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 6
+  damageAmount: 7
   force: 50
-  shildDamageMultiplier: 4
+  shildDamageMultiplier: 3
   headShotMultiplier: 1
   hitLayer:
     serializedVersion: 2

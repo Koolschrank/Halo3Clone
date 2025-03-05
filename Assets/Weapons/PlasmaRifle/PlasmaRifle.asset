@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 1535552099913994392, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
   weaponName: PlasmaRifle
   shootType: 1
-  fireRate: 0.1
+  fireRate: 0.09
   bulletsPerShot: 1
   magazineSize: 20
   maxAmmoInReserve: 500

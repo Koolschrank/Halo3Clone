@@ -22,7 +22,10 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] CinemachineCamera[] playerCameras;
     [SerializeField] CinemachineCamera[] spectatorCameras;
+    int screenCount = 1;
     [SerializeField] ScreenRectArray[] screenRectValues;
+    [SerializeField] ScreenRectArray[] screenRectValues_2Screens;
+    [SerializeField] ScreenRectArray[] screenRectValues_3Screens;
 
 
     // Awake
@@ -37,6 +40,19 @@ public class PlayerManager : MonoBehaviour
             Destroy(this);
         }
         currentLayer = startingLayer;
+
+        if (Display.displays.Length > 1)
+        {
+            screenCount = 2;
+            Display.displays[1].Activate();
+        }
+            
+        if (Display.displays.Length > 2)
+        {
+            screenCount = 3;
+            Display.displays[2].Activate();
+        }
+            
     }
 
 
@@ -80,11 +96,22 @@ public class PlayerManager : MonoBehaviour
         var playerCount = players.Count;
         for (int i = 0; i < playerCount; i++)
         {
+            var screenRectsToUse = screenRectValues;
+            if (screenCount == 2)
+            {
+                screenRectsToUse = screenRectValues_2Screens;
+            }
+            else if (screenCount == 3)
+            {
+                screenRectsToUse = screenRectValues_3Screens;
+            }
+
+
             var playerCam = players[i];
-            playerCam.SetScreenRect(screenRectValues[playerCount - 1].screenRectValues[i], i);
+            playerCam.SetScreenRect(screenRectsToUse[playerCount - 1].screenRectValues[i], i);
             var vCam = playerCameras[i];
             var spectatorCam = spectatorCameras[i];
-            var fov = screenRectValues[playerCount - 1].screenRectValues[i].FOV;
+            var fov = screenRectsToUse[playerCount - 1].screenRectValues[i].FOV;
             vCam.Lens.FieldOfView = fov;
             spectatorCam.Lens.FieldOfView = fov;
             playerCam.SetCinemaCamera(vCam);
@@ -155,14 +182,16 @@ public struct ScreenRectValues
     public float width;
     public float height;
     public float FOV;
+    public int targetDisplay;
 
-    public ScreenRectValues(float x, float y, float width, float height, float FOV)
+    public ScreenRectValues(float x, float y, float width, float height, float FOV, int targetDisplay)
     {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.FOV = FOV;
+        this.targetDisplay = targetDisplay;
     }
 
 }
