@@ -612,6 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0653be2d0781242a2cd5a0aa27fdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 782412234501442312}
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
 --- !u!114 &5352841395007449006

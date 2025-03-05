@@ -13,6 +13,41 @@ public class GameModeManager : MonoBehaviour
     protected List<List<PlayerMind>> teams = new List<List<PlayerMind>>();
     protected List<int> teamPoints = new List<int>();
 
+    [SerializeField] protected SpawnSystem spawnSystem;
+
+
+    public Transform GetStartingSpawnPoint(int teamIndex)
+    {
+        return spawnSystem.GetStartSpawnPoint(teamIndex);
+    }
+
+    public Transform GetRandomSpawnPoint()
+    {
+        return spawnSystem.GetRandomSpawnPoint();
+    }
+
+    public Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
+    {
+        int teamIndex = playerMind.TeamIndex;
+        List<Transform> enemies = new List<Transform>();
+        foreach (var team in teams)
+        {
+            if (team.Count > 0 && team[0].TeamIndex != teamIndex)
+            {
+                foreach (var player in team)
+                {
+                    enemies.Add(player.transform);
+                }
+            }
+        }
+        if (enemies.Count == 0)
+        {
+            return spawnSystem.GetStartSpawnPoint(teamIndex);
+        }
+
+        return spawnSystem.GetFarthestSpawnPointFromEnemeies(enemies);
+    }
+
     public virtual void ResetGame()
     {
         teams.Clear();
@@ -130,3 +165,50 @@ public class GameModeManager : MonoBehaviour
     }
 
 }
+
+[Serializable]
+public class SpawnSystem
+{
+    public Transform[] teamStartSpawnPoints;
+    public Transform[] basicSpawnPoints;
+
+
+    public Transform GetStartSpawnPoint(int teamIndex)
+    {
+        if (teamIndex < teamStartSpawnPoints.Length)
+        {
+            return teamStartSpawnPoints[teamIndex];
+        }
+        else
+        {
+            return basicSpawnPoints[UnityEngine.Random.Range(0, basicSpawnPoints.Length)];
+        }
+
+    }
+
+    public Transform GetRandomSpawnPoint()
+    {
+        return basicSpawnPoints[UnityEngine.Random.Range(0, basicSpawnPoints.Length)];
+    }
+
+    public Transform GetFarthestSpawnPointFromEnemeies(List<Transform> enemies)
+    {
+        Transform farthest = basicSpawnPoints[0];
+        float maxDistance = 0;
+        foreach (var spawnPoint in basicSpawnPoints)
+        {
+            float distance = 0;
+            foreach (var enemy in enemies)
+            {
+                distance += Vector3.Distance(spawnPoint.position, enemy.position);
+            }
+            if (distance > maxDistance)
+            {
+                maxDistance = distance;
+                farthest = spawnPoint;
+            }
+        }
+        return farthest;
+    }
+}
+

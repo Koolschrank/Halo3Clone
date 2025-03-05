@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
   m_Name: BaseKingOfTheHill
   m_EditorClassIdentifier: 
+  gameModeName: King of the hill
   startingEquipment:
     hasShild: 1
     headShotOneShot: 1

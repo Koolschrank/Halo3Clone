@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
   m_Name: Swat 10Kills
   m_EditorClassIdentifier: 
+  gameModeName: Swat
   startingEquipment:
     hasShild: 0
     headShotOneShot: 0

@@ -15,6 +15,13 @@ public class GameModeSelector : MonoBehaviour
 
     private void Start()
     {
+        var mapLoader = MapLoader.instance;
+        if (mapLoader != null)
+        {
+            gameMode = mapLoader.GetGameMode();
+        }
+
+
         if (gameMode is GameMode_Deathmatch)
         {
             deathMatchManager.StartGame(gameMode);

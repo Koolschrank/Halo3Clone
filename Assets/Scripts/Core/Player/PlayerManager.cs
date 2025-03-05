@@ -14,7 +14,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] int startingLayer = 20;
     [SerializeField] int deadPlayerLayer = 31;
 
-    [SerializeField] Transform[] spawnPoints;
     [SerializeField] BodyMindConnection playerBodyPrefab;
 
     [SerializeField] Material[] playerColors;
@@ -52,7 +51,8 @@ public class PlayerManager : MonoBehaviour
     public void AddPlayer(PlayerMind player)
     {
         
-        var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
+        
+        var playerBody = Instantiate(playerBodyPrefab, Vector3.zero, Quaternion.identity);
         playerBody.ConnectMind(player, playerCameras[players.Count], spectatorCameras[players.Count]);
         
 
@@ -96,19 +96,17 @@ public class PlayerManager : MonoBehaviour
         OnPlayerAdded?.Invoke(player);
 
 
-
+        var spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+        playerBody.transform.position = spawnPoint.position;
+        playerBody.transform.rotation = spawnPoint.rotation;
         playerBody.SetPlayTeamIndex();
         playerBody.SetMaterial(playerColors[player.TeamIndex]);
     }
 
-    public Transform GetRandomSpawnPoint()
-    {
-        return spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
-    }
-
     public void RespawnPlayer(PlayerMind player)
     {
-        var playerBody = Instantiate(playerBodyPrefab, GetRandomSpawnPoint().position, GetRandomSpawnPoint().rotation);
+        var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
+        var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetMaterial(playerColors[player.TeamIndex]);
 

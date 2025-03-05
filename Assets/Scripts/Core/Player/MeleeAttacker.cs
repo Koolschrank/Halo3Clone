@@ -6,10 +6,16 @@ public class MeleeAttacker : MonoBehaviour
     public Action<PlayerMeleeAttack> OnAttackStart;
     public Action<PlayerMeleeAttack> OnAttackHit;
 
+    [SerializeField] CharacterHealth health;
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
     PlayerMeleeAttack meleeData;
     float attackDelay = 0f;
+
+    private void Start()
+    {
+        health.OnDeath += CancelAttack;
+    }
 
     public void AttackStart(PlayerMeleeAttack attackData)
     {
@@ -80,6 +86,11 @@ public class MeleeAttacker : MonoBehaviour
             OnAttackHit?.Invoke(attackData);
         }
 
+    }
+
+    public void CancelAttack()
+    {
+        attackDelay = 0;
     }
 
 

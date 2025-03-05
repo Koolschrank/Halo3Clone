@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameMode : ScriptableObject
 {
-
+    [SerializeField] string gameModeName;
     [SerializeField] Equipment startingEquipment;
     [SerializeField] protected float timeLimitInMinutes =  10f;
     [SerializeField] protected int pointsToWin = 0;
@@ -18,5 +18,7 @@ public class GameMode : ScriptableObject
     public int PointsToWin { get { return pointsToWin; } }
 
     public int TeamCount { get { return teamCount; } }
+
+    public string GameModeName { get { return gameModeName; } }
 }
 
