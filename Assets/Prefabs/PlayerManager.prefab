@@ -31,6 +31,122 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4191908485381749400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &735898453123206585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1071033123686172417}
+  - component: {fileID: 3895335363518957410}
+  - component: {fileID: 665506803472683264}
+  m_Layer: 0
+  m_Name: PostProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1071033123686172417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735898453123206585}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.5, y: 14.4, z: 15.470001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7528383088536497644}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3895335363518957410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735898453123206585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 49a514bd7077cda4ba52c1fbb03e9ad4, type: 2}
+--- !u!135 &665506803472683264
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735898453123206585}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1126902980825087674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6174517863097521588}
+  - component: {fileID: 4794572296604587356}
+  m_Layer: 0
+  m_Name: ObjectiveIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6174517863097521588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126902980825087674}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7528383088536497644}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4794572296604587356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126902980825087674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b063a3f511f635408759e74207f004f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &3378400868189579010
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +516,8 @@ Transform:
   - {fileID: 8319983424748332395}
   - {fileID: 4191908485381749400}
   - {fileID: 507968635513998891}
+  - {fileID: 6174517863097521588}
+  - {fileID: 1071033123686172417}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6178971544052675649
@@ -951,7 +1069,231 @@ MonoBehaviour:
       height: 0.5
       FOV: 75
       targetDisplay: 1
-  screenRectValues_3Screens: []
+  screenRectValues_3Screens:
+  - screenRectValues:
+    - x: 0
+      y: 0
+      width: 1
+      height: 1
+      FOV: 75
+      targetDisplay: 0
+  - screenRectValues:
+    - x: 0
+      y: 0
+      width: 1
+      height: 1
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 1
+      height: 1
+      FOV: 75
+      targetDisplay: 1
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 1
+      height: 1
+      FOV: 75
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 0
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 50
+      targetDisplay: 1
+    - x: 0.5
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+  - screenRectValues:
+    - x: 0
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0.5
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0.5
+      y: 0.5
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 0
+    - x: 0.5
+      y: 0
+      width: 0.5
+      height: 0.5
+      FOV: 75
+      targetDisplay: 1
 --- !u!114 &8403267331934518576
 MonoBehaviour:
   m_ObjectHideFlags: 0

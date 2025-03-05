@@ -790,7 +790,7 @@ MonoBehaviour:
   head: {fileID: 8067625750732039895}
   head_normalPosition: {fileID: 4151376091086984915}
   head_crouchPosition: {fileID: 3378977877229724622}
-  maxMoveSpeed: 5
+  maxMoveSpeed: 4.7
   moveSpeedCrouchMultiplier: 0.4
   acceleration_ground: 35
   acceleration_air: 10

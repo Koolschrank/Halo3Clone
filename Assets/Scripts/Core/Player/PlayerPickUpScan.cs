@@ -98,6 +98,8 @@ public class PlayerPickUpScan : MonoBehaviour
             return null;
         RemovesNulls();
         SortPriority();
+        if (pickUpsInRange.Count <= 0)
+            return null;
         return pickUpsInRange[0];
     }
 

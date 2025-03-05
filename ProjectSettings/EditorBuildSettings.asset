@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 37509d1f749830c47a57406b0640cafd
+  - enabled: 1
+    path: Assets/Scenes/SmallArena.unity
+    guid: aeb5378e57e0a1440858dc5350ae0ff1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f35337ef2a27d9441967cf9acbdf46bf, type: 2}
   m_UseUCBPForAssetBundles: 0

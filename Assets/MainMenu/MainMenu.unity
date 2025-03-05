@@ -922,6 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapsToSelectFrom:
   - GameScene
+  - SmallArena
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   mapButtonParent: {fileID: 9380848}
   buttonSpacing: -200

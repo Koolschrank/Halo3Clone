@@ -33,7 +33,7 @@ public class WeaponSpawner : MonoBehaviour
 
     public void SpawnWeapon()
     {
-        weapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity).GetComponent<Weapon_PickUp>();
+        weapon = Instantiate(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
         weapon.SetAmmoWithMagazines(magazines);
         weapon.OnPickUp += WeaponPickedUp;
     }
