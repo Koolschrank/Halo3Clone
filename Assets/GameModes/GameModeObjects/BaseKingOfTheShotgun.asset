@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
+  m_Name: BaseKingOfTheShotgun
+  m_EditorClassIdentifier: 
+  gameModeName: King of the Shotgun
+  startingEquipment:
+    hasShild: 0
+    headShotOneShot: 0
+    weaponInHand: {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
+    magazinsOfWeaponInHand: 5
+    sideArm: {fileID: 0}
+    magazinsOfSideArm: 5
+    granade: {fileID: 0}
+    granadeCount: 1
+  timeLimitInMinutes: 10
+  pointsToWin: 150
+  teamCount: 4
+  timeToScore: 0.7
+  moveHill: 0
+  hillMoveTime: 60

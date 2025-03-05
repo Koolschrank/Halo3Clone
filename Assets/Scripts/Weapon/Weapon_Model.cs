@@ -1,4 +1,5 @@
 using UnityEngine;
+using ZakhanSpellsPack;
 
 public class Weapon_Model : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Weapon_Model : MonoBehaviour
         this.weapon = weapon;
         weapon.OnProjectileShot += SpawnProjectileClone;
         weapon.OnHitscanShot += SpawnBulletLine;
+        weapon.OnGranadeShot += SpawnGranadeClone;
     }
 
     public virtual void OnDestroy()
@@ -22,6 +24,7 @@ public class Weapon_Model : MonoBehaviour
         if (weapon == null) return;
         weapon.OnProjectileShot -= SpawnProjectileClone;
         weapon.OnHitscanShot -= SpawnBulletLine;
+        weapon.OnGranadeShot -= SpawnGranadeClone;
         
     }
 
@@ -61,6 +64,26 @@ public class Weapon_Model : MonoBehaviour
 
         bulletScript.ShowTrail(target - bulletSpawnPoint.position);
         bulletRay.layer = gameObject.layer;
+        SpawnMuzzleFlash();
+    }
+
+    public void SpawnGranadeClone(GameObject granade)
+    {
+        var granadeData = weapon.Bullet as Weapon_Bullet_Granade;
+        var granadeClone = Instantiate(granadeData.GranadeStats.GranadeClonePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        var granadeScript = granade.GetComponent<Granade>();
+        granadeClone.layer = gameObject.layer;
+        // set children of bullet colone to layer
+        foreach (Transform child in granadeClone.transform)
+        {
+            child.gameObject.layer = gameObject.layer;
+        }
+
+
+        granadeScript.AddGranadeCopy(granadeClone.transform);
+
+        granadeClone.layer = gameObject.layer;
+
         SpawnMuzzleFlash();
     }
 

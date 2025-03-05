@@ -15,11 +15,7 @@ public class PlayerCamera : MonoBehaviour
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
 
-    private void Awake()
-    {
-        //baseFOV = playerCamera.fieldOfView;
 
-    }
 
     public void SetVignetteIntensity(float power)
     {
@@ -47,6 +43,11 @@ public class PlayerCamera : MonoBehaviour
     {
         zoomedInFOV = weapon.ZoomFOV;
         isZoomedIn = true;
+    }
+
+    public void ZoomOut()
+    {
+        isZoomedIn = false;
     }
 
     public void ZoomOut(Weapon_Arms weapon)

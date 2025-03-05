@@ -31,9 +31,28 @@ public class GranadeThrower : MonoBehaviour
 
     }
 
-    public void ThrowGranade(GranadeStats granadeStats)
+    // todo: a lot of redundant code here
+    public GameObject ThrowGranadeWithWeapon(GranadeStats granadeStats, Vector3 inaccuracy)
     {
-        if (granadeStats == null) return;
+        if (granadeStats == null) return null;
+
+        GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation);
+        Rigidbody rb = granade.GetComponent<Rigidbody>();
+        rb.AddForce((transform.forward + inaccuracy) * granadeStats.ThrowForce, ForceMode.Impulse);
+        rb.AddForce((transform.up + inaccuracy) * granadeStats.ThrowForce * granadeStats.ThrowAngle, ForceMode.Impulse);
+
+        if (granade.TryGetComponent<Granade>(out Granade granadeScript))
+        {
+            granadeScript.SetOwner(mainTransform.gameObject);
+
+        }
+
+        return granade;
+    }
+
+    public GameObject ThrowGranade(GranadeStats granadeStats)
+    {
+        if (granadeStats == null) return null;
 
         GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation);
         Rigidbody rb = granade.GetComponent<Rigidbody>();
@@ -46,6 +65,8 @@ public class GranadeThrower : MonoBehaviour
             granadeScript.SetOwner(mainTransform.gameObject);
 
         }
+
+        return granade;
     }
 
 

@@ -32,9 +32,15 @@ public class PlayerStartEquipment : MonoBehaviour
             playerInventory.ChangeGranade(equipment.Granade);
             playerInventory.AddGranades(equipment.GranadeCount);
         }
+        else
+        {
+            playerInventory.ChangeGranade(null);
+        }
 
 
-       
+
+
+
 
         health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);

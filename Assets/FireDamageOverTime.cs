@@ -16,6 +16,11 @@ public class FireDamageOverTime : MonoBehaviour
 
     GameObject owner;
 
+    [Header("movement")]
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] float rayCastLenght;
+    [SerializeField] float speed = 1f;
+
     // setOwner
     public void SetOwner(GameObject owner)
     {
@@ -63,6 +68,12 @@ public class FireDamageOverTime : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // if not on ground move down
+        if (!Physics.Raycast(transform.position, Vector3.down, rayCastLenght, groundLayer))
+        {
+            transform.position += Vector3.down * speed * Time.deltaTime;
         }
     }
 

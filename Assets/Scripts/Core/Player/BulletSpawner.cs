@@ -14,6 +14,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] LayerMask autoAimLayerMask;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
+    [SerializeField] GranadeThrower granadeThrower;
 
 
     AutoAim autoAimOfCurrentWeapon;
@@ -97,6 +98,39 @@ public class BulletSpawner : MonoBehaviour
         return null;
     }
 
+
+    public GameObject[] ShootGranade(Weapon_Arms weapon)
+    {
+        var autoAim = weapon.AutoAim;
+        var autoAimRaycastLenght = autoAim.RaycastLenght;
+        var autoAimRadius = autoAim.Radius;
+        var autoAimLerp = autoAim.AimLerp;
+
+        Weapon_Bullet_Granade granade_data = weapon.Bullet as Weapon_Bullet_Granade;
+        var forward = transform.forward;
+        var target = GetAutoAimTarget(autoAimRadius, autoAimRaycastLenght);
+        if (target)
+        {
+            forward = Vector3.Lerp(forward, (target.position - transform.position), autoAimLerp).normalized;
+        }
+
+        int bulletCount = weapon.BulletsPerShot;
+        GameObject[] granades = new GameObject[bulletCount];
+        for (int i = 0; i < bulletCount; i++)
+        {
+            //var forwardForThisBullet = forward + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+            var inaccuracy = UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+            // spawn projectile at transform position and rotate it to forward
+            granades[i] = granadeThrower.ThrowGranadeWithWeapon(granade_data.GranadeStats, inaccuracy);
+
+            
+        }
+
+        return granades;
+
+
+
+    }
 
     public Vector3[] ShootHitScan(Weapon_Arms weapon)
     {

@@ -140,7 +140,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     // has granade
-    public bool HasGranades => granadeCount > 0;
+    public bool HasGranades => granadeStats != null && granadeCount > 0;
 
     // reduce granade
     public void UseGranade()

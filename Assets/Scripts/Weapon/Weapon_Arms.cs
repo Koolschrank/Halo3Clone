@@ -334,6 +334,7 @@ public class Weapon_Arms
 
     public Action<GameObject> OnProjectileShot;
     public Action<Vector3> OnHitscanShot;
+    public Action<GameObject> OnGranadeShot;
 
 
     [SerializeField] Weapon_Data weaponData;
@@ -468,6 +469,14 @@ public class Weapon_Arms
                 OnProjectileShot?.Invoke(projectile);
             }
             
+        }
+        else if (weaponData.WeaponBullet is Weapon_Bullet_Granade)
+        {
+            var granades = bulletSpawner.ShootGranade(this);
+            foreach(var granade in granades)
+            {
+                OnGranadeShot?.Invoke(granade);
+            }
         }
         else
         {

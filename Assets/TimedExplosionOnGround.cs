@@ -13,5 +13,10 @@ public class TimedExplosionOnGround : TimedExplosion
         {
             base.OnCollisionEnter(collision);
         }
+        // if collision has health
+        if (collision.gameObject.TryGetComponent<Health>(out Health health))
+        {
+            base.OnCollisionEnter(collision);
+        }
     }
 }

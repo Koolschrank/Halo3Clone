@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2725077803485551492}
   - component: {fileID: 3890480776725438845}
   - component: {fileID: 8572487180997942644}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Granade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimerOnFirstCollision: 1
   collisionCooldown: 0.05
-  explosionTime: 2.5
+  explosionTime: 2.2
   explosionEffect: {fileID: 8386559723769285559, guid: cec942fb091dd3044b7b1320ee8b287a, type: 3}
   mainGranade: {fileID: 3890480776725438845}
   bounceSound:

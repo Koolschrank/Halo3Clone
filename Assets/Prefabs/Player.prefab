@@ -600,6 +600,7 @@ MonoBehaviour:
     m_Bits: 128
   playerArms: {fileID: 3232609274750972410}
   playerTeam: {fileID: 2295363821645548979}
+  granadeThrower: {fileID: 625404246279802593}
 --- !u!114 &8008512304446792098
 MonoBehaviour:
   m_ObjectHideFlags: 0
