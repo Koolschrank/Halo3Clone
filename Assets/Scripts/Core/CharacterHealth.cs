@@ -118,8 +118,14 @@ public class CharacterHealth : Health
 
     public override void TakeDamage(DamagePackage damagePackage)
     {
+        
+
         float damage = damagePackage.damageAmount;
-        var damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
+        TargetHitCollector damageDealer = null;
+        if (damagePackage.owner != null)
+        {
+            damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
+        }
         if ( currentShild <= 0 && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
         {
             damage *= damagePackage.headShotMultiplier;
@@ -169,12 +175,14 @@ public class CharacterHealth : Health
         if (currentHeath <= 0)
         {
             currentHeath = 0;
-            damageDealer.CharacterKill(gameObject);
+            if (damageDealer != null)
+                damageDealer.CharacterKill(gameObject);
             Die(damagePackage);
         }
         else
         {
-            damageDealer.CharacterHit(gameObject);
+            if (damageDealer != null)
+                damageDealer.CharacterHit(gameObject);
             if (hasHealthRegen)
             {
                 healthRegenTimer = healthRegenDelay;
