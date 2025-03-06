@@ -43,6 +43,10 @@ public class ObjectiveIndicator : MonoBehaviour
         OnPositionChange?.Invoke(position);
     }
 
+    public Vector3 Position { get { return transform.position; } }
+
+    public int TeamIndex { get { return teamIndex; } }
+
     public void SetActive(bool active)
     {
         isActive = active;
@@ -59,10 +63,7 @@ public class ObjectiveIndicator : MonoBehaviour
     }
 
     // get is active
-    public bool IsActive()
-    {
-        return isActive;
-    }
+    public bool IsActive { get { return isActive; } }
 
     public void SetTeamIndex(int index)
     {

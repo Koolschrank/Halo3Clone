@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
-  m_Name: Swat 20Kills
+  m_Name: Swat
   m_EditorClassIdentifier: 
   gameModeName: 'Swat '
   startingEquipment:
     hasShild: 0
     headShotOneShot: 0
+    hasMiniMap: 0
     weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfWeaponInHand: 4
     sideArm: {fileID: 0}

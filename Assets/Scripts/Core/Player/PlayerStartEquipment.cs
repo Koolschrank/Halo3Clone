@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerStartEquipment : MonoBehaviour
 {
+    
+
+    
     [Header("References")]
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
@@ -41,6 +44,11 @@ public class PlayerStartEquipment : MonoBehaviour
 
 
 
+        
+        if (!equipment.HasMiniMap)
+        {
+            playerInventory.OnMiniMapDisabled();
+        }
 
         health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);
@@ -69,6 +77,7 @@ public class Equipment
 {
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
+    [SerializeField] bool hasMiniMap = true;
 
 
     [SerializeField] Weapon_Data weaponInHand;
@@ -91,6 +100,7 @@ public class Equipment
     public GranadeStats Granade => granade;
     public int GranadeCount => granadeCount;
 
+    public bool HasMiniMap => hasMiniMap;
 
 
 }

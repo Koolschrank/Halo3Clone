@@ -164,7 +164,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 4
+          m_FloatArgument: 6
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -195,6 +195,7 @@ MonoBehaviour:
   granadeCooldown: {fileID: 690526591888578700}
   teamWinUI: {fileID: 3547538324909370986}
   hitMarkerUI: {fileID: 973657641611872543}
+  minimapUI: {fileID: 8725600332119897690}
 --- !u!114 &2923737641940389727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,12 +829,164 @@ PrefabInstance:
       objectReference: {fileID: 367694579518745841}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: maxDistance
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 3676879251630607992}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveIconPrefab
+      value: 
+      objectReference: {fileID: 9216805385830075385, guid: 14990bb1a5f69e24dbb65c1147b2ad8b, type: 3}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveBaseColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveBaseColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveBaseColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveBaseColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[0].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[0].r
+      value: 0.029940128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[1].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[1].g
+      value: 0.076023385
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[2].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[2].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[2].r
+      value: 0.0869565
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[3].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[3].g
+      value: 0.96078426
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[3].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[4].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[4].b
+      value: 0.39811313
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[4].g
+      value: 0.9763966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[4].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[5].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[5].b
+      value: 0.39811313
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[5].g
+      value: 0.9763966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[5].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[6].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[6].b
+      value: 0.39811313
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[6].g
+      value: 0.9763966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[6].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[7].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[7].b
+      value: 0.39811313
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[7].g
+      value: 0.9763966
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: objectiveTeamColors.Array.data[7].r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -932,6 +1085,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4196208085723714694, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8725600332119897690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe04fa18de735c479bd8aa4c03727d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9077592386559092330 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9021358425600714871, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}

@@ -13,6 +13,15 @@ public class DamageIndicatorUI : MonoBehaviour
 
     List<DamageIndicator> damageIndicators = new List<DamageIndicator>();
     
+    public void Clear()
+    {
+        foreach (DamageIndicator indicator in damageIndicators) 
+        {
+            indicator.DestroyVisual();
+        }
+
+        damageIndicators.Clear();
+    }
 
     public void AddDamageIndicator(DamagePackage damagePackage)
     {

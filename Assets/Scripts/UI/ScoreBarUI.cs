@@ -27,7 +27,6 @@ public class ScoreBarUI : MonoBehaviour
 
     public void SetFill(int score)
     {
-        Debug.Log(maxScore);
         float fill = ((float)score / maxScore * (1 - minFill))  + minFill;
 
         scoreBar.fillAmount = fill;

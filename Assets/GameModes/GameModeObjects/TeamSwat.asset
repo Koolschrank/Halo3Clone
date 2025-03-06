@@ -16,6 +16,7 @@ MonoBehaviour:
   startingEquipment:
     hasShild: 0
     headShotOneShot: 0
+    hasMiniMap: 0
     weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfWeaponInHand: 4
     sideArm: {fileID: 0}
@@ -24,4 +25,4 @@ MonoBehaviour:
     granadeCount: 1
   timeLimitInMinutes: 10
   pointsToWin: 30
-  teamCount: 8
+  teamCount: 2

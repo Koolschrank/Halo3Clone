@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour
     public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
     public Action<float> OnGranadeChargeChanged;
+    public Action OnMiniMapDisabled;
 
 
     [SerializeField] int weaponInvetorySize = 1;
@@ -34,8 +35,14 @@ public class PlayerInventory : MonoBehaviour
     {
         if (weapons.Count > 0)
         {
-            Weapon_PickUp pickUp = Instantiate(weapons[0].PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
-            pickUp.SetAmmo(weapons[0].Magazine, weapons[0].Reserve);
+            var weapon = weapons[0];
+            if (weapon == null || (weapon.Magazine == 0 && weapon.Reserve ==0))
+            {
+                return;
+            }
+
+            Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
+            pickUp.SetAmmo(weapon.Magazine, weapon.Reserve);
             OnWeaponDrop?.Invoke(weapons[0]);
             weapons.RemoveAt(0);
             

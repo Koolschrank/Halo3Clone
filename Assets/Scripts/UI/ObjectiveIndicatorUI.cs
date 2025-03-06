@@ -40,7 +40,7 @@ public class ObjectiveIndicatorUI : MonoBehaviour
 
         SetHideDistance(ObjectiveIndicator.instance.GetHideDistance());
 
-        if (ObjectiveIndicator.instance.IsActive())
+        if (ObjectiveIndicator.instance.IsActive)
         {
             Show();
         }

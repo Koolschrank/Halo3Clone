@@ -19,6 +19,7 @@ public class HealthUI : MonoBehaviour
 
         this.health = health;
         health.OnHealthChanged += UpdateHealth;
+        health.OnDeath += Clear;
         UpdateHealth(health.HealthPercentage);
 
 
@@ -36,5 +37,10 @@ public class HealthUI : MonoBehaviour
         }
 
         playerCam.SetVignetteIntensity(blodyScreenCurve.Evaluate(1 - healthValue));
+    }
+
+    public void Clear()
+    {
+        playerCam.SetVignetteIntensity(0);
     }
 }

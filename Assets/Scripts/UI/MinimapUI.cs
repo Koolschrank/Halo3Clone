@@ -11,8 +11,50 @@ public class MinimapUI : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] float iconPositionMultiplier = 1f;
     [SerializeField] Transform map;
+    
 
     List<MiniMapUIObject> objectsInUI = new List<MiniMapUIObject>();
+
+
+    [Header("Objective icon")]
+    [SerializeField] Image objectiveIconPrefab = null;
+    Image objectiveIcon;
+
+
+    [SerializeField] Color objectiveBaseColor;
+
+    [SerializeField]
+    Color[] objectiveTeamColors;
+
+    private void Start()
+    {
+        if (MiniMapManager.instance.HasObjective)
+        {
+            CreateObjectiveIcon();
+
+        }
+        
+    }
+
+    public void CreateObjectiveIcon()
+    {
+        objectiveIcon = Instantiate(objectiveIconPrefab, map);
+        MiniMapManager.instance.OnObjectiveTeamIndexChanged += SetObjectiveIndexColor;
+    }
+
+    public void SetObjectiveIndexColor(int teamIndex)
+    {
+        var color = objectiveBaseColor;
+        if (teamIndex >= 0 && teamIndex < objectiveTeamColors.Length)
+            color = objectiveTeamColors[teamIndex];
+        objectiveIcon.color = color;
+    }
+
+
+    public void DisableMiniMap()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void Update()
     {
@@ -57,6 +99,21 @@ public class MinimapUI : MonoBehaviour
             }
 
         }
+
+
+        // TODO:  this can be cleaned up
+        if (objectiveIcon != null)
+        {
+            Vector2 pos = MiniMapManager.instance.GetMiniMapObjectivePosition(playerTransform.position, maxDistance);
+            Vector3 position = ObjectiveIndicator.instance.Position;
+            float distance = pos.magnitude;
+            Vector2 uiDirection = GetObjectDirection(position, playerTransform);
+            
+            objectiveIcon.rectTransform.localPosition = uiDirection* distance * iconPositionMultiplier;
+        }
+       
+
+
 
 
         // destroy objects that are not updated this frame
@@ -136,7 +193,6 @@ public class MiniMapUIObject
     {
         miniMapPosition = position;
         updatedThisFrame = true;
-        Debug.Log(new Vector3(position.x, position.y, 0));
         icon.localPosition = new Vector3(position.x, position.y, 0);
     }
 

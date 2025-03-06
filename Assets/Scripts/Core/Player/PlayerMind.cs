@@ -36,6 +36,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] CooldownUI granadeCooldown;
     [SerializeField] TeamWinUI teamWinUI;
     [SerializeField] HitMarkerUI hitMarkerUI;
+    [SerializeField] MinimapUI minimapUI;
 
 
     GameObject playerModel;
@@ -82,10 +83,12 @@ public class PlayerMind : MonoBehaviour
         if (playerInventory != null)
         {
             playerInventory.OnGranadeChargeChanged -= granadeCooldown.UpdateCooldown;
+            playerInventory.OnMiniMapDisabled -= minimapUI.DisableMiniMap;
         }
 
         playerInventory = inventory;
         inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
+        inventory.OnMiniMapDisabled += minimapUI.DisableMiniMap;
     }
 
     public void SetCinemaCamera(CinemachineCamera cCam)
@@ -144,6 +147,7 @@ public class PlayerMind : MonoBehaviour
         playerHealth.OnDeath += PlayerDeath;
 
         playerHealth.OnDamageTaken += damageIndicatorUI.AddDamageIndicator;
+        playerHealth.OnDeath += damageIndicatorUI.Clear;
     }
 
     public void PlayerDeath()
