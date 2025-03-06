@@ -160,6 +160,6 @@ public class KingOfTheHillManager : GameModeManager
 
     public bool CanMoveHill()
     {
-        return hillMoveTimer <= 0;
+        return hillMoveTimer <= 0 && hills.Length > 1;
     }
 }
