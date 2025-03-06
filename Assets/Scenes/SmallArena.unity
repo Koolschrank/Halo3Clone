@@ -6694,6 +6694,10 @@ PrefabInstance:
       value: PlayerManager
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: hills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: spawnSystem.basicSpawnPoints.Array.size
       value: 10
       objectReference: {fileID: 0}
@@ -6787,6 +6791,8 @@ PrefabInstance:
     - {fileID: 596130001413474566, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
     - {fileID: 5919734102723950323, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
     - {fileID: 3815861386578330168, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+    - {fileID: 7065473513869274017, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+    - {fileID: 6981627507217998902, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
