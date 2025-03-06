@@ -797,8 +797,9 @@ MonoBehaviour:
   deceleration_ground: 35
   deceleration_air: 10
   jumpPower: 8
-  jumpCooldown: 0.2
+  jumpCooldown: 0.31
   gravity: 15
+  cyoteTime: 0.3
   crouchSpeed: 4
   walkSound:
     Guid:

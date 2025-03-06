@@ -176,13 +176,13 @@ public class CharacterHealth : Health
         {
             currentHeath = 0;
             if (damageDealer != null)
-                damageDealer.CharacterKill(gameObject);
+                damageDealer.CharacterKill(damagePackage,gameObject);
             Die(damagePackage);
         }
         else
         {
             if (damageDealer != null)
-                damageDealer.CharacterHit(gameObject);
+                damageDealer.CharacterHit(damagePackage, gameObject);
             if (hasHealthRegen)
             {
                 healthRegenTimer = healthRegenDelay;

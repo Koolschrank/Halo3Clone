@@ -6,12 +6,17 @@ public class TargetHitCollector : MonoBehaviour
     public Action<GameObject> OnCharacterHit;
     public Action<GameObject> OnCharacterKill;
 
-    public void CharacterHit(GameObject target)
+    public void CharacterHit(DamagePackage damage,GameObject target)
     {
-        OnCharacterHit?.Invoke(target);
+        if (damage.hasHitMarkerEffect)
+        {
+            OnCharacterHit?.Invoke(target);
+        }
+
+        
     }
 
-    public void CharacterKill(GameObject target)
+    public void CharacterKill(DamagePackage damage, GameObject target)
     {
         OnCharacterKill?.Invoke(target);
     }

@@ -46,6 +46,7 @@ public class FireDamageOverTime : MonoBehaviour
             DamagePackage damagePackage = new DamagePackage(damage);
             damagePackage.origin = transform.position;
             damagePackage.owner = owner;
+            damagePackage.hasHitMarkerEffect = false;
 
 
 

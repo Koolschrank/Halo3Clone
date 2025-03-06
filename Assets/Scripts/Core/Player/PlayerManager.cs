@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
             Display.displays[1].Activate();
         }
             
-        if (Display.displays.Length > 2)
+        if (false&&Display.displays.Length > 2)
         {
             screenCount = 3;
             Display.displays[2].Activate();

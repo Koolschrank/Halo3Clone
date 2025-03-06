@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpCooldown = 0.5f;
     float jumpCooldownTimer = 0;
     [SerializeField] float gravity = 9.8f;
+    [SerializeField] float cyoteTime = 0.2f;
+    bool isGrounded => cc.isGrounded || Time.time - lastGroundTouch < cyoteTime;
+    float lastGroundTouch;
     [SerializeField] float crouchSpeed = 0.5f;
 
     [Header("Sound")]
@@ -71,6 +74,11 @@ public class PlayerMovement : MonoBehaviour
                 AudioManager.instance.PlayOneShot(walkSound, transform.position);
                 distanceToWalkSoundLeft = distanceForWalkSound;
             }
+        }
+
+        if (cc.isGrounded)
+        {
+            lastGroundTouch = Time.time;
         }
 
     }
@@ -147,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        if (cc.isGrounded && jumpCooldownTimer <= 0)
+        if (isGrounded && jumpCooldownTimer <= 0)
         {
             AudioManager.instance.PlayOneShot(jumpSound, transform.position);
             gravityVelocity = jumpPower;
