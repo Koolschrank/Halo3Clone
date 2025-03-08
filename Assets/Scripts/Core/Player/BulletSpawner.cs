@@ -15,6 +15,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] GranadeThrower granadeThrower;
+    [SerializeField] LayerMask wallCheck;
 
 
     AutoAim autoAimOfCurrentWeapon;
@@ -74,6 +75,14 @@ public class BulletSpawner : MonoBehaviour
         //sphere cast
         if (Physics.SphereCast(transform.position, radius, transform.forward, out RaycastHit hit, lenght, autoAimLayerMask))
         {
+            // make a ray cast to check if there is a wall between player and target
+            if (Physics.Raycast(transform.position, (hit.point - transform.position), out RaycastHit wallHit, Vector3.Distance(transform.position, hit.point), wallCheck))
+            {
+                return null;
+            }
+
+
+
             if (hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam pt))
             {
                 if (pt.TeamIndex == playerTeam.TeamIndex)

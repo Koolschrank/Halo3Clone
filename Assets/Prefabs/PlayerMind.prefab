@@ -929,15 +929,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[4].b
-      value: 0.39811313
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[4].g
-      value: 0.9763966
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[4].r
-      value: 1
+      value: 0.8572842
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[5].a
@@ -945,15 +945,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[5].b
-      value: 0.39811313
+      value: 0.62103826
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[5].g
-      value: 0.9763966
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[5].r
-      value: 1
+      value: 0.1716981
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[6].a
@@ -961,11 +961,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[6].b
-      value: 0.39811313
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[6].g
-      value: 0.9763966
+      value: 0.70073825
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[6].r
@@ -977,11 +977,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[7].b
-      value: 0.39811313
+      value: 0.80989677
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[7].g
-      value: 0.9763966
+      value: 0.48113203
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[7].r

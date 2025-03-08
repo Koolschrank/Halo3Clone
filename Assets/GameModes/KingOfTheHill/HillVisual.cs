@@ -1,10 +1,15 @@
+using System.Drawing;
 using UnityEngine;
 
 public class HillVisual : MonoBehaviour
 {
     [SerializeField] Hill hill;
 
-    [SerializeField] GameObject[] teamAuras;
+
+    [Header("Visual")]
+    [SerializeField] ParticleSystem particalSystem;
+    [SerializeField] UnityEngine.Color baseColor;
+    [SerializeField] UnityEngine.Color[] teamColors;
 
 
     public void Awake()
@@ -22,13 +27,12 @@ public class HillVisual : MonoBehaviour
     private void OnActivated()
     {
         OnTeamChange(-1);
+        particalSystem.gameObject.SetActive(true);
     }
 
     private void OnDeactivated()
     {
-        teamAuras[0].SetActive(false);
-        teamAuras[1].SetActive(false);
-        teamAuras[1].SetActive(false);
+        particalSystem.gameObject.SetActive(false);
     }
 
     // activate and deactivate the hill
@@ -36,25 +40,23 @@ public class HillVisual : MonoBehaviour
 
     public void OnTeamChange(int team)
     {
-        // if team index is out of bounds, use the base material
-        if (team < 0)
+        var color = team < 0 ? baseColor : teamColors[team];
+        
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[particalSystem.particleCount];
+        int numParticlesAlive = particalSystem.GetParticles(particles); // Get all active particles
+
+        for (int i = 0; i < numParticlesAlive; i++)
         {
-            teamAuras[0].SetActive(true);
-            teamAuras[1].SetActive(false);
-            teamAuras[2].SetActive(false);
-            return;
+            particles[i].startColor = color; // Change active particle color
         }
-        else if (team == 0)
-        {
-            teamAuras[0].SetActive(false);
-            teamAuras[1].SetActive(true);
-            teamAuras[2].SetActive(false);
-        }
-        else {
-            teamAuras[0].SetActive(false);
-            teamAuras[1].SetActive(false);
-            teamAuras[2].SetActive(true);
-        }
+
+        particalSystem.SetParticles(particles, numParticlesAlive);
+
+        var main = particalSystem.main;
+        main.startColor = color;
+
+
+        
 
     }
 }

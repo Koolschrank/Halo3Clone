@@ -12,7 +12,9 @@ public class Hill : MonoBehaviour
 
     [SerializeField] float radius = 10;
     [SerializeField] LayerMask LayerMask;
+
     
+
     float checkTimer = 0;
 
     int teamOnHill = -1;

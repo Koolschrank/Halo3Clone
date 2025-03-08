@@ -601,6 +601,9 @@ MonoBehaviour:
   playerArms: {fileID: 3232609274750972410}
   playerTeam: {fileID: 2295363821645548979}
   granadeThrower: {fileID: 625404246279802593}
+  wallCheck:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &8008512304446792098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +917,7 @@ MonoBehaviour:
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
-  rechargeGranadeTime: 10
+  rechargeGranadeTime: 12
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
 --- !u!114 &4471171138262044766
@@ -1021,6 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87bd9cf34b994ab49b218954bf35e605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTeam: {fileID: 2295363821645548979}
 --- !u!114 &2295363821645548979
 MonoBehaviour:
   m_ObjectHideFlags: 0

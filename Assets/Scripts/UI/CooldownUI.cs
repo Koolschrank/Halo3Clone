@@ -8,7 +8,7 @@ public class CooldownUI : MonoBehaviour
     Color defaultColor;
     [SerializeField] Color filledColor;
 
-    private void Start()
+    private void Awake()
     {
         defaultColor = cooldownBar.color;
     }

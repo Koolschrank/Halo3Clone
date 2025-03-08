@@ -5,10 +5,11 @@ public class TargetHitCollector : MonoBehaviour
 {
     public Action<GameObject> OnCharacterHit;
     public Action<GameObject> OnCharacterKill;
+    [SerializeField] PlayerTeam playerTeam;
 
     public void CharacterHit(DamagePackage damage,GameObject target)
     {
-        if (damage.hasHitMarkerEffect)
+        if (damage.hasHitMarkerEffect && target.GetComponent<PlayerTeam>().TeamIndex != playerTeam.TeamIndex)
         {
             OnCharacterHit?.Invoke(target);
         }

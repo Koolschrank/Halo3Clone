@@ -11,7 +11,7 @@ public class ObjectiveIndicator : MonoBehaviour
     public Action<int> OnTeamIndexChange;
 
 
-    bool isActive = true;
+    bool isActive = false;
     float hideDistance = 0;
     int teamIndex = -1;
     [SerializeField] Vector3 offset = new Vector3(0, 2, 0);
