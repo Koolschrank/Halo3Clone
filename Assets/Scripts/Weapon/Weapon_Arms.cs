@@ -608,6 +608,8 @@ public class Weapon_Arms
         return weaponData == otherWeapon;
     }
 
+    public float MoveSpeedMultiplier => weaponData.MoveSpeedMultiplier;
+
     public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {
         var missingAmmo = weaponData.ReserveSize - Reserve;

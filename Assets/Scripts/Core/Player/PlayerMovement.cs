@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform head;
     [SerializeField] Transform head_normalPosition;
     [SerializeField] Transform head_crouchPosition;
+    [SerializeField] PlayerArms arms;
     [Header("Settings")]
     // movement speed
     [SerializeField] float maxMoveSpeed = 12f;
@@ -125,7 +126,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
-            var speedMultiplier = MaxMoveSpeed;
+            var weapon = arms.CurrentWeapon;
+            var weaponMoveSpeedMultiplier = 1f;
+            if (weapon != null)
+            {
+                weaponMoveSpeedMultiplier = weapon.MoveSpeedMultiplier;
+            }
+
+            var speedMultiplier = MaxMoveSpeed * weaponMoveSpeedMultiplier;
             if (inCrouch)
             {
                 speedMultiplier *= moveSpeedCrouchMultiplier;

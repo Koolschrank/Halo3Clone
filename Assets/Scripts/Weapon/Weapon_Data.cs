@@ -28,8 +28,10 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float switchInTime;
     [SerializeField] bool canZoom;
     [SerializeField] float zoomFOV;
+    [SerializeField] float moveSpeedMultiplier = 1f;
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
+    
 
     [Header("Burst Values")]
     [SerializeField] int burstAmount;
@@ -85,6 +87,7 @@ public class Weapon_Data : ScriptableObject
 
     public float BurstFireRate => burstDelay;
 
+    public float MoveSpeedMultiplier => moveSpeedMultiplier;
 }
 
 
