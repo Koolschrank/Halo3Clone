@@ -27,6 +27,8 @@ public class Health : MonoBehaviour
     public Action<float> OnHealthChanged;
     public Action<DamagePackage> OnDamageTaken;
 
+    public bool IsDead => currentHeath <= 0;
+
     protected virtual void Start()
     {
         if (setMaxHeathOnStart)

@@ -50,6 +50,10 @@ public class MinimapUI : MonoBehaviour
         objectiveIcon.color = color;
     }
 
+    public void EnableMiniMap()
+    {
+        gameObject.SetActive(true);
+    }
 
     public void DisableMiniMap()
     {

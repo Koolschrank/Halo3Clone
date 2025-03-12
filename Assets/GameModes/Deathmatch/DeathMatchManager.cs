@@ -9,13 +9,13 @@ public class DeathMatchManager : GameModeManager
         player.OnTeamKill += TeamKill;
     }
 
-    void PlayerEliminated(PlayerMind playerWhoElimnated)
+    void PlayerEliminated(GameObject killedPlayer,PlayerMind playerWhoElimnated)
     {
         int teamIndex = playerWhoElimnated.TeamIndex;
         GainPoints(teamIndex, 1);
     }
 
-    void TeamKill(PlayerMind playerWhoElimnated)
+    void TeamKill(GameObject killedPlayer, PlayerMind playerWhoElimnated)
     {
         int teamIndex = playerWhoElimnated.TeamIndex;
         GainPoints(teamIndex, -1);

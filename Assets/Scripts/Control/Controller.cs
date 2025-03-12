@@ -134,6 +134,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTeam"",
+                    ""type"": ""Button"",
+                    ""id"": ""883f2047-3af0-40ab-97ea-3d5281a1db6d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -466,6 +475,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ccec6cd-85c8-4985-96d0-89754f90f661"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""SwitchTeam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a210f55-cf60-4312-af8f-fa20f97137b1"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""SwitchTeam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -514,6 +545,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player_ThrowGranade = m_Player.FindAction("ThrowGranade", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_SwitchTeam = m_Player.FindAction("SwitchTeam", throwIfNotFound: true);
     }
 
     ~@Controller()
@@ -592,6 +624,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrowGranade;
     private readonly InputAction m_Player_Melee;
     private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_SwitchTeam;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
@@ -608,6 +641,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @ThrowGranade => m_Wrapper.m_Player_ThrowGranade;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @SwitchTeam => m_Wrapper.m_Player_SwitchTeam;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -653,6 +687,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
+            @SwitchTeam.started += instance.OnSwitchTeam;
+            @SwitchTeam.performed += instance.OnSwitchTeam;
+            @SwitchTeam.canceled += instance.OnSwitchTeam;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -693,6 +730,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
+            @SwitchTeam.started -= instance.OnSwitchTeam;
+            @SwitchTeam.performed -= instance.OnSwitchTeam;
+            @SwitchTeam.canceled -= instance.OnSwitchTeam;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -742,5 +782,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnThrowGranade(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnSwitchTeam(InputAction.CallbackContext context);
     }
 }

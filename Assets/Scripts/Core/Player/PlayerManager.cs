@@ -130,13 +130,21 @@ public class PlayerManager : MonoBehaviour
         playerBody.SetMaterial(playerColors[player.TeamIndex]);
     }
 
+
+    public void UpdateTeamOfBody(PlayerMind mind)
+    {
+        var playerBody = mind.PlayerBody;
+        var connector = playerBody.GetComponent<BodyMindConnection>();
+        connector.SetPlayTeamIndex();
+        connector.SetMaterial(playerColors[mind.TeamIndex]);
+    }
+
     public void RespawnPlayer(PlayerMind player)
     {
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetMaterial(playerColors[player.TeamIndex]);
-
         player.UpdateLayers();
     }
 

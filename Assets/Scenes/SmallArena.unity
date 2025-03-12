@@ -7398,6 +7398,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 127839843735030192, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'playerColors.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 43a161cc9cf1cc84ab895c0aa49feb01, type: 2}
+    - target: {fileID: 127839843735030192, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'playerColors.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7d8d4382045f58843bb87067d73139f7, type: 2}
+    - target: {fileID: 127839843735030192, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'playerColors.Array.data[6]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 69fb7070a6afa9e47bde5da621d17251, type: 2}
+    - target: {fileID: 127839843735030192, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'playerColors.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f27e41ec5a44554384d65a63c3c7007, type: 2}
     - target: {fileID: 2217420224928112208, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: radius
       value: 5
@@ -7557,7 +7573,7 @@ PrefabInstance:
     - target: {fileID: 7063945528381591942, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: gameMode
       value: 
-      objectReference: {fileID: 11400000, guid: b3b691cdb854dbe41973632627ef625b, type: 2}
+      objectReference: {fileID: 11400000, guid: 024c38e2e861ad1429979777d02f4e59, type: 2}
     - target: {fileID: 7528383088536497644, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7706,6 +7722,70 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 278836824}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1983575483}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1751143621}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 361933561}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1217472404}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 833099484}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1004407695}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2053237020}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[9]'
+      value: 
+      objectReference: {fileID: 1751143621}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 278836824}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1983575483}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1751143621}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 361933561}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1217472404}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 833099484}
+    - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1004407695}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3378400868189579010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}

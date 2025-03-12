@@ -9,6 +9,7 @@ public class GameModeSelector : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] DeathMatchManager deathMatchManager;
     [SerializeField] KingOfTheHillManager kingOfTheHillManager;
+    [SerializeField] CrownManager crownManager;
 
 
     public static GameModeManager gameModeManager;
@@ -33,6 +34,11 @@ public class GameModeSelector : MonoBehaviour
             kingOfTheHillManager.StartGame(gameMode);
             gameModeManager = kingOfTheHillManager;
         }
+        else if (gameMode is GameMode_Crown)
+        {
+            crownManager.StartGame(gameMode);
+            gameModeManager = crownManager;
+        }
 
         gameModeManager.OnTeamWon += StartReloadGameWithTimer;
     }
@@ -51,6 +57,6 @@ public class GameModeSelector : MonoBehaviour
 
     public void ReloadScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

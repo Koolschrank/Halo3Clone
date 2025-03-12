@@ -7,6 +7,7 @@ public class GameModeManager : MonoBehaviour
     protected GameMode gameModeStats;
 
     public Action OnTeamAdded;
+    
     public Action<int, int> OnPointsUpdated;
     public Action<int> OnTeamWon;
 
@@ -82,6 +83,45 @@ public class GameModeManager : MonoBehaviour
 
     }
 
+    public virtual void PlayerSwitchTeams(PlayerMind player)
+    {
+
+
+
+        // switch player to next possible team
+        int currentIndex = player.TeamIndex;
+        int nextIndex = (currentIndex + 1) % gameModeStats.TeamCount;
+        // remove player from current team
+        teams[currentIndex].Remove(player);
+        // add player to next team
+        teams[nextIndex].Add(player);
+
+        player.AssignTeam(nextIndex);
+
+        if (teams[nextIndex].Count == 1 || teams[currentIndex].Count == 0)
+        {
+            OnTeamAdded?.Invoke();
+        }
+
+
+        var playerBody = player.PlayerBody;
+        if (playerBody == null)
+        {
+            return;
+        }
+
+        var spawnPoint = GetStartingSpawnPoint(nextIndex);
+        var characterController = playerBody.GetComponent<CharacterController>();
+        characterController.enabled = false;
+        playerBody.transform.position = spawnPoint.position;
+        playerBody.transform.rotation = spawnPoint.rotation;
+        characterController.enabled = true;
+        PlayerManager.instance.UpdateTeamOfBody(player);
+
+
+
+    }
+
 
 
 
@@ -102,6 +142,8 @@ public class GameModeManager : MonoBehaviour
         return index;
 
     }
+
+
 
     public virtual void PlayerDied(PlayerMind player)
     {
@@ -141,17 +183,21 @@ public class GameModeManager : MonoBehaviour
         return gameModeStats.StartingEquipment;
     }
 
-    public int GetTeamsWithPlayers()
+    public List<int> GetTeamsWithPlayers()
     {
-        int count = 0;
-        foreach (var team in teams)
+        List<int> teamsWithPlayers = new List<int>();
+        for (int i = 0; i < teams.Count; i++)
         {
-            if (team.Count > 0)
+            if (teams[i].Count > 0)
             {
-                count++;
+                teamsWithPlayers.Add(teams[i].Count);
+            }
+            else
+            {
+                teamsWithPlayers.Add(0);
             }
         }
-        return count;
+        return teamsWithPlayers;
     }
 
     public List<int> GetTeamPoints()
@@ -163,6 +209,8 @@ public class GameModeManager : MonoBehaviour
     {
         return gameModeStats.PointsToWin;
     }
+
+    public bool HasWeaponPickups => gameModeStats.HasWeaponPickups;
 
 }
 

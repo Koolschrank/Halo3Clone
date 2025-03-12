@@ -43,6 +43,7 @@ public class ObjectiveIndicatorUI : MonoBehaviour
         if (ObjectiveIndicator.instance.IsActive)
         {
             Show();
+            UpdatePosition(ObjectiveIndicator.instance.Position);
         }
         else
         {

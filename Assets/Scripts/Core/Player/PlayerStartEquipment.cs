@@ -12,18 +12,27 @@ public class PlayerStartEquipment : MonoBehaviour
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] CharacterHealth health;
+    [SerializeField] PlayerMovement playerMovement;
 
 
 
     public void GetEquipment(Equipment equipment)
     {
-        playerArms.PickUpWeapon(
+
+        if (equipment.WeaponInHand != null)
+        {
+            playerArms.PickUpWeapon(
             SpawnWeapon(
                 equipment.WeaponInHand,
                 equipment.MagazinsOfWeaponInHand));
+        }
+
+            
 
         if (equipment.SideArm != null)
         {
+            playerInventory.Clear();
+
             playerInventory.AddWeapon(
             SpawnWeapon(
                 equipment.SideArm,
@@ -40,14 +49,20 @@ public class PlayerStartEquipment : MonoBehaviour
             playerInventory.ChangeGranade(null);
         }
 
+        playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
 
 
 
 
-        
+
+
         if (!equipment.HasMiniMap)
         {
-            playerInventory.OnMiniMapDisabled();
+            playerInventory.OnMiniMapDisabled?.Invoke();
+        }
+        else
+        {
+            playerInventory.OnMiniMapEnabled?.Invoke();
         }
 
         health.SetHasShild(equipment.HasShild);
@@ -78,6 +93,7 @@ public class Equipment
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
     [SerializeField] bool hasMiniMap = true;
+    [SerializeField] float movementSpeedMultiplier = 1;
 
 
     [SerializeField] Weapon_Data weaponInHand;
@@ -101,6 +117,8 @@ public class Equipment
     public int GranadeCount => granadeCount;
 
     public bool HasMiniMap => hasMiniMap;
+
+    public float MovementSpeedMultiplier => movementSpeedMultiplier;
 
 
 }

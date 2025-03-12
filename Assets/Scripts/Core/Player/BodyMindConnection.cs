@@ -28,7 +28,7 @@ public class BodyMindConnection : MonoBehaviour
         camera.LookAt = mindParent.transform;
 
         this.mind = mind;
-
+        mind.SetPlayerBody(gameObject);
         mind.transform.SetParent(mindParent);
         mind.SetPlayerModel(mesh);
         mind.SetPlayerMovement(playerMovement);

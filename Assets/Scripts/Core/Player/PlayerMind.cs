@@ -10,8 +10,8 @@ public class PlayerMind : MonoBehaviour
 {
     public UnityEvent OnPlayerDeath;
     public Action<PlayerMind> OnPlayerDied;
-    public Action<PlayerMind> OnPlayerElimination;
-    public Action<PlayerMind> OnTeamKill;
+    public Action<GameObject, PlayerMind> OnPlayerElimination;
+    public Action<GameObject, PlayerMind> OnTeamKill;
 
     //[SerializeField] Camera playerCamera;
     [SerializeField] Arm_FPSView armsView;
@@ -37,8 +37,10 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] TeamWinUI teamWinUI;
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
+    [SerializeField] ObjectiveIndicatorUI objectiveIndicatorUI;
 
 
+    GameObject playerBody;
     GameObject playerModel;
     PlayerMovement playerMovement;
     PlayerAim playerAim;
@@ -59,6 +61,13 @@ public class PlayerMind : MonoBehaviour
 
         PlayerManager.instance.AddPlayer(this);
     }
+
+    public void SetPlayerBody(GameObject body)
+    {
+        playerBody = body;
+    }
+
+    public GameObject PlayerBody { get { return playerBody; } }
 
     // set Player model
     public void SetPlayerModel(GameObject model)
@@ -84,11 +93,13 @@ public class PlayerMind : MonoBehaviour
         {
             playerInventory.OnGranadeChargeChanged -= granadeCooldown.UpdateCooldown;
             playerInventory.OnMiniMapDisabled -= minimapUI.DisableMiniMap;
+            playerInventory.OnMiniMapEnabled -= minimapUI.EnableMiniMap;
         }
 
         playerInventory = inventory;
         inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
         inventory.OnMiniMapDisabled += minimapUI.DisableMiniMap;
+        inventory.OnMiniMapEnabled += minimapUI.EnableMiniMap;
     }
 
     public void SetCinemaCamera(CinemachineCamera cCam)
@@ -162,11 +173,11 @@ public class PlayerMind : MonoBehaviour
         if (otherPlayer != null) {
             if (otherPlayer.TeamIndex == team.TeamIndex)
             {
-                OnTeamKill?.Invoke(this);
+                OnTeamKill?.Invoke(obj,this);
             }
             else
             {
-                OnPlayerElimination?.Invoke(this);
+                OnPlayerElimination?.Invoke(obj, this);
 
             }
         }
@@ -281,6 +292,14 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
+    public void SwitchTeam(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameModeSelector.gameModeManager.PlayerSwitchTeams(this);
+        }
+    }
+
     public void SetLayers(int FPS_Layer, int ThirdPerson_Layer)
     {
         firstPersonLayer = FPS_Layer;
@@ -288,6 +307,11 @@ public class PlayerMind : MonoBehaviour
 
 
         UpdateLayers();
+    }
+
+    public void EnableObjectiveUIMarker()
+    {
+        objectiveIndicatorUI.gameObject.SetActive(true);
     }
 
     public void UpdateLayers()

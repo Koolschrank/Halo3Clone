@@ -24,10 +24,21 @@ public class ScoreBoardUI : MonoBehaviour
 
     public void TeamJoined()
     {
-        for (int i = 0; i < GameModeSelector.gameModeManager.GetTeamsWithPlayers(); i++)
+        var teams = GameModeSelector.gameModeManager.GetTeamsWithPlayers();
+        for (int i = 0; i < teams.Count; i++)
         {
-            scoreBars[i].gameObject.SetActive(true);
-            scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore());
+            var team = teams[i];
+            if (team > 0)
+            {
+                scoreBars[i].gameObject.SetActive(true);
+                scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore());
+            }
+            else
+            {
+                scoreBars[i].gameObject.SetActive(false);
+            }
+
+
         }
     }
 

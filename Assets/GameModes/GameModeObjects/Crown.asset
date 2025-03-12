@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589e88430007c0444a892d036f0130f9, type: 3}
+  m_Name: Crown
+  m_EditorClassIdentifier: 
+  gameModeName: Hunt
+  startingEquipment:
+    hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 1
+    movementSpeedMultiplier: 1
+    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+    magazinsOfWeaponInHand: 3
+    sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    magazinsOfSideArm: 5
+    granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+    granadeCount: 1
+  timeLimitInMinutes: 10
+  pointsToWin: 40
+  teamCount: 8
+  hasWeaponPickups: 1
+  timeToScore: 1
+  setEquipmentOnCrownPickup: 0
+  equipmentOnCrownPickup:
+    hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 1
+    movementSpeedMultiplier: 1
+    weaponInHand: {fileID: 0}
+    magazinsOfWeaponInHand: 3
+    sideArm: {fileID: 0}
+    magazinsOfSideArm: 5
+    granade: {fileID: 0}
+    granadeCount: 0

@@ -41,9 +41,18 @@ public class ShildUI : MonoBehaviour
         health.OnShildChanged += UpdateShild;
         health.OnShildDepleted += ShildDepleted;
         health.OnShildDisabled += DisableUI;
+        health.OnShildEnabled += EnableUI;
+
         UpdateShild(health.ShildPercentage);
 
 
+    }
+
+    public void EnableUI()
+    {
+       
+        gameObject.SetActive(true);
+        UpdateShild(health.ShildPercentage);
     }
 
     public void DisableUI()

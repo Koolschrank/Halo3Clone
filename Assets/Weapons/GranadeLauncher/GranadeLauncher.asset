@@ -18,11 +18,11 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 43472cc0bb0af404aa547ab04554588f, type: 3}
   weaponName: Granade Launcher
   shootType: 0
-  fireRate: 1
+  fireRate: 0.9
   bulletsPerShot: 1
   magazineSize: 3
   maxAmmoInReserve: 18
-  reloadTime: 3.5
+  reloadTime: 3
   inaccuracy: 0
   switchOutTime: 0.4
   switchInTime: 0.6

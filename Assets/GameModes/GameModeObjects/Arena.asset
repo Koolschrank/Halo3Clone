@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
+  m_Name: Arena
+  m_EditorClassIdentifier: 
+  gameModeName: Arena
+  startingEquipment:
+    hasShild: 0
+    headShotOneShot: 0
+    hasMiniMap: 0
+    movementSpeedMultiplier: 2
+    weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    magazinsOfWeaponInHand: 4
+    sideArm: {fileID: 0}
+    magazinsOfSideArm: 5
+    granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+    granadeCount: 1
+  timeLimitInMinutes: 10
+  pointsToWin: 15
+  teamCount: 8
+  hasWeaponPickups: 1

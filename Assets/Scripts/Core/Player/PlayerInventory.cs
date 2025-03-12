@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public Action<int> OnGranadeCountChanged;
     public Action<float> OnGranadeChargeChanged;
     public Action OnMiniMapDisabled;
+    public Action OnMiniMapEnabled;
 
 
     [SerializeField] int weaponInvetorySize = 1;
@@ -30,6 +31,9 @@ public class PlayerInventory : MonoBehaviour
     {
         characterHealth.OnDeath += DropWeapon;
     }
+
+    public void Clear()
+        { weapons.Clear(); }
 
     public void DropWeapon()
     {

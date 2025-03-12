@@ -7,6 +7,7 @@ public class DeathZone : MonoBehaviour
     {
         Debug.Log("DeathZone OnTriggerEnter");
         DamagePackage damage = new DamagePackage(1000000);
+        damage.owner = other.gameObject;
         Health health = other.GetComponent<Health>();
         if (health != null)
         {

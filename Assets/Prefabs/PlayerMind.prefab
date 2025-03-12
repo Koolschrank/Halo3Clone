@@ -164,7 +164,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 6
+          m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -196,6 +196,7 @@ MonoBehaviour:
   teamWinUI: {fileID: 3547538324909370986}
   hitMarkerUI: {fileID: 973657641611872543}
   minimapUI: {fileID: 8725600332119897690}
+  objectiveIndicatorUI: {fileID: 4800970749985148627}
 --- !u!114 &2923737641940389727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +402,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6f800914-9cbb-40a7-b984-d567b2e7986a
     m_ActionName: 'Player/Zoom[/DualSenseGamepadHID/rightStickPress]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: SwitchTeam
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 883f2047-3af0-40ab-97ea-3d5281a1db6d
+    m_ActionName: 'Player/SwitchTeam[/Keyboard/p]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -723,14 +740,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4645109039399102668}
     m_Modifications:
+    - target: {fileID: 28372917300648211, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -970488182351979515, guid: fe42c8b526e77e54ab91d0590272d9e8, type: 3}
+    - target: {fileID: 28372917300648211, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 781354266759541272, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939611653966831833, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2267043410257924088, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4851948068322704465}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808217097364738689, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 4020260791520427386, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerCam
       value: 
@@ -816,6 +869,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 4851948068322704465}
@@ -823,6 +880,46 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 3676879251630607992}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: distanceFromMiddleOfScreen
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[4].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[4].r
+      value: 0.7384558
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[5].b
+      value: 0.84229445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[5].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[5].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[6].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[6].g
+      value: 0.5264094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[7].b
+      value: 0.65021706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: teamColors.Array.data[7].r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerTeam
       value: 
@@ -987,6 +1084,10 @@ PrefabInstance:
       propertyPath: objectiveTeamColors.Array.data[7].r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8971247384280277190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1085,6 +1186,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4196208085723714694, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4800970749985148627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4785112996997923022, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147788285dacf6c49803152f6f74ec57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8725600332119897690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}

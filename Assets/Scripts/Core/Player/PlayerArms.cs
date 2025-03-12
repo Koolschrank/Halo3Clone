@@ -381,6 +381,13 @@ public class PlayerArms : MonoBehaviour
                         }
                     }
                     break;
+                case ShootType.Melee
+                    :
+                    if (!wasTriggerPressed && isTriggerPressed)
+                    {
+                        TryMeleeAttack();
+                    }
+                    break;
             }
         }
         if (armState == ArmState.InBurstShooting && weaponInHand != null)

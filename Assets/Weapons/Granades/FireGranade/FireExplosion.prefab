@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c6e9a30d6ab854e8ea120ba51213a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 5.5
+  aliveTime: 6.5
 --- !u!1 &7763948201697825076
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  damage: 100
+  damage: 90
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2
@@ -207,14 +207,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.8
-  damage: 6.5
+  damage: 8
   layerMask:
     serializedVersion: 2
     m_Bits: 128
   damageRate: 0.05
   height: 1
   depth: 1
-  aliveTime: 6
+  aliveTime: 7
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 14ab57070af43434aa2d486eb06df477, type: 3}
       propertyPath: lengthInSec
-      value: 5.7
+      value: 6.7
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 14ab57070af43434aa2d486eb06df477, type: 3}
       propertyPath: InitialModule.size3D

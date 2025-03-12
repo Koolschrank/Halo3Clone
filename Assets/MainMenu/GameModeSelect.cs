@@ -13,6 +13,10 @@ public class GameModeSelect : MonoBehaviour
 
     private void Start()
     {
+
+        // make maouse visible and unlock
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         for (int i = 0; i < gameModesToSelectFrom.Length; i++)
         {
             var gameMode = gameModesToSelectFrom[i];

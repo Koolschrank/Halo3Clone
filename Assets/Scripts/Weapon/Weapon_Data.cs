@@ -93,6 +93,7 @@ public enum ShootType
 {
     Single,
     Auto,
-    Burst
+    Burst,
+    Melee
 }
 

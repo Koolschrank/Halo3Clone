@@ -858,6 +858,7 @@ MonoBehaviour:
   playerArms: {fileID: 3232609274750972410}
   playerInventory: {fileID: 7573040687501960069}
   health: {fileID: 782412234501442312}
+  playerMovement: {fileID: 7400201383000877008}
 --- !u!114 &4355240392448193639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,8 +892,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHead: {fileID: 8223324349368915893}
   playerArms: {fileID: 3232609274750972410}
-  aimSpeed_x: 120
-  aimSpeed_y: 90
+  aimSpeed_x: 168
+  aimSpeed_y: 126
   minAngle: -70
   maxAngle: 70
   zoomAimSpeedMultiplier: 0.5

@@ -17,6 +17,7 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
+    movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
     magazinsOfWeaponInHand: 5
     sideArm: {fileID: 0}
@@ -26,6 +27,7 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 100
   teamCount: 8
+  hasWeaponPickups: 0
   timeToScore: 1
   moveHill: 1
   hillMoveTime: 50

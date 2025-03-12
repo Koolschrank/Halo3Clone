@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
@@ -12,11 +13,31 @@ public class WeaponSpawner : MonoBehaviour
 
     public void Start()
     {
+        StartCoroutine(StartDelay());
+    }
+
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        DelayStart();
+    }
+
+    public void DelayStart()
+    {
+        if (!GameModeSelector.gameModeManager.HasWeaponPickups)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+
+
         if (spawnOnStart)
         {
             SpawnWeapon();
         }
     }
+
 
     public void Update()
     {

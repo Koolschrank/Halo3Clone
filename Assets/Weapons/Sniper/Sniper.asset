@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 34f45053683dfdc46b33bc95460b2076, type: 3}
   weaponName: ShotGun
   shootType: 0
-  fireRate: 0.9
+  fireRate: 0.75
   bulletsPerShot: 1
   magazineSize: 4
   maxAmmoInReserve: 12

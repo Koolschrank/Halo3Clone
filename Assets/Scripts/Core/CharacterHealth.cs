@@ -34,18 +34,34 @@ public class CharacterHealth : Health
     public Action<float> OnShildChanged;
     public Action OnShildDepleted;
     public UnityEvent OnDamageTakenUnityEvent;
+    public Action OnShildEnabled;
     public Action OnShildDisabled;
+
+
+    float maxShildMultiplier = 1;
+
+    float MaxShild => maxShild * maxShildMultiplier;
 
     public void SetHasShild(bool hasShild)
     {
+        if (this.hasShild == hasShild)
+            return;
+
         this.hasShild = hasShild;
         if (!hasShild)
         {
             currentShild = 0;
-            maxShild = 0;
+            maxShildMultiplier = 0;
             OnShildDisabled?.Invoke();
 
+        }else
+        {
+            currentShild = maxShild;
+            maxShildMultiplier = 1;
+            OnShildEnabled?.Invoke();
         }
+
+
     }
 
     public void SetHeadShotOneShot(bool headShotOneShot)
@@ -58,7 +74,7 @@ public class CharacterHealth : Health
     {
         base.Start();
         if (setMaxHeathOnStart)
-            currentShild = maxShild;
+            currentShild = MaxShild;
 
         shildEmptySoundInstance = RuntimeManager.CreateInstance(shildEmptySound);
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
@@ -80,7 +96,7 @@ public class CharacterHealth : Health
                 shildRechargeSoundInstance.start();
             }
         }
-        else if (currentShild < maxShild && hasShild)
+        else if (currentShild < MaxShild && hasShild)
         {
 
             if (currentShild == 0)
@@ -93,7 +109,7 @@ public class CharacterHealth : Health
             shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
 
             currentShild += shildRegenAmountPerSecond * Time.deltaTime;
-            currentShild = Mathf.Clamp(currentShild, 0, maxShild);
+            currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
             OnShildChanged?.Invoke(ShildPercentage);
 
         }

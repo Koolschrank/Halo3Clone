@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     float lastGroundTouch;
     [SerializeField] float crouchSpeed = 0.5f;
 
+    float maxMoveSpeedMultiplier = 1f;
+
     [Header("Sound")]
     [SerializeField] EventReference walkSound;
     [SerializeField] float distanceForWalkSound = 1f;
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     float gravityVelocity = 0;
     Vector2 moveInput = Vector2.zero;
 
-    public float MaxMoveSpeed => maxMoveSpeed;
+    public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
 
@@ -123,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
-            var speedMultiplier = maxMoveSpeed;
+            var speedMultiplier = MaxMoveSpeed;
             if (inCrouch)
             {
                 speedMultiplier *= moveSpeedCrouchMultiplier;
@@ -133,6 +135,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
+    }
+
+    public void SetMovementSpeedMultiplier(float multiplier)
+    {
+        maxMoveSpeedMultiplier = multiplier;
     }
 
     private void UpdateGravity()

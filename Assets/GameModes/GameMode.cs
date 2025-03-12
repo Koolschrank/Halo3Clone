@@ -10,6 +10,7 @@ public class GameMode : ScriptableObject
     [SerializeField] protected float timeLimitInMinutes =  10f;
     [SerializeField] protected int pointsToWin = 0;
     [SerializeField] protected int teamCount = 2;
+    [SerializeField] protected bool hasWeaponPickups = false;
 
 
     public Equipment StartingEquipment { get { return startingEquipment; } }
@@ -20,5 +21,7 @@ public class GameMode : ScriptableObject
     public int TeamCount { get { return teamCount; } }
 
     public string GameModeName { get { return gameModeName; } }
+
+    public bool HasWeaponPickups { get { return hasWeaponPickups; } }
 }
 

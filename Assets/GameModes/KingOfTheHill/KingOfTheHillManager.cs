@@ -120,6 +120,12 @@ public class KingOfTheHillManager : GameModeManager
         currentHill.ScanHill();
     }
 
+    public override void PlayerJoined(PlayerMind player)
+    {
+        base.PlayerJoined(player);
+        ResetHillMoveTimer();
+    }
+
     public void ResetHillMoveTimer()
     {
         var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
