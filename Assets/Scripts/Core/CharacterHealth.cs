@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class CharacterHealth : Health
 {
 
-
+    [SerializeField] float damageMultiplier = 1; 
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
 
@@ -136,13 +136,14 @@ public class CharacterHealth : Health
     {
         
 
-        float damage = damagePackage.damageAmount;
+        float damage = damagePackage.damageAmount * damageMultiplier;
+
         TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if ( currentShild <= 0 && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
+        if ( (currentShild <= 0 || damagePackage.canHeadShotShild) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)

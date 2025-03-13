@@ -14,6 +14,7 @@ public struct DamagePackage
     public ImpactType impactType;
     public GameObject owner;
     public bool canHeadShot;
+    public bool canHeadShotShild;
     public float headShotMultiplier;
     public float shildDamageMultiplier;
     public bool hasHitMarkerEffect;
@@ -34,9 +35,10 @@ public struct DamagePackage
         OnDamageApplied = null;
         OnKill = null;
         hasHitMarkerEffect = true;
+        canHeadShotShild = false;
     }
 
-    public DamagePackage(float damageAmount, Vector3 hitPoint, Vector3 origin, Vector3 force, ImpactType impactType, GameObject owner, bool canHeadShot, float headShotMultiplier, bool hasHitMarkerEffect)
+    public DamagePackage(float damageAmount, Vector3 hitPoint, Vector3 origin, Vector3 force, ImpactType impactType, GameObject owner, bool canHeadShot, float headShotMultiplier, bool hasHitMarkerEffect,bool canHeadShotShild)
     {
         this.damageAmount = damageAmount;
         this.hitPoint = hitPoint;
@@ -47,6 +49,7 @@ public struct DamagePackage
         this.canHeadShot = canHeadShot;
         this.headShotMultiplier = headShotMultiplier;
         this.hasHitMarkerEffect = hasHitMarkerEffect;
+        this.canHeadShotShild = canHeadShotShild;
         shildDamageMultiplier = 1f;
 
         OnDamageApplied = null;

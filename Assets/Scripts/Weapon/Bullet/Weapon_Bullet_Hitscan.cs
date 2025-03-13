@@ -8,6 +8,7 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     [SerializeField] float force = 1f;
     [SerializeField] float shildDamageMultiplier = 1f;
     [SerializeField] float headShotMultiplier = 1f;
+    [SerializeField] bool canHeadShotShild = false;
     [SerializeField] float range;
     [SerializeField] LayerMask hitLayer;
 
@@ -37,6 +38,8 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     // hit sound
     public EventReference BodyHitSound => bodyHitSound;
     public EventReference GroundHitSound => groundHitSound;
+
+    public bool CanHeadShotShild => canHeadShotShild;
 
     public float GetDamageFalloff(float distance)
     {

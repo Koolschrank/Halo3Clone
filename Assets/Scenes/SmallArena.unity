@@ -7449,39 +7449,39 @@ PrefabInstance:
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 278836824}
+      objectReference: {fileID: 2053237020}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 1983575483}
+      objectReference: {fileID: 833099484}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[3]'
       value: 
-      objectReference: {fileID: 1751143621}
+      objectReference: {fileID: 278836824}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 361933561}
+      objectReference: {fileID: 1374858822}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
       value: 
-      objectReference: {fileID: 1217472404}
+      objectReference: {fileID: 1004407695}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 833099484}
+      objectReference: {fileID: 1983575483}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
       value: 
-      objectReference: {fileID: 1004407695}
+      objectReference: {fileID: 1217472404}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[8]'
       value: 
-      objectReference: {fileID: 2053237020}
+      objectReference: {fileID: 1751143621}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[9]'
       value: 
-      objectReference: {fileID: 1751143621}
+      objectReference: {fileID: 361933561}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: spawnSystem.teamStartSpawnPoints.Array.size
       value: 8

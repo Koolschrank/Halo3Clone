@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: SlowMelee
   m_EditorClassIdentifier: 
-  damage: 160
+  damage: 120
   force: 100
   delay: 0.24
   meleeTime: 1.28

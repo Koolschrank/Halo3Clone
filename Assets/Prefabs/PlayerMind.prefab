@@ -1,5 +1,108 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1679385840759390978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6210619939371060089}
+  - component: {fileID: 2127263124048056043}
+  - component: {fileID: 3936630368718065048}
+  m_Layer: 0
+  m_Name: Arm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6210619939371060089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679385840759390978}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5825169579407046778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2127263124048056043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679385840759390978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a97d88ff56fe284f9b8053eedb66137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cc: {fileID: 0}
+  mover: {fileID: 0}
+  step: 0.01
+  maxStepDistance: 0.06
+  rotationStep: 4
+  maxRotationStep: 5
+  smooth: 8
+  speedCurve: 0
+  travelLimit: {x: 0.006, y: 0.003, z: 0.003}
+  bobLimit: {x: 0.01, y: 0.01, z: 0.01}
+  bobExaggeration: 0
+  multiplier: {x: 1, y: 0, z: 0}
+--- !u!114 &3936630368718065048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679385840759390978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902132af636f9b24f8f6145028373cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArms: {fileID: 0}
+  granadeSpawnPoint: {fileID: 3664815395283841513}
+--- !u!1 &4870789051740163954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5825169579407046778}
+  m_Layer: 0
+  m_Name: LeftShoulder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5825169579407046778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870789051740163954}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.47, y: -0.58, z: -0.02}
+  m_LocalScale: {x: -1.1, y: 1.1, z: 0.9166666}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6210619939371060089}
+  m_Father: {fileID: 3676879251630607992}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4982762685980848835
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +241,7 @@ Transform:
   - {fileID: 4645109039399102668}
   - {fileID: 3664815395283841513}
   - {fileID: 225553704323308236}
+  - {fileID: 5825169579407046778}
   - {fileID: 4104662638639072826}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -164,7 +268,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 4
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -339,19 +443,7 @@ MonoBehaviour:
     m_ActionId: 7432a521-806c-4ca0-8519-a473c7270769
     m_ActionName: 'Player/RagdollTrigger[/Keyboard/p]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: Crouch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 70d64e94-3e26-4f37-b406-f394f2c1b9a3
     m_ActionName: Player/Crouch
   - m_PersistentCalls:
@@ -572,9 +664,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.5
+    y: 0
     width: 1
-    height: 0.5
+    height: 1
   near clip plane: 0.1
   far clip plane: 500
   field of view: 70
@@ -751,6 +843,10 @@ PrefabInstance:
     - target: {fileID: 781354266759541272, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 836479141534939190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 19.099998
       objectReference: {fileID: 0}
     - target: {fileID: 1939611653966831833, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
@@ -1083,6 +1179,10 @@ PrefabInstance:
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[7].r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967621458559658389, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 157.70001
       objectReference: {fileID: 0}
     - target: {fileID: 8971247384280277190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
