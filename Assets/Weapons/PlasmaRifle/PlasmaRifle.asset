@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: 50da6cff0c231cb4095c42d7be1db310, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
   weapon3rdPersonModel: {fileID: 1535552099913994392, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
-  weaponName: PlasmaRifle
+  weaponName: Plasma Rifle
   shootType: 1
   fireRate: 0.09
   bulletsPerShot: 1
@@ -28,6 +28,7 @@ MonoBehaviour:
   switchInTime: 0.3
   canZoom: 0
   zoomFOV: 0
+  moveSpeedMultiplier: 1
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   burstAmount: 0

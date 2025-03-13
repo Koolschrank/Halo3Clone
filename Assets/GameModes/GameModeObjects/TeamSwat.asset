@@ -28,3 +28,4 @@ MonoBehaviour:
   pointsToWin: 30
   teamCount: 2
   hasWeaponPickups: 1
+  reasignsTeamsInPlayerOrder: 1

@@ -28,6 +28,7 @@ MonoBehaviour:
   pointsToWin: 100
   teamCount: 2
   hasWeaponPickups: 1
+  reasignsTeamsInPlayerOrder: 1
   timeToScore: 1
   moveHill: 1
-  hillMoveTime: 60
+  hillMoveTime: 70

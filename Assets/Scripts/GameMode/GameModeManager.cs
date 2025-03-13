@@ -80,7 +80,46 @@ public class GameModeManager : MonoBehaviour
         {
             OnTeamAdded?.Invoke();
         }
+        if (gameModeStats.ReasignsTeamsInPlayerOrder)
+        {
+            ReorderPlayerTeams();
+        }
 
+    }
+
+    public void ReorderPlayerTeams()
+    {
+        var allPlayers = new List<PlayerMind>();
+        var teamIndexes = new List<int>();
+        int index = 0;
+
+        foreach (var team in teams)
+        {
+            allPlayers.AddRange(team);
+            for (int i = 0;i < team.Count;i++)
+            {
+                teamIndexes.Add(index);
+            }
+            index++;
+            team.Clear();
+        }
+
+        // order players so that first half of players are team 0 and second half are team 1
+        for (int i = 0; i < allPlayers.Count; i++)
+        {
+            
+
+
+            var player = allPlayers[i];
+            int teamIndex = i % gameModeStats.TeamCount;
+            teams[teamIndex].Add(player);
+
+            if (teamIndexes[i] == teamIndex) // bassicle player does not need to be reasigned if they are already the ideal Team
+                continue;
+
+            player.AssignTeam(teamIndex);
+            ChangeTeamOfBody(player, teamIndex);
+        }
     }
 
     public virtual void PlayerSwitchTeams(PlayerMind player)
@@ -103,25 +142,28 @@ public class GameModeManager : MonoBehaviour
             OnTeamAdded?.Invoke();
         }
 
-
-        var playerBody = player.PlayerBody;
-        if (playerBody == null)
-        {
-            return;
-        }
-
-        var spawnPoint = GetStartingSpawnPoint(nextIndex);
-        var characterController = playerBody.GetComponent<CharacterController>();
-        characterController.enabled = false;
-        playerBody.transform.position = spawnPoint.position;
-        playerBody.transform.rotation = spawnPoint.rotation;
-        characterController.enabled = true;
-        PlayerManager.instance.UpdateTeamOfBody(player);
+        ChangeTeamOfBody(player, nextIndex);
 
 
 
     }
 
+    public void ChangeTeamOfBody(PlayerMind mind, int teamIndex)
+    {
+        var playerBody = mind.PlayerBody;
+        if (playerBody == null)
+        {
+            return;
+        }
+
+        var spawnPoint = GetStartingSpawnPoint(teamIndex);
+        var characterController = playerBody.GetComponent<CharacterController>();
+        characterController.enabled = false;
+        playerBody.transform.position = spawnPoint.position;
+        playerBody.transform.rotation = spawnPoint.rotation;
+        characterController.enabled = true;
+        PlayerManager.instance.UpdateTeamOfBody(mind);
+    }
 
 
 

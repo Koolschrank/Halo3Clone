@@ -844,10 +844,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 836479141534939190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 19.099998
-      objectReference: {fileID: 0}
     - target: {fileID: 1939611653966831833, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1179,10 +1175,6 @@ PrefabInstance:
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveTeamColors.Array.data[7].r
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967621458559658389, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 157.70001
       objectReference: {fileID: 0}
     - target: {fileID: 8971247384280277190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive

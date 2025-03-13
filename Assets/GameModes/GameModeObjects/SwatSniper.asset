@@ -22,8 +22,10 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 4
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
-    granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+    granade: {fileID: 0}
     granadeCount: 1
   timeLimitInMinutes: 10
   pointsToWin: 15
   teamCount: 8
+  hasWeaponPickups: 0
+  reasignsTeamsInPlayerOrder: 0

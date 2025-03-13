@@ -794,7 +794,7 @@ MonoBehaviour:
   head_normalPosition: {fileID: 4151376091086984915}
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
-  maxMoveSpeed: 4.85
+  maxMoveSpeed: 5
   moveSpeedCrouchMultiplier: 0.4
   acceleration_ground: 35
   acceleration_air: 10
@@ -893,6 +893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHead: {fileID: 8223324349368915893}
   playerArms: {fileID: 3232609274750972410}
+  playerTeam: {fileID: 2295363821645548979}
   aimSpeed_x: 173.88
   aimSpeed_y: 124.74
   minAngle: -70
@@ -902,7 +903,7 @@ MonoBehaviour:
   aimSupportLayerMask:
     serializedVersion: 2
     m_Bits: 129
-  aimSupportSlowDown: 0.5
+  aimSupportSlowDown: 0.4
 --- !u!114 &7573040687501960069
 MonoBehaviour:
   m_ObjectHideFlags: 0

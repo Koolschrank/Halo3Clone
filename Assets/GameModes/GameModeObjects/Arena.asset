@@ -17,7 +17,7 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
-    movementSpeedMultiplier: 2
+    movementSpeedMultiplier: 1.5
     weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfWeaponInHand: 4
     sideArm: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   pointsToWin: 15
   teamCount: 8
   hasWeaponPickups: 1
+  reasignsTeamsInPlayerOrder: 0

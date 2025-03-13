@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: e93e228661b18bb4b8a893b6ceb378d8, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 590b1fd23e1c8064b835d39ba4ad4255, type: 3}
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 287b81575db7118408b3d163744ecd0e, type: 3}
-  weaponName: ShotGun
+  weaponName: Rocket Launcher
   shootType: 0
   fireRate: 0.5
   bulletsPerShot: 1
@@ -28,8 +28,11 @@ MonoBehaviour:
   switchInTime: 0.8
   canZoom: 0
   zoomFOV: 30
+  moveSpeedMultiplier: 1
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  burstAmount: 0
+  burstDelay: 0
   shootSound:
     Guid:
       Data1: -1833630155

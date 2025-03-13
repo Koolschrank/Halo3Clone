@@ -10,6 +10,7 @@ public class PlayerAim : MonoBehaviour
     [Header("References")]
     [SerializeField] GameObject playerHead;
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] PlayerTeam playerTeam;
 
     [Header("Settings")]
     [SerializeField] float aimSpeed_x = 10f;
@@ -77,10 +78,11 @@ public class PlayerAim : MonoBehaviour
         if (Physics.Raycast(ray, out hit, aimSupportDistance, aimSupportLayerMask))
         {
             // check if hit has health component
-            if (hit.collider.TryGetComponent<Health>(out Health h))
+            if (hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam t) && t.TeamIndex != playerTeam.TeamIndex)
                 return true;
 
-                return false;
+
+            return false;
         }
         return false;
     }

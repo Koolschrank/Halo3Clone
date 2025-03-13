@@ -17,6 +17,16 @@ public class PlayerPickUpScan : MonoBehaviour
     public Action OnWeaponPickUp;
 
 
+    // todo: this is not a good bug fix, need to find the root cause
+    private void Update()
+    {
+        // check every 10 onweaponPickupUpdate
+        if (Time.frameCount % 10 ==0)
+        {
+            TrySendPickUpUpdate();
+        }
+    }
+
     public void TrySendPickUpUpdate()
     {
         if (Time.time - lastPickUpTime > pickUpCooldown)
@@ -39,11 +49,6 @@ public class PlayerPickUpScan : MonoBehaviour
                 pickUpsInRange.Add(pickUp);
                 TrySendPickUpUpdate();
             }
-
-
-            
-
-
         }
     }
 

@@ -16,18 +16,19 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: e82e86efb629609439df6713b523eb81, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: fdade90f77645c94999b3134ae9e4740, type: 3}
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 34f45053683dfdc46b33bc95460b2076, type: 3}
-  weaponName: ShotGun
+  weaponName: Sniper
   shootType: 0
   fireRate: 0.75
   bulletsPerShot: 1
   magazineSize: 4
   maxAmmoInReserve: 12
-  reloadTime: 2.2
+  reloadTime: 2.6
   inaccuracy: 0
   switchOutTime: 0.3
   switchInTime: 0.6
   canZoom: 1
   zoomFOV: 30
+  moveSpeedMultiplier: 1
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
   autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
   burstAmount: 0

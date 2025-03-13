@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 200
   force: 140
-  delay: 0.3
-  meleeTime: 1.08
+  delay: 0.252
+  meleeTime: 0.9072
   meleeRadius: 1.5
   meleeDistance: 1.5
   enemyLayer:
