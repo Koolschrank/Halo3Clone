@@ -18,14 +18,14 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 4848280889717057939, guid: ce66241696224c84db4a9032c83ff6a2, type: 3}
   weaponName: Pistol
   shootType: 0
-  fireRate: 0.35
+  fireRate: 0.33
   bulletsPerShot: 1
   magazineSize: 10
   maxAmmoInReserve: 100
   reloadTime: 1.5
   inaccuracy: 0
   switchOutTime: 0.3
-  switchInTime: 0.2
+  switchInTime: 0.15
   canZoom: 1
   zoomFOV: 35
   moveSpeedMultiplier: 1.1

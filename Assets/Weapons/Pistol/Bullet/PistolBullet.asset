@@ -16,11 +16,12 @@ MonoBehaviour:
   force: 200
   shildDamageMultiplier: 1
   headShotMultiplier: 2
+  canHeadShotShild: 0
   range: 50
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 10
+  rangeUntilDamageFalloff: 25
   damageFalloff:
     serializedVersion: 2
     m_Curve:

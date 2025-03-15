@@ -90,32 +90,28 @@ public class GameModeManager : MonoBehaviour
     public void ReorderPlayerTeams()
     {
         var allPlayers = new List<PlayerMind>();
-        var teamIndexes = new List<int>();
-        int index = 0;
+        allPlayers.AddRange(PlayerManager.instance.GetAllPlayers());
 
         foreach (var team in teams)
         {
-            allPlayers.AddRange(team);
-            for (int i = 0;i < team.Count;i++)
-            {
-                teamIndexes.Add(index);
-            }
-            index++;
             team.Clear();
         }
 
+        int playerCount = allPlayers.Count;
+
+        float teamSplit = (playerCount-1) / 2;
         // order players so that first half of players are team 0 and second half are team 1
-        for (int i = 0; i < allPlayers.Count; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             
 
 
             var player = allPlayers[i];
-            int teamIndex = i % gameModeStats.TeamCount;
-            teams[teamIndex].Add(player);
+            // first half of player (rounded up) are in team 0 the rest are in team 1
+            // if index is higher than teamSplit then player is in team 1
+            int teamIndex = (float)i > teamSplit ? 1 : 0;
 
-            if (teamIndexes[i] == teamIndex) // bassicle player does not need to be reasigned if they are already the ideal Team
-                continue;
+            teams[teamIndex].Add(player);
 
             player.AssignTeam(teamIndex);
             ChangeTeamOfBody(player, teamIndex);
@@ -261,30 +257,38 @@ public class SpawnSystem
 {
     public Transform[] teamStartSpawnPoints;
     public Transform[] basicSpawnPoints;
+    public int lastSpawnPointIndex = 0;
+    
 
 
     public Transform GetStartSpawnPoint(int teamIndex)
     {
         if (teamIndex < teamStartSpawnPoints.Length)
         {
+            lastSpawnPointIndex = teamIndex;
             return teamStartSpawnPoints[teamIndex];
         }
         else
         {
-            return basicSpawnPoints[UnityEngine.Random.Range(0, basicSpawnPoints.Length)];
+            var randomIndex = UnityEngine.Random.Range(0, teamStartSpawnPoints.Length);
+            lastSpawnPointIndex = randomIndex;
+            return basicSpawnPoints[randomIndex];
         }
 
     }
 
     public Transform GetRandomSpawnPoint()
     {
-        return basicSpawnPoints[UnityEngine.Random.Range(0, basicSpawnPoints.Length)];
+        var randomIndex = UnityEngine.Random.Range(0, basicSpawnPoints.Length);
+        lastSpawnPointIndex = randomIndex;
+        return basicSpawnPoints[randomIndex];
     }
 
     public Transform GetFarthestSpawnPointFromEnemeies(List<Transform> enemies)
     {
         Transform farthest = basicSpawnPoints[0];
         float maxDistance = 0;
+        int spawnPointIndex = 0;
         foreach (var spawnPoint in basicSpawnPoints)
         {
             float distance = 0;
@@ -292,12 +296,16 @@ public class SpawnSystem
             {
                 distance += Vector3.Distance(spawnPoint.position, enemy.position);
             }
-            if (distance > maxDistance)
+            if (distance > maxDistance && spawnPointIndex != lastSpawnPointIndex)
             {
                 maxDistance = distance;
                 farthest = spawnPoint;
+                lastSpawnPointIndex = spawnPointIndex;
+
             }
+            spawnPointIndex++;
         }
+
         return farthest;
     }
 }

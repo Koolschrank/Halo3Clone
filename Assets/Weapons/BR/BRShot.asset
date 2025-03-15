@@ -16,6 +16,7 @@ MonoBehaviour:
   force: 120
   shildDamageMultiplier: 1
   headShotMultiplier: 4
+  canHeadShotShild: 0
   range: 50
   hitLayer:
     serializedVersion: 2

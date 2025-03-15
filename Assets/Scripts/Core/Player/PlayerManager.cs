@@ -55,6 +55,10 @@ public class PlayerManager : MonoBehaviour
             
     }
 
+    public List<PlayerMind> GetAllPlayers()
+    {
+        return players;
+    }
 
 
     // get dead player layer

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0776b1c71aefb8544b6d9ee114ffb1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 7
-  damage: 200
+  range: 6.5
+  damage: 250
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2

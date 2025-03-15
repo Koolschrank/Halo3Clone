@@ -419,6 +419,7 @@ MonoBehaviour:
     - {fileID: 3450024531079806349}
     basicSpawnPoints:
     - {fileID: 4359692035524896275}
+    lastSpawnPointIndex: 0
 --- !u!1 &5516329529554724374
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +517,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    lastSpawnPointIndex: 0
   crownPrefab: {fileID: 6821150974091289589, guid: 30763ddae3cc9ce4686c67a6f83e0353, type: 3}
   crownSpawn: {fileID: 7175996642347170180}
 --- !u!1 &5919734102723950323
@@ -1163,7 +1165,7 @@ MonoBehaviour:
       width: 0.5
       height: 0.5
       FOV: 75
-      targetDisplay: 0
+      targetDisplay: 1
     - x: 0.5
       y: 0
       width: 0.5
@@ -1498,6 +1500,7 @@ MonoBehaviour:
     - {fileID: 79261283961729988}
     - {fileID: 8876507778347043001}
     - {fileID: 3450024531079806349}
+    lastSpawnPointIndex: 0
   hillStartIndex: 0
   hills:
   - {fileID: 2217420224928112208}

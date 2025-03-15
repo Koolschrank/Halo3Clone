@@ -894,8 +894,8 @@ MonoBehaviour:
   playerHead: {fileID: 8223324349368915893}
   playerArms: {fileID: 3232609274750972410}
   playerTeam: {fileID: 2295363821645548979}
-  aimSpeed_x: 173.88
-  aimSpeed_y: 124.74
+  aimSpeed_x: 156.492
+  aimSpeed_y: 112.266
   minAngle: -70
   maxAngle: 70
   zoomAimSpeedMultiplier: 0.375
@@ -963,18 +963,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505f5921ce3eb7b4ba29631c55673d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeath: 60
-  currentHeath: 60
+  maxHeath: 70
+  currentHeath: 70
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 2
-  healthRegenAmountPerSecond: 18
-  damageMultiplier: 1.25
+  healthRegenDelay: 2.5
+  healthRegenAmountPerSecond: 6
+  damageMultiplier: 1
   hasShild: 1
   headShotOneShot: 1
   maxShild: 100
   currentShild: 100
-  shildPopDamageNegation: 20
+  shildPopDamageNegation: 0
   shildRegenDelay: 5
   shildRegenAmountPerSecond: 25
   shildPopParticalPrefab: {fileID: 6175688368018741305, guid: cc37801857173a24fa9b992e710f42dd, type: 3}
