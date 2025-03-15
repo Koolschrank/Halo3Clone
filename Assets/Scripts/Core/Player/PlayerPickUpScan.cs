@@ -43,6 +43,12 @@ public class PlayerPickUpScan : MonoBehaviour
             if (CheckIfPlayerOwnsWeapon(pickUp))
             {
                 TransferAmmoFromWeaponOnGroundToPlayer(pickUp);
+
+                if (pickUp != null)
+                {
+                    pickUpsInRange.Add(pickUp);
+                    TrySendPickUpUpdate();
+                }
             }
             else
             {
@@ -66,7 +72,7 @@ public class PlayerPickUpScan : MonoBehaviour
     {
         var weaponData = pickup.WeaponData;
 
-        var weaponInHand = playerArms.GetWeaponInHand();
+        var weaponInHand = playerArms.RightArm.GetWeaponInHand();
         if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData))
             return true;
         var weaponInInventory = playerInventory.GetWeapon();
@@ -78,7 +84,7 @@ public class PlayerPickUpScan : MonoBehaviour
 
     public void TransferAmmoFromWeaponOnGroundToPlayer(Weapon_PickUp pickUp)
     {
-        var weaponInHand = playerArms.GetWeaponInHand();
+        var weaponInHand = playerArms.RightArm.GetWeaponInHand();
         if (weaponInHand != null && weaponInHand.IsSameWeapon(pickUp.WeaponData))
         {
             weaponInHand.TransferAmmo(pickUp);

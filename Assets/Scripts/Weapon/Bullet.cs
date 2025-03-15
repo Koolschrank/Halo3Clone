@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
 
 
 
+
     Vector3 lastPosition;
     
     List<Transform> bulletCopys = new List<Transform>();
@@ -49,6 +50,11 @@ public class Bullet : MonoBehaviour
         damagePackage.shildDamageMultiplier = shildDamageMultiplier;
         lastPosition = transform.position;
 
+    }
+
+    public void ApplyDamageMultiplier(float multiplier)
+    {
+        damagePackage.damageAmount *= multiplier;
     }
 
     void Update()

@@ -14,7 +14,9 @@ public class PlayerMind : MonoBehaviour
     public Action<GameObject, PlayerMind> OnTeamKill;
 
     //[SerializeField] Camera playerCamera;
-    [SerializeField] Arm_FPSView armsView;
+    [SerializeField] Arm_FPSView rightArmView;
+    [SerializeField] Arm_FPSView leftArmView;
+    
     [SerializeField] WeaponSway weaponSway;
     //[SerializeField] PlayerFOV playerFOV;
     [SerializeField] PlayerInput playerInput;
@@ -29,7 +31,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] Transform UIContainer;
     [SerializeField] HealthUI healthUI;
     [SerializeField] ShildUI shildUI;
-    [SerializeField] WeaponUI weaponUI;
+    [SerializeField] WeaponUI weaponUI_RightArm;
+    [SerializeField] WeaponUI weaponUI_LeftArm;
     [SerializeField] PickUpUI pickUpUI;
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
@@ -38,6 +41,9 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
     [SerializeField] ObjectiveIndicatorUI objectiveIndicatorUI;
+
+    [Header("Input Settings")]
+    [SerializeField] float holdButtonToPickUpTime = 0.2f;
 
 
     GameObject playerBody;
@@ -55,11 +61,28 @@ public class PlayerMind : MonoBehaviour
     int firstPersonLayer;
     int thirdPersonLayer;
 
+
+    public void EnterOneWeaponMode()
+    {
+        playerInput.actions.FindActionMap("Player").Enable();
+        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
+        playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
+    }
+
+    public void EnterDualWeaponMode()
+    {
+        playerInput.actions.FindActionMap("Player").Enable();
+        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
+        playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Enable();
+    }
+
     public void Start()
     {
         GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
         PlayerManager.instance.AddPlayer(this);
+
+        
     }
 
     public void SetPlayerBody(GameObject body)
@@ -118,12 +141,38 @@ public class PlayerMind : MonoBehaviour
     // set arms
     public void SetPlayerArms(PlayerArms arms)
     {
-        playerArms = arms;
-        armsView.SetUp(arms);
-        weaponUI.SetUp(arms);
-        arms.OnZoomIn += playerCamera.ZoomIn;
-        arms.OnZoomOut += playerCamera.ZoomOut;
+        if (playerArms != null)
+        {
+            playerArms.RightArm.OnZoomIn -= playerCamera.ZoomIn;
+            playerArms.RightArm.OnZoomOut -= playerCamera.ZoomOut;
+            playerArms.OnDualWieldingEntered -= EnterDualWeaponMode;
+            playerArms.OnDualWieldingExited -= EnterOneWeaponMode;
+            playerArms.OnDualWieldingExited -= weaponUI_LeftArm.Disable;
 
+        }
+
+
+        playerArms = arms;
+        rightArmView.SetUp(arms.RightArm);
+        leftArmView.SetUp(arms.LeftArm);
+        weaponUI_RightArm.SetUp(arms.RightArm);
+        weaponUI_LeftArm.SetUp(arms.LeftArm);
+        arms.OnDualWieldingExited += weaponUI_LeftArm.Disable;
+        arms.RightArm.OnZoomIn += playerCamera.ZoomIn;
+        arms.RightArm.OnZoomOut += playerCamera.ZoomOut;
+
+
+        arms.OnDualWieldingEntered += EnterDualWeaponMode;
+        arms.OnDualWieldingExited += EnterOneWeaponMode;
+
+        if (arms.LeftArm.CurrentWeapon != null)
+        {
+            EnterDualWeaponMode();
+        }
+        else
+        {
+            EnterOneWeaponMode();
+        }
     }
 
     // set bullet spawner
@@ -220,25 +269,101 @@ public class PlayerMind : MonoBehaviour
     public void WeaponTrigger(InputAction.CallbackContext context)
     {
         if (playerArms == null) return;
-        playerArms.UpdateWeaponTrigger(context.ReadValue<float>()> 0);
+        playerArms.RightArm.UpdateWeaponTrigger(context.ReadValue<float>()> 0);
     }
 
+
+    bool reloadButtonReleased = true;
+    float reloadButtonStartPressTime = 0;
     public void WeaponReload(InputAction.CallbackContext context)
     {
         if (playerArms == null) return;
         if (context.performed)
         {
-            if (playerArms == null) return;
-            playerArms.PressReloadButton();
+
+            if (playerArms.RightArm.PressReloadButtonIfNothingToPickUp())
+                return;
+
+            reloadButtonReleased = false;
+            StartCoroutine(PickUpWeaponTimer());
+            reloadButtonStartPressTime = Time.time;
+        }
+
+        if (context.canceled )
+        {
+            if (reloadButtonStartPressTime + holdButtonToPickUpTime > Time.time)
+            {
+                playerArms.RightArm.PressReloadButton();
+            }
+
+            reloadButtonReleased = true;
+
         }
     }
+
+    IEnumerator PickUpWeaponTimer()
+    {
+        yield return new WaitForSeconds(holdButtonToPickUpTime);
+        if (!reloadButtonReleased)
+        {
+            playerArms.RightArm.TryPickUpWeapon();
+        }
+    }
+
+    bool switchButtonReleased = true;
+    float switchButtonStartPressTime = 0;
 
     public void WeaponSwitch(InputAction.CallbackContext context)
     {
         if (playerArms == null) return;
         if (context.performed)
         {
-            playerArms.PressSwitchButton();
+            if (playerArms.RightArm.CurrentWeapon.WeaponType == WeaponType.twoHanded && !playerArms.CanDualWield2HandedWeapons)
+            {
+                playerArms.RightArm.PressSwitchButton();
+                return;
+            }
+
+
+
+            if (!playerInventory.HasWeapon)
+            {
+                if (playerArms.RightArm.PressSwitchButtonIfNothingToPickUp())
+                    return;
+            }
+
+
+            
+
+            switchButtonReleased = false;
+            StartCoroutine(SwitchWeaponTimer());
+            switchButtonStartPressTime = Time.time;
+        }
+
+        if (context.canceled)
+        {
+            if (switchButtonStartPressTime + holdButtonToPickUpTime > Time.time)
+            {
+                playerArms.RightArm.PressSwitchButton();
+            }
+            switchButtonReleased = true;
+        }
+
+    }
+
+    IEnumerator SwitchWeaponTimer()
+    {
+        yield return new WaitForSeconds(holdButtonToPickUpTime);
+        if (!switchButtonReleased)
+        {
+            if (playerArms.LeftArm.CanPickUpWeapon())
+            {
+                playerArms.LeftArm.TryPickUpWeapon();
+            }
+            else
+            {
+                playerArms.LeftArm.PressSwitchButton();
+            }
         }
     }
 
@@ -247,7 +372,7 @@ public class PlayerMind : MonoBehaviour
         if (playerArms == null) return;
         if (context.performed)
         {
-            playerArms.TryPickUpWeapon();
+            playerArms.RightArm.TryPickUpWeapon();
         }
     }
 
@@ -256,7 +381,7 @@ public class PlayerMind : MonoBehaviour
         if (playerArms == null) return;
         if (context.performed)
         {
-            playerArms.PressGranadeButton();
+            playerArms.RightArm.PressGranadeButton();
         }
     }
 
@@ -274,7 +399,7 @@ public class PlayerMind : MonoBehaviour
         if (playerArms == null) return;
         if (context.performed)
         {
-            playerArms.PressMeleeButton();
+            playerArms.RightArm.PressMeleeButton();
         }
     }
 
@@ -284,13 +409,75 @@ public class PlayerMind : MonoBehaviour
 
         if (context.performed)
         {
-            playerArms.PressZoomButton();
+            playerArms.RightArm.PressZoomButton();
         }
         else if (context.canceled)
         {
-            playerArms.ReleaseZoomButton();
+            playerArms.RightArm.ReleaseZoomButton();
         }
     }
+
+    public void WeaponTrigger_1(InputAction.CallbackContext context)
+    {
+        if (playerArms == null) return;
+        playerArms.RightArm.UpdateWeaponTrigger(context.ReadValue<float>() > 0);
+    }
+
+    public void WeaponTrigger_2(InputAction.CallbackContext context)
+    {
+        if (playerArms == null) return;
+        playerArms.LeftArm.UpdateWeaponTrigger(context.ReadValue<float>() > 0);
+    }
+
+    public void WeaponReload_1(InputAction.CallbackContext context)
+    {
+        WeaponReload(context);
+
+    }
+
+    bool reloadButtonReleased_2 = true;
+    float reloadButtonStartPressTime_2 = 0;
+    public void WeaponReload_2(InputAction.CallbackContext context)
+    {
+        if (playerArms == null) return;
+        if (context.performed)
+        {
+
+            reloadButtonReleased_2 = false;
+            StartCoroutine(PickUpWeaponTimer_2());
+            reloadButtonStartPressTime_2 = Time.time;
+        }
+
+        if (context.canceled)
+        {
+            if (reloadButtonStartPressTime_2 + holdButtonToPickUpTime > Time.time)
+            {
+                playerArms.LeftArm.PressReloadButton();
+            }
+            reloadButtonReleased_2 = true;
+        }
+    }
+
+    IEnumerator PickUpWeaponTimer_2()
+    {
+        yield return new WaitForSeconds(holdButtonToPickUpTime);
+        if (!reloadButtonReleased_2)
+        {
+
+            if (playerArms.LeftArm.CanPickUpWeapon())
+            {
+                playerArms.LeftArm.TryPickUpWeapon();
+            }
+            else
+            {
+                
+
+                playerArms.LeftArm.PressSwitchButton();
+            }
+        }
+    }
+
+
 
     public void SwitchTeam(InputAction.CallbackContext context)
     {
@@ -341,7 +528,7 @@ public class PlayerMind : MonoBehaviour
         //playerCamera.transform.SetParent(spectatorCameraOffset);
         //playerCamera.transform.localPosition = Vector3.zero;
         //playerCamera.transform.localRotation = Quaternion.identity;
-        armsView.gameObject.SetActive(false);
+        leftArmView.gameObject.SetActive(false);
         UIContainer.gameObject.SetActive(false);
         spectatorCamera.Priority = 100;
     }
@@ -351,7 +538,7 @@ public class PlayerMind : MonoBehaviour
         playerCamera.transform.SetParent(transform);
         playerCamera.transform.localPosition = Vector3.zero;
         playerCamera.transform.localRotation = Quaternion.identity;
-        armsView.gameObject.SetActive(true);
+        leftArmView.gameObject.SetActive(true);
         UIContainer.gameObject.SetActive(true);
         spectatorCamera.Priority = 0;
 

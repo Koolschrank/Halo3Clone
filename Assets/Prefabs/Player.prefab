@@ -598,7 +598,8 @@ MonoBehaviour:
   autoAimLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  playerArms: {fileID: 3232609274750972410}
+  rightArm: {fileID: 3970420054294455764}
+  leftArm: {fileID: 3844945188849078822}
   playerTeam: {fileID: 2295363821645548979}
   granadeThrower: {fileID: 625404246279802593}
   wallCheck:
@@ -661,7 +662,6 @@ GameObject:
   - component: {fileID: 5934969255424994964}
   - component: {fileID: 1567991787468202011}
   - component: {fileID: 7400201383000877008}
-  - component: {fileID: 3232609274750972410}
   - component: {fileID: 8050057614039648062}
   - component: {fileID: 4355240392448193639}
   - component: {fileID: 3068919470916229809}
@@ -671,6 +671,9 @@ GameObject:
   - component: {fileID: 6138964545677116144}
   - component: {fileID: 2295363821645548979}
   - component: {fileID: 1680555677729628207}
+  - component: {fileID: 3232609274750972410}
+  - component: {fileID: 3844945188849078822}
+  - component: {fileID: 3970420054294455764}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -794,7 +797,7 @@ MonoBehaviour:
   head_normalPosition: {fileID: 4151376091086984915}
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
-  maxMoveSpeed: 5
+  maxMoveSpeed: 4.9
   moveSpeedCrouchMultiplier: 0.4
   acceleration_ground: 35
   acceleration_air: 10
@@ -820,30 +823,6 @@ MonoBehaviour:
       Data3: -1475204457
       Data4: 275955439
     Path: event:/SFX/Player/Jump
---- !u!114 &3232609274750972410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009f7143e21328a4cb8b360c6ad01e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterHealth: {fileID: 782412234501442312}
-  bulletSpawner: {fileID: 737555415851796727}
-  granadeThrower: {fileID: 625404246279802593}
-  inventory: {fileID: 7573040687501960069}
-  pickUpScan: {fileID: 3086695294023934871}
-  dropPosition: {fileID: 8167806766066142118}
-  meleeAttacker: {fileID: 8008512304446792098}
-  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
-  weaponDropForce: 10
-  reloadInputBuffer: 0.4
-  switchInputBuffer: 0.4
-  granadeThrowInputBuffer: 0.4
 --- !u!114 &8050057614039648062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,6 +1037,72 @@ MonoBehaviour:
   icon_Enemy: {fileID: 6297355074296030630, guid: 4930c2003ec96234eba6140a1b8dc078, type: 3}
   playerTeam: {fileID: 2295363821645548979}
   characterHealth: {fileID: 782412234501442312}
+--- !u!114 &3232609274750972410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009f7143e21328a4cb8b360c6ad01e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightArm: {fileID: 3970420054294455764}
+  leftArm: {fileID: 3844945188849078822}
+  canDualWield2HandedWeapons: 0
+  dualWieldMoveSpeedMultiplier: 0.9
+--- !u!114 &3844945188849078822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3d11f1550df63479d6639fa6d55894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArms: {fileID: 3232609274750972410}
+  characterHealth: {fileID: 782412234501442312}
+  bulletSpawner: {fileID: 737555415851796727}
+  granadeThrower: {fileID: 625404246279802593}
+  inventory: {fileID: 7573040687501960069}
+  pickUpScan: {fileID: 3086695294023934871}
+  dropPosition: {fileID: 8167806766066142118}
+  meleeAttacker: {fileID: 8008512304446792098}
+  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  weaponDropForce: 10
+  reloadInputBuffer: 0.4
+  switchInputBuffer: 0.4
+  granadeThrowInputBuffer: 0.4
+--- !u!114 &3970420054294455764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb2d5e70c233af4cab7afa0401c79bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArms: {fileID: 3232609274750972410}
+  characterHealth: {fileID: 782412234501442312}
+  bulletSpawner: {fileID: 737555415851796727}
+  granadeThrower: {fileID: 625404246279802593}
+  inventory: {fileID: 7573040687501960069}
+  pickUpScan: {fileID: 3086695294023934871}
+  dropPosition: {fileID: 8167806766066142118}
+  meleeAttacker: {fileID: 8008512304446792098}
+  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  weaponDropForce: 10
+  reloadInputBuffer: 0.4
+  switchInputBuffer: 0.4
+  granadeThrowInputBuffer: 0.4
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

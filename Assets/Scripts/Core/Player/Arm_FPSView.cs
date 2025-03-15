@@ -2,34 +2,34 @@ using UnityEngine;
 
 public class Arm_FPSView : MonoBehaviour
 {
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] Arm playerArm;
     [SerializeField] Transform granadeSpawnPoint;
     Weapon_Visual weaponVisual;
 
-    public void SetUp(PlayerArms newArms)
+    public void SetUp(Arm newArm)
     {
-        if (playerArms != null)
+        if (playerArm != null)
         {
-            playerArms.OnWeaponEquipStarted -= EquipWeapon;
-            playerArms.OnWeaponUnequipFinished -= RemoveWeapon;
-            playerArms.OnWeaponDroped -= RemoveWeapon;
-            playerArms.OnGranadeThrowStarted -= ThrowGranadeStart;
-            playerArms.OnGranadeThrow -= ThrowGranade;
+            playerArm.OnWeaponEquipStarted -= EquipWeapon;
+            playerArm.OnWeaponUnequipFinished -= RemoveWeapon;
+            playerArm.OnWeaponDroped -= RemoveWeapon;
+            playerArm.OnGranadeThrowStarted -= ThrowGranadeStart;
+            playerArm.OnGranadeThrow -= ThrowGranade;
         }
 
 
 
-        playerArms = newArms;
+        playerArm = newArm;
 
-        playerArms.OnWeaponEquipStarted += EquipWeapon;
-        playerArms.OnWeaponUnequipFinished += RemoveWeapon;
-        playerArms.OnWeaponDroped += RemoveWeapon;
-        playerArms.OnGranadeThrowStarted += ThrowGranadeStart;
-        playerArms.OnGranadeThrow += ThrowGranade;
+        playerArm.OnWeaponEquipStarted += EquipWeapon;
+        playerArm.OnWeaponUnequipFinished += RemoveWeapon;
+        playerArm.OnWeaponDroped += RemoveWeapon;
+        playerArm.OnGranadeThrowStarted += ThrowGranadeStart;
+        playerArm.OnGranadeThrow += ThrowGranade;
 
-        if (playerArms.CurrentWeapon != null)
+        if (playerArm.CurrentWeapon != null)
         {
-            EquipWeapon(playerArms.CurrentWeapon);
+            EquipWeapon(playerArm.CurrentWeapon);
         }
     }
 

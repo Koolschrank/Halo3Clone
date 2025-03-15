@@ -31,6 +31,7 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  weaponType: 1
   burstAmount: 3
   burstDelay: 0.05
   shootSound:

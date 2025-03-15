@@ -3,7 +3,7 @@ using TMPro;
 
 public class WeaponUI : MonoBehaviour
 {
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] Arm playerArm;
     [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] TextMeshProUGUI magazinText;
     [SerializeField] TextMeshProUGUI reserveText;
@@ -14,20 +14,25 @@ public class WeaponUI : MonoBehaviour
 
     int magazinSize = 0;
 
-    public void SetUp(PlayerArms playerArms)
+    public void SetUp(Arm playerArm)
     {
-        if (this.playerArms != null)
+        if (this.playerArm != null)
         {
-            playerArms.OnWeaponEquipStarted -= EquipWeapon;
-            playerArms.OnWeaponUnequipFinished -= UnequipWeapon;
-            playerArms.OnWeaponDroped -= UnequipWeapon;
+            playerArm.OnWeaponEquipStarted -= EquipWeapon;
+            playerArm.OnWeaponUnequipFinished -= UnequipWeapon;
+            playerArm.OnWeaponDroped -= UnequipWeapon;
         }
 
 
-        this.playerArms = playerArms;
-        playerArms.OnWeaponEquipStarted += EquipWeapon;
-        playerArms.OnWeaponUnequipFinished += UnequipWeapon;
-        playerArms.OnWeaponDroped += UnequipWeapon;
+        this.playerArm = playerArm;
+        playerArm.OnWeaponEquipStarted += EquipWeapon;
+        playerArm.OnWeaponUnequipFinished += UnequipWeapon;
+        playerArm.OnWeaponDroped += UnequipWeapon;
+
+        if ( playerArm.CurrentWeapon == null)
+        {
+            Disable();
+        }
     }
 
 
@@ -37,10 +42,21 @@ public class WeaponUI : MonoBehaviour
 
     }
 
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
+
 
 
     void EquipWeapon(Weapon_Arms weapon, float timer)
     {
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+
         magazinSize = weapon.MagazineSize;
         weapon.OnAmmoChange += UpdateAmmo;
         UpdateAmmo(weapon.Magazine, weapon.Reserve);
@@ -49,6 +65,7 @@ public class WeaponUI : MonoBehaviour
     void UnequipWeapon(Weapon_Arms weapon)
     {
         weapon.OnAmmoChange -= UpdateAmmo;
+
         ammoText.text = "";
         magazinText.text = "";
         reserveText.text = "";

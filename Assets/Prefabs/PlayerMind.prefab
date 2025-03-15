@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902132af636f9b24f8f6145028373cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerArms: {fileID: 0}
+  playerArm: {fileID: 0}
   granadeSpawnPoint: {fileID: 3664815395283841513}
 --- !u!1 &4870789051740163954
 GameObject:
@@ -284,7 +284,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  armsView: {fileID: 4409982759675025528}
+  rightArmView: {fileID: 4409982759675025528}
+  leftArmView: {fileID: 3936630368718065048}
   weaponSway: {fileID: 101173681999680801}
   playerInput: {fileID: 2923737641940389727}
   playerCamera: {fileID: 7384835890734412225}
@@ -292,7 +293,8 @@ MonoBehaviour:
   UIContainer: {fileID: 4247939652203469467}
   healthUI: {fileID: 3963887290950628199}
   shildUI: {fileID: 1102817728189394635}
-  weaponUI: {fileID: 2111367553687123706}
+  weaponUI_RightArm: {fileID: 2111367553687123706}
+  weaponUI_LeftArm: {fileID: 7065606394100537959}
   pickUpUI: {fileID: 262086610966318391}
   damageIndicatorUI: {fileID: 9077592386559092330}
   crosshairUI: {fileID: 4052545988799435235}
@@ -301,6 +303,7 @@ MonoBehaviour:
   hitMarkerUI: {fileID: 973657641611872543}
   minimapUI: {fileID: 8725600332119897690}
   objectiveIndicatorUI: {fileID: 4800970749985148627}
+  holdButtonToPickUpTime: 0.175
 --- !u!114 &2923737641940389727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,125 +378,9 @@ MonoBehaviour:
     m_ActionId: 73c3e782-dbc8-48a7-a6b1-f01350ca0cc3
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: WeaponTrigger
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 15cffccc-ff00-4bca-b02f-1091125a5b88
-    m_ActionName: 'Player/ShootWeapon[/Mouse/press]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: WeaponReload
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5ead4f71-7d8a-45a4-97c0-cb3e16d2a40e
-    m_ActionName: 'Player/Reload[/Keyboard/r]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: WeaponSwitch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0d9eefa1-15bd-4067-bffc-a9438a7694c0
-    m_ActionName: 'Player/SwitchWeapon[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: WeaponPickUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6a24f8ba-0443-4524-ba9d-921102d19b48
-    m_ActionName: Player/DropWeapon
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7432a521-806c-4ca0-8519-a473c7270769
-    m_ActionName: 'Player/RagdollTrigger[/Keyboard/p]'
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 70d64e94-3e26-4f37-b406-f394f2c1b9a3
     m_ActionName: Player/Crouch
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: ThrowGranade
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ad0c09e2-0a1e-428c-adee-ead47061d659
-    m_ActionName: 'Player/ThrowGranade[/DualSenseGamepadHID/rightShoulder]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: MeleeAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 9ed26abe-7095-4910-8460-077a8f602c96
-    m_ActionName: Player/Melee
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6762101414911299386}
-        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
-        m_MethodName: Zoom
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6f800914-9cbb-40a7-b984-d567b2e7986a
-    m_ActionName: 'Player/Zoom[/DualSenseGamepadHID/rightStickPress]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6762101414911299386}
@@ -510,6 +397,218 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 883f2047-3af0-40ab-97ea-3d5281a1db6d
     m_ActionName: 'Player/SwitchTeam[/Keyboard/p]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponTrigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c2854a4b-8e87-4761-a44f-70cb55057026
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/ShootWeapon[/Mouse/press,/DualSenseGamepadHID/rightTrigger,/DualSenseGamepadHID1/rightTrigger,/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID1/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2971a281-1b30-4621-a565-7df677dba911
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/Reload[/Keyboard/r,/DualSenseGamepadHID/buttonWest,/DualSenseGamepadHID1/buttonWest,/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID1/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponPickUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 95c329c6-ed15-4345-a136-53e07aa40db0
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/PickUpWeapon[/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID1/buttonEast,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: ThrowGranade
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0002c1e8-29be-41a3-a489-25920661aa22
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/ThrowGranade[/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID1/leftShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder,/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 67dc6083-f747-47b4-8a59-01b633fee8e3
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/Melee[/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID1/rightShoulder,/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID1/rightShoulder,/Keyboard/f,/DualSenseGamepadHID/rightStickPress,/DualSenseGamepadHID1/rightStickPress,/DualShock4GamepadHID/rightStickPress,/DualShock4GamepadHID1/rightStickPress]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: Zoom
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f3f28e24-ca94-495d-a069-3ed3b1ba0a48
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/Zoom[/Mouse/rightButton,/DualSenseGamepadHID/leftTrigger,/DualSenseGamepadHID1/leftTrigger,/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID1/leftTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponTrigger_1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0f4a77fa-d975-4331-9eaa-7e27803d74dd
+    m_ActionName: 'PlayerGunPlay_DualWeapons/Shoot_Weapon1[/Mouse/press,/DualSenseGamepadHID/rightTrigger,/DualSenseGamepadHID1/rightTrigger,/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID1/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponTrigger_2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 13b379a7-8789-4a0d-b4db-34bbadfdf326
+    m_ActionName: 'PlayerGunPlay_DualWeapons/Shoot_Weapon2[/Mouse/rightButton,/DualSenseGamepadHID/leftTrigger,/DualSenseGamepadHID1/leftTrigger,/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID1/leftTrigger]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponReload_1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ced0da5b-1f36-4d14-83f0-94f21ac8461a
+    m_ActionName: 'PlayerGunPlay_DualWeapons/Reload_Weapon1[/Keyboard/r,/DualSenseGamepadHID/buttonWest,/DualSenseGamepadHID1/buttonWest,/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID1/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponReload_2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 861dae70-7830-4e74-a34c-b8112176487c
+    m_ActionName: 'PlayerGunPlay_DualWeapons/Reload_Weapon2[/Keyboard/t,/DualSenseGamepadHID/buttonNorth,/DualSenseGamepadHID1/buttonNorth,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID1/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 997fe335-cdc0-4a8b-b8e2-6a1f80db3912
+    m_ActionName: 'PlayerGunPlay_DualWeapons/PickUpWeapon[/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID1/buttonEast,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: ThrowGranade
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c8cfe5c1-311b-4ac4-a966-1fbcd9a34ad9
+    m_ActionName: 'PlayerGunPlay_DualWeapons/ThrowGranade[/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID1/leftShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder,/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: MeleeAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91787daa-fa8d-400e-b9d8-77f18bdb6570
+    m_ActionName: 'PlayerGunPlay_DualWeapons/Melee[/DualSenseGamepadHID/rightShoulder,/DualSenseGamepadHID1/rightShoulder,/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID1/rightShoulder,/Keyboard/f,/DualSenseGamepadHID/rightStickPress,/DualSenseGamepadHID1/rightStickPress,/DualShock4GamepadHID/rightStickPress,/DualShock4GamepadHID1/rightStickPress]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: WeaponSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2cefefc0-c65b-4478-95e6-03e3e297982c
+    m_ActionName: 'PlayerGunPlay_SingleWeapon/SwitchWeapon[/DualSenseGamepadHID/buttonNorth,/DualSenseGamepadHID1/buttonNorth,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID1/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/1,/Keyboard/2]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -597,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902132af636f9b24f8f6145028373cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerArms: {fileID: 0}
+  playerArm: {fileID: 0}
   granadeSpawnPoint: {fileID: 3664815395283841513}
 --- !u!1 &8541511081613625091
 GameObject:
@@ -1176,6 +1275,10 @@ PrefabInstance:
       propertyPath: objectiveTeamColors.Array.data[7].r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8967621458559658389, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -105.99994
+      objectReference: {fileID: 0}
     - target: {fileID: 8971247384280277190, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1287,6 +1390,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 147788285dacf6c49803152f6f74ec57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7065606394100537959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7117455470618088570, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4920d2d7885c4a4caa2f0fd42ae8a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8725600332119897690 stripped

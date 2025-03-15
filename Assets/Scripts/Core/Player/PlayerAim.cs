@@ -54,7 +54,7 @@ public class PlayerAim : MonoBehaviour
             rotationX *= aimSupportSlowDown;
             rotationY *= aimSupportSlowDown;
         }
-        if (playerArms.IsInZoom)
+        if (playerArms.RightArm.IsInZoom)
         {
             rotationX *= zoomAimSpeedMultiplier;
             rotationY *= zoomAimSpeedMultiplier;

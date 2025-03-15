@@ -55,45 +55,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ShootWeapon"",
+                    ""name"": ""SwitchTeam"",
                     ""type"": ""Button"",
-                    ""id"": ""15cffccc-ff00-4bca-b02f-1091125a5b88"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""5ead4f71-7d8a-45a4-97c0-cb3e16d2a40e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""0d9eefa1-15bd-4067-bffc-a9438a7694c0"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DropWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""6a24f8ba-0443-4524-ba9d-921102d19b48"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RagdollTrigger"",
-                    ""type"": ""Button"",
-                    ""id"": ""7432a521-806c-4ca0-8519-a473c7270769"",
+                    ""id"": ""883f2047-3af0-40ab-97ea-3d5281a1db6d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -103,42 +67,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""70d64e94-3e26-4f37-b406-f394f2c1b9a3"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ThrowGranade"",
-                    ""type"": ""Button"",
-                    ""id"": ""ad0c09e2-0a1e-428c-adee-ead47061d659"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Melee"",
-                    ""type"": ""Button"",
-                    ""id"": ""9ed26abe-7095-4910-8460-077a8f602c96"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Zoom"",
-                    ""type"": ""Button"",
-                    ""id"": ""6f800914-9cbb-40a7-b984-d567b2e7986a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchTeam"",
-                    ""type"": ""Button"",
-                    ""id"": ""883f2047-3af0-40ab-97ea-3d5281a1db6d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -258,127 +186,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""318f7d9f-06ae-498a-b37e-9c27c28d614d"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""ShootWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""edce4ed1-fbd3-4405-9628-9edd6b40eea0"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""ShootWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0c53a0d6-3260-4f70-ac17-d14e67a89565"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ab7de0ca-1d46-483c-a693-01a113a124d2"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bad0288c-5587-45d6-ba80-85a15a13dbdb"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""SwitchWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9097f025-32c1-438b-b6c7-d4cacec5fe21"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9c37f70d-046b-46f1-a286-79df7f5b0ed0"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""SwitchWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""84a94d43-ee2d-4aad-a616-8b17ee808c9e"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DropWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c1b04150-b600-4b77-9570-8abff4382bdb"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""DropWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4a42f0d2-8bf4-401f-addc-d82cec946d09"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""RagdollTrigger"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a2a753f6-d2bd-49d3-9b8c-ab930113b77b"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""RagdollTrigger"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""83fb2d38-454e-4c41-878c-1d5db15f6cef"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
@@ -401,83 +208,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fbf2af06-72ec-417d-ae53-49f438b6d658"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ThrowGranade"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7eb3326c-a1ad-4e60-9258-b38275333dfb"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""ThrowGranade"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e31e8441-4c73-45c4-b13a-67747f27d8ab"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Melee"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7a4e2440-cd77-4fb0-bc06-fb6da4232704"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""Melee"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""289d6799-294f-4f0b-bf75-6a48374e5319"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Melee"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""da1300e9-4d3c-4258-8998-e063b8414186"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse"",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0aade051-62b7-4567-850c-b8f0bfe919e5"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3ccec6cd-85c8-4985-96d0-89754f90f661"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
@@ -495,6 +225,489 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""SwitchTeam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerGunPlay_SingleWeapon"",
+            ""id"": ""4f8a92e2-57be-4312-881c-933ba75dba4f"",
+            ""actions"": [
+                {
+                    ""name"": ""ShootWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2854a4b-8e87-4761-a44f-70cb55057026"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""2971a281-1b30-4621-a565-7df677dba911"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUpWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""95c329c6-ed15-4345-a136-53e07aa40db0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowGranade"",
+                    ""type"": ""Button"",
+                    ""id"": ""0002c1e8-29be-41a3-a489-25920661aa22"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""67dc6083-f747-47b4-8a59-01b633fee8e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3f28e24-ca94-495d-a069-3ed3b1ba0a48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""2cefefc0-c65b-4478-95e6-03e3e297982c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""44fac33e-c0f2-41af-8ef6-2a3bc2bc432e"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""ShootWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ed25dec-2d50-428c-adca-58c280b796ff"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ShootWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa2c1c68-2240-4f5d-ba90-282d3ca58f33"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85ffb750-8b3c-47d4-a0f1-571c3227a52e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17262c52-0095-4ea5-9c8e-593afa4c5718"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickUpWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca676902-a87f-45a7-a667-9965b83aec85"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""PickUpWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92748505-275b-4337-a8ea-fb039f61c493"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowGranade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dd6d962-39e0-4b12-9914-777118bc0f52"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""ThrowGranade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d1f9454-8012-4748-9e5b-9d113a88c635"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba78340d-aba9-465a-ac9c-f31e9ea2e46c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe3a7b85-b345-4aa3-a27e-0ad43f84e3c1"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f28ab65a-6254-4f5d-9d48-20b86f1e0249"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5aec6301-45d6-4bc3-a219-7800203f477f"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f16ec5f-acc3-47ea-8b0f-fcb3b6bc79e7"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bfe2bea-3e8f-4ea0-bbda-7ea33285301e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c3abc5a-5551-4356-bd5a-edce8edd8680"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerGunPlay_DualWeapons"",
+            ""id"": ""77cb1167-0be0-46b4-8a2e-211affd553b9"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot_Weapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f4a77fa-d975-4331-9eaa-7e27803d74dd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot_Weapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""13b379a7-8789-4a0d-b4db-34bbadfdf326"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload_Weapon1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ced0da5b-1f36-4d14-83f0-94f21ac8461a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload_Weapon2"",
+                    ""type"": ""Button"",
+                    ""id"": ""861dae70-7830-4e74-a34c-b8112176487c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickUpWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""997fe335-cdc0-4a8b-b8e2-6a1f80db3912"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowGranade"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8cfe5c1-311b-4ac4-a966-1fbcd9a34ad9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""91787daa-fa8d-400e-b9d8-77f18bdb6570"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bf1d33e4-50ef-4086-9c38-064a2f6a2d08"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Shoot_Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f1b67b1-618d-4d99-8048-561aac670d35"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Shoot_Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a04569c2-5e55-4f74-ab0e-15ca4bba594c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Shoot_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62be21ab-f8b6-47d3-bf83-de9c63e1e03a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Shoot_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc8cd551-07c5-4045-a347-6e8cc1fa7668"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Reload_Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bbf14e5-f5d5-423e-9122-43f0bd120c7d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Reload_Weapon1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bf109a2-8834-4b64-a3cd-0458decc923f"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Reload_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e3db1bc-c683-473c-9ee8-f5d1fed15c7c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Reload_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82767387-a592-464a-9270-06558e1c1e38"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickUpWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22260d59-75ed-4748-b305-1231df13c8f9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""PickUpWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65826a24-39ef-4ad5-a317-efe3cac3791a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowGranade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c69c108-9b64-49a6-9d17-1ad31bcec308"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""ThrowGranade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6141afdf-4125-417c-ad80-72f2039cdec5"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f58e1d5b-03b5-4de0-9131-1b6aa28ee63b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1aaa927e-329c-473e-930f-e63e66f6acf6"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -536,21 +749,33 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_ShootWeapon = m_Player.FindAction("ShootWeapon", throwIfNotFound: true);
-        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
-        m_Player_SwitchWeapon = m_Player.FindAction("SwitchWeapon", throwIfNotFound: true);
-        m_Player_DropWeapon = m_Player.FindAction("DropWeapon", throwIfNotFound: true);
-        m_Player_RagdollTrigger = m_Player.FindAction("RagdollTrigger", throwIfNotFound: true);
-        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
-        m_Player_ThrowGranade = m_Player.FindAction("ThrowGranade", throwIfNotFound: true);
-        m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
-        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_SwitchTeam = m_Player.FindAction("SwitchTeam", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        // PlayerGunPlay_SingleWeapon
+        m_PlayerGunPlay_SingleWeapon = asset.FindActionMap("PlayerGunPlay_SingleWeapon", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_ShootWeapon = m_PlayerGunPlay_SingleWeapon.FindAction("ShootWeapon", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_Reload = m_PlayerGunPlay_SingleWeapon.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_PickUpWeapon = m_PlayerGunPlay_SingleWeapon.FindAction("PickUpWeapon", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_ThrowGranade = m_PlayerGunPlay_SingleWeapon.FindAction("ThrowGranade", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_Melee = m_PlayerGunPlay_SingleWeapon.FindAction("Melee", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_Zoom = m_PlayerGunPlay_SingleWeapon.FindAction("Zoom", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_SwitchWeapon = m_PlayerGunPlay_SingleWeapon.FindAction("SwitchWeapon", throwIfNotFound: true);
+        // PlayerGunPlay_DualWeapons
+        m_PlayerGunPlay_DualWeapons = asset.FindActionMap("PlayerGunPlay_DualWeapons", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_Shoot_Weapon1 = m_PlayerGunPlay_DualWeapons.FindAction("Shoot_Weapon1", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_Shoot_Weapon2 = m_PlayerGunPlay_DualWeapons.FindAction("Shoot_Weapon2", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_Reload_Weapon1 = m_PlayerGunPlay_DualWeapons.FindAction("Reload_Weapon1", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_Reload_Weapon2 = m_PlayerGunPlay_DualWeapons.FindAction("Reload_Weapon2", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_PickUpWeapon = m_PlayerGunPlay_DualWeapons.FindAction("PickUpWeapon", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_ThrowGranade = m_PlayerGunPlay_DualWeapons.FindAction("ThrowGranade", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_Melee = m_PlayerGunPlay_DualWeapons.FindAction("Melee", throwIfNotFound: true);
     }
 
     ~@Controller()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controller.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PlayerGunPlay_SingleWeapon.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_SingleWeapon.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PlayerGunPlay_DualWeapons.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_DualWeapons.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -615,16 +840,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_ShootWeapon;
-    private readonly InputAction m_Player_Reload;
-    private readonly InputAction m_Player_SwitchWeapon;
-    private readonly InputAction m_Player_DropWeapon;
-    private readonly InputAction m_Player_RagdollTrigger;
-    private readonly InputAction m_Player_Crouch;
-    private readonly InputAction m_Player_ThrowGranade;
-    private readonly InputAction m_Player_Melee;
-    private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_SwitchTeam;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
@@ -632,16 +849,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @ShootWeapon => m_Wrapper.m_Player_ShootWeapon;
-        public InputAction @Reload => m_Wrapper.m_Player_Reload;
-        public InputAction @SwitchWeapon => m_Wrapper.m_Player_SwitchWeapon;
-        public InputAction @DropWeapon => m_Wrapper.m_Player_DropWeapon;
-        public InputAction @RagdollTrigger => m_Wrapper.m_Player_RagdollTrigger;
-        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
-        public InputAction @ThrowGranade => m_Wrapper.m_Player_ThrowGranade;
-        public InputAction @Melee => m_Wrapper.m_Player_Melee;
-        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @SwitchTeam => m_Wrapper.m_Player_SwitchTeam;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -660,36 +869,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @ShootWeapon.started += instance.OnShootWeapon;
-            @ShootWeapon.performed += instance.OnShootWeapon;
-            @ShootWeapon.canceled += instance.OnShootWeapon;
-            @Reload.started += instance.OnReload;
-            @Reload.performed += instance.OnReload;
-            @Reload.canceled += instance.OnReload;
-            @SwitchWeapon.started += instance.OnSwitchWeapon;
-            @SwitchWeapon.performed += instance.OnSwitchWeapon;
-            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
-            @DropWeapon.started += instance.OnDropWeapon;
-            @DropWeapon.performed += instance.OnDropWeapon;
-            @DropWeapon.canceled += instance.OnDropWeapon;
-            @RagdollTrigger.started += instance.OnRagdollTrigger;
-            @RagdollTrigger.performed += instance.OnRagdollTrigger;
-            @RagdollTrigger.canceled += instance.OnRagdollTrigger;
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
-            @ThrowGranade.started += instance.OnThrowGranade;
-            @ThrowGranade.performed += instance.OnThrowGranade;
-            @ThrowGranade.canceled += instance.OnThrowGranade;
-            @Melee.started += instance.OnMelee;
-            @Melee.performed += instance.OnMelee;
-            @Melee.canceled += instance.OnMelee;
-            @Zoom.started += instance.OnZoom;
-            @Zoom.performed += instance.OnZoom;
-            @Zoom.canceled += instance.OnZoom;
             @SwitchTeam.started += instance.OnSwitchTeam;
             @SwitchTeam.performed += instance.OnSwitchTeam;
             @SwitchTeam.canceled += instance.OnSwitchTeam;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -703,36 +888,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @ShootWeapon.started -= instance.OnShootWeapon;
-            @ShootWeapon.performed -= instance.OnShootWeapon;
-            @ShootWeapon.canceled -= instance.OnShootWeapon;
-            @Reload.started -= instance.OnReload;
-            @Reload.performed -= instance.OnReload;
-            @Reload.canceled -= instance.OnReload;
-            @SwitchWeapon.started -= instance.OnSwitchWeapon;
-            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
-            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
-            @DropWeapon.started -= instance.OnDropWeapon;
-            @DropWeapon.performed -= instance.OnDropWeapon;
-            @DropWeapon.canceled -= instance.OnDropWeapon;
-            @RagdollTrigger.started -= instance.OnRagdollTrigger;
-            @RagdollTrigger.performed -= instance.OnRagdollTrigger;
-            @RagdollTrigger.canceled -= instance.OnRagdollTrigger;
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
-            @ThrowGranade.started -= instance.OnThrowGranade;
-            @ThrowGranade.performed -= instance.OnThrowGranade;
-            @ThrowGranade.canceled -= instance.OnThrowGranade;
-            @Melee.started -= instance.OnMelee;
-            @Melee.performed -= instance.OnMelee;
-            @Melee.canceled -= instance.OnMelee;
-            @Zoom.started -= instance.OnZoom;
-            @Zoom.performed -= instance.OnZoom;
-            @Zoom.canceled -= instance.OnZoom;
             @SwitchTeam.started -= instance.OnSwitchTeam;
             @SwitchTeam.performed -= instance.OnSwitchTeam;
             @SwitchTeam.canceled -= instance.OnSwitchTeam;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -750,6 +911,194 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // PlayerGunPlay_SingleWeapon
+    private readonly InputActionMap m_PlayerGunPlay_SingleWeapon;
+    private List<IPlayerGunPlay_SingleWeaponActions> m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces = new List<IPlayerGunPlay_SingleWeaponActions>();
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_ShootWeapon;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_Reload;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_PickUpWeapon;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_ThrowGranade;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_Melee;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_Zoom;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_SwitchWeapon;
+    public struct PlayerGunPlay_SingleWeaponActions
+    {
+        private @Controller m_Wrapper;
+        public PlayerGunPlay_SingleWeaponActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ShootWeapon => m_Wrapper.m_PlayerGunPlay_SingleWeapon_ShootWeapon;
+        public InputAction @Reload => m_Wrapper.m_PlayerGunPlay_SingleWeapon_Reload;
+        public InputAction @PickUpWeapon => m_Wrapper.m_PlayerGunPlay_SingleWeapon_PickUpWeapon;
+        public InputAction @ThrowGranade => m_Wrapper.m_PlayerGunPlay_SingleWeapon_ThrowGranade;
+        public InputAction @Melee => m_Wrapper.m_PlayerGunPlay_SingleWeapon_Melee;
+        public InputAction @Zoom => m_Wrapper.m_PlayerGunPlay_SingleWeapon_Zoom;
+        public InputAction @SwitchWeapon => m_Wrapper.m_PlayerGunPlay_SingleWeapon_SwitchWeapon;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerGunPlay_SingleWeapon; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerGunPlay_SingleWeaponActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces.Add(instance);
+            @ShootWeapon.started += instance.OnShootWeapon;
+            @ShootWeapon.performed += instance.OnShootWeapon;
+            @ShootWeapon.canceled += instance.OnShootWeapon;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+            @PickUpWeapon.started += instance.OnPickUpWeapon;
+            @PickUpWeapon.performed += instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled += instance.OnPickUpWeapon;
+            @ThrowGranade.started += instance.OnThrowGranade;
+            @ThrowGranade.performed += instance.OnThrowGranade;
+            @ThrowGranade.canceled += instance.OnThrowGranade;
+            @Melee.started += instance.OnMelee;
+            @Melee.performed += instance.OnMelee;
+            @Melee.canceled += instance.OnMelee;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+        }
+
+        private void UnregisterCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
+        {
+            @ShootWeapon.started -= instance.OnShootWeapon;
+            @ShootWeapon.performed -= instance.OnShootWeapon;
+            @ShootWeapon.canceled -= instance.OnShootWeapon;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+            @PickUpWeapon.started -= instance.OnPickUpWeapon;
+            @PickUpWeapon.performed -= instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled -= instance.OnPickUpWeapon;
+            @ThrowGranade.started -= instance.OnThrowGranade;
+            @ThrowGranade.performed -= instance.OnThrowGranade;
+            @ThrowGranade.canceled -= instance.OnThrowGranade;
+            @Melee.started -= instance.OnMelee;
+            @Melee.performed -= instance.OnMelee;
+            @Melee.canceled -= instance.OnMelee;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
+        }
+
+        public void RemoveCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
+        {
+            if (m_Wrapper.m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerGunPlay_SingleWeaponActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerGunPlay_SingleWeaponActions @PlayerGunPlay_SingleWeapon => new PlayerGunPlay_SingleWeaponActions(this);
+
+    // PlayerGunPlay_DualWeapons
+    private readonly InputActionMap m_PlayerGunPlay_DualWeapons;
+    private List<IPlayerGunPlay_DualWeaponsActions> m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces = new List<IPlayerGunPlay_DualWeaponsActions>();
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_Shoot_Weapon1;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_Shoot_Weapon2;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_Reload_Weapon1;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_Reload_Weapon2;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_PickUpWeapon;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_ThrowGranade;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_Melee;
+    public struct PlayerGunPlay_DualWeaponsActions
+    {
+        private @Controller m_Wrapper;
+        public PlayerGunPlay_DualWeaponsActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot_Weapon1 => m_Wrapper.m_PlayerGunPlay_DualWeapons_Shoot_Weapon1;
+        public InputAction @Shoot_Weapon2 => m_Wrapper.m_PlayerGunPlay_DualWeapons_Shoot_Weapon2;
+        public InputAction @Reload_Weapon1 => m_Wrapper.m_PlayerGunPlay_DualWeapons_Reload_Weapon1;
+        public InputAction @Reload_Weapon2 => m_Wrapper.m_PlayerGunPlay_DualWeapons_Reload_Weapon2;
+        public InputAction @PickUpWeapon => m_Wrapper.m_PlayerGunPlay_DualWeapons_PickUpWeapon;
+        public InputAction @ThrowGranade => m_Wrapper.m_PlayerGunPlay_DualWeapons_ThrowGranade;
+        public InputAction @Melee => m_Wrapper.m_PlayerGunPlay_DualWeapons_Melee;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerGunPlay_DualWeapons; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerGunPlay_DualWeaponsActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces.Add(instance);
+            @Shoot_Weapon1.started += instance.OnShoot_Weapon1;
+            @Shoot_Weapon1.performed += instance.OnShoot_Weapon1;
+            @Shoot_Weapon1.canceled += instance.OnShoot_Weapon1;
+            @Shoot_Weapon2.started += instance.OnShoot_Weapon2;
+            @Shoot_Weapon2.performed += instance.OnShoot_Weapon2;
+            @Shoot_Weapon2.canceled += instance.OnShoot_Weapon2;
+            @Reload_Weapon1.started += instance.OnReload_Weapon1;
+            @Reload_Weapon1.performed += instance.OnReload_Weapon1;
+            @Reload_Weapon1.canceled += instance.OnReload_Weapon1;
+            @Reload_Weapon2.started += instance.OnReload_Weapon2;
+            @Reload_Weapon2.performed += instance.OnReload_Weapon2;
+            @Reload_Weapon2.canceled += instance.OnReload_Weapon2;
+            @PickUpWeapon.started += instance.OnPickUpWeapon;
+            @PickUpWeapon.performed += instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled += instance.OnPickUpWeapon;
+            @ThrowGranade.started += instance.OnThrowGranade;
+            @ThrowGranade.performed += instance.OnThrowGranade;
+            @ThrowGranade.canceled += instance.OnThrowGranade;
+            @Melee.started += instance.OnMelee;
+            @Melee.performed += instance.OnMelee;
+            @Melee.canceled += instance.OnMelee;
+        }
+
+        private void UnregisterCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
+        {
+            @Shoot_Weapon1.started -= instance.OnShoot_Weapon1;
+            @Shoot_Weapon1.performed -= instance.OnShoot_Weapon1;
+            @Shoot_Weapon1.canceled -= instance.OnShoot_Weapon1;
+            @Shoot_Weapon2.started -= instance.OnShoot_Weapon2;
+            @Shoot_Weapon2.performed -= instance.OnShoot_Weapon2;
+            @Shoot_Weapon2.canceled -= instance.OnShoot_Weapon2;
+            @Reload_Weapon1.started -= instance.OnReload_Weapon1;
+            @Reload_Weapon1.performed -= instance.OnReload_Weapon1;
+            @Reload_Weapon1.canceled -= instance.OnReload_Weapon1;
+            @Reload_Weapon2.started -= instance.OnReload_Weapon2;
+            @Reload_Weapon2.performed -= instance.OnReload_Weapon2;
+            @Reload_Weapon2.canceled -= instance.OnReload_Weapon2;
+            @PickUpWeapon.started -= instance.OnPickUpWeapon;
+            @PickUpWeapon.performed -= instance.OnPickUpWeapon;
+            @PickUpWeapon.canceled -= instance.OnPickUpWeapon;
+            @ThrowGranade.started -= instance.OnThrowGranade;
+            @ThrowGranade.performed -= instance.OnThrowGranade;
+            @ThrowGranade.canceled -= instance.OnThrowGranade;
+            @Melee.started -= instance.OnMelee;
+            @Melee.performed -= instance.OnMelee;
+            @Melee.canceled -= instance.OnMelee;
+        }
+
+        public void RemoveCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
+        {
+            if (m_Wrapper.m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerGunPlay_DualWeaponsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerGunPlay_DualWeaponsActions @PlayerGunPlay_DualWeapons => new PlayerGunPlay_DualWeaponsActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -773,15 +1122,27 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSwitchTeam(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
+    }
+    public interface IPlayerGunPlay_SingleWeaponActions
+    {
         void OnShootWeapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnSwitchWeapon(InputAction.CallbackContext context);
-        void OnDropWeapon(InputAction.CallbackContext context);
-        void OnRagdollTrigger(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
+        void OnPickUpWeapon(InputAction.CallbackContext context);
         void OnThrowGranade(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
-        void OnSwitchTeam(InputAction.CallbackContext context);
+        void OnSwitchWeapon(InputAction.CallbackContext context);
+    }
+    public interface IPlayerGunPlay_DualWeaponsActions
+    {
+        void OnShoot_Weapon1(InputAction.CallbackContext context);
+        void OnShoot_Weapon2(InputAction.CallbackContext context);
+        void OnReload_Weapon1(InputAction.CallbackContext context);
+        void OnReload_Weapon2(InputAction.CallbackContext context);
+        void OnPickUpWeapon(InputAction.CallbackContext context);
+        void OnThrowGranade(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
     }
 }

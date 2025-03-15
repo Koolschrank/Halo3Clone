@@ -21,13 +21,23 @@ public class PlayerStartEquipment : MonoBehaviour
 
         if (equipment.WeaponInHand != null)
         {
-            playerArms.PickUpWeapon(
+            playerArms.RightArm.PickUpWeapon(
             SpawnWeapon(
                 equipment.WeaponInHand,
                 equipment.MagazinsOfWeaponInHand));
         }
 
-            
+        if (equipment.WeaponInLeftHand != null)
+        {
+            playerArms.LeftArm.PickUpWeapon(
+            SpawnWeapon(
+                equipment.WeaponInLeftHand,
+                equipment.MagazinsOfWeaponInLeftHand));
+        }
+
+
+
+
 
         if (equipment.SideArm != null)
         {
@@ -98,6 +108,8 @@ public class Equipment
 
     [SerializeField] Weapon_Data weaponInHand;
     [SerializeField] int magazinsOfWeaponInHand = 3;
+    [SerializeField] Weapon_Data weaponInLeftHand;
+    [SerializeField] int magazinsOfWeaponInLeftHand = 3;
     [SerializeField] Weapon_Data sideArm;
     [SerializeField] int magazinsOfSideArm = 5;
 
@@ -109,6 +121,9 @@ public class Equipment
 
     public Weapon_Data WeaponInHand => weaponInHand;
     public int MagazinsOfWeaponInHand => magazinsOfWeaponInHand;
+
+    public Weapon_Data WeaponInLeftHand => weaponInLeftHand;
+    public int MagazinsOfWeaponInLeftHand => magazinsOfWeaponInLeftHand;
 
     public Weapon_Data SideArm => sideArm;
     public int MagazinsOfSideArm => magazinsOfSideArm;

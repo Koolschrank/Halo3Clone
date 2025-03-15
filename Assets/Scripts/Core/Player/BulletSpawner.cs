@@ -12,46 +12,68 @@ public class BulletSpawner : MonoBehaviour
 
     [SerializeField] Transform mainTransform;
     [SerializeField] LayerMask autoAimLayerMask;
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] RightArm rightArm;
+    [SerializeField] LeftArm leftArm;
+    //[SerializeField] PlayerArms playerArms;
+    
+
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] LayerMask wallCheck;
 
 
-    AutoAim autoAimOfCurrentWeapon;
+    //AutoAim autoAimOfCurrentWeapon;
 
+    /*
     public void Start()
     {
-        playerArms.OnWeaponEquipStarted += (weapon, time) =>
+        playerArms.RightArm.OnWeaponEquipStarted += (weapon, time) =>
         {
             autoAimOfCurrentWeapon = weapon.AutoAim;
         };
 
-        if (playerArms.CurrentWeapon != null)
+        if (playerArms.RightArm.CurrentWeapon != null)
         {
-            autoAimOfCurrentWeapon = playerArms.CurrentWeapon.AutoAim;
+            autoAimOfCurrentWeapon = playerArms.RightArm.CurrentWeapon.AutoAim;
         }
 
-        playerArms.OnWeaponUnequipStarted += (weapon, time) =>
+        playerArms.RightArm.OnWeaponUnequipStarted += (weapon, time) =>
         {
             autoAimOfCurrentWeapon = null;
         };
 
-        playerArms.OnWeaponDroped += (weapon) =>
+        playerArms.RightArm.OnWeaponDroped += (weapon) =>
         {
             autoAimOfCurrentWeapon = null;
         };
 
-    }
+    }*/
 
     public void Update()
     {
-        if (autoAimOfCurrentWeapon == null)
+        Transform newTarget = null;
+        var rightArmWeapon = rightArm.CurrentWeapon;
+        if (rightArmWeapon != null)
         {
-            return;
+            var rightArmAutoAim = rightArm.CurrentWeapon.AutoAim;
+            newTarget = GetAutoAimTarget(rightArmAutoAim.Radius, rightArmAutoAim.RaycastLenght);
         }
 
-        var newTarget = GetAutoAimTarget(autoAimOfCurrentWeapon.Radius, autoAimOfCurrentWeapon.RaycastLenght);
+        if (newTarget == null)
+        {
+            var leftArmWeapon = leftArm.CurrentWeapon;
+            if (leftArmWeapon != null)
+            {
+                var leftArmAutoAim = leftArm.CurrentWeapon.AutoAim;
+                newTarget = GetAutoAimTarget(leftArmAutoAim.Radius, leftArmAutoAim.RaycastLenght);
+
+            }
+
+        }
+
+           
+
+
         if (newTarget != target)
         {
             if (newTarget)
@@ -153,7 +175,13 @@ public class BulletSpawner : MonoBehaviour
         float range = bullet.Range;
         LayerMask hitLayer = bullet.HitLayer;
 
-        DamagePackage damagePackage = new DamagePackage(bullet.Damage);
+        float damageMultiplier = 1f;
+        if (weapon.IsBeingDualWielded)
+        {
+            damageMultiplier = weapon.DamageMultiplierWhenDualWielded;
+        }
+
+        DamagePackage damagePackage = new DamagePackage(bullet.Damage * damageMultiplier);
         damagePackage.origin = mainTransform.position;
         damagePackage.owner = mainTransform.gameObject;
         damagePackage.headShotMultiplier = bullet.HeadShotMultiplier;
@@ -247,6 +275,11 @@ public class BulletSpawner : MonoBehaviour
             if (projectile.TryGetComponent<Bullet>(out Bullet bullet))
             {
                 bullet.SetUp(mainTransform.gameObject);
+
+                if (weapon.IsBeingDualWielded)
+                {
+                    bullet.ApplyDamageMultiplier(weapon.DamageMultiplierWhenDualWielded);
+                }
 
             }
             bullets[i] = projectile;

@@ -31,11 +31,18 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float moveSpeedMultiplier = 1f;
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
-    
+    [SerializeField] WeaponType weaponType;
+
 
     [Header("Burst Values")]
     [SerializeField] int burstAmount;
     [SerializeField] float burstDelay;
+
+    [Header("dual Wielding")]
+    [SerializeField] float damageMultiplier = 1f;
+    [SerializeField] float fireRateMultiplier = 1f;
+    [SerializeField] float inaccuracyMultiplier = 1f;
+    [SerializeField] float reloadTimeMultiplier = 1f;
 
     [Header("Sound")]
     [SerializeField] EventReference shootSound;
@@ -46,14 +53,44 @@ public class Weapon_Data : ScriptableObject
 
     public ShootType ShootType => shootType;
     public float FireRate => fireRate;
+
+    public float GetFireRate(bool isBeingDualWielded)
+    {
+        if (isBeingDualWielded)
+        {
+            return fireRate * fireRateMultiplier;
+        }
+        return fireRate;
+    }
+
     public int MagazineSize => magazineSize;
     public int MaxAmmoInReserve => maxAmmoInReserve;
 
     public float ReloadTime => reloadTime;
 
+    public float GetReloadTime(bool isBeingDualWielded)
+    {
+        if (isBeingDualWielded)
+        {
+            return reloadTime * reloadTimeMultiplier;
+        }
+        return reloadTime;
+    }
+
     public Weapon_Bullet WeaponBullet => weaponBullet;
 
     public float Inaccuracy => inaccuracy;
+
+    public float GetInaccuracy(bool isBeingDualWielded)
+    {
+        if (isBeingDualWielded)
+        {
+            return inaccuracy * inaccuracyMultiplier;
+        }
+        return inaccuracy;
+    }
+
+    public float DualWieldDamageMultiplier => damageMultiplier;
 
     public Weapon_PickUp WeaponPickUp => weaponPickUp;
 
@@ -87,7 +124,10 @@ public class Weapon_Data : ScriptableObject
 
     public float BurstFireRate => burstDelay;
 
+
     public float MoveSpeedMultiplier => moveSpeedMultiplier;
+
+    public WeaponType WeaponType => weaponType;
 }
 
 
@@ -98,5 +138,13 @@ public enum ShootType
     Auto,
     Burst,
     Melee
+}
+
+public enum WeaponType
+{
+    oneHanded,
+    twoHanded,
+    massive
+
 }
 

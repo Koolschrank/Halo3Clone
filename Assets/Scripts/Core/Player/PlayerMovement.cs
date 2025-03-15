@@ -126,14 +126,26 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
-            var weapon = arms.CurrentWeapon;
-            var weaponMoveSpeedMultiplier = 1f;
-            if (weapon != null)
+
+            var moveSpeedMultiplier = 1f;
+            if (arms.IsDualWielding)
             {
-                weaponMoveSpeedMultiplier = weapon.MoveSpeedMultiplier;
+                moveSpeedMultiplier = arms.DualWieldMoveSpeedMultiplier;
+            }
+            else
+            {
+                var weapon = arms.RightArm.CurrentWeapon;
+                if (weapon != null)
+                {
+                    moveSpeedMultiplier = weapon.MoveSpeedMultiplier;
+                }
             }
 
-            var speedMultiplier = MaxMoveSpeed * weaponMoveSpeedMultiplier;
+           
+            
+            
+
+            var speedMultiplier = MaxMoveSpeed * moveSpeedMultiplier;
             if (inCrouch)
             {
                 speedMultiplier *= moveSpeedCrouchMultiplier;

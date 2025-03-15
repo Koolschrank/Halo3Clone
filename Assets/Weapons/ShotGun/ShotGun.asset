@@ -28,8 +28,10 @@ MonoBehaviour:
   switchInTime: 0.6
   canZoom: 0
   zoomFOV: 0
+  moveSpeedMultiplier: 1
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
+  weaponType: 1
   burstAmount: 0
   burstDelay: 0
   shootSound:

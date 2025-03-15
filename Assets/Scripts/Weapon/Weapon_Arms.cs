@@ -28,6 +28,17 @@ public class Weapon_Arms
     float shotsLeftInBurst = 0;
     float shootCooldownInBurst = 0;
 
+    bool isBeingDualWielded = false;
+
+    public void SetIsBeingDualWielded(bool isBeingDualWielded)
+    {
+        this.isBeingDualWielded = isBeingDualWielded;
+    }
+
+    public bool IsBeingDualWielded => isBeingDualWielded;
+
+    public float DamageMultiplierWhenDualWielded => weaponData.DualWieldDamageMultiplier;
+
 
     public Action<int, int> OnAmmoChange;
 
@@ -132,7 +143,8 @@ public class Weapon_Arms
     private void Shoot()
     {
         OnShot?.Invoke();
-        shootCooldown = weaponData.FireRate;
+
+        shootCooldown = weaponData.GetFireRate(isBeingDualWielded);
         Magazine--;
 
         if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
@@ -211,7 +223,7 @@ public class Weapon_Arms
 
     }
 
-    public float ReloadTime => weaponData.ReloadTime;
+    public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded);
 
     public ShootType ShootType => weaponData.ShootType;
 
@@ -264,7 +276,7 @@ public class Weapon_Arms
 
     public Weapon_Bullet Bullet => weaponData.WeaponBullet;
 
-    public float Inaccuracy => weaponData.Inaccuracy;
+    public float Inaccuracy => weaponData.GetInaccuracy(isBeingDualWielded);
 
     public Weapon_Visual WeaponFPSModel => weaponData.WeaponFPSModel;
 
@@ -291,6 +303,8 @@ public class Weapon_Arms
     }
 
     public float MoveSpeedMultiplier => weaponData.MoveSpeedMultiplier;
+
+    public WeaponType WeaponType => weaponData.WeaponType;
 
     public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {

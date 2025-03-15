@@ -46,23 +46,23 @@ public class PlayerAnimation : MonoBehaviour
         
 
         // connect reload
-        playerArms.OnWeaponReloadStarted += Reload;
+        playerArms.RightArm.OnWeaponReloadStarted += Reload;
         // connect switch weapon
-        playerArms.OnWeaponUnequipStarted += SwitchOutWeapon;
-        playerArms.OnWeaponEquipStarted += SwitchInWeapon;
+        playerArms.RightArm.OnWeaponUnequipStarted += SwitchOutWeapon;
+        playerArms.RightArm.OnWeaponEquipStarted += SwitchInWeapon;
         // throw granade
-        playerArms.OnGranadeThrowStarted += ThrowGranadeStart;
-        playerArms.OnGranadeThrow += ThrowGranade;
-        playerArms.OnMeleeWithWeaponStarted += Melee;
-        playerArms.OnWeaponDroped += DropWeapon;
+        playerArms.RightArm.OnGranadeThrowStarted += ThrowGranadeStart;
+        playerArms.RightArm.OnGranadeThrow += ThrowGranade;
+        playerArms.RightArm.OnMeleeWithWeaponStarted += Melee;
+        playerArms.RightArm.OnWeaponDroped += DropWeapon;
         playerInventory.OnWeaponAddedToInventory += PutWeaponInBackpack;
         playerInventory.OnWeaponDrop += DropInvetoryWeapon;
 
 
         if (weaponVisual == null)
         {
-            var weapon = playerArms.GetWeaponInHand();
-            var switchInTime = playerArms.GetWeaponInHandSwitchInTime();
+            var weapon = playerArms.RightArm.GetWeaponInHand();
+            var switchInTime = playerArms.RightArm.GetWeaponInHandSwitchInTime();
             SwitchInWeapon(weapon, switchInTime);
         }
         if (backpackWeaponVisual == null)

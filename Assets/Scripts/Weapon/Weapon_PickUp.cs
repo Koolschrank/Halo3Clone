@@ -64,6 +64,8 @@ public class Weapon_PickUp : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public WeaponType WeaponType => weapon_Data.WeaponType;
+
 }
 
 
