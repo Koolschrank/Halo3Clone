@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RightArm : Arm
 {
+    
+
     public override void TryPickUpWeapon()
     {
         if (playerArms.LeftArm.CurrentWeapon == null)
@@ -29,9 +31,16 @@ public class RightArm : Arm
 
     protected override void EquipWeapon(Weapon_Arms weapon)
     {
-        if (weapon.WeaponType != WeaponType.oneHanded && !playerArms.CanDualWield2HandedWeapons)
+        if (weapon.WeaponType != WeaponType.oneHanded && !playerArms.CanDualWield2HandedWeapons )
         {
-            playerArms.LeftArm.ForceWeaponToInventory();
+            if (playerArms.LeftArm.NoInvectoryInteraction)
+            {
+                playerArms.LeftArm.DropWeapon();
+            }
+            else
+            {
+                playerArms.LeftArm.ForceWeaponToInventory();
+            }
         }
 
         base.EquipWeapon(weapon);
@@ -40,5 +49,19 @@ public class RightArm : Arm
         {
             weapon.SetIsBeingDualWielded(playerArms.IsDualWielding);
         }
+    }
+
+    public override void TryMeleeAttack()
+    {
+        base.TryMeleeAttack();
+        //playerArms.LeftArm.DropWeapon();
+
+
+    }
+
+    public override void TryThrowGranade()
+    {
+        base.TryThrowGranade();
+        playerArms.LeftArm.DropWeapon();
     }
 }

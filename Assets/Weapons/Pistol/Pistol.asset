@@ -28,7 +28,7 @@ MonoBehaviour:
   switchInTime: 0.15
   canZoom: 1
   zoomFOV: 35
-  moveSpeedMultiplier: 1.1
+  moveSpeedMultiplier: 1
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
   autoAim: {fileID: 11400000, guid: b1220f81241b91d478ae61ae3dae0db5, type: 2}
   weaponType: 0

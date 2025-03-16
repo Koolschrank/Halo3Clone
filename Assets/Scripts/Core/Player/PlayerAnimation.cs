@@ -12,8 +12,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
-    
+    [SerializeField] Transform weaponSocketLeftHand;
+
     GameObject weaponVisual;
+    GameObject weaponVisualLeftHand;
     [SerializeField] Transform backpackWeaponSocket;
     GameObject backpackWeaponVisual;
 
@@ -58,12 +60,23 @@ public class PlayerAnimation : MonoBehaviour
         playerInventory.OnWeaponAddedToInventory += PutWeaponInBackpack;
         playerInventory.OnWeaponDrop += DropInvetoryWeapon;
 
+        playerArms.LeftArm.OnWeaponEquipStarted += SwitchInLeftWeapon;
+
+        playerArms.LeftArm.OnWeaponDroped += DropWeaponLeftWeapon;
+        playerArms.LeftArm.OnWeaponUnequipFinished += DropWeaponLeftWeapon;
+
 
         if (weaponVisual == null)
         {
             var weapon = playerArms.RightArm.GetWeaponInHand();
             var switchInTime = playerArms.RightArm.GetWeaponInHandSwitchInTime();
             SwitchInWeapon(weapon, switchInTime);
+        }
+        if (weaponVisualLeftHand == null)
+        {
+            var weapon = playerArms.LeftArm.GetWeaponInHand();
+            var switchInTime = playerArms.LeftArm.GetWeaponInHandSwitchInTime();
+            SwitchInLeftWeapon(weapon, switchInTime);
         }
         if (backpackWeaponVisual == null)
         {
@@ -171,6 +184,14 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void DropWeaponLeftWeapon(Weapon_Arms weapon)
+    {
+        if (weaponVisualLeftHand != null)
+        {
+            Destroy(weaponVisualLeftHand.gameObject);
+        }
+    }
+
     public void DropInvetoryWeapon(Weapon_Arms weapon)
     {
         if (backpackWeaponVisual != null)
@@ -181,7 +202,12 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SwitchInWeapon(Weapon_Arms weapon, float animationDuration)
     {
-        var child = transform.GetChild(0);
+        if (weapon == null)
+        {
+            return;
+        }
+
+        //var child = transform.GetChild(0);
 
         var switchInClip = GetAnimationClipByName("SwitchIn");
         var animationLenght = GetAnimationLenght(switchInClip);
@@ -204,6 +230,33 @@ public class PlayerAnimation : MonoBehaviour
             weaponModel.SetUp(weapon);
         }
         UtilityFunctions.SetLayerRecursively(weaponVisual, gameObject.layer);
+    }
+
+    public void SwitchInLeftWeapon(Weapon_Arms weapon, float animationDuration)
+    {
+
+        if (weapon == null)
+        {
+            return;
+        }
+
+        Debug.Log("SwitchInLeftWeapon");
+
+
+
+        if (weaponVisualLeftHand != null)
+        {
+            Destroy(weaponVisualLeftHand.gameObject);
+        }
+
+        weaponVisualLeftHand = Instantiate(weapon.WeaponModel, weaponSocketLeftHand);
+        weaponVisualLeftHand.transform.localPosition = Vector3.zero;
+        weaponVisualLeftHand.transform.localRotation = Quaternion.identity;
+        if (weaponVisualLeftHand.TryGetComponent<Weapon_Model>(out Weapon_Model weaponModel))
+        {
+            weaponModel.SetUp(weapon);
+        }
+        UtilityFunctions.SetLayerRecursively(weaponVisualLeftHand, gameObject.layer);
     }
 
     public void Melee(Weapon_Arms weapon, float animationDuration)

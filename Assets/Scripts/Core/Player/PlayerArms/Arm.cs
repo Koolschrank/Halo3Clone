@@ -55,6 +55,7 @@ public class Arm : MonoBehaviour
     protected float switchInputBufferTimer;
     [SerializeField] float granadeThrowInputBuffer = 0.4f;
     float granadeThrowInputBufferTimer;
+    [SerializeField] float meleeAttackTimeMultiplierInDualWielding = 1.5f;
 
     private void Start()
     {
@@ -262,7 +263,8 @@ public class Arm : MonoBehaviour
     void ReloadFinished()
     {
         armState = ArmState.Ready;
-        weaponInHand.ReloadFinished();
+        if (weaponInHand != null)
+            weaponInHand.ReloadFinished();
     }
 
 
@@ -339,7 +341,7 @@ public class Arm : MonoBehaviour
         reloadInputBufferTimer = 0;
     }
 
-    protected virtual void TrySwitchWeapon()
+    public virtual void TrySwitchWeapon()
     {
         Debug.Log("Switching weapon try");
 
@@ -397,7 +399,7 @@ public class Arm : MonoBehaviour
         var pickUp = LetGoOfWeapon();
     }
 
-    protected void DropWeapon()
+    public virtual void DropWeapon()
     {
 
         if (weaponInHand == null) return;
@@ -438,7 +440,7 @@ public class Arm : MonoBehaviour
         granadeThrowInputBufferTimer = granadeThrowInputBuffer;
     }
 
-    public void TryThrowGranade()
+    public virtual void TryThrowGranade()
     {
         if (armState != ArmState.Ready) return;
         if (inventory.HasGranades)
@@ -463,7 +465,7 @@ public class Arm : MonoBehaviour
         TryMeleeAttack();
     }
 
-    public void TryMeleeAttack()
+    public virtual void TryMeleeAttack()
     {
         if (armState != ArmState.Ready && armState != ArmState.Shooting && armState != ArmState.Reloading) return;
         IfZoomedInExitZoom();
@@ -473,8 +475,15 @@ public class Arm : MonoBehaviour
             meleeAttack = basicMeleeAttack;
         }
         armState = ArmState.InMeleeAttack;
-        meleeAttackTimer = meleeAttack.MeleeTime;
-        meleeAttacker.AttackStart(meleeAttack);
+        float timeMultiplier = 1;
+        if (playerArms.IsDualWielding)
+        {
+            timeMultiplier = meleeAttackTimeMultiplierInDualWielding;
+        }
+
+
+        meleeAttackTimer = meleeAttack.MeleeTime * timeMultiplier;
+        meleeAttacker.AttackStart(meleeAttack, timeMultiplier);
         weaponInHand.MeleeStart(meleeAttackTimer);
         OnMeleeWithWeaponStarted?.Invoke(weaponInHand, meleeAttackTimer);
 
@@ -529,6 +538,8 @@ public class Arm : MonoBehaviour
 
     public float GetWeaponInHandSwitchInTime()
     {
+        if (weaponInHand == null) return 0;
+
         return weaponInHand.SwitchInTime;
     }
 

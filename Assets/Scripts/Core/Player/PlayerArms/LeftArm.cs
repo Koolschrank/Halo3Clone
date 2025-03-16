@@ -3,6 +3,11 @@ using static Arm;
 
 public class LeftArm : Arm
 {
+    [SerializeField] bool noInvectoryInteraction = false;
+
+    public bool NoInvectoryInteraction => noInvectoryInteraction;
+
+
     public override void TryPickUpWeapon()
     {
         if (armState == ArmState.SwitchingOut) return;
@@ -15,15 +20,22 @@ public class LeftArm : Arm
             DropWeapon();
             PickUpWeapon(newWeapon);
 
-            if (inventory.Full)
+            if (inventory.Full && !noInvectoryInteraction)
             {
                 inventory.DropWeapon();
             }
             
         }
     }
-    protected override void TrySwitchWeapon()
+    public override void TrySwitchWeapon()
     {
+        if (noInvectoryInteraction)
+        {
+            playerArms.RightArm.TrySwitchWeapon();
+            DropWeapon();
+            return;
+        }
+
         Debug.Log("Switching weapon start");
         if (armState != ArmState.Ready && armState != ArmState.Reloading && armState != ArmState.Empty) return;
         switchInputBufferTimer = 0;
@@ -82,6 +94,14 @@ public class LeftArm : Arm
         
     }
 
+
+    public override void DropWeapon()
+    {
+
+        base.DropWeapon();
+        
+    }
+
     public void ForceWeaponToInventory()
     {
         if (weaponInHand != null)
@@ -90,6 +110,8 @@ public class LeftArm : Arm
             TrySwitchWeapon();
         }
     }
+
+    
 
     protected override void EquipWeapon(Weapon_Arms weapon)
     {

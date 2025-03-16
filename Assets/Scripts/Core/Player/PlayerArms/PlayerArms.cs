@@ -43,6 +43,11 @@ public class PlayerArms : MonoBehaviour
         {
             ExitDualWielding();
         };
+
+        LeftArm.OnWeaponDroped += (weapon) =>
+        {
+            ExitDualWielding();
+        };
     }
 
 

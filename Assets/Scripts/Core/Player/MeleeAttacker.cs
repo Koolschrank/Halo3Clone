@@ -17,10 +17,10 @@ public class MeleeAttacker : MonoBehaviour
         health.OnDeath += CancelAttack;
     }
 
-    public void AttackStart(PlayerMeleeAttack attackData)
+    public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier)
     {
         meleeData = attackData;
-        attackDelay = meleeData.Delay;
+        attackDelay = meleeData.Delay * timeMultiplier;
         OnAttackStart?.Invoke(attackData);
     }
 

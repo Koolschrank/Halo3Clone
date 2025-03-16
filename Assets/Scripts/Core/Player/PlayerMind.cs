@@ -17,7 +17,9 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] Arm_FPSView rightArmView;
     [SerializeField] Arm_FPSView leftArmView;
     
-    [SerializeField] WeaponSway weaponSway;
+    [SerializeField] WeaponSway weaponSway1;
+
+    [SerializeField] WeaponSway weaponSway2;
     //[SerializeField] PlayerFOV playerFOV;
     [SerializeField] PlayerInput playerInput;
 
@@ -102,7 +104,8 @@ public class PlayerMind : MonoBehaviour
     public void SetPlayerMovement(PlayerMovement movement)
     {
         playerMovement = movement;
-        weaponSway.SetUp(playerMovement);
+        weaponSway1.SetUp(playerMovement);
+        weaponSway2.SetUp(playerMovement);
     }
 
     public void SetSpectatorTarget(CinemachineCamera camera)
@@ -318,7 +321,7 @@ public class PlayerMind : MonoBehaviour
         if (playerArms == null) return;
         if (context.performed)
         {
-            if (playerArms.RightArm.CurrentWeapon.WeaponType == WeaponType.twoHanded && !playerArms.CanDualWield2HandedWeapons)
+            if (playerArms.RightArm.CurrentWeapon.WeaponType != WeaponType.oneHanded && !playerArms.CanDualWield2HandedWeapons)
             {
                 playerArms.RightArm.PressSwitchButton();
                 return;

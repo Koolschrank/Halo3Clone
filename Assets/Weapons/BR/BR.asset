@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9212859378291490076, guid: 0fd127000fb9617408bbe60392ae5fa7, type: 3}
   weaponName: BR
   shootType: 2
-  fireRate: 0.25
+  fireRate: 0.275
   bulletsPerShot: 1
   magazineSize: 24
   maxAmmoInReserve: 500
@@ -34,6 +34,10 @@ MonoBehaviour:
   weaponType: 1
   burstAmount: 3
   burstDelay: 0.05
+  damageMultiplier: 1
+  fireRateMultiplier: 1
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1
   shootSound:
     Guid:
       Data1: 2116415683
