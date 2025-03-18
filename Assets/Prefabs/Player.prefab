@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightArm: {fileID: 3970420054294455764}
   leftArm: {fileID: 3844945188849078822}
-  canDualWield2HandedWeapons: 0
+  canDualWield2HandedWeapons: 1
   dualWieldMoveSpeedMultiplier: 1
 --- !u!114 &3844945188849078822
 MonoBehaviour:
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   reloadInputBuffer: 0.4
   switchInputBuffer: 0.4
   granadeThrowInputBuffer: 0.4
+  meleeAttackTimeMultiplierInDualWielding: 1.5
   noInvectoryInteraction: 1
 --- !u!114 &3970420054294455764
 MonoBehaviour:
@@ -1200,6 +1201,7 @@ MonoBehaviour:
   reloadInputBuffer: 0.4
   switchInputBuffer: 0.4
   granadeThrowInputBuffer: 0.4
+  meleeAttackTimeMultiplierInDualWielding: 1.5
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0
