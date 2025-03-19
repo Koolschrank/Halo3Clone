@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightArm: {fileID: 3970420054294455764}
   leftArm: {fileID: 3844945188849078822}
-  canDualWield2HandedWeapons: 1
+  canDualWield2HandedWeapons: 0
   dualWieldMoveSpeedMultiplier: 1
 --- !u!114 &3844945188849078822
 MonoBehaviour:

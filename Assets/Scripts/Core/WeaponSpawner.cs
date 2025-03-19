@@ -65,6 +65,13 @@ public class WeaponSpawner : MonoBehaviour
         this.weapon = null;
     }
 
+    // gizmor sphere spawn point
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+    }
+
 
 
 

@@ -1884,7 +1884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 278836824}
   m_Layer: 0
-  m_Name: Team2
+  m_Name: Team2 SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2377,7 +2377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361933561}
   m_Layer: 0
-  m_Name: MidSide (2)
+  m_Name: RandomSpawnPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3795,7 +3795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833099484}
   m_Layer: 0
-  m_Name: Team1 (2)
+  m_Name: RandomSpawnPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5385,7 +5385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004407695}
   m_Layer: 0
-  m_Name: Team2 (2)
+  m_Name: RandomSpawnPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7024,35 +7024,35 @@ PrefabInstance:
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 2053237020}
+      objectReference: {fileID: 278836824}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 833099484}
+      objectReference: {fileID: 1983575483}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[3]'
       value: 
-      objectReference: {fileID: 278836824}
+      objectReference: {fileID: 1751143621}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 1374858822}
+      objectReference: {fileID: 2053237020}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
       value: 
-      objectReference: {fileID: 1004407695}
+      objectReference: {fileID: 833099484}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 1983575483}
+      objectReference: {fileID: 1374858822}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
       value: 
-      objectReference: {fileID: 1217472404}
+      objectReference: {fileID: 1004407695}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[8]'
       value: 
-      objectReference: {fileID: 1751143621}
+      objectReference: {fileID: 1217472404}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[9]'
       value: 
@@ -7119,7 +7119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516329529554724374, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_Name
-      value: Team1
+      value: Team1 SpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6436128335455776888, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalScale.x
@@ -7236,15 +7236,15 @@ PrefabInstance:
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 361933561}
+      objectReference: {fileID: 2053237020}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
       value: 
-      objectReference: {fileID: 1217472404}
+      objectReference: {fileID: 833099484}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 833099484}
+      objectReference: {fileID: 1374858822}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
       value: 
@@ -7252,11 +7252,11 @@ PrefabInstance:
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[8]'
       value: 
-      objectReference: {fileID: 2053237020}
+      objectReference: {fileID: 1217472404}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[9]'
       value: 
-      objectReference: {fileID: 1751143621}
+      objectReference: {fileID: 361933561}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: spawnSystem.teamStartSpawnPoints.Array.size
       value: 8
@@ -7312,15 +7312,15 @@ PrefabInstance:
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 361933561}
+      objectReference: {fileID: 2053237020}
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
       value: 
-      objectReference: {fileID: 1217472404}
+      objectReference: {fileID: 833099484}
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 833099484}
+      objectReference: {fileID: 1374858822}
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
       value: 
@@ -7328,11 +7328,11 @@ PrefabInstance:
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[8]'
       value: 
-      objectReference: {fileID: 2053237020}
+      objectReference: {fileID: 1217472404}
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[9]'
       value: 
-      objectReference: {fileID: 1751143621}
+      objectReference: {fileID: 361933561}
     - target: {fileID: 9093571000208819694, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[1]'
       value: 
@@ -7377,13 +7377,19 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 278836824}
+    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983575483}
+    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751143621}
+    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2053237020}
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 833099484}
-    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 278836824}
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1374858822}
@@ -7392,13 +7398,7 @@ PrefabInstance:
       addedObject: {fileID: 1004407695}
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1983575483}
-    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1217472404}
-    - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1751143621}
     - targetCorrespondingSourceObject: {fileID: 4191908485381749400, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 361933561}
@@ -7560,7 +7560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1217472404}
   m_Layer: 0
-  m_Name: MidSide (3)
+  m_Name: RandomSpawnPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8080,7 +8080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1374858822}
   m_Layer: 0
-  m_Name: Team2 (1)
+  m_Name: RandomSpawnPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9838,7 +9838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751143621}
   m_Layer: 0
-  m_Name: MidSide (1)
+  m_Name: Team 4 SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11399,7 +11399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1983575483}
   m_Layer: 0
-  m_Name: MidSide
+  m_Name: Team 3 SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11414,7 +11414,7 @@ Transform:
   m_GameObject: {fileID: 1983575482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.4, y: 2.65, z: -8.3}
+  m_LocalPosition: {x: 17.81, y: 2.65, z: -8.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12118,7 +12118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053237020}
   m_Layer: 0
-  m_Name: Team1 (1)
+  m_Name: RandomSpawnPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
