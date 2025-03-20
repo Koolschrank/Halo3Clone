@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: d9d908b63e1b7884cad01543fc881995, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: c140d93adb32fd24aa9cf2a06508a9ae, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 0a912273c20432048876a95f021beb6b, type: 3}
-  weaponName: Assult Rifle
+  weaponName: SMG
   shootType: 1
   fireRate: 0.075
   bulletsPerShot: 1

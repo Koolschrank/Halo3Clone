@@ -84,14 +84,15 @@ public class PlayerStartEquipment : MonoBehaviour
     {
         var weapon = new Weapon_Arms(data);
         weapon.FillMagazine();
-        weapon.FillReserve();
+        playerInventory.AddAmmo(data, data.ReserveSize);
         return weapon;
     }
 
-    public Weapon_Arms SpawnWeapon(Weapon_Data data, int magazin)
+    public Weapon_Arms SpawnWeapon(Weapon_Data data, int magazins)
     {
         var weapon = new Weapon_Arms(data);
-        weapon.GainMagazins(magazin);
+        weapon.FillMagazine();
+        playerInventory.AddAmmo(data, data.MagazineSize * (magazins -1));
         return weapon;
     }
 }

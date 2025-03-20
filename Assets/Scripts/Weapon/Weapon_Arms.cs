@@ -21,7 +21,8 @@ public class Weapon_Arms
 
     [SerializeField] Weapon_Data weaponData;
     [SerializeField] int magazine;
-    [SerializeField] int reserve;
+
+    public Action<int> OnMagazineChange;
 
     BulletSpawner bulletSpawner;
     float shootCooldown = 0;
@@ -40,17 +41,17 @@ public class Weapon_Arms
     public float DamageMultiplierWhenDualWielded => weaponData.DualWieldDamageMultiplier;
 
 
-    public Action<int, int> OnAmmoChange;
+   
 
     public Weapon_Arms(Weapon_Data weaponData)
     {
         this.weaponData = weaponData;
     }
 
-    public Weapon_Arms(Weapon_Data weaponData, int magazine, int reserve)
+    public Weapon_Arms(Weapon_Data weaponData, int magazine)
     {
         this.weaponData = weaponData;
-        SetAmmo(magazine, reserve);
+        SetAmmo(magazine);
     }
 
     public int Magazine
@@ -61,20 +62,7 @@ public class Weapon_Arms
             if (magazine != value) 
             {
                 magazine = value;
-                OnAmmoChange?.Invoke(magazine,reserve); 
-            }
-        }
-    }
-
-    public int Reserve
-    {
-        get => reserve;
-        set
-        {
-            if (reserve != value)
-            {
-                reserve = value;
-                OnAmmoChange?.Invoke(magazine, reserve);
+                OnMagazineChange?.Invoke(magazine); 
             }
         }
     }
@@ -191,7 +179,7 @@ public class Weapon_Arms
 
     public bool CanReload()
     {
-        return Magazine < weaponData.MagazineSize && reserve > 0;
+        return Magazine < weaponData.MagazineSize;
     }
 
     public void ReloadStart(float reloadTime)
@@ -214,12 +202,10 @@ public class Weapon_Arms
         OnMeleeStart?.Invoke(meleeTime);
     }
 
-    public void ReloadFinished()
+    public void ReloadFinished(int ammoAdded)
     {
         int missingAmmo = weaponData.MagazineSize - Magazine;
-        int ammoToReload = System.Math.Min(missingAmmo, reserve);
-        Magazine += ammoToReload;
-        Reserve -= ammoToReload;
+        Magazine += ammoAdded;
 
     }
 
@@ -235,44 +221,44 @@ public class Weapon_Arms
 
     public GameObject WeaponModel => weaponData.Weapon3rdPersonModel;
 
-    public void SetAmmo(int magazine, int reserve)
+    public void SetAmmo(int magazine)
     {
         Magazine = Mathf.Min(weaponData.MagazineSize, magazine);
-        Reserve = Mathf.Min(weaponData.MaxAmmoInReserve, reserve);
+        //Reserve = Mathf.Min(weaponData.MaxAmmoInReserve, reserve);
     }
 
-    public void GainMagazins(int magazins)
-    {
-        var bulletsAmount = magazins * weaponData.MagazineSize;
+    //public void GainMagazins(int magazins)
+    //{
+    //    var bulletsAmount = magazins * weaponData.MagazineSize;
 
-        if (bulletsAmount >= Magazine)
-        {
-            bulletsAmount -= Magazine;
-            Magazine = weaponData.MagazineSize;
-        }
-        else
-        {
-            Magazine += bulletsAmount;
-            return;
-        }
-        Reserve += bulletsAmount;
-        OnAmmoChange?.Invoke(Magazine, Reserve);
-    }
+    //    if (bulletsAmount >= Magazine)
+    //    {
+    //        bulletsAmount -= Magazine;
+    //        Magazine = weaponData.MagazineSize;
+    //    }
+    //    else
+    //    {
+    //        Magazine += bulletsAmount;
+    //        return;
+    //    }
+    //    Reserve += bulletsAmount;
+    //    OnMagazineChange?.Invoke(Magazine, Reserve);
+    //}
 
     public void FillMagazine()
     {
         Magazine = weaponData.MagazineSize;
     }
 
-    public void FillReserve()
-    {
-        Reserve = weaponData.MaxAmmoInReserve;
-    }
+    //public void FillReserve()
+    //{
+    //    Reserve = weaponData.MaxAmmoInReserve;
+    //}
 
-    public void AddAmmo(int amount)
-    {
-        Reserve = Mathf.Min(Reserve + amount, weaponData.MaxAmmoInReserve);
-    }
+    //public void AddAmmo(int amount)
+    //{
+    //    Reserve = Mathf.Min(Reserve + amount, weaponData.MaxAmmoInReserve);
+    //}
 
     public Weapon_Bullet Bullet => weaponData.WeaponBullet;
 
@@ -306,7 +292,9 @@ public class Weapon_Arms
 
     public WeaponType WeaponType => weaponData.WeaponType;
 
-    public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
+    public Weapon_Data Data => weaponData;
+
+    /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {
         var missingAmmo = weaponData.ReserveSize - Reserve;
         // first use up ammo from other reserve
@@ -351,4 +339,5 @@ public class Weapon_Arms
 
         
     }
+    */
 }

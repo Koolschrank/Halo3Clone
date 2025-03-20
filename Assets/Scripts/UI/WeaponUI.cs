@@ -10,7 +10,9 @@ public class WeaponUI : MonoBehaviour
 
     [SerializeField] Color baseColor;
     [SerializeField] Color emptyColor;
-    [SerializeField] TextMeshProUGUI[] textToColor;
+
+    [SerializeField] TextMeshProUGUI[] magazinTextToColor;
+    [SerializeField] TextMeshProUGUI[] reserveTextToColor;
 
     int magazinSize = 0;
 
@@ -21,6 +23,7 @@ public class WeaponUI : MonoBehaviour
             playerArm.OnWeaponEquipStarted -= EquipWeapon;
             playerArm.OnWeaponUnequipFinished -= UnequipWeapon;
             playerArm.OnWeaponDroped -= UnequipWeapon;
+            playerArm.OnReserveAmmoChanged -= UpdateReserve;
         }
 
 
@@ -28,6 +31,9 @@ public class WeaponUI : MonoBehaviour
         playerArm.OnWeaponEquipStarted += EquipWeapon;
         playerArm.OnWeaponUnequipFinished += UnequipWeapon;
         playerArm.OnWeaponDroped += UnequipWeapon;
+        playerArm.OnReserveAmmoChanged += UpdateReserve;
+
+
 
         if ( playerArm.CurrentWeapon == null)
         {
@@ -58,52 +64,35 @@ public class WeaponUI : MonoBehaviour
         }
 
         magazinSize = weapon.MagazineSize;
-        weapon.OnAmmoChange += UpdateAmmo;
-        UpdateAmmo(weapon.Magazine, weapon.Reserve);
+        weapon.OnMagazineChange += UpdateMagazin;
+        UpdateMagazin(weapon.Magazine);
+        UpdateReserve(playerArm.AmmoOfWeaponInReserve);
     }
 
     void UnequipWeapon(Weapon_Arms weapon)
     {
-        weapon.OnAmmoChange -= UpdateAmmo;
+        weapon.OnMagazineChange -= UpdateMagazin;
 
         ammoText.text = "";
         magazinText.text = "";
         reserveText.text = "";
     }
 
-    void UpdateAmmo(int magazin, int reserve)
+    void UpdateMagazin(int magazin)
     {
         // if ammo empty change color
-        if (magazin == 0 && reserve == 0)
+        if (magazin == 0)
         {
-            foreach (var text in textToColor)
+            foreach (var text in magazinTextToColor)
             {
                 text.color = emptyColor;
             }
         }
         else
         {
-            foreach (var text in textToColor)
+            foreach (var text in magazinTextToColor)
             {
                 text.color = baseColor;
-            }
-
-            if (magazin == 0)
-            {
-                ammoText.color = emptyColor;
-            }
-            else
-            {
-                ammoText.color = baseColor;
-            }
-
-            if (reserve == 0)
-            {
-                reserveText.color = emptyColor;
-            }
-            else
-            {
-                reserveText.color = baseColor;
             }
         }
 
@@ -111,6 +100,25 @@ public class WeaponUI : MonoBehaviour
 
         ammoText.text = magazin.ToString();
         magazinText.text = "/ " + magazinSize.ToString();
+    }
+
+    void UpdateReserve(int reserve)
+    {
+        // if ammo empty change color
+        if (reserve == 0)
+        {
+            foreach (var text in reserveTextToColor)
+            {
+                text.color = emptyColor;
+            }
+        }
+        else
+        {
+            foreach (var text in reserveTextToColor)
+            {
+                text.color = baseColor;
+            }
+        }
         reserveText.text = reserve.ToString();
     }
 }

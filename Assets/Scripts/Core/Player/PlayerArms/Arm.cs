@@ -21,6 +21,7 @@ public class Arm : MonoBehaviour
     public Action<GameObject, GranadeStats> OnGranadeThrow;
     public Action<Weapon_Arms> OnZoomIn;
     public Action<Weapon_Arms> OnZoomOut;
+    public Action<int> OnReserveAmmoChanged;
 
 
     [Header("References")]
@@ -61,6 +62,25 @@ public class Arm : MonoBehaviour
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
         characterHealth.OnDeath += DropWeaponWithNoForce;
+        inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
+
+    }
+
+    public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
+    {
+        if (weaponInHand != null && weaponInHand.Data == weaponAmmoChanged)
+        {
+            OnReserveAmmoChanged?.Invoke(ammo);
+        }
+    }
+
+    public int AmmoOfWeaponInReserve
+    {
+        get
+        {
+            if (weaponInHand == null) return 0;
+            return inventory.GetAmmo(weaponInHand.Data);
+        }
     }
 
     void Update()
@@ -250,7 +270,7 @@ public class Arm : MonoBehaviour
         if (armState != ArmState.Ready) return;
         reloadInputBufferTimer = 0;
 
-        if (weaponInHand != null && weaponInHand.CanReload())
+        if (weaponInHand != null && weaponInHand.CanReload() && inventory.HasAmmo(weaponInHand.Data))
         {
             IfZoomedInExitZoom();
             armState = ArmState.Reloading;
@@ -264,7 +284,12 @@ public class Arm : MonoBehaviour
     {
         armState = ArmState.Ready;
         if (weaponInHand != null)
-            weaponInHand.ReloadFinished();
+        {
+            int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
+            int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
+            weaponInHand.ReloadFinished(ammoAdded);
+        }
+            
     }
 
 
@@ -376,6 +401,7 @@ public class Arm : MonoBehaviour
         if (pickUpScan.CanPickUpWeapon())
         {
             IfZoomedInExitZoom();
+            
             var newWeapon = pickUpScan.PickUpWeapon();
 
 
@@ -416,15 +442,24 @@ public class Arm : MonoBehaviour
         IfZoomedInExitZoom();
         OnWeaponDroped?.Invoke(weaponInHand);
         // if weapon is empty return null
-        if (weaponInHand.Magazine == 0 && weaponInHand.Reserve == 0)
+        if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
         {
-
             return null;
         }
 
         var pickUpVersion = weaponInHand.PickUpVersion;
         var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
-        pickUp.SetAmmo(weaponInHand.Magazine, weaponInHand.Reserve);
+
+
+        if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data))
+        {
+            pickUp.SetAmmo(weaponInHand.Magazine, 0); 
+        }
+        else
+        {
+            pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
+        }
+        
 
         weaponInHand = null;
         return pickUp;

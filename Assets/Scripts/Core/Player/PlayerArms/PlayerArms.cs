@@ -15,6 +15,7 @@ public class PlayerArms : MonoBehaviour
 
     [SerializeField] RightArm rightArm;
     [SerializeField] LeftArm leftArm;
+    [SerializeField] PlayerInventory inventory;
     [SerializeField] bool canDualWield2HandedWeapons = false;
     [SerializeField] float dualWieldMoveSpeedMultiplier = 1;
 
@@ -105,7 +106,56 @@ public class PlayerArms : MonoBehaviour
         }
     }
 
+    public bool HasWeapon(Weapon_Data weapon)
+    {
+        return rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data == weapon ||
+            leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data == weapon ||
+            inventory.GetWeapon() != null && inventory.GetWeapon().Data == weapon;
+    }
 
+    public bool HasMultipleOfTheSameWeapon(Weapon_Data weaponToCheck)
+    {
+        Weapon_Data rightWeapon = null;
+        Weapon_Data leftWeapon = null;
+        Weapon_Data weaponInInventory = null;
+
+        if (rightArm.CurrentWeapon != null)
+        {
+            rightWeapon = rightArm.CurrentWeapon.Data;
+        }
+
+        if (leftArm.CurrentWeapon != null)
+        {
+            leftWeapon = leftArm.CurrentWeapon.Data;
+        }
+
+        if (inventory.GetWeapon() != null)
+        {
+            weaponInInventory = inventory.GetWeapon().Data;
+        }
+
+
+        int count = 0;
+        if (rightWeapon != null && rightWeapon == weaponToCheck)
+        {
+            count++;
+        }
+
+        if (leftWeapon != null && leftWeapon == weaponToCheck)
+        {
+            count++;
+        }
+
+        if (weaponInInventory != null && weaponInInventory == weaponToCheck)
+        {
+            count++;
+        }
+
+        return count > 1;
+
+
+
+    }
 
 
 }

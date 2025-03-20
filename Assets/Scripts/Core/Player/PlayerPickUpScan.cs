@@ -14,6 +14,7 @@ public class PlayerPickUpScan : MonoBehaviour
     [SerializeField] PlayerInventory playerInventory;
 
     public Action<Weapon_PickUp> OnWeaponPickUpUpdate;
+    public Action<Weapon_PickUp> OnWeaponDualWieldUpdate;
     public Action OnWeaponPickUp;
 
 
@@ -23,15 +24,38 @@ public class PlayerPickUpScan : MonoBehaviour
         // check every 10 onweaponPickupUpdate
         if (Time.frameCount % 10 ==0)
         {
-            TrySendPickUpUpdate();
+            TrySendUpdates();
         }
     }
 
-    public void TrySendPickUpUpdate()
+    public void TrySendUpdates()
     {
         if (Time.time - lastPickUpTime > pickUpCooldown)
         {
-            OnWeaponPickUpUpdate?.Invoke(GetClosesPickUp());
+            var closesWeapon = GetClosesPickUp();
+            OnWeaponPickUpUpdate?.Invoke(closesWeapon);
+
+            var weaponInRightHand = playerArms.RightArm.GetWeaponInHand();
+            if (weaponInRightHand != null && closesWeapon != null)
+            {
+                var weaponTypeOfWeaponInHand = weaponInRightHand.WeaponType;
+                bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+
+                var weaponTypeOfWeaponOnGround = closesWeapon.WeaponType;
+                bool isDualWieldableOnGround = weaponTypeOfWeaponOnGround == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+
+                if (isDualWieldable && isDualWieldableOnGround)
+                {
+                    OnWeaponDualWieldUpdate?.Invoke(closesWeapon);
+                    return;
+                }
+
+
+
+            }
+
+            OnWeaponDualWieldUpdate?.Invoke(null);
+
         }
     }
 
@@ -44,16 +68,16 @@ public class PlayerPickUpScan : MonoBehaviour
             {
                 TransferAmmoFromWeaponOnGroundToPlayer(pickUp);
 
-                if (pickUp != null)
+                if (pickUp != null )
                 {
                     pickUpsInRange.Add(pickUp);
-                    TrySendPickUpUpdate();
+                    TrySendUpdates();
                 }
             }
             else
             {
                 pickUpsInRange.Add(pickUp);
-                TrySendPickUpUpdate();
+                TrySendUpdates();
             }
         }
     }
@@ -64,7 +88,7 @@ public class PlayerPickUpScan : MonoBehaviour
         if (pickUp != null)
         {
             pickUpsInRange.Remove(pickUp);
-            TrySendPickUpUpdate();
+            TrySendUpdates();
         }
     }
 
@@ -75,6 +99,9 @@ public class PlayerPickUpScan : MonoBehaviour
         var weaponInHand = playerArms.RightArm.GetWeaponInHand();
         if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData))
             return true;
+        var weaponInLeftHand = playerArms.LeftArm.GetWeaponInHand();
+        if (weaponInLeftHand != null && weaponInLeftHand.IsSameWeapon(weaponData))
+            return true;
         var weaponInInventory = playerInventory.GetWeapon();
         if (weaponInInventory != null && weaponInInventory.IsSameWeapon(weaponData))
             return true;
@@ -84,19 +111,14 @@ public class PlayerPickUpScan : MonoBehaviour
 
     public void TransferAmmoFromWeaponOnGroundToPlayer(Weapon_PickUp pickUp)
     {
-        var weaponInHand = playerArms.RightArm.GetWeaponInHand();
-        if (weaponInHand != null && weaponInHand.IsSameWeapon(pickUp.WeaponData))
+        if (playerArms.HasWeapon(pickUp.WeaponData))
         {
-            weaponInHand.TransferAmmo(pickUp);
+            playerInventory.TransferAmmoFromPickUp(pickUp);
+
+
         }
-        else
-        {
-            var weaponInInventory = playerInventory.GetWeapon();
-            if (weaponInInventory != null && weaponInInventory.IsSameWeapon(pickUp.WeaponData))
-            {
-                weaponInInventory.TransferAmmo(pickUp);
-            }
-        }
+
+        
     }
     public bool CanPickUpWeapon()
     {
@@ -118,10 +140,12 @@ public class PlayerPickUpScan : MonoBehaviour
     {
         var pickUp = GetClosesPickUp();
         pickUpsInRange.Remove(pickUp);
-        TrySendPickUpUpdate();
+        TrySendUpdates();
         lastPickUpTime = Time.time;
         if (pickUp == null)
             return null;
+
+        playerInventory.AddAmmo(pickUp.WeaponData, pickUp.AmmoInReserve);
         return pickUp.PickUp();
     }
 

@@ -15,7 +15,7 @@ public class Weapon_PickUp : MonoBehaviour
     public Weapon_Arms PickUp()
     {
         if (pickedUp) return null;
-        var weapon = new Weapon_Arms(weapon_Data, ammoInMagazine, ammoInReserve);
+        var weapon = new Weapon_Arms(weapon_Data, ammoInMagazine);
         pickedUp = true;
         OnPickUp?.Invoke(this);
         Destroy(gameObject, 0.01f); // Destroy the pickup object after 0.01 seconds to avoid multiple pickups
