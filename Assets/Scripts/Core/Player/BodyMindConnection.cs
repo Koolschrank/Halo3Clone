@@ -16,6 +16,7 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] TargetHitCollector targetHitCollector;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] PlayerStartEquipment playerStartEquipment;
+    [SerializeField] PlayerAnimation playerAnimation;
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
 
@@ -63,6 +64,11 @@ public class BodyMindConnection : MonoBehaviour
         {
             mesh.material = material;
         }
+    }
+
+    public void SetPlayerColor(Color color)
+    {
+        playerAnimation.SetPlayerColor(color);
     }
 
     public PlayerMind GetMind()

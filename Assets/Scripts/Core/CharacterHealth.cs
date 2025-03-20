@@ -3,11 +3,12 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.Events;
+using NUnit.Framework.Internal;
 
 public class CharacterHealth : Health
 {
 
-    [SerializeField] float damageMultiplier = 1; 
+    [SerializeField] float damageMultiplier = 1;
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
 
@@ -16,11 +17,11 @@ public class CharacterHealth : Health
     [SerializeField] float shildPopDamageNegation = 25;
     [SerializeField] float shildRegenDelay = 5;
     [SerializeField] float shildRegenAmountPerSecond = 20;
-    [SerializeField] GameObject shildPopParticalPrefab;
     float shildRegenTimer;
 
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
+
 
 
     [Header("Sound")]
@@ -36,6 +37,9 @@ public class CharacterHealth : Health
     public UnityEvent OnDamageTakenUnityEvent;
     public Action OnShildEnabled;
     public Action OnShildDisabled;
+    public Action OnShildDamageTaken;
+    public Action OnHealthDamageTaken;
+    public Action OnShildRechargeStarted;
 
 
     float maxShildMultiplier = 1;
@@ -54,7 +58,8 @@ public class CharacterHealth : Health
             maxShildMultiplier = 0;
             OnShildDisabled?.Invoke();
 
-        }else
+        }
+        else
         {
             currentShild = maxShild;
             maxShildMultiplier = 1;
@@ -87,7 +92,7 @@ public class CharacterHealth : Health
             return;
 
         base.Update();
-        if(shildRegenTimer > 0 && hasShild)
+        if (shildRegenTimer > 0 && hasShild)
         {
             shildRegenTimer -= Time.deltaTime;
             shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
@@ -102,8 +107,9 @@ public class CharacterHealth : Health
             if (currentShild == 0)
             {
                 shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                
-                
+                OnShildRechargeStarted?.Invoke();
+
+
 
             }
             shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
@@ -113,6 +119,8 @@ public class CharacterHealth : Health
             OnShildChanged?.Invoke(ShildPercentage);
 
         }
+
+        
     }
 
 
@@ -134,7 +142,7 @@ public class CharacterHealth : Health
 
     public override void TakeDamage(DamagePackage damagePackage)
     {
-        
+
 
         float damage = damagePackage.damageAmount * damageMultiplier;
 
@@ -143,7 +151,7 @@ public class CharacterHealth : Health
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if ( (currentShild <= 0 || damagePackage.canHeadShotShild) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint) )
+        if ((currentShild <= 0 || damagePackage.canHeadShotShild) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)
@@ -156,7 +164,8 @@ public class CharacterHealth : Health
 
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        if (hasShild && currentShild > 0) {
+        if (hasShild && currentShild > 0)
+        {
 
             var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
 
@@ -166,8 +175,8 @@ public class CharacterHealth : Health
                 damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
                 currentShild = 0;
                 OnShildChanged?.Invoke(0);
+                OnShildDamageTaken?.Invoke();
                 OnShildDepleted?.Invoke();
-                Instantiate(shildPopParticalPrefab, transform.position, Quaternion.identity);
                 AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
 
                 shildEmptySoundInstance.start();
@@ -175,25 +184,27 @@ public class CharacterHealth : Health
             }
             else
             {
-                
+                OnShildDamageTaken?.Invoke();
                 currentShild -= damageAgainstShild;
                 damage = 0;
                 OnShildChanged?.Invoke(ShildPercentage);
+
             }
         }
         if (damage > 0)
         {
             currentHeath -= damage;
             OnHealthChanged?.Invoke(HealthPercentage);
+            OnHealthDamageTaken?.Invoke();
         }
-        
+
 
 
         if (currentHeath <= 0)
         {
             currentHeath = 0;
             if (damageDealer != null)
-                damageDealer.CharacterKill(damagePackage,gameObject);
+                damageDealer.CharacterKill(damagePackage, gameObject);
             Die(damagePackage);
         }
         else
@@ -206,9 +217,9 @@ public class CharacterHealth : Health
             }
             shildRegenTimer = shildRegenDelay;
 
-            
+
         }
-       
+
         OnDamageTaken?.Invoke(damagePackage);
 
     }
@@ -218,7 +229,7 @@ public class CharacterHealth : Health
     {
         base.Die();
         ragdollTrigger.Activate(damagePackage);
-        
+
         dead = true;
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -233,4 +244,6 @@ public class CharacterHealth : Health
             return currentShild / maxShild;
         }
     }
+
+    
 }

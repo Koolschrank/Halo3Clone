@@ -48,6 +48,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 0}
   muzzleFlashSpawnPoint: {fileID: 0}
   muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  weaponAnimationIndex: 1
 --- !u!1001 &7302195536946739514
 PrefabInstance:
   m_ObjectHideFlags: 0

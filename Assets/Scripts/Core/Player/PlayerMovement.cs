@@ -38,7 +38,9 @@ public class PlayerMovement : MonoBehaviour
     float lastGroundTouch;
     [SerializeField] float crouchSpeed = 0.5f;
 
+
     float maxMoveSpeedMultiplier = 1f;
+
 
     [Header("Sound")]
     [SerializeField] EventReference walkSound;

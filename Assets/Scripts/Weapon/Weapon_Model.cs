@@ -7,6 +7,7 @@ public class Weapon_Model : MonoBehaviour
     [SerializeField] protected Transform bulletSpawnPoint;
     [SerializeField] protected Transform muzzleFlashSpawnPoint;
     [SerializeField] protected GameObject muzzleFlashPrefab;
+    [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -93,4 +94,7 @@ public class Weapon_Model : MonoBehaviour
         muzzle.transform.localScale = muzzleFlashSpawnPoint.localScale;
         muzzle.layer = gameObject.layer;
     }
+
+    // get animation index
+    public int WeaponAnimationIndex { get { return weaponAnimationIndex; } }
 }

@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] BodyMindConnection playerBodyPrefab;
 
-    [SerializeField] Material[] playerColors;
+    [SerializeField] Color[] playerColors;
     int currentLayer;
     List<int> playerLayers = new List<int>();
 
@@ -131,7 +131,7 @@ public class PlayerManager : MonoBehaviour
         playerBody.transform.position = spawnPoint.position;
         playerBody.transform.rotation = spawnPoint.rotation;
         playerBody.SetPlayTeamIndex();
-        playerBody.SetMaterial(playerColors[player.TeamIndex]);
+        playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
     }
 
 
@@ -140,7 +140,7 @@ public class PlayerManager : MonoBehaviour
         var playerBody = mind.PlayerBody;
         var connector = playerBody.GetComponent<BodyMindConnection>();
         connector.SetPlayTeamIndex();
-        connector.SetMaterial(playerColors[mind.TeamIndex]);
+        connector.SetPlayerColor(playerColors[mind.TeamIndex]);
     }
 
     public void RespawnPlayer(PlayerMind player)
@@ -148,15 +148,8 @@ public class PlayerManager : MonoBehaviour
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
-        playerBody.SetMaterial(playerColors[player.TeamIndex]);
+        playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
         player.UpdateLayers();
-    }
-
-    public Material GetPlayerColor(PlayerMind player)
-    {
-        var index = players.IndexOf(player);
-        if (index > playerColors.Length) return playerColors[playerColors.Length -1];
-        return playerColors[index];
     }
 
     public CinemachineCamera GetPlayerCamera(PlayerMind player)

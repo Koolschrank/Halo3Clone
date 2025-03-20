@@ -7,12 +7,21 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Transform lookTransform;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] CharacterHealth characterHealth;
     [SerializeField] CharacterController cc;
     [SerializeField] Animator animator;
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
     [SerializeField] Transform weaponSocketLeftHand;
+
+
+    [Header("Shild")]
+    [SerializeField] SkinnedMeshRenderer[] playerMeshes;
+    [SerializeField] Transform[] shildBrakeParticals;
+    [SerializeField] GameObject shildDepletedVisual;
+    [SerializeField] float minShildStrength = 3;
+    [SerializeField] float maxShildStrength = 12;
 
     GameObject weaponVisual;
     GameObject weaponVisualLeftHand;
@@ -26,6 +35,10 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float landRaycastDistance = 2.5f;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] float shildVisualRecoveryTime = 1;
+    [SerializeField] AnimationCurve shildVisualRecoveryCurve;
+
+    float shildVisualRecoveryTimer = 0;
 
     bool rightHandGripActive = true;
     bool leftHandGripActive = true;
@@ -65,6 +78,11 @@ public class PlayerAnimation : MonoBehaviour
         playerArms.LeftArm.OnWeaponDroped += DropWeaponLeftWeapon;
         playerArms.LeftArm.OnWeaponUnequipFinished += DropWeaponLeftWeapon;
 
+        characterHealth.OnShildDamageTaken += ShildDamageTaken;
+        characterHealth.OnShildDepleted += ShildDepleted;
+        characterHealth.OnShildRechargeStarted += ShildRechargeStarted;
+        characterHealth.OnDeath += DisableShildpPartical;
+        characterHealth.OnShildChanged += UpdateShildStrength;
 
         if (weaponVisual == null)
         {
@@ -94,6 +112,7 @@ public class PlayerAnimation : MonoBehaviour
         UpdateMove();
         UpdateGrip();
         UpdateAim();
+        UpdateShild();
     }
 
     public void UpdateAim()
@@ -152,6 +171,19 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         leftHandWeaponGrip.weight = Mathf.Clamp(leftHandWeaponGrip.weight + leftHandGripChangeThisFrame, 0, 1);
+    }
+
+    public void UpdateShild()
+    {
+        if (shildVisualRecoveryTimer > 0)
+        {
+            shildVisualRecoveryTimer -= Time.deltaTime;
+            SetShildVisualPower(shildVisualRecoveryTimer / shildVisualRecoveryTime);
+        }
+        else
+        {
+            SetShildVisualPower(0);
+        }
     }
 
     public void Jump()
@@ -228,6 +260,8 @@ public class PlayerAnimation : MonoBehaviour
         if (weaponVisual.TryGetComponent<Weapon_Model>(out Weapon_Model weaponModel))
         {
             weaponModel.SetUp(weapon);
+
+            animator.SetFloat("WeaponType", (float)weaponModel.WeaponAnimationIndex);
         }
         UtilityFunctions.SetLayerRecursively(weaponVisual, gameObject.layer);
     }
@@ -370,6 +404,75 @@ public class PlayerAnimation : MonoBehaviour
         return index >= 0 ? input.Substring(index + 1) : input; // Return original if no "_"
     }
 
+
+    public void ShildDamageTaken()
+    {
+        shildVisualRecoveryTimer = shildVisualRecoveryTime;
+        SetShildVisualPower(1);
+    }
+
+    public void ShildDepleted()
+    {
+        SetShildVisualPower(0);
+        shildVisualRecoveryTimer = 0;
+        foreach (var partical in shildBrakeParticals)
+        {
+            partical.gameObject.SetActive(true);
+        }
+        shildDepletedVisual.SetActive(true);
+    }
+
+    public void ShildRechargeStarted()
+    {
+        shildDepletedVisual.SetActive(false);
+
+    }
+
+    public void DisableShildpPartical()
+    {
+        shildDepletedVisual.SetActive(false);
+    }
+
+    public void SetPlayerColor(Color color)
+    {
+        foreach (var smr in playerMeshes)
+        {
+            Material materialInstance = smr.material;
+            materialInstance.SetColor("_ArmorColor", color);
+        }
+    }
+
+    public void UpdateShildStrength(float percentage)
+    {
+        float shildStrength = Mathf.Lerp(maxShildStrength, minShildStrength, percentage);
+        foreach (var smr in playerMeshes)
+        {
+            Material materialInstance = smr.material;
+
+            if (materialInstance.GetFloat("_Strength") == shildStrength)
+            {
+                return;
+            }
+            materialInstance.SetFloat("_Strength", shildStrength);
+        }
+    }
+
+    public void SetShildVisualPower(float power)
+    {
+        float truePower = shildVisualRecoveryCurve.Evaluate(power);
+
+        foreach (var smr in playerMeshes)
+        {
+            Material materialInstance = smr.material;
+
+            if (materialInstance.GetFloat("_Power") == truePower)
+            {
+                return;
+            }
+            materialInstance.SetFloat("_Power", truePower);
+        }
+
+    }
 
     public void SetLeftHandGrip(bool value)
     {
