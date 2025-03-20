@@ -11082,7 +11082,7 @@ PrefabInstance:
       objectReference: {fileID: 7573040687501960069}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: maxShildStrength
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: minShildStrength
@@ -11129,8 +11129,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8950159679603386068}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: shildVisualRecoveryCurve.m_Curve.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.data[1].inSlope
+      value: 2.958027
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.data[1].inWeight
+      value: 0.043333292
+      objectReference: {fileID: 0}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: shildStrengthCurve.m_Curve.Array.data[1].outSlope
+      value: 2.958027
       objectReference: {fileID: 0}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: shildVisualRecoveryCurve.m_Curve.Array.data[1].time

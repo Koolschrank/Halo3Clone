@@ -22,6 +22,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] GameObject shildDepletedVisual;
     [SerializeField] float minShildStrength = 3;
     [SerializeField] float maxShildStrength = 12;
+    [SerializeField] AnimationCurve shildStrengthCurve;
 
     GameObject weaponVisual;
     GameObject weaponVisualLeftHand;
@@ -444,7 +445,8 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateShildStrength(float percentage)
     {
-        float shildStrength = Mathf.Lerp(maxShildStrength, minShildStrength, percentage);
+        float percentageCurved = shildStrengthCurve.Evaluate(percentage);
+        float shildStrength = Mathf.Lerp(maxShildStrength, minShildStrength, percentageCurved);
         foreach (var smr in playerMeshes)
         {
             Material materialInstance = smr.material;
