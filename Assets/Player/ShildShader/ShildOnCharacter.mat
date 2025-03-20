@@ -86,7 +86,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _ArmorColor: {r: 1, g: 0, b: 0, a: 1}
+    - _ArmorColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 0.43412846, b: 0, a: 1}
     - _ScanLineColors: {r: 0.4867924, g: 0.29598933, b: 0, a: 1}
     - _ScanLineSpeed: {r: 0, g: -2, b: 0, a: 0}
