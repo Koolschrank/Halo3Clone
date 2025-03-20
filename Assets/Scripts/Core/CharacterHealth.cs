@@ -140,9 +140,14 @@ public class CharacterHealth : Health
         return headShotArea.transform;
     }
 
+    float firstShotTime = 0;
+
     public override void TakeDamage(DamagePackage damagePackage)
     {
-
+        if (currentShild == maxShild)
+        {
+            firstShotTime = Time.time;
+        }
 
         float damage = damagePackage.damageAmount * damageMultiplier;
 
@@ -234,7 +239,8 @@ public class CharacterHealth : Health
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-
+        float timeToKill = Time.time - firstShotTime;
+        Debug.Log("Time to kill: " + timeToKill);
     }
 
     public float ShildPercentage

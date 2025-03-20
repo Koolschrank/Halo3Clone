@@ -34,9 +34,9 @@ MonoBehaviour:
   weaponType: 0
   burstAmount: 0
   burstDelay: 0
-  damageMultiplier: 0.9
-  fireRateMultiplier: 1.27
-  inaccuracyMultiplier: 30
+  damageMultiplier: 1
+  fireRateMultiplier: 1.25
+  inaccuracyMultiplier: 10
   reloadTimeMultiplier: 1.5
   shootSound:
     Guid:

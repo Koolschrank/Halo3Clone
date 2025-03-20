@@ -97,7 +97,6 @@ public class Bullet : MonoBehaviour
             {
                 hit.rigidbody.AddForceAtPosition(damagePackage.forceVector, hit.point, ForceMode.Impulse);
             }
-            Debug.Log(hit.collider.name);
 
             if (hitParticle != null)
             {

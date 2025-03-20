@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
-  m_Name: PistolBullet
+  m_Name: HitScanSMG
   m_EditorClassIdentifier: 
-  damage: 21
-  force: 200
+  damage: 10
+  force: 100
   shildDamageMultiplier: 1
-  headShotMultiplier: 2
+  headShotMultiplier: 1
   canHeadShotShild: 0
   range: 50
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 25
+  rangeUntilDamageFalloff: 100
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0051979143
-      value: 0.9303982
+      time: 0
+      value: 1
       inSlope: 0
-      outSlope: 0
+      outSlope: -1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1.0066627
-      value: 0.67838675
-      inSlope: -0.34669378
-      outSlope: -0.34669378
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.10739132
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

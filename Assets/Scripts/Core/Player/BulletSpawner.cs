@@ -214,7 +214,7 @@ public class BulletSpawner : MonoBehaviour
                 damagePackage.forceVector = shotDirectionForThisBullet.normalized * bullet.Force;
                 damagePackage.hitPoint = hit.point;
 
-                damagePackage.damageAmount = bullet.Damage * bullet.GetDamageFalloff(hit.distance);
+                damagePackage.damageAmount = bullet.Damage * damageMultiplier * bullet.GetDamageFalloff(hit.distance);
 
                 // if hit health
                 if (hit.collider.TryGetComponent<Health>(out Health health))
