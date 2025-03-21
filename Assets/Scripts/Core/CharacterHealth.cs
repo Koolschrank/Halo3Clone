@@ -21,6 +21,7 @@ public class CharacterHealth : Health
 
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
+    [SerializeField] PlayerArms playerArms;
 
 
 
@@ -149,7 +150,8 @@ public class CharacterHealth : Health
             firstShotTime = Time.time;
         }
 
-        float damage = damagePackage.damageAmount * damageMultiplier;
+        float damageReduction = playerArms.DamageReduction;
+        float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction);
 
         TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)

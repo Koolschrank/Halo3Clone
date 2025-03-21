@@ -89,9 +89,8 @@ public class Weapon_Visual : Weapon_Model
         
     }
 
-    public void ThrowGranadeStart(GranadeStats granade)
+    public void ThrowGranadeStart(GranadeStats granade, float time)
     {
-        var time = granade.ThrowTime;
 
         var throwGranadeClip = GetAnimationClipByName("Throw");
         var animationLenght = GetAnimationLenght(throwGranadeClip);

@@ -294,6 +294,8 @@ public class Weapon_Arms
 
     public Weapon_Data Data => weaponData;
 
+    public float DamageReduction => weaponData.DamageReduction;
+
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {
         var missingAmmo = weaponData.ReserveSize - Reserve;

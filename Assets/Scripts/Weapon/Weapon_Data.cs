@@ -29,6 +29,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] bool canZoom;
     [SerializeField] float zoomFOV;
     [SerializeField] float moveSpeedMultiplier = 1f;
+    [SerializeField] float damageReduction = 0f;
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
     [SerializeField] WeaponType weaponType;
@@ -128,6 +129,8 @@ public class Weapon_Data : ScriptableObject
     public float MoveSpeedMultiplier => moveSpeedMultiplier;
 
     public WeaponType WeaponType => weaponType;
+
+    public float DamageReduction => damageReduction;
 }
 
 

@@ -10771,7 +10771,7 @@ MonoBehaviour:
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
-  rechargeGranadeTime: 12
+  rechargeGranadeTime: 1
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
 --- !u!114 &4471171138262044766
@@ -10831,6 +10831,7 @@ MonoBehaviour:
   shildRegenAmountPerSecond: 25
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
+  playerArms: {fileID: 3232609274750972410}
   shildEmptySound:
     Guid:
       Data1: 1763954669
@@ -10952,6 +10953,7 @@ MonoBehaviour:
   switchInputBuffer: 0.4
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
+  granadeThrowTimeMultiplierInDualWielding: 1.5
   noInvectoryInteraction: 1
 --- !u!114 &3970420054294455764
 MonoBehaviour:
@@ -10979,6 +10981,7 @@ MonoBehaviour:
   switchInputBuffer: 0.4
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
+  granadeThrowTimeMultiplierInDualWielding: 1.6
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

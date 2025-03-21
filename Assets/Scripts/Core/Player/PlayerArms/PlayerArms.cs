@@ -17,15 +17,16 @@ public class PlayerArms : MonoBehaviour
     [SerializeField] LeftArm leftArm;
     [SerializeField] PlayerInventory inventory;
     [SerializeField] bool canDualWield2HandedWeapons = false;
-    [SerializeField] float dualWieldMoveSpeedMultiplier = 1;
 
     bool isDualWielding = false;
 
-    public float DualWieldMoveSpeedMultiplier
+    float movementSpeedMultiplier = 1;
+
+    public float MovementSpeedMultiplier
     {
         get
         {
-            return dualWieldMoveSpeedMultiplier;
+            return movementSpeedMultiplier;
         }
     }
 
@@ -48,6 +49,31 @@ public class PlayerArms : MonoBehaviour
         LeftArm.OnWeaponDroped += (weapon) =>
         {
             ExitDualWielding();
+        };
+
+
+        rightArm.OnWeaponEquipStarted += (weapon, time) =>
+        {
+            SetDamageReduction();
+            SetMovementSpeedMultiplier();
+        };
+
+        rightArm.OnWeaponDroped += (weapon) =>
+        {
+            SetDamageReduction();
+            SetMovementSpeedMultiplier();
+        };
+
+        leftArm.OnWeaponEquipStarted += (weapon, time) =>
+        {
+            SetDamageReduction();
+            SetMovementSpeedMultiplier();
+        };
+
+        leftArm.OnWeaponDroped += (weapon) =>
+        {
+            SetDamageReduction();
+            SetMovementSpeedMultiplier();
         };
     }
 
@@ -77,7 +103,7 @@ public class PlayerArms : MonoBehaviour
         leftArm.SetWeaponToIfDualWielding(true);
 
 
-        
+
     }
 
     public void ExitDualWielding()
@@ -158,4 +184,51 @@ public class PlayerArms : MonoBehaviour
     }
 
 
+    float damageReduction = 0;
+    public float DamageReduction
+    {
+        get
+        {
+            return damageReduction;
+        }
+    }
+
+    public void SetDamageReduction()
+    {
+        damageReduction = 0;
+        Weapon_Arms rightWeapon = rightArm.CurrentWeapon;
+        Weapon_Arms leftWeapon = leftArm.CurrentWeapon;
+        if (rightWeapon != null)
+        {
+            damageReduction = rightWeapon.Data.DamageReduction;
+        }
+
+        if (leftWeapon != null)
+        {
+            float leftWeaponDamageReduction = leftWeapon.Data.DamageReduction;
+            if (leftWeaponDamageReduction > damageReduction)
+            {
+                damageReduction = leftWeaponDamageReduction;
+            }
+        }
+    }
+
+    public void SetMovementSpeedMultiplier()
+    {
+        movementSpeedMultiplier = 1;
+        Weapon_Arms rightWeapon = rightArm.CurrentWeapon;
+        Weapon_Arms leftWeapon = leftArm.CurrentWeapon;
+        if (rightWeapon != null)
+        {
+            movementSpeedMultiplier = rightWeapon.MoveSpeedMultiplier;
+        }
+        if (leftWeapon != null)
+        {
+            float leftWeaponMovementSpeedMultiplier = leftWeapon.MoveSpeedMultiplier;
+            if (leftWeaponMovementSpeedMultiplier > movementSpeedMultiplier)
+            {
+                movementSpeedMultiplier = leftWeaponMovementSpeedMultiplier;
+            }
+        }
+    }
 }

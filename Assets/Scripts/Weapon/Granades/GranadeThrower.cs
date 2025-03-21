@@ -11,10 +11,10 @@ public class GranadeThrower : MonoBehaviour
     GranadeStats granadeStats = null;
     [SerializeField] Transform mainTransform;
 
-    public void ThrowGranadeStart(GranadeStats granadeStats)
+    public void ThrowGranadeStart(GranadeStats granadeStats , float timeMultiplier)
     {
         this.granadeStats = granadeStats;
-        throwDelay = granadeStats.ThrowDelay;
+        throwDelay = granadeStats.ThrowDelay * timeMultiplier;
     }
 
     public void Update()

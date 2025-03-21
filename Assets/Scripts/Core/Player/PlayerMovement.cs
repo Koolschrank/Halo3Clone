@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             var moveSpeedMultiplier = 1f;
             if (arms.IsDualWielding)
             {
-                moveSpeedMultiplier = arms.DualWieldMoveSpeedMultiplier;
+                moveSpeedMultiplier = arms.MovementSpeedMultiplier;
             }
             else
             {

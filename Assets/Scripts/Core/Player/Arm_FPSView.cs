@@ -58,10 +58,10 @@ public class Arm_FPSView : MonoBehaviour
     }
 
 
-    public void ThrowGranadeStart(GranadeStats stats)
+    public void ThrowGranadeStart(GranadeStats stats, float time)
     {
         if (weaponVisual == null) return;
-        weaponVisual.ThrowGranadeStart(stats);
+        weaponVisual.ThrowGranadeStart(stats, time);
     }
 
     public void ThrowGranade(GameObject granade, GranadeStats stats)

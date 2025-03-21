@@ -17,7 +17,7 @@ public class Arm : MonoBehaviour
     public Action<Weapon_Arms> OnWeaponShoot;
     public Action<Weapon_Arms> OnWeaponUnequipFinished;
     public Action<Weapon_Arms> OnWeaponDroped;
-    public Action<GranadeStats> OnGranadeThrowStarted;
+    public Action<GranadeStats, float> OnGranadeThrowStarted;
     public Action<GameObject, GranadeStats> OnGranadeThrow;
     public Action<Weapon_Arms> OnZoomIn;
     public Action<Weapon_Arms> OnZoomOut;
@@ -57,6 +57,7 @@ public class Arm : MonoBehaviour
     [SerializeField] float granadeThrowInputBuffer = 0.4f;
     float granadeThrowInputBufferTimer;
     [SerializeField] float meleeAttackTimeMultiplierInDualWielding = 1.5f;
+    [SerializeField] float granadeThrowTimeMultiplierInDualWielding = 1.5f;
 
     private void Start()
     {
@@ -482,11 +483,16 @@ public class Arm : MonoBehaviour
         {
             IfZoomedInExitZoom();
             var granade = inventory.GranadeStats;
-            granadeThrower.ThrowGranadeStart(granade);
+            float timeMultiplier = 1;
+            if (playerArms.IsDualWielding)
+            {
+                timeMultiplier = granadeThrowTimeMultiplierInDualWielding;
+            }
+            granadeThrower.ThrowGranadeStart(granade, timeMultiplier);
             inventory.UseGranade();
             armState = ArmState.InGranadeThrow;
-            granadeThrowTimer = granade.ThrowTime;
-            OnGranadeThrowStarted?.Invoke(granade);
+            granadeThrowTimer = granade.ThrowTime * timeMultiplier;
+            OnGranadeThrowStarted?.Invoke(granade, granadeThrowTimer);
         }
     }
 

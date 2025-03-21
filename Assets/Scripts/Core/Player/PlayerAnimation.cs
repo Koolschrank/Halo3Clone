@@ -314,9 +314,10 @@ public class PlayerAnimation : MonoBehaviour
         UtilityFunctions.SetLayerRecursively(backpackWeaponVisual, gameObject.layer);
     }
 
-    public void ThrowGranadeStart(GranadeStats granade)
+    public void ThrowGranadeStart(GranadeStats granade, float time)
     {
-        float animationDuration =granade.ThrowDelay;
+        float delayPercent = granade.ThrowDelay / granade.ThrowTime;
+        float animationDuration = delayPercent * time;
 
         var throughInClip = GetAnimationClipByName("Throw");
         var animationLenght = GetAnimationLenght(throughInClip);
