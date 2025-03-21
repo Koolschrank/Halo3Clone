@@ -928,6 +928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapsToSelectFrom:
   - SmallArena
+  - MapTemplate
   - Island
   - Streets
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}

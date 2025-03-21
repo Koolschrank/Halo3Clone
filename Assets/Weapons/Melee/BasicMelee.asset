@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: BasicMelee
   m_EditorClassIdentifier: 
-  damage: 120
+  damage: 90
   force: 70
   delay: 0.15
   meleeTime: 0.8

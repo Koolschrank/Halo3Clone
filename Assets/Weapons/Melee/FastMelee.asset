@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: FastMelee
   m_EditorClassIdentifier: 
-  damage: 80
+  damage: 70
   force: 60
   delay: 0.1
   meleeTime: 0.54

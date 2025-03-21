@@ -10815,12 +10815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505f5921ce3eb7b4ba29631c55673d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHeath: 70
-  currentHeath: 70
+  maxHeath: 50
+  currentHeath: 50
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 2.5
-  healthRegenAmountPerSecond: 6
+  healthRegenDelay: 2
+  healthRegenAmountPerSecond: 10
   damageMultiplier: 1
   hasShild: 1
   headShotOneShot: 1

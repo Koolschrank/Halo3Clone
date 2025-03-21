@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  damage: 90
+  damage: 75
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2

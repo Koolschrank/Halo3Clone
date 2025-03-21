@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 37509d1f749830c47a57406b0640cafd
   - enabled: 1
+    path: Assets/Scenes/TeamMaps/MapTemplate/MapTemplate.unity
+    guid: f43a17f8170a90a49a6c4101a9700ed7
+  - enabled: 1
     path: Assets/Scenes/SmallArena.unity
     guid: aeb5378e57e0a1440858dc5350ae0ff1
   - enabled: 1

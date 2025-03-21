@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
-  m_Name: Slayer
+  m_Name: TestGameMode
   m_EditorClassIdentifier: 
   gameModeName: 'Elimination '
   startingEquipment:
@@ -27,7 +27,7 @@ MonoBehaviour:
     granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
     granadeCount: 1
   timeLimitInMinutes: 10
-  pointsToWin: 10
+  pointsToWin: 100
   teamCount: 8
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0

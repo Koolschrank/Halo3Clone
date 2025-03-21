@@ -22,7 +22,7 @@ MonoBehaviour:
   bulletsPerShot: 1
   magazineSize: 30
   maxAmmoInReserve: 90
-  reloadTime: 1.8
+  reloadTime: 1.7
   inaccuracy: 0.03
   switchOutTime: 0.2
   switchInTime: 0.3
