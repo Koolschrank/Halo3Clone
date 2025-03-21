@@ -13,6 +13,9 @@ public class WFX_LightFlicker : MonoBehaviour
 	public float time = 0.05f;
 	
 	private float timer;
+
+	[SerializeField] bool flikerOnce;
+	bool notFlickerdYet = true;
 	
 	void Start ()
 	{
@@ -22,7 +25,7 @@ public class WFX_LightFlicker : MonoBehaviour
 	
 	IEnumerator Flicker()
 	{
-		while(true)
+		while(notFlickerdYet)
 		{
 			GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
 			
@@ -33,6 +36,13 @@ public class WFX_LightFlicker : MonoBehaviour
 			}
 			while(timer > 0);
 			timer = time;
+
+			if (flikerOnce)
+			{
+                notFlickerdYet = false;
+				GetComponent<Light>().enabled = false;
+            }
+				
 		}
 	}
 }

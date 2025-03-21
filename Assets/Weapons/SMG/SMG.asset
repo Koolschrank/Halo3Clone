@@ -29,6 +29,7 @@ MonoBehaviour:
   canZoom: 1
   zoomFOV: 35
   moveSpeedMultiplier: 1
+  damageReduction: 0
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
   burstDelay: 0.1
   damageMultiplier: 0.85
   fireRateMultiplier: 1
-  inaccuracyMultiplier: 3
+  inaccuracyMultiplier: 2.75
   reloadTimeMultiplier: 1.5
   shootSound:
     Guid:

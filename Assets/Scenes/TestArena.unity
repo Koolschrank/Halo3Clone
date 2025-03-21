@@ -7449,6 +7449,10 @@ PrefabInstance:
       propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[7]'
       value: 
       objectReference: {fileID: 1004407695}
+    - target: {fileID: 8403267331934518576, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: gameSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8781002057444987038, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_IsActive
       value: 0

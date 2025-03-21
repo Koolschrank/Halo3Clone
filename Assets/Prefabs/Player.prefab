@@ -10771,7 +10771,7 @@ MonoBehaviour:
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
-  rechargeGranadeTime: 1
+  rechargeGranadeTime: 15
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
 --- !u!114 &4471171138262044766
@@ -10926,7 +10926,6 @@ MonoBehaviour:
   leftArm: {fileID: 3844945188849078822}
   inventory: {fileID: 7573040687501960069}
   canDualWield2HandedWeapons: 0
-  dualWieldMoveSpeedMultiplier: 1
 --- !u!114 &3844945188849078822
 MonoBehaviour:
   m_ObjectHideFlags: 0

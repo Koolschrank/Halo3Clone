@@ -461,7 +461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 5172114726302232939}
   muzzleFlashSpawnPoint: {fileID: 8831925217553507735}
-  muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  muzzleFlashPrefab: {fileID: 100000, guid: 8a6a3f6958b4c1f4286cb9a4eace8e88, type: 3}
+  weaponAnimationIndex: 0
   animator: {fileID: 113404401569806681}
   OnShoot:
     m_PersistentCalls:

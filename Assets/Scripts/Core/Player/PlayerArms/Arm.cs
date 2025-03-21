@@ -242,7 +242,7 @@ public class Arm : MonoBehaviour
         wasTriggerPressed = isTriggerPressed;
 
 
-        if ((armState == ArmState.Shooting) && !weaponInHand.IsInShootCooldown())
+        if ((armState == ArmState.Shooting) && weaponInHand != null && !weaponInHand.IsInShootCooldown())
         {
             armState = ArmState.Ready;
         }

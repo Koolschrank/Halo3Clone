@@ -358,7 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 255709162125137471}
   muzzleFlashSpawnPoint: {fileID: 255709162125137471}
-  muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  muzzleFlashPrefab: {fileID: 100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+  weaponAnimationIndex: 0
   animator: {fileID: 8242606572955927572}
   OnShoot:
     m_PersistentCalls:
@@ -424,6 +425,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 255709162125137471}
   muzzleFlashSpawnPoint: {fileID: 255709162125137471}
   muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  weaponAnimationIndex: 0
 --- !u!1 &8652754272784216957
 GameObject:
   m_ObjectHideFlags: 0
