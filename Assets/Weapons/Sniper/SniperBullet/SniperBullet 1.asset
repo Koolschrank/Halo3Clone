@@ -47,7 +47,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   trail: {fileID: 7783241535111576775, guid: 3cbb8aaea6a9bce43bd21ea425f5555d, type: 3}
-  impact: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  impact_body: {fileID: 100002, guid: 0f0f9fc6229e6154bb8985951c94750f, type: 3}
+  impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   bodyHitSound:
     Guid:
       Data1: 0

@@ -16,7 +16,8 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     [SerializeField] AnimationCurve damageFalloff = AnimationCurve.Linear(0, 1, 1, 0);
 
     [SerializeField] GameObject trail;
-    [SerializeField] GameObject impact;
+    [SerializeField] GameObject impact_body;
+    [SerializeField] GameObject impact_ground;
 
     [Header("Sound")]
     [SerializeField] EventReference bodyHitSound;
@@ -33,7 +34,10 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     public LayerMask HitLayer => hitLayer;
 
     public GameObject Trail => trail;
-    public GameObject Impact => impact;
+
+    public GameObject ImpactBody => impact_body;
+
+    public GameObject ImpactGround => impact_ground;
 
     // hit sound
     public EventReference BodyHitSound => bodyHitSound;

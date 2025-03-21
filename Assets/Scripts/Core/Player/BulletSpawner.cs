@@ -216,24 +216,45 @@ public class BulletSpawner : MonoBehaviour
 
                 damagePackage.damageAmount = bullet.Damage * damageMultiplier * bullet.GetDamageFalloff(hit.distance);
 
+
+                bool bodyHit = false;
                 // if hit health
                 if (hit.collider.TryGetComponent<Health>(out Health health))
                 {
                     health.TakeDamage(damagePackage);
-                    AudioManager.instance.PlayOneShot(bullet.BodyHitSound, hit.point);
+                    
+                    bodyHit = true;
                 }
                 else
                 {
-                    AudioManager.instance.PlayOneShot(bullet.GroundHitSound, hit.point);
+                    // if layer is dead player layer
+                    if (hit.collider.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
+                    {
+                        bodyHit = true;
+                    }
+
+                    
                 }
                 if (hit.collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
                 {
                     rb.AddForceAtPosition(damagePackage.forceVector, hit.point, ForceMode.Impulse);
                 }
 
-                GameObject impact = Instantiate(bullet.Impact, hit.point, Quaternion.identity);
-                // get normal of hit point
-                impact.transform.forward = hit.normal;
+                if (bodyHit)
+                {
+                    AudioManager.instance.PlayOneShot(bullet.BodyHitSound, hit.point);
+                    GameObject impact = Instantiate(bullet.ImpactBody, hit.point, Quaternion.identity);
+                    // get normal of hit point
+                    impact.transform.forward = hit.normal;
+                    
+                }
+                else
+                {
+                    AudioManager.instance.PlayOneShot(bullet.GroundHitSound, hit.point);
+                    GameObject impact = Instantiate(bullet.ImpactGround, hit.point, Quaternion.identity);
+                    
+                    impact.transform.forward = hit.normal;
+                }
                 hitPoints[i] = hit.point;
 
                

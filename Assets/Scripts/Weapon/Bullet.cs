@@ -14,7 +14,8 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] float copyTransitionSpeed;
 
-    [SerializeField] GameObject hitParticle;
+    [SerializeField] GameObject bodyHitPartical;
+    [SerializeField] GameObject groundHitPartical;
     [SerializeField] GameObject[] destroyObjects;
 
     [Header("Audio")]
@@ -82,15 +83,22 @@ public class Bullet : MonoBehaviour
 
             damagePackage.forceVector = direction.normalized * force;
             damagePackage.hitPoint = hit.point;
-
+            bool bodyHit = false;
             if (hit.collider.TryGetComponent<Health>(out Health health))
             {
                 health.TakeDamage(damagePackage);
-                AudioManager.instance.PlayOneShot(bodyHitSound, hit.point);
+                
+                bodyHit = true;
             }
             else
             {
-                AudioManager.instance.PlayOneShot(groundHitSound, hit.point);
+
+                // if layer is dead player layer
+                if (hit.collider.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
+                {
+                    bodyHit = true;
+                }
+
             }
             // if hit has rigidbody
             if (hit.rigidbody != null)
@@ -98,12 +106,26 @@ public class Bullet : MonoBehaviour
                 hit.rigidbody.AddForceAtPosition(damagePackage.forceVector, hit.point, ForceMode.Impulse);
             }
 
-            if (hitParticle != null)
-            {
-                Instantiate(hitParticle, hit.point, Quaternion.identity);
-                // rotate the particle to the normal of the hit point
-                hitParticle.transform.forward = hit.normal;
+            // spawn the hit particle
 
+
+            if (bodyHit)
+            {
+                AudioManager.instance.PlayOneShot(bodyHitSound, hit.point);
+                if (bodyHitPartical != null)
+                {
+                    Instantiate(bodyHitPartical, hit.point, Quaternion.identity);
+                    bodyHitPartical.transform.forward = hit.normal;
+                }
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(groundHitSound, hit.point);
+                if (groundHitPartical != null)
+                {
+                    Instantiate(groundHitPartical, hit.point, Quaternion.identity);
+                    groundHitPartical.transform.forward = hit.normal;
+                }
             }
 
             for (int i = 0; i < destroyObjects.Length; i++)

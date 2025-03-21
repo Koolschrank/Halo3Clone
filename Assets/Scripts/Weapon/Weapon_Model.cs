@@ -5,8 +5,7 @@ public class Weapon_Model : MonoBehaviour
 {
     protected Weapon_Arms weapon;
     [SerializeField] protected Transform bulletSpawnPoint;
-    [SerializeField] protected Transform muzzleFlashSpawnPoint;
-    [SerializeField] protected GameObject muzzleFlashPrefab;
+    [SerializeField] protected GameObject muzzleFlash;
     [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,20 +51,25 @@ public class Weapon_Model : MonoBehaviour
 
         bulletClone.layer = gameObject.layer;
 
-        SpawnMuzzleFlash();
+        TriggerPartical();
     }
 
     public void SpawnBulletLine(Vector3 target)
     {
         var bulletData = weapon.Bullet as Weapon_Bullet_Hitscan;
-        var bulletRay = Instantiate(bulletData.Trail, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
-        var bulletScript = bulletRay.GetComponent<BulletTrail>();
+        if (bulletData.Trail != null)
+        {
+            var bulletRay = Instantiate(bulletData.Trail, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
+            var bulletScript = bulletRay.GetComponent<BulletTrail>();
 
-        bulletRay.layer = gameObject.layer;
+            bulletRay.layer = gameObject.layer;
 
-        bulletScript.ShowTrail(target - bulletSpawnPoint.position);
-        bulletRay.layer = gameObject.layer;
-        SpawnMuzzleFlash();
+            bulletScript.ShowTrail(target - bulletSpawnPoint.position);
+            bulletRay.layer = gameObject.layer;
+        }
+        
+        
+        TriggerPartical();
     }
 
     public void SpawnGranadeClone(GameObject granade)
@@ -85,14 +89,20 @@ public class Weapon_Model : MonoBehaviour
 
         granadeClone.layer = gameObject.layer;
 
-        SpawnMuzzleFlash();
+        TriggerPartical();
     }
 
-    public void SpawnMuzzleFlash()
+    public void TriggerPartical()
     {
-        var muzzle =Instantiate(muzzleFlashPrefab, muzzleFlashSpawnPoint.position, muzzleFlashSpawnPoint.rotation) as GameObject;
-        muzzle.transform.localScale = muzzleFlashSpawnPoint.localScale;
-        muzzle.layer = gameObject.layer;
+        if (muzzleFlash == null) return;
+
+        if (muzzleFlash.activeSelf)
+        {
+            muzzleFlash.SetActive(false);
+        }
+
+        // enable muzzle flash
+        muzzleFlash.SetActive(true);
     }
 
     // get animation index

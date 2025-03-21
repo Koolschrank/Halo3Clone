@@ -78,8 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 255709162125137471}
-  muzzleFlashSpawnPoint: {fileID: 255709162125137471}
-  muzzleFlashPrefab: {fileID: 100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+  muzzleFlash: {fileID: 6941847535785784419}
   weaponAnimationIndex: 0
   animator: {fileID: 8242606572955927572}
   OnShoot:
@@ -617,6 +616,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8396158248225550356, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 255709162125137471}
+    - targetCorrespondingSourceObject: {fileID: 8396158248225550356, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6941847535785420867}
     - targetCorrespondingSourceObject: {fileID: 1982775587518466647, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 940923271565672240}
@@ -631,6 +633,77 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8396158248225550356, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
   m_PrefabInstance: {fileID: 3252932946363197948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6941847535785816771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6458610700692986344}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_Name
+      value: Muzzle3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.057
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.854
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.000000295028
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 8.792485e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000029802354
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+--- !u!4 &6941847535785420867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+  m_PrefabInstance: {fileID: 6941847535785816771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6941847535785784419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 3b36c04aa646e954e8f5fc748d347021, type: 3}
+  m_PrefabInstance: {fileID: 6941847535785816771}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9029751834593781003
 PrefabInstance:
