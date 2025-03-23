@@ -22,8 +22,8 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 3
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 5
+    sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    magazinsOfSideArm: 3
     granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
     granadeCount: 1
   timeLimitInMinutes: 10

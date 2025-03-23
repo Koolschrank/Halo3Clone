@@ -6005,54 +6005,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1903847369093816303, guid: 8474d700cf8a0bc40b2977b4e561110f, type: 3}
   m_PrefabInstance: {fileID: 154968016}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &156576788
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 156576789}
-  - component: {fileID: 156576790}
-  m_Layer: 0
-  m_Name: Pistol (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &156576789
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156576788}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.23624699, z: -0, w: 0.97169304}
-  m_LocalPosition: {x: 53.66, y: 5.65, z: -1.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 711893151}
-  m_LocalEulerAnglesHint: {x: 0, y: -27.33, z: 0}
---- !u!114 &156576790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156576788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
-  spawnTime: 30
-  magazines: 4
 --- !u!1001 &157980172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27328,10 +27280,6 @@ Transform:
   - {fileID: 1029434201}
   - {fileID: 1702121990}
   - {fileID: 1451852306}
-  - {fileID: 768457423}
-  - {fileID: 2147091260}
-  - {fileID: 1287672889}
-  - {fileID: 156576789}
   - {fileID: 949163050}
   - {fileID: 317272504}
   - {fileID: 983211472}
@@ -29747,54 +29695,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3870208824498330349, guid: c19b4b7fad123cd40a398e27a00f1259, type: 3}
   m_PrefabInstance: {fileID: 768121999}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &768457422
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 768457423}
-  - component: {fileID: 768457424}
-  m_Layer: 0
-  m_Name: Pistol
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &768457423
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768457422}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.23624699, z: -0, w: 0.97169304}
-  m_LocalPosition: {x: 53.07, y: 5.65, z: 2.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 711893151}
-  m_LocalEulerAnglesHint: {x: 0, y: -27.33, z: 0}
---- !u!114 &768457424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768457422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
-  spawnTime: 30
-  magazines: 4
 --- !u!1001 &770086808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50673,7 +50573,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
-  magazines: 8
+  magazines: 3
 --- !u!1001 &1158102530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56763,54 +56663,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5970615318602822724, guid: bd3ba1edf4dd78c49bbc73f49adbe5e2, type: 3}
   m_PrefabInstance: {fileID: 1283684312}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1287672888
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1287672889}
-  - component: {fileID: 1287672890}
-  m_Layer: 0
-  m_Name: Pistol (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1287672889
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287672888}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.23624699, z: -0, w: 0.97169304}
-  m_LocalPosition: {x: -54.28, y: 5.65, z: 2.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 711893151}
-  m_LocalEulerAnglesHint: {x: 0, y: -27.33, z: 0}
---- !u!114 &1287672890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287672888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
-  spawnTime: 30
-  magazines: 4
 --- !u!4 &1288207143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6248888815015760116, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
@@ -74401,7 +74253,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
-  magazines: 8
+  magazines: 3
 --- !u!1001 &1718242576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85510,54 +85362,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 495259229835682767, guid: 9119102f8ea2b2243911909a16be4b9b, type: 3}
   m_PrefabInstance: {fileID: 2144265344}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2147091259
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2147091260}
-  - component: {fileID: 2147091261}
-  m_Layer: 0
-  m_Name: Pistol (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2147091260
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147091259}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.23624699, z: -0, w: 0.97169304}
-  m_LocalPosition: {x: -54.34, y: 5.65, z: -2.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 711893151}
-  m_LocalEulerAnglesHint: {x: 0, y: -27.33, z: 0}
---- !u!114 &2147091261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2147091259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: d83f6a08897a2824cb559e5b9b4484f9, type: 3}
-  spawnTime: 30
-  magazines: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
   weaponName: ShotGun
   shootType: 1
-  fireRate: 0.8
+  fireRate: 0.9
   bulletsPerShot: 20
   magazineSize: 2
   maxAmmoInReserve: 10
@@ -29,11 +29,16 @@ MonoBehaviour:
   canZoom: 0
   zoomFOV: 0
   moveSpeedMultiplier: 1
+  damageReduction: 0
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
   weaponType: 1
   burstAmount: 0
   burstDelay: 0
+  damageMultiplier: 1
+  fireRateMultiplier: 1
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1
   shootSound:
     Guid:
       Data1: -1842625480

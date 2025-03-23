@@ -712,6 +712,138 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""QuickMenu"",
+            ""id"": ""2d31a3e7-3df3-4236-8b18-cd6537dd8544"",
+            ""actions"": [
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""10cd804d-fdbd-43c2-b30d-dfec2a65b5b7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5f448b6-a939-4a02-8e3a-2a5acfdfd97e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""88275807-fd5a-4d3f-b14b-8cfa2055e904"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""3fb0100b-1156-4647-9e92-ddfa0c5ffc9d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""951e0810-00c3-4028-a6e7-d153548dc4da"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b4da970-dc9b-4cb6-a295-052fb74f4ffc"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""296f41ef-aa21-417f-9d06-5ed3293b54db"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""903ed74a-a175-4cab-b6de-d79b7eacb736"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6686acb8-3ffd-4089-a212-505a0989fc1e"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f77c09a2-6983-4300-89a1-8286d0e641b4"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c07947e0-6773-44c7-a00e-6b21ca77ea01"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60e37053-7395-4e63-bcfe-54efe3c7e97a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -769,6 +901,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_PlayerGunPlay_DualWeapons_PickUpWeapon = m_PlayerGunPlay_DualWeapons.FindAction("PickUpWeapon", throwIfNotFound: true);
         m_PlayerGunPlay_DualWeapons_ThrowGranade = m_PlayerGunPlay_DualWeapons.FindAction("ThrowGranade", throwIfNotFound: true);
         m_PlayerGunPlay_DualWeapons_Melee = m_PlayerGunPlay_DualWeapons.FindAction("Melee", throwIfNotFound: true);
+        // QuickMenu
+        m_QuickMenu = asset.FindActionMap("QuickMenu", throwIfNotFound: true);
+        m_QuickMenu_Left = m_QuickMenu.FindAction("Left", throwIfNotFound: true);
+        m_QuickMenu_Right = m_QuickMenu.FindAction("Right", throwIfNotFound: true);
+        m_QuickMenu_Down = m_QuickMenu.FindAction("Down", throwIfNotFound: true);
+        m_QuickMenu_Up = m_QuickMenu.FindAction("Up", throwIfNotFound: true);
     }
 
     ~@Controller()
@@ -776,6 +914,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controller.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerGunPlay_SingleWeapon.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_SingleWeapon.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerGunPlay_DualWeapons.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_DualWeapons.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_QuickMenu.enabled, "This will cause a leak and performance issues, Controller.QuickMenu.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1099,6 +1238,76 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         }
     }
     public PlayerGunPlay_DualWeaponsActions @PlayerGunPlay_DualWeapons => new PlayerGunPlay_DualWeaponsActions(this);
+
+    // QuickMenu
+    private readonly InputActionMap m_QuickMenu;
+    private List<IQuickMenuActions> m_QuickMenuActionsCallbackInterfaces = new List<IQuickMenuActions>();
+    private readonly InputAction m_QuickMenu_Left;
+    private readonly InputAction m_QuickMenu_Right;
+    private readonly InputAction m_QuickMenu_Down;
+    private readonly InputAction m_QuickMenu_Up;
+    public struct QuickMenuActions
+    {
+        private @Controller m_Wrapper;
+        public QuickMenuActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Left => m_Wrapper.m_QuickMenu_Left;
+        public InputAction @Right => m_Wrapper.m_QuickMenu_Right;
+        public InputAction @Down => m_Wrapper.m_QuickMenu_Down;
+        public InputAction @Up => m_Wrapper.m_QuickMenu_Up;
+        public InputActionMap Get() { return m_Wrapper.m_QuickMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(QuickMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IQuickMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_QuickMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_QuickMenuActionsCallbackInterfaces.Add(instance);
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+        }
+
+        private void UnregisterCallbacks(IQuickMenuActions instance)
+        {
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+        }
+
+        public void RemoveCallbacks(IQuickMenuActions instance)
+        {
+            if (m_Wrapper.m_QuickMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IQuickMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_QuickMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_QuickMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public QuickMenuActions @QuickMenu => new QuickMenuActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -1144,5 +1353,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnPickUpWeapon(InputAction.CallbackContext context);
         void OnThrowGranade(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
+    }
+    public interface IQuickMenuActions
+    {
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
     }
 }

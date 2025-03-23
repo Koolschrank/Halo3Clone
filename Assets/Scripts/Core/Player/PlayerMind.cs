@@ -43,6 +43,10 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
     [SerializeField] ObjectiveIndicatorUI objectiveIndicatorUI;
+    [Header("UI Settings Menu")]
+    [SerializeField] SettingsQuickMenu settingsQuickMenu;
+    [SerializeField] SensitivitySlider sensitivitySlider;
+
 
     [Header("Input Settings")]
     [SerializeField] float holdButtonToPickUpTime = 0.2f;
@@ -57,6 +61,7 @@ public class PlayerMind : MonoBehaviour
     BulletSpawner bulletSpawner;
     PlayerPickUpScan playerPickUpScan;
     PlayerInventory playerInventory;
+    PlayerSettings playerSettings;
 
 
 
@@ -69,11 +74,14 @@ public class PlayerMind : MonoBehaviour
         playerInput.actions.FindActionMap("Player").Enable();
         playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
+
+        
     }
 
     public void EnterDualWeaponMode()
     {
         playerInput.actions.FindActionMap("Player").Enable();
+        
         playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Enable();
     }
@@ -82,8 +90,14 @@ public class PlayerMind : MonoBehaviour
     {
         GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
+        string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
+        Debug.Log(deviceName + " joined");
+        playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
+
+
         PlayerManager.instance.AddPlayer(this);
 
+        playerInput.actions.FindActionMap("QuickMenu").Enable();
         
     }
 
@@ -139,6 +153,8 @@ public class PlayerMind : MonoBehaviour
     public void SetPlayerAim(PlayerAim aim)
     {
         playerAim = aim;
+
+        aim.OnSensitivityMultiplierChanged += sensitivitySlider.UpdateValues;
     }
 
     // set arms
@@ -176,6 +192,8 @@ public class PlayerMind : MonoBehaviour
         {
             EnterOneWeaponMode();
         }
+
+       
     }
 
     // set bullet spawner
@@ -260,6 +278,20 @@ public class PlayerMind : MonoBehaviour
 
         Vector2 look = context.ReadValue<Vector2>();
         playerAim.UpdateAimInput(look);
+
+
+        if (playerSettings != null)
+        {
+            playerAim.SetSensetivityWithNoActionSent(this.playerSettings.sensitivity);
+            // connect to PlayerSettings value change it only takes in one float instead of two
+            playerAim.OnSensitivityMultiplierChanged += (value, percent) => playerSettings.SetSensitivity(value);
+        }
+        else
+        {
+            // debug error
+            Debug.LogError("PlayerSettings is null");
+
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -432,6 +464,25 @@ public class PlayerMind : MonoBehaviour
         playerArms.LeftArm.UpdateWeaponTrigger(context.ReadValue<float>() > 0);
     }
 
+    public void AddToSensetivity(InputAction.CallbackContext context)
+    {
+        if (playerAim == null) return;
+        if (context.performed)
+        {
+            playerAim.AddSensetivity();
+        }
+
+    }
+
+    public void ReduceFromSensetivity(InputAction.CallbackContext context)
+    {
+        if (playerAim == null) return;
+        if (context.performed)
+        {
+            playerAim.ReduceSensetivity();
+        }
+    }
+
     public void WeaponReload_1(InputAction.CallbackContext context)
     {
         WeaponReload(context);
@@ -564,6 +615,8 @@ public class PlayerMind : MonoBehaviour
     {
         playerCamera.SetScreenRect(screen, channel);
     }
+
+
 
     public int TeamIndex { get { return team.TeamIndex; } }
 

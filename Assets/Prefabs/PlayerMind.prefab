@@ -304,6 +304,8 @@ MonoBehaviour:
   hitMarkerUI: {fileID: 973657641611872543}
   minimapUI: {fileID: 8725600332119897690}
   objectiveIndicatorUI: {fileID: 4800970749985148627}
+  settingsQuickMenu: {fileID: 8575887476298330554}
+  sensitivitySlider: {fileID: 3880309612561890731}
   holdButtonToPickUpTime: 0.175
 --- !u!114 &2923737641940389727
 MonoBehaviour:
@@ -610,6 +612,46 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2cefefc0-c65b-4478-95e6-03e3e297982c
     m_ActionName: 'PlayerGunPlay_SingleWeapon/SwitchWeapon[/DualSenseGamepadHID/buttonNorth,/DualSenseGamepadHID1/buttonNorth,/DualShock4GamepadHID/buttonNorth,/DualShock4GamepadHID1/buttonNorth,/XInputControllerWindows/buttonNorth,/Keyboard/1,/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: ReduceFromSensetivity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10cd804d-fdbd-43c2-b30d-dfec2a65b5b7
+    m_ActionName: 'QuickMenuInput/Left[/XInputControllerWindows/dpad/left]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: AddToSensetivity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c5f448b6-a939-4a02-8e3a-2a5acfdfd97e
+    m_ActionName: 'QuickMenuInput/Right[/XInputControllerWindows/dpad/right]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 88275807-fd5a-4d3f-b14b-8cfa2055e904
+    m_ActionName: 'QuickMenuInput/Down[/XInputControllerWindows/dpad/down]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3fb0100b-1156-4647-9e92-ddfa0c5ffc9d
+    m_ActionName: 'QuickMenuInput/Up[/XInputControllerWindows/dpad/up]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1164,6 +1206,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8632265411439034279, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: headUI
+      value: 
+      objectReference: {fileID: 7309338090501931411}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerTeam
       value: 
@@ -1462,6 +1508,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a8d794eae0b6143a01cb1f7b5f6fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3880309612561890731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3824113081949467574, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b409268fd65e34a44880020e28fe2c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3963887290950628199 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4020260791520427386, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
@@ -1542,6 +1599,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4920d2d7885c4a4caa2f0fd42ae8a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &7309338090501931411 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7325007876476686222, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8575887476298330554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8632265411439034279, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c487ec2e0cfb6149a6e7c11ab43189b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8725600332119897690 stripped

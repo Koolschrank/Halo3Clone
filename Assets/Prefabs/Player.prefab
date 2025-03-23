@@ -10755,6 +10755,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   aimSupportSlowDown: 0.4
+  minSensitivity: 0.1
+  maxSensitivity: 2
+  sensitivityChangeSteps: 0.1
 --- !u!114 &7573040687501960069
 MonoBehaviour:
   m_ObjectHideFlags: 0

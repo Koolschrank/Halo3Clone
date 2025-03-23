@@ -957,17 +957,17 @@ MonoBehaviour:
       targetDisplay: 0
   - screenRectValues:
     - x: 0
-      y: 0.5
+      y: 0
       width: 1
-      height: 0.5
-      FOV: 55
+      height: 1
+      FOV: 75
       targetDisplay: 0
     - x: 0
       y: 0
       width: 1
-      height: 0.5
-      FOV: 55
-      targetDisplay: 0
+      height: 1
+      FOV: 75
+      targetDisplay: 1
   - screenRectValues:
     - x: 0
       y: 0.5

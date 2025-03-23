@@ -132,6 +132,8 @@ public class PlayerManager : MonoBehaviour
         playerBody.transform.rotation = spawnPoint.rotation;
         playerBody.SetPlayTeamIndex();
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
+
+        
     }
 
 
