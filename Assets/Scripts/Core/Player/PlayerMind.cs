@@ -101,6 +101,8 @@ public class PlayerMind : MonoBehaviour
         
     }
 
+    public int PlayerIndex { get { return playerSettings.playerIndex; } }
+
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
@@ -567,6 +569,11 @@ public class PlayerMind : MonoBehaviour
     public void EnableLayerInCamera(int layer)
     {
         playerCamera.EnableLayerInCamera(layer);
+    }
+
+    public void DisableLayerInCamera(int layer)
+    {
+        playerCamera.DisableLayerInCamera(layer);
     }
 
 

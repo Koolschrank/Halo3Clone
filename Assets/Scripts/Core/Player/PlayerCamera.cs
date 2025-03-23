@@ -77,6 +77,11 @@ public class PlayerCamera : MonoBehaviour
         playerCamera.cullingMask |= 1 << layer;
     }
 
+    public void DisableLayerInCamera(int layer)
+    {
+        playerCamera.cullingMask &= ~(1 << layer);
+    }
+
     public void SetScreenRect(ScreenRectValues screen, int channel)
     {
         cinemachineBrain.ChannelMask = 0;

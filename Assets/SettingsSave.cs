@@ -34,7 +34,7 @@ public class SettingsSave : MonoBehaviour
         }
 
         // create PlayerSettings
-        var newSettings = new PlayerSettings(deviceName);
+        var newSettings = new PlayerSettings(deviceName, playerSettings.Count);
         playerSettings.Add(newSettings);
         return newSettings;
     }
@@ -45,17 +45,20 @@ public class PlayerSettings
 {
     public string deviceName;
 
+    public int playerIndex = 0;
     public float sensitivity = 1;
+    
 
     public PlayerSettings()
     {
         sensitivity = 1;
     }
 
-    public PlayerSettings(string deviceName)
+    public PlayerSettings(string deviceName, int playerIndex)
     {
         this.deviceName = deviceName;
         sensitivity = 1;
+        this.playerIndex = playerIndex;
     }
 
     public void SetSensitivity(float value)

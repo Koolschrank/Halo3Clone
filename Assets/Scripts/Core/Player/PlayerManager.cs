@@ -17,8 +17,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] BodyMindConnection playerBodyPrefab;
 
     [SerializeField] Color[] playerColors;
-    int currentLayer;
-    List<int> playerLayers = new List<int>();
+    //List<int> playerLayers = new List<int>();
 
     [SerializeField] CinemachineCamera[] playerCameras;
     [SerializeField] CinemachineCamera[] spectatorCameras;
@@ -27,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] ScreenRectArray[] screenRectValues_2Screens;
     [SerializeField] ScreenRectArray[] screenRectValues_3Screens;
 
+
+    List<int> fpsLayers = new List<int>();
+    List<int> thirdPersonLayers = new List<int>();
 
     // Awake
     private void Awake()
@@ -39,20 +41,26 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(this);
         }
-        currentLayer = startingLayer;
+        for (int i = 0; i < 8; i++)
+        {
+            fpsLayers.Add(startingLayer + (i *2));
+            thirdPersonLayers.Add(startingLayer + (i * 2) + 1);
+        }
+
+
 
         if (Display.displays.Length > 1)
         {
             screenCount = 2;
             Display.displays[1].Activate();
         }
-            
-        if (false&&Display.displays.Length > 2)
+
+        if (false && Display.displays.Length > 2)
         {
             screenCount = 3;
             Display.displays[2].Activate();
         }
-            
+
     }
 
     public List<PlayerMind> GetAllPlayers()
@@ -70,18 +78,46 @@ public class PlayerManager : MonoBehaviour
 
     public void AddPlayer(PlayerMind player)
     {
-        
-        
+        players.Add(player);
+        ReorderPlayers();
+
         var playerBody = Instantiate(playerBodyPrefab, Vector3.zero, Quaternion.identity);
-        playerBody.ConnectMind(player, playerCameras[players.Count], spectatorCameras[players.Count]);
+        //playerBody.ConnectMind(player, playerCameras[players.Count-1], spectatorCameras[players.Count-1]);
+        playerBody.ConnectMind(player);
         
 
 
-        player.SetLayers(currentLayer, currentLayer +1);
-        player.EnableLayerInCamera(currentLayer);
 
 
+        for (int i = 0; i < players.Count; i++)
+        {
+            var p = players[i];
+            p.SetLayers(fpsLayers[i], thirdPersonLayers[i]);
+            for (int j = 0; j < fpsLayers.Count; j++)
+            {
+                if (j != i)
+                {
+                    p.DisableLayerInCamera(fpsLayers[j]);
+                    p.EnableLayerInCamera(thirdPersonLayers[j]);
+                }
+
+            }
+
+
+            p.EnableLayerInCamera(fpsLayers[i]);
+            p.DisableLayerInCamera(thirdPersonLayers[i]);
+            p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
+
+
+        }
         player.EnableLayerInCamera(deadPlayerLayer);
+
+
+        //player.SetLayers(currentLayer, currentLayer + 1);
+        //player.EnableLayerInCamera(currentLayer);
+
+
+        /*
         foreach (var layer in playerLayers)
         {
             player.EnableLayerInCamera(layer);
@@ -94,7 +130,10 @@ public class PlayerManager : MonoBehaviour
         }
         players.Add(player);
         playerLayers.Add(currentLayer);
-        currentLayer += 1;
+        currentLayer += 1;*/
+
+
+
 
 
         var playerCount = players.Count;
@@ -120,8 +159,8 @@ public class PlayerManager : MonoBehaviour
             spectatorCam.Lens.FieldOfView = fov;
             playerCam.SetCinemaCamera(vCam);
 
-            
-            
+
+
         }
 
         OnPlayerAdded?.Invoke(player);
@@ -133,7 +172,7 @@ public class PlayerManager : MonoBehaviour
         playerBody.SetPlayTeamIndex();
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
 
-        
+
     }
 
 
@@ -149,7 +188,8 @@ public class PlayerManager : MonoBehaviour
     {
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
-        playerBody.ConnectMind(player, GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
+        playerBody.ConnectMind(player);
+        playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
         player.UpdateLayers();
     }
@@ -165,6 +205,49 @@ public class PlayerManager : MonoBehaviour
     {
         var index = players.IndexOf(player);
         return spectatorCameras[index];
+    }
+
+    public void ReorderPlayers()
+    {
+        List<PlayerMind> newPlayers = new List<PlayerMind>();
+        List<int> indexList = new List<int>();
+
+        foreach (var player in players)
+        {
+            newPlayers.Add(player);
+            indexList.Add(player.PlayerIndex);
+        }
+
+
+
+        players.Clear();
+        foreach (var player in newPlayers)
+        {
+            bool inserted = false;
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (player.PlayerIndex < players[i].PlayerIndex)
+                {
+                    players.Insert(i, player);
+                    inserted = true;
+                    break;
+                }
+            }
+            if (!inserted)
+            {
+                players.Add(player);
+            }
+        }
+
+        Debug.Log("playerIndexOrder");
+        foreach (var player in players)
+        {
+            Debug.Log(player.PlayerIndex);
+        }
+
+
+
+
     }
 }
 

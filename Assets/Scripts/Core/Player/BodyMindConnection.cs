@@ -23,10 +23,9 @@ public class BodyMindConnection : MonoBehaviour
 
     PlayerMind mind;
 
-    public void ConnectMind(PlayerMind mind, CinemachineCamera camera, CinemachineCamera spectatorCamera)
+    public void ConnectMind(PlayerMind mind)
     {
-        camera.Follow = mindParent.transform;
-        camera.LookAt = mindParent.transform;
+        
 
         this.mind = mind;
         mind.SetPlayerBody(gameObject);
@@ -38,19 +37,27 @@ public class BodyMindConnection : MonoBehaviour
         mind.SetHealth(health);
         mind.SetPickUpScan(playerPickUpScan);
         mind.SetBulletSpawner(bulletSpawner);
-        mind.SetSpectatorTarget(spectatorCamera);
+        
         mind.SetPlayerInventory(playerInventory);
         mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
 
-        spectatorCamera.Follow = transform  ;
-        spectatorCamera.LookAt = spectatorCameraTarget;
+        
 
         mind.ConnectPlayerElimination(targetHitCollector);
         SetPlayTeamIndex();
         playerStartEquipment.GetEquipment(GameModeSelector.gameModeManager.GetEquipment());
 
 
+    }
+
+    public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
+    {
+        camera.Follow = mindParent.transform;
+        camera.LookAt = mindParent.transform;
+        mind.SetSpectatorTarget(spectatorCamera);
+        spectatorCamera.Follow = transform;
+        spectatorCamera.LookAt = spectatorCameraTarget;
     }
 
     public void SetPlayTeamIndex()
