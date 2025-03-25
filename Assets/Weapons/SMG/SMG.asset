@@ -18,11 +18,11 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 0a912273c20432048876a95f021beb6b, type: 3}
   weaponName: SMG
   shootType: 1
-  fireRate: 0.075
+  fireRate: 0.077
   bulletsPerShot: 1
-  magazineSize: 30
-  maxAmmoInReserve: 120
-  reloadTime: 1.7
+  magazineSize: 35
+  maxAmmoInReserve: 140
+  reloadTime: 1.75
   inaccuracy: 0.03
   switchOutTime: 0.2
   switchInTime: 0.3

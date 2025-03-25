@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6061741333527372475}
+  - {fileID: 6106626786888918666}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3057255587533650763
@@ -46,21 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0776b1c71aefb8544b6d9ee114ffb1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4.5
-  damage: 50
-  damageOnShildMultiplier: 2.5
+  range: 3
+  damage: 60
+  damageOnShildMultiplier: 2
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0.0033340454
       value: 1.0065918
-      inSlope: -0.3818266
-      outSlope: -0.3818266
+      inSlope: -0.07272882
+      outSlope: -0.07272882
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.20000002
+      outWeight: 0.21000001
     - serializedVersion: 3
       time: 1
       value: -0.0028266907
@@ -73,7 +74,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  force: 60
+  force: 50
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2
@@ -109,7 +110,7 @@ MonoBehaviour:
       Data2: 1337839689
       Data3: 1266807996
       Data4: -1935789024
-    Path: event:/SFX/Granades/BaseGranade/Explosion
+    Path: event:/SFX/Granades/PlasmaGranade/PlasmaExplosion
   fireDamageOverTime: {fileID: 0}
   OnExplosion:
     m_PersistentCalls:
@@ -373,6 +374,204 @@ MonoBehaviour:
         Velocity: {x: 2.5, y: 2.5, z: 2.5}
         ClearImpulseOnStop: 0
         DrawGizmos: 0
+--- !u!1001 &4569619883978345446
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 198190743066484924}
+    m_Modifications:
+    - target: {fileID: 6973818828667977, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340676594213234558, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1599726124788453129, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2356935811933116373, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7306680212488205248, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_Name
+      value: PlasmaGranadeExplosionVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130614433148851561, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419991850476457622, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027040731096822776, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 1000
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+--- !u!4 &6106626786888918666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+  m_PrefabInstance: {fileID: 4569619883978345446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6061741333527509053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -388,6 +587,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 5c06e6ad0a72eb0428c35ef85f267b65, type: 3}
       propertyPath: m_Name
       value: WFX_Explosion StarSmoke 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 5c06e6ad0a72eb0428c35ef85f267b65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 5c06e6ad0a72eb0428c35ef85f267b65, type: 3}
       propertyPath: m_LocalScale.x

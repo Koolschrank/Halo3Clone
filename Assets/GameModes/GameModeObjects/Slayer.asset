@@ -27,7 +27,7 @@ MonoBehaviour:
     granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
     granadeCount: 1
   timeLimitInMinutes: 10
-  pointsToWin: 1
+  pointsToWin: 10
   teamCount: 8
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0

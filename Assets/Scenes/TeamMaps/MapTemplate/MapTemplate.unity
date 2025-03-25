@@ -2423,13 +2423,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375973796}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.47853342, z: -0, w: 0.87806934}
+  m_LocalRotation: {x: -0, y: 0.13116163, z: -0, w: 0.991361}
   m_LocalPosition: {x: -22.3, y: 0.02, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2107224114}
-  m_LocalEulerAnglesHint: {x: 0, y: 57.179, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 15.073, z: 0}
 --- !u!114 &375973798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5465,7 +5465,7 @@ GameObject:
   - component: {fileID: 1020963089}
   - component: {fileID: 1020963090}
   m_Layer: 0
-  m_Name: Bomb pistol
+  m_Name: Raygun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5479,13 +5479,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020963088}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.3361444, z: -0, w: 0.9418104}
   m_LocalPosition: {x: -11.22, y: 1.36, z: 2.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2107224114}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -39.284, z: 0}
 --- !u!114 &1020963090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5501,7 +5501,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 33d1b381375f78b4b857b2144737cf7b, type: 3}
   spawnTime: 90
-  magazines: 7
+  magazines: 3
 --- !u!1001 &1025349613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8463,7 +8463,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 30
-  magazines: 3
+  magazines: 4
 --- !u!1001 &1443321478
 PrefabInstance:
   m_ObjectHideFlags: 0

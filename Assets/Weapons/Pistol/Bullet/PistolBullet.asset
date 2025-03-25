@@ -21,7 +21,7 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 15
+  rangeUntilDamageFalloff: 20
   damageFalloff:
     serializedVersion: 2
     m_Curve:

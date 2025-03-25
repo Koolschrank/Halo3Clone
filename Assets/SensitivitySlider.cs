@@ -14,7 +14,7 @@ public class SensitivitySlider : MonoBehaviour
     public void UpdateValues(float valueAsText, float valueAsPercentage)
     {
         // value 1 is 100%, value 0 is 0%, value 2 is 200%
-        sensitivityTextValue.text = valueAsText.ToString("0.00")  + "%";
+        sensitivityTextValue.text = valueAsText.ToString("0.00");
 
         bar.fillAmount = valueAsPercentage;
         OnUpdated?.Invoke();

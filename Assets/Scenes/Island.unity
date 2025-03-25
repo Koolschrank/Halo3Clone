@@ -50573,7 +50573,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
-  magazines: 3
+  magazines: 4
 --- !u!1001 &1158102530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74253,7 +74253,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
-  magazines: 3
+  magazines: 4
 --- !u!1001 &1718242576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81725,7 +81725,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 33d1b381375f78b4b857b2144737cf7b, type: 3}
   spawnTime: 90
-  magazines: 4
+  magazines: 3
 --- !u!1001 &2027046668
 PrefabInstance:
   m_ObjectHideFlags: 0
