@@ -12,6 +12,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] GameObject playerHead;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
+    [SerializeField] CharacterHealth playerHealth;
 
     [Header("Settings")]
     [SerializeField] float aimSpeed_x = 10f;
@@ -40,9 +41,15 @@ public class PlayerAim : MonoBehaviour
 
     private void Start()
     {
-        // hide mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+
+        // bug fix so that player stps rotating when dead
+        playerHealth.OnDeath += () =>
+        {
+            sensitivityMultiplier = 0;
+        };
     }
 
     void Update()

@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponFPSModel: {fileID: 6899193775294056288, guid: 864e0e6b2a7233d488690e7bbf8e0aaa, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e42c0ea4cc5613349978263455e0e4d7, type: 3}
   weaponName: Raygun
-  shootType: 1
+  shootType: 0
   fireRate: 0.8
   bulletsPerShot: 1
   magazineSize: 5

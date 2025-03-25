@@ -10745,6 +10745,7 @@ MonoBehaviour:
   playerHead: {fileID: 8223324349368915893}
   playerArms: {fileID: 3232609274750972410}
   playerTeam: {fileID: 2295363821645548979}
+  playerHealth: {fileID: 782412234501442312}
   aimSpeed_x: 156.492
   aimSpeed_y: 112.266
   minAngle: -70

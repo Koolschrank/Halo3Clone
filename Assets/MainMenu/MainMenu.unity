@@ -434,8 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8514513fbedaa6b448ee922a5184bd63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: {fileID: 0}
-  sceneToLoad: 
+  gameMode: {fileID: 11400000, guid: 12e2246d1299bf94ab2b2611d6633a6d, type: 2}
+  sceneToLoad: Villiage
 --- !u!4 &915985327
 Transform:
   m_ObjectHideFlags: 0
