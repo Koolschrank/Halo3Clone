@@ -17,6 +17,7 @@ public class Weapon_Arms
     public Action<GameObject> OnProjectileShot;
     public Action<Vector3> OnHitscanShot;
     public Action<GameObject> OnGranadeShot;
+    public Action OnWeaponDroped;
 
 
     [SerializeField] Weapon_Data weaponData;
@@ -40,8 +41,12 @@ public class Weapon_Arms
 
     public float DamageMultiplierWhenDualWielded => weaponData.DualWieldDamageMultiplier;
 
+    public void DropWeapon()
+    {
+        OnWeaponDroped?.Invoke();
+    }
 
-   
+
 
     public Weapon_Arms(Weapon_Data weaponData)
     {
@@ -295,6 +300,8 @@ public class Weapon_Arms
     public Weapon_Data Data => weaponData;
 
     public float DamageReduction => weaponData.DamageReduction;
+
+    public bool CanNotBeInInventory => weaponData.CanNotBePutInInventory;
 
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {

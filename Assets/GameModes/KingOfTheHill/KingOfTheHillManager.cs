@@ -162,6 +162,7 @@ public class KingOfTheHillManager : GameModeManager
             return;
         }
         hillMoveTimer -= Time.deltaTime;
+        ObjectiveIndicator.instance.SetTimer((int)hillMoveTimer);
     }
 
     public bool CanMoveHill()

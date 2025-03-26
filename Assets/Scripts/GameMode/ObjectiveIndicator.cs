@@ -9,11 +9,14 @@ public class ObjectiveIndicator : MonoBehaviour
     public Action<Vector3> OnPositionChange;
     public Action<float> OnHideDistanceChange;
     public Action<int> OnTeamIndexChange;
+    public Action<int> OnTimerChanged;
+    
 
 
     bool isActive = false;
     float hideDistance = 0;
     int teamIndex = -1;
+    int timer = 0;
     [SerializeField] Vector3 offset = new Vector3(0, 2, 0);
 
     
@@ -47,6 +50,8 @@ public class ObjectiveIndicator : MonoBehaviour
 
     public int TeamIndex { get { return teamIndex; } }
 
+    public int Timer { get { return timer; } }
+
     public void SetActive(bool active)
     {
         isActive = active;
@@ -69,6 +74,13 @@ public class ObjectiveIndicator : MonoBehaviour
     {
         teamIndex = index;
         OnTeamIndexChange?.Invoke(index);
+    }
+
+    public void SetTimer(int timer)
+    {
+        this.timer = timer;
+        OnTimerChanged?.Invoke(timer);
+
     }
 
 

@@ -33,6 +33,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] AutoAim autoAim;
     [SerializeField] WeaponType weaponType;
+    [SerializeField] bool canNotBeInInventory = false;
 
 
     [Header("Burst Values")]
@@ -131,6 +132,8 @@ public class Weapon_Data : ScriptableObject
     public WeaponType WeaponType => weaponType;
 
     public float DamageReduction => damageReduction;
+
+    public bool CanNotBePutInInventory => canNotBeInInventory;
 }
 
 

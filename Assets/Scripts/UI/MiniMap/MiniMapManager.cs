@@ -7,6 +7,7 @@ public class MiniMapManager : MonoBehaviour
 {
     public Action<Vector3> OnObjectiveMoved;
     public Action<int> OnObjectiveTeamIndexChanged;
+    public Action<int> OnObjectiveTimerChanged;
 
     // instance
     public static MiniMapManager instance;
@@ -16,6 +17,7 @@ public class MiniMapManager : MonoBehaviour
 
     Vector3 objectivePosition = Vector3.zero;
     int objectiveIndex = 0;
+    int objectiveTime = 0;
 
     void Awake()
     {
@@ -30,6 +32,8 @@ public class MiniMapManager : MonoBehaviour
         SetObjectivePosition(ObjectiveIndicator.instance.Position);
         ObjectiveIndicator.instance.OnTeamIndexChange += SetObjectiveIndex;
         SetObjectiveIndex(ObjectiveIndicator.instance.TeamIndex);
+        ObjectiveIndicator.instance.OnTimerChanged += SetObjectiveTimer;
+        SetObjectiveTimer(ObjectiveIndicator.instance.Timer);
     }
 
 
@@ -46,6 +50,12 @@ public class MiniMapManager : MonoBehaviour
     {
         objectiveIndex = index;
         OnObjectiveTeamIndexChanged?.Invoke(objectiveIndex);
+    }
+
+    public void SetObjectiveTimer(int timer)
+    {
+        objectiveTime = timer;
+        OnObjectiveTimerChanged?.Invoke(objectiveTime);
     }
 
     // add object to list
@@ -98,8 +108,7 @@ public class MiniMapManager : MonoBehaviour
         // rotate direction with player forward
         //direction = Quaternion.Euler(0, -forward.y, 0) * direction;
 
-        Debug.Log(distance);
-        Debug.Log(direction);
+
 
         Vector3 mapPosition = direction.normalized * Mathf.Min(1.1f ,(distance / maxDistance));
 

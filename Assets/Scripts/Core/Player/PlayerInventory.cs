@@ -61,6 +61,7 @@ public class PlayerInventory : MonoBehaviour
             Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
             pickUp.SetAmmo(weapon.Magazine, TakeAllAmmo(weapon.Data));
             OnWeaponDrop?.Invoke(weapons[0]);
+            weapons[0].DropWeapon();
             weapons.RemoveAt(0);
             
         }

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class ObjectiveIndicatorUI : MonoBehaviour
     [SerializeField] float maxAngleForDirectView = 60f;
 
     [SerializeField] Color baseColor;
+    [SerializeField] TextMeshProUGUI numberText;
 
     [SerializeField]
     Color[] teamColors;
@@ -37,6 +39,7 @@ public class ObjectiveIndicatorUI : MonoBehaviour
         ObjectiveIndicator.instance.OnDeactivated += Hide;
         ObjectiveIndicator.instance.OnHideDistanceChange += SetHideDistance;
         ObjectiveIndicator.instance.OnTeamIndexChange += SetColor;
+        ObjectiveIndicator.instance.OnTimerChanged += UpdateNumber;
 
         SetHideDistance(ObjectiveIndicator.instance.GetHideDistance());
 
@@ -63,6 +66,20 @@ public class ObjectiveIndicatorUI : MonoBehaviour
 
 
         
+    }
+
+    private void UpdateNumber(int number)
+    {
+        if (number > 0)
+        {
+            numberText.enabled = true;
+        }
+        else
+        {
+            numberText.enabled = false;
+        }
+
+        numberText.text = number.ToString();
     }
 
     public Vector2 GetIndicatorDirection(Vector3 targetPosition, Transform playerTransform)
@@ -143,10 +160,12 @@ public class ObjectiveIndicatorUI : MonoBehaviour
         if (teamIndex < 0 || teamIndex >= teamColors.Length)
         {
             uiImage.color = baseColor;
+            numberText.color = baseColor;
         }
         else
         {
             uiImage.color = teamColors[teamIndex];
+            numberText.color = teamColors[teamIndex];
         }
     }
 

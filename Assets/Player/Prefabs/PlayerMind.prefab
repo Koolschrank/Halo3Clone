@@ -1225,7 +1225,7 @@ PrefabInstance:
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveIconPrefab
       value: 
-      objectReference: {fileID: 9216805385830075385, guid: 14990bb1a5f69e24dbb65c1147b2ad8b, type: 3}
+      objectReference: {fileID: 1163181146398286329, guid: 14990bb1a5f69e24dbb65c1147b2ad8b, type: 3}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: objectiveBaseColor.a
       value: 1

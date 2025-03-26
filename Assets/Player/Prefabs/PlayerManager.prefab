@@ -222,6 +222,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d294b69590d19a4daae6a9e3c9fa272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2828890577571562474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3147085536994218238}
+  - component: {fileID: 5778423917874009010}
+  m_Layer: 0
+  m_Name: CaptureTheFlag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3147085536994218238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828890577571562474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507968635513998891}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5778423917874009010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828890577571562474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32e778a7e03a204b9b869644e8d87c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagPrefab: {fileID: 9197169624787015198, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
+  team1_Base: {fileID: 0}
+  team1_FalgSpawnPoint: {fileID: 0}
+  team2_Base: {fileID: 0}
+  team2_FalgSpawnPoint: {fileID: 0}
+  movementSpeedDebuffWithFlag: 0.4
 --- !u!1 &3378400868189579010
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +438,7 @@ Transform:
   - {fileID: 6248888815015760116}
   - {fileID: 6033376506077724446}
   - {fileID: 6519837670151788239}
+  - {fileID: 3147085536994218238}
   m_Father: {fileID: 7528383088536497644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7063945528381591942

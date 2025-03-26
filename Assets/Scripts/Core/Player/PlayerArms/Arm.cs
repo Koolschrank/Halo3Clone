@@ -372,6 +372,14 @@ public class Arm : MonoBehaviour
         Debug.Log("Switching weapon try");
 
         if (armState != ArmState.Ready && armState != ArmState.Reloading) return;
+
+        if (weaponInHand != null && weaponInHand.CanNotBeInInventory)
+        {
+            DropWeapon();
+        }
+            
+
+
         switchInputBufferTimer = 0;
         if (inventory.HasWeapon)
         {
@@ -460,14 +468,16 @@ public class Arm : MonoBehaviour
         {
             pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
         }
-        
 
+        weaponInHand.DropWeapon();
         weaponInHand = null;
         return pickUp;
     }
 
     public void PickUpWeapon(Weapon_Arms weapon)
     {
+
+
         EquipWeapon(weapon);
     }
 

@@ -250,6 +250,13 @@ public class GameModeManager : MonoBehaviour
 
     public bool HasWeaponPickups => gameModeStats.HasWeaponPickups;
 
+    public int GetPointsLeftForTeamToWin(int teamIndex)
+    {
+        int pointsToWin = gameModeStats.PointsToWin;
+        int pointsOfTeam = teamPoints[teamIndex];
+        return pointsToWin - pointsOfTeam;
+    }
+
 }
 
 [Serializable]
@@ -308,5 +315,7 @@ public class SpawnSystem
 
         return farthest;
     }
+
+    
 }
 
