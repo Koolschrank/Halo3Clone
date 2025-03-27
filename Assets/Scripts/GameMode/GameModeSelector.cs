@@ -10,6 +10,7 @@ public class GameModeSelector : MonoBehaviour
     [SerializeField] DeathMatchManager deathMatchManager;
     [SerializeField] KingOfTheHillManager kingOfTheHillManager;
     [SerializeField] CrownManager crownManager;
+    [SerializeField] CaptureTheFlagManager captureTheFlagManager;
 
 
     public static GameModeManager gameModeManager;
@@ -38,6 +39,11 @@ public class GameModeSelector : MonoBehaviour
         {
             crownManager.StartGame(gameMode);
             gameModeManager = crownManager;
+        }
+        else if (gameMode is GameMode_CaptureTheFlag)
+        {
+            captureTheFlagManager.StartGame(gameMode);
+            gameModeManager = captureTheFlagManager;
         }
 
         gameModeManager.OnTeamWon += StartReloadGameWithTimer;

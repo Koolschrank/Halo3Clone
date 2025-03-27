@@ -46,7 +46,7 @@ public class PlayerArms : MonoBehaviour
             ExitDualWielding();
         };
 
-        LeftArm.OnWeaponDroped += (weapon) =>
+        LeftArm.OnWeaponDroped += (weapon,pickUp) =>
         {
             ExitDualWielding();
         };
@@ -58,7 +58,7 @@ public class PlayerArms : MonoBehaviour
             SetMovementSpeedMultiplier();
         };
 
-        rightArm.OnWeaponDroped += (weapon) =>
+        rightArm.OnWeaponDroped += (weapon, pickUp) =>
         {
             SetDamageReduction();
             SetMovementSpeedMultiplier();
@@ -70,7 +70,7 @@ public class PlayerArms : MonoBehaviour
             SetMovementSpeedMultiplier();
         };
 
-        leftArm.OnWeaponDroped += (weapon) =>
+        leftArm.OnWeaponDroped += (weapon, pickUp) =>
         {
             SetDamageReduction();
             SetMovementSpeedMultiplier();

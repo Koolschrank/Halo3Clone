@@ -42,7 +42,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] TeamWinUI teamWinUI;
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
-    [SerializeField] ObjectiveIndicatorUI objectiveIndicatorUI;
+    [SerializeField] ObjectiveIndicatorUI[] objectiveIndicatorUIs;
     [Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
@@ -558,7 +558,10 @@ public class PlayerMind : MonoBehaviour
 
     public void EnableObjectiveUIMarker()
     {
-        objectiveIndicatorUI.gameObject.SetActive(true);
+        foreach (var objectiveIndicatorUI in objectiveIndicatorUIs)
+            objectiveIndicatorUI.gameObject.SetActive(true);
+
+
     }
 
     public void UpdateLayers()

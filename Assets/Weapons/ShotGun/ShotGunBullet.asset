@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: ShotGunBullet
   m_EditorClassIdentifier: 
-  damage: 27.5
+  damage: 24
   force: 200
   shildDamageMultiplier: 1
   headShotMultiplier: 1
   canHeadShotShild: 0
-  range: 15
+  range: 12
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -28,20 +28,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
-      outSlope: -1
+      inSlope: -0.32831907
+      outSlope: -0.32831907
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.18874237
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: 0
+      time: 0.99125916
+      value: 0.6039221
+      inSlope: -0.23011935
+      outSlope: -0.23011935
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.21191779
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -6,6 +6,7 @@ using System;
 public class PlayerManager : MonoBehaviour
 {
     public Action<PlayerMind> OnPlayerAdded;
+    public Action<PlayerMind> OnPlayerSpawned;
 
     // singelton
     public static PlayerManager instance;
@@ -164,6 +165,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         OnPlayerAdded?.Invoke(player);
+        OnPlayerSpawned?.Invoke(player);
 
 
         var spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
@@ -192,6 +194,7 @@ public class PlayerManager : MonoBehaviour
         playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
         player.UpdateLayers();
+        OnPlayerSpawned?.Invoke(player);
     }
 
     public CinemachineCamera GetPlayerCamera(PlayerMind player)

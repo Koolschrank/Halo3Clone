@@ -16,7 +16,8 @@ public class Arm : MonoBehaviour
     public Action<Weapon_Arms, float> OnMeleeWithWeaponStarted;
     public Action<Weapon_Arms> OnWeaponShoot;
     public Action<Weapon_Arms> OnWeaponUnequipFinished;
-    public Action<Weapon_Arms> OnWeaponDroped;
+    public Action<Weapon_Arms, Weapon_PickUp> OnWeaponDroped;
+    public Action<Weapon_Arms> OnWeaponPickedUp;
     public Action<GranadeStats, float> OnGranadeThrowStarted;
     public Action<GameObject, GranadeStats> OnGranadeThrow;
     public Action<Weapon_Arms> OnZoomIn;
@@ -180,7 +181,7 @@ public class Arm : MonoBehaviour
                     break;
                 case ShootType.Burst:
 
-                    if (!wasTriggerPressed && isTriggerPressed)
+                    if (/*!wasTriggerPressed &&*/ isTriggerPressed)
                     {
                         if (weaponInHand.CanShoot())
                         {
@@ -412,6 +413,7 @@ public class Arm : MonoBehaviour
             IfZoomedInExitZoom();
             
             var newWeapon = pickUpScan.PickUpWeapon();
+            OnWeaponPickedUp?.Invoke(newWeapon);
 
 
 
@@ -449,7 +451,7 @@ public class Arm : MonoBehaviour
         if (weaponInHand == null) return null;
 
         IfZoomedInExitZoom();
-        OnWeaponDroped?.Invoke(weaponInHand);
+        
         // if weapon is empty return null
         if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
         {
@@ -468,7 +470,7 @@ public class Arm : MonoBehaviour
         {
             pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
         }
-
+        OnWeaponDroped?.Invoke(weaponInHand, pickUp);
         weaponInHand.DropWeapon();
         weaponInHand = null;
         return pickUp;

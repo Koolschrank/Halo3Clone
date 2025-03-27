@@ -22,7 +22,7 @@ public class WeaponUI : MonoBehaviour
         {
             playerArm.OnWeaponEquipStarted -= EquipWeapon;
             playerArm.OnWeaponUnequipFinished -= UnequipWeapon;
-            playerArm.OnWeaponDroped -= UnequipWeapon;
+            playerArm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
             playerArm.OnReserveAmmoChanged -= UpdateReserve;
         }
 
@@ -30,7 +30,7 @@ public class WeaponUI : MonoBehaviour
         this.playerArm = playerArm;
         playerArm.OnWeaponEquipStarted += EquipWeapon;
         playerArm.OnWeaponUnequipFinished += UnequipWeapon;
-        playerArm.OnWeaponDroped += UnequipWeapon;
+        playerArm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
         playerArm.OnReserveAmmoChanged += UpdateReserve;
 
 

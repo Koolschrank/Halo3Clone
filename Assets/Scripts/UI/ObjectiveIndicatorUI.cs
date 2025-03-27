@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ObjectiveIndicatorUI : MonoBehaviour
 {
+
+    // add index to follow here
+    [SerializeField] int indexToFollow = 0;
     [SerializeField] Camera playerCam;
     [SerializeField] Transform playerTransform;
     [SerializeField] RectTransform uiMarker;
@@ -33,20 +36,29 @@ public class ObjectiveIndicatorUI : MonoBehaviour
     private void Start()
     {
 
-        
-        ObjectiveIndicator.instance.OnPositionChange += UpdatePosition;
-        ObjectiveIndicator.instance.OnActivated += Show;
-        ObjectiveIndicator.instance.OnDeactivated += Hide;
-        ObjectiveIndicator.instance.OnHideDistanceChange += SetHideDistance;
-        ObjectiveIndicator.instance.OnTeamIndexChange += SetColor;
-        ObjectiveIndicator.instance.OnTimerChanged += UpdateNumber;
+        if (ObjectiveIndicator.instance.ObjectiveCount <= indexToFollow)
+        {
+            
+            return;
+        }
 
-        SetHideDistance(ObjectiveIndicator.instance.GetHideDistance());
 
-        if (ObjectiveIndicator.instance.IsActive)
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnPositionChange += UpdatePosition;
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnActivated += Show;
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnDeactivated += Hide;
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnHideDistanceChange += SetHideDistance;
+        SetHideDistance(ObjectiveIndicator.instance.GetObjective(indexToFollow).HideDistance);
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnTeamIndexChange += SetColor;
+        SetColor(ObjectiveIndicator.instance.GetObjective(indexToFollow).TeamIndex);
+        ObjectiveIndicator.instance.GetObjective(indexToFollow).OnNumberChanged += UpdateNumber;
+        UpdateNumber(ObjectiveIndicator.instance.GetObjective(indexToFollow).Number);
+
+        SetHideDistance(ObjectiveIndicator.instance.GetObjective(indexToFollow).HideDistance);
+
+        if (ObjectiveIndicator.instance.GetObjective(indexToFollow).IsActive)
         {
             Show();
-            UpdatePosition(ObjectiveIndicator.instance.Position);
+            UpdatePosition(ObjectiveIndicator.instance.GetObjective(indexToFollow).Position);
         }
         else
         {

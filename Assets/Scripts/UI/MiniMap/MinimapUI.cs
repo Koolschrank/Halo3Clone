@@ -18,7 +18,7 @@ public class MinimapUI : MonoBehaviour
 
     [Header("Objective icon")]
     [SerializeField] MiniMapUIObjective objectiveIconPrefab = null;
-    MiniMapUIObjective objectiveIcon;
+    List<MiniMapUIObjective> objectivesInUI = new List<MiniMapUIObjective>();
 
 
     [SerializeField] Color objectiveBaseColor;
@@ -30,34 +30,35 @@ public class MinimapUI : MonoBehaviour
     {
         if (MiniMapManager.instance.HasObjective)
         {
-            CreateObjective();
-
+            for (int i = 0; i < MiniMapManager.instance.GetObjectiveCount(); i++)
+            {
+                CreateObjective( i);
+            }
         }
-        
     }
 
-    public void CreateObjective()
+    public void CreateObjective(int index)
     {
-        var obj = Instantiate(objectiveIconPrefab.gameObject, map);
-        objectiveIcon = obj.GetComponent<MiniMapUIObjective>();
-        MiniMapManager.instance.OnObjectiveTeamIndexChanged += SetObjectiveIndexColor;
-        MiniMapManager.instance.OnObjectiveTimerChanged += SetObjectiveTimer;
+        var obj = Instantiate(objectiveIconPrefab.gameObject, map).GetComponent<MiniMapUIObjective>();
+        
+        objectivesInUI.Add(obj);
+        var obiManager = MiniMapManager.instance.GetObjective(index);
+        obiManager.OnObjectiveTeamIndexChanged += (index) => SetObjectiveIndexColor(obj, index);
+        obiManager.OnObjectiveNumberChanged += obj.ChangeNumber;
+        SetObjectiveIndexColor(obj, obiManager.ObjectiveTeamIndex);
+        obj.ChangeNumber(obiManager.ObjectiveNumber);
+
 
     }
 
-    public void SetObjectiveIndexColor(int teamIndex)
+    public void SetObjectiveIndexColor(MiniMapUIObjective objective, int teamIndex)
     {
         var color = objectiveBaseColor;
         if (teamIndex >= 0 && teamIndex < objectiveTeamColors.Length)
             color = objectiveTeamColors[teamIndex];
-        objectiveIcon.ChangeColor(color);
+        objective.ChangeColor(color);
     }
 
-    public void SetObjectiveTimer(int timer)
-    {
-        objectiveIcon.ShowText();
-        objectiveIcon.ChangeNumber(timer);
-    }
 
     public void EnableMiniMap()
     {
@@ -114,18 +115,16 @@ public class MinimapUI : MonoBehaviour
         }
 
 
-        // TODO:  this can be cleaned up
-        if (objectiveIcon != null)
+        for (int i = 0; i < objectivesInUI.Count; i++)
         {
-            Vector2 pos = MiniMapManager.instance.GetMiniMapObjectivePosition(playerTransform.position, maxDistance);
-            Vector3 position = ObjectiveIndicator.instance.Position;
+            var obj = objectivesInUI[i];
+            Vector2 pos = MiniMapManager.instance.GetMiniMapObjectivePosition(i, playerTransform.position, maxDistance);
+            Vector3 position = ObjectiveIndicator.instance.GetObjective(i).Position;
             float distance = pos.magnitude;
             Vector2 uiDirection = GetObjectDirection(position, playerTransform);
-            
-            objectiveIcon.RectTransform.localPosition = uiDirection* distance * iconPositionMultiplier;
-        }
-       
 
+            obj.RectTransform.localPosition = (uiDirection * distance * iconPositionMultiplier);
+        }
 
 
 
@@ -176,7 +175,6 @@ public class MinimapUI : MonoBehaviour
 
 }
 
-
 public class MiniMapUIObject
 {
     MiniMapObject mapObject;
@@ -206,6 +204,7 @@ public class MiniMapUIObject
     {
         miniMapPosition = position;
         updatedThisFrame = true;
+
         icon.localPosition = new Vector3(position.x, position.y, 0);
     }
 

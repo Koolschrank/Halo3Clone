@@ -10,6 +10,7 @@ public class LeftArm : Arm
 
     public override void TryPickUpWeapon()
     {
+        
         if (armState == ArmState.SwitchingOut) return;
 
         if (pickUpScan.CanPickUpWeapon())
@@ -19,6 +20,7 @@ public class LeftArm : Arm
 
             DropWeapon();
             PickUpWeapon(newWeapon);
+            OnWeaponPickedUp?.Invoke(newWeapon);
 
             if (inventory.Full && !noInvectoryInteraction)
             {

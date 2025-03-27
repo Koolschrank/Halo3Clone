@@ -1,22 +1,13 @@
 using UnityEngine;
 using System;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class ObjectiveIndicator : MonoBehaviour
 {
-    public Action OnActivated;
-    public Action OnDeactivated;
+    public Action<Objective> OnObjectiveAdded;
 
-    public Action<Vector3> OnPositionChange;
-    public Action<float> OnHideDistanceChange;
-    public Action<int> OnTeamIndexChange;
-    public Action<int> OnTimerChanged;
-    
-
-
-    bool isActive = false;
-    float hideDistance = 0;
-    int teamIndex = -1;
-    int timer = 0;
+    List<Objective> objectives = new List<Objective>();
     [SerializeField] Vector3 offset = new Vector3(0, 2, 0);
 
     
@@ -24,40 +15,55 @@ public class ObjectiveIndicator : MonoBehaviour
     // singelton instance
     public static ObjectiveIndicator instance;
 
-    public void SetHideDistance(float distance)
-    {
-        hideDistance = distance;
-        OnHideDistanceChange?.Invoke(distance);
-    }
+    
+    public int ObjectiveCount { get { return objectives.Count; } }
 
-    public float GetHideDistance()
+    public Objective GetObjective(int index)
     {
-        return hideDistance;
+        if (index >= objectives.Count)
+        {
+            for (int i = objectives.Count; i <= index; i++)
+            {
+                var obj = new Objective();
+                objectives.Add(obj);
+                OnObjectiveAdded?.Invoke(obj);
+            }
+        }
+        return objectives[index];
     }
 
     public void Awake()
     {
         instance = this;
     }
+}
 
-    public void SetPosition(Vector3 position)
+public class Objective
+{
+
+    public Action OnActivated;
+    public Action OnDeactivated;
+    public Action<Vector3> OnPositionChange;
+    public Action<float> OnHideDistanceChange;
+    public Action<int> OnTeamIndexChange;
+    public Action<int> OnNumberChanged;
+
+    public Objective()
     {
-        transform.position = position + offset;
-        OnPositionChange?.Invoke(position);
+        
     }
 
-    public Vector3 Position { get { return transform.position; } }
 
-    public int TeamIndex { get { return teamIndex; } }
-
-    public int Timer { get { return timer; } }
+    bool isActive = false;
+    float hideDistance = 0;
+    int teamIndex = -1;
+    int number = 0;
+    Vector3 position = Vector3.zero;
 
     public void SetActive(bool active)
     {
         isActive = active;
-        gameObject.SetActive(active);
-
-        if (isActive)
+        if (active)
         {
             OnActivated?.Invoke();
         }
@@ -67,7 +73,18 @@ public class ObjectiveIndicator : MonoBehaviour
         }
     }
 
-    // get is active
+    public void SetPosition(Vector3 position)
+    {
+        this.position = position;
+        OnPositionChange?.Invoke(position);
+    }
+
+    public Vector3 Position { get { return position; } }
+
+    public int TeamIndex { get { return teamIndex; } }
+
+    public int Number { get { return number; } }
+
     public bool IsActive { get { return isActive; } }
 
     public void SetTeamIndex(int index)
@@ -76,15 +93,19 @@ public class ObjectiveIndicator : MonoBehaviour
         OnTeamIndexChange?.Invoke(index);
     }
 
-    public void SetTimer(int timer)
+    public void SetNumber(int number)
     {
-        this.timer = timer;
-        OnTimerChanged?.Invoke(timer);
-
+        this.number = number;
+        OnNumberChanged?.Invoke(number);
     }
 
+    public void SetHideDistance(float distance)
+    {
+        hideDistance = distance;
+        OnHideDistanceChange?.Invoke(distance);
+    }
 
-
+    public float HideDistance { get { return hideDistance; } }
 
 
 

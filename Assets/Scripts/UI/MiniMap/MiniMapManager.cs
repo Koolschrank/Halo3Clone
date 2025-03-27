@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MiniMapManager : MonoBehaviour
 {
+    
     public Action<Vector3> OnObjectiveMoved;
     public Action<int> OnObjectiveTeamIndexChanged;
     public Action<int> OnObjectiveTimerChanged;
@@ -13,50 +14,41 @@ public class MiniMapManager : MonoBehaviour
     public static MiniMapManager instance;
 
     List<MiniMapObject> miniMapObjects = new List<MiniMapObject>();
-   
-
-    Vector3 objectivePosition = Vector3.zero;
-    int objectiveIndex = 0;
-    int objectiveTime = 0;
+    List<MiniMapObjectiv> miniMapObjectivDatas = new List<MiniMapObjectiv>();
 
     void Awake()
     {
         instance = this;
-        
-
+        ObjectiveIndicator.instance.OnObjectiveAdded += (objective) =>
+        {
+            var miniMapObjective = new MiniMapObjectiv(objective.Position, objective.TeamIndex, objective.Number);
+            miniMapObjectivDatas.Add(miniMapObjective);
+            objective.OnPositionChange += (position) => { miniMapObjective.ObjectivePosition = position; };
+            objective.OnTeamIndexChange += (index) => { miniMapObjective.ObjectiveTeamIndex = index; };
+            miniMapObjective.ObjectiveTeamIndex = objective.TeamIndex;
+            objective.OnNumberChanged += (number) =>
+            {
+                miniMapObjective.ObjectiveNumber = number;
+            };
+            miniMapObjective.ObjectiveNumber = objective.Number;
+        };
     }
 
-    private void Start()
+    public MiniMapObjectiv GetObjective(int index)
     {
-        ObjectiveIndicator.instance.OnPositionChange += SetObjectivePosition;
-        SetObjectivePosition(ObjectiveIndicator.instance.Position);
-        ObjectiveIndicator.instance.OnTeamIndexChange += SetObjectiveIndex;
-        SetObjectiveIndex(ObjectiveIndicator.instance.TeamIndex);
-        ObjectiveIndicator.instance.OnTimerChanged += SetObjectiveTimer;
-        SetObjectiveTimer(ObjectiveIndicator.instance.Timer);
+
+        return miniMapObjectivDatas[index];
     }
 
-
-    public bool HasObjective { get { return ObjectiveIndicator.instance.IsActive; } }
-
-    public void SetObjectivePosition(Vector3 position)
+    public int GetObjectiveCount()
     {
-        objectivePosition = position;
-        OnObjectiveMoved?.Invoke(objectivePosition);
-
+        return miniMapObjectivDatas.Count;
     }
 
-    public void SetObjectiveIndex(int index)
-    {
-        objectiveIndex = index;
-        OnObjectiveTeamIndexChanged?.Invoke(objectiveIndex);
-    }
 
-    public void SetObjectiveTimer(int timer)
-    {
-        objectiveTime = timer;
-        OnObjectiveTimerChanged?.Invoke(objectiveTime);
-    }
+
+
+    public bool HasObjective { get { return ObjectiveIndicator.instance.GetObjective(0).IsActive; } }
 
     // add object to list
     public void AddMinimapObject(MiniMapObject obj)
@@ -97,16 +89,15 @@ public class MiniMapManager : MonoBehaviour
 
     // todo: this intire thing needs a rework
 
-    public Vector2 GetMiniMapObjectivePosition(Vector3 position, float maxDistance)
+    public Vector2 GetMiniMapObjectivePosition(int objectiveIndex,Vector3 position, float maxDistance)
     {
+        var objectivePosition = miniMapObjectivDatas[objectiveIndex].ObjectivePosition;
         var positionWithoutY = new Vector3(position.x, 0, position.z);
 
 
         var objPosWithoutY = new Vector3(objectivePosition.x, 0, objectivePosition.z);
         var distance = Vector3.Distance(positionWithoutY, objPosWithoutY);
         Vector3 direction = objPosWithoutY - positionWithoutY;
-        // rotate direction with player forward
-        //direction = Quaternion.Euler(0, -forward.y, 0) * direction;
 
 
 
@@ -114,17 +105,67 @@ public class MiniMapManager : MonoBehaviour
 
 
         return new Vector2(mapPosition.x, mapPosition.z);
-
-
-
     }
-
-    
-
 }
 
+public class MiniMapObjectiv
+{
+    public Action<Vector3> OnObjectiveMoved;
+    public Action<int> OnObjectiveTeamIndexChanged;
+    public Action<int> OnObjectiveNumberChanged;
 
-public struct MiniMapObjectData
+
+    Vector3 objectivePosition;
+    int objectiveTeamIndex;
+    int objectiveNumber;
+
+    public MiniMapObjectiv()
+    {
+        objectivePosition = Vector3.zero;
+        objectiveTeamIndex = 0;
+        objectiveNumber = 0;
+    }
+    public MiniMapObjectiv(Vector3 objectivePosition, int objectiveIndex, int objectiveNumber)
+    {
+        this.objectivePosition = objectivePosition;
+        OnObjectiveMoved?.Invoke(objectivePosition);
+        this.objectiveTeamIndex = objectiveIndex;
+        OnObjectiveTeamIndexChanged?.Invoke(objectiveTeamIndex);
+        this.objectiveNumber = objectiveNumber;
+        OnObjectiveNumberChanged?.Invoke(objectiveNumber);
+    }
+
+    public Vector3 ObjectivePosition
+    {
+        get { return objectivePosition; }
+        set
+        {
+            objectivePosition = value;
+            OnObjectiveMoved?.Invoke(objectivePosition);
+        }
+    }
+
+    public int ObjectiveTeamIndex
+    {
+        get { return objectiveTeamIndex; }
+        set
+        {
+            objectiveTeamIndex = value;
+            OnObjectiveTeamIndexChanged?.Invoke(objectiveTeamIndex);
+        }
+    }
+
+    public int ObjectiveNumber
+    {
+        get { return objectiveNumber; }
+        set
+        {
+            objectiveNumber = value;
+            OnObjectiveNumberChanged?.Invoke(objectiveNumber);
+        }
+    }
+}
+public class MiniMapObjectData
 {
     MiniMapObject mapObject;
     Vector2 miniMapPosition;

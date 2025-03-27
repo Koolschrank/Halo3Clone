@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9212859378291490076, guid: 0fd127000fb9617408bbe60392ae5fa7, type: 3}
   weaponName: BR
   shootType: 2
-  fireRate: 0.28
+  fireRate: 0.300028
   bulletsPerShot: 1
   magazineSize: 27
   maxAmmoInReserve: 500
@@ -33,8 +33,9 @@ MonoBehaviour:
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
+  canNotBeInInventory: 0
   burstAmount: 3
-  burstDelay: 0.05
+  burstDelay: 0.0600005
   damageMultiplier: 1
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1

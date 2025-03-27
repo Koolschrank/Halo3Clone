@@ -62,12 +62,11 @@ public class GameModeManager : MonoBehaviour
 
     public void StartGame(GameMode gameModeStats)
     {
-
-
         this.gameModeStats = gameModeStats;
         gameObject.SetActive(true);
         ResetGame();
         PlayerManager.instance.OnPlayerAdded += PlayerJoined;
+        PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
     }
 
     public virtual void PlayerJoined(PlayerMind player)
@@ -84,6 +83,11 @@ public class GameModeManager : MonoBehaviour
         {
             ReorderPlayerTeams();
         }
+
+    }
+
+    public virtual void PlayerSpawned(PlayerMind player)
+    {
 
     }
 

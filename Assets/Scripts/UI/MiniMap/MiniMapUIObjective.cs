@@ -23,6 +23,10 @@ public class MiniMapUIObjective : MonoBehaviour
             numberText.enabled = false;
             return;
         }
+        else
+        {
+            numberText.enabled = true;
+        }
         numberText.text = number.ToString();
     }
 
@@ -35,4 +39,6 @@ public class MiniMapUIObjective : MonoBehaviour
     {
         numberText.enabled = true;
     }
+
+    
 }

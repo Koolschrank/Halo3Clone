@@ -12,7 +12,7 @@ public class Arm_FPSView : MonoBehaviour
         {
             playerArm.OnWeaponEquipStarted -= EquipWeapon;
             playerArm.OnWeaponUnequipFinished -= RemoveWeapon;
-            playerArm.OnWeaponDroped -= RemoveWeapon;
+            playerArm.OnWeaponDroped -= (weapon,pickUp)  => RemoveWeapon(weapon);
             playerArm.OnGranadeThrowStarted -= ThrowGranadeStart;
             playerArm.OnGranadeThrow -= ThrowGranade;
         }
@@ -23,7 +23,7 @@ public class Arm_FPSView : MonoBehaviour
 
         playerArm.OnWeaponEquipStarted += EquipWeapon;
         playerArm.OnWeaponUnequipFinished += RemoveWeapon;
-        playerArm.OnWeaponDroped += RemoveWeapon;
+        playerArm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
         playerArm.OnGranadeThrowStarted += ThrowGranadeStart;
         playerArm.OnGranadeThrow += ThrowGranade;
 

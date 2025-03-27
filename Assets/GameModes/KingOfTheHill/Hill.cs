@@ -28,9 +28,9 @@ public class Hill : MonoBehaviour
         OnActivated?.Invoke();
 
         var marker = ObjectiveIndicator.instance;
-        marker.SetActive(true);
-        marker.SetPosition(transform.position);
-        marker.SetHideDistance(0);
+        marker.GetObjective(0).SetActive(true);
+        marker.GetObjective(0).SetPosition(transform.position);
+        marker.GetObjective(0).SetHideDistance(0);
     }
 
 
@@ -104,7 +104,7 @@ public class Hill : MonoBehaviour
         teamOnHill = teamIndex;
 
         OnTeamChanged?.Invoke(teamIndex);
-        ObjectiveIndicator.instance.SetTeamIndex(teamIndex);
+        ObjectiveIndicator.instance.GetObjective(0).SetTeamIndex(teamIndex);
     }
 
     // gizmo to show the hill radius

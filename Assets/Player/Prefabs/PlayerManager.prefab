@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3147085536994218238
 Transform:
   m_ObjectHideFlags: 0
@@ -266,7 +266,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32e778a7e03a204b9b869644e8d87c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagPrefab: {fileID: 9197169624787015198, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
+  spawnSystem:
+    teamStartSpawnPoints: []
+    basicSpawnPoints: []
+    lastSpawnPointIndex: 0
+  team1_FlagPrefab: {fileID: 9197169624787015198, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
+  team2_FlagPrefab: {fileID: 9197169624787015198, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
   team1_Base: {fileID: 0}
   team1_FalgSpawnPoint: {fileID: 0}
   team2_Base: {fileID: 0}
@@ -458,6 +463,7 @@ MonoBehaviour:
   deathMatchManager: {fileID: 4742262639001859997}
   kingOfTheHillManager: {fileID: 8195818992727454778}
   crownManager: {fileID: 9093571000208819694}
+  captureTheFlagManager: {fileID: 5778423917874009010}
 --- !u!1 &5358015548170087887
 GameObject:
   m_ObjectHideFlags: 0
