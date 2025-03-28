@@ -27,7 +27,7 @@ public class GameModeManager : MonoBehaviour
         return spawnSystem.GetRandomSpawnPoint();
     }
 
-    public Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
+    public virtual Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
     {
         int teamIndex = playerMind.TeamIndex;
         List<Transform> enemies = new List<Transform>();
@@ -320,6 +320,34 @@ public class SpawnSystem
         return farthest;
     }
 
-    
+    public Transform GetFarthestSpawnPointFromEnemeies(List<Transform> enemies, Transform enemyObjective, float multiplierForObjective)
+    {
+        Transform farthest = basicSpawnPoints[0];
+        float maxDistance = 0;
+        int spawnPointIndex = 0;
+        foreach (var spawnPoint in basicSpawnPoints)
+        {
+            float distance = 0;
+            foreach (var enemy in enemies)
+            {
+                distance += Vector3.Distance(spawnPoint.position, enemy.position);
+            }
+
+            distance += Vector3.Distance(spawnPoint.position, enemyObjective.position) * multiplierForObjective;
+            if (distance > maxDistance && spawnPointIndex != lastSpawnPointIndex)
+            {
+                maxDistance = distance;
+                farthest = spawnPoint;
+                lastSpawnPointIndex = spawnPointIndex;
+
+            }
+            spawnPointIndex++;
+        }
+
+        return farthest;
+    }
+
+
+
 }
 

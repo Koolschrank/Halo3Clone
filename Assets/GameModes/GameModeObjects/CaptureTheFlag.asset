@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd8e9c3626b06f4c92abf9b7116df01, type: 3}
   m_Name: CaptureTheFlag
   m_EditorClassIdentifier: 
-  gameModeName: CaptureTheFlag
+  gameModeName: Capture The Flag
   startingEquipment:
     hasShild: 1
     headShotOneShot: 1
@@ -31,5 +31,3 @@ MonoBehaviour:
   teamCount: 2
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 1
-  flagRecoveryTime: 10
-  FlagRecoveryTime: 0

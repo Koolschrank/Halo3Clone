@@ -92,7 +92,7 @@ public class CrownManager : GameModeManager
         crownTeamIndex = player.GetComponent<PlayerTeam>().TeamIndex;
         ObjectiveIndicator.instance.GetObjective(0).SetPosition(player.transform.position);
         ObjectiveIndicator.instance.GetObjective(0).SetTeamIndex(crownTeamIndex);
-        ObjectiveIndicator.instance.GetObjective(0).SetNumber(GetPointsLeftForTeamToWin(crownTeamIndex));
+        ObjectiveIndicator.instance.GetObjective(0).SetText(GetPointsLeftForTeamToWin(crownTeamIndex).ToString());
 
         if (gameMode.SetEquipmentOnCrownPickup)
         {
@@ -113,7 +113,7 @@ public class CrownManager : GameModeManager
 
         if (crownTeamIndex < 0)
         {
-            ObjectiveIndicator.instance.GetObjective(0).SetNumber(-1);
+            ObjectiveIndicator.instance.GetObjective(0).SetText("");
             return;
         }
 
@@ -124,7 +124,7 @@ public class CrownManager : GameModeManager
             {
                 GainPoints(crownTeamIndex, 1);
                 timeToScore = ((GameMode_Crown)gameModeStats).TimeToScore;
-                ObjectiveIndicator.instance.GetObjective(0).SetNumber(GetPointsLeftForTeamToWin(crownTeamIndex));
+                ObjectiveIndicator.instance.GetObjective(0).SetText(GetPointsLeftForTeamToWin(crownTeamIndex).ToString());
 
             }
             

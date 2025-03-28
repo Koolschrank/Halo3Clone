@@ -21,16 +21,16 @@ public class MiniMapManager : MonoBehaviour
         instance = this;
         ObjectiveIndicator.instance.OnObjectiveAdded += (objective) =>
         {
-            var miniMapObjective = new MiniMapObjectiv(objective.Position, objective.TeamIndex, objective.Number);
+            var miniMapObjective = new MiniMapObjectiv(objective.Position, objective.TeamIndex, objective.Text);
             miniMapObjectivDatas.Add(miniMapObjective);
             objective.OnPositionChange += (position) => { miniMapObjective.ObjectivePosition = position; };
             objective.OnTeamIndexChange += (index) => { miniMapObjective.ObjectiveTeamIndex = index; };
             miniMapObjective.ObjectiveTeamIndex = objective.TeamIndex;
-            objective.OnNumberChanged += (number) =>
+            objective.OnTextChanged += (number) =>
             {
-                miniMapObjective.ObjectiveNumber = number;
+                miniMapObjective.ObjectiveText = number;
             };
-            miniMapObjective.ObjectiveNumber = objective.Number;
+            miniMapObjective.ObjectiveText = objective.Text;
         };
     }
 
@@ -112,27 +112,27 @@ public class MiniMapObjectiv
 {
     public Action<Vector3> OnObjectiveMoved;
     public Action<int> OnObjectiveTeamIndexChanged;
-    public Action<int> OnObjectiveNumberChanged;
+    public Action<String> OnObjectiveTextChanged;
 
 
     Vector3 objectivePosition;
     int objectiveTeamIndex;
-    int objectiveNumber;
+    string objectiveText;
 
     public MiniMapObjectiv()
     {
         objectivePosition = Vector3.zero;
         objectiveTeamIndex = 0;
-        objectiveNumber = 0;
+        objectiveText = "";
     }
-    public MiniMapObjectiv(Vector3 objectivePosition, int objectiveIndex, int objectiveNumber)
+    public MiniMapObjectiv(Vector3 objectivePosition, int objectiveIndex, string objectiveText)
     {
         this.objectivePosition = objectivePosition;
         OnObjectiveMoved?.Invoke(objectivePosition);
         this.objectiveTeamIndex = objectiveIndex;
         OnObjectiveTeamIndexChanged?.Invoke(objectiveTeamIndex);
-        this.objectiveNumber = objectiveNumber;
-        OnObjectiveNumberChanged?.Invoke(objectiveNumber);
+        this.objectiveText = objectiveText;
+        OnObjectiveTextChanged?.Invoke(objectiveText);
     }
 
     public Vector3 ObjectivePosition
@@ -155,13 +155,13 @@ public class MiniMapObjectiv
         }
     }
 
-    public int ObjectiveNumber
+    public string ObjectiveText
     {
-        get { return objectiveNumber; }
+        get { return objectiveText; }
         set
         {
-            objectiveNumber = value;
-            OnObjectiveNumberChanged?.Invoke(objectiveNumber);
+            objectiveText = value;
+            OnObjectiveTextChanged?.Invoke(objectiveText);
         }
     }
 }

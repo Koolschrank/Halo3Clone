@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MiniMapUIObjective : MonoBehaviour
 {
     [SerializeField] Image image;
-    [SerializeField] TextMeshProUGUI numberText;
+    [SerializeField] TextMeshProUGUI objectiveText;
     [SerializeField] RectTransform rectTransform;
 
     public RectTransform RectTransform => rectTransform;
@@ -13,31 +13,23 @@ public class MiniMapUIObjective : MonoBehaviour
     public void ChangeColor(Color color)
     {
         image.color = color;
-        numberText.color = color;
+        objectiveText.color = color;
     }
 
-    public void ChangeNumber(int number)
+    public void ChangeText(string text)
     {
-        if (number < 0)
-        {
-            numberText.enabled = false;
-            return;
-        }
-        else
-        {
-            numberText.enabled = true;
-        }
-        numberText.text = number.ToString();
+        
+        objectiveText.text = text;
     }
 
     public void HideText()
     {
-        numberText.enabled = false;
+        objectiveText.enabled = false;
     }
 
     public void ShowText()
     {
-        numberText.enabled = true;
+        objectiveText.enabled = true;
     }
 
     

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon_PickUp : MonoBehaviour
@@ -9,6 +10,8 @@ public class Weapon_PickUp : MonoBehaviour
     [SerializeField] Weapon_Data weapon_Data;
     [SerializeField] int ammoInMagazine = 0;
     [SerializeField] int ammoInReserve = 0;
+
+    List<int> teamsBlockedFromPickUpThis = new List<int>();
     bool pickedUp = false;
 
 
@@ -65,6 +68,21 @@ public class Weapon_PickUp : MonoBehaviour
     }
 
     public WeaponType WeaponType => weapon_Data.WeaponType;
+
+    public void BlockPickUpForTeam(int teamIndex)
+    {
+        teamsBlockedFromPickUpThis.Add(teamIndex);
+    }
+
+    public void UnblockPickUpForTeam(int teamIndex)
+    {
+        teamsBlockedFromPickUpThis.Remove(teamIndex);
+    }
+
+    public bool CanBePickedUpByTeam(int teamIndex)
+    {
+        return !teamsBlockedFromPickUpThis.Contains(teamIndex);
+    }
 
 }
 

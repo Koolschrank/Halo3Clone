@@ -22,6 +22,11 @@ public class PlayerArms : MonoBehaviour
 
     float movementSpeedMultiplier = 1;
 
+    public void SetCanDualWield2HandedWeapons(bool value)
+    {
+        canDualWield2HandedWeapons = value;
+    }
+
     public float MovementSpeedMultiplier
     {
         get
@@ -132,6 +137,22 @@ public class PlayerArms : MonoBehaviour
         }
     }
 
+    public void DeleteWeapon(Weapon_Data data)
+    {
+        
+        if (rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data == data)
+        {
+            Debug.Log("Deleting weapon");
+            rightArm.DeleteWeapon();
+        }
+        if (leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data == data)
+        {
+            Debug.Log("Deleting weapon");
+            leftArm.DeleteWeapon();
+        }
+
+    }
+
     public bool HasWeapon(Weapon_Data weapon)
     {
         return rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data == weapon ||
@@ -225,9 +246,9 @@ public class PlayerArms : MonoBehaviour
         if (leftWeapon != null)
         {
             float leftWeaponMovementSpeedMultiplier = leftWeapon.MoveSpeedMultiplier;
-            if (leftWeaponMovementSpeedMultiplier > movementSpeedMultiplier)
+            if (leftWeaponMovementSpeedMultiplier != 1)
             {
-                movementSpeedMultiplier = leftWeaponMovementSpeedMultiplier;
+                movementSpeedMultiplier *= leftWeaponMovementSpeedMultiplier;
             }
         }
     }

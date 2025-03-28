@@ -649,15 +649,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 12e2246d1299bf94ab2b2611d6633a6d, type: 2}
   - {fileID: 11400000, guid: 024c38e2e861ad1429979777d02f4e59, type: 2}
   - {fileID: 11400000, guid: b3b691cdb854dbe41973632627ef625b, type: 2}
-  - {fileID: 11400000, guid: 01e59655181d95c4da67ebba62bd9403, type: 2}
-  - {fileID: 11400000, guid: 517eff2c0bb1bd544ba3d59a3f63471b, type: 2}
+  - {fileID: 11400000, guid: c5fdb7efe99bbc346aefef6d2692dde4, type: 2}
   - {fileID: 11400000, guid: 007b7356af70ba644ad9c8eb77010a9c, type: 2}
   - {fileID: 11400000, guid: 5498acdb4ab4e1f4dba86dc90f837d80, type: 2}
+  - {fileID: 11400000, guid: 01e59655181d95c4da67ebba62bd9403, type: 2}
+  - {fileID: 11400000, guid: 517eff2c0bb1bd544ba3d59a3f63471b, type: 2}
   - {fileID: 11400000, guid: 3d948b4d8f59e91479ddfe55885aeaf3, type: 2}
   - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
   - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
-  - {fileID: 11400000, guid: 492cbc93147b09b4e9da1088501f3b17, type: 2}
   - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
+  - {fileID: 11400000, guid: 2cdcf6af517550d4c9a0c0acf4c64885, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
   buttonSpacing: -60

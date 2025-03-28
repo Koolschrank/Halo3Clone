@@ -28052,9 +28052,37 @@ PrefabInstance:
       propertyPath: 'playerColors.Array.data[7]'
       value: 
       objectReference: {fileID: 2100000, guid: 3f27e41ec5a44554384d65a63c3c7007, type: 2}
+    - target: {fileID: 903774208047818906, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 903774208047818906, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 903774208047818906, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -28.34
+      objectReference: {fileID: 0}
     - target: {fileID: 1348920957298140003, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: radius
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669615057878615205, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669615057878615205, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669615057878615205, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828890577571562474, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3294454691434133679, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalScale.x
@@ -28067,6 +28095,18 @@ PrefabInstance:
     - target: {fileID: 3294454691434133679, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalScale.z
       value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503352654208145905, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503352654208145905, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503352654208145905, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.31000042
       objectReference: {fileID: 0}
     - target: {fileID: 3959578641144242227, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28200,6 +28240,78 @@ PrefabInstance:
       propertyPath: m_Name
       value: Team1
       objectReference: {fileID: 0}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: spawnSystem.basicSpawnPoints.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1250695240}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1842817394}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2136521637}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1718950442}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 411337560}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1427887576}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 1341839819}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1550081388}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: spawnSystem.teamStartSpawnPoints.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1250695240}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1842817394}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2136521637}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1718950442}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 411337560}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1427887576}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 1341839819}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1550081388}
     - target: {fileID: 5944988559447818504, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.26
@@ -28223,6 +28335,18 @@ PrefabInstance:
     - target: {fileID: 6137340979069603147, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalScale.z
       value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287100024015536485, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44.129997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287100024015536485, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287100024015536485, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -28.34
       objectReference: {fileID: 0}
     - target: {fileID: 7063945528381591942, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: gameMode

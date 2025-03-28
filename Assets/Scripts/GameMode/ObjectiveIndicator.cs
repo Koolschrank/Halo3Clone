@@ -46,7 +46,7 @@ public class Objective
     public Action<Vector3> OnPositionChange;
     public Action<float> OnHideDistanceChange;
     public Action<int> OnTeamIndexChange;
-    public Action<int> OnNumberChanged;
+    public Action<String> OnTextChanged;
 
     public Objective()
     {
@@ -57,7 +57,7 @@ public class Objective
     bool isActive = false;
     float hideDistance = 0;
     int teamIndex = -1;
-    int number = 0;
+    String objectiveText = "";
     Vector3 position = Vector3.zero;
 
     public void SetActive(bool active)
@@ -83,7 +83,7 @@ public class Objective
 
     public int TeamIndex { get { return teamIndex; } }
 
-    public int Number { get { return number; } }
+    public String Text { get { return objectiveText; } }
 
     public bool IsActive { get { return isActive; } }
 
@@ -93,10 +93,10 @@ public class Objective
         OnTeamIndexChange?.Invoke(index);
     }
 
-    public void SetNumber(int number)
+    public void SetText(string objectiveText)
     {
-        this.number = number;
-        OnNumberChanged?.Invoke(number);
+        this.objectiveText = objectiveText;
+        OnTextChanged?.Invoke(objectiveText);
     }
 
     public void SetHideDistance(float distance)

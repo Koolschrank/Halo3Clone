@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
-  m_Name: Flag
+  m_Name: Red Flag
   m_EditorClassIdentifier: 
-  weaponPickUp: {fileID: 1358379668584700671, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
+  weaponPickUp: {fileID: 4924384559840711381, guid: 6877b7e63dc2a2e48ad58ab048242320, type: 3}
   weaponBullet: {fileID: 0}
-  weaponFPSModel: {fileID: 6899193775294056288, guid: 7fe6f8c473bbb724dabc170489f5756f, type: 3}
-  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 7a2c335a530921944a03c8420534b1d5, type: 3}
-  weaponName: Flag
+  weaponFPSModel: {fileID: 6931433600974927012, guid: 34f846cb8a6de16438d406f69df27aff, type: 3}
+  weapon3rdPersonModel: {fileID: 6031747819342394465, guid: 2ebf57caa004cf14ea40633cdf5b235a, type: 3}
+  weaponName: Red Flag
   shootType: 3
   fireRate: 1
   bulletsPerShot: 1
@@ -28,7 +28,7 @@ MonoBehaviour:
   switchInTime: 0.5
   canZoom: 0
   zoomFOV: 0
-  moveSpeedMultiplier: 1.2
+  moveSpeedMultiplier: 0.7
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: 46cba928d34f93349ac312de1e9ee4da, type: 2}
   autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}

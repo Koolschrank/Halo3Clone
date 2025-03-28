@@ -44,9 +44,9 @@ public class MinimapUI : MonoBehaviour
         objectivesInUI.Add(obj);
         var obiManager = MiniMapManager.instance.GetObjective(index);
         obiManager.OnObjectiveTeamIndexChanged += (index) => SetObjectiveIndexColor(obj, index);
-        obiManager.OnObjectiveNumberChanged += obj.ChangeNumber;
+        obiManager.OnObjectiveTextChanged += obj.ChangeText;
         SetObjectiveIndexColor(obj, obiManager.ObjectiveTeamIndex);
-        obj.ChangeNumber(obiManager.ObjectiveNumber);
+        obj.ChangeText(obiManager.ObjectiveText);
 
 
     }

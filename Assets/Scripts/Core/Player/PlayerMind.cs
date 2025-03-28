@@ -558,10 +558,16 @@ public class PlayerMind : MonoBehaviour
 
     public void EnableObjectiveUIMarker()
     {
-        foreach (var objectiveIndicatorUI in objectiveIndicatorUIs)
-            objectiveIndicatorUI.gameObject.SetActive(true);
+        for (int i = 0; i < objectiveIndicatorUIs.Length; i++)
+        {
+            objectiveIndicatorUIs[i].gameObject.SetActive(true);
+        }
 
+    }
 
+    public void EnableObjectiveUIMarker(int index)
+    {
+        objectiveIndicatorUIs[index].gameObject.SetActive(true);
     }
 
     public void UpdateLayers()

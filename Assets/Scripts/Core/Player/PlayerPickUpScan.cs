@@ -12,6 +12,7 @@ public class PlayerPickUpScan : MonoBehaviour
 
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] PlayerTeam playerTeam;
 
     public Action<Weapon_PickUp> OnWeaponPickUpUpdate;
     public Action<Weapon_PickUp> OnWeaponDualWieldUpdate;
@@ -76,6 +77,9 @@ public class PlayerPickUpScan : MonoBehaviour
             }
             else
             {
+                if (!pickUp.CanBePickedUpByTeam(playerTeam.TeamIndex))
+                    return;
+
                 pickUpsInRange.Add(pickUp);
                 TrySendUpdates();
             }

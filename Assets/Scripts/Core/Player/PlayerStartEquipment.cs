@@ -78,6 +78,8 @@ public class PlayerStartEquipment : MonoBehaviour
         health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);
 
+        playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
+
     }
 
     public Weapon_Arms SpawnWeapon(Weapon_Data data)
@@ -104,6 +106,7 @@ public class Equipment
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
     [SerializeField] bool hasMiniMap = true;
+    [SerializeField] bool canDualWieldEverything = false;
     [SerializeField] float movementSpeedMultiplier = 1;
 
 
@@ -135,6 +138,8 @@ public class Equipment
     public bool HasMiniMap => hasMiniMap;
 
     public float MovementSpeedMultiplier => movementSpeedMultiplier;
+
+    public bool CanDualWieldEverything => canDualWieldEverything;
 
 
 }

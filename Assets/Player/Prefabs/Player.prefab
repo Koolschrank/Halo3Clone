@@ -70,6 +70,7 @@ MonoBehaviour:
   pickUpCooldown: 0.5
   playerArms: {fileID: 3232609274750972410}
   playerInventory: {fileID: 7573040687501960069}
+  playerTeam: {fileID: 2295363821645548979}
 --- !u!1 &2050298198174422752
 GameObject:
   m_ObjectHideFlags: 0

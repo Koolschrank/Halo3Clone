@@ -1242,7 +1242,7 @@ MonoBehaviour:
   lerpChangeTime: 0.2
   maxAngleForDirectView: 60
   baseColor: {r: 1, g: 1, b: 1, a: 0.77254903}
-  numberText: {fileID: 4970269304085248405}
+  objectiveText: {fileID: 4970269304085248405}
   teamColors:
   - {r: 0.0067100525, g: 0, b: 1, a: 0.77254903}
   - {r: 1, g: 0.033947065, b: 0, a: 0.77254903}
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4073867504755939888}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -2068,7 +2068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2618,7 +2618,7 @@ MonoBehaviour:
   lerpChangeTime: 0.2
   maxAngleForDirectView: 60
   baseColor: {r: 1, g: 1, b: 1, a: 0.77254903}
-  numberText: {fileID: 664319211227760440}
+  objectiveText: {fileID: 664319211227760440}
   teamColors:
   - {r: 0.0067100525, g: 0, b: 1, a: 0.77254903}
   - {r: 1, g: 0.033947065, b: 0, a: 0.77254903}
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4956698836163463319}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   lerpChangeTime: 0.2
   maxAngleForDirectView: 60
   baseColor: {r: 1, g: 1, b: 1, a: 0.77254903}
-  numberText: {fileID: 145987653569332910}
+  objectiveText: {fileID: 145987653569332910}
   teamColors:
   - {r: 0.0067100525, g: 0, b: 1, a: 0.77254903}
   - {r: 1, g: 0.033947065, b: 0, a: 0.77254903}
@@ -3632,7 +3632,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5844396777538722067}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -3645,7 +3645,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5597,7 +5597,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665019326565564032}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -5610,7 +5610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5879,7 +5879,7 @@ MonoBehaviour:
   lerpChangeTime: 0.2
   maxAngleForDirectView: 60
   baseColor: {r: 1, g: 1, b: 1, a: 0.77254903}
-  numberText: {fileID: 6352069423913415096}
+  objectiveText: {fileID: 6352069423913415096}
   teamColors:
   - {r: 0.0067100525, g: 0, b: 1, a: 0.77254903}
   - {r: 1, g: 0.033947065, b: 0, a: 0.77254903}

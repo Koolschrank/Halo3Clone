@@ -308,7 +308,16 @@ public class Arm : MonoBehaviour
         zoomButtonPressed = false;
     }
 
+    public void DeleteWeapon()
+    {
+        if (weaponInHand != null)
+        {
+            OnWeaponDroped?.Invoke(weaponInHand, null);
+            weaponInHand = null;
+            TrySwitchWeapon();
 
+        }
+    }
 
     // TODO: this function can be cleared up
 
