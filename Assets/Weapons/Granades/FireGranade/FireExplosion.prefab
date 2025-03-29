@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  damage: 75
+  damage: 70
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2.8
-  damage: 8
+  damage: 7
   layerMask:
     serializedVersion: 2
     m_Bits: 128

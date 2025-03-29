@@ -46,10 +46,10 @@ public class PlayerAim : MonoBehaviour
 
 
         // bug fix so that player stps rotating when dead
-        playerHealth.OnDeath += () =>
-        {
-            sensitivityMultiplier = 0;
-        };
+        //playerHealth.OnDeath += () =>
+        //{
+        //    sensitivityMultiplier = 0;
+        //};
     }
 
     void Update()

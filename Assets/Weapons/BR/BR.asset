@@ -21,7 +21,7 @@ MonoBehaviour:
   fireRate: 0.300028
   bulletsPerShot: 1
   magazineSize: 27
-  maxAmmoInReserve: 500
+  maxAmmoInReserve: 108
   reloadTime: 2.3
   inaccuracy: 0.01
   switchOutTime: 0.3
@@ -36,10 +36,10 @@ MonoBehaviour:
   canNotBeInInventory: 0
   burstAmount: 3
   burstDelay: 0.0600005
-  damageMultiplier: 1
+  damageMultiplier: 0.8
   fireRateMultiplier: 1
-  inaccuracyMultiplier: 1
-  reloadTimeMultiplier: 1
+  inaccuracyMultiplier: 2
+  reloadTimeMultiplier: 1.4
   shootSound:
     Guid:
       Data1: 2116415683

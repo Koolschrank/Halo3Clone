@@ -48,28 +48,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4.5
-  damage: 60
-  damageOnShildMultiplier: 2
+  damage: 50
+  damageOnShildMultiplier: 2.4
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -0.0066452026
       value: 0.9970398
-      inSlope: -0.9931978
-      outSlope: -0.9931978
-      tangentMode: 34
+      inSlope: -0.0093609905
+      outSlope: -0.0093609905
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.2
     - serializedVersion: 3
       time: 1
       value: -0.0027580261
-      inSlope: -0.9931978
-      outSlope: -0.9931978
-      tangentMode: 34
+      inSlope: -3.0610328
+      outSlope: -3.0610328
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.033333346
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -103,6 +103,7 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  damageReductionIfObstructed: 0.3
   timeForSelfDestruction: 5
   explosionSound:
     Guid:
@@ -412,11 +413,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.7
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.35
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726696575710434051, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: scalingMode
@@ -460,15 +465,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.2
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.2
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.2
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 7770281278996311404, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: m_LocalPosition.x

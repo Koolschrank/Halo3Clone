@@ -332,6 +332,12 @@ public class PlayerInventory : MonoBehaviour
             }
 
         }
+        if (ammoInPickUpReserve > 0 || ammoInPickUpMagazine > 0)
+        {
+            pickUp.OnPickUp?.Invoke(pickUp);
+            if (pickUp.WeaponType != WeaponType.oneHanded)
+                Destroy(pickUp.gameObject);
+        }
         OnAmmoChanged?.Invoke(pickUp.WeaponData, GetAmmo(pickUp.WeaponData));
 
     }

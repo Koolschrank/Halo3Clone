@@ -102,6 +102,7 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  damageReductionIfObstructed: 0.1
   timeForSelfDestruction: 5
   explosionSound:
     Guid:

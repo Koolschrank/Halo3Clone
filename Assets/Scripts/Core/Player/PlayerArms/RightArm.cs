@@ -18,7 +18,7 @@ public class RightArm : Arm
             {
                 IfZoomedInExitZoom();
                 var newWeapon = pickUpScan.PickUpWeapon();
-
+                OnWeaponPickedUp?.Invoke(newWeapon);
 
 
                 DropWeapon();

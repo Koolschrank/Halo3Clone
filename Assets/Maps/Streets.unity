@@ -28241,6 +28241,14 @@ PrefabInstance:
       value: Team1
       objectReference: {fileID: 0}
     - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: scoreRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: flagRecoveryTimer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: spawnSystem.basicSpawnPoints.Array.size
       value: 8
       objectReference: {fileID: 0}

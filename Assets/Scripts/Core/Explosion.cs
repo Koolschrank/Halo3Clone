@@ -18,6 +18,8 @@ public class Explosion : MonoBehaviour
     // curve to control the damage falloff
 
     [SerializeField] LayerMask hitLayer;
+    [SerializeField] float damageReductionIfObstructed = 0.4f;
+
     [SerializeField] float timeForSelfDestruction = 5f;
 
     DamagePackage damagePackage;
@@ -53,27 +55,62 @@ public class Explosion : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, hitLayer);
         foreach (var collider in colliders)
         {
-            var direction = collider.transform.position - transform.position;
-            var forceDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
-            var distance = direction.magnitude;
-            var falloff = damageFalloff.Evaluate(distance / range);
-            var finalDamage = damage * falloff;
-            var forceFalloffValue = forceFalloff.Evaluate(distance / range);
-            var finalForce = force * forceFalloffValue;
-            damagePackage.hitPoint = collider.transform.position;
-            damagePackage.damageAmount = finalDamage;
-            damagePackage.forceVector = forceDirection.normalized * finalForce;
-            damagePackage.impactType = ImpactType.wholeBody;
-            damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
+            
+
+            
 
             if (collider.TryGetComponent<Health>(out Health health))
             {
+                var direction = collider.transform.position - transform.position;
+                var forceDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
+                var distance = direction.magnitude;
+                var falloff = damageFalloff.Evaluate(distance / range);
+                var finalDamage = damage * falloff;
+                var forceFalloffValue = forceFalloff.Evaluate(distance / range);
+                var finalForce = force * forceFalloffValue;
+                damagePackage.hitPoint = collider.transform.position;
+                damagePackage.damageAmount = finalDamage;
+                damagePackage.forceVector = forceDirection.normalized * finalForce;
+                damagePackage.impactType = ImpactType.wholeBody;
+                damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
+
+                // cast a ray to check if the object is obstructed
+                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, hitLayer))
+                {
+                    if (hit.collider != collider)
+                    {
+                        damagePackage.damageAmount *= damageReductionIfObstructed;
+                        damagePackage.forceVector *= damageReductionIfObstructed;
+                    }
+                }
+
                 health.TakeDamage(damagePackage);
             }
             // add force to the rigidbody
             if (collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
-                
+                var direction = collider.transform.position - transform.position;
+                var forceDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
+                var distance = direction.magnitude;
+                var falloff = damageFalloff.Evaluate(distance / range);
+                var finalDamage = damage * falloff;
+                var forceFalloffValue = forceFalloff.Evaluate(distance / range);
+                var finalForce = force * forceFalloffValue;
+                damagePackage.hitPoint = collider.transform.position;
+                damagePackage.damageAmount = finalDamage;
+                damagePackage.forceVector = forceDirection.normalized * finalForce;
+                damagePackage.impactType = ImpactType.wholeBody;
+                damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
+
+
+                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, hitLayer))
+                {
+                    if (hit.collider != collider)
+                    {
+                        damagePackage.damageAmount *= damageReductionIfObstructed;
+                        damagePackage.forceVector *= damageReductionIfObstructed;
+                    }
+                }
                 rb.AddForce(damagePackage.forceVector, ForceMode.Impulse);
             }
 

@@ -17,26 +17,33 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
+    canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
     magazinsOfWeaponInHand: 5
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
     magazinsOfSideArm: 5
     granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
     granadeCount: 1
   timeLimitInMinutes: 10
-  pointsToWin: 30
+  pointsToWin: 40
   teamCount: 8
   hasWeaponPickups: 0
+  reasignsTeamsInPlayerOrder: 0
   timeToScore: 1
   setEquipmentOnCrownPickup: 0
   equipmentOnCrownPickup:
     hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
+    canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 0}
     magazinsOfWeaponInHand: 3
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
     granade: {fileID: 0}

@@ -33,12 +33,13 @@ MonoBehaviour:
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
   weaponType: 1
+  canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
-  damageMultiplier: 1
+  damageMultiplier: 0.9
   fireRateMultiplier: 1
-  inaccuracyMultiplier: 1
-  reloadTimeMultiplier: 1
+  inaccuracyMultiplier: 1.5
+  reloadTimeMultiplier: 1.4
   shootSound:
     Guid:
       Data1: -1842625480

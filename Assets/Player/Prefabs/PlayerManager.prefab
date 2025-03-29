@@ -1397,28 +1397,28 @@ MonoBehaviour:
   - screenRectValues:
     - x: 0
       y: 0.5
-      width: 0.5
+      width: 1
       height: 0.5
-      FOV: 75
-      targetDisplay: 0
-    - x: 0.5
-      y: 0.5
-      width: 0.5
-      height: 0.5
-      FOV: 75
+      FOV: 55
       targetDisplay: 0
     - x: 0
       y: 0
-      width: 0.5
+      width: 1
       height: 0.5
-      FOV: 75
+      FOV: 55
       targetDisplay: 0
-    - x: 0.5
+    - x: 0
+      y: 0.5
+      width: 1
+      height: 0.5
+      FOV: 55
+      targetDisplay: 1
+    - x: 0
       y: 0
-      width: 0.5
+      width: 1
       height: 0.5
-      FOV: 75
-      targetDisplay: 0
+      FOV: 55
+      targetDisplay: 1
   - screenRectValues:
     - x: 0
       y: 0.5

@@ -21,9 +21,9 @@ MonoBehaviour:
   fireRate: 0.09
   bulletsPerShot: 1
   magazineSize: 42
-  maxAmmoInReserve: 200
+  maxAmmoInReserve: 168
   reloadTime: 2
-  inaccuracy: 0.06
+  inaccuracy: 0.05
   switchOutTime: 0.25
   switchInTime: 0.5
   canZoom: 0
@@ -33,12 +33,13 @@ MonoBehaviour:
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
+  canNotBeInInventory: 0
   burstAmount: 3
   burstDelay: 0.1
-  damageMultiplier: 1
+  damageMultiplier: 0.85
   fireRateMultiplier: 1
-  inaccuracyMultiplier: 1
-  reloadTimeMultiplier: 1
+  inaccuracyMultiplier: 1.5
+  reloadTimeMultiplier: 1.4
   shootSound:
     Guid:
       Data1: 1709653785

@@ -593,7 +593,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bf1d33e4-50ef-4086-9c38-064a2f6a2d08"",
-                    ""path"": ""<Mouse>/press"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
@@ -615,7 +615,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a04569c2-5e55-4f74-ab0e-15ca4bba594c"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
@@ -659,7 +659,29 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1bf109a2-8834-4b64-a3cd-0458decc923f"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Reload_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""384d9f28-d65d-4189-84f9-d81e75ce066c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Reload_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3551456d-38d7-4c01-aa50-10a9abf5db0a"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
@@ -674,6 +696,17 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
+                    ""action"": ""Reload_Weapon2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""179e939f-8f6c-4244-8a2d-76377fa18b3d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Reload_Weapon2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
