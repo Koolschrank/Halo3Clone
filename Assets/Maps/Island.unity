@@ -49063,6 +49063,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -6.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7063945528381591942, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: gameMode
+      value: 
+      objectReference: {fileID: 11400000, guid: b3b691cdb854dbe41973632627ef625b, type: 2}
     - target: {fileID: 7175996642347170180, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02

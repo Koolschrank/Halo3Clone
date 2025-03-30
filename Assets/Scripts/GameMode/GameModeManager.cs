@@ -15,6 +15,7 @@ public class GameModeManager : MonoBehaviour
     protected List<int> teamPoints = new List<int>();
 
     [SerializeField] protected SpawnSystem spawnSystem;
+    [SerializeField] bool smallMap = false;
 
 
     public Transform GetStartingSpawnPoint(int teamIndex)
@@ -217,7 +218,7 @@ public class GameModeManager : MonoBehaviour
 
     bool HasTeamWon(int teamIndex)
     {
-        return teamPoints[teamIndex] >= gameModeStats.PointsToWin;
+        return teamPoints[teamIndex] >= gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
     }
 
     public Equipment GetEquipment()
@@ -249,14 +250,14 @@ public class GameModeManager : MonoBehaviour
 
     public int GetMaxScore()
     {
-        return gameModeStats.PointsToWin;
+        return gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
     }
 
     public bool HasWeaponPickups => gameModeStats.HasWeaponPickups;
 
     public int GetPointsLeftForTeamToWin(int teamIndex)
     {
-        int pointsToWin = gameModeStats.PointsToWin;
+        int pointsToWin = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
         int pointsOfTeam = teamPoints[teamIndex];
         return pointsToWin - pointsOfTeam;
     }

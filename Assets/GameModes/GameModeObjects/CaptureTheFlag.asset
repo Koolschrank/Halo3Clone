@@ -32,3 +32,5 @@ MonoBehaviour:
   teamCount: 2
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 1
+  pointsToWinMultiplier_4orMorePlayers: 1
+  pointsToWinMultiplier_smallMap: 1.5

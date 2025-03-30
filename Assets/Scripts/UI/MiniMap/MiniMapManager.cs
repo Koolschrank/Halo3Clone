@@ -19,6 +19,13 @@ public class MiniMapManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        
+    }
+
+
+    // TODO: clean this up
+    public void Start()
+    {
         ObjectiveIndicator.instance.OnObjectiveAdded += (objective) =>
         {
             var miniMapObjective = new MiniMapObjectiv(objective.Position, objective.TeamIndex, objective.Text);
@@ -32,6 +39,21 @@ public class MiniMapManager : MonoBehaviour
             };
             miniMapObjective.ObjectiveText = objective.Text;
         };
+
+        var alreadyExistingObjectives = ObjectiveIndicator.instance.GetAllObjectives();
+        foreach (var objective in alreadyExistingObjectives)
+        {
+            var miniMapObjective = new MiniMapObjectiv(objective.Position, objective.TeamIndex, objective.Text);
+            miniMapObjectivDatas.Add(miniMapObjective);
+            objective.OnPositionChange += (position) => { miniMapObjective.ObjectivePosition = position; };
+            objective.OnTeamIndexChange += (index) => { miniMapObjective.ObjectiveTeamIndex = index; };
+            miniMapObjective.ObjectiveTeamIndex = objective.TeamIndex;
+            objective.OnTextChanged += (number) =>
+            {
+                miniMapObjective.ObjectiveText = number;
+            };
+            miniMapObjective.ObjectiveText = objective.Text;
+        }
     }
 
     public MiniMapObjectiv GetObjective(int index)

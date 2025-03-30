@@ -18,6 +18,11 @@ public class ObjectiveIndicator : MonoBehaviour
     
     public int ObjectiveCount { get { return objectives.Count; } }
 
+    public List<Objective> GetAllObjectives()
+    {
+        return objectives;
+    }
+
     public Objective GetObjective(int index)
     {
         if (index >= objectives.Count)

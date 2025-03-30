@@ -13,9 +13,28 @@ public class GameMode : ScriptableObject
     [SerializeField] protected bool hasWeaponPickups = false;
     [SerializeField] protected bool reasignsTeamsInPlayerOrder = false; // first half of players are team blue second half are team red 
 
+    [SerializeField] protected float pointsToWinMultiplier_MoreThan4Players = 1f;
+    [SerializeField] protected float pointsToWinMultiplier_smallMap = 1f;
+
 
     public Equipment StartingEquipment { get { return startingEquipment; } }
     public float TimeLimitInMinutes { get { return timeLimitInMinutes; } }
+
+    public int GetPointsToWin(int playerCount, bool isSmallMap)
+    {
+        int points = pointsToWin;
+
+        if (playerCount >= 4)
+        {
+            points = Mathf.RoundToInt(points * pointsToWinMultiplier_MoreThan4Players);
+
+        }
+        if (isSmallMap)
+        {
+            points = Mathf.RoundToInt(points * pointsToWinMultiplier_smallMap);
+        }
+        return points;
+    }
 
     public int PointsToWin { get { return pointsToWin; } }
 

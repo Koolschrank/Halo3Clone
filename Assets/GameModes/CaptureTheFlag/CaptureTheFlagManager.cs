@@ -76,6 +76,11 @@ public class CaptureTheFlagManager : GameModeManager
                 SpawnFlagPrefab_Team1();
             }
         }
+        else
+        {
+            flag1_dropedTimer += Time.deltaTime;
+            
+        }
 
         // if flag is close to opposite base
         if (team1_Flag != null && team2_Base != null)
@@ -115,6 +120,10 @@ public class CaptureTheFlagManager : GameModeManager
             {
                 SpawnFlagPrefab_Team2();
             }
+        }
+        else
+        {
+            flag2_dropedTimer += Time.deltaTime;
         }
 
         // if flag is close to opposite base
@@ -287,7 +296,7 @@ public class CaptureTheFlagManager : GameModeManager
         }
         team1_Flag = pickUp.gameObject;
         flag1_droped = true;
-        flag1_dropedTimer = flagRecoveryTimer;
+        flag1_dropedTimer = Mathf.Min(flag1_dropedTimer, flagRecoveryTimer);
         var pickup = team1_Flag.GetComponent<Weapon_PickUp>();
         pickup.BlockPickUpForTeam(0);
 
@@ -300,7 +309,7 @@ public class CaptureTheFlagManager : GameModeManager
         }
         team2_Flag = pickUp.gameObject;
         flag2_droped = true;
-        flag2_dropedTimer = flagRecoveryTimer;
+        flag2_dropedTimer = Mathf.Min(flag2_dropedTimer, flagRecoveryTimer);
         var pickup = team2_Flag.GetComponent<Weapon_PickUp>();
         pickup.BlockPickUpForTeam(1);
     }
