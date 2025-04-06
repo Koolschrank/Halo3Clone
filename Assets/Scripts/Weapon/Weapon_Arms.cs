@@ -320,7 +320,15 @@ public class Weapon_Arms
 
     public bool CanNotBeInInventory => weaponData.CanNotBePutInInventory;
 
-    public bool ShowAmmo => weaponData.ShowAmmo;
+    public bool ShowAmmoUI => weaponData.ShowAmmoUI;
+
+    public Sprite GunSpriteUI => weaponData.GunSpriteUI;
+
+    public Sprite BulletSpriteUI => weaponData.BulletSpriteUI;
+
+    public int BulletsPerRowUI => weaponData.BulletsPerRowUI;
+
+    public float BulletSizeUI => weaponData.BulletSizeUI;
 
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {

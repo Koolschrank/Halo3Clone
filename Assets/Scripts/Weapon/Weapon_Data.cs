@@ -20,7 +20,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] ShootType shootType;
     [SerializeField] float fireRate;
     [SerializeField] int bulletsPerShot = 1;
-    [SerializeField] bool showAmmo = true;
+    
     [SerializeField] int magazineSize;
     [SerializeField] int maxAmmoInReserve;
     [SerializeField] float reloadTime;
@@ -51,6 +51,13 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] EventReference shootSound;
     [SerializeField] TimedSoundList switchInSound;
     [SerializeField] TimedSoundList reloadSounds;
+
+    [Header("UI")]
+    [SerializeField] bool showAmmo = true;
+    [SerializeField] Sprite gunSprite;
+    [SerializeField] Sprite bulletSprite;
+    [SerializeField] float bulletSize;
+    [SerializeField] int bulletsPerRow;
 
 
 
@@ -136,7 +143,15 @@ public class Weapon_Data : ScriptableObject
 
     public bool CanNotBePutInInventory => canNotBeInInventory;
 
-    public bool ShowAmmo => showAmmo;
+    public bool ShowAmmoUI => showAmmo;
+
+    public Sprite GunSpriteUI => gunSprite;
+
+    public Sprite BulletSpriteUI => bulletSprite;
+
+    public int BulletsPerRowUI => bulletsPerRow;
+
+    public float BulletSizeUI => bulletSize;
 }
 
 

@@ -75,3 +75,8 @@ MonoBehaviour:
           Data4: 1818439784
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinIn
       timeOfPlay: 0.65
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
+  bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
+  bulletSize: 1
+  bulletsPerRow: 21
