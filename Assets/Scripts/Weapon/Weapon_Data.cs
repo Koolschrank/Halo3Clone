@@ -20,6 +20,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] ShootType shootType;
     [SerializeField] float fireRate;
     [SerializeField] int bulletsPerShot = 1;
+    [SerializeField] bool showAmmo = true;
     [SerializeField] int magazineSize;
     [SerializeField] int maxAmmoInReserve;
     [SerializeField] float reloadTime;
@@ -134,6 +135,8 @@ public class Weapon_Data : ScriptableObject
     public float DamageReduction => damageReduction;
 
     public bool CanNotBePutInInventory => canNotBeInInventory;
+
+    public bool ShowAmmo => showAmmo;
 }
 
 

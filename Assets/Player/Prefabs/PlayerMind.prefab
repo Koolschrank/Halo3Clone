@@ -263,7 +263,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6762101414911299386}
         m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
         m_MethodName: RespawnWithDelay
-        m_Mode: 4
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -986,6 +986,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 674807498447230609, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: barObject
+      value: 
+      objectReference: {fileID: 819575538802774874}
     - target: {fileID: 781354266759541272, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1713,7 +1717,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1745,7 +1749,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 674807498447230609, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 819575538802774874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e8f3527ed15bbd4285a2f1e1adfa31b, type: 3}
@@ -1757,11 +1761,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &819575538802774874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 835395752812158279, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &973657641611872543 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 957995588699522818, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
@@ -1943,7 +1952,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 56395733494746653}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 

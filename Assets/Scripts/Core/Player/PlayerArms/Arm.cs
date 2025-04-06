@@ -234,6 +234,7 @@ public class Arm : MonoBehaviour
             if (!weaponInHand.IsInBurst())
             {
                 armState = ArmState.Shooting;
+                weaponInHand.ResetShootCooldown();
             }
         }
 

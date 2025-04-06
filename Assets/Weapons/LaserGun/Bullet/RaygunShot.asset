@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: RaygunShot
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 4
   force: 50
   shildDamageMultiplier: 1
-  headShotMultiplier: 1
+  headShotMultiplier: 2
+  canHeadShotShild: 0
   range: 40
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 15
+  rangeUntilDamageFalloff: 50
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -46,4 +47,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   trail: {fileID: 7783241535111576775, guid: 86cdd261e60cfcb47abf1a0f8e521b20, type: 3}
-  impact: {fileID: 8030697463898779624, guid: 6ece8d19ae8f34d41905563756b37f2b, type: 3}
+  impact_body: {fileID: 8030697463898779624, guid: 6ece8d19ae8f34d41905563756b37f2b, type: 3}
+  impact_ground: {fileID: 8030697463898779624, guid: 6ece8d19ae8f34d41905563756b37f2b, type: 3}
+  bodyHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  groundHitSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

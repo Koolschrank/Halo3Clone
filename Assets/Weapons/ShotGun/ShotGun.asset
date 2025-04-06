@@ -24,7 +24,7 @@ MonoBehaviour:
   maxAmmoInReserve: 10
   reloadTime: 2.5
   inaccuracy: 0.2
-  switchOutTime: 0.3
+  switchOutTime: 0.25
   switchInTime: 0.6
   canZoom: 0
   zoomFOV: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   damageMultiplier: 0.9
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
-  reloadTimeMultiplier: 1.4
+  reloadTimeMultiplier: 1.5
   shootSound:
     Guid:
       Data1: -1842625480

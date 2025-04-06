@@ -53,14 +53,23 @@ public class WeaponUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void Enable()
+    {
+        gameObject.SetActive(true);
+    }
+
 
 
 
     void EquipWeapon(Weapon_Arms weapon, float timer)
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject.activeSelf && weapon.ShowAmmo)
         {
             gameObject.SetActive(true);
+        }
+        else if (gameObject.activeSelf && !weapon.ShowAmmo)
+        {
+            gameObject.SetActive(false);
         }
 
         magazinSize = weapon.MagazineSize;

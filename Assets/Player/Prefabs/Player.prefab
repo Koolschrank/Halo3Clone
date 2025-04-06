@@ -10824,7 +10824,7 @@ MonoBehaviour:
   currentHeath: 50
   setMaxHeathOnStart: 1
   hasHealthRegen: 1
-  healthRegenDelay: 2
+  healthRegenDelay: 2.5
   healthRegenAmountPerSecond: 10
   damageMultiplier: 1
   hasShild: 1
@@ -10832,7 +10832,7 @@ MonoBehaviour:
   maxShild: 100
   currentShild: 100
   shildPopDamageNegation: 0
-  shildRegenDelay: 5
+  shildRegenDelay: 4.5
   shildRegenAmountPerSecond: 25
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
@@ -10953,8 +10953,8 @@ MonoBehaviour:
   meleeAttacker: {fileID: 8008512304446792098}
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   weaponDropForce: 10
-  reloadInputBuffer: 0.4
-  switchInputBuffer: 0.4
+  reloadInputBuffer: 0.29
+  switchInputBuffer: 0.29
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
   granadeThrowTimeMultiplierInDualWielding: 1.5
@@ -10981,8 +10981,8 @@ MonoBehaviour:
   meleeAttacker: {fileID: 8008512304446792098}
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   weaponDropForce: 10
-  reloadInputBuffer: 0.4
-  switchInputBuffer: 0.4
+  reloadInputBuffer: 0.29
+  switchInputBuffer: 0.29
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
   granadeThrowTimeMultiplierInDualWielding: 1.6

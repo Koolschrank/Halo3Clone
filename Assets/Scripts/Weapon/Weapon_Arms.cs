@@ -86,27 +86,34 @@ public class Weapon_Arms
         {
             shootCooldown -= Time.deltaTime;
         }
+        else if (shootCooldown <0)
+        {
+            shootCooldown = 0;
+        }
     }
 
     public bool UpdateBurstShot()
     {
-        if (shotsLeftInBurst > 0 && shootCooldownInBurst > 0)
+        if (shotsLeftInBurst > 0)
         {
             shootCooldownInBurst -= Time.deltaTime;
-            if (shootCooldownInBurst <= 0)
+            bool shot = false;
+            while (shootCooldownInBurst <= 0)
             {
                 shotsLeftInBurst--;
-                shootCooldownInBurst = weaponData.BurstFireRate;
+                shootCooldownInBurst += weaponData.BurstFireRate;
+                shootCooldown = 0;
                 Shoot();
-                return true;
+                shot = true;
             }
+            return shot;
         }
         return false;
     }
 
     public bool IsInBurst()
     {
-        return shotsLeftInBurst > 0;
+        return shotsLeftInBurst > 0 && magazine > 0;
     }
 
     public bool TryShoot()
@@ -133,42 +140,52 @@ public class Weapon_Arms
         return false;
     }
 
+    public void ResetShootCooldown()
+    {
+        shootCooldown = weaponData.GetFireRate(isBeingDualWielded);
+    }
+
     private void Shoot()
     {
-        OnShot?.Invoke();
+        while(shootCooldown <= 0 && magazine > 0)
+        {
+            OnShot?.Invoke();
 
-        shootCooldown = weaponData.GetFireRate(isBeingDualWielded);
-        Magazine--;
+            shootCooldown += weaponData.GetFireRate(isBeingDualWielded);
+            Magazine--;
 
-        if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
-        {
-            var hitscan = bulletSpawner.ShootHitScan(this);
-            foreach (var hit in hitscan)
+            if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
             {
-                OnHitscanShot?.Invoke(hit);
+                var hitscan = bulletSpawner.ShootHitScan(this);
+                foreach (var hit in hitscan)
+                {
+                    OnHitscanShot?.Invoke(hit);
+                }
+            }
+            else if (weaponData.WeaponBullet is Weapon_Bullet_Projectile)
+            {
+                var projectiles = bulletSpawner.ShootProjectile(this);
+                foreach (var projectile in projectiles)
+                {
+                    OnProjectileShot?.Invoke(projectile);
+                }
+
+            }
+            else if (weaponData.WeaponBullet is Weapon_Bullet_Granade)
+            {
+                var granades = bulletSpawner.ShootGranade(this);
+                foreach (var granade in granades)
+                {
+                    OnGranadeShot?.Invoke(granade);
+                }
+            }
+            else
+            {
+                Debug.LogError("Unknown bullet type");
             }
         }
-        else if (weaponData.WeaponBullet is Weapon_Bullet_Projectile)
-        {
-            var projectiles = bulletSpawner.ShootProjectile(this);
-            foreach (var projectile in projectiles)
-            {
-                OnProjectileShot?.Invoke(projectile);
-            }
-            
-        }
-        else if (weaponData.WeaponBullet is Weapon_Bullet_Granade)
-        {
-            var granades = bulletSpawner.ShootGranade(this);
-            foreach(var granade in granades)
-            {
-                OnGranadeShot?.Invoke(granade);
-            }
-        }
-        else
-        {
-            Debug.LogError("Unknown bullet type");
-        }
+
+        
     }
    
 
@@ -302,6 +319,8 @@ public class Weapon_Arms
     public float DamageReduction => weaponData.DamageReduction;
 
     public bool CanNotBeInInventory => weaponData.CanNotBePutInInventory;
+
+    public bool ShowAmmo => weaponData.ShowAmmo;
 
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {

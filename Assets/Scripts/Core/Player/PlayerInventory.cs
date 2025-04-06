@@ -8,6 +8,8 @@ public class PlayerInventory : MonoBehaviour
     public Action<Weapon_Arms> OnWeaponAddedToInventory;
     public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
+
+    public Action<int> OnMaxGranadeCountChanged;
     public Action<float> OnGranadeChargeChanged;
     public Action OnMiniMapDisabled;
     public Action OnMiniMapEnabled;
@@ -142,7 +144,19 @@ public class PlayerInventory : MonoBehaviour
     public void ChangeGranade(GranadeStats granade)
     {
         granadeStats = granade;
+        if (granadeStats != null)
+        {
+            OnMaxGranadeCountChanged?.Invoke(granadeInventorySize);
+        }
+        else
+        {
+            OnMaxGranadeCountChanged?.Invoke(0);
+        }
     }
+
+    public int GranadeInventorySize => granadeStats == null ? 0 : granadeInventorySize;
+
+
     public void AddGranades(int count)
     {
         for (int i = 0; i < count; i++)

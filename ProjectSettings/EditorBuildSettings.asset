@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Maps/TeamMaps/MapTemplate/MapTemplate.unity
     guid: f43a17f8170a90a49a6c4101a9700ed7
+  - enabled: 0
+    path: Assets/Maps/DungeonVersion1.unity
+    guid: b2bbb2db25139f74783c830c4b4ce507
+  - enabled: 1
+    path: Assets/Maps/Dungeon.unity
+    guid: 698beee7eec86d74e93404f624375efd
   - enabled: 1
     path: Assets/Maps/Villiage.unity
     guid: 8215bdb246be99b449c87dc29194bbe9

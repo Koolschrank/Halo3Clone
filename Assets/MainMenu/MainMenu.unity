@@ -654,6 +654,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5498acdb4ab4e1f4dba86dc90f837d80, type: 2}
   - {fileID: 11400000, guid: 01e59655181d95c4da67ebba62bd9403, type: 2}
   - {fileID: 11400000, guid: 517eff2c0bb1bd544ba3d59a3f63471b, type: 2}
+  - {fileID: 11400000, guid: ec9cf853cf06b0340bb8a4204e8b28a0, type: 2}
   - {fileID: 11400000, guid: 3d948b4d8f59e91479ddfe55885aeaf3, type: 2}
   - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
   - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
@@ -972,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapsToSelectFrom:
+  - Dungeon
   - Villiage
   - Island
   - Streets

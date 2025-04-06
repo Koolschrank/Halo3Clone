@@ -24,8 +24,8 @@ MonoBehaviour:
   maxAmmoInReserve: 108
   reloadTime: 2.3
   inaccuracy: 0.01
-  switchOutTime: 0.3
-  switchInTime: 0.8
+  switchOutTime: 0.25
+  switchInTime: 0.9
   canZoom: 1
   zoomFOV: 35
   moveSpeedMultiplier: 1

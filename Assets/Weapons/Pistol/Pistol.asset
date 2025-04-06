@@ -24,8 +24,8 @@ MonoBehaviour:
   maxAmmoInReserve: 40
   reloadTime: 1.5
   inaccuracy: 0.017
-  switchOutTime: 0.3
-  switchInTime: 0.15
+  switchOutTime: 0.15
+  switchInTime: 0.2
   canZoom: 1
   zoomFOV: 35
   moveSpeedMultiplier: 1
@@ -33,6 +33,7 @@ MonoBehaviour:
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
   autoAim: {fileID: 11400000, guid: b1220f81241b91d478ae61ae3dae0db5, type: 2}
   weaponType: 0
+  canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
   damageMultiplier: 0.9

@@ -255,6 +255,8 @@ public class GameModeManager : MonoBehaviour
 
     public bool HasWeaponPickups => gameModeStats.HasWeaponPickups;
 
+    public float RespawnTime => gameModeStats.RespawnTime;
+
     public int GetPointsLeftForTeamToWin(int teamIndex)
     {
         int pointsToWin = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
@@ -348,6 +350,7 @@ public class SpawnSystem
         return farthest;
     }
 
+    
 
 
 }

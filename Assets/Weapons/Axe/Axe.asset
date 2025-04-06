@@ -20,12 +20,13 @@ MonoBehaviour:
   shootType: 3
   fireRate: 1
   bulletsPerShot: 1
+  showAmmo: 0
   magazineSize: 1
   maxAmmoInReserve: 1
   reloadTime: 1
   inaccuracy: 0
-  switchOutTime: 0.3
-  switchInTime: 0.5
+  switchOutTime: 0.15
+  switchInTime: 0.25
   canZoom: 0
   zoomFOV: 0
   moveSpeedMultiplier: 1.2
@@ -33,6 +34,7 @@ MonoBehaviour:
   meleeData: {fileID: 11400000, guid: 46cba928d34f93349ac312de1e9ee4da, type: 2}
   autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
   weaponType: 0
+  canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
   damageMultiplier: 1

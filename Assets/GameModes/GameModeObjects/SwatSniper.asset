@@ -17,9 +17,12 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
+    canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
     magazinsOfWeaponInHand: 4
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
     granade: {fileID: 0}
@@ -27,5 +30,8 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 15
   teamCount: 8
+  respawnTime: 2
   hasWeaponPickups: 0
   reasignsTeamsInPlayerOrder: 0
+  pointsToWinMultiplier_MoreThan4Players: 1
+  pointsToWinMultiplier_smallMap: 1

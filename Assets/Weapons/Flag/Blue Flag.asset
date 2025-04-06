@@ -20,6 +20,7 @@ MonoBehaviour:
   shootType: 3
   fireRate: 1
   bulletsPerShot: 1
+  showAmmo: 0
   magazineSize: 1
   maxAmmoInReserve: 1
   reloadTime: 1

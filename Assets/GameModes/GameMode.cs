@@ -10,6 +10,7 @@ public class GameMode : ScriptableObject
     [SerializeField] protected float timeLimitInMinutes =  10f;
     [SerializeField] protected int pointsToWin = 0;
     [SerializeField] protected int teamCount = 2;
+    [SerializeField] protected float respawnTime = 4;
     [SerializeField] protected bool hasWeaponPickups = false;
     [SerializeField] protected bool reasignsTeamsInPlayerOrder = false; // first half of players are team blue second half are team red 
 
@@ -45,5 +46,7 @@ public class GameMode : ScriptableObject
     public bool HasWeaponPickups { get { return hasWeaponPickups; } }
 
     public bool ReasignsTeamsInPlayerOrder { get { return reasignsTeamsInPlayerOrder; } }
+
+    public float RespawnTime {  get { return respawnTime; } }
 }
 

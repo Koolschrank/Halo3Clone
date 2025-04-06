@@ -17,10 +17,10 @@ MonoBehaviour:
   weaponFPSModel: {fileID: 6899193775294056288, guid: 338164222942ec64781af0cdb332d958, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e7540095be4d7b44a8400b3c6b6eb650, type: 3}
   weaponName: Raygun
-  shootType: 1
-  fireRate: 0.03
+  shootType: 2
+  fireRate: 0.35
   bulletsPerShot: 1
-  magazineSize: 99
+  magazineSize: 100
   maxAmmoInReserve: 999
   reloadTime: 2
   inaccuracy: 0
@@ -28,5 +28,50 @@ MonoBehaviour:
   switchInTime: 0.8
   canZoom: 1
   zoomFOV: 35
+  moveSpeedMultiplier: 1
+  damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: 5e5df1ebfbb1b36489b1ffa30cc96c04, type: 2}
+  autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
+  weaponType: 0
+  canNotBeInInventory: 0
+  burstAmount: 10
+  burstDelay: 0.02
+  damageMultiplier: 1
+  fireRateMultiplier: 1
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1
+  shootSound:
+    Guid:
+      Data1: 440703412
+      Data2: 1220775816
+      Data3: -1088993891
+      Data4: -5924873
+    Path: event:/SFX/Guns/PlasmaRifle/PlasmaShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.3
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -619505912
+          Data2: 1140018917
+          Data3: -671243335
+          Data4: 44528707
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadStart
+      timeOfPlay: 0.2
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.6

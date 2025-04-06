@@ -136,12 +136,15 @@ public class PlayerMind : MonoBehaviour
             playerInventory.OnGranadeChargeChanged -= granadeCooldown.UpdateCooldown;
             playerInventory.OnMiniMapDisabled -= minimapUI.DisableMiniMap;
             playerInventory.OnMiniMapEnabled -= minimapUI.EnableMiniMap;
+            inventory.OnMaxGranadeCountChanged -= (count) => granadeCooldown.SetActive(count == 0 ? false : true);
         }
 
         playerInventory = inventory;
         inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
         inventory.OnMiniMapDisabled += minimapUI.DisableMiniMap;
         inventory.OnMiniMapEnabled += minimapUI.EnableMiniMap;
+        inventory.OnMaxGranadeCountChanged += (count) => granadeCooldown.SetActive(count == 0 ? false : true);
+        granadeCooldown.SetActive(inventory.GranadeInventorySize == 0 ? false : true);
     }
 
     public void SetCinemaCamera(CinemachineCamera cCam)
@@ -590,9 +593,10 @@ public class PlayerMind : MonoBehaviour
     }
 
 
-    public void RespawnWithDelay(float delay)
+    public void RespawnWithDelay()
     {
-        StartCoroutine(RespawnDelay(delay));
+        
+        StartCoroutine(RespawnDelay(GameModeSelector.gameModeManager.RespawnTime));
     }
 
     public void SwitchToSpectatorCamera()
