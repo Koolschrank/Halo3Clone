@@ -91,3 +91,8 @@ MonoBehaviour:
           Data4: 534116276
         Path: event:/SFX/Guns/ShotGun/Reload/ChargeBolt
       timeOfPlay: 0.9
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 854037e5ea70f1e48bfdc78fe5fb2261, type: 3}
+  bulletSprite: {fileID: 21300000, guid: c8fb4c1e73d92a04787384e53fd847b5, type: 3}
+  bulletSize: {x: 3, y: 2}
+  bulletsPerRow: 6

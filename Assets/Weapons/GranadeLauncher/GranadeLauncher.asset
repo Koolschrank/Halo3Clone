@@ -99,3 +99,8 @@ MonoBehaviour:
           Data4: -879277789
         Path: event:/SFX/Guns/GranadeTrower/Reload/CloseGranadeLauncher
       timeOfPlay: 0.85
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
+  bulletSprite: {fileID: 21300000, guid: a57755ac7edc91347bbe92ba8fdd481e, type: 3}
+  bulletSize: {x: 1.9, y: 1.9}
+  bulletsPerRow: 5

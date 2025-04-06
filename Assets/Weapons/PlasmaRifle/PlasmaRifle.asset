@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 1535552099913994392, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
   weaponName: Plasma Rifle
   shootType: 1
-  fireRate: 0.09
+  fireRate: 0.1
   bulletsPerShot: 1
   magazineSize: 20
   maxAmmoInReserve: 100
@@ -75,3 +75,8 @@ MonoBehaviour:
           Data4: -602697179
         Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
       timeOfPlay: 0.6
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
+  bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
+  bulletSize: {x: 1, y: 1}
+  bulletsPerRow: 20

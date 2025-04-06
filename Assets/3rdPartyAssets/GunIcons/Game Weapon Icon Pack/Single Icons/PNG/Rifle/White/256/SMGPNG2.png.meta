@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c95ce2627acbe7b45adf84e0b856e637
+guid: 44599e93c4526774d86e7124201ee97d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,5 +131,5 @@ AssetOrigin:
   packageName: Gun Icons Package
   packageVersion: 1.0.0
   assetPath: Assets/Navidtbt/Game Weapon Icon Pack/Single Icons/PNG/Rifle/White/256/Name=PP71,
-    Size=256, Rotation=0.png
+    Size=256_80, Rotation=0.png
   uploadId: 674624

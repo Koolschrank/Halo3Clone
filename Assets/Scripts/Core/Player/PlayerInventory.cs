@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public Action<Weapon_Arms> OnWeaponAddedToInventory;
+    public Action<Weapon_Arms, int> OnWeaponAddedToInventory;
     public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
 
@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     public Action OnMiniMapDisabled;
     public Action OnMiniMapEnabled;
     public Action<Weapon_Data,int> OnAmmoChanged;
+    public Action<int> OnAmmoOfWeaponInInventoryChanged;
 
 
 
@@ -45,6 +46,7 @@ public class PlayerInventory : MonoBehaviour
     public void Start()
     {
         characterHealth.OnDeath += DropWeapon;
+        OnAmmoChanged += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 
     public void Clear()
@@ -98,7 +100,16 @@ public class PlayerInventory : MonoBehaviour
         if (!Full)
         {
             weapons.Add(weapon);
-            OnWeaponAddedToInventory?.Invoke(weapon);
+            if (ammo.TryGetValue(weapon.Data, out int ammuntion))
+            {
+                OnWeaponAddedToInventory?.Invoke(weapon, ammo[weapon.Data] + weapon.Magazine);
+            }
+            else
+            {
+                OnWeaponAddedToInventory?.Invoke(weapon, weapon.Magazine);
+            }
+
+            
 
         }
     }
@@ -276,6 +287,16 @@ public class PlayerInventory : MonoBehaviour
         }
         return 0;
 
+    }
+
+    public void TryInvokeAmmoChangeOfInventoryWeapon(Weapon_Data weaponType, int amount)
+    {
+        Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon");
+        if (weapons.Count > 0 &&weapons[0] != null && weapons[0].Data == weaponType)
+        {
+            Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon 2");
+            OnAmmoOfWeaponInInventoryChanged?.Invoke(amount + weapons[0].Magazine);
+        }
     }
 
     public bool HasAmmo(Weapon_Data weaponType)

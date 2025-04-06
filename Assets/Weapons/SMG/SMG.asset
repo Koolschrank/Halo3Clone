@@ -18,9 +18,9 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 0a912273c20432048876a95f021beb6b, type: 3}
   weaponName: SMG
   shootType: 1
-  fireRate: 0.077
+  fireRate: 0.08
   bulletsPerShot: 1
-  magazineSize: 35
+  magazineSize: 36
   maxAmmoInReserve: 140
   reloadTime: 1.75
   inaccuracy: 0.03
@@ -75,3 +75,8 @@ MonoBehaviour:
           Data4: 1818439784
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinIn
       timeOfPlay: 0.65
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: c95ce2627acbe7b45adf84e0b856e637, type: 3}
+  bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
+  bulletSize: {x: 1, y: 1}
+  bulletsPerRow: 18

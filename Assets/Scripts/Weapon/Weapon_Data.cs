@@ -56,7 +56,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] bool showAmmo = true;
     [SerializeField] Sprite gunSprite;
     [SerializeField] Sprite bulletSprite;
-    [SerializeField] float bulletSize;
+    [SerializeField] Vector2 bulletSize = Vector2.one;
     [SerializeField] int bulletsPerRow;
 
 
@@ -151,7 +151,7 @@ public class Weapon_Data : ScriptableObject
 
     public int BulletsPerRowUI => bulletsPerRow;
 
-    public float BulletSizeUI => bulletSize;
+    public Vector2 BulletSizeUI => bulletSize;
 }
 
 

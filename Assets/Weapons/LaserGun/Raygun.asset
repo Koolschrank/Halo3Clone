@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e7540095be4d7b44a8400b3c6b6eb650, type: 3}
   weaponName: Raygun
   shootType: 2
-  fireRate: 0.35
+  fireRate: 0.4
   bulletsPerShot: 1
   magazineSize: 100
   maxAmmoInReserve: 999
@@ -32,10 +32,10 @@ MonoBehaviour:
   damageReduction: 0
   meleeData: {fileID: 0}
   autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
-  weaponType: 0
+  weaponType: 1
   canNotBeInInventory: 0
-  burstAmount: 10
-  burstDelay: 0.02
+  burstAmount: 20
+  burstDelay: 0.015
   damageMultiplier: 1
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
@@ -75,3 +75,8 @@ MonoBehaviour:
           Data4: -602697179
         Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
       timeOfPlay: 0.6
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
+  bulletSprite: {fileID: 0}
+  bulletSize: {x: 0.06, y: 0.4}
+  bulletsPerRow: 100

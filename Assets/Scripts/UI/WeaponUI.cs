@@ -8,23 +8,19 @@ public class WeaponUI : MonoBehaviour
 {
 
     [SerializeField] Arm playerArm;
-    [SerializeField] TextMeshProUGUI ammoText;
-    [SerializeField] TextMeshProUGUI magazinText;
     [SerializeField] TextMeshProUGUI reserveText;
 
     [SerializeField] Color baseColor;
     [SerializeField] Color emptyColor;
 
-    [SerializeField] bool showMagazinText = true;
-    [SerializeField] TextMeshProUGUI[] magazinTextToColor;
     [SerializeField] TextMeshProUGUI[] reserveTextToColor;
     [SerializeField] Image weaponSprite;
 
-    int magazinSize = 0;
 
     [Header("BulletUI")]
     [SerializeField] RectTransform bulletUI;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletSizeImpactOnPosition = 2f; 
     [SerializeField] Color BulletColor;
     [SerializeField] Color BulletEmptyColor;
     [SerializeField] Color BulletsDepletedColor;
@@ -56,6 +52,10 @@ public class WeaponUI : MonoBehaviour
         {
             Disable();
         }
+        else
+        {
+            Enable();
+        }
     }
 
 
@@ -80,20 +80,29 @@ public class WeaponUI : MonoBehaviour
 
     void EquipWeapon(Weapon_Arms weapon, float timer)
     {
-        if (!gameObject.activeSelf && weapon.ShowAmmoUI)
+        if ( weapon.ShowAmmoUI)
         {
-            gameObject.SetActive(true);
+            bulletUI.gameObject.SetActive(true);
+            foreach (var text in reserveTextToColor)
+            {
+                text.gameObject.SetActive(true);
+            }
         }
-        else if (gameObject.activeSelf && !weapon.ShowAmmoUI)
+        else if ( !weapon.ShowAmmoUI)
         {
-            gameObject.SetActive(false);
+            bulletUI.gameObject.SetActive(false);
+            foreach (var text in reserveTextToColor)
+            {
+                text.gameObject.SetActive(false);
+            }
         }
+        Enable();
 
-        magazinSize = weapon.MagazineSize;
         weapon.OnMagazineChange += UpdateMagazin;
-        UpdateMagazin(weapon.Magazine);
+       
         UpdateReserve(playerArm.AmmoOfWeaponInReserve);
         SetUpBulletUI(weapon.BulletSpriteUI, weapon.MagazineSize, weapon.BulletsPerRowUI, weapon.BulletSizeUI);
+        UpdateMagazin(weapon.Magazine);
 
         var newSprite = weapon.GunSpriteUI;
         if (newSprite != null)
@@ -106,51 +115,43 @@ public class WeaponUI : MonoBehaviour
             weaponSprite.sprite = null;
             weaponSprite.color = new Color(1, 1, 1, 0);
         }
+
+        UpdateSprite();
     }
 
     void UnequipWeapon(Weapon_Arms weapon)
     {
         weapon.OnMagazineChange -= UpdateMagazin;
 
-        ammoText.text = "";
-        magazinText.text = "";
+        DeleteBulletsFromUI();
         reserveText.text = "";
     }
 
+    int magazin = 0;
     void UpdateMagazin(int magazin)
     {
-
-        if (showMagazinText)
+        this.magazin = magazin;
+        for (int i = 0; i < bullets.Count; i++)
         {
             if (magazin == 0)
             {
-                foreach (var text in magazinTextToColor)
-                {
-                    text.color = emptyColor;
-                }
+                bullets[i].color = BulletsDepletedColor;
+                continue;
+            }
+
+            if (i < magazin)
+            {
+                bullets[i].color = BulletColor;
             }
             else
             {
-                foreach (var text in magazinTextToColor)
-                {
-                    text.color = baseColor;
-                }
-            }
-
-            ammoText.text = magazin.ToString();
-            magazinText.text = "/ " + magazinSize.ToString();
-        }
-        else
-        {
-            foreach (var text in magazinTextToColor)
-            {
-                // 100% transparent
-                text.color = new Color(1, 1, 1, 0);
+                bullets[i].color = BulletEmptyColor;
             }
         }
-            UpdateBulletUI(magazin);
+        UpdateSprite();
     }
 
+    int reserve = 0;
     void UpdateReserve(int reserve)
     {
         // if ammo empty change color
@@ -168,11 +169,27 @@ public class WeaponUI : MonoBehaviour
                 text.color = baseColor;
             }
         }
+
+        this.reserve = reserve;
+
         reserveText.text = reserve.ToString();
+        UpdateSprite();
+    }
+
+    public void UpdateSprite()
+    {
+        if (reserve <= 0 && magazin <= 0)
+        {
+            weaponSprite.color = BulletsDepletedColor;
+        }
+        else
+        {
+            weaponSprite.color = BulletColor;
+        }
     }
 
 
-    public void SetUpBulletUI(Sprite bulletSprite, int count, int bulletsPerRow, float bulletSize)
+    public void SetUpBulletUI(Sprite bulletSprite, int count, int bulletsPerRow, Vector2 bulletSize)
     {
         var bulletUIWidth = bulletUI.rect.width;
         var bulletUIHeight = bulletUI.rect.height;
@@ -182,13 +199,9 @@ public class WeaponUI : MonoBehaviour
         }
         var rows = Mathf.CeilToInt((float)count / bulletsPerRow);
         // delete all bullets in list
-        foreach (var bullet in bullets)
-        {
-            Destroy(bullet.gameObject);
-        }
-        bullets.Clear();
+        DeleteBulletsFromUI();
 
-        
+
 
         // create new bullets
         for (int i = 0; i < count; i++)
@@ -204,46 +217,56 @@ public class WeaponUI : MonoBehaviour
 
             var bulletTransform = bullet.GetComponent<RectTransform>();
             bulletTransform.SetParent(bulletUI.transform);
-            bulletTransform.localScale = new Vector2(bulletSize, bulletSize);
-            
-            int row = i / bulletsPerRow;
-            row++;
-            Debug.Log(row);
-            int column = bulletsPerRow -  (i % bulletsPerRow);
-            float x =
-                (bulletUIWidth / bulletsPerRow) * column - (bulletUIWidth / 2) + (bulletSize / 2);
+            bulletTransform.localScale = bulletSize;
 
-            float y = 0;
-            if (rows != 1)
+            
+            int column = bulletsPerRow - (i % bulletsPerRow);
+            float x =
+                (bulletUIWidth / bulletsPerRow) * (column) - (bulletUIWidth / 2) + (bulletSize.x * bulletSizeImpactOnPosition);
+
+            int row = i / bulletsPerRow;
+            float rowHeight = 0;
+            if (rows == 2)
             {
-                y =
-                    (bulletUIHeight / rows) * row - (bulletUIHeight / 2) + (bulletSize / 2);
+                if (row == 0)
+                {
+                    rowHeight = -0.5f;
+                }
+                else
+                {
+                    rowHeight = 0.5f;
+                }
             }
+            else if (rows == 3)
+            {
+                if (row == 0)
+                {
+                    rowHeight = -0.7f;
+                }
+                else if (row == 1)
+                {
+                    rowHeight = 0;
+                }
+                else
+                {
+                    rowHeight = 0.7f;
+                }
+            }
+
+            float y =
+                rowHeight * bulletUIHeight / 2;//+ (bulletSize / 2);
             bulletTransform.anchoredPosition = new Vector2(x, y);
         }
     }
 
-    public void UpdateBulletUI(int count)
+    private void DeleteBulletsFromUI()
     {
-        for (int i = 0; i < bullets.Count; i++)
+        foreach (var bullet in bullets)
         {
-            if (count == 0)
-            {
-                bullets[i].color = BulletsDepletedColor;
-                continue;
-            }
-
-            if (i < count)
-            {
-                bullets[i].color = BulletColor;
-            }
-            else
-            {
-                bullets[i].color = BulletEmptyColor;
-            }
+            Destroy(bullet.gameObject);
         }
+        bullets.Clear();
     }
-
 }
 
 

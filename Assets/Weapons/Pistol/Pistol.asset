@@ -23,7 +23,7 @@ MonoBehaviour:
   magazineSize: 10
   maxAmmoInReserve: 40
   reloadTime: 1.5
-  inaccuracy: 0.017
+  inaccuracy: 0.013
   switchOutTime: 0.15
   switchInTime: 0.2
   canZoom: 1
@@ -75,3 +75,8 @@ MonoBehaviour:
           Data4: 2081986932
         Path: event:/SFX/Guns/Pistol/Reload/MagIn
       timeOfPlay: 0.65
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: a765bf6a421bcc348957c4bc06d8215f, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 6ecaae872ef19374e8fd872ffa47eb86, type: 3}
+  bulletSize: {x: 2, y: 2}
+  bulletsPerRow: 10

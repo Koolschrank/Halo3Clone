@@ -328,7 +328,7 @@ public class Weapon_Arms
 
     public int BulletsPerRowUI => weaponData.BulletsPerRowUI;
 
-    public float BulletSizeUI => weaponData.BulletSizeUI;
+    public Vector2 BulletSizeUI => weaponData.BulletSizeUI;
 
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {

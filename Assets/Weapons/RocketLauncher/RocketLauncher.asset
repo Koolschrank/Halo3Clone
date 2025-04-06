@@ -33,6 +33,7 @@ MonoBehaviour:
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
+  canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
   damageMultiplier: 1
@@ -58,3 +59,8 @@ MonoBehaviour:
       timeOfPlay: 0.25
   reloadSounds:
     timedSounds: []
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 3b08c177acc333a4da30da7532c070ab, type: 3}
+  bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
+  bulletSize: {x: 4, y: 2}
+  bulletsPerRow: 2

@@ -35,6 +35,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] ShildUI shildUI;
     [SerializeField] WeaponUI weaponUI_RightArm;
     [SerializeField] WeaponUI weaponUI_LeftArm;
+    [SerializeField] WeaponInventoryUI weaponInventoryUI;
     [SerializeField] PickUpUI pickUpUI;
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
@@ -145,6 +146,8 @@ public class PlayerMind : MonoBehaviour
         inventory.OnMiniMapEnabled += minimapUI.EnableMiniMap;
         inventory.OnMaxGranadeCountChanged += (count) => granadeCooldown.SetActive(count == 0 ? false : true);
         granadeCooldown.SetActive(inventory.GranadeInventorySize == 0 ? false : true);
+
+        weaponInventoryUI.SetUp(playerInventory);
     }
 
     public void SetCinemaCamera(CinemachineCamera cCam)

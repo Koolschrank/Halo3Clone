@@ -4,14 +4,17 @@ using UnityEngine.UI;
 public class CooldownUI : MonoBehaviour
 {
     [SerializeField] GameObject barObject;
-    [SerializeField] Image cooldownBar;
+    [SerializeField] Image[] cooldownBars;
 
     Color defaultColor;
     [SerializeField] Color filledColor;
 
     private void Awake()
     {
-        defaultColor = cooldownBar.color;
+        foreach (var bar in cooldownBars)
+        {
+            defaultColor = bar.color;
+        }
     }
 
     public void SetActive(bool active)
@@ -22,15 +25,19 @@ public class CooldownUI : MonoBehaviour
 
     public void UpdateCooldown(float value)
     {
+        foreach (var bar in cooldownBars)
+        {
+            bar.fillAmount = value;
+            if (value == 1)
+            {
+                bar.color = filledColor;
+            }
+            else
+            {
+                bar.color = defaultColor;
+            }
+        }
 
-        cooldownBar.fillAmount = value;
-        if (value == 1)
-        {
-            cooldownBar.color = filledColor;
-        }
-        else
-        {
-            cooldownBar.color = defaultColor;
-        }
+        
     }
 }
