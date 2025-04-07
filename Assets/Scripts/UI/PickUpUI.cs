@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PickUpUI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PickUpUI : MonoBehaviour
     [SerializeField] GameObject pickUpTextObject;
 
     [SerializeField] TextMeshProUGUI weaponName;
+    [SerializeField] Image weaponImage;
 
     [SerializeField] GameObject dualwieldObject;
     [SerializeField] TextMeshProUGUI dualWieldName;
@@ -17,20 +19,20 @@ public class PickUpUI : MonoBehaviour
     public void SetUp(PlayerPickUpScan pickUpScan)
     {
         if (pickUpScan != null) {
-            pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpText;
-            pickUpScan.OnWeaponPickUp -= ClearTextPickUpText;
+            pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
+            pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
             pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
         }
 
         this.pickUpScan = pickUpScan;
-        pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpText;
-        pickUpScan.OnWeaponPickUp += ClearTextPickUpText;
+        pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpUI;
+        pickUpScan.OnWeaponPickUp += ClearPickUpUI;
         pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
-        ClearTextPickUpText();
+        ClearPickUpUI();
     }
 
 
-    void UpdatePickUpText(Weapon_PickUp weapon_PickUp)
+    void UpdatePickUpUI(Weapon_PickUp weapon_PickUp)
     {
         if (weapon_PickUp == null)
         {
@@ -40,12 +42,27 @@ public class PickUpUI : MonoBehaviour
         }
         pickUpTextObject.SetActive(true);
         weaponName.text = pickUpText + weapon_PickUp.WeaponName;
+
+        var sprite = weapon_PickUp.GunSpriteUI;
+
+        if (sprite != null)
+        {
+            weaponImage.sprite = sprite;
+            weaponImage.enabled =true;
+        }
+        else
+        {
+            weaponImage.sprite = null;
+            weaponImage.enabled = false;
+        }
     }
 
-    void ClearTextPickUpText()
+    void ClearPickUpUI()
     {
         weaponName.text = "";
         pickUpTextObject.SetActive(false);
+        weaponImage.sprite = null;
+        weaponImage.enabled = false;
     }
 
     void UpdateDualWieldText(Weapon_PickUp weapon_PickUp)

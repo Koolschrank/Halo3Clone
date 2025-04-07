@@ -84,6 +84,8 @@ public class Weapon_PickUp : MonoBehaviour
         return !teamsBlockedFromPickUpThis.Contains(teamIndex);
     }
 
+    public Sprite GunSpriteUI => weapon_Data.GunSpriteUI;
+
 }
 
 

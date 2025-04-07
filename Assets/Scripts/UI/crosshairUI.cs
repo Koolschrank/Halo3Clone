@@ -8,6 +8,26 @@ public class crosshairUI : MonoBehaviour
     [SerializeField] Color onTargetColor;
     [SerializeField] RawImage crosshairImage;
 
+
+    public void ChangeSprite(Sprite sprite, Vector2 size)
+    {
+        if (crosshairImage != null)
+        {
+            if (sprite == null)
+            {
+                crosshairImage.enabled = false;
+                return;
+            }
+            else 
+            {
+                crosshairImage.enabled = true;
+            }
+
+            crosshairImage.texture = sprite.texture;
+            crosshairImage.rectTransform.localScale = size;
+        }
+    }
+
     //start
     private void Start()
     {

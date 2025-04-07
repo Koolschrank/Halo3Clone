@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53125d4ba8cd8f54281af4b856b90b13, type: 3}
   m_Name: SwordAutoAim
   m_EditorClassIdentifier: 
-  raycastLenght: 3
+  raycastLenght: 2.5
   radius: 0.5
   aimLerp: 0.5

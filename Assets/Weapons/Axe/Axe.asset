@@ -31,7 +31,7 @@ MonoBehaviour:
   moveSpeedMultiplier: 1.2
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: 46cba928d34f93349ac312de1e9ee4da, type: 2}
-  autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
+  autoAim: {fileID: 11400000, guid: d42e85b7f459a294782ca8c9db3814ae, type: 2}
   weaponType: 0
   canNotBeInInventory: 0
   burstAmount: 0
@@ -54,5 +54,7 @@ MonoBehaviour:
   showAmmo: 0
   gunSprite: {fileID: 21300000, guid: 1a203ac6cee467d49ba83bbf5ba1b18f, type: 3}
   bulletSprite: {fileID: 0}
-  bulletSize: 0
+  bulletSize: {x: 1, y: 1}
   bulletsPerRow: 0
+  crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
+  crosshairsSize: {x: 0.7, y: 0.7}

@@ -58,6 +58,8 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] Sprite bulletSprite;
     [SerializeField] Vector2 bulletSize = Vector2.one;
     [SerializeField] int bulletsPerRow;
+    [SerializeField] Sprite crosshairs = null;
+    [SerializeField] Vector2 crosshairsSize = Vector2.one;
 
 
 
@@ -152,6 +154,10 @@ public class Weapon_Data : ScriptableObject
     public int BulletsPerRowUI => bulletsPerRow;
 
     public Vector2 BulletSizeUI => bulletSize;
+
+    public Sprite CrosshairsUI => crosshairs;
+
+    public Vector2 CrosshairsSizeUI => crosshairsSize;
 }
 
 

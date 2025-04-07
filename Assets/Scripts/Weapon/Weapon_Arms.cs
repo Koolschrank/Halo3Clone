@@ -330,6 +330,10 @@ public class Weapon_Arms
 
     public Vector2 BulletSizeUI => weaponData.BulletSizeUI;
 
+    public Sprite CrosshairUI => weaponData.CrosshairsUI;
+
+    public Vector2 CrosshairSizeUI => weaponData.CrosshairsSizeUI;
+
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {
         var missingAmmo = weaponData.ReserveSize - Reserve;

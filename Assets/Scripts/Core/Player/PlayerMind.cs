@@ -176,6 +176,8 @@ public class PlayerMind : MonoBehaviour
             playerArms.OnDualWieldingExited -= EnterOneWeaponMode;
             playerArms.OnDualWieldingExited -= weaponUI_LeftArm.Disable;
 
+            playerArms.RightArm.OnWeaponEquipStarted -= (weapon, time) => crosshairUI.ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
+
         }
 
 
@@ -191,6 +193,8 @@ public class PlayerMind : MonoBehaviour
 
         arms.OnDualWieldingEntered += EnterDualWeaponMode;
         arms.OnDualWieldingExited += EnterOneWeaponMode;
+
+        arms.RightArm.OnWeaponEquipStarted += (weapon, time) => crosshairUI.ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
 
         if (arms.LeftArm.CurrentWeapon != null)
         {
