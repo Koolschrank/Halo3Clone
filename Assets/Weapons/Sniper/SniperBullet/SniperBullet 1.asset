@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: SniperBullet 1
   m_EditorClassIdentifier: 
-  damage: 115
+  damage: 140
   force: 700
   shildDamageMultiplier: 1
   headShotMultiplier: 2
-  canHeadShotShild: 1
+  canHeadShotShild: 0
   range: 100
   hitLayer:
     serializedVersion: 2

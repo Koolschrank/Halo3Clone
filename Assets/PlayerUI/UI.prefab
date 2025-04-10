@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aacc32c66a02e4d94c3bf313e9c3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTargetColor: {r: 1, g: 0, b: 0, a: 1}
+  onTargetColor: {r: 1, g: 0, b: 0, a: 0.70980394}
   crosshairImage: {fileID: 1015360713942454341}
 --- !u!1 &3698534810967370160
 GameObject:

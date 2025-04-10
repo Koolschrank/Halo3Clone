@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 34f45053683dfdc46b33bc95460b2076, type: 3}
   weaponName: Sniper
   shootType: 0
-  fireRate: 0.75
+  fireRate: 0.7
   bulletsPerShot: 1
   magazineSize: 4
   maxAmmoInReserve: 12
@@ -36,7 +36,7 @@ MonoBehaviour:
   canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
-  damageMultiplier: 1
+  damageMultiplier: 0.8
   fireRateMultiplier: 1.2
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1.4

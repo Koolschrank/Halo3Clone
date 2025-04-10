@@ -18,11 +18,11 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 287b81575db7118408b3d163744ecd0e, type: 3}
   weaponName: Rocket Launcher
   shootType: 0
-  fireRate: 0.5
+  fireRate: 0.9
   bulletsPerShot: 1
-  magazineSize: 1
+  magazineSize: 2
   maxAmmoInReserve: 3
-  reloadTime: 2.2
+  reloadTime: 2.8
   inaccuracy: 0
   switchOutTime: 0.3
   switchInTime: 0.8
@@ -63,6 +63,6 @@ MonoBehaviour:
   gunSprite: {fileID: 21300000, guid: 3b08c177acc333a4da30da7532c070ab, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
   bulletSize: {x: 4, y: 2}
-  bulletsPerRow: 2
+  bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 33dfa090efe1bc442b27c137d87e3ad5, type: 3}
   crosshairsSize: {x: 0.7, y: 0.7}
