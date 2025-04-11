@@ -13,10 +13,10 @@ public class NetworkPlayer: NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (GetInput(out NetworkInputData data))
+        if (GetInput(out NetworkControllerData data))
         {
-            data.direction.Normalize();
-            _cc.Move(5 * data.direction * Runner.DeltaTime);
+            data.moveVector.Normalize();
+            _cc.Move(5 * data.moveVector * Runner.DeltaTime);
         }
     }
 }

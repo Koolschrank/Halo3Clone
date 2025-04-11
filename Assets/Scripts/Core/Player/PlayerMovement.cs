@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 using Fusion;
+using Fusion.Addons.SimpleKCC;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerMovement : NetworkBehaviour
 
     // character controller 
     [Header("References")]
-    [SerializeField] CharacterController cc;
+    [SerializeField] SimpleKCC cc;
     [SerializeField] Transform head;
     [SerializeField] Transform head_normalPosition;
     [SerializeField] Transform head_crouchPosition;
@@ -35,7 +36,7 @@ public class PlayerMovement : NetworkBehaviour
     float jumpCooldownTimer = 0;
     [SerializeField] float gravity = 9.8f;
     [SerializeField] float cyoteTime = 0.2f;
-    bool isGrounded => cc.isGrounded || Time.time - lastGroundTouch < cyoteTime;
+    bool isGrounded => cc.IsGrounded || Time.time - lastGroundTouch < cyoteTime;
     float lastGroundTouch;
     [SerializeField] float crouchSpeed = 0.5f;
 
@@ -72,7 +73,7 @@ public class PlayerMovement : NetworkBehaviour
 
         OnMoveUpdated?.Invoke(moveVector);
 
-        if (moveVelocity.magnitude > 0 && cc.isGrounded)
+        if (moveVelocity.magnitude > 0 && cc.IsGrounded)
         {
             distanceToWalkSoundLeft -= moveVelocity.magnitude * Runner.DeltaTime;
             if (distanceToWalkSoundLeft <= 0)
@@ -82,7 +83,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if (cc.isGrounded)
+        if (cc.IsGrounded)
         {
             // todo : Time.time neess to be replaced with fusion time
             lastGroundTouch  = Time.time;
@@ -113,7 +114,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private void UpdateMove()
     {
-        Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
+        GetInput(out NetworkControllerData data);
+        Vector2 input = data.moveVector;
+
+        //Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
         Vector3 camForward = head.transform.forward;
         camForward.y = 0;
@@ -124,12 +128,12 @@ public class PlayerMovement : NetworkBehaviour
 
         if (move.magnitude == 0)
         {
-            var deceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
+            var deceleration = cc.IsGrounded ? deceleration_ground : deceleration_air;
             moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration * Runner.DeltaTime);
         }
         else
         {
-            var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
+            var acceleration = cc.IsGrounded ? acceleration_ground : acceleration_air;
 
             var moveSpeedMultiplier = 1f;
             if (arms.IsDualWielding)
@@ -169,7 +173,7 @@ public class PlayerMovement : NetworkBehaviour
     private void UpdateGravity()
     {
 
-        if (cc.isGrounded && jumpCooldownTimer <= 0)
+        if (cc.IsGrounded && jumpCooldownTimer <= 0)
         {
             gravityVelocity = -0.1f;
         }
@@ -217,7 +221,7 @@ public class PlayerMovement : NetworkBehaviour
             OnStandUp?.Invoke();
             
         }
-        else if(cc.isGrounded)
+        else if(cc.IsGrounded)
         {
             inCrouch = true;
             OnCrouch?.Invoke();

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Fusion.Addons.SimpleKCC;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] CharacterHealth characterHealth;
-    [SerializeField] CharacterController cc;
+    [SerializeField] SimpleKCC cc;
     [SerializeField] Animator animator;
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Transform aimTarget;
@@ -34,6 +35,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] TwoBoneIKConstraint leftHandWeaponGrip;
 
     [Header("Settings")]
+    [SerializeField] float walkAnimationSpeedMultiplier = 100f;
     [SerializeField] float landRaycastDistance = 2.5f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float shildVisualRecoveryTime = 1;
@@ -127,9 +129,9 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateInAir()
     {
-        animator.SetBool("InAir", !cc.isGrounded);
+        animator.SetBool("InAir", !cc.IsGrounded);
 
-        if (!cc.isGrounded && cc.velocity.y < 0)
+        if (!cc.IsGrounded && cc.RealVelocity.y < 0)
         {
             // shoot a raycast down to check if player is grounded
             if (Physics.Raycast(cc.transform.position, Vector3.down, landRaycastDistance, groundLayer))
@@ -145,11 +147,11 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateMove()
     {
-        var velocity = cc.velocity;
+        var velocity = cc.RealVelocity;
         var maxSpeed = playerMovement.MaxMoveSpeed;
 
-        float forwardVelocity = Vector3.Dot(velocity, transform.forward);
-        float rightVelocity = Vector3.Dot(velocity, transform.right);
+        float forwardVelocity = Vector3.Dot(velocity, transform.forward) * walkAnimationSpeedMultiplier;
+        float rightVelocity = Vector3.Dot(velocity, transform.right) * walkAnimationSpeedMultiplier;
 
         animator.SetFloat("MoveX", forwardVelocity / maxSpeed);
         animator.SetFloat("MoveZ", rightVelocity / maxSpeed);
