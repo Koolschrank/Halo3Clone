@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MultiplayerGameModes;
 
 public class MapLoader : MonoBehaviour
 {

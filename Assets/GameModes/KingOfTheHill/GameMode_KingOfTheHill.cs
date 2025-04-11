@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using MultiplayerGameModes;
 
 [CreateAssetMenu(menuName = "GameModes/KingOfTheHill")]
 public class GameMode_KingOfTheHill : GameMode

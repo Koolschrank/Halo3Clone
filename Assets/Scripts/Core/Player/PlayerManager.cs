@@ -242,11 +242,10 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        Debug.Log("playerIndexOrder");
-        foreach (var player in players)
-        {
-            Debug.Log(player.PlayerIndex);
-        }
+        //foreach (var player in players)
+        //{
+        //    Debug.Log(player.PlayerIndex);
+        //}
 
 
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using MultiplayerGameModes;
 
 [CreateAssetMenu(menuName = "GameModes/Crown")]
 public class GameMode_Crown : GameMode

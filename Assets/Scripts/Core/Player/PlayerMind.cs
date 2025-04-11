@@ -92,7 +92,7 @@ public class PlayerMind : MonoBehaviour
         GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
         string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
-        Debug.Log(deviceName + " joined");
+        
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
 
 

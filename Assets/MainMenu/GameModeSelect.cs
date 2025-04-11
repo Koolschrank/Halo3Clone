@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 // ui
 using UnityEngine.UI;
-
+using MultiplayerGameModes;
 
 public class GameModeSelect : MonoBehaviour
 {
