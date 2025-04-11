@@ -3,8 +3,9 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
+using Fusion;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
 
     public Action OnJump;
@@ -60,20 +61,20 @@ public class PlayerMovement : MonoBehaviour
 
 
     // update
-    void Update()
+    public override void FixedUpdateNetwork()
     {
         UpdateCrouch();
         UpdateMove();
         UpdateGravity();
 
         var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
-        cc.Move(moveVector * Time.deltaTime);
+        cc.Move(moveVector * Runner.DeltaTime);
 
         OnMoveUpdated?.Invoke(moveVector);
 
         if (moveVelocity.magnitude > 0 && cc.isGrounded)
         {
-            distanceToWalkSoundLeft -= moveVelocity.magnitude * Time.deltaTime;
+            distanceToWalkSoundLeft -= moveVelocity.magnitude * Runner.DeltaTime;
             if (distanceToWalkSoundLeft <= 0)
             {
                 AudioManager.instance.PlayOneShot(walkSound, transform.position);
@@ -83,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (cc.isGrounded)
         {
-            lastGroundTouch = Time.time;
+            // todo : Time.time neess to be replaced with fusion time
+            lastGroundTouch  = Time.time;
         }
 
     }
@@ -94,11 +96,11 @@ public class PlayerMovement : MonoBehaviour
         
         if ( inCrouch)
         {
-            head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Time.deltaTime);
+            head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Runner.DeltaTime);
         }
         else
         {
-            head.transform.position = Vector3.MoveTowards(head.transform.position, head_normalPosition.position, crouchSpeed * Time.deltaTime);
+            head.transform.position = Vector3.MoveTowards(head.transform.position, head_normalPosition.position, crouchSpeed * Runner.DeltaTime);
         }
     }
 
@@ -123,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         if (move.magnitude == 0)
         {
             var deceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
-            moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration * Time.deltaTime);
+            moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration * Runner.DeltaTime);
         }
         else
         {
@@ -153,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
                 speedMultiplier *= moveSpeedCrouchMultiplier;
             }
 
-            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier, acceleration * Time.deltaTime);
+            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier, acceleration * Runner.DeltaTime);
         }
 
         
@@ -173,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            gravityVelocity -= gravity * Time.deltaTime;
+            gravityVelocity -= gravity * Runner.DeltaTime;
         }
 
         if (jumpCooldownTimer > 0)
