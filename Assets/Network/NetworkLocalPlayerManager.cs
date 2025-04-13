@@ -10,7 +10,6 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
 
 
 
-
     public void OnLocalPlayerSpawn()
     {
 
@@ -22,7 +21,7 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
         }
     }
 
-
+    
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     private void RPC_LocalPlayerSpawn(PlayerRef player)
     {
@@ -32,6 +31,11 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
         NetworkObject networkPlayerObject = Runner.Spawn(playerObject, spawnPosition, Quaternion.identity, player);
         // Keep track of the player avatars for easy access
         _spawnedCharacters.Add(networkPlayerObject);
+
+        if (networkPlayerObject.TryGetComponent<PlayerMind>(out PlayerMind mind))
+        {
+            mind.SetControllerIndex(_spawnedCharacters.Count -1);
+        }
     }
 
 }

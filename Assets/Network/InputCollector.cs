@@ -42,7 +42,6 @@ public class InputCollector : MonoBehaviour
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        Debug.Log("count: " + localControllers.Count);
         var data = new NetworkInputData();
         int playerCount = localControllers.Count;
         if (playerCount > 0)

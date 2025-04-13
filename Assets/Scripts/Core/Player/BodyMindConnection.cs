@@ -1,7 +1,8 @@
+using Fusion;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class BodyMindConnection : MonoBehaviour
+public class BodyMindConnection : NetworkBehaviour
 {
     [SerializeField] Transform mindParent;
     [SerializeField] GameObject mesh;

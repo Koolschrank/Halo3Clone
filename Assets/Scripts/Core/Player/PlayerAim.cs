@@ -1,7 +1,9 @@
+using Fusion;
 using System;
 using UnityEngine;
+using Fusion.Addons.SimpleKCC;
 
-public class PlayerAim : MonoBehaviour
+public class PlayerAim : NetworkBehaviour
 {
 
     
@@ -13,6 +15,8 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth playerHealth;
+    [SerializeField] SimpleKCC cc;
+
 
     [Header("Settings")]
     [SerializeField] float aimSpeed_x = 10f;
@@ -52,7 +56,7 @@ public class PlayerAim : MonoBehaviour
         //};
     }
 
-    void Update()
+    public override void FixedUpdateNetwork()
     {
         UpdateAim();
     }
@@ -61,8 +65,8 @@ public class PlayerAim : MonoBehaviour
     {
         // x rotates player y rotates camera
         Vector2 input = aimInput; //controller.Player.Aim.ReadValue<Vector2>();
-        float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Time.deltaTime;
-        float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Time.deltaTime;
+        float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Runner.DeltaTime;
+        float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Runner.DeltaTime;
 
         float playerXRotation = transform.eulerAngles.y;
         float playerYRotation = playerHead.transform.eulerAngles.x;
@@ -81,10 +85,11 @@ public class PlayerAim : MonoBehaviour
         playerXRotation += rotationX;
         playerYRotation -= rotationY;
         //playerYRotation = Mathf.Clamp(playerYRotation, minAngle, maxAngle);
-        
 
 
-        transform.eulerAngles = new Vector3(0, playerXRotation, 0);
+        //
+        cc.SetLookRotation(new Vector3(0, playerXRotation, 0));
+        //transform.eulerAngles = new Vector3(0, playerXRotation, 0);
         playerHead.transform.eulerAngles = new Vector3(playerYRotation, playerXRotation, 0);
 
     }

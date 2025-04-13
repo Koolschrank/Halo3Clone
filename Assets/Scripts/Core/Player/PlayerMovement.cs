@@ -114,10 +114,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void UpdateMove()
     {
-        GetInput(out NetworkInputData data);
-        Vector2 input = data.controllerData1.moveVector;
+        //GetInput(out NetworkInputData data);
+        //Vector2 input = data.controllerData1.moveVector;
 
-        //Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
+        Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
+        
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
         Vector3 camForward = head.transform.forward;
         camForward.y = 0;

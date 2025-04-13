@@ -3,7 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using System;
-public class PlayerManager : MonoBehaviour
+using Fusion;
+public class PlayerManager : NetworkBehaviour
 {
     public Action<PlayerMind> OnPlayerAdded;
     public Action<PlayerMind> OnPlayerSpawned;
@@ -82,7 +83,7 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
         ReorderPlayers();
 
-        var playerBody = Instantiate(playerBodyPrefab, Vector3.zero, Quaternion.identity);
+        var playerBody = Runner.Spawn(playerBodyPrefab, Vector3.zero, Quaternion.identity);
         //playerBody.ConnectMind(player, playerCameras[players.Count-1], spectatorCameras[players.Count-1]);
         playerBody.ConnectMind(player);
         
@@ -189,7 +190,7 @@ public class PlayerManager : MonoBehaviour
     public void RespawnPlayer(PlayerMind player)
     {
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
-        var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
+        var playerBody = Runner.Spawn(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player);
         playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);

@@ -1,3 +1,4 @@
+using Fusion;
 using System;
 using System.Collections;
 using Unity.Cinemachine;
@@ -6,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerMind : MonoBehaviour
+public class PlayerMind : NetworkBehaviour
 {
     public UnityEvent OnPlayerDeath;
     public Action<PlayerMind> OnPlayerDied;
@@ -21,7 +22,6 @@ public class PlayerMind : MonoBehaviour
 
     [SerializeField] WeaponSway weaponSway2;
     //[SerializeField] PlayerFOV playerFOV;
-    [SerializeField] PlayerInput playerInput;
 
     CinemachineCamera spectatorCamera;
     [SerializeField] PlayerCamera playerCamera;
@@ -70,35 +70,112 @@ public class PlayerMind : MonoBehaviour
     int thirdPersonLayer;
 
 
+
+    int playerIndex = 0;
+
+    public void SetControllerIndex(int index)
+    {
+        playerIndex = index;
+    }
+
+    public LocalControllerData GetContollerInput(int playerIndex)
+    {
+        GetInput(out NetworkInputData inputData);
+
+        if (playerIndex == 0)
+        {
+            return inputData.controllerData1;
+        }
+        else if (playerIndex == 1)
+        {
+            return inputData.controllerData2;
+        }
+        else if (playerIndex == 2)
+        {
+            return inputData.controllerData3;
+        }
+        else if (playerIndex == 3)
+        {
+            return inputData.controllerData4;
+        }
+        else if (playerIndex == 4)
+        {
+            return inputData.controllerData5;
+        }
+        else if (playerIndex == 5)
+        {
+            return inputData.controllerData6;
+        }
+        else if (playerIndex == 6)
+        {
+            return inputData.controllerData7;
+        }
+        else
+        {
+            return inputData.controllerData8;
+        }
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        
+
+        LocalControllerData playerInput = GetContollerInput(playerIndex);
+
+        if (playerMovement == null) return;
+        playerMovement.UpdateMoveInput(playerInput.moveVector);
+        playerAim.UpdateAimInput(playerInput.aimVector);
+
+        if (playerInput.buttons.IsSet(InputButton.Jump))
+        {
+            playerMovement.TryJump();
+        }
+        playerArms.RightArm.UpdateWeaponTrigger(playerInput.buttons.IsSet(InputButton.UseWeapon1));
+
+        if (playerInput.buttons.IsSet(InputButton.UseWeaponAbility))
+        {
+            playerArms.RightArm.PressZoomButton();
+        }
+        else
+        {
+            playerArms.RightArm.ReleaseZoomButton();
+        }
+        
+        if(playerInput.buttons.IsSet(InputButton.SwitchWeapon))
+        {
+            playerArms.RightArm.PressSwitchButton();
+        }
+    }
+
     public void EnterOneWeaponMode()
     {
-        playerInput.actions.FindActionMap("Player").Enable();
-        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
-        playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
+        //playerInput.actions.FindActionMap("Player").Enable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
 
         
     }
 
     public void EnterDualWeaponMode()
     {
-        playerInput.actions.FindActionMap("Player").Enable();
+        //playerInput.actions.FindActionMap("Player").Enable();
         
-        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
-        playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Enable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Enable();
     }
 
     public void Start()
     {
         GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
-        string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
+        string deviceName = "test"; //playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
         
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
 
 
         PlayerManager.instance.AddPlayer(this);
 
-        playerInput.actions.FindActionMap("QuickMenu").Enable();
+        //playerInput.actions.FindActionMap("QuickMenu").Enable();
         
     }
 
@@ -248,9 +325,9 @@ public class PlayerMind : MonoBehaviour
         OnPlayerDeath?.Invoke();
         OnPlayerDied?.Invoke(this);
 
-        playerInput.actions.FindActionMap("Player").Disable();
-        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
-        playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
+        //playerInput.actions.FindActionMap("Player").Disable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
+        //playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
     }
 
     public void PlayerElimination(GameObject obj)
@@ -676,6 +753,9 @@ public class PlayerMind : MonoBehaviour
         hitCollector.OnCharacterHit += hitMarkerUI.ShowHitMarker;
         hitCollector.OnCharacterKill += hitMarkerUI.ShowKillMarker;
     }
+
+
+    
 
 
 }
