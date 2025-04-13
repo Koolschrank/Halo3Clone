@@ -44,5 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91933ba4abf336a42bf033b07cca71b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SortKey: 1617321430
+  ObjectInterest: 1
+  Flags: 1
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0
+  _inputCollector: {fileID: 0}
   _playerPrefab:
     RawGuidValue: a922945dd367a444e86f099b04969c75

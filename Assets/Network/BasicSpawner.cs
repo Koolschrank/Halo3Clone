@@ -3,15 +3,38 @@ using Fusion.Sockets;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.Unicode;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
+    [SerializeField] InputCollector inputCollector;
+    [SerializeField] private PlayerInputManager playerInput;
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
+    // singelon instance
+    public static BasicSpawner Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
 
+    //public void OnLocalPlayerSpawn(PlayerRef player)
+    //{
+    //    var runner = GetComponent<NetworkRunner>();
+    //    if (runner.IsServer)
+    //    {
+    //        // Create a unique position for the player
+    //        Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 1.5f, 3, 0);
+    //        NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+    //        // Keep track of the player avatars for easy access
+    //        _spawnedCharacters2.Add(networkPlayerObject);
+    //    }
+    //}
 
+    int index = 0;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) 
     {
         if (runner.IsServer)
@@ -19,6 +42,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             // Create a unique position for the player
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 1.5f, 3, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            networkPlayerObject.name += " " + index.ToString();
+            index++;
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
@@ -32,18 +57,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input) {
-        var data = new NetworkControllerData();
-
-        if (Input.GetKey(KeyCode.W))
-            data.moveVector += Vector2.up;
-        if (Input.GetKey(KeyCode.S))
-            data.moveVector += Vector2.down;
-        if (Input.GetKey(KeyCode.A))
-            data.moveVector += Vector2.left;
-        if (Input.GetKey(KeyCode.D))
-            data.moveVector += Vector2.right;
-
-        input.Set(data);
+        inputCollector.OnInput(runner, input);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
@@ -88,6 +102,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
+
+        playerInput.enabled = true;
     }
 
     private void OnGUI()

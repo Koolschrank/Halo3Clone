@@ -1,11 +1,15 @@
 using Fusion;
+using Fusion.Sockets;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputCollector : MonoBehaviour, INetworkInput
+
+public class InputCollector : MonoBehaviour
 {
+    
+
     // singleton instance
     public static InputCollector Instance { get; private set; }
 
@@ -21,10 +25,24 @@ public class InputCollector : MonoBehaviour, INetworkInput
     public void AddPlayerController(PlayerController controller)
     {
         localControllers.Add(controller);
+
+        foreach (var playerManager in FindObjectsByType<NetworkLocalPlayerManager>(default))
+        {
+            if (playerManager.HasInputAuthority)
+            {
+                playerManager.OnLocalPlayerSpawn();
+            }
+        }
+        
+        
+
     }
 
-    public void OnInput(NetworkInput input)
+
+
+    public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        Debug.Log("count: " + localControllers.Count);
         var data = new NetworkInputData();
         int playerCount = localControllers.Count;
         if (playerCount > 0)
