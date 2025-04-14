@@ -108,7 +108,7 @@ public class PlayerManager : NetworkBehaviour
 
             p.EnableLayerInCamera(fpsLayers[i]);
             p.DisableLayerInCamera(thirdPersonLayers[i]);
-           // p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
+            //p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
 
 
         }
@@ -159,10 +159,7 @@ public class PlayerManager : NetworkBehaviour
             var fov = screenRectsToUse[playerCount - 1].screenRectValues[i].FOV;
             vCam.Lens.FieldOfView = fov;
             spectatorCam.Lens.FieldOfView = fov;
-            //playerCam.SetCinemaCamera(vCam);
-
-
-
+            //playerCam.SetCinemaCamera(vCam
         }
 
         OnPlayerAdded?.Invoke(player);

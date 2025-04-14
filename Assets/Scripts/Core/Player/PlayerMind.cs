@@ -96,6 +96,10 @@ public class PlayerMind : NetworkBehaviour
         {
             connectedBody = body;
             connectedBody.LocalPlayerIndex = localPlayerIndex;
+            if (playerInterface != null)
+            {
+                playerInterface.PlayerBody = body;
+            }
         }
             
 
@@ -114,6 +118,10 @@ public class PlayerMind : NetworkBehaviour
     public void SetPlayerInterface(PlayerInterface playerInterface)
     {
         this.playerInterface = playerInterface;
+        if (Body != null)
+        {
+            playerInterface.PlayerBody = Body;
+        }
     }
 
     public void SetControllerIndex(int index)

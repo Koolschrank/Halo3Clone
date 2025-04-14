@@ -74,6 +74,7 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
         playerInterface.transform.localPosition = Vector3.zero;
         playerInterface.transform.localRotation = Quaternion.identity;
         playerInterfaces.Add(playerInterface);
+        
 
 
 

@@ -16,6 +16,7 @@ public class PlayerCamera : MonoBehaviour
     bool isZoomedIn = false;
 
 
+    
 
     public void SetVignetteIntensity(float power)
     {

@@ -1,4 +1,5 @@
 using Fusion;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerBody : NetworkBehaviour
@@ -24,6 +25,16 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] PlayerAnimation playerAnimation;
 
     [Networked] int localPlayerIndex { get; set; }
+    int visualLayerIndex = 0;
+
+    public void SetVisualLayer(int visualLayer)
+    {
+        visualLayerIndex = visualLayer;
+        for (int i = 0; i < meshes.Length; i++)
+        {
+            meshes[i].gameObject.layer = visualLayer;
+        }
+    }
 
     public int LocalPlayerIndex
     {
@@ -33,6 +44,17 @@ public class PlayerBody : NetworkBehaviour
             localPlayerIndex = value;
         }
     }
+
+    public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
+    {
+        Debug.Log("Setting cameras");
+        camera.Follow = head.transform;
+        camera.LookAt = head.transform;
+        //mind.SetSpectatorTarget(spectatorCamera);
+        spectatorCamera.Follow = transform;
+        spectatorCamera.LookAt = spectatorCameraTarget;
+    }
+
 
     public PlayerMovement PlayerMovement => playerMovement;
     public PlayerAim PlayerAim => playerAim;
