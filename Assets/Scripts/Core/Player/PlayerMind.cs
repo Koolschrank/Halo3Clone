@@ -14,8 +14,9 @@ public class PlayerMind : NetworkBehaviour
     public Action<GameObject, PlayerMind> OnPlayerElimination;
     public Action<GameObject, PlayerMind> OnTeamKill;
 
-    PlayerBody connectedBody;
-    NetworkLocalPlayerManager playerManager;
+    [Networked] PlayerBody connectedBody { get; set; }
+    [Networked] NetworkLocalPlayerManager playerManager { get; set; }
+    PlayerInterface playerInterface;
 
     public PlayerBody Body => connectedBody;
 
@@ -69,81 +70,65 @@ public class PlayerMind : NetworkBehaviour
 
 
 
-    int playerIndex = 0;
+    [Networked] int localPlayerIndex { get; set; }
 
 
     public override void Spawned()
     {
-        if (HasInputAuthority)
-        {
-            if (playerManager == null) return;
+        TryGetInterface();
+    }
 
+    public void TryGetInterface()
+    {
+        Debug.Log("Spawned");
+        if (HasInputAuthority && playerInterface == null)
+        {
+            Debug.Log("Spawned2");
+            if (playerManager == null) return;
+            Debug.Log("Spawned3");
             playerManager.CreatePlayerInterface(this);
         }
     }
 
     public void ConnectToBody(PlayerBody body)
     {
-        connectedBody = body;
+        if (HasStateAuthority)
+        {
+            connectedBody = body;
+            connectedBody.LocalPlayerIndex = localPlayerIndex;
+        }
+            
 
-        transform.SetParent(connectedBody.MindParent);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
     }
 
     public void SetPlayerManager(NetworkLocalPlayerManager playerManager)
     {
-        this.playerManager = playerManager;
+        Debug.Log("SetPlayerManager");
+        if (HasStateAuthority)
+        {
+            Debug.Log("SetPlayerManager2");
+            this.playerManager = playerManager;
+        }
+    }
+
+    public void SetPlayerInterface(PlayerInterface playerInterface)
+    {
+        this.playerInterface = playerInterface;
     }
 
     public void SetControllerIndex(int index)
     {
-        playerIndex = index;
-    }
-
-    public LocalControllerData GetContollerInput(int playerIndex)
-    {
-        GetInput(out NetworkInputData inputData);
-
-        if (playerIndex == 0)
-        {
-            return inputData.controllerData1;
-        }
-        else if (playerIndex == 1)
-        {
-            return inputData.controllerData2;
-        }
-        else if (playerIndex == 2)
-        {
-            return inputData.controllerData3;
-        }
-        else if (playerIndex == 3)
-        {
-            return inputData.controllerData4;
-        }
-        else if (playerIndex == 4)
-        {
-            return inputData.controllerData5;
-        }
-        else if (playerIndex == 5)
-        {
-            return inputData.controllerData6;
-        }
-        else if (playerIndex == 6)
-        {
-            return inputData.controllerData7;
-        }
-        else
-        {
-            return inputData.controllerData8;
-        }
+        localPlayerIndex = index;
     }
 
     public override void FixedUpdateNetwork()
     {
-        LocalControllerData playerInput = GetContollerInput(playerIndex);
+        GetInput(out NetworkInputData inputData);
+        LocalControllerData playerInput =InputSplitter.GetContollerData(inputData, localPlayerIndex);
 
         if (connectedBody == null) return;
+
+        return;
         var movement = connectedBody.PlayerMovement;
         var aim = connectedBody.PlayerAim;
         var arms = connectedBody.PlayerArms;

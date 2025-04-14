@@ -68,3 +68,4 @@ MonoBehaviour:
     RawGuidValue: 9276fa2f27b16aa42a91501bf8123bb6
   playerBodyPrefab:
     RawGuidValue: a922945dd367a444e86f099b04969c75
+  playerInterfacePrefab: {fileID: 4318146055660359705, guid: 1ee478a2ea5ab36419c3640878036ef9, type: 3}

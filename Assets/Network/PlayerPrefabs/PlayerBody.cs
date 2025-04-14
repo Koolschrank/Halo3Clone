@@ -1,12 +1,13 @@
+using Fusion;
 using UnityEngine;
 
-public class PlayerBody : MonoBehaviour
+public class PlayerBody : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerArms playerArms;
-    [SerializeField] Transform mindParent;
+    [SerializeField] Transform head;
 
 
     [SerializeField] GameObject mainMesh;
@@ -21,6 +22,17 @@ public class PlayerBody : MonoBehaviour
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] PlayerStartEquipment playerStartEquipment;
     [SerializeField] PlayerAnimation playerAnimation;
+
+    [Networked] int localPlayerIndex { get; set; }
+
+    public int LocalPlayerIndex
+    {
+        get => localPlayerIndex;
+        set
+        {
+            localPlayerIndex = value;
+        }
+    }
 
     public PlayerMovement PlayerMovement => playerMovement;
     public PlayerAim PlayerAim => playerAim;
@@ -37,6 +49,6 @@ public class PlayerBody : MonoBehaviour
     public SkinnedMeshRenderer[] Meshes => meshes;
     public GameObject MainMesh => mainMesh;
 
-    public Transform MindParent => mindParent;
+    public Transform HeadTransform => head;
 
 }

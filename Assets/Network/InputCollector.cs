@@ -25,6 +25,7 @@ public class InputCollector : MonoBehaviour
     public void AddPlayerController(PlayerController controller)
     {
         localControllers.Add(controller);
+        controller.transform.SetParent(transform);
 
         foreach (var playerManager in FindObjectsByType<NetworkLocalPlayerManager>(default))
         {

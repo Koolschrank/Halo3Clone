@@ -17,6 +17,7 @@ public class PlayerMovement : NetworkBehaviour
 
     // character controller 
     [Header("References")]
+    [SerializeField] PlayerBody playerBody;
     [SerializeField] SimpleKCC cc;
     [SerializeField] Transform head;
     [SerializeField] Transform head_normalPosition;
@@ -117,7 +118,12 @@ public class PlayerMovement : NetworkBehaviour
         //GetInput(out NetworkInputData data);
         //Vector2 input = data.controllerData1.moveVector;
 
-        Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
+        if (!HasStateAuthority) return;
+
+        GetInput(out NetworkInputData data);
+        LocalControllerData localControllerData = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
+
+        Vector2 input = localControllerData.moveVector;//controller.Player.Move.ReadValue<Vector2>();
         
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
         Vector3 camForward = head.transform.forward;
@@ -163,7 +169,12 @@ public class PlayerMovement : NetworkBehaviour
             moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier, acceleration * Runner.DeltaTime);
         }
 
-        
+        if ( localControllerData.buttons.IsSet(InputButton.Jump))
+        {
+            TryJump();
+        }
+
+
     }
 
     public void SetMovementSpeedMultiplier(float multiplier)

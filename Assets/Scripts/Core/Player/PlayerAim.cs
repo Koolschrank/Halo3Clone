@@ -11,7 +11,8 @@ public class PlayerAim : NetworkBehaviour
     public Action<float, float> OnSensitivityMultiplierChanged;
 
     [Header("References")]
-    [SerializeField] GameObject playerHead;
+    [SerializeField] PlayerBody playerBody;
+    [SerializeField] Transform playerHead;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth playerHealth;
@@ -41,6 +42,8 @@ public class PlayerAim : NetworkBehaviour
     [SerializeField] float sensitivityChangeSteps = 0.10f;
 
 
+    [Networked]
+    public Vector2 ViewDirection { get; set; }
 
 
     private void Start()
@@ -63,35 +66,58 @@ public class PlayerAim : NetworkBehaviour
 
     private void UpdateAim()
     {
-        // x rotates player y rotates camera
-        Vector2 input = aimInput; //controller.Player.Aim.ReadValue<Vector2>();
-        float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Runner.DeltaTime;
-        float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Runner.DeltaTime;
 
-        float playerXRotation = transform.eulerAngles.y;
-        float playerYRotation = playerHead.transform.eulerAngles.x;
-
-        if (CheckIfHoverOverEnemy())
+        if (HasStateAuthority)
         {
-            rotationX *= aimSupportSlowDown;
-            rotationY *= aimSupportSlowDown;
+
+            GetInput(out NetworkInputData data);
+            var controller = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
+            // x rotates player y rotates camera
+            Vector2 input = controller.aimVector; //controller.Player.Aim.ReadValue<Vector2>();
+            float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Runner.DeltaTime;
+            float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Runner.DeltaTime;
+
+            float playerXRotation = transform.eulerAngles.y;
+            float playerYRotation = playerHead.transform.eulerAngles.x;
+
+            if (CheckIfHoverOverEnemy())
+            {
+                rotationX *= aimSupportSlowDown;
+                rotationY *= aimSupportSlowDown;
+            }
+            if (playerArms.RightArm.IsInZoom)
+            {
+                rotationX *= zoomAimSpeedMultiplier;
+                rotationY *= zoomAimSpeedMultiplier;
+            }
+
+            playerXRotation += rotationX;
+            playerYRotation -= rotationY;
+            //playerYRotation = Mathf.Clamp(playerYRotation, minAngle, maxAngle);
+
+
+            
+            ViewDirection = new Vector2 (playerXRotation, playerYRotation);
+           
         }
-        if (playerArms.RightArm.IsInZoom)
+        cc.SetLookRotation(new Vector3(0, ViewDirection.x, 0));
+        playerHead.transform.eulerAngles = new Vector3(ViewDirection.y, ViewDirection.x, 0);
+
+
+    }
+
+    // render
+    public override void Render()
+    {
+        return;
+        if (!HasInputAuthority)
         {
-            rotationX *= zoomAimSpeedMultiplier;
-            rotationY *= zoomAimSpeedMultiplier;
+            cc.SetLookRotation(new Vector3(0, ViewDirection.x, 0));
+            playerHead.transform.eulerAngles = new Vector3(ViewDirection.y, 0, 0);
+
+
         }
-
-        playerXRotation += rotationX;
-        playerYRotation -= rotationY;
-        //playerYRotation = Mathf.Clamp(playerYRotation, minAngle, maxAngle);
-
-
-        //
-        cc.SetLookRotation(new Vector3(0, playerXRotation, 0));
-        //transform.eulerAngles = new Vector3(0, playerXRotation, 0);
-        playerHead.transform.eulerAngles = new Vector3(playerYRotation, playerXRotation, 0);
-
+        
     }
 
     public bool CheckIfHoverOverEnemy()

@@ -78,6 +78,11 @@ public class MinimapUI : MonoBehaviour
             objectInUI.SetUpdatedThisFrame(false);
         }
 
+        if (playerTransform == null)
+        {
+            return;
+        }
+
         var allObjectsInMinimap = MiniMapManager.instance.GetMiniMapObjectsInDistance(playerTransform.position, maxDistance);
 
         foreach (MiniMapObjectData objectData in allObjectsInMinimap)
