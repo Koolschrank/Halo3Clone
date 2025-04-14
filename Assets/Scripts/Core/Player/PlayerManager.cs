@@ -108,7 +108,7 @@ public class PlayerManager : NetworkBehaviour
 
             p.EnableLayerInCamera(fpsLayers[i]);
             p.DisableLayerInCamera(thirdPersonLayers[i]);
-            p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
+           // p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
 
 
         }
@@ -159,7 +159,7 @@ public class PlayerManager : NetworkBehaviour
             var fov = screenRectsToUse[playerCount - 1].screenRectValues[i].FOV;
             vCam.Lens.FieldOfView = fov;
             spectatorCam.Lens.FieldOfView = fov;
-            playerCam.SetCinemaCamera(vCam);
+            //playerCam.SetCinemaCamera(vCam);
 
 
 
@@ -181,10 +181,10 @@ public class PlayerManager : NetworkBehaviour
 
     public void UpdateTeamOfBody(PlayerMind mind)
     {
-        var playerBody = mind.PlayerBody;
-        var connector = playerBody.GetComponent<BodyMindConnection>();
-        connector.SetPlayTeamIndex();
-        connector.SetPlayerColor(playerColors[mind.TeamIndex]);
+       // var playerBody = mind.PlayerBody;
+        //var connector = playerBody.GetComponent<BodyMindConnection>();
+        //connector.SetPlayTeamIndex();
+       // connector.SetPlayerColor(playerColors[mind.TeamIndex]);
     }
 
     public void RespawnPlayer(PlayerMind player)
@@ -194,7 +194,7 @@ public class PlayerManager : NetworkBehaviour
         playerBody.ConnectMind(player);
         playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
         playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
-        player.UpdateLayers();
+        //player.UpdateLayers();
         OnPlayerSpawned?.Invoke(player);
     }
 

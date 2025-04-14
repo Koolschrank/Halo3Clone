@@ -10531,12 +10531,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5698032335818744442}
+  - component: {fileID: 7999377576702310532}
   - component: {fileID: 7400201383000877008}
   - component: {fileID: 8050057614039648062}
   - component: {fileID: 4355240392448193639}
   - component: {fileID: 3068919470916229809}
   - component: {fileID: 7573040687501960069}
-  - component: {fileID: 4471171138262044766}
   - component: {fileID: 782412234501442312}
   - component: {fileID: 6138964545677116144}
   - component: {fileID: 2295363821645548979}
@@ -10548,7 +10548,7 @@ GameObject:
   - component: {fileID: 4169074679463143072}
   - component: {fileID: 5599619161729298736}
   m_Layer: 7
-  m_Name: NetworkPlayer
+  m_Name: NetworkPlayerBody
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10575,6 +10575,34 @@ Transform:
   - {fileID: 1905413014460542580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7999377576702310532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f44e38eb75466b40b3a429dcbf1cb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 7400201383000877008}
+  playerAim: {fileID: 3068919470916229809}
+  playerArms: {fileID: 3232609274750972410}
+  mainMesh: {fileID: 8335073051360787677}
+  meshes:
+  - {fileID: 6082606815277094945}
+  - {fileID: 8840055025692013051}
+  playerPickUpScan: {fileID: 3086695294023934871}
+  health: {fileID: 782412234501442312}
+  bulletSpawner: {fileID: 737555415851796727}
+  spectatorCameraTarget: {fileID: 3798683650232698611}
+  playerInventory: {fileID: 7573040687501960069}
+  targetHitCollector: {fileID: 6138964545677116144}
+  playerTeam: {fileID: 2295363821645548979}
+  playerStartEquipment: {fileID: 8050057614039648062}
+  playerAnimation: {fileID: 6646059112641200883}
 --- !u!114 &7400201383000877008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10702,35 +10730,6 @@ MonoBehaviour:
   rechargeGranadeTime: 13
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
---- !u!114 &4471171138262044766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b5d240d082db045a78ed61ae81f0a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mindParent: {fileID: 8067625750732039895}
-  mesh: {fileID: 8335073051360787677}
-  playerMovement: {fileID: 7400201383000877008}
-  playerAim: {fileID: 3068919470916229809}
-  playerArms: {fileID: 3232609274750972410}
-  playerPickUpScan: {fileID: 3086695294023934871}
-  health: {fileID: 782412234501442312}
-  bulletSpawner: {fileID: 737555415851796727}
-  spectatorCameraTarget: {fileID: 3521633971492238688}
-  playerInventory: {fileID: 7573040687501960069}
-  targetHitCollector: {fileID: 6138964545677116144}
-  playerTeam: {fileID: 2295363821645548979}
-  playerStartEquipment: {fileID: 8050057614039648062}
-  playerAnimation: {fileID: 6646059112641200883}
-  meshes:
-  - {fileID: 6082606815277094945}
-  - {fileID: 8840055025692013051}
 --- !u!114 &782412234501442312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10928,7 +10927,6 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 7400201383000877008}
   - {fileID: 3068919470916229809}
-  - {fileID: 4471171138262044766}
   - {fileID: 5599619161729298736}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072
@@ -11305,9 +11303,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8656812689673382145, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
   m_PrefabInstance: {fileID: 6244328683183300069}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3521633971492238688 stripped
+--- !u!4 &3798683650232698611 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7383392835385583749, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7070631061924354838, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
   m_PrefabInstance: {fileID: 6244328683183300069}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &6082606815277094945 stripped

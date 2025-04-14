@@ -14,21 +14,30 @@ public class PlayerMind : NetworkBehaviour
     public Action<GameObject, PlayerMind> OnPlayerElimination;
     public Action<GameObject, PlayerMind> OnTeamKill;
 
-    //[SerializeField] Camera playerCamera;
-    [SerializeField] Arm_FPSView rightArmView;
-    [SerializeField] Arm_FPSView leftArmView;
-    
-    [SerializeField] WeaponSway weaponSway1;
+    PlayerBody connectedBody;
+    NetworkLocalPlayerManager playerManager;
 
-    [SerializeField] WeaponSway weaponSway2;
+    public PlayerBody Body => connectedBody;
+
+
+
+    //[SerializeField] Camera playerCamera;
+    //[SerializeField] Arm_FPSView rightArmView;
+    //[SerializeField] Arm_FPSView leftArmView;
+    
+    //[SerializeField] WeaponSway weaponSway1;
+
+    //[SerializeField] WeaponSway weaponSway2;
     //[SerializeField] PlayerFOV playerFOV;
 
     CinemachineCamera spectatorCamera;
+
+    
     [SerializeField] PlayerCamera playerCamera;
     //[SerializeField] CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerTeam team;
 
-
+    /*
     [Header("UI")]
     [SerializeField] Transform UIContainer;
     [SerializeField] HealthUI healthUI;
@@ -51,20 +60,9 @@ public class PlayerMind : NetworkBehaviour
 
     [Header("Input Settings")]
     [SerializeField] float holdButtonToPickUpTime = 0.2f;
+    */
 
-
-    GameObject playerBody;
-    GameObject playerModel;
-    PlayerMovement playerMovement;
-    PlayerAim playerAim;
-    PlayerArms playerArms;
-    Health playerHealth;
-    BulletSpawner bulletSpawner;
-    PlayerPickUpScan playerPickUpScan;
-    PlayerInventory playerInventory;
     PlayerSettings playerSettings;
-
-
 
     int firstPersonLayer;
     int thirdPersonLayer;
@@ -72,6 +70,31 @@ public class PlayerMind : NetworkBehaviour
 
 
     int playerIndex = 0;
+
+
+    public override void Spawned()
+    {
+        if (HasInputAuthority)
+        {
+            if (playerManager == null) return;
+
+            playerManager.CreatePlayerInterface(this);
+        }
+    }
+
+    public void ConnectToBody(PlayerBody body)
+    {
+        connectedBody = body;
+
+        transform.SetParent(connectedBody.MindParent);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+    }
+
+    public void SetPlayerManager(NetworkLocalPlayerManager playerManager)
+    {
+        this.playerManager = playerManager;
+    }
 
     public void SetControllerIndex(int index)
     {
@@ -118,32 +141,34 @@ public class PlayerMind : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        
-
         LocalControllerData playerInput = GetContollerInput(playerIndex);
 
-        if (playerMovement == null) return;
-        playerMovement.UpdateMoveInput(playerInput.moveVector);
-        playerAim.UpdateAimInput(playerInput.aimVector);
+        if (connectedBody == null) return;
+        var movement = connectedBody.PlayerMovement;
+        var aim = connectedBody.PlayerAim;
+        var arms = connectedBody.PlayerArms;
+
+        movement.UpdateMoveInput(playerInput.moveVector);
+        aim.UpdateAimInput(playerInput.aimVector);
 
         if (playerInput.buttons.IsSet(InputButton.Jump))
         {
-            playerMovement.TryJump();
+            movement.TryJump();
         }
-        playerArms.RightArm.UpdateWeaponTrigger(playerInput.buttons.IsSet(InputButton.UseWeapon1));
+        arms.RightArm.UpdateWeaponTrigger(playerInput.buttons.IsSet(InputButton.UseWeapon1));
 
         if (playerInput.buttons.IsSet(InputButton.UseWeaponAbility))
         {
-            playerArms.RightArm.PressZoomButton();
+            arms.RightArm.PressZoomButton();
         }
         else
         {
-            playerArms.RightArm.ReleaseZoomButton();
+            arms.RightArm.ReleaseZoomButton();
         }
         
         if(playerInput.buttons.IsSet(InputButton.SwitchWeapon))
         {
-            playerArms.RightArm.PressSwitchButton();
+            arms.RightArm.PressSwitchButton();
         }
     }
 
@@ -166,14 +191,14 @@ public class PlayerMind : NetworkBehaviour
 
     public void Start()
     {
-        GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
+        //GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
         string deviceName = "test"; //playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
         
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
 
 
-        PlayerManager.instance.AddPlayer(this);
+        //PlayerManager.instance.AddPlayer(this);
 
         //playerInput.actions.FindActionMap("QuickMenu").Enable();
         
@@ -181,6 +206,7 @@ public class PlayerMind : NetworkBehaviour
 
     public int PlayerIndex { get { return playerSettings.playerIndex; } }
 
+    /*
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
@@ -225,8 +251,9 @@ public class PlayerMind : NetworkBehaviour
         granadeCooldown.SetActive(inventory.GranadeInventorySize == 0 ? false : true);
 
         weaponInventoryUI.SetUp(playerInventory);
-    }
+    } */
 
+    /*
     public void SetCinemaCamera(CinemachineCamera cCam)
     {
         playerCamera.SetCinemachineCamera(cCam);
@@ -318,7 +345,7 @@ public class PlayerMind : NetworkBehaviour
 
         playerHealth.OnDamageTaken += damageIndicatorUI.AddDamageIndicator;
         playerHealth.OnDeath += damageIndicatorUI.Clear;
-    }
+    } */
 
     public void PlayerDeath()
     {
@@ -348,6 +375,8 @@ public class PlayerMind : NetworkBehaviour
 
             
     }
+
+    /*
 
     // set pick up scan
     public void SetPickUpScan(PlayerPickUpScan pickUpScan)
@@ -478,7 +507,9 @@ public class PlayerMind : NetworkBehaviour
         }
 
     }
-
+    */
+    
+    /*
     IEnumerator SwitchWeaponTimer()
     {
         yield return new WaitForSeconds(holdButtonToPickUpTime);
@@ -623,7 +654,7 @@ public class PlayerMind : NetworkBehaviour
             }
         }
     }
-
+    */
 
 
     public void SwitchTeam(InputAction.CallbackContext context)
@@ -640,9 +671,11 @@ public class PlayerMind : NetworkBehaviour
         thirdPersonLayer = ThirdPerson_Layer;
 
 
-        UpdateLayers();
+       // UpdateLayers();
     }
 
+
+    /*
     public void EnableObjectiveUIMarker()
     {
         for (int i = 0; i < objectiveIndicatorUIs.Length; i++)
@@ -655,8 +688,9 @@ public class PlayerMind : NetworkBehaviour
     public void EnableObjectiveUIMarker(int index)
     {
         objectiveIndicatorUIs[index].gameObject.SetActive(true);
-    }
+    } */
 
+    /*
     public void UpdateLayers()
     {
         if (transform != null && playerModel != null)
@@ -664,7 +698,7 @@ public class PlayerMind : NetworkBehaviour
             UtilityFunctions.SetLayerRecursively(gameObject, firstPersonLayer);
             UtilityFunctions.SetLayerRecursively(playerModel, thirdPersonLayer);
         }
-    }
+    }*/
 
     public void EnableLayerInCamera(int layer)
     {
@@ -690,8 +724,8 @@ public class PlayerMind : NetworkBehaviour
         //playerCamera.transform.SetParent(spectatorCameraOffset);
         //playerCamera.transform.localPosition = Vector3.zero;
         //playerCamera.transform.localRotation = Quaternion.identity;
-        leftArmView.gameObject.SetActive(false);
-        UIContainer.gameObject.SetActive(false);
+        //leftArmView.gameObject.SetActive(false);
+        //UIContainer.gameObject.SetActive(false);
         spectatorCamera.Priority = 100;
     }
 
@@ -700,8 +734,8 @@ public class PlayerMind : NetworkBehaviour
         playerCamera.transform.SetParent(transform);
         playerCamera.transform.localPosition = Vector3.zero;
         playerCamera.transform.localRotation = Quaternion.identity;
-        leftArmView.gameObject.SetActive(true);
-        UIContainer.gameObject.SetActive(true);
+        //leftArmView.gameObject.SetActive(true);
+        //UIContainer.gameObject.SetActive(true);
         spectatorCamera.Priority = 0;
 
 
@@ -731,7 +765,7 @@ public class PlayerMind : NetworkBehaviour
     public void AssignTeam(int team)
     {
         this.team.SetTeamIndex(team);
-        shildUI.SetTeamColor(team);
+        //shildUI.SetTeamColor(team);
     }
 
 
@@ -742,16 +776,16 @@ public class PlayerMind : NetworkBehaviour
         {
             this.hitCollector.OnCharacterKill -= PlayerElimination;
 
-            this.hitCollector.OnCharacterHit -= hitMarkerUI.ShowHitMarker;
-            this.hitCollector.OnCharacterKill -= hitMarkerUI.ShowKillMarker;
+            //this.hitCollector.OnCharacterHit -= hitMarkerUI.ShowHitMarker;
+            //this.hitCollector.OnCharacterKill -= hitMarkerUI.ShowKillMarker;
 
         }
 
         this.hitCollector = hitCollector;
 
-        hitCollector.OnCharacterKill += PlayerElimination;
-        hitCollector.OnCharacterHit += hitMarkerUI.ShowHitMarker;
-        hitCollector.OnCharacterKill += hitMarkerUI.ShowKillMarker;
+        //hitCollector.OnCharacterKill += PlayerElimination;
+        //hitCollector.OnCharacterHit += hitMarkerUI.ShowHitMarker;
+        //hitCollector.OnCharacterKill += hitMarkerUI.ShowKillMarker;
     }
 
 

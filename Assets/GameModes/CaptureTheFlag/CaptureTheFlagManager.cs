@@ -157,22 +157,23 @@ public class CaptureTheFlagManager : GameModeManager
     public override void PlayerJoined(PlayerMind player)
     {
         base.PlayerJoined(player);
-        player.EnableObjectiveUIMarker();
+        //player.EnableObjectiveUIMarker();
     }
 
     public override void PlayerSpawned(PlayerMind player)
     {
         base.PlayerSpawned(player);
-        var arms = player.PlayerBody.GetComponent<PlayerArms>();
+
+        var arms = player.Body.PlayerArms;
         arms.LeftArm.OnWeaponPickedUp += (weapon) =>
         {
             if (weapon.Data == team1_FlagData)
             {
-                FlagPickedUp_Team1(player.PlayerBody);
+                FlagPickedUp_Team1(player.Body.gameObject);
             }
             else if (weapon.Data == team2_FlagData)
             {
-                FlagPickedUp_Team2(player.PlayerBody);
+                FlagPickedUp_Team2(player.Body.gameObject);
             }
         };
 
@@ -180,11 +181,11 @@ public class CaptureTheFlagManager : GameModeManager
         {
             if (weapon.Data == team1_FlagData)
             {
-                FlagPickedUp_Team1(player.PlayerBody);
+                FlagPickedUp_Team1(player.Body.gameObject);
             }
             else if (weapon.Data == team2_FlagData)
             {
-                FlagPickedUp_Team2(player.PlayerBody);
+                FlagPickedUp_Team2(player.Body.gameObject);
             }
         };
 

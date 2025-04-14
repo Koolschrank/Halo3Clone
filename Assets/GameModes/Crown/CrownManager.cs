@@ -19,7 +19,7 @@ public class CrownManager : GameModeManager
         player.OnPlayerElimination += OnPlayerElimination;
         player.OnTeamKill += OnTeamKill;
 
-        player.EnableObjectiveUIMarker();
+        //player.EnableObjectiveUIMarker();
     }
 
     public void OnPlayerElimination(GameObject killedPlayer, PlayerMind player)
@@ -28,7 +28,7 @@ public class CrownManager : GameModeManager
 
         if (playerWithCrown == killedPlayer)
         {
-            var isDead = player.PlayerBody.GetComponent<CharacterHealth>().IsDead;
+            var isDead = player.Body.Health.IsDead;
             if (isDead)
             {
                 playerWithCrown = null;
@@ -36,7 +36,7 @@ public class CrownManager : GameModeManager
             }
             else
             {
-                TransferCrownToPlayer(player.PlayerBody);
+                TransferCrownToPlayer(player.Body.gameObject);
             }
             
         }

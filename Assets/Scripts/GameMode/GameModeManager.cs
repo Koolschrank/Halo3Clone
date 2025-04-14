@@ -153,7 +153,7 @@ public class GameModeManager : MonoBehaviour
 
     public void ChangeTeamOfBody(PlayerMind mind, int teamIndex)
     {
-        var playerBody = mind.PlayerBody;
+        var playerBody = mind.Body.gameObject;
         if (playerBody == null)
         {
             return;

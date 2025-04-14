@@ -2,15 +2,41 @@ using UnityEngine;
 
 public class PlayerBody : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("References")]
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerAim playerAim;
+    [SerializeField] PlayerArms playerArms;
+    [SerializeField] Transform mindParent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    [SerializeField] GameObject mainMesh;
+    [SerializeField] SkinnedMeshRenderer[] meshes;
+
+    [SerializeField] PlayerPickUpScan playerPickUpScan;
+    [SerializeField] Health health;
+    [SerializeField] BulletSpawner bulletSpawner;
+    [SerializeField] Transform spectatorCameraTarget;
+    [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] TargetHitCollector targetHitCollector;
+    [SerializeField] PlayerTeam playerTeam;
+    [SerializeField] PlayerStartEquipment playerStartEquipment;
+    [SerializeField] PlayerAnimation playerAnimation;
+
+    public PlayerMovement PlayerMovement => playerMovement;
+    public PlayerAim PlayerAim => playerAim;
+    public PlayerArms PlayerArms => playerArms;
+    public PlayerPickUpScan PlayerPickUpScan => playerPickUpScan;
+    public Health Health => health;
+    public BulletSpawner BulletSpawner => bulletSpawner;
+    public Transform SpectatorCameraTarget => spectatorCameraTarget;
+    public PlayerInventory PlayerInventory => playerInventory;
+    public TargetHitCollector TargetHitCollector => targetHitCollector;
+    public PlayerTeam PlayerTeam => playerTeam;
+    public PlayerStartEquipment PlayerStartEquipment => playerStartEquipment;
+    public PlayerAnimation PlayerAnimation => playerAnimation;
+    public SkinnedMeshRenderer[] Meshes => meshes;
+    public GameObject MainMesh => mainMesh;
+
+    public Transform MindParent => mindParent;
+
 }

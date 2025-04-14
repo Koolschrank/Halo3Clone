@@ -29,17 +29,7 @@ public class BodyMindConnection : NetworkBehaviour
         
 
         this.mind = mind;
-        mind.SetPlayerBody(gameObject);
-        mind.transform.SetParent(mindParent);
-        mind.SetPlayerModel(mesh);
-        mind.SetPlayerMovement(playerMovement);
-        mind.SetPlayerAim(playerAim);
-        mind.SetPlayerArms(playerArms);
-        mind.SetHealth(health);
-        mind.SetPickUpScan(playerPickUpScan);
-        mind.SetBulletSpawner(bulletSpawner);
-        
-        mind.SetPlayerInventory(playerInventory);
+       
         mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
 
@@ -56,7 +46,7 @@ public class BodyMindConnection : NetworkBehaviour
     {
         camera.Follow = mindParent.transform;
         camera.LookAt = mindParent.transform;
-        mind.SetSpectatorTarget(spectatorCamera);
+        //mind.SetSpectatorTarget(spectatorCamera);
         spectatorCamera.Follow = transform;
         spectatorCamera.LookAt = spectatorCameraTarget;
     }
