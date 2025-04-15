@@ -19,15 +19,25 @@ public class PlayerController : MonoBehaviour
         InputCollector.Instance.AddPlayerController(this);
     }
 
-
-    public void UseWeapon1(InputAction.CallbackContext context)
+    public void Interact1(InputAction.CallbackContext context)
     {
-        buttonData[InputButton.UseAbility1] = context.ReadValueAsButton();
+        buttonData[InputButton.Interact1] = context.ReadValueAsButton();
     }
 
-    public void ReloadWeapon1(InputAction.CallbackContext context)
+    public void Interact2(InputAction.CallbackContext context)
     {
-        buttonData[InputButton.ReloadWeapon1] = context.ReadValueAsButton();
+        buttonData[InputButton.Interact2] = context.ReadValueAsButton();
+    }
+
+
+    public void Weapon1(InputAction.CallbackContext context)
+    {
+        buttonData[InputButton.Weapon1] = context.ReadValueAsButton();
+    }
+
+    public void Weapon2(InputAction.CallbackContext context)
+    {
+        buttonData[InputButton.Weapon2] = context.ReadValueAsButton();
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -40,15 +50,21 @@ public class PlayerController : MonoBehaviour
         moveVector = context.ReadValue<Vector2>();
     }
 
-    public void Aim(InputAction.CallbackContext context)
+    public void Ability1(InputAction.CallbackContext context)
     {
-        aimVector = context.ReadValue<Vector2>();
+        buttonData[InputButton.Ability1] = context.ReadValueAsButton();
     }
 
-    public void UseWeaponAbility(InputAction.CallbackContext context)
+    public void Ability2(InputAction.CallbackContext context)
     {
-        buttonData[InputButton.UseWeaponAbility] = context.ReadValueAsButton();
+        buttonData[InputButton.Ability2] = context.ReadValueAsButton();
     }
+
+    public void Melee(InputAction.CallbackContext context)
+    {
+        buttonData[InputButton.Melee] = context.ReadValueAsButton();
+    }
+
 
     public void SwitchWeapon(InputAction.CallbackContext context)
     {

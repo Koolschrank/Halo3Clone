@@ -133,36 +133,7 @@ public class PlayerMind : NetworkBehaviour
     {
         GetInput(out NetworkInputData inputData);
         LocalControllerData playerInput =InputSplitter.GetContollerData(inputData, localPlayerIndex);
-
-        if (connectedBody == null) return;
-
-        return;
-        var movement = connectedBody.PlayerMovement;
-        var aim = connectedBody.PlayerAim;
-        var arms = connectedBody.PlayerArms;
-
-        movement.UpdateMoveInput(playerInput.moveVector);
-        aim.UpdateAimInput(playerInput.aimVector);
-
-        if (playerInput.buttons.IsSet(InputButton.Jump))
-        {
-            movement.TryJump();
-        }
-        arms.RightArm.UpdateWeaponTrigger(playerInput.buttons.IsSet(InputButton.UseWeapon1));
-
-        if (playerInput.buttons.IsSet(InputButton.UseWeaponAbility))
-        {
-            arms.RightArm.PressZoomButton();
-        }
-        else
-        {
-            arms.RightArm.ReleaseZoomButton();
-        }
         
-        if(playerInput.buttons.IsSet(InputButton.SwitchWeapon))
-        {
-            arms.RightArm.PressSwitchButton();
-        }
     }
 
     public void EnterOneWeaponMode()

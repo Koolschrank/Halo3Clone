@@ -5,18 +5,14 @@ using UnityEngine;
 public enum InputButton
 {
     Jump,
-    UseWeapon1,
-    UseWeapon2,
-    ReloadWeapon1,
-    ReloadWeapon2,
+    Weapon1,
+    Weapon2,
+    Interact1,
+    Interact2,
     SwitchWeapon,
-    UseWeaponAbility,
-    UseAbility1,
-    UseAbility2,
-    pickUpWeapon1,
-    pickUpWeapon2,
-    dropWeapon1,
-    dropWeapon2,
+    Ability1,
+    Ability2,
+    Melee
 }
 
 public struct NetworkInputData : INetworkInput

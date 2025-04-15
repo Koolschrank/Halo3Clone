@@ -246,41 +246,12 @@ public class Weapon_Arms
     public void SetAmmo(int magazine)
     {
         Magazine = Mathf.Min(weaponData.MagazineSize, magazine);
-        //Reserve = Mathf.Min(weaponData.MaxAmmoInReserve, reserve);
     }
-
-    //public void GainMagazins(int magazins)
-    //{
-    //    var bulletsAmount = magazins * weaponData.MagazineSize;
-
-    //    if (bulletsAmount >= Magazine)
-    //    {
-    //        bulletsAmount -= Magazine;
-    //        Magazine = weaponData.MagazineSize;
-    //    }
-    //    else
-    //    {
-    //        Magazine += bulletsAmount;
-    //        return;
-    //    }
-    //    Reserve += bulletsAmount;
-    //    OnMagazineChange?.Invoke(Magazine, Reserve);
-    //}
 
     public void FillMagazine()
     {
         Magazine = weaponData.MagazineSize;
     }
-
-    //public void FillReserve()
-    //{
-    //    Reserve = weaponData.MaxAmmoInReserve;
-    //}
-
-    //public void AddAmmo(int amount)
-    //{
-    //    Reserve = Mathf.Min(Reserve + amount, weaponData.MaxAmmoInReserve);
-    //}
 
     public Weapon_Bullet Bullet => weaponData.WeaponBullet;
 
@@ -334,50 +305,4 @@ public class Weapon_Arms
 
     public Vector2 CrosshairSizeUI => weaponData.CrosshairsSizeUI;
 
-    /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
-    {
-        var missingAmmo = weaponData.ReserveSize - Reserve;
-        // first use up ammo from other reserve
-        if (missingAmmo > 0)
-        {
-            var ammoInPickUpReserve = weaponAmmoToTransfer.AmmoInReserve;
-            if (ammoInPickUpReserve > missingAmmo)
-            {
-                Reserve += missingAmmo;
-                ammoInPickUpReserve -= missingAmmo;
-                missingAmmo = 0;
-                weaponAmmoToTransfer.SetAmmoInReserve(ammoInPickUpReserve);
-            }
-            else
-            {
-                Reserve += ammoInPickUpReserve;
-                missingAmmo -= ammoInPickUpReserve;
-                ammoInPickUpReserve = 0;
-                weaponAmmoToTransfer.SetAmmoInReserve(ammoInPickUpReserve);
-
-                var ammoInPickUpMagazine = weaponAmmoToTransfer.AmmoInMagazine;
-                if (missingAmmo > 0)
-                {
-                    if (ammoInPickUpMagazine > missingAmmo)
-                    {
-                        Reserve += missingAmmo;
-                        ammoInPickUpMagazine -= missingAmmo;
-                        missingAmmo = 0;
-                        weaponAmmoToTransfer.SetAmmoInMagazin(ammoInPickUpMagazine);
-                    }
-                    else
-                    {
-                        Reserve += ammoInPickUpMagazine;
-                        missingAmmo -= ammoInPickUpMagazine;
-                        ammoInPickUpMagazine = 0;
-                        weaponAmmoToTransfer.SetAmmoInMagazin(ammoInPickUpMagazine);
-                        weaponAmmoToTransfer.DestroyObject();
-                    }
-                }
-            }
-        }
-
-        
-    }
-    */
 }
