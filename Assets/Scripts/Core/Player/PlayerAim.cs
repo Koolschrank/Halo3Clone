@@ -67,9 +67,7 @@ public class PlayerAim : NetworkBehaviour
     private void UpdateAim()
     {
 
-        if (HasStateAuthority)
-        {
-
+        
             GetInput(out NetworkInputData data);
             var controller = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
             // x rotates player y rotates camera
@@ -99,7 +97,7 @@ public class PlayerAim : NetworkBehaviour
             
             ViewDirection = new Vector2 (playerXRotation, playerYRotation);
            
-        }
+        
         cc.SetLookRotation(new Vector3(0, ViewDirection.x, 0));
         playerHead.transform.eulerAngles = new Vector3(ViewDirection.y, ViewDirection.x, 0);
 

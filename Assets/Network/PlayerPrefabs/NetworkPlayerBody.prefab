@@ -10660,6 +10660,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ef2b619d26f7b4c84bb4315965b386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testEquipment:
+    hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 1
+    canDualWieldEverything: 0
+    movementSpeedMultiplier: 1
+    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+    magazinsOfWeaponInHand: 3
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 3
+    sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    magazinsOfSideArm: 5
+    granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+    granadeCount: 1
   playerArms: {fileID: 3232609274750972410}
   playerInventory: {fileID: 7573040687501960069}
   health: {fileID: 782412234501442312}
@@ -10727,7 +10741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f44e285ab8c58445bb7cd2ec2d19c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInvetorySize: 1
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
@@ -10931,7 +10944,9 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 7999377576702310532}
   - {fileID: 7400201383000877008}
+  - {fileID: 8050057614039648062}
   - {fileID: 3068919470916229809}
+  - {fileID: 7573040687501960069}
   - {fileID: 5599619161729298736}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072

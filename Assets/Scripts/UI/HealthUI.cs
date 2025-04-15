@@ -2,27 +2,25 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
-public class HealthUI : MonoBehaviour
+public class HealthUI : InterfaceItem
 {
-    [SerializeField] Health health;
     [SerializeField] Image healthBar;
     [SerializeField] PlayerCamera playerCam;
     [SerializeField] AnimationCurve blodyScreenCurve;
 
-    public void SetUp(Health health)
+    protected override void Unsubscribe(PlayerBody body)
     {
-        if (this.health != null)
-        {
-            health.OnHealthChanged -= UpdateHealth;
-        }
+        var health = body.Health;
+        health.OnHealthChanged -= UpdateHealth;
+    }
 
-
-        this.health = health;
+    protected override void Subscribe(PlayerBody body)
+    {
+        var health = body.Health;
         health.OnHealthChanged += UpdateHealth;
         health.OnDeath += Clear;
+
         UpdateHealth(health.HealthPercentage);
-
-
     }
 
     public void UpdateHealth(float healthValue)

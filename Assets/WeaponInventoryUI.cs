@@ -2,9 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponInventoryUI : MonoBehaviour
+public class WeaponInventoryUI : InterfaceItem
 {
-    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] TextMeshProUGUI reserveText;
 
     [SerializeField] Color baseColor;
@@ -14,34 +13,38 @@ public class WeaponInventoryUI : MonoBehaviour
     [SerializeField] Image weaponSprite;
 
 
-
-
-    public void SetUp(PlayerInventory playerInventory)
+    // subscribe to the player body
+    protected override void Unsubscribe(PlayerBody body)
     {
-        if (this.playerInventory != null)
-        {
-            playerInventory.OnWeaponAddedToInventory += (weapon, ammo) =>
-            {
-                Show();
-                UpdateWeaponSprite(weapon.GunSpriteUI);
-                UpdateAmmo(ammo);
-            };
-            
-            playerInventory.OnAmmoOfWeaponInInventoryChanged -= UpdateAmmo;
-            playerInventory.OnWeaponDrop -= (weapon) => Hide();
-        }
-        this.playerInventory = playerInventory;
-        playerInventory.OnWeaponAddedToInventory += (weapon, ammo) =>
+        var inventory = body.PlayerInventory;
+        inventory.OnWeaponAddedToInventory -= (weapon, ammo) =>
         {
             Show();
             UpdateWeaponSprite(weapon.GunSpriteUI);
             UpdateAmmo(ammo);
         };
-        playerInventory.OnAmmoOfWeaponInInventoryChanged += UpdateAmmo;
-        playerInventory.OnWeaponDrop += (weapon) => Hide();
-        if (playerInventory.HasWeapon)
+
+        inventory.OnAmmoOfWeaponInInventoryChanged -= UpdateAmmo;
+        inventory.OnWeaponDrop -= (weapon) => Hide();
+    }
+
+    protected override void Subscribe(PlayerBody body)
+    {
+        var inventory = body.PlayerInventory;
+        inventory.OnWeaponAddedToInventory += (weapon, ammo) =>
         {
             Show();
+            UpdateWeaponSprite(weapon.GunSpriteUI);
+            UpdateAmmo(ammo);
+        };
+        inventory.OnAmmoOfWeaponInInventoryChanged += UpdateAmmo;
+        inventory.OnWeaponDrop += (weapon) => Hide();
+        if (inventory.HasWeapon)
+        {
+            var weapon = inventory.GetWeapon();
+            Show();
+            UpdateAmmo(weapon.Magazine + inventory.GetAmmo(weapon.Data));
+            UpdateWeaponSprite(weapon.GunSpriteUI);
         }
         else
         {

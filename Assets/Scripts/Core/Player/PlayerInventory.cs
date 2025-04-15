@@ -1,9 +1,10 @@
+using Fusion;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : NetworkBehaviour
 {
     public Action<Weapon_Arms, int> OnWeaponAddedToInventory;
     public Action<Weapon_Arms> OnWeaponDrop;
@@ -19,8 +20,8 @@ public class PlayerInventory : MonoBehaviour
 
 
 
-    [SerializeField] int weaponInvetorySize = 1;
-    List<Weapon_Arms> weapons = new List<Weapon_Arms>();
+
+    Weapon_Arms weapon { get; set; }
     // make an ammo dictionary weapondata -> ammo
     Dictionary<Weapon_Data,int> ammo = new Dictionary<Weapon_Data, int>();
 
@@ -38,10 +39,12 @@ public class PlayerInventory : MonoBehaviour
     float rechargeGranadeTimer;
     int granadeCount = 0;
 
-    public bool HasWeapon => weapons.Count > 0;
+    public bool HasWeapon => weapon != null;
 
-    public Weapon_Arms FirstWeaponInInventory => weapons.Count > 0 ? weapons[0] : null;
+    public Weapon_Arms FirstWeaponInInventory => weapon;
 
+
+    public float GranadeCharge => 1 - (rechargeGranadeTimer / rechargeGranadeTime);
     // start
     public void Start()
     {
@@ -50,13 +53,12 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void Clear()
-        { weapons.Clear(); }
+        { weapon = null; }
 
     public void DropWeapon()
     {
-        if (weapons.Count > 0)
+        if (weapon != null)
         {
-            var weapon = weapons[0];
             if (weapon == null || (weapon.Magazine == 0 && GetAmmo(weapon.Data) == 0))
             {
                 return;
@@ -64,16 +66,17 @@ public class PlayerInventory : MonoBehaviour
 
             Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
             pickUp.SetAmmo(weapon.Magazine, TakeAllAmmo(weapon.Data));
-            OnWeaponDrop?.Invoke(weapons[0]);
-            weapons[0].DropWeapon();
-            weapons.RemoveAt(0);
-            
+            OnWeaponDrop?.Invoke(weapon);
+            weapon.DropWeapon();
+            weapon = null;
+
+
         }
     }
 
     public void Update()
     {
-        foreach (var weapon in weapons)
+        if (weapon != null)
         {
             weapon.UpdateWeapon();
         }
@@ -83,7 +86,7 @@ public class PlayerInventory : MonoBehaviour
             if (rechargeGranadeTimer > 0)
             {
                 rechargeGranadeTimer -= Time.deltaTime;
-                OnGranadeChargeChanged?.Invoke(1-(rechargeGranadeTimer / rechargeGranadeTime));
+                OnGranadeChargeChanged?.Invoke(GranadeCharge);
             }
             else
             {
@@ -99,7 +102,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!Full)
         {
-            weapons.Add(weapon);
+            this.weapon = weapon;
             if (ammo.TryGetValue(weapon.Data, out int ammuntion))
             {
                 OnWeaponAddedToInventory?.Invoke(weapon, ammo[weapon.Data] + weapon.Magazine);
@@ -116,21 +119,17 @@ public class PlayerInventory : MonoBehaviour
 
     public Weapon_Arms RemoveWeapon()
     {
-        if (weapons.Count > 0)
-        {
-            var weapon = weapons[0];
-            weapons.RemoveAt(0);
-            return weapon;
-        }
-        return null;
+        var weaponToReturn = weapon;
+        weapon = null;
+        return weaponToReturn;
     }
 
 
     // shoot be obsolete
     public Weapon_Arms SwitchWeapon(Weapon_Arms weapon)
     {
-        var weaponToReturn = weapons[0];
-        weapons.RemoveAt(0);
+        var weaponToReturn = weapon;
+        weapon = null;
 
         if (weapon != null)
         {
@@ -141,14 +140,10 @@ public class PlayerInventory : MonoBehaviour
 
     public Weapon_Arms GetWeapon()
     {
-        if (weapons.Count > 0)
-        {
-            return weapons[0];
-        }
-        return null;
+        return weapon;
     }
 
-    public bool Full => weapons.Count >= weaponInvetorySize;
+    public bool Full => weapon != null;
 
     // add granade
 
@@ -292,10 +287,10 @@ public class PlayerInventory : MonoBehaviour
     public void TryInvokeAmmoChangeOfInventoryWeapon(Weapon_Data weaponType, int amount)
     {
         Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon");
-        if (weapons.Count > 0 &&weapons[0] != null && weapons[0].Data == weaponType)
+        if (weapon != null && weapon.Data == weaponType)
         {
             Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon 2");
-            OnAmmoOfWeaponInInventoryChanged?.Invoke(amount + weapons[0].Magazine);
+            OnAmmoOfWeaponInInventoryChanged?.Invoke(amount + weapon.Magazine);
         }
     }
 

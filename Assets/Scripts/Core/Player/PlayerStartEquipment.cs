@@ -1,13 +1,15 @@
+using Fusion;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStartEquipment : MonoBehaviour
-{
-    
 
-    
+public class PlayerStartEquipment : NetworkBehaviour // is only networked for testin
+{
+    [SerializeField] Equipment testEquipment;
+
+
     [Header("References")]
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
@@ -15,9 +17,15 @@ public class PlayerStartEquipment : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
 
 
+    public override void Spawned()
+    {
+        GetEquipment(testEquipment);
+    }
+
 
     public void GetEquipment(Equipment equipment)
     {
+        if (!HasStateAuthority) return;
 
         if (equipment.WeaponInHand != null)
         {

@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShildUI : MonoBehaviour
+public class ShildUI : InterfaceItem
 {
-    [SerializeField] CharacterHealth health;
     [SerializeField] Image shildBar;
 
     Color defaultColor;
@@ -15,11 +14,51 @@ public class ShildUI : MonoBehaviour
     bool inAlarm;
     bool alarmColorOn;
 
-    private void Start()
+
+    protected override void Awake()
     {
+        base.Awake();
         if (defaultColor == null)
             defaultColor = shildBar.color;
     }
+
+    // subscribe to the player body
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var health = body.Health as CharacterHealth;
+        var team = body.PlayerTeam;
+
+        health.OnShildChanged -= UpdateShild;
+        health.OnShildDepleted -= ShildDepleted;
+        health.OnShildDisabled -= DisableUI;
+        health.OnShildEnabled -= EnableUI;
+        team.OnTeamIndexChanged -= SetTeamColor;
+    }
+
+    protected override void Subscribe(PlayerBody body)
+    {
+        var health = body.Health as CharacterHealth;
+        var team = body.PlayerTeam;
+        health.OnShildChanged += UpdateShild;
+        health.OnShildDepleted += ShildDepleted;
+        health.OnShildDisabled += DisableUI;
+        health.OnShildEnabled += EnableUI;
+        team.OnTeamIndexChanged += SetTeamColor;
+
+        if (health.MaxShild >0)
+        {
+            EnableUI();
+        }
+        else
+        {
+            DisableUI();
+        }
+
+         UpdateShild(health.ShildPercentage);
+
+
+    }
+
 
     public void SetTeamColor(int index)
     {
@@ -27,32 +66,10 @@ public class ShildUI : MonoBehaviour
         shildBar.color = defaultColor;
     }
 
-
-    public void SetUp(CharacterHealth health)
-    {
-        if (this.health != null)
-        {
-            this.health.OnShildChanged -= UpdateShild;
-            this.health.OnShildDepleted -= ShildDepleted;
-        }
-
-
-        this.health = health;
-        health.OnShildChanged += UpdateShild;
-        health.OnShildDepleted += ShildDepleted;
-        health.OnShildDisabled += DisableUI;
-        health.OnShildEnabled += EnableUI;
-
-        UpdateShild(health.ShildPercentage);
-
-
-    }
-
     public void EnableUI()
     {
        
         gameObject.SetActive(true);
-        UpdateShild(health.ShildPercentage);
     }
 
     public void DisableUI()

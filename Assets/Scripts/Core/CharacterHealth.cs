@@ -45,7 +45,7 @@ public class CharacterHealth : Health
 
     float maxShildMultiplier = 1;
 
-    float MaxShild => maxShild * maxShildMultiplier;
+    public float MaxShild => maxShild * maxShildMultiplier;
 
     public void SetHasShild(bool hasShild)
     {

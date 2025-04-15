@@ -49,6 +49,8 @@ public class BodyMindConnection : NetworkBehaviour
         //mind.SetSpectatorTarget(spectatorCamera);
         spectatorCamera.Follow = transform;
         spectatorCamera.LookAt = spectatorCameraTarget;
+
+
     }
 
     public void SetPlayTeamIndex()

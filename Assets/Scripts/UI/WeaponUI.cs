@@ -4,10 +4,14 @@ using NUnit.Framework;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class WeaponUI : MonoBehaviour
+public class WeaponUI : InterfaceItem
 {
 
-    [SerializeField] Arm playerArm;
+
+
+
+    [SerializeField] bool leftArm = false;
+     Arm playerArm;
     [SerializeField] TextMeshProUGUI reserveText;
 
     [SerializeField] Color baseColor;
@@ -27,42 +31,52 @@ public class WeaponUI : MonoBehaviour
     List<Image> bullets = new List<Image>();
 
 
-    public void SetUp(Arm playerArm)
+    // subscribe to the player body
+    protected override void Unsubscribe(PlayerBody body)
     {
-        if (this.playerArm != null)
-        {
-            playerArm.OnWeaponEquipStarted -= EquipWeapon;
-            playerArm.OnWeaponUnequipFinished -= UnequipWeapon;
-            playerArm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
-            playerArm.OnReserveAmmoChanged -= UpdateReserve;
-        }
+        Arm arm = GetArm(body);
+        arm.OnWeaponEquipStarted -= (weapon,time) => EquipWeapon(weapon);
+        arm.OnWeaponUnequipFinished -= UnequipWeapon;
+        arm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
+        arm.OnReserveAmmoChanged -= UpdateReserve;
+    }
 
+    protected override void Subscribe(PlayerBody body)
+    {
+        Arm arm = GetArm(body);
+        playerArm = arm;
+        arm.OnWeaponEquipStarted += (weapon, time) => EquipWeapon(weapon);
+        arm.OnWeaponUnequipFinished += UnequipWeapon;
+        arm.OnWeaponDroped += (weapon, pickUp) => UnequipWeapon(weapon);
+        arm.OnReserveAmmoChanged += UpdateReserve;
 
-        this.playerArm = playerArm;
-        playerArm.OnWeaponEquipStarted += EquipWeapon;
-        playerArm.OnWeaponUnequipFinished += UnequipWeapon;
-        playerArm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
-        playerArm.OnReserveAmmoChanged += UpdateReserve;
-
-        
-
-
-
-        if ( playerArm.CurrentWeapon == null)
+        if (arm.CurrentWeapon == null)
         {
             Disable();
         }
         else
         {
             Enable();
+            EquipWeapon(arm.CurrentWeapon);
+            UpdateMagazin(arm.CurrentWeapon.Magazine);
+            UpdateReserve(arm.AmmoOfWeaponInReserve);
         }
-    }
 
-
-    void Awake()
-    {
         
 
+        
+    }
+
+    public Arm GetArm(PlayerBody body)
+    {
+        if (leftArm)
+        {
+            return body.PlayerArms.LeftArm;
+        }
+        else
+        {
+            return body.PlayerArms.RightArm;
+        }
     }
 
     public void Disable()
@@ -78,7 +92,7 @@ public class WeaponUI : MonoBehaviour
 
 
 
-    void EquipWeapon(Weapon_Arms weapon, float timer)
+    void EquipWeapon(Weapon_Arms weapon)
     {
         if ( weapon.ShowAmmoUI)
         {

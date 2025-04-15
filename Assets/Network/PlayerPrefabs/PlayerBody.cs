@@ -30,10 +30,8 @@ public class PlayerBody : NetworkBehaviour
     public void SetVisualLayer(int visualLayer)
     {
         visualLayerIndex = visualLayer;
-        for (int i = 0; i < meshes.Length; i++)
-        {
-            meshes[i].gameObject.layer = visualLayer;
-        }
+
+        UtilityFunctions.SetLayerRecursively(mainMesh, visualLayerIndex);
     }
 
     public int LocalPlayerIndex

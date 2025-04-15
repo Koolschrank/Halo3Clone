@@ -1,37 +1,51 @@
 using UnityEngine;
 
-public class Arm_FPSView : MonoBehaviour
+public class Arm_FPSView : InterfaceItem
 {
-    [SerializeField] Arm playerArm;
+    [SerializeField] bool leftArm = false;
     [SerializeField] Transform granadeSpawnPoint;
     Weapon_Visual weaponVisual;
 
-    public void SetUp(Arm newArm)
+
+    protected override void Subscribe(PlayerBody body)
     {
-        if (playerArm != null)
+        var arm = GetArm(body);
+
+        arm.OnWeaponEquipStarted += EquipWeapon;
+        arm.OnWeaponUnequipFinished += RemoveWeapon;
+        arm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
+        arm.OnGranadeThrowStarted += ThrowGranadeStart;
+        arm.OnGranadeThrow += ThrowGranade;
+
+        if (arm.CurrentWeapon != null)
         {
-            playerArm.OnWeaponEquipStarted -= EquipWeapon;
-            playerArm.OnWeaponUnequipFinished -= RemoveWeapon;
-            playerArm.OnWeaponDroped -= (weapon,pickUp)  => RemoveWeapon(weapon);
-            playerArm.OnGranadeThrowStarted -= ThrowGranadeStart;
-            playerArm.OnGranadeThrow -= ThrowGranade;
-        }
-
-
-
-        playerArm = newArm;
-
-        playerArm.OnWeaponEquipStarted += EquipWeapon;
-        playerArm.OnWeaponUnequipFinished += RemoveWeapon;
-        playerArm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
-        playerArm.OnGranadeThrowStarted += ThrowGranadeStart;
-        playerArm.OnGranadeThrow += ThrowGranade;
-
-        if (playerArm.CurrentWeapon != null)
-        {
-            EquipWeapon(playerArm.CurrentWeapon);
+            EquipWeapon(arm.CurrentWeapon);
         }
     }
+
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var arm = GetArm(body);
+
+        arm.OnWeaponEquipStarted -= EquipWeapon;
+        arm.OnWeaponUnequipFinished -= RemoveWeapon;
+        arm.OnWeaponDroped -= (weapon, pickUp) => RemoveWeapon(weapon);
+        arm.OnGranadeThrowStarted -= ThrowGranadeStart;
+        arm.OnGranadeThrow -= ThrowGranade;
+    }
+
+    public Arm GetArm(PlayerBody body)
+    {
+        if (leftArm)
+        {
+            return body.PlayerArms.LeftArm;
+        }
+        else
+        {
+            return body.PlayerArms.RightArm;
+        }
+    }
+
 
 
     public void EquipWeapon(Weapon_Arms weapon, float time)

@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerInterface : MonoBehaviour
 {
+    public Action<PlayerBody> OnPlayerBodySet;
+
+
     [SerializeField] PlayerCamera playerCamera;
     PlayerBody playerBody;
     int interfaceLayer = 0;
@@ -19,7 +23,10 @@ public class PlayerInterface : MonoBehaviour
     public PlayerBody PlayerBody
     {
         get { return playerBody; }
-        set { playerBody = value; }
+        set { 
+            playerBody = value;
+            OnPlayerBodySet?.Invoke(playerBody);
+        }
     }
 
     public void EnableLayerInCamera(int layer)

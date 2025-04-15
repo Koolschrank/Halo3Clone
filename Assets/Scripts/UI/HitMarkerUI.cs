@@ -1,11 +1,28 @@
 using UnityEngine;
 
-public class HitMarkerUI : MonoBehaviour
+public class HitMarkerUI : InterfaceItem
 {
     [SerializeField] GameObject hitMarker;
     [SerializeField] GameObject killMarker;
     [SerializeField] float hitMarkerTime = 0.1f;
     [SerializeField] float killMarkerTime = 0.1f;
+
+    protected override void Subscribe(PlayerBody body)
+    {
+        var hitCollector = body.TargetHitCollector;
+        hitCollector.OnCharacterHit += ShowHitMarker;
+        hitCollector.OnCharacterKill += ShowKillMarker;
+    }
+
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var hitCollector = body.TargetHitCollector;
+        hitCollector.OnCharacterHit -= ShowHitMarker;
+        hitCollector.OnCharacterKill -= ShowKillMarker;
+
+        HideHitMarker();
+        HideKillMarker();
+    }
 
     public void ShowHitMarker(GameObject target)
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DamageIndicatorUI : MonoBehaviour
+public class DamageIndicatorUI : InterfaceItem
 {
     [SerializeField] float damageIndicatorTime;
     [SerializeField] float damageIndicatorDistance;
@@ -12,7 +12,29 @@ public class DamageIndicatorUI : MonoBehaviour
     
 
     List<DamageIndicator> damageIndicators = new List<DamageIndicator>();
-    
+
+    protected override void Subscribe(PlayerBody body)
+    {
+        var health = body.Health as CharacterHealth;
+
+
+        health.OnDamageTaken += AddDamageIndicator;
+        health.OnDeath += Clear;
+    }
+
+    // unsubscribe
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var health = body.Health as CharacterHealth;
+
+
+        health.OnDamageTaken -= AddDamageIndicator;
+        health.OnDeath -= Clear;
+
+    }
+
+
+
     public void Clear()
     {
         foreach (DamageIndicator indicator in damageIndicators) 

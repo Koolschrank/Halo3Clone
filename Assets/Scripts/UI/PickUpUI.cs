@@ -2,11 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PickUpUI : MonoBehaviour
+public class PickUpUI : InterfaceItem
 {
     [SerializeField] string pickUpText = "Press E to pick up ";
     [SerializeField] string dualWieldText = "Press E to dual wield ";
-    [SerializeField] PlayerPickUpScan pickUpScan;
     [SerializeField] GameObject pickUpTextObject;
 
     [SerializeField] TextMeshProUGUI weaponName;
@@ -15,16 +14,18 @@ public class PickUpUI : MonoBehaviour
     [SerializeField] GameObject dualwieldObject;
     [SerializeField] TextMeshProUGUI dualWieldName;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void SetUp(PlayerPickUpScan pickUpScan)
+    protected override void Subscribe(PlayerBody body)
     {
-        if (pickUpScan != null) {
-            pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
-            pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
-            pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
-        }
+        var pickUpScan = body.PlayerPickUpScan;
 
-        this.pickUpScan = pickUpScan;
+        pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
+        pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
+        pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
+    }
+
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var pickUpScan = body.PlayerPickUpScan;
         pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpUI;
         pickUpScan.OnWeaponPickUp += ClearPickUpUI;
         pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;

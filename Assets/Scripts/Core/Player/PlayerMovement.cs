@@ -118,7 +118,7 @@ public class PlayerMovement : NetworkBehaviour
         //GetInput(out NetworkInputData data);
         //Vector2 input = data.controllerData1.moveVector;
 
-        if (!HasStateAuthority) return;
+        
 
         GetInput(out NetworkInputData data);
         LocalControllerData localControllerData = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);

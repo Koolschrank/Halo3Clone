@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
-public class WeaponSway : MonoBehaviour
+public class WeaponSway : InterfaceItem
 {
 
-    [SerializeField] CharacterController cc;
-    [SerializeField] PlayerMovement mover;
+    CharacterController cc;
+    PlayerMovement mover;
 
     [Header("Sway")]
     [SerializeField] float step = 0.01f;
@@ -34,27 +35,25 @@ public class WeaponSway : MonoBehaviour
     [SerializeField] Vector3 multiplier;
     Vector3 bobEulerRotation;
 
-
-    public void SetUp(PlayerMovement mover)
+    protected override void Unsubscribe(PlayerBody body)
     {
-        if (mover != null) {
+        var mover = body.PlayerMovement;
+        if (mover != null)
+        {
             mover.OnAimUpdated -= UpdateLookInput;
             mover.OnMoveUpdated -= UpdateWalkInput;
         }
-
-
-        this.mover = mover;
-        // todo: not best solution
-        if (cc == null)
-        {
-            cc = mover.GetComponent<CharacterController>();
-        }
-
-        
-        mover.OnAimUpdated += UpdateLookInput;
-        mover.OnMoveUpdated += UpdateWalkInput;
     }
 
+    protected override void Subscribe(PlayerBody body)
+    {
+        var mover = body.PlayerMovement;
+        mover.OnAimUpdated += UpdateLookInput;
+        mover.OnMoveUpdated += UpdateWalkInput;
+
+        this.mover = mover;
+        cc = mover.GetComponent<CharacterController>();
+    }
 
     // Update is called once per frame
     void Update()
