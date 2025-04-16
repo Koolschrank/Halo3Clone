@@ -133,6 +133,9 @@ public class PlayerArms : NetworkBehaviour
 
     private void FixedUpdate_OneWeapon()
     {
+        if (rightArm.CurrentWeapon == null)
+            return;
+
 
         InZoom = armsInput.Weapon2 && rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.CanZoom && rightArm.InIdle  && !InAction;
         if (InSwitchOut)
@@ -233,7 +236,7 @@ public class PlayerArms : NetworkBehaviour
             }
         }
 
-        if ((armsInput.PickUp2 || armsInput.Reload2) && (canDualWield2HandedWeapons || pickUpScan.IsClosesPickUpOneHanded()))
+        if ((armsInput.PickUp2 || armsInput.Reload2) &&(canDualWield2HandedWeapons || (rightArm.CurrentWeapon.WeaponType == WeaponType.oneHanded && pickUpScan.IsClosesPickUpOneHanded())))
         {
 
 
@@ -254,6 +257,9 @@ public class PlayerArms : NetworkBehaviour
 
     public void FixedUpdate_TwoWeapons()
     {
+
+        if (leftArm.CurrentWeapon == null)
+            return;
         InZoom = false;
         
         if (InGranadeThrow)

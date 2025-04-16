@@ -61,15 +61,22 @@ public class PlayerMovement : NetworkBehaviour
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
+    public override void Spawned()
+    {
+        cc.SetGravity(gravity);
+    }
 
     // update
     public override void FixedUpdateNetwork()
     {
+        
+
         UpdateCrouch();
         UpdateMove();
         UpdateGravity();
 
-        var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
+        
+        var moveVector = new Vector3(moveVelocity.x, 0, moveVelocity.z);
         cc.Move(moveVector * Runner.DeltaTime);
 
         OnMoveUpdated?.Invoke(moveVector);
@@ -175,6 +182,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
 
+
     }
 
     public void SetMovementSpeedMultiplier(float multiplier)
@@ -185,18 +193,18 @@ public class PlayerMovement : NetworkBehaviour
     private void UpdateGravity()
     {
 
-        if (cc.IsGrounded && jumpCooldownTimer <= 0)
-        {
-            gravityVelocity = -0.1f;
-        }
-        else
-        {
-            gravityVelocity -= gravity * Runner.DeltaTime;
-        }
+        //if (cc.IsGrounded && jumpCooldownTimer <= 0)
+        //{
+        //    gravityVelocity = -0.1f;
+        //}
+        //else
+        //{
+        //    gravityVelocity -= gravity * Runner.DeltaTime;
+        //}
 
         if (jumpCooldownTimer > 0)
         {
-            jumpCooldownTimer -= Time.deltaTime;
+            jumpCooldownTimer -= Runner.DeltaTime;
         }
     }
 

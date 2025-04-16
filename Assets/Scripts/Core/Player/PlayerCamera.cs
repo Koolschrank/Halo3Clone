@@ -16,16 +16,26 @@ public class PlayerCamera : InterfaceItem
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
 
+    PlayerBody playerBody;
 
     protected override void Subscribe(PlayerBody body)
     {
         body.PlayerArms.OnZoomUpdated += UpdateZoom;
         body.PlayerArms.RightArm.OnWeaponEquipStarted += (weapon, time) => SetZoomedInFOV(weapon.ZoomFOV);
 
-        SetZoomedInFOV(body.PlayerArms.RightArm.CurrentWeapon.ZoomFOV);
+        playerBody = body;
+
+        if (body.PlayerArms.RightArm.CurrentWeapon != null)
+            SetZoomedInFOV(body.PlayerArms.RightArm.CurrentWeapon.ZoomFOV);
         UpdateZoom(body.PlayerArms.InZoom);
-        body.SetCameras(cinemachineCamera, spectatorCamera);
-        body.SetVisualLayer(playerInterface.HidenPlayerLayer);
+
+        if (cinemachineCamera != null)
+        {
+            body.SetCameras(cinemachineCamera, spectatorCamera);
+            body.SetVisualLayer(playerInterface.HidenPlayerLayer);
+        }
+            
+        
     }
 
     protected override void Unsubscribe(PlayerBody body)
@@ -57,6 +67,12 @@ public class PlayerCamera : InterfaceItem
     public void SetSpectatorCamera(CinemachineCamera cam)
     {
         spectatorCamera = cam;
+
+        if (playerBody != null)
+        {
+            playerBody.SetCameras(cinemachineCamera, spectatorCamera);
+            playerBody.SetVisualLayer(playerInterface.HidenPlayerLayer);
+        }
     }
 
     public void SetBaseFOV(float fov)

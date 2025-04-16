@@ -10490,7 +10490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0653be2d0781242a2cd5a0aa27fdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 782412234501442312}
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
 --- !u!114 &5352841395007449006
@@ -10625,13 +10624,13 @@ MonoBehaviour:
   arms: {fileID: 3232609274750972410}
   maxMoveSpeed: 490
   moveSpeedCrouchMultiplier: 0.4
-  acceleration_ground: 3500
+  acceleration_ground: 35000000
   acceleration_air: 1000
-  deceleration_ground: 3500
+  deceleration_ground: 35000000
   deceleration_air: 1000
   jumpPower: 800
   jumpCooldown: 0.31
-  gravity: 1500
+  gravity: -9
   cyoteTime: 0.3
   crouchSpeed: 4
   walkSound:
@@ -10879,6 +10878,8 @@ MonoBehaviour:
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   weaponDropForce: 5
   canDualWield2HandedWeapons: 0
+  meleeAttackTimeMultiplierInDualWielding: 1.5
+  granadeThrowTimeMultiplierInDualWielding: 1.5
 --- !u!114 &3844945188849078822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10896,6 +10897,8 @@ MonoBehaviour:
   reloadTimer: 0
   switchOutTimer: 0
   switchInTimer: 0
+  meleeAttackTimer: 0
+  meleeAttackHitTimer: 0
 --- !u!114 &3970420054294455764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10913,6 +10916,8 @@ MonoBehaviour:
   reloadTimer: 0
   switchOutTimer: 0
   switchInTimer: 0
+  meleeAttackTimer: 0
+  meleeAttackHitTimer: 0
 --- !u!114 &412254439390827981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10963,8 +10968,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -11024,6 +11029,7 @@ MonoBehaviour:
   meleeInputBuffer: 0.2
   holdInteractForPickUpTime: 0.2
   pickUp1InputBuffer: 0.2
+  Weapon2: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

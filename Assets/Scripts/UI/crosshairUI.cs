@@ -17,8 +17,12 @@ public class crosshairUI : InterfaceItem
         bulletSpawner.OnTargetLost += OnTargetLost;
         rightArm.OnWeaponEquipStarted += (weapon, time) => ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
 
-        var weapon = rightArm.CurrentWeapon;
-        ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
+
+        if (rightArm.CurrentWeapon != null)
+        {
+            ChangeSprite(rightArm.CurrentWeapon.CrosshairUI, rightArm.CurrentWeapon.CrosshairSizeUI);
+        }
+       
     }
 
     protected override void Unsubscribe(PlayerBody body)
