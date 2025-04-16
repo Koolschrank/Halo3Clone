@@ -80,23 +80,28 @@ public class Weapon_Arms
         this.bulletSpawner = bulletSpawner;
     }
 
-    public void UpdateWeapon()
+    public void UpdateWeapon(float delta)
     {
         if (shootCooldown > 0)
         {
-            shootCooldown -= Time.deltaTime;
+            shootCooldown -= delta;
         }
         else if (shootCooldown <0)
         {
             shootCooldown = 0;
         }
+
+        if (IsInBurst())
+        {
+            UpdateBurstShot(delta);
+        }
     }
 
-    public bool UpdateBurstShot()
+    public bool UpdateBurstShot(float delta)
     {
         if (shotsLeftInBurst > 0)
         {
-            shootCooldownInBurst -= Time.deltaTime;
+            shootCooldownInBurst -= delta;
             bool shot = false;
             while (shootCooldownInBurst <= 0)
             {
@@ -118,6 +123,7 @@ public class Weapon_Arms
 
     public bool TryShoot()
     {
+        Debug.Log("tryShoot");
         if (CanShoot())
         {
             Shoot();
@@ -147,6 +153,7 @@ public class Weapon_Arms
 
     private void Shoot()
     {
+        Debug.Log("shoot");
         while(shootCooldown <= 0 && magazine > 0)
         {
             OnShot?.Invoke();

@@ -80,12 +80,9 @@ public class PlayerMind : NetworkBehaviour
 
     public void TryGetInterface()
     {
-        Debug.Log("Spawned");
         if (HasInputAuthority && playerInterface == null)
         {
-            Debug.Log("Spawned2");
             if (playerManager == null) return;
-            Debug.Log("Spawned3");
             playerManager.CreatePlayerInterface(this);
         }
     }
@@ -107,10 +104,8 @@ public class PlayerMind : NetworkBehaviour
 
     public void SetPlayerManager(NetworkLocalPlayerManager playerManager)
     {
-        Debug.Log("SetPlayerManager");
         if (HasStateAuthority)
         {
-            Debug.Log("SetPlayerManager2");
             this.playerManager = playerManager;
         }
     }
@@ -121,6 +116,8 @@ public class PlayerMind : NetworkBehaviour
         if (Body != null)
         {
             playerInterface.PlayerBody = Body;
+
+            playerInterface.transform.SetParent(Body.HeadTransform);
         }
     }
 

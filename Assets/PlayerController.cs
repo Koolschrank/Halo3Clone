@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         InputCollector.Instance.AddPlayerController(this);
+
+        var playerInput = GetComponent<PlayerInput>();
+        playerInput.actions.FindActionMap("Player").Enable();
+        playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
     }
 
     public void Interact1(InputAction.CallbackContext context)
@@ -50,6 +54,11 @@ public class PlayerController : MonoBehaviour
         moveVector = context.ReadValue<Vector2>();
     }
 
+    public void Aim(InputAction.CallbackContext context)
+    {
+        aimVector = context.ReadValue<Vector2>();
+    }
+
     public void Ability1(InputAction.CallbackContext context)
     {
         buttonData[InputButton.Ability1] = context.ReadValueAsButton();
@@ -64,6 +73,8 @@ public class PlayerController : MonoBehaviour
     {
         buttonData[InputButton.Melee] = context.ReadValueAsButton();
     }
+
+    
 
 
     public void SwitchWeapon(InputAction.CallbackContext context)

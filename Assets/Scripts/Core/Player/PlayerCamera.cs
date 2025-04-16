@@ -3,20 +3,39 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : InterfaceItem
 {
     [SerializeField] CinemachineBrain cinemachineBrain;
     [SerializeField] Camera playerCamera;
     [SerializeField] float zoomInSpeed = 2f;
     [SerializeField] float zoomOutSpeed = 2f;
-    CinemachineCamera cCam;
+    CinemachineCamera cinemachineCamera;
+    CinemachineCamera spectatorCamera;
     Volume volume;
     float baseFOV = 75f;
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
 
 
-    
+    protected override void Subscribe(PlayerBody body)
+    {
+        body.PlayerArms.OnZoomUpdated += UpdateZoom;
+        body.PlayerArms.RightArm.OnWeaponEquipStarted += (weapon, time) => SetZoomedInFOV(weapon.ZoomFOV);
+
+        SetZoomedInFOV(body.PlayerArms.RightArm.CurrentWeapon.ZoomFOV);
+        UpdateZoom(body.PlayerArms.InZoom);
+        body.SetCameras(cinemachineCamera, spectatorCamera);
+        body.SetVisualLayer(playerInterface.HidenPlayerLayer);
+    }
+
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        body.PlayerArms.OnZoomUpdated -= UpdateZoom;
+        body.PlayerArms.RightArm.OnWeaponEquipStarted -= (weapon, time) => SetZoomedInFOV(weapon.ZoomFOV);
+
+    }
+
+
 
     public void SetVignetteIntensity(float power)
     {
@@ -30,9 +49,14 @@ public class PlayerCamera : MonoBehaviour
 
     public void SetCinemachineCamera(CinemachineCamera cam)
     {
-        cCam = cam;
-        volume = cCam.GetComponentInChildren<Volume>();
-        SetBaseFOV(cCam.Lens.FieldOfView);
+        cinemachineCamera = cam;
+        volume = cinemachineCamera.GetComponentInChildren<Volume>();
+        SetBaseFOV(cinemachineCamera.Lens.FieldOfView);
+    }
+
+    public void SetSpectatorCamera(CinemachineCamera cam)
+    {
+        spectatorCamera = cam;
     }
 
     public void SetBaseFOV(float fov)
@@ -40,35 +64,30 @@ public class PlayerCamera : MonoBehaviour
         baseFOV = fov;
     }
 
-    public void ZoomIn(Weapon_Arms weapon)
+    public void SetZoomedInFOV(float fov)
     {
-        zoomedInFOV = weapon.ZoomFOV;
-        isZoomedIn = true;
+        zoomedInFOV = fov;
     }
 
-    public void ZoomOut()
+    public void UpdateZoom(bool val)
     {
-        isZoomedIn = false;
-    }
-
-    public void ZoomOut(Weapon_Arms weapon)
-    {
-        isZoomedIn = false;
+        Debug.Log("UpdateZoom: " + val);
+        isZoomedIn = val;
     }
 
     private void Update()
     {
-        if (cCam == null)
+        if (cinemachineCamera == null)
             return;
 
         // move towards zoomed in FOV, do not lerp
         if (isZoomedIn)
         {
-            cCam.Lens.FieldOfView = Mathf.MoveTowards(cCam.Lens.FieldOfView, zoomedInFOV, zoomInSpeed * Time.deltaTime);
+            cinemachineCamera.Lens.FieldOfView = Mathf.MoveTowards(cinemachineCamera.Lens.FieldOfView, zoomedInFOV, zoomInSpeed * Time.deltaTime);
         }
         else
         {
-            cCam.Lens.FieldOfView = Mathf.MoveTowards(cCam.Lens.FieldOfView, baseFOV, zoomOutSpeed * Time.deltaTime);
+            cinemachineCamera.Lens.FieldOfView = Mathf.MoveTowards(cinemachineCamera.Lens.FieldOfView, baseFOV, zoomOutSpeed * Time.deltaTime);
         }
 
     }

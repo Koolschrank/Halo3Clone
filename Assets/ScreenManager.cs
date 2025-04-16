@@ -66,9 +66,11 @@ public class ScreenManager : MonoBehaviour
             var pif = playerInterfaces[i];
             pif.SetInterfaceLayer(fpsLayers[i]);
             pif.SetHiddenLayer(thirdPersonLayers[i]);
+            pif.PlayerCamera.SetCinemachineCamera(playerCameras[i]);
+            pif.PlayerCamera.SetSpectatorCamera(spectatorCameras[i]);
 
-            if (pif.PlayerBody != null)
-                pif.PlayerBody.SetVisualLayer(thirdPersonLayers[i]);
+            //if (pif.PlayerBody != null)
+            //    pif.PlayerBody.SetVisualLayer(thirdPersonLayers[i]);
             for (int j = 0; j < fpsLayers.Count; j++)
             {
                 if (j != i)
@@ -82,10 +84,11 @@ public class ScreenManager : MonoBehaviour
 
             pif.EnableLayerInCamera(fpsLayers[i]);
             pif.DisableLayerInCamera(thirdPersonLayers[i]);
-            if (pif.PlayerBody != null)
-                pif.PlayerBody.SetCameras(playerCameras[i], spectatorCameras[i]);
+            //if (pif.PlayerBody != null)
+            //    pif.PlayerBody.SetCameras(playerCameras[i], spectatorCameras[i]);
             // p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
 
+           
 
         }
         playerInterface.EnableLayerInCamera(networkPlayerLayer);

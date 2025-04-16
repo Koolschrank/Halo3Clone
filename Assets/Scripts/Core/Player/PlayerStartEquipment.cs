@@ -29,7 +29,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         if (equipment.WeaponInHand != null)
         {
-            playerArms.RightArm.PickUpWeapon(
+            playerArms.RightArm.EquipWeapon(
             SpawnWeapon(
                 equipment.WeaponInHand,
                 equipment.MagazinsOfWeaponInHand));
@@ -37,7 +37,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         if (equipment.WeaponInLeftHand != null)
         {
-            playerArms.LeftArm.PickUpWeapon(
+            playerArms.LeftArm.EquipWeapon(
             SpawnWeapon(
                 equipment.WeaponInLeftHand,
                 equipment.MagazinsOfWeaponInLeftHand));

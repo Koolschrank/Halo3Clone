@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 
 public class PlayerPickUpScan : MonoBehaviour
 {
+
+
     [SerializeField]List<Weapon_PickUp> pickUpsInRange = new List<Weapon_PickUp>();
     [SerializeField] float pickUpCooldown = 0.5f;
     float lastPickUpTime = -100f;
@@ -29,6 +31,15 @@ public class PlayerPickUpScan : MonoBehaviour
         }
     }
 
+    public bool CanBeDualWielded(Weapon_PickUp pickUp)
+    {
+        var weaponTypeOfWeaponInHand = playerArms.RightArm.GetWeaponInHand().WeaponType;
+        bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+        var weaponTypeOfWeaponOnGround = pickUp.WeaponType;
+        bool isDualWieldableOnGround = weaponTypeOfWeaponOnGround == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+        return isDualWieldable && isDualWieldableOnGround;
+    }
+
     public void TrySendUpdates()
     {
         if (Time.time - lastPickUpTime > pickUpCooldown)
@@ -39,13 +50,7 @@ public class PlayerPickUpScan : MonoBehaviour
             var weaponInRightHand = playerArms.RightArm.GetWeaponInHand();
             if (weaponInRightHand != null && closesWeapon != null)
             {
-                var weaponTypeOfWeaponInHand = weaponInRightHand.WeaponType;
-                bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
-
-                var weaponTypeOfWeaponOnGround = closesWeapon.WeaponType;
-                bool isDualWieldableOnGround = weaponTypeOfWeaponOnGround == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
-
-                if (isDualWieldable && isDualWieldableOnGround)
+                if (CanBeDualWielded(closesWeapon))
                 {
                     OnWeaponDualWieldUpdate?.Invoke(closesWeapon);
                     return;
@@ -129,6 +134,8 @@ public class PlayerPickUpScan : MonoBehaviour
         return pickUpsInRange.Count > 0;
     }
 
+    
+
     public Weapon_PickUp GetClosesPickUp()
     {
         if (pickUpsInRange.Count <= 0)
@@ -138,6 +145,14 @@ public class PlayerPickUpScan : MonoBehaviour
         if (pickUpsInRange.Count <= 0)
             return null;
         return pickUpsInRange[0];
+    }
+
+    public bool IsClosesPickUpOneHanded()
+    {
+        var pickUp = GetClosesPickUp();
+        if (pickUp == null)
+            return false;
+        return pickUp.WeaponType == WeaponType.oneHanded;
     }
 
     public Weapon_Arms PickUpWeapon()

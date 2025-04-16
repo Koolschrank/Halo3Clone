@@ -78,7 +78,7 @@ public class PlayerInventory : NetworkBehaviour
     {
         if (weapon != null)
         {
-            weapon.UpdateWeapon();
+            weapon.UpdateWeapon(Runner.DeltaTime);
         }
 
         if (rechargeGranades && granadeCount < granadeInventorySize)

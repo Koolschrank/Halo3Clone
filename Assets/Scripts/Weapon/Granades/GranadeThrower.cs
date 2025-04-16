@@ -4,7 +4,7 @@ using UnityEngine;
 public class GranadeThrower : MonoBehaviour
 {
 
-    public Action<GameObject> OnGranadeThrow;
+    public Action<GameObject,GranadeStats> OnGranadeThrow;
 
 
     float throwDelay = 0f;
@@ -58,7 +58,7 @@ public class GranadeThrower : MonoBehaviour
         Rigidbody rb = granade.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * granadeStats.ThrowForce, ForceMode.Impulse);
         rb.AddForce(transform.up * granadeStats.ThrowForce * granadeStats.ThrowAngle, ForceMode.Impulse);
-        OnGranadeThrow?.Invoke(granade);
+        OnGranadeThrow?.Invoke(granade, granadeStats);
 
         if (granade.TryGetComponent<Granade>(out Granade granadeScript))
         {

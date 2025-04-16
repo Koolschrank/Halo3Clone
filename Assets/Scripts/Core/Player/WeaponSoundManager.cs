@@ -20,14 +20,14 @@ public class WeaponSoundManager : MonoBehaviour
     {
         playerArms.RightArm.OnWeaponReloadStarted += Reload;
         playerArms.RightArm.OnWeaponEquipStarted += SwitchIn;
-        playerArms.RightArm.OnWeaponShoot += Shoot;
+        playerArms.RightArm.OnWeaponShot += Shoot;
 
         playerArms.LeftArm.OnWeaponReloadStarted += Reload;
         playerArms.LeftArm.OnWeaponEquipStarted += SwitchIn;
-        playerArms.LeftArm.OnWeaponShoot += Shoot;
+        playerArms.LeftArm.OnWeaponShot += Shoot;
 
-        meleeAttacker.OnAttackStart += MeleeSwing;
-        meleeAttacker.OnAttackHit += MeleeHit;
+        meleeAttacker.OnMeleeStart += MeleeSwing;
+        meleeAttacker.OnMeleeHit += MeleeHit;
 
         targetHitCollector.OnCharacterHit += HitTarget;
         targetHitCollector.OnCharacterKill += KillTarget;

@@ -10547,6 +10547,7 @@ GameObject:
   - component: {fileID: 412254439390827981}
   - component: {fileID: 4169074679463143072}
   - component: {fileID: 5599619161729298736}
+  - component: {fileID: -5009260468559975710}
   m_Layer: 7
   m_Name: NetworkPlayerBody
   m_TagString: Player
@@ -10869,6 +10870,14 @@ MonoBehaviour:
   rightArm: {fileID: 3970420054294455764}
   leftArm: {fileID: 3844945188849078822}
   inventory: {fileID: 7573040687501960069}
+  armsInput: {fileID: -5009260468559975710}
+  characterHealth: {fileID: 782412234501442312}
+  bulletSpawner: {fileID: 737555415851796727}
+  granadeThrower: {fileID: 625404246279802593}
+  pickUpScan: {fileID: 3086695294023934871}
+  meleeAttacker: {fileID: 8008512304446792098}
+  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  weaponDropForce: 5
   canDualWield2HandedWeapons: 0
 --- !u!114 &3844945188849078822
 MonoBehaviour:
@@ -10883,21 +10892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerArms: {fileID: 3232609274750972410}
-  characterHealth: {fileID: 782412234501442312}
-  bulletSpawner: {fileID: 737555415851796727}
-  granadeThrower: {fileID: 625404246279802593}
-  inventory: {fileID: 7573040687501960069}
-  pickUpScan: {fileID: 3086695294023934871}
   dropPosition: {fileID: 2372597562941759599}
-  meleeAttacker: {fileID: 8008512304446792098}
-  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
-  weaponDropForce: 10
-  reloadInputBuffer: 0.29
-  switchInputBuffer: 0.29
-  granadeThrowInputBuffer: 0.4
-  meleeAttackTimeMultiplierInDualWielding: 1.5
-  granadeThrowTimeMultiplierInDualWielding: 1.5
-  noInvectoryInteraction: 1
+  reloadTimer: 0
+  switchOutTimer: 0
+  switchInTimer: 0
 --- !u!114 &3970420054294455764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10911,20 +10909,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerArms: {fileID: 3232609274750972410}
-  characterHealth: {fileID: 782412234501442312}
-  bulletSpawner: {fileID: 737555415851796727}
-  granadeThrower: {fileID: 625404246279802593}
-  inventory: {fileID: 7573040687501960069}
-  pickUpScan: {fileID: 3086695294023934871}
   dropPosition: {fileID: 8167806766066142118}
-  meleeAttacker: {fileID: 8008512304446792098}
-  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
-  weaponDropForce: 10
-  reloadInputBuffer: 0.29
-  switchInputBuffer: 0.29
-  granadeThrowInputBuffer: 0.4
-  meleeAttackTimeMultiplierInDualWielding: 1.5
-  granadeThrowTimeMultiplierInDualWielding: 1.6
+  reloadTimer: 0
+  switchOutTimer: 0
+  switchInTimer: 0
 --- !u!114 &412254439390827981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10947,7 +10935,11 @@ MonoBehaviour:
   - {fileID: 8050057614039648062}
   - {fileID: 3068919470916229809}
   - {fileID: 7573040687501960069}
+  - {fileID: 3232609274750972410}
+  - {fileID: 3844945188849078822}
+  - {fileID: 3970420054294455764}
   - {fileID: 5599619161729298736}
+  - {fileID: -5009260468559975710}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072
 Rigidbody:
@@ -11013,6 +11005,25 @@ MonoBehaviour:
     StepRequireGroundTarget: 0
     SnapDistance: 0.25
     SnapSpeed: 4
+--- !u!114 &-5009260468559975710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b754c0867fea0548abb2ae14993d66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBody: {fileID: 7999377576702310532}
+  playerArms: {fileID: 3232609274750972410}
+  reloadWeaponInputBuffer: 0.2
+  switchWeaponInputBuffer: 0.2
+  meleeInputBuffer: 0.2
+  holdInteractForPickUpTime: 0.2
+  pickUp1InputBuffer: 0.2
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,7 +72,8 @@ public class PlayerAim : NetworkBehaviour
             var controller = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
             // x rotates player y rotates camera
             Vector2 input = controller.aimVector; //controller.Player.Aim.ReadValue<Vector2>();
-            float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Runner.DeltaTime;
+       
+        float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Runner.DeltaTime;
             float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Runner.DeltaTime;
 
             float playerXRotation = transform.eulerAngles.y;
@@ -83,7 +84,7 @@ public class PlayerAim : NetworkBehaviour
                 rotationX *= aimSupportSlowDown;
                 rotationY *= aimSupportSlowDown;
             }
-            if (playerArms.RightArm.IsInZoom)
+            if (playerArms.InZoom)
             {
                 rotationX *= zoomAimSpeedMultiplier;
                 rotationY *= zoomAimSpeedMultiplier;

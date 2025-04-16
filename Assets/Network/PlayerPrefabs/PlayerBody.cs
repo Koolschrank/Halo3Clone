@@ -1,9 +1,12 @@
 using Fusion;
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerBody : NetworkBehaviour
 {
+
+
     [Header("References")]
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAim playerAim;
@@ -45,9 +48,9 @@ public class PlayerBody : NetworkBehaviour
 
     public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
     {
-        Debug.Log("Setting cameras");
         camera.Follow = head.transform;
         camera.LookAt = head.transform;
+
         //mind.SetSpectatorTarget(spectatorCamera);
         spectatorCamera.Follow = transform;
         spectatorCamera.LookAt = spectatorCameraTarget;

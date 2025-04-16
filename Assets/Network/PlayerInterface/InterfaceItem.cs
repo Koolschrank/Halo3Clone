@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InterfaceItem : MonoBehaviour
 {
-    [SerializeField] PlayerInterface playerInterface;
+    [SerializeField] protected PlayerInterface playerInterface;
     PlayerBody body;
 
     protected virtual void Awake()

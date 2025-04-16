@@ -70,7 +70,7 @@ public class PlayerAnimation : MonoBehaviour
         playerArms.RightArm.OnWeaponEquipStarted += SwitchInWeapon;
         // throw granade
         playerArms.RightArm.OnGranadeThrowStarted += ThrowGranadeStart;
-        playerArms.RightArm.OnGranadeThrow += ThrowGranade;
+        playerArms.GranadeThrower.OnGranadeThrow += ThrowGranade;
         playerArms.RightArm.OnMeleeWithWeaponStarted += Melee;
         playerArms.RightArm.OnWeaponDroped += (weapon,pickup) => DropWeapon(weapon);
         playerInventory.OnWeaponAddedToInventory += (weapon,ammo)  => PutWeaponInBackpack(weapon);

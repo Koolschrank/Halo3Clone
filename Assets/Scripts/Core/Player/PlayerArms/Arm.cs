@@ -1,312 +1,288 @@
+using Fusion;
 using System;
 using UnityEngine;
 using static PlayerArms;
 
-public class Arm : MonoBehaviour
+public class Arm : NetworkBehaviour
 {
     [SerializeField] protected PlayerArms playerArms;
-
-
-
-
-
-    public Action<Weapon_Arms, float> OnWeaponEquipStarted;
-    public Action<Weapon_Arms, float> OnWeaponUnequipStarted;
-    public Action<Weapon_Arms, float> OnWeaponReloadStarted;
-    public Action<Weapon_Arms, float> OnMeleeWithWeaponStarted;
-    public Action<Weapon_Arms> OnWeaponShoot;
-    public Action<Weapon_Arms> OnWeaponUnequipFinished;
-    public Action<Weapon_Arms, Weapon_PickUp> OnWeaponDroped;
-    public Action<Weapon_Arms> OnWeaponPickedUp;
-    public Action<GranadeStats, float> OnGranadeThrowStarted;
-    public Action<GameObject, GranadeStats> OnGranadeThrow;
-    public Action<Weapon_Arms> OnZoomIn;
-    public Action<Weapon_Arms> OnZoomOut;
-    public Action<int> OnReserveAmmoChanged;
-
-
-    [Header("References")]
-    [SerializeField] CharacterHealth characterHealth;
-    [SerializeField] BulletSpawner bulletSpawner;
-    [SerializeField] GranadeThrower granadeThrower;
-    [SerializeField] Controller controller;
-    [SerializeField] protected PlayerInventory inventory;
-    [SerializeField] protected PlayerPickUpScan pickUpScan;
     [SerializeField] Transform dropPosition;
-    [SerializeField] MeleeAttacker meleeAttacker;
-    [SerializeField] PlayerMeleeAttack basicMeleeAttack;
 
-     bool isTriggerPressed;
-     bool wasTriggerPressed;
-     float reloadTimer;
-    protected float switchOutTimer;
-     float switchInTimer;
-     float granadeThrowTimer;
-     float meleeAttackTimer;
+    bool isTriggerPressed;
 
+    public float reloadTimer = 0;
+    public float switchOutTimer = 0;
+    public float switchInTimer = 0;
+    public float meleeAttackTimer = 0;
+    public float meleeAttackHitTimer = 0;
 
     protected Weapon_Arms weaponInHand;
-    protected ArmState armState = ArmState.Ready;
-    bool inZoom = false;
 
-    [Header("Settings")]
-    [SerializeField]  float weaponDropForce;
-    [SerializeField]  float reloadInputBuffer = 0.4f;
-    float reloadInputBufferTimer;
-    [SerializeField] float switchInputBuffer = 0.4f;
-    protected float switchInputBufferTimer;
-    [SerializeField] float granadeThrowInputBuffer = 0.4f;
-    float granadeThrowInputBufferTimer;
-    [SerializeField] float meleeAttackTimeMultiplierInDualWielding = 1.5f;
-    [SerializeField] float granadeThrowTimeMultiplierInDualWielding = 1.5f;
+
+    public bool IsTriggerPressed => isTriggerPressed;
+    public bool InReload => reloadTimer > 0;
+    public bool InSwitchOut => switchOutTimer > 0;
+    public bool InSwitchIn => switchInTimer > 0;
+
+    public bool InMeleeAttack => meleeAttackTimer > 0;
+
+
+    public bool InIdle => !InReload && !InSwitchOut && !InSwitchIn && !InMeleeAttack;
 
     private void Start()
     {
-        granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
-        characterHealth.OnDeath += DropWeaponWithNoForce;
-        inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
+        //granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
+        //characterHealth.OnDeath += () => DropWeapon(0);
+        playerArms.Inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
 
     }
 
-    public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
+    
+
+    public void CancelTimers()
     {
-        if (weaponInHand != null && weaponInHand.Data == weaponAmmoChanged)
-        {
-            OnReserveAmmoChanged?.Invoke(ammo);
-        }
+        reloadTimer = 0;
+        switchOutTimer = 0;
+        switchInTimer = 0;
+        meleeAttackTimer = 0;
+        meleeAttackHitTimer = 0;
     }
 
-    public int AmmoOfWeaponInReserve
+    public void ArmUpdate()
     {
-        get
+        if (weaponInHand != null)
         {
-            if (weaponInHand == null) return 0;
-            return inventory.GetAmmo(weaponInHand.Data);
-        }
-    }
-
-    void Update()
-    {
-        weaponInHand?.UpdateWeapon();
-
-        // input buffers
-        if (switchInputBufferTimer > 0)
-        {
-            switchInputBufferTimer -= Time.deltaTime;
-            TrySwitchWeapon();
-        }
-        else if (reloadInputBufferTimer > 0)
-        {
-            reloadInputBufferTimer -= Time.deltaTime;
-            TryReload();
-        }
-        else if (granadeThrowInputBufferTimer > 0)
-        {
-            granadeThrowInputBufferTimer -= Time.deltaTime;
-            TryThrowGranade();
+            weaponInHand.UpdateWeapon(Runner.DeltaTime);
         }
 
-        TryToggleZoom();
 
-
-
-        if (armState == ArmState.Reloading)
+        if (InReload)
         {
-            reloadTimer -= Time.deltaTime;
+            reloadTimer -= Runner.DeltaTime;
             if (reloadTimer <= 0)
             {
                 ReloadFinished();
             }
         }
-        if (armState == ArmState.SwitchingOut)
+       
+        if (InSwitchIn)
         {
-            switchOutTimer -= Time.deltaTime;
-            if (switchOutTimer <= 0)
-            {
-                SwitchWeapon();
-            }
-        }
-        if (armState == ArmState.SwitchingIn)
-        {
-            switchInTimer -= Time.deltaTime;
+            switchInTimer -= Runner.DeltaTime;
             if (switchInTimer <= 0)
             {
                 SwitchInFinished();
+                switchInTimer = 0;
             }
         }
-        if (armState == ArmState.InGranadeThrow)
+
+        if (InMeleeAttack)
         {
-            granadeThrowTimer -= Time.deltaTime;
-            if (granadeThrowTimer <= 0)
+            meleeAttackTimer -= Runner.DeltaTime;
+            if (meleeAttackHitTimer > 0)
             {
-                armState = ArmState.Ready;
+                meleeAttackHitTimer -= Runner.DeltaTime;
+                if (meleeAttackHitTimer <= 0)
+                {
+                    meleeAttackHitTimer = 0;
+                    var meleeAttack = weaponInHand.MeleeAttack;
+                    if (meleeAttack == null)
+                    {
+                        meleeAttack = playerArms.BasicMeleeAttack;
+                    }
+                    playerArms.MeleeAttacker.Attack(meleeAttack);
+                }
             }
-        }
-        if (armState == ArmState.InMeleeAttack)
-        {
-            meleeAttackTimer -= Time.deltaTime;
+            
+
+
             if (meleeAttackTimer <= 0)
             {
-                armState = ArmState.Ready;
+                meleeAttackTimer = 0;
             }
         }
-
-        if (armState == ArmState.Ready && weaponInHand != null)
-        {
-            if (weaponInHand.Magazine == 0)
-            {
-                TryReload();
-            }
-
-
-            switch (weaponInHand.ShootType)
-            {
-                case ShootType.Single:
-
-                    if (!wasTriggerPressed && isTriggerPressed)
-                    {
-                        if (weaponInHand.CanShoot())
-                        {
-                            if (weaponInHand.TryShoot())
-                            {
-                                armState = ArmState.Shooting;
-                                OnWeaponShoot?.Invoke(weaponInHand);
-                            }
-                        }
-                        else // if try to shoot but cannot because magazine is empty reload
-                        {
-                            TryReload();
-                        }
-                    }
-                    break;
-                case ShootType.Burst:
-
-                    if (/*!wasTriggerPressed &&*/ isTriggerPressed)
-                    {
-                        if (weaponInHand.CanShoot())
-                        {
-                            if (weaponInHand.TryBurstShoot())
-                            {
-                                armState = ArmState.InBurstShooting;
-                                OnWeaponShoot?.Invoke(weaponInHand);
-                            }
-                        }
-                        else // if try to shoot but cannot because magazine is empty reload
-                        {
-                            TryReload();
-                        }
-                    }
-                    break;
-                case ShootType.Auto:
-                    if (isTriggerPressed)
-                    {
-                        if (weaponInHand.CanShoot())
-                        {
-                            if (weaponInHand.TryShoot())
-                            {
-                                armState = ArmState.Shooting;
-                                OnWeaponShoot?.Invoke(weaponInHand);
-                            }
-                        }
-                        else // if try to shoot but cannot because magazine is empty reload
-                        {
-                            TryReload();
-                        }
-                    }
-                    break;
-                case ShootType.Melee
-                    :
-                    if (!wasTriggerPressed && isTriggerPressed)
-                    {
-                        TryMeleeAttack();
-                    }
-                    break;
-            }
-        }
-        if (armState == ArmState.InBurstShooting && weaponInHand != null)
-        {
-            if (weaponInHand.UpdateBurstShot())
-            {
-                armState = ArmState.InBurstShooting;
-                OnWeaponShoot?.Invoke(weaponInHand);
-            }
-
-            if (!weaponInHand.IsInBurst())
-            {
-                armState = ArmState.Shooting;
-                weaponInHand.ResetShootCooldown();
-            }
-        }
-
-
-
-
-        wasTriggerPressed = isTriggerPressed;
-
-
-        if ((armState == ArmState.Shooting) && weaponInHand != null && !weaponInHand.IsInShootCooldown())
-        {
-            armState = ArmState.Ready;
-        }
-
     }
 
-
-    public bool PressReloadButtonIfNothingToPickUp()
+    public void TriggerHeld()
     {
-        if (pickUpScan.CanPickUpWeapon())
+        if (!InIdle) return;
+
+        bool wasTriggerPressed = isTriggerPressed;
+        isTriggerPressed = true;
+
+        bool hasShotThisTick = false;
+
+        switch (weaponInHand.ShootType)
         {
-            return false;
+            case ShootType.Single:
+            
+
+                if (!wasTriggerPressed)
+                {
+                    hasShotThisTick = weaponInHand.TryShoot();
+                }
+                break;
+            case ShootType.Burst:
+                hasShotThisTick = weaponInHand.TryBurstShoot();
+                break;
+            case ShootType.Auto:
+                hasShotThisTick = weaponInHand.TryShoot();
+                break;
+            case ShootType.Melee:
+                if (!wasTriggerPressed)
+                {
+                    TryMelee();
+                }
+                break;
         }
-        PressReloadButton();
-        return true;
-    }
 
-    public void PressReloadButton()
-    {
-        reloadInputBufferTimer = reloadInputBuffer;
-        switchInputBufferTimer = 0;
-    }
-
-    void TryReload()
-    {
-        if (armState != ArmState.Ready) return;
-        reloadInputBufferTimer = 0;
-
-        if (weaponInHand != null && weaponInHand.CanReload() && inventory.HasAmmo(weaponInHand.Data))
+        if (hasShotThisTick)
         {
-            IfZoomedInExitZoom();
-            armState = ArmState.Reloading;
+            Debug.Log("Shot");
+            OnWeaponShot?.Invoke(weaponInHand);
+        }
+    }
+
+    public void TriggerReleased()
+    {
+        isTriggerPressed = false;
+        
+    }
+
+    public bool TryMelee()
+    {
+        if ( !InMeleeAttack && !InSwitchOut)
+        {
+            CancelTimers();
+            var meleeAttack = weaponInHand.MeleeAttack;
+            if (meleeAttack == null)
+            {
+                meleeAttack = playerArms.BasicMeleeAttack;
+            }
+            float timeMultiplier = 1;
+            if (playerArms.IsDualWielding)
+            {
+                timeMultiplier = playerArms.MeleeAttackTimeMultiplierInDualWielding;
+            }
+
+            playerArms.MeleeAttacker.AttackStart(meleeAttack);
+            meleeAttackTimer = meleeAttack.MeleeTime * timeMultiplier;
+            meleeAttackHitTimer = meleeAttack.Delay * timeMultiplier;
+            weaponInHand.MeleeStart(meleeAttackTimer);
+            OnMeleeWithWeaponStarted?.Invoke(weaponInHand, meleeAttackTimer);
+
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryReload()
+    {
+        if (weaponInHand != null &&
+            !weaponInHand.IsInShootCooldown() &&
+            weaponInHand.CanReload() &&
+            InIdle &&
+            playerArms.Inventory.HasAmmo(weaponInHand.Data))
+        {
             reloadTimer = weaponInHand.ReloadTime;
             OnWeaponReloadStarted?.Invoke(weaponInHand, weaponInHand.ReloadTime);
             weaponInHand.ReloadStart(reloadTimer);
+            return true;
         }
+        return false;
     }
 
     void ReloadFinished()
     {
-        armState = ArmState.Ready;
+        reloadTimer = 0;
         if (weaponInHand != null)
         {
             int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
-            int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
+            int ammoAdded = playerArms.Inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
             weaponInHand.ReloadFinished(ammoAdded);
         }
-            
-    }
-
-
-    bool zoomButtonPressed = false;
-    public void PressZoomButton()
-    {
-        zoomButtonPressed = true;
 
     }
 
-    public void ReleaseZoomButton()
+    public bool TryPickUpWeapon()
+    {
+        if (InSwitchOut) return false;
+        
+
+        var inventory = playerArms.Inventory;
+        var pickUpScan = playerArms.PickUpScan;
+
+        if (pickUpScan.CanPickUpWeapon())
+        {
+
+            var newWeapon = pickUpScan.PickUpWeapon();
+            OnWeaponPickedUp?.Invoke(newWeapon);
+
+
+
+            if (inventory.Full)
+            {
+                DropWeapon(playerArms.WeaponDropForce);
+                EquipWeapon(newWeapon);
+            }
+            else
+            {
+                inventory.AddWeapon(newWeapon);
+                playerArms.TrySwitchWeapon();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    
+
+    public void EquipWeapon(Weapon_Arms weapon)
+    {
+        if (weapon == null)
+        {
+            return;
+        }
+
+        if (weaponInHand != null)
+        {
+            OnWeaponUnequipFinished?.Invoke(weaponInHand);
+            playerArms.Inventory.AddWeapon(weaponInHand);
+        }
+
+        CancelTimers();
+        weaponInHand = weapon;
+        switchInTimer = weaponInHand.SwitchInTime;
+        OnWeaponEquipStarted?.Invoke(weaponInHand, weaponInHand.SwitchInTime);
+
+        weapon.SetBulletSpawner(playerArms.BulletSpawner);
+        weaponInHand.SwitchInStart(switchInTimer);
+        weapon.SetIsBeingDualWielded(playerArms.IsDualWielding);
+    }
+
+    void SwitchInFinished()
+    {
+        switchInTimer = 0;
+    }
+
+    public void DropWeapon()
+    {
+        DropWeapon(0);
+    }
+
+    public virtual void DropWeapon(float dropForce)
     {
 
-        zoomButtonPressed = false;
+        if (weaponInHand == null) return;
+        CancelTimers();
+        var pickUp = LetGoOfWeapon();
+        if (pickUp == null) return;
+
+        pickUp.AddImpulse(dropPosition.forward, dropForce);
+    }
+
+    public void CancelReload()
+    {
+        reloadTimer = 0;
     }
 
     public void DeleteWeapon()
@@ -315,153 +291,27 @@ public class Arm : MonoBehaviour
         {
             OnWeaponDroped?.Invoke(weaponInHand, null);
             weaponInHand = null;
-            TrySwitchWeapon();
+            playerArms.TrySwitchWeapon();
 
         }
     }
 
-    // TODO: this function can be cleared up
-
-    public void TryToggleZoom()
+    public int AmmoOfWeaponInReserve
     {
-        if (zoomButtonPressed == inZoom) return;
-
-
-        if (armState != ArmState.Ready && armState != ArmState.Shooting)
+        get
         {
-            OnZoomOut?.Invoke(weaponInHand);
-            return;
-        }
-
-
-
-        if (weaponInHand != null && weaponInHand.CanZoom)
-        {
-            if (zoomButtonPressed)
-            {
-                inZoom = true;
-                OnZoomIn?.Invoke(weaponInHand);
-            }
-            else
-            {
-                inZoom = false;
-                OnZoomOut?.Invoke(weaponInHand);
-            }
+            if (weaponInHand == null) return 0;
+            return playerArms.Inventory.GetAmmo(weaponInHand.Data);
         }
     }
 
-
-
-    public void IfZoomedInExitZoom()
-    {
-        if (inZoom)
-        {
-            inZoom = false;
-            OnZoomOut?.Invoke(weaponInHand);
-        }
-    }
-
-    public bool PressSwitchButtonIfNothingToPickUp()
-    {
-        if (pickUpScan.CanPickUpWeapon())
-        {
-            return false;
-        }
-        PressSwitchButton();
-        return true;
-    }
-
-    public void PressSwitchButton()
-    {
-       
-        switchInputBufferTimer = switchInputBuffer;
-        reloadInputBufferTimer = 0;
-    }
-
-    public virtual void TrySwitchWeapon()
-    {
-        Debug.Log("Switching weapon try");
-
-        if (armState != ArmState.Ready && armState != ArmState.Reloading) return;
-
-        if (weaponInHand != null && weaponInHand.CanNotBeInInventory)
-        {
-            DropWeapon();
-        }
-            
-
-
-        switchInputBufferTimer = 0;
-        if (inventory.HasWeapon)
-        {
-            IfZoomedInExitZoom();
-            if (weaponInHand == null)
-            {
-                SwitchWeapon();
-                return;
-            }
-
-            armState = ArmState.SwitchingOut;
-            switchOutTimer = weaponInHand.SwitchOutTime;
-            OnWeaponUnequipStarted?.Invoke(weaponInHand, weaponInHand.SwitchOutTime);
-            weaponInHand.SwitchOutStart(switchOutTimer);
-
-        }
-    }
-
-    public virtual bool CanPickUpWeapon()
-    {
-        return pickUpScan.CanPickUpWeapon();
-    }
-
-    public virtual void TryPickUpWeapon()
-    {
-        if (armState == ArmState.SwitchingOut) return;
-
-        if (pickUpScan.CanPickUpWeapon())
-        {
-            IfZoomedInExitZoom();
-            
-            var newWeapon = pickUpScan.PickUpWeapon();
-            OnWeaponPickedUp?.Invoke(newWeapon);
-
-
-
-            if (inventory.Full)
-            {
-                DropWeapon();
-                PickUpWeapon(newWeapon);
-            }
-            else
-            {
-                inventory.AddWeapon(newWeapon);
-                TrySwitchWeapon();
-            }
-        }
-    }
-
-    void DropWeaponWithNoForce()
-    {
-        if (weaponInHand == null) return;
-        var pickUp = LetGoOfWeapon();
-    }
-
-    public virtual void DropWeapon()
-    {
-
-        if (weaponInHand == null) return;
-        var pickUp = LetGoOfWeapon();
-        if (pickUp == null) return;
-
-        pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
-    }
 
     Weapon_PickUp LetGoOfWeapon()
     {
         if (weaponInHand == null) return null;
 
-        IfZoomedInExitZoom();
-        
+        var inventory = playerArms.Inventory;
+
         // if weapon is empty return null
         if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
         {
@@ -474,7 +324,7 @@ public class Arm : MonoBehaviour
 
         if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data))
         {
-            pickUp.SetAmmo(weaponInHand.Magazine, 0); 
+            pickUp.SetAmmo(weaponInHand.Magazine, 0);
         }
         else
         {
@@ -486,17 +336,58 @@ public class Arm : MonoBehaviour
         return pickUp;
     }
 
-    public void PickUpWeapon(Weapon_Arms weapon)
+
+
+
+
+
+    public Action<Weapon_Arms, float> OnWeaponEquipStarted;
+    public Action<Weapon_Arms, float> OnWeaponUnequipStarted;
+    public Action<Weapon_Arms, float> OnWeaponReloadStarted;
+    public Action<Weapon_Arms, float> OnMeleeWithWeaponStarted;
+    public Action<Weapon_Arms> OnWeaponShot;
+    public Action<Weapon_Arms> OnWeaponUnequipFinished;
+    public Action<Weapon_Arms, Weapon_PickUp> OnWeaponDroped;
+    public Action<Weapon_Arms> OnWeaponPickedUp;
+    public Action<GranadeStats, float> OnGranadeThrowStarted;
+    public Action<int> OnReserveAmmoChanged;
+
+
+    
+
+
+
+
+
+    
+
+
+    
+
+
+    
+
+    public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
     {
-
-
-        EquipWeapon(weapon);
+        if (weaponInHand != null && weaponInHand.Data == weaponAmmoChanged)
+        {
+            OnReserveAmmoChanged?.Invoke(ammo);
+        }
     }
 
-    public void PressGranadeButton()
-    {
-        granadeThrowInputBufferTimer = granadeThrowInputBuffer;
-    }
+   
+        
+
+
+    // TODO: this function can be cleared up
+
+
+
+    
+
+    
+
+    /*
 
     public virtual void TryThrowGranade()
     {
@@ -516,18 +407,16 @@ public class Arm : MonoBehaviour
             granadeThrowTimer = granade.ThrowTime * timeMultiplier;
             OnGranadeThrowStarted?.Invoke(granade, granadeThrowTimer);
         }
-    }
+    }*/
 
+    /*
     void SendGranadeThrowSignal(GameObject granade)
     {
         OnGranadeThrow?.Invoke(granade, inventory.GranadeStats);
-    }
+    }*/
 
-    public void PressMeleeButton()
-    {
-        TryMeleeAttack();
-    }
 
+    /*
     public virtual void TryMeleeAttack()
     {
         if (armState != ArmState.Ready && armState != ArmState.Shooting && armState != ArmState.Reloading) return;
@@ -551,39 +440,10 @@ public class Arm : MonoBehaviour
         OnMeleeWithWeaponStarted?.Invoke(weaponInHand, meleeAttackTimer);
 
 
-    }
+    }*/
 
-    protected virtual void SwitchWeapon()
-    {
-        var weaponToSwitchInto = inventory.RemoveWeapon();
-        if (weaponInHand != null)
-        {
-            inventory.AddWeapon(weaponInHand);
-        }
-        EquipWeapon(weaponToSwitchInto);
-    }
 
-    protected virtual void EquipWeapon(Weapon_Arms weapon)
-    {
-        if (weapon == null)
-        {
-            armState = ArmState.Ready;
-            return;
-        }
-
-        if (weaponInHand != null)
-        {
-            OnWeaponUnequipFinished?.Invoke(weaponInHand);
-        }
-
-        weaponInHand = weapon;
-        switchInTimer = weaponInHand.SwitchInTime;
-        armState = ArmState.SwitchingIn;
-        OnWeaponEquipStarted?.Invoke(weaponInHand, weaponInHand.SwitchInTime);
-
-        SetUpWeapon(weaponInHand);
-        weaponInHand.SwitchInStart(switchInTimer);
-    }
+    
 
     public void SetWeaponToIfDualWielding(bool isDualWielding)
     {
@@ -606,28 +466,12 @@ public class Arm : MonoBehaviour
         return weaponInHand.SwitchInTime;
     }
 
-    void SwitchInFinished()
-    {
-        armState = ArmState.Ready;
-    }
 
-    void SetUpWeapon(Weapon_Arms weapon)
-    {
-        weapon.SetBulletSpawner(bulletSpawner);
-
-    }
+   
 
     public void UpdateWeaponTrigger(bool value)
     {
         isTriggerPressed = value;
-    }
-
-    public bool IsInZoom
-    {
-        get
-        {
-            return inZoom;
-        }
     }
 
     public Weapon_Arms CurrentWeapon
@@ -638,18 +482,6 @@ public class Arm : MonoBehaviour
         }
     }
 
-    public enum ArmState
-    {
-        Ready,
-        Shooting,
-        InBurstShooting,
-        Reloading,
-        SwitchingIn,
-        SwitchingOut,
-        InGranadeThrow,
-        InMeleeAttack,
-        Empty,
-    }
 
 
 }

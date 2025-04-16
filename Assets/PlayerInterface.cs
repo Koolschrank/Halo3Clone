@@ -12,13 +12,12 @@ public class PlayerInterface : MonoBehaviour
     int interfaceLayer = 0;
     int hidenPlayerLayer = 0;
 
-    public PlayerCamera InterfaceCamera => playerCamera;
-    
+    public int InterfaceLayer => interfaceLayer;
+    public int HidenPlayerLayer => hidenPlayerLayer;
 
-    public void Start()
-    {
-        ScreenManager.Instance.AddInterface(this);
-    }
+
+    public PlayerCamera InterfaceCamera => playerCamera;
+   
 
     public PlayerBody PlayerBody
     {
@@ -28,6 +27,8 @@ public class PlayerInterface : MonoBehaviour
             OnPlayerBodySet?.Invoke(playerBody);
         }
     }
+
+    public PlayerCamera PlayerCamera => playerCamera;
 
     public void EnableLayerInCamera(int layer)
     {

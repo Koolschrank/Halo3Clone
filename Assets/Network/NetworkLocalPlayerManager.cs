@@ -38,9 +38,10 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
         {
             mind.SetControllerIndex(_spawnedCharacters.Count -1);
             mind.SetPlayerManager(this);
+            mind.TryGetInterface();
             SpawnPlayerBody(mind, player);
 
-            mind.TryGetInterface();
+            
         }
 
         
@@ -63,18 +64,16 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
     public void CreatePlayerInterface(PlayerMind mind)
     {
 
-        Debug.Log("CreatePlayerInterface");
         if (!HasInputAuthority) return;
-        Debug.Log("CreatePlayerInterface 2");
 
         var playerInterfaceObject = Instantiate(playerInterfacePrefab, Vector3.zero, Quaternion.identity) as GameObject;
         PlayerInterface playerInterface = playerInterfaceObject.GetComponent<PlayerInterface>();
         mind.SetPlayerInterface(playerInterface);
-        playerInterface.transform.SetParent(mind.Body.HeadTransform);
         playerInterface.transform.localPosition = Vector3.zero;
         playerInterface.transform.localRotation = Quaternion.identity;
         playerInterfaces.Add(playerInterface);
-        
+        ScreenManager.Instance.AddInterface(playerInterface);
+
 
 
 

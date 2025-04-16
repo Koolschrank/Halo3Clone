@@ -3,38 +3,15 @@ using System;
 
 public class MeleeAttacker : MonoBehaviour
 {
-    public Action<PlayerMeleeAttack> OnAttackStart;
-    public Action<PlayerMeleeAttack> OnAttackHit;
+    public Action<PlayerMeleeAttack> OnMeleeStart;
+    public Action<PlayerMeleeAttack> OnMeleeHit;
 
-    [SerializeField] CharacterHealth health;
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
-    PlayerMeleeAttack meleeData;
-    float attackDelay = 0f;
 
-    private void Start()
+    public void AttackStart(PlayerMeleeAttack attackData)
     {
-        health.OnDeath += CancelAttack;
-    }
-
-    public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier)
-    {
-        meleeData = attackData;
-        attackDelay = meleeData.Delay * timeMultiplier;
-        OnAttackStart?.Invoke(attackData);
-    }
-
-    // update
-    public void Update()
-    {
-        if (attackDelay > 0)
-        {
-            attackDelay -= Time.deltaTime;
-            if (attackDelay <= 0)
-            {
-                Attack(meleeData);
-            }
-        }
+        OnMeleeStart?.Invoke(attackData);
     }
 
     // attack
@@ -68,6 +45,7 @@ public class MeleeAttacker : MonoBehaviour
             }
             hits++;
 
+            OnMeleeHit?.Invoke(attackData);
 
             if (collider.TryGetComponent<Health>(out Health health))
             {
@@ -81,16 +59,6 @@ public class MeleeAttacker : MonoBehaviour
             }
         }
 
-        if (hits > 0)
-        {
-            OnAttackHit?.Invoke(attackData);
-        }
-
-    }
-
-    public void CancelAttack()
-    {
-        attackDelay = 0;
     }
 
 

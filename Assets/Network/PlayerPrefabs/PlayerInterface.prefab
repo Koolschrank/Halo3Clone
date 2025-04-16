@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9957f776374be428a0b342eddbf778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInterface: {fileID: 7263889817761224605}
   cinemachineBrain: {fileID: 5051555028876994697}
   playerCamera: {fileID: 1022665561114618699}
   zoomInSpeed: 275

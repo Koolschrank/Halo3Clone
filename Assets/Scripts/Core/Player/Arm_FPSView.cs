@@ -10,12 +10,13 @@ public class Arm_FPSView : InterfaceItem
     protected override void Subscribe(PlayerBody body)
     {
         var arm = GetArm(body);
+        var granadeTrower = body.PlayerArms.GranadeThrower;
 
         arm.OnWeaponEquipStarted += EquipWeapon;
         arm.OnWeaponUnequipFinished += RemoveWeapon;
         arm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
         arm.OnGranadeThrowStarted += ThrowGranadeStart;
-        arm.OnGranadeThrow += ThrowGranade;
+        granadeTrower.OnGranadeThrow += ThrowGranade;
 
         if (arm.CurrentWeapon != null)
         {
@@ -27,11 +28,14 @@ public class Arm_FPSView : InterfaceItem
     {
         var arm = GetArm(body);
 
+        var granadeTrower = body.PlayerArms.GranadeThrower;
+
         arm.OnWeaponEquipStarted -= EquipWeapon;
         arm.OnWeaponUnequipFinished -= RemoveWeapon;
         arm.OnWeaponDroped -= (weapon, pickUp) => RemoveWeapon(weapon);
         arm.OnGranadeThrowStarted -= ThrowGranadeStart;
-        arm.OnGranadeThrow -= ThrowGranade;
+
+        granadeTrower.OnGranadeThrow += ThrowGranade;
     }
 
     public Arm GetArm(PlayerBody body)

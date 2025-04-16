@@ -18,17 +18,19 @@ public class PickUpUI : InterfaceItem
     {
         var pickUpScan = body.PlayerPickUpScan;
 
-        pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
-        pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
-        pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
+        pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpUI;
+        pickUpScan.OnWeaponPickUp += ClearPickUpUI;
+        pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
+
+        pickUpScan.TrySendUpdates();
     }
 
     protected override void Unsubscribe(PlayerBody body)
     {
         var pickUpScan = body.PlayerPickUpScan;
-        pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpUI;
-        pickUpScan.OnWeaponPickUp += ClearPickUpUI;
-        pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
+        pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
+        pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
+        pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
         ClearPickUpUI();
     }
 
