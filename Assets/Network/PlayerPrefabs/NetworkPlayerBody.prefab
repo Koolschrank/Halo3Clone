@@ -10545,8 +10545,8 @@ GameObject:
   - component: {fileID: 3970420054294455764}
   - component: {fileID: 412254439390827981}
   - component: {fileID: 4169074679463143072}
-  - component: {fileID: 5599619161729298736}
   - component: {fileID: -5009260468559975710}
+  - component: {fileID: 4461638039460575108}
   m_Layer: 7
   m_Name: NetworkPlayerBody
   m_TagString: Player
@@ -10617,20 +10617,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 7999377576702310532}
-  cc: {fileID: 5599619161729298736}
+  cc: {fileID: 4461638039460575108}
   head: {fileID: 8067625750732039895}
   head_normalPosition: {fileID: 4151376091086984915}
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
-  maxMoveSpeed: 490
-  moveSpeedCrouchMultiplier: 0.4
-  acceleration_ground: 35000000
-  acceleration_air: 1000
-  deceleration_ground: 35000000
-  deceleration_air: 1000
   jumpPower: 800
   jumpCooldown: 0.31
-  gravity: -9
   cyoteTime: 0.3
   crouchSpeed: 4
   walkSound:
@@ -10640,7 +10633,7 @@ MonoBehaviour:
       Data3: -319476326
       Data4: -1659513558
     Path: event:/SFX/Player/PlayerFootstep
-  distanceForWalkSound: 160
+  distanceForWalkSound: 1.6
   jumpSound:
     Guid:
       Data1: -935968898
@@ -10692,7 +10685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3316862365299375133}
   colliders: []
-  cc: {fileID: 5599619161729298736}
+  cc: {fileID: 4461638039460575108}
   ragdoll: {fileID: 8712196350449165927}
   playerArms: {fileID: 3232609274750972410}
   playerMovement: {fileID: 7400201383000877008}
@@ -10714,7 +10707,7 @@ MonoBehaviour:
   playerArms: {fileID: 3232609274750972410}
   playerTeam: {fileID: 2295363821645548979}
   playerHealth: {fileID: 782412234501442312}
-  cc: {fileID: 5599619161729298736}
+  cc: {fileID: 4461638039460575108}
   aimSpeed_x: 156.492
   aimSpeed_y: 112.266
   minAngle: -70
@@ -10728,7 +10721,8 @@ MonoBehaviour:
   minSensitivity: 0.1
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1
-  _ViewDirection: {x: 0, y: 0}
+  pitchMin: -89
+  pitchMax: 89
 --- !u!114 &7573040687501960069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10943,8 +10937,8 @@ MonoBehaviour:
   - {fileID: 3232609274750972410}
   - {fileID: 3844945188849078822}
   - {fileID: 3970420054294455764}
-  - {fileID: 5599619161729298736}
   - {fileID: -5009260468559975710}
+  - {fileID: 4461638039460575108}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072
 Rigidbody:
@@ -10973,43 +10967,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5599619161729298736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1869825851, guid: 977dbcf975465374990f471e1497f563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stateAuthorityChangeErrorCorrectionDelta: 0
-  _settings:
-    Shape: 1
-    IsTrigger: 0
-    Radius: 0.35
-    Height: 1.8
-    Extent: 0.035
-    ColliderLayer: 7
-    CollisionLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    ProxyInterpolationMode: 0
-    MaxPenetrationSteps: 8
-    CCDRadiusMultiplier: 0.75
-    AntiJitterDistance: {x: 0.025, y: 0.01}
-    CompressNetworkPosition: 0
-    ForcePredictedLookRotation: 0
-    StepHeight: 0.5
-    StepDepth: 0.2
-    StepSpeed: 1
-    StepMinPushBack: 0.5
-    StepGroundCheckRadiusScale: 0.5
-    StepRequireGroundTarget: 0
-    SnapDistance: 0.25
-    SnapSpeed: 4
 --- !u!114 &-5009260468559975710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11030,6 +10987,47 @@ MonoBehaviour:
   holdInteractForPickUpTime: 0.2
   pickUp1InputBuffer: 0.2
   Weapon2: 0
+--- !u!114 &4461638039460575108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f7684f04e649e84fb2ee1bc9fbee42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  _settings:
+    Shape: 1
+    IsTrigger: 0
+    Radius: 0.35
+    Height: 1.8
+    Extent: 0.035
+    ColliderLayer: 7
+    CollisionLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    Features: -1
+    InputAuthorityBehavior: 0
+    StateAuthorityBehavior: 0
+    ProxyInterpolationMode: 0
+    ForcePredictedLookRotation: 0
+    AllowClientTeleports: 0
+    Processors:
+    - {fileID: 4219866145273439913, guid: 1ab62523487a65745ab7ee9663ad9025, type: 3}
+    - {fileID: 561824206424634091, guid: 68c4081a63f1dfd469da9c95bea22158, type: 3}
+    - {fileID: 8306782452827789390, guid: 6d976f9777012db4aa55e7e6b1991afe, type: 3}
+    MaxPenetrationSteps: 8
+    CCDRadiusMultiplier: 0.75
+    AntiJitterDistance: {x: 0.025, y: 0.01}
+    PredictionCorrectionSpeed: 30
+    NetworkedInteractions: 8
+    CompressNetworkPosition: 0
+    ForceSingleOverlapQuery: 0
+    SuppressConvexMeshColliders: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0
@@ -11143,7 +11141,7 @@ PrefabInstance:
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: cc
       value: 
-      objectReference: {fileID: 5599619161729298736}
+      objectReference: {fileID: 4461638039460575108}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: playerArms
       value: 
@@ -11204,6 +11202,10 @@ PrefabInstance:
       propertyPath: 'playerMeshes.Array.data[1]'
       value: 
       objectReference: {fileID: 6082606815277094945}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: walkAnimationSpeedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: shildBrakeParticals.Array.size
       value: 1

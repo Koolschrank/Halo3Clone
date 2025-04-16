@@ -4,45 +4,37 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 using Fusion;
-using Fusion.Addons.SimpleKCC;
+
+using Fusion.Addons.KCC;
+using UnityEngine.Windows;
 
 public class PlayerMovement : NetworkBehaviour
 {
 
+    public Action<Vector3> OnMoveUpdated;
+
     public Action OnJump;
     public Action OnCrouch;
     public Action OnStandUp;
-    public Action<Vector3> OnMoveUpdated;
-    public Action<Vector2> OnAimUpdated;
 
     // character controller 
     [Header("References")]
     [SerializeField] PlayerBody playerBody;
-    [SerializeField] SimpleKCC cc;
+    [SerializeField] KCC cc;
     [SerializeField] Transform head;
     [SerializeField] Transform head_normalPosition;
     [SerializeField] Transform head_crouchPosition;
     [SerializeField] PlayerArms arms;
     [Header("Settings")]
     // movement speed
-    [SerializeField] float maxMoveSpeed = 12f;
-    [SerializeField] float moveSpeedCrouchMultiplier = 0.4f;
-    [SerializeField] float acceleration_ground = 10f;
-    [SerializeField] float acceleration_air = 5f;
-    [SerializeField] float deceleration_ground = 10f;
-    [SerializeField] float deceleration_air = 5f;
+
 
     [SerializeField] float jumpPower = 9.8f;
     [SerializeField] float jumpCooldown = 0.5f;
     float jumpCooldownTimer = 0;
-    [SerializeField] float gravity = 9.8f;
     [SerializeField] float cyoteTime = 0.2f;
-    bool isGrounded => cc.IsGrounded || Time.time - lastGroundTouch < cyoteTime;
-    float lastGroundTouch;
+    bool isGrounded => true; //cc.IsGrounded || Time.time - lastGroundTouch < cyoteTime;
     [SerializeField] float crouchSpeed = 0.5f;
-
-
-    float maxMoveSpeedMultiplier = 1f;
 
 
     [Header("Sound")]
@@ -58,32 +50,36 @@ public class PlayerMovement : NetworkBehaviour
     float gravityVelocity = 0;
     Vector2 moveInput = Vector2.zero;
 
-    public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
     public override void Spawned()
     {
-        cc.SetGravity(gravity);
+        
     }
 
     // update
     public override void FixedUpdateNetwork()
     {
-        
+        GetInput(out NetworkInputData data);
+        LocalControllerData localControllerData = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
+        cc.SetInputDirection(cc.Data.TransformRotation * new Vector3(localControllerData.moveVector.x, 0.0f, localControllerData.moveVector.y));
 
-        UpdateCrouch();
-        UpdateMove();
-        UpdateGravity();
 
-        
-        var moveVector = new Vector3(moveVelocity.x, 0, moveVelocity.z);
-        cc.Move(moveVector * Runner.DeltaTime);
+        RPC_UpdateMove(cc.Data.KinematicVelocity);
 
-        OnMoveUpdated?.Invoke(moveVector);
 
-        if (moveVelocity.magnitude > 0 && cc.IsGrounded)
+        if (localControllerData.buttons.IsSet(InputButton.Jump) && cc.Data.IsGrounded)
         {
-            distanceToWalkSoundLeft -= moveVelocity.magnitude * Runner.DeltaTime;
+            cc.Jump(Vector3.up);
+            RPC_UpdateJump();
+            AudioManager.instance.PlayOneShot(jumpSound, transform.position);
+        }
+
+
+        var moveMagnitude = cc.Data.KinematicVelocity.magnitude;
+        if (moveMagnitude > 0 && cc.Data.IsGrounded)
+        {
+            distanceToWalkSoundLeft -= moveMagnitude * Runner.DeltaTime;
             if (distanceToWalkSoundLeft <= 0)
             {
                 AudioManager.instance.PlayOneShot(walkSound, transform.position);
@@ -91,12 +87,49 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if (cc.IsGrounded)
-        {
-            // todo : Time.time neess to be replaced with fusion time
-            lastGroundTouch  = Time.time;
-        }
 
+
+        return;
+        UpdateCrouch();
+        UpdateMove();
+        UpdateGravity();
+
+        
+        var moveVector = new Vector3(moveVelocity.x, 0, moveVelocity.z);
+        //cc.Move(moveVector * Runner.DeltaTime);
+
+        
+
+        //OnMoveUpdated?.Invoke(moveVector);
+
+        //if (moveVelocity.magnitude > 0 && cc.IsGrounded)
+        //{
+        //    distanceToWalkSoundLeft -= moveVelocity.magnitude * Runner.DeltaTime;
+        //    if (distanceToWalkSoundLeft <= 0)
+        //    {
+        //        AudioManager.instance.PlayOneShot(walkSound, transform.position);
+        //        distanceToWalkSoundLeft = distanceForWalkSound;
+        //    }
+        //}
+
+        //if (cc.IsGrounded)
+        //{
+        //    // todo : Time.time neess to be replaced with fusion time
+        //    lastGroundTouch  = Time.time;
+        //}
+
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    public void RPC_UpdateMove(Vector3 moveVector)
+    {
+        OnMoveUpdated?.Invoke(moveVector);
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    public void RPC_UpdateJump()
+    {
+        OnJump?.Invoke();
     }
 
     private void UpdateCrouch()
@@ -138,7 +171,7 @@ public class PlayerMovement : NetworkBehaviour
         camForward.Normalize();
         
         Vector3 move = camForward * moveInput.z + head.transform.right * moveInput.x;
-
+        /*
 
         if (move.magnitude == 0)
         {
@@ -179,16 +212,16 @@ public class PlayerMovement : NetworkBehaviour
         if ( localControllerData.buttons.IsSet(InputButton.Jump))
         {
             TryJump();
-        }
+        }*/
 
 
 
     }
 
-    public void SetMovementSpeedMultiplier(float multiplier)
-    {
-        maxMoveSpeedMultiplier = multiplier;
-    }
+    //public void SetMovementSpeedMultiplier(float multiplier)
+    //{
+    //    maxMoveSpeedMultiplier = multiplier;
+    //}
 
     private void UpdateGravity()
     {
@@ -241,11 +274,11 @@ public class PlayerMovement : NetworkBehaviour
             OnStandUp?.Invoke();
             
         }
-        else if(cc.IsGrounded)
-        {
-            inCrouch = true;
-            OnCrouch?.Invoke();
-        }
+        //else if(cc.IsGrounded)
+        //{
+        //    inCrouch = true;
+        //    OnCrouch?.Invoke();
+        //}
     }
 
 

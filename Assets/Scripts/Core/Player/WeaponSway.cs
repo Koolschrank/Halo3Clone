@@ -40,7 +40,7 @@ public class WeaponSway : InterfaceItem
         var mover = body.PlayerMovement;
         if (mover != null)
         {
-            mover.OnAimUpdated -= UpdateLookInput;
+            body.PlayerAim.OnAimUpdated -= UpdateLookInput;
             mover.OnMoveUpdated -= UpdateWalkInput;
         }
     }
@@ -48,7 +48,7 @@ public class WeaponSway : InterfaceItem
     protected override void Subscribe(PlayerBody body)
     {
         var mover = body.PlayerMovement;
-        mover.OnAimUpdated += UpdateLookInput;
+        body.PlayerAim.OnAimUpdated += UpdateLookInput;
         mover.OnMoveUpdated += UpdateWalkInput;
 
         this.mover = mover;
@@ -70,6 +70,7 @@ public class WeaponSway : InterfaceItem
     public void UpdateWalkInput(Vector3 moveInput)
     {
         walkInput = new Vector2(moveInput.x, moveInput.z);
+        Debug.Log("Walk Input: " + walkInput);
     }
 
     public void UpdateLookInput(Vector2 lookInput)

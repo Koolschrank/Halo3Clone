@@ -1,11 +1,11 @@
 using UnityEngine;
-using Fusion.Addons.SimpleKCC;
+using Fusion.Addons.KCC;
 
 public class RagdollTrigger : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] Collider[] colliders;
-    [SerializeField] SimpleKCC cc;
+    [SerializeField] KCC cc;
 
     [SerializeField] Transform ragdoll;
 
@@ -67,10 +67,10 @@ public class RagdollTrigger : MonoBehaviour
             c.enabled = true;
         }
 
-        Vector3 velocity = cc.RealVelocity;
+        Vector3 velocity = cc.Data.RealVelocity;
         foreach (Rigidbody rb in ragdollRigidbodies)
         {
-            rb.linearVelocity = cc.RealVelocity;
+            rb.linearVelocity = cc.Data.RealVelocity;
         }
 
         if (damagePackage.impactType == ImpactType.singleBodyPart)
@@ -118,7 +118,7 @@ public class RagdollTrigger : MonoBehaviour
             c.enabled = true;
         }
 
-        Vector3 velocity = cc.RealVelocity;
+        Vector3 velocity = cc.Data.RealVelocity;
         foreach (Rigidbody rb in ragdollRigidbodies)
         {
             rb.linearVelocity = velocity;
@@ -168,7 +168,7 @@ public class RagdollTrigger : MonoBehaviour
             c.enabled = true;
         }
 
-        Vector3 velocity = cc.RealVelocity + extraForce;
+        Vector3 velocity = cc.Data.RealVelocity + extraForce;
         foreach (Rigidbody rb in ragdollRigidbodies)
         {
             rb.linearVelocity = velocity;

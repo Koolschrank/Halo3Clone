@@ -67,7 +67,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
             playerInventory.ChangeGranade(null);
         }
 
-        playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
+        //playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
 
 
 

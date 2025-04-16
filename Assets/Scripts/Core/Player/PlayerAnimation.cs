@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using Fusion.Addons.SimpleKCC;
+using Fusion.Addons.KCC;
+using Fusion;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] CharacterHealth characterHealth;
-    [SerializeField] SimpleKCC cc;
+    [SerializeField] KCC cc;
     [SerializeField] Animator animator;
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Transform aimTarget;
@@ -40,6 +41,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float shildVisualRecoveryTime = 1;
     [SerializeField] AnimationCurve shildVisualRecoveryCurve;
+    [SerializeField] float peakSpeed = 6f;
 
     float shildVisualRecoveryTimer = 0;
 
@@ -61,7 +63,8 @@ public class PlayerAnimation : MonoBehaviour
         playerMovement.OnJump += Jump;
         playerMovement.OnCrouch += () => UpdateCrouch(true);
         playerMovement.OnStandUp += () => UpdateCrouch(false);
-        
+        playerMovement.OnMoveUpdated += UpdateVelocity;
+
 
         // connect reload
         playerArms.RightArm.OnWeaponReloadStarted += Reload;
@@ -126,12 +129,12 @@ public class PlayerAnimation : MonoBehaviour
         aimTarget.position = targetPosition;
     }
 
-
+    
     public void UpdateInAir()
     {
-        animator.SetBool("InAir", !cc.IsGrounded);
+        animator.SetBool("InAir", !cc.Data.IsGrounded);
 
-        if (!cc.IsGrounded && cc.RealVelocity.y < 0)
+        if (!cc.Data.IsGrounded && cc.Data.DynamicVelocity.y < 0)
         {
             // shoot a raycast down to check if player is grounded
             if (Physics.Raycast(cc.transform.position, Vector3.down, landRaycastDistance, groundLayer))
@@ -145,16 +148,22 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+
+    Vector3 velocity { get; set; }
+
+
+    public void UpdateVelocity(Vector3 velocity)
+    {
+        this.velocity = velocity;
+    }
     public void UpdateMove()
     {
-        var velocity = cc.RealVelocity;
-        var maxSpeed = playerMovement.MaxMoveSpeed;
 
         float forwardVelocity = Vector3.Dot(velocity, transform.forward) * walkAnimationSpeedMultiplier;
         float rightVelocity = Vector3.Dot(velocity, transform.right) * walkAnimationSpeedMultiplier;
 
-        animator.SetFloat("MoveX", forwardVelocity / maxSpeed);
-        animator.SetFloat("MoveZ", rightVelocity / maxSpeed);
+        animator.SetFloat("MoveX", forwardVelocity / peakSpeed);
+        animator.SetFloat("MoveZ", rightVelocity / peakSpeed);
     }
 
     public void UpdateGrip()
