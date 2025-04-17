@@ -1391,6 +1391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 226835851}
   - component: {fileID: 226835852}
+  - component: {fileID: 226835853}
   m_Layer: 0
   m_Name: SniperSpawn
   m_TagString: Untagged
@@ -1426,9 +1427,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
+  weaponPrefab: {fileID: 531619989947781006, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
   spawnTime: 90
   magazines: 3
+--- !u!114 &226835853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226835850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1965411860
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 226835852}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &238963231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2644,6 +2664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375973797}
   - component: {fileID: 375973798}
+  - component: {fileID: 375973799}
   m_Layer: 0
   m_Name: ShotGunSpawner
   m_TagString: Untagged
@@ -2679,9 +2700,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 875420519fd23124c9872c57b921a743, type: 3}
+  weaponPrefab: {fileID: -8810218150888756848, guid: 875420519fd23124c9872c57b921a743, type: 3}
   spawnTime: 90
   magazines: 5
+--- !u!114 &375973799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375973796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3592833386
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 375973798}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &380368394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4030,6 +4070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744746396}
   - component: {fileID: 744746397}
+  - component: {fileID: 744746398}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -4065,9 +4106,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
+  weaponPrefab: {fileID: -947295690290330870, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &744746398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744746395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 420976916
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 744746397}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &754581934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4350,6 +4410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 789833771}
   - component: {fileID: 789833772}
+  - component: {fileID: 789833773}
   m_Layer: 0
   m_Name: BR Spawner (1)
   m_TagString: Untagged
@@ -4385,9 +4446,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
+  weaponPrefab: {fileID: -2377079447507418214, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &789833773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789833770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 4238714931
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 789833772}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &826756286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4737,6 +4817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 862006501}
   - component: {fileID: 862006502}
+  - component: {fileID: 862006503}
   m_Layer: 0
   m_Name: SMG (3)
   m_TagString: Untagged
@@ -4772,9 +4853,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
+  weaponPrefab: {fileID: -1951264196690670203, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
   spawnTime: 5
   magazines: 4
+--- !u!114 &862006503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862006500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1864260851
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 862006502}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &872809550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6782,6 +6882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1020963089}
   - component: {fileID: 1020963090}
+  - component: {fileID: 1020963091}
   m_Layer: 0
   m_Name: Raygun
   m_TagString: Untagged
@@ -6817,9 +6918,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 33d1b381375f78b4b857b2144737cf7b, type: 3}
+  weaponPrefab: {fileID: 7418767269082829470, guid: 33d1b381375f78b4b857b2144737cf7b, type: 3}
   spawnTime: 90
   magazines: 3
+--- !u!114 &1020963091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020963088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2800027828
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1020963090}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1025349613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8095,6 +8215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1139755185}
   - component: {fileID: 1139755186}
+  - component: {fileID: 1139755187}
   m_Layer: 0
   m_Name: BR Spawner
   m_TagString: Untagged
@@ -8130,9 +8251,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
+  weaponPrefab: {fileID: -2377079447507418214, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &1139755187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139755184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2729650437
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1139755186}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1168000358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9529,6 +9669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1254107548}
   - component: {fileID: 1254107549}
+  - component: {fileID: 1254107550}
   m_Layer: 0
   m_Name: GranadeSpawner
   m_TagString: Untagged
@@ -9564,9 +9705,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
+  weaponPrefab: {fileID: 7642327352939723073, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
   spawnTime: 90
   magazines: 3
+--- !u!114 &1254107550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254107547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1309098289
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1254107549}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1293158909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9856,6 +10016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1346299931}
   - component: {fileID: 1346299932}
+  - component: {fileID: 1346299933}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -9891,9 +10052,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
+  weaponPrefab: {fileID: -7558621830735597120, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &1346299933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346299930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2460778137
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1346299932}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1355604430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10410,6 +10590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443288513}
   - component: {fileID: 1443288514}
+  - component: {fileID: 1443288515}
   m_Layer: 0
   m_Name: PlasmaRifleSpawn
   m_TagString: Untagged
@@ -10445,9 +10626,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
+  weaponPrefab: {fileID: -3267657026100453495, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &1443288515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443288512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1518831262
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1443288514}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1443321478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12392,6 +12592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1768554075}
   - component: {fileID: 1768554076}
+  - component: {fileID: 1768554077}
   m_Layer: 0
   m_Name: SMG (2)
   m_TagString: Untagged
@@ -12427,9 +12628,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: d01b5a31eb01e084d80ab9bec2f97cd5, type: 3}
+  weaponPrefab: {fileID: -6590319946725103275, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &1768554077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768554074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3943405629
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1768554076}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1773821427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13269,6 +13489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897261760}
   - component: {fileID: 1897261761}
+  - component: {fileID: 1897261762}
   m_Layer: 0
   m_Name: SMG (1)
   m_TagString: Untagged
@@ -13304,9 +13525,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  weaponPrefab: {fileID: -7356428270659864968, guid: d01b5a31eb01e084d80ab9bec2f97cd5, type: 3}
   spawnTime: 30
   magazines: 4
+--- !u!114 &1897261762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897261759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 1002823680
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1897261761}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &1905640165
 PrefabInstance:
   m_ObjectHideFlags: 0

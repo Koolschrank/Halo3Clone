@@ -1,15 +1,48 @@
+using Fusion;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
+using static Unity.Collections.Unicode;
+using UnityEngine.UIElements;
 
-public class WeaponSpawner : MonoBehaviour
+public class WeaponSpawner : NetworkBehaviour
 {
     [SerializeField] bool spawnOnStart;
-    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] NetworkObject weaponPrefab;
     [SerializeField] float spawnTime;
     [SerializeField] int magazines = 4;
-    float spawnTimer;
+    
 
     Weapon_PickUp weapon;
+
+
+    [Networked] private TickTimer spawnTimer { get; set; }
+
+    // spawned
+    public override async void Spawned()
+    {
+        
+
+
+        await Task.Delay(100); // Wait for 0.1 seconds
+        if (!GameModeSelector.gameModeManager.HasWeaponPickups)
+        {
+            Runner.Despawn(Object);
+            return;
+        }
+
+        if (spawnOnStart)
+        {
+            SpawnWeapon();
+        }
+        else
+        {
+            spawnTimer = TickTimer.CreateFromSeconds(Runner, spawnTime);
+        }
+
+            
+    }
+
 
     public void Start()
     {
@@ -32,29 +65,23 @@ public class WeaponSpawner : MonoBehaviour
 
 
 
-        if (spawnOnStart)
+        
+    }
+
+
+    public override void FixedUpdateNetwork()
+    {
+        if (spawnTimer.Expired(Runner) && weapon == null)
         {
             SpawnWeapon();
         }
     }
 
 
-    public void Update()
-    {
-        if (weapon == null)
-        {
-            spawnTimer += Time.deltaTime;
-            if (spawnTimer >= spawnTime)
-            {
-                SpawnWeapon();
-                spawnTimer = 0;
-            }
-        }
-    }
 
     public void SpawnWeapon()
     {
-        weapon = Instantiate(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
+        weapon = Runner.Spawn(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
         weapon.SetAmmoWithMagazines(magazines);
         weapon.OnPickUp += WeaponPickedUp;
     }
@@ -63,6 +90,7 @@ public class WeaponSpawner : MonoBehaviour
     {
         weapon.OnPickUp -= WeaponPickedUp;
         this.weapon = null;
+        spawnTimer = TickTimer.CreateFromSeconds(Runner, spawnTime);
     }
 
     // gizmor sphere spawn point

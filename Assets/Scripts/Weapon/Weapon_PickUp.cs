@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Collections.Unicode;
+using Fusion;
 
-public class Weapon_PickUp : MonoBehaviour
+public class Weapon_PickUp : NetworkBehaviour
 {
     public Action<Weapon_PickUp> OnPickUp;
 
@@ -21,9 +24,18 @@ public class Weapon_PickUp : MonoBehaviour
         var weapon = new Weapon_Arms(weapon_Data, ammoInMagazine);
         pickedUp = true;
         OnPickUp?.Invoke(this);
-        Destroy(gameObject, 0.01f); // Destroy the pickup object after 0.01 seconds to avoid multiple pickups
+        StartCoroutine(DestroyAfter(0.01f)); // Destroy the pickup object after 0.01 seconds to avoid multiple pickups
+        
         return weapon;
 
+    }
+
+    public IEnumerator DestroyAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        if (HasStateAuthority)
+            Runner.Despawn(Object);
     }
 
     public Weapon_Data WeaponData => weapon_Data;

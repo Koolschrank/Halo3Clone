@@ -319,7 +319,8 @@ public class Arm : NetworkBehaviour
         }
 
         var pickUpVersion = weaponInHand.PickUpVersion;
-        var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
+        var pickUp = Runner.Spawn(pickUpVersion, dropPosition.position, dropPosition.rotation);
+        //var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
 
 
         if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data))
