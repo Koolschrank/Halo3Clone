@@ -6,7 +6,97 @@ using UnityEngine;
 
 public class PlayerInventory : NetworkBehaviour
 {
-    public Action<Weapon_Arms, int> OnWeaponAddedToInventory;
+    public Action<int, int> OnAmmoChanged;
+    public Action<int> OnWeaponAddedToInventory;
+    public Action<int> OnWeaponRemovedFromInventory;
+
+
+    [SerializeField] PlayerArms playerArms;
+
+    [Networked] public int WeaponInInventory { get; private set; } = -1;
+
+    [Networked] public int AmmoInInventoryMagazine { get; private set; } = 0;
+    [Networked, Capacity(30)] public NetworkArray<int> AmmoReserve { get; }
+
+    [Networked] public int AbilityInInventory { get; private set; } = -1;
+    [Networked] public int AbilityUses { get; private set; } = 0;
+
+
+    public void SetWeaponInInventory(WeaponNetworkStruct weapon)
+    {
+        if (WeaponInInventory != -1)
+        {
+            RemoveWeapon();
+        }
+
+
+        WeaponInInventory = weapon.weaponIndex;
+        AmmoInInventoryMagazine = weapon.ammoInMagazine;
+        OnWeaponAddedToInventory?.Invoke(weapon.weaponIndex);
+    }
+
+    public WeaponNetworkStruct GetWeaponInInventory()
+    {
+        return new WeaponNetworkStruct()
+        {
+            weaponIndex = WeaponInInventory,
+            ammoInMagazine = AmmoInInventoryMagazine,
+            ammoInReserveMagazine = AmmoReserve[WeaponInInventory]
+        };
+    }
+
+    public WeaponNetworkStruct RemoveWeapon()
+    {
+        var weapon = GetWeaponInInventory();
+        WeaponInInventory = -1;
+        if (true) //(!playerArms.HasWeaponOfTypeInHand(weapon))
+        {
+            SetAmmoInReserve(weapon.weaponIndex, 0);
+            AmmoReserve.Set(weapon.weaponIndex, 0);
+        }
+        OnWeaponRemovedFromInventory?.Invoke(weapon.weaponIndex);
+        return weapon;
+    }
+
+    public void SetAmmoInReserve(int weaponID, int ammo)
+    {
+        if (HasStateAuthority)
+        {
+            AmmoReserve.Set(weaponID, ammo);
+            OnAmmoChanged?.Invoke(weaponID, ammo);
+        } 
+    }
+
+    public int TakeAmmoFromReserve(int weaponID, int ammoToTake)
+    {
+        if (HasStateAuthority)
+        {
+            int ammoInReserve = AmmoReserve[weaponID];
+            if (ammoInReserve >= ammoToTake)
+            {
+                SetAmmoInReserve(weaponID, ammoInReserve - ammoToTake);
+                return ammoToTake;
+            }
+            else
+            {
+                SetAmmoInReserve(weaponID, 0);
+                return ammoInReserve;
+            }
+        }
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public Action<Weapon_Arms, int> OnWeaponAddedToInventoryOld;
     public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
 
@@ -14,7 +104,7 @@ public class PlayerInventory : NetworkBehaviour
     public Action<float> OnGranadeChargeChanged;
     public Action OnMiniMapDisabled;
     public Action OnMiniMapEnabled;
-    public Action<Weapon_Data,int> OnAmmoChanged;
+    public Action<Weapon_Data,int> OnAmmoChangedOld;
     public Action<int> OnAmmoOfWeaponInInventoryChanged;
 
 
@@ -23,6 +113,8 @@ public class PlayerInventory : NetworkBehaviour
 
     Weapon_Arms weapon { get; set; }
     // make an ammo dictionary weapondata -> ammo
+    
+
     Dictionary<Weapon_Data,int> ammo = new Dictionary<Weapon_Data, int>();
 
 
@@ -49,7 +141,7 @@ public class PlayerInventory : NetworkBehaviour
     public void Start()
     {
         characterHealth.OnDeath += DropWeapon;
-        OnAmmoChanged += TryInvokeAmmoChangeOfInventoryWeapon;
+        OnAmmoChangedOld += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 
     public void Clear()
@@ -105,11 +197,11 @@ public class PlayerInventory : NetworkBehaviour
             this.weapon = weapon;
             if (ammo.TryGetValue(weapon.Data, out int ammuntion))
             {
-                OnWeaponAddedToInventory?.Invoke(weapon, ammo[weapon.Data] + weapon.Magazine);
+                OnWeaponAddedToInventoryOld?.Invoke(weapon, ammo[weapon.Data] + weapon.Magazine);
             }
             else
             {
-                OnWeaponAddedToInventory?.Invoke(weapon, weapon.Magazine);
+                OnWeaponAddedToInventoryOld?.Invoke(weapon, weapon.Magazine);
             }
 
             
@@ -117,7 +209,7 @@ public class PlayerInventory : NetworkBehaviour
         }
     }
 
-    public Weapon_Arms RemoveWeapon()
+    public Weapon_Arms RemoveWeaponOld()
     {
         var weaponToReturn = weapon;
         weapon = null;
@@ -216,7 +308,7 @@ public class PlayerInventory : NetworkBehaviour
         {
             this.ammo[weaponType] = Mathf.Min(this.ammo[weaponType] + ammo, weaponType.ReserveSize);
         }
-        OnAmmoChanged?.Invoke(weaponType, this.ammo[weaponType]);
+        OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
     }
 
     public int GetAmmo(Weapon_Data weaponType)
@@ -237,7 +329,7 @@ public class PlayerInventory : NetworkBehaviour
             {
                 this.ammo.Remove(weaponType);
             }
-            OnAmmoChanged?.Invoke(weaponType, this.ammo[weaponType]);
+            OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
         }
     }
 
@@ -246,7 +338,7 @@ public class PlayerInventory : NetworkBehaviour
         if (this.ammo.ContainsKey(weapon))
         {
             this.ammo.Remove(weapon);
-            OnAmmoChanged?.Invoke(weapon, 0);
+            OnAmmoChangedOld?.Invoke(weapon, 0);
         }
     }
 
@@ -256,7 +348,7 @@ public class PlayerInventory : NetworkBehaviour
         {
             int ammo = this.ammo[weaponType];
             this.ammo.Remove(weaponType);
-            OnAmmoChanged?.Invoke(weaponType, 0);
+            OnAmmoChangedOld?.Invoke(weaponType, 0);
             return ammo;
         }
         return 0;
@@ -270,13 +362,13 @@ public class PlayerInventory : NetworkBehaviour
             if (ammo >= desiredAmount)
             {
                 this.ammo[weaponType] -= desiredAmount;
-                OnAmmoChanged?.Invoke(weaponType, this.ammo[weaponType]);
+                OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
                 return desiredAmount;
             }
             else
             {
                 this.ammo.Remove(weaponType);
-                OnAmmoChanged?.Invoke(weaponType, 0);
+                OnAmmoChangedOld?.Invoke(weaponType, 0);
                 return ammo;
             }
         }
@@ -310,7 +402,7 @@ public class PlayerInventory : NetworkBehaviour
             {
                 this.ammo.Remove(weaponType);
             }
-            OnAmmoChanged?.Invoke(weaponType, this.ammo[weaponType]);
+            OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
             return ammoToTake;
 
         }
@@ -368,7 +460,7 @@ public class PlayerInventory : NetworkBehaviour
             if (pickUp.WeaponType != WeaponType.oneHanded)
                 Destroy(pickUp.gameObject);
         }
-        OnAmmoChanged?.Invoke(pickUp.WeaponData, GetAmmo(pickUp.WeaponData));
+        OnAmmoChangedOld?.Invoke(pickUp.WeaponData, GetAmmo(pickUp.WeaponData));
 
     }
 

@@ -33,7 +33,7 @@ public class Arm : NetworkBehaviour
     {
         //granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
         //characterHealth.OnDeath += () => DropWeapon(0);
-        playerArms.Inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
+        playerArms.Inventory.OnAmmoChangedOld += TrySendEventToUpdateReserve;
 
     }
 
@@ -238,6 +238,25 @@ public class Arm : NetworkBehaviour
 
     public void EquipWeapon(Weapon_Arms weapon)
     {
+        WeaponNetworkStruct weaponNetworkStruct = new WeaponNetworkStruct()
+        {
+            weaponIndex = ItemIndexList.Instance.GetIndexViaWeapondData(weapon.Data),
+            ammoInMagazine = weapon.Magazine,
+            ammoInReserveMagazine = 0
+        };
+
+
+
+        RPC_EquipWeapon(weaponNetworkStruct);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_EquipWeapon(WeaponNetworkStruct weaponNetworkStruct)
+    {
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponNetworkStruct.weaponIndex);
+        var weapon = new Weapon_Arms(weaponData, weaponNetworkStruct.ammoInMagazine);
+
+
         if (weapon == null)
         {
             return;
@@ -258,6 +277,7 @@ public class Arm : NetworkBehaviour
         weaponInHand.SwitchInStart(switchInTimer);
         weapon.SetIsBeingDualWielded(playerArms.IsDualWielding);
     }
+
 
     void SwitchInFinished()
     {

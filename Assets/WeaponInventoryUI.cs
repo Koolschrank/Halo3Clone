@@ -17,7 +17,7 @@ public class WeaponInventoryUI : InterfaceItem
     protected override void Unsubscribe(PlayerBody body)
     {
         var inventory = body.PlayerInventory;
-        inventory.OnWeaponAddedToInventory -= (weapon, ammo) =>
+        inventory.OnWeaponAddedToInventoryOld -= (weapon, ammo) =>
         {
             Show();
             UpdateWeaponSprite(weapon.GunSpriteUI);
@@ -31,7 +31,7 @@ public class WeaponInventoryUI : InterfaceItem
     protected override void Subscribe(PlayerBody body)
     {
         var inventory = body.PlayerInventory;
-        inventory.OnWeaponAddedToInventory += (weapon, ammo) =>
+        inventory.OnWeaponAddedToInventoryOld += (weapon, ammo) =>
         {
             Show();
             UpdateWeaponSprite(weapon.GunSpriteUI);

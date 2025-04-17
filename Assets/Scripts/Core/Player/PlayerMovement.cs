@@ -64,14 +64,15 @@ public class PlayerMovement : NetworkBehaviour
         LocalControllerData localControllerData = InputSplitter.GetContollerData(data, playerBody.LocalPlayerIndex);
         cc.SetInputDirection(cc.Data.TransformRotation * new Vector3(localControllerData.moveVector.x, 0.0f, localControllerData.moveVector.y));
 
-
-        RPC_UpdateMove(cc.Data.KinematicVelocity);
+        if (HasStateAuthority)
+            RPC_UpdateMove(cc.Data.KinematicVelocity);
 
 
         if (localControllerData.buttons.IsSet(InputButton.Jump) && cc.Data.IsGrounded)
         {
             cc.Jump(Vector3.up);
-            RPC_UpdateJump();
+            if (HasStateAuthority)
+                RPC_UpdateJump();
             AudioManager.instance.PlayOneShot(jumpSound, transform.position);
         }
 

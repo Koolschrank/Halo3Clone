@@ -6013,6 +6013,7 @@ GameObject:
   - component: {fileID: 963734255}
   - component: {fileID: 963734256}
   - component: {fileID: 963734257}
+  - component: {fileID: 963734258}
   m_Layer: 0
   m_Name: LocalSystem
   m_TagString: Untagged
@@ -6587,6 +6588,34 @@ MonoBehaviour:
       targetDisplay: 1
   startingLayerLocalPlayer: 15
   networkPlayerLayer: 31
+--- !u!114 &963734258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963734253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d553ab4cf234a2478c29efd7990d075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData:
+  - {fileID: 11400000, guid: 650909fc6bcc65a45ad4ae3ee3128392, type: 2}
+  - {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+  - {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
+  - {fileID: 11400000, guid: 9d1ab78676d934449a13dbcb53363519, type: 2}
+  - {fileID: 11400000, guid: ac9f5e478e1d8694e9968705cc0ea824, type: 2}
+  - {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
+  - {fileID: 11400000, guid: efcebe5d52d7af841a969659fdd9092a, type: 2}
+  - {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+  - {fileID: 11400000, guid: cb17908b6a45b7a478e801369c9a68d7, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
+  - {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
+  - {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
+  - {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
+  - {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
 --- !u!1001 &977368009
 PrefabInstance:
   m_ObjectHideFlags: 0

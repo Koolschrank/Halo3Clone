@@ -21,7 +21,7 @@ public class WeaponSpawner : NetworkBehaviour
     // spawned
     public override async void Spawned()
     {
-        
+        if (!HasStateAuthority) return;
 
 
         await Task.Delay(100); // Wait for 0.1 seconds
@@ -41,18 +41,6 @@ public class WeaponSpawner : NetworkBehaviour
         }
 
             
-    }
-
-
-    public void Start()
-    {
-        StartCoroutine(StartDelay());
-    }
-
-    IEnumerator StartDelay()
-    {
-        yield return new WaitForSeconds(0.1f);
-        DelayStart();
     }
 
     public void DelayStart()

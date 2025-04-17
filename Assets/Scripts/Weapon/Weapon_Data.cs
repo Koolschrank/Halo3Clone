@@ -9,6 +9,9 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Weapon/WeaponData")]
 public class Weapon_Data : ScriptableObject
 {
+    public int WeaponIndex { get; set; } = -1;
+
+
     [SerializeField] Weapon_PickUp weaponPickUp;
     [SerializeField] Weapon_Bullet weaponBullet;
     [SerializeField] Weapon_Visual weaponFPSModel;

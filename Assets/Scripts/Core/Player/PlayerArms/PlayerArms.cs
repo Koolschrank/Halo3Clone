@@ -465,7 +465,7 @@ public class PlayerArms : NetworkBehaviour
 
     public void EquipWeaponFromInventory()
     {
-        rightArm.EquipWeapon(inventory.RemoveWeapon());
+        rightArm.EquipWeapon(inventory.RemoveWeaponOld());
 
     }
 
