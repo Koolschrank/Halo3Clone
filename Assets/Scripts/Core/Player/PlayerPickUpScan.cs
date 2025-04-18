@@ -111,8 +111,8 @@ public class PlayerPickUpScan : MonoBehaviour
         var weaponInLeftHand = playerArms.LeftArm.GetWeaponInHand();
         if (weaponInLeftHand != null && weaponInLeftHand.IsSameWeapon(weaponData))
             return true;
-        var weaponInInventory = playerInventory.GetWeapon();
-        if (weaponInInventory != null && weaponInInventory.IsSameWeapon(weaponData))
+        var weaponInInventory = playerInventory.WeaponInInventory;
+        if (weaponInInventory != -1 && weaponInInventory == weaponData.WeaponIndex)
             return true;
         return false;
 
@@ -120,12 +120,12 @@ public class PlayerPickUpScan : MonoBehaviour
 
     public void TransferAmmoFromWeaponOnGroundToPlayer(Weapon_PickUp pickUp)
     {
-        if (playerArms.HasWeapon(pickUp.WeaponData))
+        /*if (playerArms.HasWeapon(pickUp.WeaponData))
         {
             playerInventory.TransferAmmoFromPickUp(pickUp);
 
 
-        }
+        }*/
 
         
     }
@@ -155,21 +155,23 @@ public class PlayerPickUpScan : MonoBehaviour
         return pickUp.WeaponType == WeaponType.oneHanded;
     }
 
-    public Weapon_Arms PickUpWeapon()
+    public WeaponNetworkStruct PickUpWeapon()
     {
         var pickUp = GetClosesPickUp();
         pickUpsInRange.Remove(pickUp);
         TrySendUpdates();
         lastPickUpTime = Time.time;
         if (pickUp == null)
-            return null;
+            return new WeaponNetworkStruct()
+            {
+                weaponIndex = -1,
+            };
 
-        playerInventory.AddAmmo(pickUp.WeaponData, pickUp.AmmoInReserve);
+        
+
         return pickUp.PickUp();
+        //playerInventory.AddAmmoOld(pickUp.WeaponData, pickUp.AmmoInReserve);
     }
-
-
-
 
 
     public void RemovesNulls()

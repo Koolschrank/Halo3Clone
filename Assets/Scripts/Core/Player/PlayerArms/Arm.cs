@@ -5,6 +5,15 @@ using static PlayerArms;
 
 public class Arm : NetworkBehaviour
 {
+    [Networked] public int WeaponIndex { get; private set; } = -1;
+    int previousWeaponIndex = -1;
+
+    [Networked] public int AmmoInMagazine { get; set; } = 0;
+
+    
+
+
+
     [SerializeField] protected PlayerArms playerArms;
     [SerializeField] Transform dropPosition;
 
@@ -33,11 +42,21 @@ public class Arm : NetworkBehaviour
     {
         //granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
         //characterHealth.OnDeath += () => DropWeapon(0);
-        playerArms.Inventory.OnAmmoChangedOld += TrySendEventToUpdateReserve;
+        playerArms.Inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
 
     }
 
-    
+    public override void FixedUpdateNetwork()
+    {
+        if (previousWeaponIndex != WeaponIndex)
+        {
+            previousWeaponIndex = WeaponIndex;
+            EquipWeapon(WeaponIndex);
+        }
+    }
+
+
+
 
     public void CancelTimers()
     {
@@ -181,7 +200,7 @@ public class Arm : NetworkBehaviour
             !weaponInHand.IsInShootCooldown() &&
             weaponInHand.CanReload() &&
             InIdle &&
-            playerArms.Inventory.HasAmmo(weaponInHand.Data))
+            playerArms.Inventory.HasAmmoInReserve(weaponInHand.Data.WeaponIndex))
         {
             reloadTimer = weaponInHand.ReloadTime;
             OnWeaponReloadStarted?.Invoke(weaponInHand, weaponInHand.ReloadTime);
@@ -197,7 +216,7 @@ public class Arm : NetworkBehaviour
         if (weaponInHand != null)
         {
             int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
-            int ammoAdded = playerArms.Inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
+            int ammoAdded = playerArms.Inventory.TakeAmmoFromReserve(weaponInHand.Data.WeaponIndex, ammoNeeded);
             weaponInHand.ReloadFinished(ammoAdded);
         }
 
@@ -215,18 +234,17 @@ public class Arm : NetworkBehaviour
         {
 
             var newWeapon = pickUpScan.PickUpWeapon();
+
             OnWeaponPickedUp?.Invoke(newWeapon);
 
-
-
-            if (inventory.Full)
+            if (inventory.HasWeaponInInventory)
             {
                 DropWeapon(playerArms.WeaponDropForce);
                 EquipWeapon(newWeapon);
             }
             else
             {
-                inventory.AddWeapon(newWeapon);
+                inventory.SetWeaponInInventory(newWeapon);
                 playerArms.TrySwitchWeapon();
             }
             return true;
@@ -234,22 +252,59 @@ public class Arm : NetworkBehaviour
         return false;
     }
 
-    
+    public void EquipWeapon(int index)
+    {
+        if (index == -1) return;
 
-    public void EquipWeapon(Weapon_Arms weapon)
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(index);
+        var weapon = new Weapon_Arms(weaponData, AmmoInMagazine);
+
+
+        if (weapon == null)
+        {
+            return;
+        }
+
+        if (weaponInHand != null)
+        {
+            OnWeaponUnequipFinished?.Invoke(weaponInHand);
+            var weaponStruct = weaponInHand.GetWeaponNetworkStruct();
+            //weaponStruct.ammoInReserve = playerArms.Inventory.TakeAllAmmo(weaponInHand.Data.WeaponIndex);
+            playerArms.Inventory.SetWeaponInInventory(weaponStruct);
+        }
+
+        CancelTimers();
+        weaponInHand = weapon;
+        switchInTimer = weaponInHand.SwitchInTime;
+        OnWeaponEquipStarted?.Invoke(weaponInHand, weaponInHand.SwitchInTime);
+
+        weapon.SetBulletSpawner(playerArms.BulletSpawner);
+        weaponInHand.SwitchInStart(switchInTimer);
+        weapon.SetIsBeingDualWielded(playerArms.IsDualWielding);
+    }
+
+    public void EquipWeapon(WeaponNetworkStruct weapon)
+    {
+        WeaponIndex = weapon.weaponIndex;
+        AmmoInMagazine = weapon.ammoInMagazine;
+        playerArms.Inventory.SetAmmoInReserve(weapon.weaponIndex, weapon.ammoInReserve);
+    }
+
+    public void EquipWeaponOld(Weapon_Arms weapon)
     {
         WeaponNetworkStruct weaponNetworkStruct = new WeaponNetworkStruct()
         {
             weaponIndex = ItemIndexList.Instance.GetIndexViaWeapondData(weapon.Data),
             ammoInMagazine = weapon.Magazine,
-            ammoInReserveMagazine = 0
+            ammoInReserve = 0
         };
 
 
 
-        RPC_EquipWeapon(weaponNetworkStruct);
+        //RPC_EquipWeapon(weaponNetworkStruct);
     }
 
+    /*
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_EquipWeapon(WeaponNetworkStruct weaponNetworkStruct)
     {
@@ -277,7 +332,7 @@ public class Arm : NetworkBehaviour
         weaponInHand.SwitchInStart(switchInTimer);
         weapon.SetIsBeingDualWielded(playerArms.IsDualWielding);
     }
-
+    */
 
     void SwitchInFinished()
     {
@@ -321,7 +376,7 @@ public class Arm : NetworkBehaviour
         get
         {
             if (weaponInHand == null) return 0;
-            return playerArms.Inventory.GetAmmo(weaponInHand.Data);
+            return playerArms.Inventory.GetAmmoInReserve(weaponInHand.Data.WeaponIndex);
         }
     }
 
@@ -333,7 +388,7 @@ public class Arm : NetworkBehaviour
         var inventory = playerArms.Inventory;
 
         // if weapon is empty return null
-        if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
+        if (weaponInHand.Magazine == 0 && inventory.GetAmmoInReserve(weaponInHand.Data.WeaponIndex) == 0)
         {
             return null;
         }
@@ -343,13 +398,13 @@ public class Arm : NetworkBehaviour
         //var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
 
 
-        if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data))
+        if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data.WeaponIndex))
         {
             pickUp.SetAmmo(weaponInHand.Magazine, 0);
         }
         else
         {
-            pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
+            pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data.WeaponIndex));
         }
         OnWeaponDroped?.Invoke(weaponInHand, pickUp);
         weaponInHand.DropWeapon();
@@ -369,28 +424,28 @@ public class Arm : NetworkBehaviour
     public Action<Weapon_Arms> OnWeaponShot;
     public Action<Weapon_Arms> OnWeaponUnequipFinished;
     public Action<Weapon_Arms, Weapon_PickUp> OnWeaponDroped;
-    public Action<Weapon_Arms> OnWeaponPickedUp;
     public Action<GranadeStats, float> OnGranadeThrowStarted;
     public Action<int> OnReserveAmmoChanged;
 
-
-    
-
+    public Action<WeaponNetworkStruct> OnWeaponPickedUp;
 
 
 
 
-    
 
 
-    
 
 
-    
 
-    public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
+
+
+
+
+
+
+    public void TrySendEventToUpdateReserve(int weaponIndex, int ammo)
     {
-        if (weaponInHand != null && weaponInHand.Data == weaponAmmoChanged)
+        if (weaponInHand != null && weaponInHand.Data.WeaponIndex == weaponIndex)
         {
             OnReserveAmmoChanged?.Invoke(ammo);
         }

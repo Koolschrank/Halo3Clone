@@ -17,8 +17,31 @@ public class Weapon_PickUp : NetworkBehaviour
     List<int> teamsBlockedFromPickUpThis = new List<int>();
     bool pickedUp = false;
 
+    public WeaponNetworkStruct PickUp()
+    {
+        if (pickedUp)
+        {
+            return new WeaponNetworkStruct()
+            {
+                weaponIndex = -1,
+            };
+        }
+            
+        var weapon = new WeaponNetworkStruct()
+        {
+            weaponIndex = weapon_Data.WeaponIndex,
+            ammoInMagazine = ammoInMagazine,
+            ammoInReserve = ammoInReserve,
+        };
+        pickedUp = true;
+        OnPickUp?.Invoke(this);
+        StartCoroutine(DestroyAfter(0.01f)); // Destroy the pickup object after 0.01 seconds to avoid multiple pickups
+        return weapon;
+    }
 
-    public Weapon_Arms PickUp()
+
+
+    public Weapon_Arms PickUpOld()
     {
         if (pickedUp) return null;
         var weapon = new Weapon_Arms(weapon_Data, ammoInMagazine);

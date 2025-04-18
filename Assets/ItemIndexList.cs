@@ -23,7 +23,7 @@ public class ItemIndexList : MonoBehaviour
 
         for (int i = 0; i < weaponData.Length; i++)
         {
-            if (weaponData[i] == null)
+            if (weaponData[i] != null)
             {
                 weaponData[i].WeaponIndex = i;
             }
@@ -64,5 +64,5 @@ public struct WeaponNetworkStruct : INetworkStruct
 {
     public int weaponIndex;
     public int ammoInMagazine;
-    public int ammoInReserveMagazine;
+    public int ammoInReserve;
 }

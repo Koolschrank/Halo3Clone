@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerInventory : NetworkBehaviour
 {
     public Action<int, int> OnAmmoChanged;
+    public Action<int> OnInventoryWeaponAmmoChanged;
     public Action<int> OnWeaponAddedToInventory;
     public Action<int> OnWeaponRemovedFromInventory;
 
@@ -21,6 +22,7 @@ public class PlayerInventory : NetworkBehaviour
     [Networked] public int AbilityInInventory { get; private set; } = -1;
     [Networked] public int AbilityUses { get; private set; } = 0;
 
+    public bool HasWeaponInInventory => WeaponInInventory != -1;
 
     public void SetWeaponInInventory(WeaponNetworkStruct weapon)
     {
@@ -41,18 +43,20 @@ public class PlayerInventory : NetworkBehaviour
         {
             weaponIndex = WeaponInInventory,
             ammoInMagazine = AmmoInInventoryMagazine,
-            ammoInReserveMagazine = AmmoReserve[WeaponInInventory]
+            ammoInReserve = AmmoReserve[WeaponInInventory]
         };
     }
 
     public WeaponNetworkStruct RemoveWeapon()
     {
+        if (WeaponInInventory == -1)
+            return new WeaponNetworkStruct();
+
         var weapon = GetWeaponInInventory();
         WeaponInInventory = -1;
         if (true) //(!playerArms.HasWeaponOfTypeInHand(weapon))
         {
             SetAmmoInReserve(weapon.weaponIndex, 0);
-            AmmoReserve.Set(weapon.weaponIndex, 0);
         }
         OnWeaponRemovedFromInventory?.Invoke(weapon.weaponIndex);
         return weapon;
@@ -60,30 +64,44 @@ public class PlayerInventory : NetworkBehaviour
 
     public void SetAmmoInReserve(int weaponID, int ammo)
     {
-        if (HasStateAuthority)
-        {
-            AmmoReserve.Set(weaponID, ammo);
-            OnAmmoChanged?.Invoke(weaponID, ammo);
-        } 
+        AmmoReserve.Set(weaponID, ammo);
+        OnAmmoChanged?.Invoke(weaponID, ammo);
+
+        if (weaponID == WeaponInInventory)
+            OnInventoryWeaponAmmoChanged?.Invoke(ammo + AmmoInInventoryMagazine);
     }
 
     public int TakeAmmoFromReserve(int weaponID, int ammoToTake)
     {
-        if (HasStateAuthority)
+        int ammoInReserve = AmmoReserve[weaponID];
+        if (ammoInReserve >= ammoToTake)
         {
-            int ammoInReserve = AmmoReserve[weaponID];
-            if (ammoInReserve >= ammoToTake)
-            {
-                SetAmmoInReserve(weaponID, ammoInReserve - ammoToTake);
-                return ammoToTake;
-            }
-            else
-            {
-                SetAmmoInReserve(weaponID, 0);
-                return ammoInReserve;
-            }
+            SetAmmoInReserve(weaponID, ammoInReserve - ammoToTake);
+            return ammoToTake;
         }
-        return 0;
+        else
+        {
+            SetAmmoInReserve(weaponID, 0);
+            return ammoInReserve;
+        }
+    }
+
+    public int GetAmmoInReserve(int weaponID)
+    {
+        return AmmoReserve[weaponID];
+    }
+
+    public int TakeAllAmmo(int weaponID)
+    {
+        int ammoInReserve = AmmoReserve[weaponID];
+        SetAmmoInReserve(weaponID, 0);
+        return ammoInReserve;
+    }
+
+
+    public bool HasAmmoInReserve(int weaponID)
+    {
+        return AmmoReserve[weaponID] > 0;
     }
 
 
@@ -95,17 +113,16 @@ public class PlayerInventory : NetworkBehaviour
 
 
 
-
-    public Action<Weapon_Arms, int> OnWeaponAddedToInventoryOld;
-    public Action<Weapon_Arms> OnWeaponDrop;
+    //public Action<Weapon_Arms, int> OnWeaponAddedToInventoryOld;
+    //public Action<Weapon_Arms> OnWeaponDrop;
     public Action<int> OnGranadeCountChanged;
 
     public Action<int> OnMaxGranadeCountChanged;
     public Action<float> OnGranadeChargeChanged;
     public Action OnMiniMapDisabled;
     public Action OnMiniMapEnabled;
-    public Action<Weapon_Data,int> OnAmmoChangedOld;
-    public Action<int> OnAmmoOfWeaponInInventoryChanged;
+    //public Action<Weapon_Data,int> OnAmmoChangedOld;
+    //public Action<int> OnAmmoOfWeaponInInventoryChanged;
 
 
 
@@ -115,7 +132,7 @@ public class PlayerInventory : NetworkBehaviour
     // make an ammo dictionary weapondata -> ammo
     
 
-    Dictionary<Weapon_Data,int> ammo = new Dictionary<Weapon_Data, int>();
+    //Dictionary<Weapon_Data,int> ammo = new Dictionary<Weapon_Data, int>();
 
 
 
@@ -131,7 +148,7 @@ public class PlayerInventory : NetworkBehaviour
     float rechargeGranadeTimer;
     int granadeCount = 0;
 
-    public bool HasWeapon => weapon != null;
+   
 
     public Weapon_Arms FirstWeaponInInventory => weapon;
 
@@ -141,33 +158,32 @@ public class PlayerInventory : NetworkBehaviour
     public void Start()
     {
         characterHealth.OnDeath += DropWeapon;
-        OnAmmoChangedOld += TryInvokeAmmoChangeOfInventoryWeapon;
+        //OnAmmoChangedOld += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 
-    public void Clear()
-        { weapon = null; }
 
     public void DropWeapon()
     {
-        if (weapon != null)
-        {
-            if (weapon == null || (weapon.Magazine == 0 && GetAmmo(weapon.Data) == 0))
-            {
-                return;
-            }
+    //    if (weapon != null)
+    //    {
+    //        if (weapon == null || (weapon.Magazine == 0 && GetAmmo(weapon.Data) == 0))
+    //        {
+    //            return;
+    //        }
 
-            Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
-            pickUp.SetAmmo(weapon.Magazine, TakeAllAmmo(weapon.Data));
-            OnWeaponDrop?.Invoke(weapon);
-            weapon.DropWeapon();
-            weapon = null;
+    //        Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
+    //        pickUp.SetAmmo(weapon.Magazine, TakeAllAmmo(weapon.Data));
+    //        OnWeaponDrop?.Invoke(weapon);
+    //        weapon.DropWeapon();
+    //        weapon = null;
 
 
-        }
+    //    }
     }
 
     public void Update()
     {
+        /*
         if (weapon != null)
         {
             weapon.UpdateWeapon(Runner.DeltaTime);
@@ -187,55 +203,16 @@ public class PlayerInventory : NetworkBehaviour
                 OnGranadeChargeChanged?.Invoke(1);
 
             }
-        }
+        }*/
     }
 
-    public void AddWeapon(Weapon_Arms weapon)
-    {
-        if (!Full)
-        {
-            this.weapon = weapon;
-            if (ammo.TryGetValue(weapon.Data, out int ammuntion))
-            {
-                OnWeaponAddedToInventoryOld?.Invoke(weapon, ammo[weapon.Data] + weapon.Magazine);
-            }
-            else
-            {
-                OnWeaponAddedToInventoryOld?.Invoke(weapon, weapon.Magazine);
-            }
 
-            
-
-        }
-    }
-
-    public Weapon_Arms RemoveWeaponOld()
-    {
-        var weaponToReturn = weapon;
-        weapon = null;
-        return weaponToReturn;
-    }
 
 
     // shoot be obsolete
-    public Weapon_Arms SwitchWeapon(Weapon_Arms weapon)
-    {
-        var weaponToReturn = weapon;
-        weapon = null;
 
-        if (weapon != null)
-        {
-            AddWeapon(weapon);
-        }
-        return weaponToReturn;
-    }
 
-    public Weapon_Arms GetWeapon()
-    {
-        return weapon;
-    }
-
-    public bool Full => weapon != null;
+  
 
     // add granade
 
@@ -297,172 +274,18 @@ public class PlayerInventory : NetworkBehaviour
 
     public GranadeStats GranadeStats => granadeStats;
 
-    public void AddAmmo(Weapon_Data weaponType, int ammo)
-    {
-        if (!this.ammo.ContainsKey(weaponType))
-        {
-            this.ammo.Add(weaponType,Mathf.Min(weaponType.ReserveSize,  ammo));
-
-        }
-        else
-        {
-            this.ammo[weaponType] = Mathf.Min(this.ammo[weaponType] + ammo, weaponType.ReserveSize);
-        }
-        OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
-    }
-
-    public int GetAmmo(Weapon_Data weaponType)
-    {
-        if (this.ammo.ContainsKey(weaponType))
-        {
-            return this.ammo[weaponType];
-        }
-        return 0;
-    }
-
-    public void RemoveAmmo(Weapon_Data weaponType, int ammo)
-    {
-        if (this.ammo.ContainsKey(weaponType))
-        {
-            this.ammo[weaponType] -= ammo;
-            if (this.ammo[weaponType] <= 0)
-            {
-                this.ammo.Remove(weaponType);
-            }
-            OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
-        }
-    }
-
-    public void RemoveAllAmmoOfWeapon(Weapon_Data weapon)
-    {
-        if (this.ammo.ContainsKey(weapon))
-        {
-            this.ammo.Remove(weapon);
-            OnAmmoChangedOld?.Invoke(weapon, 0);
-        }
-    }
-
-    public int TakeAllAmmo(Weapon_Data weaponType)
-    {
-        if (this.ammo.ContainsKey(weaponType))
-        {
-            int ammo = this.ammo[weaponType];
-            this.ammo.Remove(weaponType);
-            OnAmmoChangedOld?.Invoke(weaponType, 0);
-            return ammo;
-        }
-        return 0;
-    }
-
-    public int TakeAmmo(Weapon_Data weaponType, int desiredAmount)
-    {
-        if (this.ammo.ContainsKey(weaponType))
-        {
-            int ammo = this.ammo[weaponType];
-            if (ammo >= desiredAmount)
-            {
-                this.ammo[weaponType] -= desiredAmount;
-                OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
-                return desiredAmount;
-            }
-            else
-            {
-                this.ammo.Remove(weaponType);
-                OnAmmoChangedOld?.Invoke(weaponType, 0);
-                return ammo;
-            }
-        }
-        return 0;
-
-    }
-
-    public void TryInvokeAmmoChangeOfInventoryWeapon(Weapon_Data weaponType, int amount)
-    {
-        Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon");
-        if (weapon != null && weapon.Data == weaponType)
-        {
-            Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon 2");
-            OnAmmoOfWeaponInInventoryChanged?.Invoke(amount + weapon.Magazine);
-        }
-    }
-
-    public bool HasAmmo(Weapon_Data weaponType)
-    {
-        return this.ammo.ContainsKey(weaponType) && this.ammo[weaponType] != 0;
-    }
-
-    public int TakeMagazin(Weapon_Data weaponType)
-    {
-        if (ammo.ContainsKey(weaponType))
-        {
-            int ammoInInventory = this.ammo[weaponType];
-            int ammoToTake = Mathf.Min(ammoInInventory, weaponType.MagazineSize);
-            this.ammo[weaponType] -= ammoToTake;
-            if (this.ammo[weaponType] <= 0)
-            {
-                this.ammo.Remove(weaponType);
-            }
-            OnAmmoChangedOld?.Invoke(weaponType, this.ammo[weaponType]);
-            return ammoToTake;
-
-        }
-        return 0;
-    }
 
 
-    public void TransferAmmoFromPickUp(Weapon_PickUp pickUp)
-    {
-        int maxAmmo = pickUp.WeaponData.ReserveSize;
-        int ammoOfWeaponType = GetAmmo(pickUp.WeaponData);
-        int missingAmmo = maxAmmo - ammoOfWeaponType;
-        int ammoInPickUpReserve = pickUp.AmmoInReserve;
-        int ammoInPickUpMagazine = pickUp.AmmoInMagazine;
 
-        if (missingAmmo > 0)
-        {
-            // first use up ammo from pick reserve then from magazine
-            if (ammoInPickUpReserve > missingAmmo)
-            {
-                AddAmmo(pickUp.WeaponData, missingAmmo);
-                ammoInPickUpReserve -= missingAmmo;
-                missingAmmo = 0;
-                pickUp.SetAmmo(ammoInPickUpMagazine, ammoInPickUpReserve);
-            }
-            else
-            {
-                AddAmmo(pickUp.WeaponData, ammoInPickUpReserve);
-                missingAmmo -= ammoInPickUpReserve;
-                ammoInPickUpReserve = 0;
-                pickUp.SetAmmo(ammoInPickUpMagazine, ammoInPickUpReserve);
-                if (missingAmmo > 0)
-                {
-                    if (ammoInPickUpMagazine > missingAmmo)
-                    {
-                        AddAmmo(pickUp.WeaponData, missingAmmo);
-                        ammoInPickUpMagazine -= missingAmmo;
-                        missingAmmo = 0;
-                        pickUp.SetAmmo(ammoInPickUpMagazine, ammoInPickUpReserve);
-                    }
-                    else
-                    {
-                        AddAmmo(pickUp.WeaponData, ammoInPickUpMagazine);
-                        missingAmmo -= ammoInPickUpMagazine;
-                        ammoInPickUpMagazine = 0;
-                        pickUp.SetAmmo(ammoInPickUpMagazine, ammoInPickUpReserve);
-                    }
-                }
-            }
 
-        }
-        if (ammoInPickUpReserve > 0 || ammoInPickUpMagazine > 0)
-        {
-            pickUp.OnPickUp?.Invoke(pickUp);
-            if (pickUp.WeaponType != WeaponType.oneHanded)
-                Destroy(pickUp.gameObject);
-        }
-        OnAmmoChangedOld?.Invoke(pickUp.WeaponData, GetAmmo(pickUp.WeaponData));
 
-    }
+
+
+
+
+
+
+
 
 
 

@@ -10735,6 +10735,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f44e285ab8c58445bb7cd2ec2d19c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerArms: {fileID: 3232609274750972410}
+  _WeaponInInventory: -1
+  _AmmoInInventoryMagazine: 0
+  _AmmoReserve: 
+  _AbilityInInventory: -1
+  _AbilityUses: 0
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
   granadeInventorySize: 1
   rechargeGranades: 1
@@ -10886,6 +10892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3d11f1550df63479d6639fa6d55894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _WeaponIndex: -1
+  _AmmoInMagazine: 0
   playerArms: {fileID: 3232609274750972410}
   dropPosition: {fileID: 2372597562941759599}
   reloadTimer: 0
@@ -10905,6 +10913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb2d5e70c233af4cab7afa0401c79bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _WeaponIndex: -1
+  _AmmoInMagazine: 0
   playerArms: {fileID: 3232609274750972410}
   dropPosition: {fileID: 8167806766066142118}
   reloadTimer: 0

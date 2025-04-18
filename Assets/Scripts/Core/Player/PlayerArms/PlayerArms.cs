@@ -192,7 +192,7 @@ public class PlayerArms : NetworkBehaviour
 
         if (rightArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmo(rightArm.CurrentWeapon.Data))
+            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
                 rightArm.TryReload();
             
         }
@@ -211,7 +211,7 @@ public class PlayerArms : NetworkBehaviour
         {
             if (rightArm.CurrentWeapon.Magazine == 0)
             {
-                if (!inventory.HasAmmo(rightArm.CurrentWeapon.Data))
+                if (!inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
                 {
                     TrySwitchWeapon();
                     if (InSwitchOut) return;
@@ -309,13 +309,13 @@ public class PlayerArms : NetworkBehaviour
 
         if (rightArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmo(rightArm.CurrentWeapon.Data))
+            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
                 rightArm.TryReload();
 
         }
         if (leftArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmo(leftArm.CurrentWeapon.Data))
+            if (inventory.HasAmmoInReserve(leftArm.CurrentWeapon.Data.WeaponIndex))
                 leftArm.TryReload();
 
         }
@@ -433,7 +433,7 @@ public class PlayerArms : NetworkBehaviour
 
     public bool TrySwitchWeapon()
     {
-        if (InAction || !inventory.HasWeapon) return false;
+        if (InAction || inventory.WeaponInInventory == -1) return false;
 
 
 
@@ -465,7 +465,7 @@ public class PlayerArms : NetworkBehaviour
 
     public void EquipWeaponFromInventory()
     {
-        rightArm.EquipWeapon(inventory.RemoveWeaponOld());
+        rightArm.EquipWeapon(inventory.RemoveWeapon());
 
     }
 
@@ -574,47 +574,33 @@ public class PlayerArms : NetworkBehaviour
 
     }
 
-    public bool HasWeapon(Weapon_Data weapon)
+    public bool HasWeapon(int weaponIndex)
     {
-        return rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data == weapon ||
-            leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data == weapon ||
-            inventory.GetWeapon() != null && inventory.GetWeapon().Data == weapon;
+        if (weaponIndex == -1) return false;
+
+
+
+
+
+        return rightArm.WeaponIndex == weaponIndex ||
+            leftArm.WeaponIndex == weaponIndex ||
+            inventory.WeaponInInventory == weaponIndex;
     }
 
-    public bool HasMultipleOfTheSameWeapon(Weapon_Data weaponToCheck)
+    public bool HasMultipleOfTheSameWeapon(int weaponIndexToCheck)
     {
-        Weapon_Data rightWeapon = null;
-        Weapon_Data leftWeapon = null;
-        Weapon_Data weaponInInventory = null;
-
-        if (rightArm.CurrentWeapon != null)
-        {
-            rightWeapon = rightArm.CurrentWeapon.Data;
-        }
-
-        if (leftArm.CurrentWeapon != null)
-        {
-            leftWeapon = leftArm.CurrentWeapon.Data;
-        }
-
-        if (inventory.GetWeapon() != null)
-        {
-            weaponInInventory = inventory.GetWeapon().Data;
-        }
-
-
         int count = 0;
-        if (rightWeapon != null && rightWeapon == weaponToCheck)
+        if(rightArm.WeaponIndex == weaponIndexToCheck)
         {
             count++;
         }
 
-        if (leftWeapon != null && leftWeapon == weaponToCheck)
+        if (leftArm.WeaponIndex == weaponIndexToCheck)
         {
             count++;
         }
 
-        if (weaponInInventory != null && weaponInInventory == weaponToCheck)
+        if (inventory.WeaponInInventory == weaponIndexToCheck)
         {
             count++;
         }

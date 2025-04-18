@@ -30,16 +30,16 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
         if (equipment.WeaponInHand != null)
         {
             playerArms.RightArm.EquipWeapon(
-            SpawnWeapon(
-                equipment.WeaponInHand,
+                CreateWeapon(
+                equipment.WeaponInHand.WeaponIndex,
                 equipment.MagazinsOfWeaponInHand));
         }
 
         if (equipment.WeaponInLeftHand != null)
         {
             playerArms.LeftArm.EquipWeapon(
-            SpawnWeapon(
-                equipment.WeaponInLeftHand,
+                CreateWeapon(
+                equipment.WeaponInLeftHand.WeaponIndex,
                 equipment.MagazinsOfWeaponInLeftHand));
         }
 
@@ -47,14 +47,20 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
 
 
+
         if (equipment.SideArm != null)
         {
-            playerInventory.Clear();
+            playerInventory.RemoveWeapon();
+            var weaponStruct = CreateWeapon(
+                equipment.SideArm.WeaponIndex,
+                equipment.MagazinsOfSideArm);
+            playerInventory.SetWeaponInInventory(weaponStruct);
+            playerInventory.SetAmmoInReserve(
+                weaponStruct.weaponIndex,
+                weaponStruct.ammoInReserve);
 
-            playerInventory.AddWeapon(
-            SpawnWeapon(
-                equipment.SideArm,
-                equipment.MagazinsOfSideArm));
+
+
         }
 
         if (equipment.Granade != null)
@@ -90,20 +96,20 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
     }
 
-    public Weapon_Arms SpawnWeapon(Weapon_Data data)
+    public WeaponNetworkStruct CreateWeapon(int index, int magazines)
     {
-        var weapon = new Weapon_Arms(data);
-        weapon.FillMagazine();
-        playerInventory.AddAmmo(data, data.ReserveSize);
-        return weapon;
-    }
+        var data = ItemIndexList.Instance.GetWeaponViaIndex(index);
+        int magazineSize = data.MagazineSize;
 
-    public Weapon_Arms SpawnWeapon(Weapon_Data data, int magazins)
-    {
-        var weapon = new Weapon_Arms(data);
-        weapon.FillMagazine();
-        playerInventory.AddAmmo(data, data.MagazineSize * (magazins -1));
-        return weapon;
+        int bulletsInMagazine = magazineSize;
+        int bulletsInReserve = (magazines - 1) * magazineSize;
+
+        return new WeaponNetworkStruct
+        {
+            weaponIndex = index,
+            ammoInMagazine = bulletsInMagazine,
+            ammoInReserve = bulletsInReserve
+        };
     }
 }
 

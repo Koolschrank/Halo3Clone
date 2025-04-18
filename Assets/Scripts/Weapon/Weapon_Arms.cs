@@ -59,6 +59,17 @@ public class Weapon_Arms
         SetAmmo(magazine);
     }
 
+    public WeaponNetworkStruct GetWeaponNetworkStruct()
+    {
+        return new WeaponNetworkStruct()
+        {
+            weaponIndex = weaponData.WeaponIndex,
+            ammoInMagazine = magazine,
+            ammoInReserve = 0
+        };
+    }
+
+
     public int Magazine
     {
         get => magazine;

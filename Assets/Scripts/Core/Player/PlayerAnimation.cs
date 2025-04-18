@@ -76,8 +76,8 @@ public class PlayerAnimation : MonoBehaviour
         playerArms.GranadeThrower.OnGranadeThrow += ThrowGranade;
         playerArms.RightArm.OnMeleeWithWeaponStarted += Melee;
         playerArms.RightArm.OnWeaponDroped += (weapon,pickup) => DropWeapon(weapon);
-        playerInventory.OnWeaponAddedToInventoryOld += (weapon,ammo)  => PutWeaponInBackpack(weapon);
-        playerInventory.OnWeaponDrop += DropInvetoryWeapon;
+        playerInventory.OnWeaponAddedToInventory +=  PutWeaponInBackpack;
+        //playerInventory.OnWeaponDrop += DropInvetoryWeapon;
 
         playerArms.LeftArm.OnWeaponEquipStarted += SwitchInLeftWeapon;
 
@@ -104,8 +104,8 @@ public class PlayerAnimation : MonoBehaviour
         }
         if (backpackWeaponVisual == null)
         {
-            var weapon = playerInventory.GetWeapon();
-            if (weapon != null)
+            var weapon = playerInventory.WeaponInInventory;
+            if (weapon != -1)
             {
                 PutWeaponInBackpack(weapon);
             }
@@ -313,13 +313,14 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger("Melee");
     }
 
-    public void PutWeaponInBackpack(Weapon_Arms weapon)
+    public void PutWeaponInBackpack(int weaponIndex)
     {
+        var weapon = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
         if (backpackWeaponVisual != null)
         {
             Destroy(backpackWeaponVisual.gameObject);
         }
-        backpackWeaponVisual = Instantiate(weapon.WeaponModel, backpackWeaponSocket);
+        backpackWeaponVisual = Instantiate(weapon.Weapon3rdPersonModel, backpackWeaponSocket);
         backpackWeaponVisual.transform.localPosition = Vector3.zero;
         backpackWeaponVisual.transform.localRotation = Quaternion.identity;
         UtilityFunctions.SetLayerRecursively(backpackWeaponVisual, gameObject.layer);

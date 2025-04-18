@@ -87,7 +87,6 @@ public class PlayerCamera : InterfaceItem
 
     public void UpdateZoom(bool val)
     {
-        Debug.Log("UpdateZoom: " + val);
         isZoomedIn = val;
     }
 

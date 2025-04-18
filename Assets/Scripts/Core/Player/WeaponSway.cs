@@ -70,7 +70,7 @@ public class WeaponSway : InterfaceItem
     public void UpdateWalkInput(Vector3 moveInput)
     {
         walkInput = new Vector2(moveInput.x, moveInput.z);
-        Debug.Log("Walk Input: " + walkInput);
+        
     }
 
     public void UpdateLookInput(Vector2 lookInput)
