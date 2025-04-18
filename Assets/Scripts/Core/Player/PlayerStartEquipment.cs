@@ -31,7 +31,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
         {
             playerArms.RightArm.EquipWeapon(
                 CreateWeapon(
-                equipment.WeaponInHand.WeaponIndex,
+                equipment.WeaponInHand.WeaponTypeIndex,
                 equipment.MagazinsOfWeaponInHand));
         }
 
@@ -39,7 +39,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
         {
             playerArms.LeftArm.EquipWeapon(
                 CreateWeapon(
-                equipment.WeaponInLeftHand.WeaponIndex,
+                equipment.WeaponInLeftHand.WeaponTypeIndex,
                 equipment.MagazinsOfWeaponInLeftHand));
         }
 
@@ -52,11 +52,11 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
         {
             playerInventory.RemoveWeapon();
             var weaponStruct = CreateWeapon(
-                equipment.SideArm.WeaponIndex,
+                equipment.SideArm.WeaponTypeIndex,
                 equipment.MagazinsOfSideArm);
             playerInventory.SetWeaponInInventory(weaponStruct);
             playerInventory.SetAmmoInReserve(
-                weaponStruct.weaponIndex,
+                weaponStruct.weaponTypeIndex,
                 weaponStruct.ammoInReserve);
 
 
@@ -106,7 +106,7 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         return new WeaponNetworkStruct
         {
-            weaponIndex = index,
+            weaponTypeIndex = index,
             ammoInMagazine = bulletsInMagazine,
             ammoInReserve = bulletsInReserve
         };

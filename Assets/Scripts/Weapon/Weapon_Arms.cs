@@ -8,6 +8,17 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon_Arms
 {
+    int index = -1;
+
+    public int Index
+    {
+        get => index;
+        set
+        {
+            index = value;
+        }
+    }
+
     public Action<float> OnReloadStart;
     public Action<float> OnSwitchOutStart;
     public Action<float> OnSwitchInStart;
@@ -59,11 +70,18 @@ public class Weapon_Arms
         SetAmmo(magazine);
     }
 
+    public Weapon_Arms(Weapon_Data weaponData, int magazine, int index)
+    {
+        this.weaponData = weaponData;
+        SetAmmo(magazine);
+        this.index = index;
+    }
+
     public WeaponNetworkStruct GetWeaponNetworkStruct()
     {
         return new WeaponNetworkStruct()
         {
-            weaponIndex = weaponData.WeaponIndex,
+            weaponTypeIndex = weaponData.WeaponTypeIndex,
             ammoInMagazine = magazine,
             ammoInReserve = 0
         };

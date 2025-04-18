@@ -21,6 +21,10 @@ public class PlayerPickUpScan : MonoBehaviour
     public Action OnWeaponPickUp;
 
 
+
+
+
+
     // todo: this is not a good bug fix, need to find the root cause
     private void Update()
     {
@@ -103,18 +107,11 @@ public class PlayerPickUpScan : MonoBehaviour
 
     public bool CheckIfPlayerOwnsWeapon(Weapon_PickUp pickup)
     {
-        var weaponData = pickup.WeaponData;
+        var weaponData = pickup.WeaponData.WeaponTypeIndex;
 
-        var weaponInHand = playerArms.RightArm.GetWeaponInHand();
-        if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData))
-            return true;
-        var weaponInLeftHand = playerArms.LeftArm.GetWeaponInHand();
-        if (weaponInLeftHand != null && weaponInLeftHand.IsSameWeapon(weaponData))
-            return true;
-        var weaponInInventory = playerInventory.WeaponInInventory;
-        if (weaponInInventory != -1 && weaponInInventory == weaponData.WeaponIndex)
-            return true;
-        return false;
+        return (weaponData == playerArms.LeftArm.WeaponIndex)||
+                (weaponData == playerArms.RightArm.WeaponIndex) ||
+                (weaponData == playerInventory.WeaponInInventory);
 
     }
 
@@ -129,9 +126,23 @@ public class PlayerPickUpScan : MonoBehaviour
 
         
     }
-    public bool CanPickUpWeapon()
+
+    public bool IsWeaponInRange()
     {
         return pickUpsInRange.Count > 0;
+    }
+
+    public bool CanPickUpWeapon(Arm arm)
+    {
+        if (!IsWeaponInRange()) return false;
+        var closestWeapon = GetClosesPickUp();
+        var weaponIndex = closestWeapon.WeaponData.WeaponTypeIndex;
+
+       
+
+        if (playerInventory.WeaponInInventory == weaponIndex || arm.WeaponIndex == weaponIndex)
+            return false;
+        return true;
     }
 
     
@@ -164,7 +175,7 @@ public class PlayerPickUpScan : MonoBehaviour
         if (pickUp == null)
             return new WeaponNetworkStruct()
             {
-                weaponIndex = -1,
+                weaponTypeIndex = -1,
             };
 
         

@@ -27,7 +27,7 @@ public class WeaponInventoryUI : InterfaceItem
         };
 
         inventory.OnInventoryWeaponAmmoChanged -= UpdateAmmo;
-        //inventory.OnWeaponDrop -= (weapon) => Hide();
+        inventory.OnWeaponRemovedFromInventory -= (weapon) => Hide();
     }
 
     protected override void Subscribe(PlayerBody body)
@@ -42,7 +42,7 @@ public class WeaponInventoryUI : InterfaceItem
             UpdateAmmo(inventory.GetAmmoInReserve(weaponIndex) + inventory.AmmoInInventoryMagazine);
         };
         inventory.OnInventoryWeaponAmmoChanged += UpdateAmmo;
-        //inventory.OnWeaponDrop += (weapon) => Hide();
+        inventory.OnWeaponRemovedFromInventory += (weapon) => Hide();
         if (inventory.WeaponInInventory != -1)
         {
             var weaponIndex = inventory.WeaponInInventory;

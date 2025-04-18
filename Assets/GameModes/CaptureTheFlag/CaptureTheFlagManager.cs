@@ -167,11 +167,11 @@ public class CaptureTheFlagManager : GameModeManager
         var arms = player.Body.PlayerArms;
         arms.LeftArm.OnWeaponPickedUp += (weapon) =>
         {
-            if (weapon.weaponIndex == team1_FlagData.WeaponIndex)
+            if (weapon.weaponTypeIndex == team1_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team1(player.Body.gameObject);
             }
-            else if (weapon.weaponIndex == team2_FlagData.WeaponIndex)
+            else if (weapon.weaponTypeIndex == team2_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team2(player.Body.gameObject);
             }
@@ -179,11 +179,11 @@ public class CaptureTheFlagManager : GameModeManager
 
         arms.RightArm.OnWeaponPickedUp += (weapon) =>
         {
-            if (weapon.weaponIndex == team1_FlagData.WeaponIndex)
+            if (weapon.weaponTypeIndex == team1_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team1(player.Body.gameObject);
             }
-            else if (weapon.weaponIndex == team2_FlagData.WeaponIndex)
+            else if (weapon.weaponTypeIndex == team2_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team2(player.Body.gameObject);
             }

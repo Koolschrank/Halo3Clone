@@ -94,6 +94,7 @@ public class WeaponUI : InterfaceItem
 
     void EquipWeapon(Weapon_Arms weapon)
     {
+        gameObject.SetActive(true);
         if ( weapon.ShowAmmoUI)
         {
             bulletUI.gameObject.SetActive(true);
@@ -135,6 +136,8 @@ public class WeaponUI : InterfaceItem
 
     void UnequipWeapon(Weapon_Arms weapon)
     {
+
+        gameObject.SetActive(false);
         weapon.OnMagazineChange -= UpdateMagazin;
 
         DeleteBulletsFromUI();

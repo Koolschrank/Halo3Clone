@@ -9,6 +9,9 @@ public class ItemIndexList : MonoBehaviour
     public static ItemIndexList Instance { get; private set; }
     [SerializeField] Weapon_Data[] weaponData;
 
+
+    int index = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,7 +28,7 @@ public class ItemIndexList : MonoBehaviour
         {
             if (weaponData[i] != null)
             {
-                weaponData[i].WeaponIndex = i;
+                weaponData[i].WeaponTypeIndex = i;
             }
         }
     }
@@ -56,13 +59,22 @@ public class ItemIndexList : MonoBehaviour
         Debug.LogError("Weapon data not found in the list: " + data);
         return -1;
     }
+
+    public int GetNextIndex()
+    {
+        index++;
+        return index;
+    }
+
+
 }
 
 
 [Serializable]
 public struct WeaponNetworkStruct : INetworkStruct
 {
-    public int weaponIndex;
+    public int index;
+    public int weaponTypeIndex;
     public int ammoInMagazine;
     public int ammoInReserve;
 }

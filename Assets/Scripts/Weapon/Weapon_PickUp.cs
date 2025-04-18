@@ -23,13 +23,13 @@ public class Weapon_PickUp : NetworkBehaviour
         {
             return new WeaponNetworkStruct()
             {
-                weaponIndex = -1,
+                weaponTypeIndex = -1,
             };
         }
             
         var weapon = new WeaponNetworkStruct()
         {
-            weaponIndex = weapon_Data.WeaponIndex,
+            weaponTypeIndex = weapon_Data.WeaponTypeIndex,
             ammoInMagazine = ammoInMagazine,
             ammoInReserve = ammoInReserve,
         };

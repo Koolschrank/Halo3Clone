@@ -32,16 +32,16 @@ public class PlayerInventory : NetworkBehaviour
         }
 
 
-        WeaponInInventory = weapon.weaponIndex;
+        WeaponInInventory = weapon.weaponTypeIndex;
         AmmoInInventoryMagazine = weapon.ammoInMagazine;
-        OnWeaponAddedToInventory?.Invoke(weapon.weaponIndex);
+        OnWeaponAddedToInventory?.Invoke(weapon.weaponTypeIndex);
     }
 
     public WeaponNetworkStruct GetWeaponInInventory()
     {
         return new WeaponNetworkStruct()
         {
-            weaponIndex = WeaponInInventory,
+            weaponTypeIndex = WeaponInInventory,
             ammoInMagazine = AmmoInInventoryMagazine,
             ammoInReserve = AmmoReserve[WeaponInInventory]
         };
@@ -50,26 +50,42 @@ public class PlayerInventory : NetworkBehaviour
     public WeaponNetworkStruct RemoveWeapon()
     {
         if (WeaponInInventory == -1)
-            return new WeaponNetworkStruct();
+        {
+            return new WeaponNetworkStruct()
+            {
+                weaponTypeIndex = -1,
+                ammoInMagazine = 0,
+                ammoInReserve = 0
+            };
+             
+        }
+            
 
         var weapon = GetWeaponInInventory();
         WeaponInInventory = -1;
         if (true) //(!playerArms.HasWeaponOfTypeInHand(weapon))
         {
-            SetAmmoInReserve(weapon.weaponIndex, 0);
+            SetAmmoInReserve(weapon.weaponTypeIndex, 0);
         }
-        OnWeaponRemovedFromInventory?.Invoke(weapon.weaponIndex);
+        OnWeaponRemovedFromInventory?.Invoke(weapon.weaponTypeIndex);
         return weapon;
     }
 
     public void SetAmmoInReserve(int weaponID, int ammo)
     {
+        if (weaponID < 0|| ammo < 0)
+        {
+            return;
+        }
+
         AmmoReserve.Set(weaponID, ammo);
         OnAmmoChanged?.Invoke(weaponID, ammo);
 
         if (weaponID == WeaponInInventory)
             OnInventoryWeaponAmmoChanged?.Invoke(ammo + AmmoInInventoryMagazine);
     }
+
+
 
     public int TakeAmmoFromReserve(int weaponID, int ammoToTake)
     {

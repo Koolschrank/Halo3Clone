@@ -143,7 +143,7 @@ public class PlayerArms : NetworkBehaviour
             switchOutTimer -= Runner.DeltaTime;
             if (switchOutTimer <= 0f)
             {
-                EquipWeaponFromInventory();
+                EquipWeaponFromInventory(rightArm);
             }
             return;
         }
@@ -180,7 +180,7 @@ public class PlayerArms : NetworkBehaviour
         }
         if (armsInput.SwitchWeapon)
         {
-            if (TrySwitchWeapon())
+            if (TrySwitchWeapon(rightArm))
             {
                 armsInput.ResetSwitchInput();
             }
@@ -192,7 +192,7 @@ public class PlayerArms : NetworkBehaviour
 
         if (rightArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
+            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponTypeIndex))
                 rightArm.TryReload();
             
         }
@@ -211,9 +211,9 @@ public class PlayerArms : NetworkBehaviour
         {
             if (rightArm.CurrentWeapon.Magazine == 0)
             {
-                if (!inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
+                if (!inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponTypeIndex))
                 {
-                    TrySwitchWeapon();
+                    TrySwitchWeapon(rightArm);
                     if (InSwitchOut) return;
                 }
             }
@@ -236,21 +236,41 @@ public class PlayerArms : NetworkBehaviour
             }
         }
 
-        if ((armsInput.PickUp2 || armsInput.Reload2) &&(canDualWield2HandedWeapons || (rightArm.CurrentWeapon.WeaponType == WeaponType.oneHanded && pickUpScan.IsClosesPickUpOneHanded())))
+        if ((armsInput.PickUp2 || armsInput.Reload2))
         {
 
-
-            bool pickUpStarted = leftArm.TryPickUpWeapon();
-            if (pickUpStarted)
+            if (pickUpScan.IsWeaponInRange() && 
+                pickUpScan.CanPickUpWeapon(leftArm)&&
+                (canDualWield2HandedWeapons ||  
+                (rightArm.CurrentWeapon.WeaponType == WeaponType.oneHanded && pickUpScan.IsClosesPickUpOneHanded())))
             {
+                bool pickUpStarted = leftArm.TryPickUpWeapon();
+                if (pickUpStarted)
+                {
+                    armsInput.ResetPickUp2Input();
+                    armsInput.ResetPickUp1Input();
+                    armsInput.ResetReload1Input();
+
+                    armsInput.ResetReload2Input();
+                    SetState(ArmsState.TwoWeapons);
+
+                }
+            }
+            else if (canDualWield2HandedWeapons || 
+                (rightArm.CurrentWeapon.WeaponType == WeaponType.oneHanded && ItemIndexList.Instance.GetWeaponViaIndex(inventory.WeaponInInventory).WeaponType == WeaponType.oneHanded))
+            {
+                leftArm.EquipWeapon(inventory.RemoveWeapon());
                 armsInput.ResetPickUp2Input();
                 armsInput.ResetPickUp1Input();
                 armsInput.ResetReload1Input();
 
                 armsInput.ResetReload2Input();
                 SetState(ArmsState.TwoWeapons);
-                
+
             }
+
+
+            
         }
 
     }
@@ -258,9 +278,26 @@ public class PlayerArms : NetworkBehaviour
     public void FixedUpdate_TwoWeapons()
     {
 
-        if (leftArm.CurrentWeapon == null)
+        if (InSwitchOut)
+        {
+            switchOutTimer -= Runner.DeltaTime;
+            if (switchOutTimer <= 0f)
+            {
+                MoveWeaponToInventory(leftArm);
+                SetState(ArmsState.OneWeapon);
+            }
             return;
+        }
+
+        if (leftArm.CurrentWeapon == null)
+        {
+            SetState(ArmsState.OneWeapon);
+        }
         InZoom = false;
+
+
+
+
         
         if (InGranadeThrow)
         {
@@ -300,22 +337,35 @@ public class PlayerArms : NetworkBehaviour
 
         if (armsInput.SwitchWeapon)
         {
-            leftArm.DropWeapon(weaponDropForce);
-            armsInput.ResetSwitchInput();
-            SetState(ArmsState.OneWeapon);
+            if (inventory.HasWeaponInInventory)
+            {
+                leftArm.DropWeapon(weaponDropForce);
+                armsInput.ResetSwitchInput();
+                SetState(ArmsState.OneWeapon);
+            }
+            else
+            {
+                if (TrySwitchWeapon(leftArm))
+                {
+                    armsInput.ResetSwitchInput();
+                }
+            }
+
+
+            
             return;
         }
 
 
         if (rightArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponIndex))
+            if (inventory.HasAmmoInReserve(rightArm.CurrentWeapon.Data.WeaponTypeIndex))
                 rightArm.TryReload();
 
         }
         if (leftArm.CurrentWeapon.Magazine == 0)
         {
-            if (inventory.HasAmmoInReserve(leftArm.CurrentWeapon.Data.WeaponIndex))
+            if (inventory.HasAmmoInReserve(leftArm.CurrentWeapon.Data.WeaponTypeIndex))
                 leftArm.TryReload();
 
         }
@@ -431,43 +481,57 @@ public class PlayerArms : NetworkBehaviour
 
     
 
-    public bool TrySwitchWeapon()
+    public bool TrySwitchWeapon(Arm arm)
     {
-        if (InAction || inventory.WeaponInInventory == -1) return false;
+        if (InAction || (inventory.WeaponInInventory == -1) && arm != leftArm) return false;
 
 
 
-        rightArm.CancelTimers();
-        if (rightArm.InReload)
+        arm.CancelTimers();
+        if (arm.InReload)
         {
-            rightArm.CancelReload();
+            arm.CancelReload();
         }
 
-        if ( rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.CanNotBeInInventory)
+        if (arm.CurrentWeapon != null && arm.CurrentWeapon.CanNotBeInInventory)
         {
-            rightArm.DropWeapon();
+            arm.DropWeapon();
         }
 
-        if (rightArm.CurrentWeapon == null)
+        if (arm.CurrentWeapon == null)
         {
-            EquipWeaponFromInventory();
+            EquipWeaponFromInventory(arm);
         }
         else
         {
-            var weaponToSwitchOut = rightArm.CurrentWeapon;
+            var weaponToSwitchOut = arm.CurrentWeapon;
             switchOutTimer = weaponToSwitchOut.SwitchOutTime;
-            rightArm.OnWeaponUnequipStarted?.Invoke(weaponToSwitchOut, weaponToSwitchOut.SwitchOutTime);
+            arm.OnWeaponUnequipStarted?.Invoke(weaponToSwitchOut, weaponToSwitchOut.SwitchOutTime);
             weaponToSwitchOut.SwitchOutStart(switchOutTimer);
         }
 
         return true;
     }
 
-    public void EquipWeaponFromInventory()
+    public void EquipWeaponFromInventory(Arm arm)
     {
-        rightArm.EquipWeapon(inventory.RemoveWeapon());
+        arm.EquipWeapon(inventory.RemoveWeapon());
 
     }
+
+    public void MoveWeaponToInventory(Arm arm)
+    {
+        var weaponStruct = new WeaponNetworkStruct()
+        {
+            weaponTypeIndex = arm.WeaponIndex,
+            ammoInMagazine = arm.CurrentWeapon.Magazine,
+            ammoInReserve = 0
+        };
+        inventory.SetWeaponInInventory(weaponStruct);
+        arm.DeleteWeapon();
+    }
+
+    
 
 
 
@@ -565,6 +629,7 @@ public class PlayerArms : NetworkBehaviour
         if (rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data == data)
         {
             rightArm.DeleteWeapon();
+            TrySwitchWeapon(rightArm);
         }
         if (leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data == data)
         {
