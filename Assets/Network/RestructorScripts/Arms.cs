@@ -7,20 +7,26 @@ public class Arms : NetworkBehaviour
     public Action<Weapon_Arms> OnRightWeaponEquiped;
     public Action<Weapon_Arms> OnRightWeaponRemoved;
     public Action<Weapon_Arms> OnRightWeaponStoringStarted;
-    
+
+    public Action<Weapon_Arms> OnLeftWeaponEquiped;
+    public Action<Weapon_Arms> OnLeftWeaponRemoved;
+    public Action<Weapon_Arms> OnLeftWeaponStoringStarted;
 
 
-    [SerializeField] WeaponInventory weaponInventory;
+
+    [SerializeField] protected WeaponInventory weaponInventory;
 
 
 
-    Weapon_Arms weapon_LeftHand;
-    Weapon_Arms weapon_RightHand;
+    protected Weapon_Arms weapon_LeftHand;
+    protected Weapon_Arms weapon_RightHand;
 
     
     [Networked] public TickTimer GetReadyTimer_RightWeapon {  get; private set; }
     [Networked] public TickTimer StoreTimer_RightWeapon { get; private set; }
     [Networked] public TickTimer ReloadWeapon_RightWeapon { get; private set; }
+
+    
 
     [Networked] public TickTimer GetReadyTimer_LeftWeapon { get; private set; }
     [Networked] public TickTimer StoreTimer_LeftWeapon { get; private set; }
@@ -36,14 +42,31 @@ public class Arms : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        // timer updates
         if (StoreTimer_RightWeapon.Expired(Runner))
         {
             StoreTimer_RightWeapon = TickTimer.None;
             weaponInventory.Switch_RightWithBackWeapon();
         }
+        if (ReloadWeapon_RightWeapon.Expired(Runner))
+        {
+            ReloadWeapon_RightWeapon = TickTimer.None;
+            ReloadRightWeapon();
+        }
+        if (StoreTimer_LeftWeapon.Expired(Runner))
+        {
+            StoreTimer_LeftWeapon = TickTimer.None;
+            weaponInventory.Switch_LeftWithBackWeapon();
+        }
+        if (ReloadWeapon_LeftWeapon.Expired(Runner))
+        {
+            ReloadWeapon_LeftWeapon = TickTimer.None;
+            ReloadLeftWeapon();
+        }
 
 
 
+        // check for new weapon equiped
         if (!HasWeaponIndex(weapon_RightHand, weaponInventory.RightWeapon))
         {
             RemoveWeaponFromRightHand();
@@ -90,6 +113,9 @@ public class Arms : NetworkBehaviour
 
     void AssignWeaponToLeftHand(Weapon_Arms weapon)
     {
+        weapon_LeftHand = weapon;
+        GetReadyTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, weapon_LeftHand.SwitchInTime);
+        OnLeftWeaponEquiped?.Invoke(weapon);
 
     }
 
@@ -102,26 +128,58 @@ public class Arms : NetworkBehaviour
 
     void RemoveWeaponFromLeftHand()
     {
-        
+        var weapon = weapon_LeftHand;
+        weapon_LeftHand = null;
+        OnLeftWeaponRemoved?.Invoke(weapon);
+
     }
 
-    void InitiateRightWeaponSwitch()
+    protected void InitiateRightWeaponSwitch()
     {
+        ReloadWeapon_RightWeapon = TickTimer.None;
+
         StoreTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, weapon_RightHand.SwitchOutTime);
         OnRightWeaponStoringStarted?.Invoke(weapon_RightHand);
     }
 
-    public bool TryRightWeaponSwitch()
+    protected void InitiateLeftWeaponSwitch()
     {
-        if (
-            GetReadyTimer_RightWeapon.ExpiredOrNotRunning(Runner) 
-            && StoreTimer_RightWeapon.ExpiredOrNotRunning(Runner))
-        {
-            InitiateRightWeaponSwitch();
-            return true;
-        }
-        return false;
+        ReloadWeapon_LeftWeapon = TickTimer.None;
+
+        StoreTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, weapon_LeftHand.SwitchOutTime);
+        OnLeftWeaponStoringStarted?.Invoke(weapon_LeftHand);
     }
+
+    protected void InitiateReloadRightWeapon()
+    {
+        ReloadWeapon_RightWeapon = TickTimer.CreateFromSeconds(Runner, weapon_RightHand.ReloadTime);
+    }
+
+    protected void InitiateReloadLeftWeapon()
+    {
+        ReloadWeapon_LeftWeapon = TickTimer.CreateFromSeconds(Runner, weapon_LeftHand.ReloadTime);
+    }
+
+    void ReloadRightWeapon()
+    {
+        int ammoInMagazine = weaponInventory.RightWeapon.ammoInMagazine;
+        int magazineSize = weapon_RightHand.MagazineSize;
+        int ammoNeeded = magazineSize - ammoInMagazine;
+
+        weaponInventory.TransferReserveAmmo_RightWeapon(ammoNeeded);
+
+    }
+
+    void ReloadLeftWeapon()
+    {
+        int ammoInMagazine = weaponInventory.LeftWeapon.ammoInMagazine;
+        int magazineSize = weapon_LeftHand.MagazineSize;
+        int ammoNeeded = magazineSize - ammoInMagazine;
+
+        weaponInventory.TransferReserveAmmo_LeftWeapon(ammoNeeded);
+    }
+
+
 
 
 

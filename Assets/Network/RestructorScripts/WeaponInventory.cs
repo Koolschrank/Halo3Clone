@@ -6,7 +6,7 @@ public class WeaponInventory : NetworkBehaviour
     [Networked] public WeaponNetworkStruct RightWeapon { get; private set; }
     [Networked] public WeaponNetworkStruct LeftWeapon { get; private set; }
     [Networked] public WeaponNetworkStruct BackWeapon { get; private set; }
-    [Networked, Capacity(30)] NetworkArray<int> AmmoReserve { get; }
+    [Networked, Capacity(30)] public NetworkArray<int> AmmoReserve { get; }
 
     public void Equip_RightWeapon(WeaponNetworkStruct newWeapon)
     {
@@ -142,5 +142,43 @@ public class WeaponInventory : NetworkBehaviour
     public void DropWeapon(WeaponNetworkStruct weapon)
     {
 
+    }
+
+    
+
+    public void TransferReserveAmmo_RightWeapon(int ammoToTransfer)
+    {
+        var rightWeaponTemp = RightWeapon;
+        int ammoInReserve = AmmoReserve[RightWeapon.weaponTypeIndex];
+        if (ammoInReserve >= ammoToTransfer)
+        {
+            AmmoReserve.Set(RightWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
+            rightWeaponTemp.ammoInReserve += ammoToTransfer;
+            RightWeapon = rightWeaponTemp;
+        }
+        else
+        {
+            AmmoReserve.Set(RightWeapon.weaponTypeIndex, 0);
+            rightWeaponTemp.ammoInReserve += ammoInReserve;
+            RightWeapon = rightWeaponTemp;
+        }
+    }
+
+    public void TransferReserveAmmo_LeftWeapon(int ammoToTransfer)
+    {
+        var leftWeaponTemp = LeftWeapon;
+        int ammoInReserve = AmmoReserve[LeftWeapon.weaponTypeIndex];
+        if (ammoInReserve >= ammoToTransfer)
+        {
+            AmmoReserve.Set(LeftWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
+            leftWeaponTemp.ammoInReserve += ammoToTransfer;
+            LeftWeapon = leftWeaponTemp;
+        }
+        else
+        {
+            AmmoReserve.Set(LeftWeapon.weaponTypeIndex, 0);
+            leftWeaponTemp.ammoInReserve += ammoInReserve;
+            LeftWeapon = leftWeaponTemp;
+        }
     }
 }
