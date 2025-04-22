@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ArmsExtended : Arms
+public class ArmsExtended : ArmsEvents
 {
     public bool TryRightWeaponSwitch()
     {
         if (
             GetReadyTimer_RightWeapon.ExpiredOrNotRunning(Runner)
             && StoreTimer_RightWeapon.ExpiredOrNotRunning(Runner)
-            && weaponInventory.BackWeapon.weaponTypeIndex != -1
+            && WeaponInventory.BackWeapon.weaponTypeIndex != -1
             )
         {
             InitiateRightWeaponSwitch();
@@ -22,8 +22,8 @@ public class ArmsExtended : Arms
             GetReadyTimer_RightWeapon.ExpiredOrNotRunning(Runner)
             && StoreTimer_RightWeapon.ExpiredOrNotRunning(Runner)
             && ReloadWeapon_RightWeapon.ExpiredOrNotRunning(Runner)
-            && weaponInventory.AmmoReserve[weaponInventory.RightWeapon.weaponTypeIndex] > 0
-            && weaponInventory.RightWeapon.ammoInMagazine < weapon_RightHand.MagazineSize
+            && WeaponInventory.AmmoReserve[WeaponInventory.RightWeapon.weaponTypeIndex] > 0
+            && WeaponInventory.RightWeapon.ammoInMagazine < Weapon_RightHand.MagazineSize
             )
         {
             InitiateReloadRightWeapon();
