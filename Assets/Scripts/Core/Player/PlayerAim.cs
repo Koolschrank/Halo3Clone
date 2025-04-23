@@ -13,7 +13,7 @@ public class PlayerAim : NetworkBehaviour
     [Header("References")]
     [SerializeField] PlayerBody playerBody;
     [SerializeField] Transform playerHead;
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] Arms playerArms;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth playerHealth;
     [SerializeField] KCC cc;

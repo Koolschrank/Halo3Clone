@@ -70,6 +70,7 @@ public class WeaponSpawner : NetworkBehaviour
     public void SpawnWeapon()
     {
         weapon = Runner.Spawn(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
+        weapon.Index = ItemIndexList.Instance.GetNextIndex();
         weapon.SetAmmoWithMagazines(magazines);
         weapon.OnPickUp += WeaponPickedUp;
     }

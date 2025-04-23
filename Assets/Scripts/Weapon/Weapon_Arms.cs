@@ -8,16 +8,9 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon_Arms
 {
-    int index = -1;
 
-    public int Index
-    {
-        get => index;
-        set
-        {
-            index = value;
-        }
-    }
+    public int Index { get; set; } = -1;
+
 
     public Action<float> OnReloadStart;
     public Action<float> OnSwitchOutStart;
@@ -34,7 +27,7 @@ public class Weapon_Arms
     [SerializeField] Weapon_Data weaponData;
     [SerializeField] int magazine;
 
-    public Action<int> OnMagazineChange;
+    //public Action<int> OnMagazineChange;
 
     BulletSpawner bulletSpawner;
     float shootCooldown = 0;
@@ -64,17 +57,13 @@ public class Weapon_Arms
         this.weaponData = weaponData;
     }
 
-    public Weapon_Arms(Weapon_Data weaponData, int magazine)
-    {
-        this.weaponData = weaponData;
-        SetAmmo(magazine);
-    }
 
-    public Weapon_Arms(Weapon_Data weaponData, int magazine, int index)
+
+    public Weapon_Arms(Weapon_Data weaponData, int index)
     {
         this.weaponData = weaponData;
-        SetAmmo(magazine);
-        this.index = index;
+        this.Index = index;
+        //SetAmmo(magazine);
     }
 
     public WeaponNetworkStruct GetWeaponNetworkStruct()
@@ -88,18 +77,7 @@ public class Weapon_Arms
     }
 
 
-    public int Magazine
-    {
-        get => magazine;
-        set
-        {
-            if (magazine != value) 
-            {
-                magazine = value;
-                OnMagazineChange?.Invoke(magazine); 
-            }
-        }
-    }
+
 
     public int MagazineSize => weaponData.MagazineSize;
 
@@ -150,21 +128,11 @@ public class Weapon_Arms
         return shotsLeftInBurst > 0 && magazine > 0;
     }
 
-    public bool TryShoot()
-    {
-        Debug.Log("tryShoot");
-        if (CanShoot())
-        {
-            Shoot();
-            return true;
-        }
-        return false;
 
-    }
 
     public bool TryBurstShoot()
     {
-        if (CanShoot())
+        if (true)//(CanShoot())
         {
             shotsLeftInBurst = weaponData.BulletsInBurst;
             Shoot();
@@ -188,7 +156,7 @@ public class Weapon_Arms
             OnShot?.Invoke();
 
             shootCooldown += weaponData.GetFireRate(isBeingDualWielded);
-            Magazine--;
+            //Magazine--;
 
             if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
             {
@@ -230,19 +198,13 @@ public class Weapon_Arms
         return shootCooldown > 0;
     }
 
-    public bool CanShoot()
-    {
-        return shootCooldown <= 0 && Magazine > 0;
-    }
 
-    public bool CanReload()
-    {
-        return Magazine < weaponData.MagazineSize;
-    }
+
 
     public void ReloadStart(float reloadTime)
     {
         OnReloadStart?.Invoke(reloadTime);
+
     }
 
     public void SwitchOutStart(float switchOutTime)
@@ -260,12 +222,7 @@ public class Weapon_Arms
         OnMeleeStart?.Invoke(meleeTime);
     }
 
-    public void ReloadFinished(int ammoAdded)
-    {
-        int missingAmmo = weaponData.MagazineSize - Magazine;
-        Magazine += ammoAdded;
 
-    }
 
     public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded);
 
@@ -279,15 +236,9 @@ public class Weapon_Arms
 
     public GameObject WeaponModel => weaponData.Weapon3rdPersonModel;
 
-    public void SetAmmo(int magazine)
-    {
-        Magazine = Mathf.Min(weaponData.MagazineSize, magazine);
-    }
 
-    public void FillMagazine()
-    {
-        Magazine = weaponData.MagazineSize;
-    }
+
+
 
     public Weapon_Bullet Bullet => weaponData.WeaponBullet;
 
@@ -340,5 +291,7 @@ public class Weapon_Arms
     public Sprite CrosshairUI => weaponData.CrosshairsUI;
 
     public Vector2 CrosshairSizeUI => weaponData.CrosshairsSizeUI;
+
+    public int WeaponTypeIndex => weaponData.WeaponTypeIndex;
 
 }

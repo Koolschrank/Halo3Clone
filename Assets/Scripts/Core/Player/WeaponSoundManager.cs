@@ -6,11 +6,13 @@ using FMODUnity;
 public class WeaponSoundManager : MonoBehaviour
 {
 
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] ArmsExtended playerArms;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] TargetHitCollector targetHitCollector;
-    TimedSoundListInstance reloadList;
-    TimedSoundListInstance switchInList;
+    TimedSoundListInstance reloadListLeftWeapon;
+    TimedSoundListInstance reloadListRightWeapon;
+    TimedSoundListInstance switchInListLeftWeapon;
+    TimedSoundListInstance switchInListRightWeapon;
 
     [SerializeField] EventReference hitSound;
     [SerializeField] EventReference killSound;
@@ -18,13 +20,13 @@ public class WeaponSoundManager : MonoBehaviour
 
     public void Start()
     {
-        playerArms.RightArm.OnWeaponReloadStarted += Reload;
-        playerArms.RightArm.OnWeaponEquipStarted += SwitchIn;
-        playerArms.RightArm.OnWeaponShot += Shoot;
+        playerArms.OnRightWeaponReloadStarted += ReloadRightWeapon;
+        playerArms.OnRightWeaponEquiped += SwitchInRightWeapon;
+        playerArms.OnRightWeaponShot += Shoot;
 
-        playerArms.LeftArm.OnWeaponReloadStarted += Reload;
-        playerArms.LeftArm.OnWeaponEquipStarted += SwitchIn;
-        playerArms.LeftArm.OnWeaponShot += Shoot;
+        playerArms.OnLeftWeaponReloadStarted += ReloadLeftWeapon;
+        playerArms.OnLeftWeaponEquiped += SwitchInLeftWeapon;
+        playerArms.OnLeftWeaponShot += Shoot;
 
         meleeAttacker.OnMeleeStart += MeleeSwing;
         meleeAttacker.OnMeleeHit += MeleeHit;
@@ -61,22 +63,41 @@ public class WeaponSoundManager : MonoBehaviour
 
     }
 
-    public void SwitchIn(Weapon_Arms weapon, float timer)
+
+    public void SwitchInLeftWeapon(Weapon_Arms weapon)
     {
-        switchInList = new TimedSoundListInstance(weapon.SwitchInSound, timer);
+        float time = playerArms.RemainingGetReadyTime_LeftWeapon;
+        switchInListLeftWeapon = new TimedSoundListInstance(weapon.SwitchInSound, time);
     }
 
-    public void Reload(Weapon_Arms weapon, float time)
+    public void SwitchInRightWeapon(Weapon_Arms weapon)
     {
-        reloadList = new TimedSoundListInstance( weapon.ReloadSounds, time);
+        float time = playerArms.RemainingGetReadyTime_RightWeapon;
+        switchInListRightWeapon = new TimedSoundListInstance(weapon.SwitchInSound, time);
+    }
 
 
+
+
+
+    public void ReloadLeftWeapon(Weapon_Arms weapon)
+    {
+        float time = playerArms.RemainingReloadTime_LeftWeapon;
+        reloadListLeftWeapon = new TimedSoundListInstance(weapon.ReloadSounds, time);
+    }
+
+    public void ReloadRightWeapon(Weapon_Arms weapon)
+    {
+        float time = playerArms.RemainingReloadTime_RightWeapon;
+        reloadListRightWeapon = new TimedSoundListInstance(weapon.ReloadSounds, time);
     }
 
     public void Update()
     {
-        UpdateSoundList(reloadList);
-        UpdateSoundList(switchInList);
+        UpdateSoundList(reloadListLeftWeapon);
+        UpdateSoundList(reloadListRightWeapon);
+        UpdateSoundList(switchInListLeftWeapon);
+        UpdateSoundList(switchInListRightWeapon);
 
     }
 

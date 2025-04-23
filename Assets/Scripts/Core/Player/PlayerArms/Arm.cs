@@ -5,6 +5,7 @@ using static PlayerArms;
 
 public class Arm : NetworkBehaviour
 {
+    /*
     [Networked] public int WeaponIndex { get; private set; } = -1;
     int previousWeaponIndex = -1;
 
@@ -347,6 +348,7 @@ public class Arm : NetworkBehaviour
     }
     */
 
+    /*
     void SwitchInFinished()
     {
         switchInTimer = 0;
@@ -535,7 +537,7 @@ public class Arm : NetworkBehaviour
     }*/
 
 
-    
+    /*
 
     public void SetWeaponToIfDualWielding(bool isDualWielding)
     {
@@ -574,6 +576,6 @@ public class Arm : NetworkBehaviour
         }
     }
 
-
+    */
 
 }

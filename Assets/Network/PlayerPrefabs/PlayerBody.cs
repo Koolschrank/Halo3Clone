@@ -10,7 +10,7 @@ public class PlayerBody : NetworkBehaviour
     [Header("References")]
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAim playerAim;
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] ArmsExtended playerArms;
     [SerializeField] Transform head;
 
 
@@ -21,11 +21,13 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] Health health;
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] Transform spectatorCameraTarget;
-    [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] WeaponInventoryExtended weaponInventory;
+    [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] TargetHitCollector targetHitCollector;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] PlayerStartEquipment playerStartEquipment;
     [SerializeField] PlayerAnimation playerAnimation;
+    [SerializeField] GranadeThrower granadeThrower;
 
     [Networked] int localPlayerIndex { get; set; }
     int visualLayerIndex = 0;
@@ -59,12 +61,13 @@ public class PlayerBody : NetworkBehaviour
 
     public PlayerMovement PlayerMovement => playerMovement;
     public PlayerAim PlayerAim => playerAim;
-    public PlayerArms PlayerArms => playerArms;
+    public ArmsExtended PlayerArms => playerArms;
     public PlayerPickUpScan PlayerPickUpScan => playerPickUpScan;
     public Health Health => health;
     public BulletSpawner BulletSpawner => bulletSpawner;
     public Transform SpectatorCameraTarget => spectatorCameraTarget;
-    public PlayerInventory PlayerInventory => playerInventory;
+    public WeaponInventoryExtended WeaponInventory => weaponInventory;
+    public AbilityInventory AbilityInventory => abilityInventory;
     public TargetHitCollector TargetHitCollector => targetHitCollector;
     public PlayerTeam PlayerTeam => playerTeam;
     public PlayerStartEquipment PlayerStartEquipment => playerStartEquipment;
@@ -73,5 +76,7 @@ public class PlayerBody : NetworkBehaviour
     public GameObject MainMesh => mainMesh;
 
     public Transform HeadTransform => head;
+
+    public GranadeThrower GranadeThrower => granadeThrower;
 
 }

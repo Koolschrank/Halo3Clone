@@ -3,70 +3,83 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Fusion;
 
-public class PlayerPickUpScan : MonoBehaviour
+public class PlayerPickUpScan : NetworkBehaviour
 {
+
+    [Networked] public int indexOfClosestPickUp { get; private set; } = -1;
+
+    public int IndexOfClosestPickUp
+    {
+        get => indexOfClosestPickUp;
+        private set
+        {
+            if (value == indexOfClosestPickUp) return;
+
+            indexOfClosestPickUp = value;
+            OnIndexOfClosesWeaponChanged?.Invoke(value);
+        }
+    }
 
 
     [SerializeField]List<Weapon_PickUp> pickUpsInRange = new List<Weapon_PickUp>();
     [SerializeField] float pickUpCooldown = 0.5f;
-    float lastPickUpTime = -100f;
 
-    [SerializeField] PlayerArms playerArms;
-    [SerializeField] PlayerInventory playerInventory;
+    [Networked] public TickTimer pickUpCooldownTimer { get; set; }
+
+    [SerializeField] WeaponInventory playerInventory;
     [SerializeField] PlayerTeam playerTeam;
 
-    public Action<Weapon_PickUp> OnWeaponPickUpUpdate;
-    public Action<Weapon_PickUp> OnWeaponDualWieldUpdate;
-    public Action OnWeaponPickUp;
+    public Action<int> OnIndexOfClosesWeaponChanged;
 
 
 
 
 
+    //public override void FixedUpdateNetwork()
+    //{
+    //    // todo: this is not a good bug fix, need to find the root cause
+    //    TrySendUpdates();
+    //}
 
-    // todo: this is not a good bug fix, need to find the root cause
-    private void Update()
+    //public bool CanBeDualWielded(Weapon_PickUp pickUp)
+    //{
+    //    var weaponTypeOfWeaponInHand = playerArms.Weapon_RightHand.WeaponType;
+    //    bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+    //    var weaponTypeOfWeaponOnGround = pickUp.WeaponType;
+    //    bool isDualWieldableOnGround = weaponTypeOfWeaponOnGround == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
+    //    return isDualWieldable && isDualWieldableOnGround;
+    //}
+
+    //public void TrySendUpdates()
+    //{
+    //    if (Time.time - lastPickUpTime > pickUpCooldown)
+    //    {
+    //        var closesWeapon = GetClosesPickUp();
+    //        OnWeaponPickUpUpdate?.Invoke(closesWeapon);
+
+    //        var weaponInRightHand = playerArms.Weapon_RightHand;
+    //        if (weaponInRightHand != null && closesWeapon != null)
+    //        {
+    //            if (CanBeDualWielded(closesWeapon))
+    //            {
+    //                OnWeaponDualWieldUpdate?.Invoke(closesWeapon);
+    //                return;
+    //            }
+
+
+
+    //        }
+
+    //        OnWeaponDualWieldUpdate?.Invoke(null);
+
+    //    }
+    //}
+
+    public override void FixedUpdateNetwork()
     {
-        // check every 10 onweaponPickupUpdate
-        if (Time.frameCount % 10 ==0)
-        {
-            TrySendUpdates();
-        }
-    }
-
-    public bool CanBeDualWielded(Weapon_PickUp pickUp)
-    {
-        var weaponTypeOfWeaponInHand = playerArms.RightArm.GetWeaponInHand().WeaponType;
-        bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
-        var weaponTypeOfWeaponOnGround = pickUp.WeaponType;
-        bool isDualWieldableOnGround = weaponTypeOfWeaponOnGround == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;
-        return isDualWieldable && isDualWieldableOnGround;
-    }
-
-    public void TrySendUpdates()
-    {
-        if (Time.time - lastPickUpTime > pickUpCooldown)
-        {
-            var closesWeapon = GetClosesPickUp();
-            OnWeaponPickUpUpdate?.Invoke(closesWeapon);
-
-            var weaponInRightHand = playerArms.RightArm.GetWeaponInHand();
-            if (weaponInRightHand != null && closesWeapon != null)
-            {
-                if (CanBeDualWielded(closesWeapon))
-                {
-                    OnWeaponDualWieldUpdate?.Invoke(closesWeapon);
-                    return;
-                }
-
-
-
-            }
-
-            OnWeaponDualWieldUpdate?.Invoke(null);
-
-        }
+        RestructurePickUps();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,7 +94,6 @@ public class PlayerPickUpScan : MonoBehaviour
                 if (pickUp != null )
                 {
                     pickUpsInRange.Add(pickUp);
-                    TrySendUpdates();
                 }
             }
             else
@@ -90,8 +102,10 @@ public class PlayerPickUpScan : MonoBehaviour
                     return;
 
                 pickUpsInRange.Add(pickUp);
-                TrySendUpdates();
+                
             }
+
+            RestructurePickUps();
         }
     }
 
@@ -101,7 +115,7 @@ public class PlayerPickUpScan : MonoBehaviour
         if (pickUp != null)
         {
             pickUpsInRange.Remove(pickUp);
-            TrySendUpdates();
+            RestructurePickUps();
         }
     }
 
@@ -109,9 +123,9 @@ public class PlayerPickUpScan : MonoBehaviour
     {
         var weaponData = pickup.WeaponData.WeaponTypeIndex;
 
-        return (weaponData == playerArms.LeftArm.WeaponIndex)||
-                (weaponData == playerArms.RightArm.WeaponIndex) ||
-                (weaponData == playerInventory.WeaponInInventory);
+        return (weaponData == playerInventory.BackWeapon.weaponTypeIndex) ||
+                (weaponData == playerInventory.LeftWeapon.weaponTypeIndex) ||
+                (weaponData == playerInventory.RightWeapon.weaponTypeIndex);
 
     }
 
@@ -127,61 +141,45 @@ public class PlayerPickUpScan : MonoBehaviour
         
     }
 
+    public bool CanPickUpWeapon()
+    {
+        return pickUpCooldownTimer.ExpiredOrNotRunning(Runner) && IsWeaponInRange();
+    }
+
     public bool IsWeaponInRange()
     {
         return pickUpsInRange.Count > 0;
     }
 
-    public bool CanPickUpWeapon(Arm arm)
+    public void RestructurePickUps()
     {
-        if (!IsWeaponInRange()) return false;
-        var closestWeapon = GetClosesPickUp();
-        var weaponIndex = closestWeapon.WeaponData.WeaponTypeIndex;
-
-       
-
-        if (playerInventory.WeaponInInventory == weaponIndex || arm.WeaponIndex == weaponIndex)
-            return false;
-        return true;
-    }
-
-    
-
-    public Weapon_PickUp GetClosesPickUp()
-    {
-        if (pickUpsInRange.Count <= 0)
-            return null;
         RemovesNulls();
         SortPriority();
         if (pickUpsInRange.Count <= 0)
-            return null;
-        return pickUpsInRange[0];
-    }
-
-    public bool IsClosesPickUpOneHanded()
-    {
-        var pickUp = GetClosesPickUp();
-        if (pickUp == null)
-            return false;
-        return pickUp.WeaponType == WeaponType.oneHanded;
+            IndexOfClosestPickUp = -1;
+        else
+            IndexOfClosestPickUp = pickUpsInRange[0].WeaponData.WeaponTypeIndex;
     }
 
     public WeaponNetworkStruct PickUpWeapon()
     {
-        var pickUp = GetClosesPickUp();
-        pickUpsInRange.Remove(pickUp);
-        TrySendUpdates();
-        lastPickUpTime = Time.time;
+        if (pickUpsInRange.Count <= 0)
+            return new WeaponNetworkStruct()
+            {
+                weaponTypeIndex = -1,
+            };
+
+        var pickUp = pickUpsInRange[0];
+        pickUpsInRange.RemoveAt(0);
+        pickUpCooldownTimer = TickTimer.CreateFromSeconds(Runner, pickUpCooldown);
+        RestructurePickUps();
         if (pickUp == null)
             return new WeaponNetworkStruct()
             {
                 weaponTypeIndex = -1,
             };
 
-        
-
         return pickUp.PickUp();
-        //playerInventory.AddAmmoOld(pickUp.WeaponData, pickUp.AmmoInReserve);
     }
 
 

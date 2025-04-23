@@ -6,7 +6,6 @@ public class PlayerArmsInput : NetworkBehaviour
 {
 
     [SerializeField] PlayerBody playerBody;
-    [SerializeField] PlayerArms playerArms;
 
     [SerializeField] float reloadWeaponInputBuffer = 0.2f;
     [SerializeField] float switchWeaponInputBuffer = 0.2f;
@@ -21,7 +20,7 @@ public class PlayerArmsInput : NetworkBehaviour
 
     [NonSerialized]
     public bool Weapon1;
-    
+    [NonSerialized]
     public bool Weapon2;
     [NonSerialized]
     public bool Ability1;
@@ -168,7 +167,10 @@ public class PlayerArmsInput : NetworkBehaviour
         pickUp2InputBufferCounter = 0;
     }
 
-
+    public void ResetMeleeInput()
+    {
+        meleeInputBufferCounter = 0;
+    }
 
 
 }

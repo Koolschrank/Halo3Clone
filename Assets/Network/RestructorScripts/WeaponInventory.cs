@@ -3,48 +3,71 @@ using UnityEngine;
 
 public class WeaponInventory : NetworkBehaviour
 {
-    [Networked] public WeaponNetworkStruct RightWeapon { get; private set; }
-    [Networked] public WeaponNetworkStruct LeftWeapon { get; private set; }
-    [Networked] public WeaponNetworkStruct BackWeapon { get; private set; }
+    
+    [Networked] public WeaponNetworkStruct RightWeapon { get; private set; } = new WeaponNetworkStruct(){weaponTypeIndex = -1};
+    [Networked] public WeaponNetworkStruct LeftWeapon { get; private set; } = new WeaponNetworkStruct() { weaponTypeIndex = -1 };
+
+    [Networked] public WeaponNetworkStruct BackWeapon { get; private set; } = new WeaponNetworkStruct() { weaponTypeIndex = -1 };
+    
     [Networked, Capacity(30)] public NetworkArray<int> AmmoReserve { get; }
 
-    public void Equip_RightWeapon(WeaponNetworkStruct newWeapon)
+    public bool IsDualWielding => LeftWeapon.weaponTypeIndex != -1 && RightWeapon.weaponTypeIndex != -1;
+
+    public override void Spawned()
+    {
+        
+    }
+
+    public virtual void Equip_RightWeapon(WeaponNetworkStruct newWeapon)
     {
         if (RightWeapon.weaponTypeIndex != -1)
         {
             Remove_RightWeapon();
         }
 
-        AmmoReserve.Set(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+        if (newWeapon.weaponTypeIndex != -1)
+        {
+            SetAmmo(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+            
+        }
+        
         newWeapon.ammoInReserve = 0;
-        RightWeapon = newWeapon;
+        SetRightWeapon(newWeapon);
     }
 
-    public void Equip_LeftWeapon(WeaponNetworkStruct newWeapon)
+    public virtual void Equip_LeftWeapon(WeaponNetworkStruct newWeapon)
     {
+        
+
         if (LeftWeapon.weaponTypeIndex != -1)
         {
             Remove_LeftWeapon();
         }
 
-        AmmoReserve.Set(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+        if (newWeapon.weaponTypeIndex != -1)
+        {
+            SetAmmo(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+        }
+        
         newWeapon.ammoInReserve = 0;
-        LeftWeapon = newWeapon;
+        SetLeftWeapon(newWeapon);
     }
 
-    public void Equip_BackWeapon(WeaponNetworkStruct newWeapon)
+    public virtual void Equip_BackWeapon(WeaponNetworkStruct newWeapon)
     {
         if (BackWeapon.weaponTypeIndex != -1)
         {
             Remove_BackWeapon();
         }
-
-        AmmoReserve.Set(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+        if (newWeapon.weaponTypeIndex != -1)
+        {
+            SetAmmo(newWeapon.weaponTypeIndex, AmmoReserve[newWeapon.weaponTypeIndex] + newWeapon.ammoInReserve);
+        }
         newWeapon.ammoInReserve = 0;
-        BackWeapon = newWeapon;
+        SetBackWeapon(newWeapon);
     }
 
-    public WeaponNetworkStruct Remove_RightWeapon()
+    public virtual WeaponNetworkStruct Remove_RightWeapon()
     {
         // remove the weapon from the right hand
         var weaponToRemove = RightWeapon;
@@ -58,12 +81,12 @@ public class WeaponInventory : NetworkBehaviour
             && LeftWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex )
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
-            AmmoReserve.Set(weaponToRemove.weaponTypeIndex, 0);
+            SetAmmo(weaponToRemove.weaponTypeIndex, 0);
         }
         return weaponToRemove;
     }
 
-    public WeaponNetworkStruct Remove_LeftWeapon()
+    public virtual WeaponNetworkStruct Remove_LeftWeapon()
     {
         // remove the weapon from the left hand
         var weaponToRemove = LeftWeapon;
@@ -76,12 +99,12 @@ public class WeaponInventory : NetworkBehaviour
             && RightWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex)
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
-            AmmoReserve.Set(weaponToRemove.weaponTypeIndex, 0);
+            SetAmmo(weaponToRemove.weaponTypeIndex, 0);
         }
         return weaponToRemove;
     }
 
-    public WeaponNetworkStruct Remove_BackWeapon()
+    public virtual WeaponNetworkStruct Remove_BackWeapon()
     {
         // remove the weapon from the back
         var weaponToRemove = BackWeapon;
@@ -94,7 +117,7 @@ public class WeaponInventory : NetworkBehaviour
             && RightWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex)
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
-            AmmoReserve.Set(weaponToRemove.weaponTypeIndex, 0);
+            SetAmmo(weaponToRemove.weaponTypeIndex, 0);
         }
         return weaponToRemove;
     }
@@ -115,6 +138,36 @@ public class WeaponInventory : NetworkBehaviour
 
         Equip_LeftWeapon(backWeapon);
         Equip_BackWeapon(leftWeapon);
+    }
+
+    public void PickUp_RightWeapon(WeaponNetworkStruct weapon)
+    {
+        var weaponToDrop = Remove_RightWeapon();
+        Equip_RightWeapon(weapon);
+        if (weaponToDrop.weaponTypeIndex != -1)
+        {
+            DropWeapon(weaponToDrop);
+        }
+    }
+
+    public void PickUp_LeftWeapon(WeaponNetworkStruct weapon)
+    {
+        var weaponToDrop = Remove_LeftWeapon();
+        Equip_LeftWeapon(weapon);
+        if (weaponToDrop.weaponTypeIndex != -1)
+        {
+            DropWeapon(weaponToDrop);
+        }
+    }
+
+    public void PickUp_BackWeapon(WeaponNetworkStruct weapon)
+    {
+        var weaponToDrop = Remove_BackWeapon();
+        Equip_BackWeapon(weapon);
+        if (weaponToDrop.weaponTypeIndex != -1)
+        {
+            DropWeapon(weaponToDrop);
+        }
     }
 
 
@@ -141,6 +194,7 @@ public class WeaponInventory : NetworkBehaviour
 
     public void DropWeapon(WeaponNetworkStruct weapon)
     {
+        
 
     }
 
@@ -152,15 +206,15 @@ public class WeaponInventory : NetworkBehaviour
         int ammoInReserve = AmmoReserve[RightWeapon.weaponTypeIndex];
         if (ammoInReserve >= ammoToTransfer)
         {
-            AmmoReserve.Set(RightWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
-            rightWeaponTemp.ammoInReserve += ammoToTransfer;
-            RightWeapon = rightWeaponTemp;
+            SetAmmo(RightWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
+            rightWeaponTemp.ammoInMagazine += ammoToTransfer;
+            SetRightWeapon(rightWeaponTemp);
         }
         else
         {
-            AmmoReserve.Set(RightWeapon.weaponTypeIndex, 0);
-            rightWeaponTemp.ammoInReserve += ammoInReserve;
-            RightWeapon = rightWeaponTemp;
+            SetAmmo(RightWeapon.weaponTypeIndex, 0);
+            rightWeaponTemp.ammoInMagazine += ammoInReserve;
+            SetRightWeapon(rightWeaponTemp);
         }
     }
 
@@ -170,15 +224,63 @@ public class WeaponInventory : NetworkBehaviour
         int ammoInReserve = AmmoReserve[LeftWeapon.weaponTypeIndex];
         if (ammoInReserve >= ammoToTransfer)
         {
-            AmmoReserve.Set(LeftWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
-            leftWeaponTemp.ammoInReserve += ammoToTransfer;
-            LeftWeapon = leftWeaponTemp;
+            SetAmmo(LeftWeapon.weaponTypeIndex, ammoInReserve - ammoToTransfer);
+            leftWeaponTemp.ammoInMagazine += ammoToTransfer;
+            SetLeftWeapon(leftWeaponTemp);
         }
         else
         {
-            AmmoReserve.Set(LeftWeapon.weaponTypeIndex, 0);
-            leftWeaponTemp.ammoInReserve += ammoInReserve;
-            LeftWeapon = leftWeaponTemp;
+            SetAmmo(LeftWeapon.weaponTypeIndex, 0);
+            leftWeaponTemp.ammoInMagazine += ammoInReserve;
+            SetLeftWeapon(leftWeaponTemp);
         }
     }
+
+    public virtual void SetAmmo(int index, int amount)
+    {
+        if (index < 0)
+        {
+            Debug.LogError("Invalid ammo index: " + index);
+            return;
+        }
+        AmmoReserve.Set(index, amount);
+    }
+
+    public virtual void SetRightWeapon(WeaponNetworkStruct weapon)
+    {
+        RightWeapon = weapon;
+    }
+
+    public virtual void SetLeftWeapon(WeaponNetworkStruct weapon)
+    {
+        LeftWeapon = weapon;
+    }
+
+    public virtual void SetBackWeapon(WeaponNetworkStruct weapon)
+    {
+        BackWeapon = weapon;
+    }
+
+    public void ReduceLeftWeaponMagazin(int count)
+    {
+        var leftWeaponTemp = LeftWeapon;
+        leftWeaponTemp.ammoInMagazine = Mathf.Max(0, leftWeaponTemp.ammoInMagazine - count);
+        SetLeftWeapon(leftWeaponTemp);
+    }
+
+    public void ReduceRightWeaponMagazin(int count)
+    {
+        var rightWeaponTemp = RightWeapon;
+        rightWeaponTemp.ammoInMagazine = Mathf.Max(0, rightWeaponTemp.ammoInMagazine - count);
+        SetRightWeapon(rightWeaponTemp);
+    }
+
+    public void ReduceBackWeaponMagazin(int count)
+    {
+        var backWeaponTemp = BackWeapon;
+        backWeaponTemp.ammoInMagazine = Mathf.Max(0, backWeaponTemp.ammoInMagazine - count);
+        SetBackWeapon(backWeaponTemp);
+    }
+
+
 }

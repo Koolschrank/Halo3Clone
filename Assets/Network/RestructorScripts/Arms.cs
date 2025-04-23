@@ -2,31 +2,72 @@ using Fusion;
 using System;
 using UnityEngine;
 
-public class Arms : NetworkBehaviour
+public abstract class Arms : NetworkBehaviour
 {
-    [SerializeField] public WeaponInventory WeaponInventory { get; private set; }
+    [Header("References")]
+    [SerializeField] GranadeThrower granadeThrower;
+    [SerializeField] protected WeaponInventory weaponInventory;
+    [SerializeField] AbilityInventory abilityInventory;
+    [SerializeField] MeleeAttacker meleeAttacker;
+    [SerializeField] BulletSpawner bulletSpawner;
+    [SerializeField] protected PlayerPickUpScan pickUpScan;
+
+    [Header("Stats")]
+    [SerializeField] PlayerMeleeAttack defaultMelee;
+
+    public WeaponInventory WeaponInventory => weaponInventory;
 
     public Weapon_Arms Weapon_LeftHand { get; private set; }
     public Weapon_Arms Weapon_RightHand { get; private set; }
 
+    bool inZoom = false;
+    public virtual bool InZoom
+    {
+        get => inZoom;
+        protected set => inZoom = value;
+    }
+
+    public bool CanDualWield2HandedWeapons { get; private set; } = false;
+
     
-    [Networked] public TickTimer GetReadyTimer_RightWeapon {  get; private set; }
+
+
+    // Right Weapon
+    [Networked] public TickTimer GetReadyTimer_RightWeapon { get; private set; }
     [Networked] public TickTimer StoreTimer_RightWeapon { get; private set; }
-    [Networked] public TickTimer ReloadWeapon_RightWeapon { get; private set; }
+    [Networked] public TickTimer ReloadTimer_RightWeapon { get; private set; }
+    [Networked] public TickTimer MeleeHitTimer_RightWeapon { get; private set; }
+    [Networked] public TickTimer MeleeRecoveryTimer_RightWeapon { get; private set; }
+    [Networked] public TickTimer ShootCooldownTimer_RightWeapon { get; private set; }
+
+    public float RemainingReloadTime_RightWeapon => ReloadTimer_RightWeapon.RemainingTime(Runner) ?? 0f;
+    public float RemainingStoreTime_RightWeapon => StoreTimer_RightWeapon.RemainingTime(Runner) ?? 0f;
+    public float RemainingGetReadyTime_RightWeapon => GetReadyTimer_RightWeapon.RemainingTime(Runner) ?? 0f;
+
+    public float RemainingMeleeTime_RightWeapon => MeleeRecoveryTimer_RightWeapon.RemainingTime(Runner) ?? 0f;
 
     
 
+
+    // Left Weapon
     [Networked] public TickTimer GetReadyTimer_LeftWeapon { get; private set; }
     [Networked] public TickTimer StoreTimer_LeftWeapon { get; private set; }
-    [Networked] public TickTimer ReloadWeapon_LeftWeapon { get; private set; }
-
-    
-
-
-    
+    [Networked] public TickTimer ReloadTimer_LeftWeapon { get; private set; }
+    [Networked] public TickTimer MeleeHitTimer_LeftWeapon { get; private set; }
+    [Networked] public TickTimer MeleeRecoveryTimer_LeftWeapon { get; private set; }
+    [Networked] public TickTimer ShootCooldownTimer_LeftWeapon { get; private set; }
 
 
+    public float RemainingReloadTime_LeftWeapon => ReloadTimer_LeftWeapon.RemainingTime(Runner) ?? 0f;
+    public float RemainingStoreTime_LeftWeapon => StoreTimer_LeftWeapon.RemainingTime(Runner) ?? 0f;
+    public float RemainingGetReadyTime_LeftWeapon => GetReadyTimer_LeftWeapon.RemainingTime(Runner) ?? 0f;
 
+    public float RemainingMeleeTime_LeftWeapon => MeleeRecoveryTimer_LeftWeapon.RemainingTime(Runner) ?? 0f;
+
+    // ability
+    [Networked] public TickTimer AbilityUseTimer { get; private set; }
+
+    [Networked] public TickTimer AbilityEndLagTimer { get; private set; }
 
     public override void FixedUpdateNetwork()
     {
@@ -36,9 +77,9 @@ public class Arms : NetworkBehaviour
             StoreTimer_RightWeapon = TickTimer.None;
             WeaponInventory.Switch_RightWithBackWeapon();
         }
-        if (ReloadWeapon_RightWeapon.Expired(Runner))
+        if (ReloadTimer_RightWeapon.Expired(Runner))
         {
-            ReloadWeapon_RightWeapon = TickTimer.None;
+            ReloadTimer_RightWeapon = TickTimer.None;
             ReloadRightWeapon();
         }
         if (StoreTimer_LeftWeapon.Expired(Runner))
@@ -46,11 +87,51 @@ public class Arms : NetworkBehaviour
             StoreTimer_LeftWeapon = TickTimer.None;
             WeaponInventory.Switch_LeftWithBackWeapon();
         }
-        if (ReloadWeapon_LeftWeapon.Expired(Runner))
+        if (ReloadTimer_LeftWeapon.Expired(Runner))
         {
-            ReloadWeapon_LeftWeapon = TickTimer.None;
+            ReloadTimer_LeftWeapon = TickTimer.None;
             ReloadLeftWeapon();
         }
+        if (GetReadyTimer_RightWeapon.Expired(Runner))
+        {
+            GetReadyTimer_RightWeapon = TickTimer.None;
+        }
+        if (GetReadyTimer_LeftWeapon.Expired(Runner))
+        {
+            GetReadyTimer_LeftWeapon = TickTimer.None;
+        }
+        if (ShootCooldownTimer_RightWeapon.Expired(Runner))
+        {
+            ShootCooldownTimer_RightWeapon = TickTimer.None;
+        }
+        if (ShootCooldownTimer_LeftWeapon.Expired(Runner))
+        {
+            ShootCooldownTimer_LeftWeapon = TickTimer.None;
+        }
+        if (AbilityUseTimer.Expired(Runner))
+        {
+            AbilityUseTimer = TickTimer.None;
+            UseAbility();
+        }
+        if (MeleeHitTimer_RightWeapon.Expired(Runner))
+        {
+            MeleeHitTimer_RightWeapon = TickTimer.None;
+            MeleeWithRightWeapon();
+        }
+        if (MeleeHitTimer_LeftWeapon.Expired(Runner))
+        {
+            MeleeHitTimer_LeftWeapon = TickTimer.None;
+            MeleeWithLeftWeapon();
+        }
+        if (MeleeRecoveryTimer_RightWeapon.Expired(Runner))
+        {
+            MeleeRecoveryTimer_RightWeapon= TickTimer.None;
+        }
+        if (MeleeRecoveryTimer_LeftWeapon.Expired(Runner))
+        {
+            MeleeRecoveryTimer_LeftWeapon = TickTimer.None;
+        }
+
 
 
 
@@ -63,7 +144,7 @@ public class Arms : NetworkBehaviour
                 var newWeapon = CreateWeaponArms(WeaponInventory.RightWeapon);
                 AssignWeaponToRightHand(newWeapon);
             }
-            
+
         }
         if (!HasWeaponIndex(Weapon_LeftHand, WeaponInventory.LeftWeapon))
         {
@@ -80,65 +161,65 @@ public class Arms : NetworkBehaviour
     {
         if (weapon == null)
             return false;
-        if (weaponStruct.weaponTypeIndex == weapon.GetWeaponNetworkStruct().weaponTypeIndex)
+        if (weaponStruct.index == weapon.Index)
             return true;
         return false;
     }
 
     Weapon_Arms CreateWeaponArms(WeaponNetworkStruct weaponStruct)
     {
-        Weapon_Arms weapon = new Weapon_Arms(ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex), weaponStruct.ammoInMagazine, weaponStruct.weaponTypeIndex);
+        Weapon_Arms weapon = new Weapon_Arms(ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex), weaponStruct.index);
         return weapon;
     }
 
     protected virtual void AssignWeaponToRightHand(Weapon_Arms weapon)
     {
+        ReloadTimer_RightWeapon = TickTimer.None;
         Weapon_RightHand = weapon;
         GetReadyTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.SwitchInTime);
     }
 
     protected virtual void AssignWeaponToLeftHand(Weapon_Arms weapon)
     {
+        ReloadTimer_LeftWeapon = TickTimer.None;
         Weapon_LeftHand = weapon;
         GetReadyTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.SwitchInTime);
     }
 
     protected virtual void RemoveWeaponFromRightHand()
     {
-        var weapon = Weapon_RightHand;
         Weapon_RightHand = null;
     }
 
     protected virtual void RemoveWeaponFromLeftHand()
     {
-        var weapon = Weapon_LeftHand;
         Weapon_LeftHand = null;
 
     }
 
     protected virtual void InitiateRightWeaponSwitch()
     {
-        ReloadWeapon_RightWeapon = TickTimer.None;
+        ReloadTimer_RightWeapon = TickTimer.None;
         StoreTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.SwitchOutTime);
     }
 
     protected virtual void InitiateLeftWeaponSwitch()
     {
-        ReloadWeapon_LeftWeapon = TickTimer.None;
+        ReloadTimer_LeftWeapon = TickTimer.None;
         StoreTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.SwitchOutTime);
     }
 
-    protected void InitiateReloadRightWeapon()
+    protected virtual void InitiateReloadRightWeapon()
     {
-        ReloadWeapon_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.ReloadTime);
+        ReloadTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.ReloadTime);
     }
 
-    protected void InitiateReloadLeftWeapon()
+    protected virtual void InitiateReloadLeftWeapon()
     {
-        ReloadWeapon_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.ReloadTime);
+        ReloadTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.ReloadTime);
     }
 
-    void ReloadRightWeapon()
+    protected virtual void ReloadRightWeapon()
     {
         int ammoInMagazine = WeaponInventory.RightWeapon.ammoInMagazine;
         int magazineSize = Weapon_RightHand.MagazineSize;
@@ -148,7 +229,7 @@ public class Arms : NetworkBehaviour
 
     }
 
-    void ReloadLeftWeapon()
+    protected virtual void ReloadLeftWeapon()
     {
         int ammoInMagazine = WeaponInventory.LeftWeapon.ammoInMagazine;
         int magazineSize = Weapon_LeftHand.MagazineSize;
@@ -156,6 +237,123 @@ public class Arms : NetworkBehaviour
 
         WeaponInventory.TransferReserveAmmo_LeftWeapon(ammoNeeded);
     }
+
+
+    protected void InitiateAbilityUse()
+    {
+        abilityInventory.UseAbility();
+        var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
+
+        if (ability is Ability_Data_Granade)
+        {
+            var stats = (Ability_Data_Granade)ability;
+            var granadeStats = stats.Granade;
+            float timeMultiplier = 1;
+
+            granadeThrower.ThrowGranadeStart(granadeStats, timeMultiplier);
+            AbilityUseTimer = TickTimer.CreateFromSeconds(Runner, granadeStats.ThrowDelay);
+            AbilityEndLagTimer = TickTimer.CreateFromSeconds(Runner, granadeStats.ThrowTime);
+        }
+    }
+
+    void UseAbility()
+    {
+        var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
+        if (ability is Ability_Data_Granade)
+        {
+            var stats = (Ability_Data_Granade)ability;
+            var granadeStats = stats.Granade;
+            granadeThrower.ThrowGranade(granadeStats);
+        }
+    }
+
+    protected virtual void InitiateMeleeWithRightWeapon()
+    {
+        var attackStats = Weapon_RightHand.MeleeAttack;
+        if (attackStats == null)
+        {
+            attackStats = defaultMelee;
+        }
+        float multiplier = 1f;
+        ReloadTimer_RightWeapon = TickTimer.None;
+
+        MeleeHitTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, attackStats.Delay * multiplier);
+        MeleeRecoveryTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, attackStats.MeleeTime * multiplier);
+        meleeAttacker.AttackStart(attackStats);
+    }
+
+    void MeleeWithRightWeapon()
+    {
+        var attackStats = Weapon_RightHand.MeleeAttack;
+        if (attackStats == null)
+        {
+            attackStats = defaultMelee;
+        }
+        meleeAttacker.Attack(attackStats);
+    }
+
+    protected virtual void InitiateMeleeWithLeftWeapon()
+    {
+        var attackStats = Weapon_LeftHand.MeleeAttack;
+        if (attackStats == null)
+        {
+            attackStats = defaultMelee;
+        }
+        MeleeHitTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, attackStats.Delay);
+        MeleeRecoveryTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, attackStats.MeleeTime);
+        meleeAttacker.AttackStart(attackStats);
+    }
+
+    void MeleeWithLeftWeapon()
+    {
+        var attackStats = Weapon_LeftHand.MeleeAttack;
+        if (attackStats == null)
+        {
+            attackStats = defaultMelee;
+        }
+        meleeAttacker.Attack(attackStats);
+    }
+
+    protected virtual void InitiateShootRightWeapon()
+    {
+        ShootCooldownTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.Data.FireRate);
+        ShootWithWeapon(Weapon_RightHand);
+        weaponInventory.ReduceRightWeaponMagazin(1);
+    }
+
+    protected virtual void InitiateShootLeftWeapon()
+    {
+        ShootCooldownTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.Data.FireRate);
+        ShootWithWeapon(Weapon_LeftHand);
+        weaponInventory.ReduceLeftWeaponMagazin(1);
+    }
+
+    void ShootWithWeapon(Weapon_Arms weapon)
+    {
+        var projectileData = weapon.Data.WeaponBullet;
+
+        if (projectileData is Weapon_Bullet_Hitscan)
+        {
+            var hitscan = bulletSpawner.ShootHitScan(weapon);
+            HitScanHit(weapon, hitscan);
+        }
+        else if (projectileData is Weapon_Bullet_Projectile)
+        {
+            var projectiles = bulletSpawner.ShootProjectile(weapon);
+            ProjectilesShot(weapon, projectiles);
+        }
+        else if (projectileData is Weapon_Bullet_Granade)
+        {
+            var granades = bulletSpawner.ShootGranade(weapon);
+            GranadesShot(weapon, granades);
+        }
+    }
+
+    protected abstract void HitScanHit(Weapon_Arms weapon,Vector3[] hits);
+
+    protected abstract void ProjectilesShot(Weapon_Arms weapon, GameObject[] projectiles);
+
+    protected abstract void GranadesShot(Weapon_Arms weapon, GameObject[] granades);
 
 
 

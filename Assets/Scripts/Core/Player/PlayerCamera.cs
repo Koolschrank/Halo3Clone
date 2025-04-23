@@ -20,13 +20,13 @@ public class PlayerCamera : InterfaceItem
 
     protected override void Subscribe(PlayerBody body)
     {
-        body.PlayerArms.OnZoomUpdated += UpdateZoom;
-        body.PlayerArms.RightArm.OnWeaponEquipStarted += (weapon, time) => SetZoomedInFOV(weapon.ZoomFOV);
+        body.PlayerArms.OnZoomedChanged += UpdateZoom;
+        body.PlayerArms.OnRightWeaponEquiped += (weapon) => SetZoomedInFOV(weapon.ZoomFOV);
 
         playerBody = body;
 
-        if (body.PlayerArms.RightArm.CurrentWeapon != null)
-            SetZoomedInFOV(body.PlayerArms.RightArm.CurrentWeapon.ZoomFOV);
+        if (body.PlayerArms.Weapon_RightHand != null)
+            SetZoomedInFOV(body.PlayerArms.Weapon_RightHand.ZoomFOV);
         UpdateZoom(body.PlayerArms.InZoom);
 
         if (cinemachineCamera != null)
@@ -40,8 +40,9 @@ public class PlayerCamera : InterfaceItem
 
     protected override void Unsubscribe(PlayerBody body)
     {
-        body.PlayerArms.OnZoomUpdated -= UpdateZoom;
-        body.PlayerArms.RightArm.OnWeaponEquipStarted -= (weapon, time) => SetZoomedInFOV(weapon.ZoomFOV);
+        body.PlayerArms.OnZoomedChanged -= UpdateZoom;
+        body.PlayerArms.OnRightWeaponEquiped -= (weapon) => SetZoomedInFOV(weapon.ZoomFOV);
+        playerBody = null;
 
     }
 

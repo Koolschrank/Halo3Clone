@@ -12,8 +12,7 @@ public class BulletSpawner : MonoBehaviour
 
     [SerializeField] Transform mainTransform;
     [SerializeField] LayerMask autoAimLayerMask;
-    [SerializeField] RightArm rightArm;
-    [SerializeField] LeftArm leftArm;
+    [SerializeField] Arms arms;
     //[SerializeField] PlayerArms playerArms;
     
 
@@ -52,19 +51,19 @@ public class BulletSpawner : MonoBehaviour
     public void Update()
     {
         Transform newTarget = null;
-        var rightArmWeapon = rightArm.CurrentWeapon;
+        var rightArmWeapon = arms.Weapon_RightHand;
         if (rightArmWeapon != null)
         {
-            var rightArmAutoAim = rightArm.CurrentWeapon.AutoAim;
+            var rightArmAutoAim = rightArmWeapon.AutoAim;
             newTarget = GetAutoAimTarget(rightArmAutoAim.Radius, rightArmAutoAim.RaycastLenght);
         }
 
         if (newTarget == null)
         {
-            var leftArmWeapon = leftArm.CurrentWeapon;
+            var leftArmWeapon = arms.Weapon_LeftHand;
             if (leftArmWeapon != null)
             {
-                var leftArmAutoAim = leftArm.CurrentWeapon.AutoAim;
+                var leftArmAutoAim = leftArmWeapon.AutoAim;
                 newTarget = GetAutoAimTarget(leftArmAutoAim.Radius, leftArmAutoAim.RaycastLenght);
 
             }
@@ -128,6 +127,8 @@ public class BulletSpawner : MonoBehaviour
 
         return null;
     }
+
+    
 
 
     public GameObject[] ShootGranade(Weapon_Arms weapon)

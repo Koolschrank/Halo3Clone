@@ -5,52 +5,97 @@ using UnityEngine.UI;
 public class PickUpUI : InterfaceItem
 {
     [SerializeField] string pickUpText = "Press E to pick up ";
-    [SerializeField] string dualWieldText = "Press E to dual wield ";
-    [SerializeField] GameObject pickUpTextObject;
+    [SerializeField] string pickUpTextLeftHand = "Press E to dual wield ";
+    [SerializeField] string pickUpTextRightHand = "Press E to pick up ";
+    [SerializeField] GameObject pickUpTextObjectRightArm;
+    [SerializeField] GameObject pickUpTextObjectLeftArm;
 
-    [SerializeField] TextMeshProUGUI weaponName;
+    [SerializeField] TextMeshProUGUI textRightArm;
+    [SerializeField] TextMeshProUGUI textLeftArm;
+
     [SerializeField] Image weaponImage;
 
-    [SerializeField] GameObject dualwieldObject;
-    [SerializeField] TextMeshProUGUI dualWieldName;
+    WeaponInventoryExtended weaponInventory;
+    Arms arms;
 
     protected override void Subscribe(PlayerBody body)
     {
         var pickUpScan = body.PlayerPickUpScan;
+        weaponInventory = body.WeaponInventory;
+        arms = body.PlayerArms;
 
-        pickUpScan.OnWeaponPickUpUpdate += UpdatePickUpUI;
-        pickUpScan.OnWeaponPickUp += ClearPickUpUI;
-        pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
+        pickUpScan.OnIndexOfClosesWeaponChanged += UpdatePickUpUI;
 
-        pickUpScan.TrySendUpdates();
+        UpdatePickUpUI(pickUpScan.IndexOfClosestPickUp);
     }
 
     protected override void Unsubscribe(PlayerBody body)
     {
         var pickUpScan = body.PlayerPickUpScan;
-        pickUpScan.OnWeaponPickUpUpdate -= UpdatePickUpUI;
-        pickUpScan.OnWeaponPickUp -= ClearPickUpUI;
-        pickUpScan.OnWeaponDualWieldUpdate -= UpdateDualWieldText;
-        ClearPickUpUI();
+        pickUpScan.OnIndexOfClosesWeaponChanged -= UpdatePickUpUI;
+
+        weaponInventory = null;
+        arms = null;
+
+        UpdatePickUpUI(-1);
     }
 
 
-    void UpdatePickUpUI(Weapon_PickUp weapon_PickUp)
+    void UpdatePickUpUI(int weaponIndex)
     {
-        if (weapon_PickUp == null)
+        if (weaponIndex == -1)
         {
-            weaponName.text = "";
-            pickUpTextObject.SetActive(false);
+            pickUpTextObjectLeftArm.SetActive(false);
+            pickUpTextObjectRightArm.SetActive(false);
+            weaponImage.enabled = false;
             return;
         }
-        pickUpTextObject.SetActive(true);
-        weaponName.text = pickUpText + weapon_PickUp.WeaponName;
 
-        var sprite = weapon_PickUp.GunSpriteUI;
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
+        Sprite weaponSprite = weaponData.GunSpriteUI;
+        string weaponName = weaponData.WeaponName;
+        bool canRightArmPickUp = true;
+        bool canLeftArmPickUp =
+            arms.CanDualWield2HandedWeapons
+            || (arms.Weapon_RightHand != null 
+            && arms.Weapon_RightHand.WeaponType == WeaponType.oneHanded
+            && weaponData.WeaponType == WeaponType.oneHanded);
 
-        if (sprite != null)
+        if (canRightArmPickUp && canLeftArmPickUp)
         {
-            weaponImage.sprite = sprite;
+            pickUpTextObjectLeftArm.SetActive(true);
+            textLeftArm.text = pickUpTextLeftHand + weaponName;
+
+            pickUpTextObjectRightArm.SetActive(true);
+            textRightArm.text = pickUpTextRightHand + weaponName;
+
+
+
+        }
+        else if (canRightArmPickUp)
+        {
+            pickUpTextObjectRightArm.SetActive(true);
+            textRightArm.text = pickUpText + weaponName;
+
+            pickUpTextObjectLeftArm.SetActive(false);
+
+        }
+        else
+        {
+            pickUpTextObjectRightArm.SetActive(false);
+            pickUpTextObjectLeftArm.SetActive(false);
+            weaponImage.enabled = false;
+            return;
+        }
+
+
+
+
+        
+
+        if (weaponSprite != null)
+        {
+            weaponImage.sprite = weaponSprite;
             weaponImage.enabled =true;
         }
         else
@@ -60,22 +105,4 @@ public class PickUpUI : InterfaceItem
         }
     }
 
-    void ClearPickUpUI()
-    {
-        weaponName.text = "";
-        pickUpTextObject.SetActive(false);
-        weaponImage.sprite = null;
-        weaponImage.enabled = false;
-    }
-
-    void UpdateDualWieldText(Weapon_PickUp weapon_PickUp)
-    {
-        if (weapon_PickUp == null)
-        {
-            dualwieldObject.SetActive(false);
-            return;
-        }
-        dualwieldObject.SetActive(true);
-        dualWieldName.text = dualWieldText;// + weapon_PickUp.WeaponName;
-    }
 }

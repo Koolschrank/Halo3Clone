@@ -11,16 +11,16 @@ public class crosshairUI : InterfaceItem
     protected override void Subscribe(PlayerBody body)
     {
         var bulletSpawner = body.BulletSpawner;
-        var rightArm = body.PlayerArms.RightArm;
+        var arms = body.PlayerArms;
 
         bulletSpawner.OnTargetAcquired += OnTargetAcquired;
         bulletSpawner.OnTargetLost += OnTargetLost;
-        rightArm.OnWeaponEquipStarted += (weapon, time) => ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
+        arms.OnRightWeaponEquiped += (weapon) => ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
 
 
-        if (rightArm.CurrentWeapon != null)
+        if (arms.Weapon_RightHand != null)
         {
-            ChangeSprite(rightArm.CurrentWeapon.CrosshairUI, rightArm.CurrentWeapon.CrosshairSizeUI);
+            ChangeSprite(arms.Weapon_RightHand.CrosshairUI, arms.Weapon_RightHand.CrosshairSizeUI);
         }
        
     }
@@ -28,11 +28,11 @@ public class crosshairUI : InterfaceItem
     protected override void Unsubscribe(PlayerBody body)
     {
         var bulletSpawner = body.BulletSpawner;
-        var rightArm = body.PlayerArms.RightArm;
+        var arms = body.PlayerArms;
 
         bulletSpawner.OnTargetAcquired -= OnTargetAcquired;
         bulletSpawner.OnTargetLost -= OnTargetLost;
-        rightArm.OnWeaponEquipStarted -= (weapon, time) => ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
+        arms.OnRightWeaponEquiped -= (weapon) => ChangeSprite(weapon.CrosshairUI, weapon.CrosshairSizeUI);
 
         OnTargetLost(null);
     }

@@ -17,6 +17,15 @@ public class Weapon_PickUp : NetworkBehaviour
     List<int> teamsBlockedFromPickUpThis = new List<int>();
     bool pickedUp = false;
 
+    public int Index { get; set; } = -1;
+
+
+
+    public override void Spawned()
+    {
+        PickUpManager.OnPickUpSpawnedInvoke(this);
+    }
+
     public WeaponNetworkStruct PickUp()
     {
         if (pickedUp)
@@ -29,6 +38,7 @@ public class Weapon_PickUp : NetworkBehaviour
             
         var weapon = new WeaponNetworkStruct()
         {
+            index = Index,
             weaponTypeIndex = weapon_Data.WeaponTypeIndex,
             ammoInMagazine = ammoInMagazine,
             ammoInReserve = ammoInReserve,

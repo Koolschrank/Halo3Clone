@@ -21,7 +21,7 @@ public class CharacterHealth : Health
 
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] ArmsExtended playerArms;
 
 
 

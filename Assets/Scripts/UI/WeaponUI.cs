@@ -3,6 +3,7 @@ using TMPro;
 using NUnit.Framework;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 
 public class WeaponUI : InterfaceItem
 {
@@ -11,7 +12,6 @@ public class WeaponUI : InterfaceItem
 
 
     [SerializeField] bool leftArm = false;
-     Arm playerArm;
     [SerializeField] TextMeshProUGUI reserveText;
 
     [SerializeField] Color baseColor;
@@ -19,6 +19,8 @@ public class WeaponUI : InterfaceItem
 
     [SerializeField] TextMeshProUGUI[] reserveTextToColor;
     [SerializeField] Image weaponSprite;
+
+    WeaponInventoryExtended weaponInventory;
 
 
     [Header("BulletUI")]
@@ -34,50 +36,109 @@ public class WeaponUI : InterfaceItem
     // subscribe to the player body
     protected override void Unsubscribe(PlayerBody body)
     {
-        Arm arm = GetArm(body);
-        arm.OnWeaponEquipStarted -= (weapon,time) => EquipWeapon(weapon);
-        arm.OnWeaponUnequipFinished -= UnequipWeapon;
-        arm.OnWeaponDroped -= (weapon, pickUp) => UnequipWeapon(weapon);
-        arm.OnReserveAmmoChanged -= UpdateReserve;
+
+        if (leftArm)
+        {
+            weaponInventory.OnLeftWeaponEquipped -= (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
+            };
+
+            weaponInventory.OnLeftWeaponRemoved -= UnequipWeapon;
+            weaponInventory.OnLeftWeaponReserveAmmoChanged -= UpdateReserve;
+            weaponInventory.OnLeftWeaponMagazinChanged -= UpdateMagazin;
+
+
+        }
+        else
+        {
+            weaponInventory.OnRightWeaponEquipped -= (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
+            };
+            weaponInventory.OnRightWeaponRemoved -= UnequipWeapon;
+            weaponInventory.OnRightWeaponReserveAmmoChanged -= UpdateReserve;
+            weaponInventory.OnRightWeaponMagazinChanged -= UpdateMagazin;
+
+        }
+
+
+        weaponInventory = null;
+
+
+
     }
 
     protected override void Subscribe(PlayerBody body)
     {
-        Arm arm = GetArm(body);
-        playerArm = arm;
-        arm.OnWeaponEquipStarted += (weapon, time) => EquipWeapon(weapon);
-        arm.OnWeaponUnequipFinished += UnequipWeapon;
-        arm.OnWeaponDroped += (weapon, pickUp) => UnequipWeapon(weapon);
-        arm.OnReserveAmmoChanged += UpdateReserve;
 
-        if (arm.CurrentWeapon == null)
-        {
-            Disable();
-        }
-        else
-        {
-            Enable();
-            EquipWeapon(arm.CurrentWeapon);
-            UpdateMagazin(arm.CurrentWeapon.Magazine);
-            UpdateReserve(arm.AmmoOfWeaponInReserve);
-        }
+        weaponInventory = body.WeaponInventory;
 
-        
-
-        
-    }
-
-    public Arm GetArm(PlayerBody body)
-    {
         if (leftArm)
         {
-            return body.PlayerArms.LeftArm;
+
+            weaponInventory.OnLeftWeaponRemoved += UnequipWeapon;
+            weaponInventory.OnLeftWeaponRemoved += (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
+            };
+            weaponInventory.OnLeftWeaponReserveAmmoChanged += UpdateReserve;
+            weaponInventory.OnLeftWeaponMagazinChanged += UpdateMagazin;
+
+            if (weaponInventory.LeftWeapon.weaponTypeIndex == -1)
+            {
+                Disable();
+            }
+            else
+            {
+                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
+                Enable();
+                EquipWeapon(weaponInventory.LeftWeapon);
+                
+            }
         }
         else
         {
-            return body.PlayerArms.RightArm;
+            weaponInventory.OnRightWeaponEquipped += (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
+            };
+            weaponInventory.OnRightWeaponRemoved += UnequipWeapon;
+            weaponInventory.OnRightWeaponReserveAmmoChanged += UpdateReserve;
+            weaponInventory.OnRightWeaponMagazinChanged += UpdateMagazin;
+
+            if (weaponInventory.RightWeapon.weaponTypeIndex == -1)
+            {
+                Disable();
+            }
+            else
+            {
+                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
+                Enable();
+                EquipWeapon(weaponInventory.RightWeapon);
+                
+            }
         }
+
+       
+
+        
+
+        
+
+        
     }
+
 
     public void Disable()
     {
@@ -92,10 +153,14 @@ public class WeaponUI : InterfaceItem
 
 
 
-    void EquipWeapon(Weapon_Arms weapon)
+    void EquipWeapon(WeaponNetworkStruct weaponStruct)
     {
+        if (weaponStruct.weaponTypeIndex == -1) return;
+
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+
         gameObject.SetActive(true);
-        if ( weapon.ShowAmmoUI)
+        if (weaponData.ShowAmmoUI)
         {
             bulletUI.gameObject.SetActive(true);
             foreach (var text in reserveTextToColor)
@@ -103,7 +168,7 @@ public class WeaponUI : InterfaceItem
                 text.gameObject.SetActive(true);
             }
         }
-        else if ( !weapon.ShowAmmoUI)
+        else if ( !weaponData.ShowAmmoUI)
         {
             bulletUI.gameObject.SetActive(false);
             foreach (var text in reserveTextToColor)
@@ -113,13 +178,13 @@ public class WeaponUI : InterfaceItem
         }
         Enable();
 
-        weapon.OnMagazineChange += UpdateMagazin;
+        //weapon.OnMagazineChange += UpdateMagazin;
        
-        UpdateReserve(playerArm.AmmoOfWeaponInReserve);
-        SetUpBulletUI(weapon.BulletSpriteUI, weapon.MagazineSize, weapon.BulletsPerRowUI, weapon.BulletSizeUI);
-        UpdateMagazin(weapon.Magazine);
+        
+        SetUpBulletUI(weaponData.BulletSpriteUI, weaponData.MagazineSize, weaponData.BulletsPerRowUI, weaponData.BulletSizeUI);
+       
 
-        var newSprite = weapon.GunSpriteUI;
+        var newSprite = weaponData.GunSpriteUI;
         if (newSprite != null)
         {
             weaponSprite.sprite = newSprite;
@@ -134,11 +199,11 @@ public class WeaponUI : InterfaceItem
         UpdateSprite();
     }
 
-    void UnequipWeapon(Weapon_Arms weapon)
+    void UnequipWeapon(WeaponNetworkStruct weaponStruct)
     {
+        if (weaponStruct.weaponTypeIndex == -1) return;
 
         gameObject.SetActive(false);
-        weapon.OnMagazineChange -= UpdateMagazin;
 
         DeleteBulletsFromUI();
         reserveText.text = "";

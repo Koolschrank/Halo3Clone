@@ -9,45 +9,62 @@ public class Arm_FPSView : InterfaceItem
 
     protected override void Subscribe(PlayerBody body)
     {
-        var arm = GetArm(body);
-        var granadeTrower = body.PlayerArms.GranadeThrower;
+        var arms = body.PlayerArms;
+        var granadeTrower = body.GranadeThrower;
 
-        arm.OnWeaponEquipStarted += EquipWeapon;
-        arm.OnWeaponUnequipFinished += RemoveWeapon;
-        arm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
-        arm.OnGranadeThrowStarted += ThrowGranadeStart;
+        if (!leftArm)
+        {
+            arms.OnRightWeaponEquiped += EquipWeapon;
+            arms.OnRightWeaponRemoved += RemoveWeapon;
+            if (arms.Weapon_RightHand != null)
+            {
+                EquipWeapon(arms.Weapon_RightHand);
+            }
+        }
+        else
+        {
+            arms.OnLeftWeaponEquiped += EquipWeapon;
+            arms.OnLeftWeaponRemoved += RemoveWeapon;
+            if (arms.Weapon_LeftHand != null)
+            {
+                EquipWeapon(arms.Weapon_LeftHand);
+            }
+
+        }
+
+
+
+
+        granadeTrower.OnGranadeThrowStart += ThrowGranadeStart;
         granadeTrower.OnGranadeThrow += ThrowGranade;
 
-        if (arm.CurrentWeapon != null)
-        {
-            EquipWeapon(arm.CurrentWeapon);
-        }
+        
     }
 
     protected override void Unsubscribe(PlayerBody body)
     {
-        var arm = GetArm(body);
+        var arms = body.PlayerArms;
 
-        var granadeTrower = body.PlayerArms.GranadeThrower;
-
-        arm.OnWeaponEquipStarted -= EquipWeapon;
-        arm.OnWeaponUnequipFinished -= RemoveWeapon;
-        arm.OnWeaponDroped -= (weapon, pickUp) => RemoveWeapon(weapon);
-        arm.OnGranadeThrowStarted -= ThrowGranadeStart;
-
-        granadeTrower.OnGranadeThrow += ThrowGranade;
-    }
-
-    public Arm GetArm(PlayerBody body)
-    {
-        if (leftArm)
+        if (!leftArm)
         {
-            return body.PlayerArms.LeftArm;
+            arms.OnRightWeaponEquiped -= EquipWeapon;
+            arms.OnRightWeaponRemoved -= RemoveWeapon;
+            if (arms.Weapon_RightHand != null)
+            {
+                EquipWeapon(arms.Weapon_RightHand);
+            }
         }
         else
         {
-            return body.PlayerArms.RightArm;
+            arms.OnLeftWeaponEquiped -= EquipWeapon;
+            arms.OnLeftWeaponRemoved -= RemoveWeapon;
         }
+
+
+        var granadeTrower = body.GranadeThrower;
+        granadeTrower.OnGranadeThrowStart -= ThrowGranadeStart;
+
+        granadeTrower.OnGranadeThrow -= ThrowGranade;
     }
 
 

@@ -5,6 +5,7 @@ public class GranadeThrower : MonoBehaviour
 {
 
     public Action<GameObject,GranadeStats> OnGranadeThrow;
+    public Action<GranadeStats, float> OnGranadeThrowStart;
 
 
     float throwDelay = 0f;

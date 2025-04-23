@@ -66,10 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bbe459746232845ae8e482d225a85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _indexOfClosestPickUp: -1
   pickUpsInRange: []
   pickUpCooldown: 0.5
-  playerArms: {fileID: 3232609274750972410}
-  playerInventory: {fileID: 7573040687501960069}
+  playerInventory: {fileID: 4889731717858166356}
   playerTeam: {fileID: 2295363821645548979}
 --- !u!1 &2050298198174422752
 GameObject:
@@ -10471,8 +10471,7 @@ MonoBehaviour:
   autoAimLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  rightArm: {fileID: 3970420054294455764}
-  leftArm: {fileID: 3844945188849078822}
+  arms: {fileID: 5436099177385318033}
   playerTeam: {fileID: 2295363821645548979}
   granadeThrower: {fileID: 625404246279802593}
   wallCheck:
@@ -10504,7 +10503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7726a89860a7d094ba3c3b53867517ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerArms: {fileID: 3232609274750972410}
+  playerArms: {fileID: 5436099177385318033}
   meleeAttacker: {fileID: 8008512304446792098}
   targetHitCollector: {fileID: 6138964545677116144}
   hitSound:
@@ -10535,11 +10534,11 @@ GameObject:
   - component: {fileID: 8050057614039648062}
   - component: {fileID: 4355240392448193639}
   - component: {fileID: 3068919470916229809}
-  - component: {fileID: 7573040687501960069}
   - component: {fileID: 782412234501442312}
   - component: {fileID: 6138964545677116144}
   - component: {fileID: 2295363821645548979}
   - component: {fileID: 1680555677729628207}
+  - component: {fileID: 7573040687501960069}
   - component: {fileID: 3232609274750972410}
   - component: {fileID: 3844945188849078822}
   - component: {fileID: 3970420054294455764}
@@ -10547,6 +10546,9 @@ GameObject:
   - component: {fileID: 4169074679463143072}
   - component: {fileID: -5009260468559975710}
   - component: {fileID: 4461638039460575108}
+  - component: {fileID: 5436099177385318033}
+  - component: {fileID: 4889731717858166356}
+  - component: {fileID: 2214214731459028143}
   m_Layer: 7
   m_Name: NetworkPlayerBody
   m_TagString: Player
@@ -10589,7 +10591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 7400201383000877008}
   playerAim: {fileID: 3068919470916229809}
-  playerArms: {fileID: 3232609274750972410}
+  playerArms: {fileID: 5436099177385318033}
   head: {fileID: 8067625750732039895}
   mainMesh: {fileID: 8335073051360787677}
   meshes:
@@ -10599,11 +10601,13 @@ MonoBehaviour:
   health: {fileID: 782412234501442312}
   bulletSpawner: {fileID: 737555415851796727}
   spectatorCameraTarget: {fileID: 3798683650232698611}
-  playerInventory: {fileID: 7573040687501960069}
+  weaponInventory: {fileID: 4889731717858166356}
+  abilityInventory: {fileID: 2214214731459028143}
   targetHitCollector: {fileID: 6138964545677116144}
   playerTeam: {fileID: 2295363821645548979}
   playerStartEquipment: {fileID: 8050057614039648062}
   playerAnimation: {fileID: 6646059112641200883}
+  granadeThrower: {fileID: 625404246279802593}
 --- !u!114 &7400201383000877008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10665,10 +10669,9 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfSideArm: 5
-    granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
-    granadeCount: 1
-  playerArms: {fileID: 3232609274750972410}
-  playerInventory: {fileID: 7573040687501960069}
+    ability: {fileID: 11400000, guid: 26cca8548ff4faf4ab9e9785ea14054e, type: 2}
+  weaponInventory: {fileID: 4889731717858166356}
+  abilityInventory: {fileID: 2214214731459028143}
   health: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
 --- !u!114 &4355240392448193639
@@ -10704,7 +10707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 7999377576702310532}
   playerHead: {fileID: 8067625750732039895}
-  playerArms: {fileID: 3232609274750972410}
+  playerArms: {fileID: 5436099177385318033}
   playerTeam: {fileID: 2295363821645548979}
   playerHealth: {fileID: 782412234501442312}
   cc: {fileID: 4461638039460575108}
@@ -10723,30 +10726,6 @@ MonoBehaviour:
   sensitivityChangeSteps: 0.1
   pitchMin: -89
   pitchMax: 89
---- !u!114 &7573040687501960069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f44e285ab8c58445bb7cd2ec2d19c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerArms: {fileID: 3232609274750972410}
-  _WeaponInInventory: -1
-  _AmmoInInventoryMagazine: 0
-  _AmmoReserve: 
-  _AbilityInInventory: -1
-  _AbilityUses: 0
-  granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
-  granadeInventorySize: 1
-  rechargeGranades: 1
-  rechargeGranadeTime: 13
-  weaponDropPoint: {fileID: 1905413014460542580}
-  characterHealth: {fileID: 782412234501442312}
 --- !u!114 &782412234501442312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10775,7 +10754,7 @@ MonoBehaviour:
   shildRegenAmountPerSecond: 25
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
-  playerArms: {fileID: 3232609274750972410}
+  playerArms: {fileID: 5436099177385318033}
   shildEmptySound:
     Guid:
       Data1: 1763954669
@@ -10854,6 +10833,30 @@ MonoBehaviour:
   icon_Enemy: {fileID: 6297355074296030630, guid: 4930c2003ec96234eba6140a1b8dc078, type: 3}
   playerTeam: {fileID: 2295363821645548979}
   characterHealth: {fileID: 782412234501442312}
+--- !u!114 &7573040687501960069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f44e285ab8c58445bb7cd2ec2d19c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerArms: {fileID: 3232609274750972410}
+  _WeaponInInventory: -1
+  _AmmoInInventoryMagazine: 0
+  _AmmoReserve: 
+  _AbilityInInventory: -1
+  _AbilityUses: 0
+  granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
+  granadeInventorySize: 1
+  rechargeGranades: 1
+  rechargeGranadeTime: 13
+  weaponDropPoint: {fileID: 1905413014460542580}
+  characterHealth: {fileID: 782412234501442312}
 --- !u!114 &3232609274750972410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10861,25 +10864,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009f7143e21328a4cb8b360c6ad01e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightArm: {fileID: 3970420054294455764}
-  leftArm: {fileID: 3844945188849078822}
-  inventory: {fileID: 7573040687501960069}
-  armsInput: {fileID: -5009260468559975710}
-  characterHealth: {fileID: 782412234501442312}
-  bulletSpawner: {fileID: 737555415851796727}
-  granadeThrower: {fileID: 625404246279802593}
-  pickUpScan: {fileID: 3086695294023934871}
-  meleeAttacker: {fileID: 8008512304446792098}
-  basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
-  weaponDropForce: 5
-  canDualWield2HandedWeapons: 0
-  meleeAttackTimeMultiplierInDualWielding: 1.5
-  granadeThrowTimeMultiplierInDualWielding: 1.5
 --- !u!114 &3844945188849078822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10887,20 +10876,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e3d11f1550df63479d6639fa6d55894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WeaponIndex: -1
-  _AmmoInMagazine: 0
-  playerArms: {fileID: 3232609274750972410}
-  dropPosition: {fileID: 2372597562941759599}
-  reloadTimer: 0
-  switchOutTimer: 0
-  switchInTimer: 0
-  meleeAttackTimer: 0
-  meleeAttackHitTimer: 0
 --- !u!114 &3970420054294455764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10908,20 +10888,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289933859456780900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb2d5e70c233af4cab7afa0401c79bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WeaponIndex: -1
-  _AmmoInMagazine: 0
-  playerArms: {fileID: 3232609274750972410}
-  dropPosition: {fileID: 8167806766066142118}
-  reloadTimer: 0
-  switchOutTimer: 0
-  switchInTimer: 0
-  meleeAttackTimer: 0
-  meleeAttackHitTimer: 0
 --- !u!114 &412254439390827981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10949,6 +10920,10 @@ MonoBehaviour:
   - {fileID: 3970420054294455764}
   - {fileID: -5009260468559975710}
   - {fileID: 4461638039460575108}
+  - {fileID: 5436099177385318033}
+  - {fileID: 4889731717858166356}
+  - {fileID: 2214214731459028143}
+  - {fileID: 3086695294023934871}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072
 Rigidbody:
@@ -10990,13 +10965,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 7999377576702310532}
-  playerArms: {fileID: 3232609274750972410}
   reloadWeaponInputBuffer: 0.2
   switchWeaponInputBuffer: 0.2
   meleeInputBuffer: 0.2
   holdInteractForPickUpTime: 0.2
   pickUp1InputBuffer: 0.2
-  Weapon2: 0
 --- !u!114 &4461638039460575108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11038,6 +11011,70 @@ MonoBehaviour:
     CompressNetworkPosition: 0
     ForceSingleOverlapQuery: 0
     SuppressConvexMeshColliders: 0
+--- !u!114 &5436099177385318033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3d287f8f4c38641a59beaaf75cbf81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  granadeThrower: {fileID: 625404246279802593}
+  weaponInventory: {fileID: 4889731717858166356}
+  abilityInventory: {fileID: 2214214731459028143}
+  meleeAttacker: {fileID: 8008512304446792098}
+  bulletSpawner: {fileID: 737555415851796727}
+  pickUpScan: {fileID: 3086695294023934871}
+  defaultMelee: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  input: {fileID: -5009260468559975710}
+--- !u!114 &4889731717858166356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af4a395fbe14e741a149bfefee24499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _RightWeapon:
+    index: 0
+    weaponTypeIndex: 0
+    ammoInMagazine: 0
+    ammoInReserve: 0
+  _LeftWeapon:
+    index: 0
+    weaponTypeIndex: 0
+    ammoInMagazine: 0
+    ammoInReserve: 0
+  _BackWeapon:
+    index: 0
+    weaponTypeIndex: 0
+    ammoInMagazine: 0
+    ammoInReserve: 0
+  _AmmoReserve: 
+--- !u!114 &2214214731459028143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45fc598a3604104faf8d8c410f67f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AbilityIndex: -1
+  _UsesLeft: 0
+  _MaxUses: 0
+  _UseRechargeTime: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0
@@ -11155,7 +11192,7 @@ PrefabInstance:
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: playerArms
       value: 
-      objectReference: {fileID: 3232609274750972410}
+      objectReference: {fileID: 5436099177385318033}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: granadeSocket
       value: 
@@ -11164,6 +11201,14 @@ PrefabInstance:
       propertyPath: lookTransform
       value: 
       objectReference: {fileID: 8067625750732039895}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: meleeAttacker
+      value: 
+      objectReference: {fileID: 8008512304446792098}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: granadeThrower
+      value: 
+      objectReference: {fileID: 625404246279802593}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: playerMovement
       value: 
@@ -11176,6 +11221,10 @@ PrefabInstance:
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 7573040687501960069}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: weaponInventory
+      value: 
+      objectReference: {fileID: 4889731717858166356}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: maxShildStrength
       value: 10

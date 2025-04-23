@@ -6616,6 +6616,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
   - {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
   - {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
+  ability_Data:
+  - {fileID: 11400000, guid: 26cca8548ff4faf4ab9e9785ea14054e, type: 2}
 --- !u!1001 &977368009
 PrefabInstance:
   m_ObjectHideFlags: 0

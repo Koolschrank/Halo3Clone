@@ -16,39 +16,40 @@ public class WeaponInventoryUI : InterfaceItem
     // subscribe to the player body
     protected override void Unsubscribe(PlayerBody body)
     {
-        var inventory = body.PlayerInventory;
+        var inventory = body.WeaponInventory;
         
-        inventory.OnWeaponAddedToInventory -= (weaponIndex) =>
+        inventory.OnBackWeaponEquipped -= (weaponStruct) =>
         {
-            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
+            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
             Show();
             UpdateWeaponSprite(weaponData.GunSpriteUI);
-            UpdateAmmo(inventory.GetAmmoInReserve(weaponIndex) + inventory.AmmoInInventoryMagazine);
+            UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);
         };
 
-        inventory.OnInventoryWeaponAmmoChanged -= UpdateAmmo;
-        inventory.OnWeaponRemovedFromInventory -= (weapon) => Hide();
+        inventory.OnBackWeaponReserveAmmoChanged -= UpdateAmmo;
+        inventory.OnBackWeaponRemoved -= (weapon) => Hide();
     }
 
     protected override void Subscribe(PlayerBody body)
     {
-        var inventory = body.PlayerInventory;
-        
-        inventory.OnWeaponAddedToInventory += (weaponIndex) =>
+        var inventory = body.WeaponInventory;
+
+        inventory.OnBackWeaponEquipped += (weaponStruct) =>
         {
-            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
+            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
             Show();
             UpdateWeaponSprite(weaponData.GunSpriteUI);
-            UpdateAmmo(inventory.GetAmmoInReserve(weaponIndex) + inventory.AmmoInInventoryMagazine);
+            UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);
         };
-        inventory.OnInventoryWeaponAmmoChanged += UpdateAmmo;
-        inventory.OnWeaponRemovedFromInventory += (weapon) => Hide();
-        if (inventory.WeaponInInventory != -1)
+        inventory.OnBackWeaponReserveAmmoChanged += UpdateAmmo;
+        inventory.OnBackWeaponRemoved += (weapon) => Hide();
+
+        if (inventory.BackWeapon.weaponTypeIndex != -1)
         {
-            var weaponIndex = inventory.WeaponInInventory;
+            var weapon = inventory.BackWeapon;
             Show();
-            UpdateAmmo(inventory.GetAmmoInReserve(weaponIndex) + inventory.AmmoInInventoryMagazine);
-            UpdateWeaponSprite(ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex).GunSpriteUI);
+            UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + inventory.BackWeapon.ammoInMagazine);
+            UpdateWeaponSprite(ItemIndexList.Instance.GetWeaponViaIndex(weapon.weaponTypeIndex).GunSpriteUI);
         }
         else
         {

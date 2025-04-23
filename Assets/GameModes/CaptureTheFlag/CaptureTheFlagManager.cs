@@ -88,9 +88,16 @@ public class CaptureTheFlagManager : GameModeManager
             if (Vector3.Distance(team1_Flag.transform.position, team2_Base.position) < scoreRange)
             {
                 GainPoints(1, 1);
-                if (team1_Flag.TryGetComponent<PlayerArms>(out PlayerArms arms))
+                if (team1_Flag.TryGetComponent<ArmsExtended>(out ArmsExtended arms))
                 {
-                    arms.DeleteWeapon(team1_FlagData);
+                    if (arms.Weapon_RightHand.Data == team1_FlagData)
+                    {
+                        arms.DeleteRightWeapon();
+                    }
+                    else if (arms.Weapon_LeftHand.Data == team1_FlagData)
+                    {
+                        arms.DeleteLeftWeapon();
+                    }
                 }
                 else
                 {
@@ -132,9 +139,16 @@ public class CaptureTheFlagManager : GameModeManager
             if (Vector3.Distance(team2_Flag.transform.position, team1_Base.position) < scoreRange)
             {
                 GainPoints(0, 1);
-                if (team2_Flag.TryGetComponent<PlayerArms>(out PlayerArms arms))
+                if (team2_Flag.TryGetComponent<ArmsExtended>(out ArmsExtended arms))
                 {
-                    arms.DeleteWeapon(team2_FlagData);
+                    if (arms.Weapon_RightHand.Data == team2_FlagData)
+                    {
+                        arms.DeleteRightWeapon();
+                    }
+                    else if (arms.Weapon_LeftHand.Data == team2_FlagData)
+                    {
+                        arms.DeleteLeftWeapon();
+                    }
                 }
                 else
                 {
@@ -165,53 +179,72 @@ public class CaptureTheFlagManager : GameModeManager
         base.PlayerSpawned(player);
 
         var arms = player.Body.PlayerArms;
-        arms.LeftArm.OnWeaponPickedUp += (weapon) =>
+        arms.OnLeftWeaponEquiped += (weapon) =>
         {
-            if (weapon.weaponTypeIndex == team1_FlagData.WeaponTypeIndex)
+            if (weapon.Data.WeaponTypeIndex == team1_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team1(player.Body.gameObject);
             }
-            else if (weapon.weaponTypeIndex == team2_FlagData.WeaponTypeIndex)
+            else if (weapon.Data.WeaponTypeIndex == team2_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team2(player.Body.gameObject);
             }
         };
 
-        arms.RightArm.OnWeaponPickedUp += (weapon) =>
+        arms.OnRightWeaponEquiped+= (weapon) =>
         {
-            if (weapon.weaponTypeIndex == team1_FlagData.WeaponTypeIndex)
+            if (weapon.Data.WeaponTypeIndex == team1_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team1(player.Body.gameObject);
             }
-            else if (weapon.weaponTypeIndex == team2_FlagData.WeaponTypeIndex)
+            else if (weapon.Data.WeaponTypeIndex == team2_FlagData.WeaponTypeIndex)
             {
                 FlagPickedUp_Team2(player.Body.gameObject);
             }
         };
 
-        arms.LeftArm.OnWeaponDroped += (weapon, pickUp) =>
+
+        PickUpManager.OnPickUpSpawned += (pickUp) =>
         {
-            if (weapon.Data == team1_FlagData)
+            if (pickUp.WeaponData.WeaponTypeIndex == team1_FlagData.WeaponTypeIndex)
             {
-                FlagDroped_Team1(pickUp);
+                if (team1_Flag.TryGetComponent<PlayerBody>(out PlayerBody player))
+                {
+                    FlagDroped_Team1(pickUp);
+                }
             }
-            else if (weapon.Data == team2_FlagData)
+            else if (pickUp.WeaponData.WeaponTypeIndex == team2_FlagData.WeaponTypeIndex)
             {
-                FlagDroped_Team2(pickUp);
+                if (team2_Flag.TryGetComponent<PlayerBody>(out PlayerBody player))
+                {
+                    FlagDroped_Team2(pickUp);
+                }
             }
         };
 
-        arms.RightArm.OnWeaponDroped += (weapon, pickUp) =>
-        {
-            if (weapon.Data == team1_FlagData)
-            {
-                FlagDroped_Team1(pickUp);
-            }
-            else if (weapon.Data == team2_FlagData)
-            {
-                FlagDroped_Team2(pickUp);
-            }
-        };
+        //arms.LeftArm.OnWeaponDroped += (weapon, pickUp) =>
+        //{
+        //    if (weapon.Data == team1_FlagData)
+        //    {
+        //        FlagDroped_Team1(pickUp);
+        //    }
+        //    else if (weapon.Data == team2_FlagData)
+        //    {
+        //        FlagDroped_Team2(pickUp);
+        //    }
+        //};
+
+        //arms.RightArm.OnWeaponDroped += (weapon, pickUp) =>
+        //{
+        //    if (weapon.Data == team1_FlagData)
+        //    {
+        //        FlagDroped_Team1(pickUp);
+        //    }
+        //    else if (weapon.Data == team2_FlagData)
+        //    {
+        //        FlagDroped_Team2(pickUp);
+        //    }
+        //};
     }
 
 

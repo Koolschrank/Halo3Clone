@@ -12,6 +12,9 @@ using static Arm;
 
 public class PlayerArms : NetworkBehaviour
 {
+    /*
+
+
     [Header("References")]
     [SerializeField] RightArm rightArm;
     [SerializeField] LeftArm leftArm;
@@ -724,6 +727,8 @@ public class PlayerArms : NetworkBehaviour
             }
         }
     }
+
+    */
 }
 
 

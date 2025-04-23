@@ -8,9 +8,10 @@ public class ItemIndexList : MonoBehaviour
 
     public static ItemIndexList Instance { get; private set; }
     [SerializeField] Weapon_Data[] weaponData;
+    [SerializeField] Ability_Data[] ability_Data;
 
 
-    int index = 0;
+    int nextWeaponIndex = 0;
 
     private void Awake()
     {
@@ -31,6 +32,13 @@ public class ItemIndexList : MonoBehaviour
                 weaponData[i].WeaponTypeIndex = i;
             }
         }
+        for (int i = 0; i < ability_Data.Length; i++)
+        {
+            if (ability_Data[i] != null)
+            {
+                ability_Data[i].AbilityTypeIndex = i;
+            }
+        }
     }
 
 
@@ -45,6 +53,16 @@ public class ItemIndexList : MonoBehaviour
             return null;
         }
         return weaponData[index];
+    }
+
+    public Ability_Data GetAbilityViaIndex(int index)
+    {
+        if (index < 0 || index >= ability_Data.Length)
+        {
+            Debug.LogError("Invalid ability index: " + index);
+            return null;
+        }
+        return ability_Data[index];
     }
 
     public int GetIndexViaWeapondData(Weapon_Data data)
@@ -62,8 +80,8 @@ public class ItemIndexList : MonoBehaviour
 
     public int GetNextIndex()
     {
-        index++;
-        return index;
+        nextWeaponIndex++;
+        return nextWeaponIndex;
     }
 
 

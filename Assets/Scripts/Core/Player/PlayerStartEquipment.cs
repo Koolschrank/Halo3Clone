@@ -11,8 +11,8 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
 
     [Header("References")]
-    [SerializeField] PlayerArms playerArms;
-    [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] WeaponInventory weaponInventory;
+    [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] CharacterHealth health;
     [SerializeField] PlayerMovement playerMovement;
 
@@ -29,18 +29,40 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         if (equipment.WeaponInHand != null)
         {
-            playerArms.RightArm.EquipWeapon(
+            weaponInventory.Equip_RightWeapon(
                 CreateWeapon(
                 equipment.WeaponInHand.WeaponTypeIndex,
                 equipment.MagazinsOfWeaponInHand));
         }
+        else
+        {
+            weaponInventory.Equip_RightWeapon(
+                new WeaponNetworkStruct
+                {
+                    index = -1,
+                    weaponTypeIndex = -1,
+                    ammoInMagazine = 0,
+                    ammoInReserve = 0
+                });
+        }
 
         if (equipment.WeaponInLeftHand != null)
         {
-            playerArms.LeftArm.EquipWeapon(
+            weaponInventory.Equip_LeftWeapon(
                 CreateWeapon(
                 equipment.WeaponInLeftHand.WeaponTypeIndex,
                 equipment.MagazinsOfWeaponInLeftHand));
+        }
+        else
+        {
+            weaponInventory.Equip_LeftWeapon(
+                new WeaponNetworkStruct
+                {
+                    index = -1,
+                    weaponTypeIndex = -1,
+                    ammoInMagazine = 0,
+                    ammoInReserve = 0
+                });
         }
 
 
@@ -50,55 +72,70 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         if (equipment.SideArm != null)
         {
-            playerInventory.RemoveWeapon();
-            var weaponStruct = CreateWeapon(
+            weaponInventory.Equip_BackWeapon(
+                CreateWeapon(
                 equipment.SideArm.WeaponTypeIndex,
-                equipment.MagazinsOfSideArm);
-            playerInventory.SetWeaponInInventory(weaponStruct);
-            playerInventory.SetAmmoInReserve(
-                weaponStruct.weaponTypeIndex,
-                weaponStruct.ammoInReserve);
-
-
-
-        }
-
-        if (equipment.Granade != null)
-        {
-            playerInventory.ChangeGranade(equipment.Granade);
-            playerInventory.AddGranades(equipment.GranadeCount);
+                equipment.MagazinsOfSideArm));
         }
         else
         {
-            playerInventory.ChangeGranade(null);
+            weaponInventory.Equip_BackWeapon(
+                new WeaponNetworkStruct
+                {
+                    index = -1,
+                    weaponTypeIndex = -1,
+                    ammoInMagazine = 0,
+                    ammoInReserve = 0
+                });
         }
 
-        //playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
 
-
-
-
-
-
-        if (!equipment.HasMiniMap)
+        if (equipment.Ability != null)
         {
-            playerInventory.OnMiniMapDisabled?.Invoke();
+            var ability = equipment.Ability;
+            abilityInventory.SetAbility(
+                ability.AbilityTypeIndex,
+                ability.maxUses,
+                ability.RechargeTime);
         }
-        else
-        {
-            playerInventory.OnMiniMapEnabled?.Invoke();
-        }
+        
 
-        health.SetHasShild(equipment.HasShild);
+            //if (equipment.Granade != null)
+            //{
+            //    playerInventory.ChangeGranade(equipment.Granade);
+            //    playerInventory.AddGranades(equipment.GranadeCount);
+            //}
+            //else
+            //{
+            //    playerInventory.ChangeGranade(null);
+            //}
+
+            //playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
+
+
+
+
+
+
+            //if (!equipment.HasMiniMap)
+            //{
+            //    playerInventory.OnMiniMapDisabled?.Invoke();
+            //}
+            //else
+            //{
+            //    playerInventory.OnMiniMapEnabled?.Invoke();
+            //}
+
+            health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);
 
-        playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
+        //playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
 
     }
 
-    public WeaponNetworkStruct CreateWeapon(int index, int magazines)
+    public WeaponNetworkStruct CreateWeapon(int weaponIndex, int magazines)
     {
-        var data = ItemIndexList.Instance.GetWeaponViaIndex(index);
+        var data = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
         int magazineSize = data.MagazineSize;
 
         int bulletsInMagazine = magazineSize;
@@ -106,7 +143,8 @@ public class PlayerStartEquipment : NetworkBehaviour // is only networked for te
 
         return new WeaponNetworkStruct
         {
-            weaponTypeIndex = index,
+            index = ItemIndexList.Instance.GetNextIndex(),
+            weaponTypeIndex = weaponIndex,
             ammoInMagazine = bulletsInMagazine,
             ammoInReserve = bulletsInReserve
         };
@@ -131,8 +169,7 @@ public class Equipment
     [SerializeField] Weapon_Data sideArm;
     [SerializeField] int magazinsOfSideArm = 5;
 
-    [SerializeField] GranadeStats granade;
-    [SerializeField] int granadeCount = 0;
+    [SerializeField] Ability_Data ability;
 
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
@@ -146,8 +183,7 @@ public class Equipment
     public Weapon_Data SideArm => sideArm;
     public int MagazinsOfSideArm => magazinsOfSideArm;
 
-    public GranadeStats Granade => granade;
-    public int GranadeCount => granadeCount;
+    public Ability_Data Ability => ability;
 
     public bool HasMiniMap => hasMiniMap;
 

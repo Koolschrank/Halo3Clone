@@ -9,25 +9,23 @@ public class CooldownUI : InterfaceItem
     Color defaultColor;
     [SerializeField] Color filledColor;
 
+    AbilityInventory inventory;
+
     // subscribe to the player body
     protected override void Subscribe(PlayerBody body)
     {
-        var inventory = body.PlayerInventory;
+        inventory = body.AbilityInventory;
 
-        inventory.OnMaxGranadeCountChanged += (count) => SetActive(count == 0 ? false : true);
-        inventory.OnGranadeChargeChanged += UpdateCooldown;
+        
 
-        SetActive(inventory.GranadeInventorySize == 0 ? false : true);
-        UpdateCooldown(inventory.GranadeCharge);
+        SetActive(inventory.MaxUses == 0 ? false : true);
+        UpdateCooldown(inventory.RechargePercent);
     }
 
     // unsubscribe from the player body
     protected override void Unsubscribe(PlayerBody body)
     {
-        var inventory = body.PlayerInventory;
-
-        inventory.OnGranadeChargeChanged -= UpdateCooldown;
-        inventory.OnMaxGranadeCountChanged -= (count) => SetActive(count == 0 ? false : true);
+        inventory = null;
     }
 
 
@@ -43,6 +41,14 @@ public class CooldownUI : InterfaceItem
     public void SetActive(bool active)
     {
         barObject.SetActive(active);
+    }
+
+    public void Update()
+    {
+        if (inventory != null)
+        {
+            UpdateCooldown(inventory.RechargePercent);
+        }
     }
 
 
@@ -61,6 +67,15 @@ public class CooldownUI : InterfaceItem
             }
         }
 
-        
+        if (inventory.MaxUses ==0)
+        {
+            barObject.SetActive(false);
+        }
+        else
+        {
+            barObject.SetActive(true);
+        }
+
+
     }
 }

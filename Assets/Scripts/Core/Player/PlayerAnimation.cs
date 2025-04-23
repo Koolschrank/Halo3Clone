@@ -8,14 +8,16 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Reverences")]
     [SerializeField] Transform lookTransform;
     [SerializeField] PlayerMovement playerMovement;
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] ArmsExtended playerArms;
+    [SerializeField] WeaponInventoryExtended weaponInventory;
     [SerializeField] CharacterHealth characterHealth;
     [SerializeField] KCC cc;
     [SerializeField] Animator animator;
-    [SerializeField] PlayerInventory playerInventory;
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
     [SerializeField] Transform weaponSocketLeftHand;
+    [SerializeField] GranadeThrower granadeThrower;
+    [SerializeField] MeleeAttacker meleeAttacker;
 
 
     [Header("Shild")]
@@ -67,22 +69,21 @@ public class PlayerAnimation : MonoBehaviour
 
 
         // connect reload
-        playerArms.RightArm.OnWeaponReloadStarted += Reload;
+        playerArms.OnRightWeaponReloadStarted += Reload;
         // connect switch weapon
-        playerArms.RightArm.OnWeaponUnequipStarted += SwitchOutWeapon;
-        playerArms.RightArm.OnWeaponEquipStarted += SwitchInWeapon;
+        playerArms.OnRightWeaponStoringStarted += SwitchOutWeapon;
+        playerArms.OnRightWeaponEquiped += EquipRightWeapon;
         // throw granade
-        playerArms.RightArm.OnGranadeThrowStarted += ThrowGranadeStart;
-        playerArms.GranadeThrower.OnGranadeThrow += ThrowGranade;
-        playerArms.RightArm.OnMeleeWithWeaponStarted += Melee;
-        playerArms.RightArm.OnWeaponDroped += (weapon,pickup) => DropWeapon(weapon);
-        playerInventory.OnWeaponAddedToInventory +=  PutWeaponInBackpack;
+        granadeThrower.OnGranadeThrowStart += ThrowGranadeStart;
+        granadeThrower.OnGranadeThrow += ThrowGranade;
+        playerArms.OnRightWeaponMeleeStarted += (weapon) => MeleeWithRightWeapon();
+        playerArms.OnRightWeaponRemoved += (weapon) => DropWeapon();
+        weaponInventory.OnBackWeaponEquipped +=  PutWeaponInBackpack;
         //playerInventory.OnWeaponDrop += DropInvetoryWeapon;
 
-        playerArms.LeftArm.OnWeaponEquipStarted += SwitchInLeftWeapon;
+        playerArms.OnLeftWeaponEquiped += EquipLeftWeapon;
 
-        playerArms.LeftArm.OnWeaponDroped += (weapon, pickup) => DropWeaponLeftWeapon(weapon);
-        playerArms.LeftArm.OnWeaponUnequipFinished += DropWeaponLeftWeapon;
+        weaponInventory.OnLeftWeaponRemoved += (weapon) => RemoveLeftWeapon();
 
         characterHealth.OnShildDamageTaken += ShildDamageTaken;
         characterHealth.OnShildDepleted += ShildDepleted;
@@ -92,20 +93,18 @@ public class PlayerAnimation : MonoBehaviour
 
         if (weaponVisual == null)
         {
-            var weapon = playerArms.RightArm.GetWeaponInHand();
-            var switchInTime = playerArms.RightArm.GetWeaponInHandSwitchInTime();
-            SwitchInWeapon(weapon, switchInTime);
+            var weapon = playerArms.Weapon_RightHand;
+            EquipRightWeapon(weapon);
         }
         if (weaponVisualLeftHand == null)
         {
-            var weapon = playerArms.LeftArm.GetWeaponInHand();
-            var switchInTime = playerArms.LeftArm.GetWeaponInHandSwitchInTime();
-            SwitchInLeftWeapon(weapon, switchInTime);
+            var weapon = playerArms.Weapon_LeftHand;
+            EquipLeftWeapon(weapon);
         }
         if (backpackWeaponVisual == null)
         {
-            var weapon = playerInventory.WeaponInInventory;
-            if (weapon != -1)
+            var weapon = weaponInventory.BackWeapon;
+            if (weapon.weaponTypeIndex != -1)
             {
                 PutWeaponInBackpack(weapon);
             }
@@ -203,16 +202,18 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger("Jump");
     }
 
-    public void Reload(Weapon_Arms weapon,float animationDuration)
+    public void Reload(Weapon_Arms weapon)
     {
+        float animationDuration = playerArms.RemainingReloadTime_RightWeapon;
         var reloadClip = GetAnimationClipByName("Reload");
         var animationLenght = GetAnimationLenght(reloadClip);
         SetAnimationSpeed(reloadClip, animationLenght, animationDuration);
         animator.SetTrigger("Reload");
     }
 
-    public void SwitchOutWeapon(Weapon_Arms weapon, float animationDuration)
+    public void SwitchOutWeapon(Weapon_Arms weapon)
     {
+        float animationDuration = playerArms.RemainingStoreTime_RightWeapon;
         var switchOutClip = GetAnimationClipByName("SwitchOut");
         var animationLenght = GetAnimationLenght(switchOutClip);
         SetAnimationSpeed(switchOutClip, animationLenght, animationDuration);
@@ -220,7 +221,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger("SwitchOut");
     }
 
-    public void DropWeapon(Weapon_Arms weapon)
+    public void DropWeapon()
     {
         if (weaponVisual != null)
         {
@@ -228,7 +229,7 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void DropWeaponLeftWeapon(Weapon_Arms weapon)
+    public void RemoveLeftWeapon()
     {
         if (weaponVisualLeftHand != null)
         {
@@ -244,13 +245,13 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void SwitchInWeapon(Weapon_Arms weapon, float animationDuration)
+    public void EquipRightWeapon(Weapon_Arms weapon)
     {
         if (weapon == null)
         {
             return;
         }
-
+        float animationDuration = playerArms.RemainingGetReadyTime_RightWeapon;
         //var child = transform.GetChild(0);
 
         var switchInClip = GetAnimationClipByName("SwitchIn");
@@ -278,7 +279,7 @@ public class PlayerAnimation : MonoBehaviour
         UtilityFunctions.SetLayerRecursively(weaponVisual, gameObject.layer);
     }
 
-    public void SwitchInLeftWeapon(Weapon_Arms weapon, float animationDuration)
+    public void EquipLeftWeapon(Weapon_Arms weapon)
     {
 
         if (weapon == null)
@@ -288,7 +289,7 @@ public class PlayerAnimation : MonoBehaviour
 
         Debug.Log("SwitchInLeftWeapon");
 
-
+        float animationDuration = playerArms.RemainingGetReadyTime_LeftWeapon;
 
         if (weaponVisualLeftHand != null)
         {
@@ -305,17 +306,18 @@ public class PlayerAnimation : MonoBehaviour
         UtilityFunctions.SetLayerRecursively(weaponVisualLeftHand, gameObject.layer);
     }
 
-    public void Melee(Weapon_Arms weapon, float animationDuration)
+    public void MeleeWithRightWeapon()
     {
+        float animationDuration = playerArms.RemainingMeleeTime_RightWeapon;
         var meleeClip = GetAnimationClipByName("Melee");
         var animationLenght = GetAnimationLenght(meleeClip);
         SetAnimationSpeed(meleeClip, animationLenght, animationDuration);
         animator.SetTrigger("Melee");
     }
 
-    public void PutWeaponInBackpack(int weaponIndex)
+    public void PutWeaponInBackpack(WeaponNetworkStruct weaponStruct)
     {
-        var weapon = ItemIndexList.Instance.GetWeaponViaIndex(weaponIndex);
+        var weapon = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
         if (backpackWeaponVisual != null)
         {
             Destroy(backpackWeaponVisual.gameObject);
