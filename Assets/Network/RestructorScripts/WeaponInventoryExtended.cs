@@ -98,16 +98,29 @@ public class WeaponInventoryExtended : WeaponInventory
 
     public int GetReserveAmmoLeftWeapon()
     {
+        if (LeftWeapon.weaponTypeIndex == -1)
+        {
+            return 0;
+        }
+
         return AmmoReserve[LeftWeapon.weaponTypeIndex];
     }
 
     public int GetReserveAmmoRightWeapon()
     {
+        if (RightWeapon.weaponTypeIndex == -1)
+        {
+            return 0;
+        }
         return AmmoReserve[RightWeapon.weaponTypeIndex];
     }
 
     public int GetReserveAmmoBackWeapon()
     {
+        if (BackWeapon.weaponTypeIndex == -1)
+        {
+            return 0;
+        }
         return AmmoReserve[BackWeapon.weaponTypeIndex];
     }
 }

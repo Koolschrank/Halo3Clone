@@ -21,6 +21,12 @@ public class WeaponInventoryUI : InterfaceItem
         inventory.OnBackWeaponEquipped -= (weaponStruct) =>
         {
             var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+            if (weaponData == null)
+            {
+                Hide();
+                return;
+            }
+
             Show();
             UpdateWeaponSprite(weaponData.GunSpriteUI);
             UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);
@@ -37,6 +43,12 @@ public class WeaponInventoryUI : InterfaceItem
         inventory.OnBackWeaponEquipped += (weaponStruct) =>
         {
             var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+            if (weaponData == null)
+            {
+                Hide();
+                return;
+            }
+
             Show();
             UpdateWeaponSprite(weaponData.GunSpriteUI);
             UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);

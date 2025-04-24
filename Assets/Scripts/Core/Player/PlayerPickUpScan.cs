@@ -18,8 +18,16 @@ public class PlayerPickUpScan : NetworkBehaviour
             if (value == indexOfClosestPickUp) return;
 
             indexOfClosestPickUp = value;
-            OnIndexOfClosesWeaponChanged?.Invoke(value);
+            if (HasStateAuthority)
+                RPC_InvokeWeaponChangeEvent();
         }
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    public void RPC_InvokeWeaponChangeEvent()
+    {
+        OnIndexOfClosesWeaponChanged?.Invoke(indexOfClosestPickUp);
+
     }
 
 

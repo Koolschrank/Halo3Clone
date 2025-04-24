@@ -32,6 +32,63 @@ public class WeaponUI : InterfaceItem
     [SerializeField] Color BulletsDepletedColor;
     List<Image> bullets = new List<Image>();
 
+    protected override void Subscribe(PlayerBody body)
+    {
+
+        weaponInventory = body.WeaponInventory;
+
+        if (leftArm)
+        {
+
+            weaponInventory.OnLeftWeaponRemoved += UnequipWeapon;
+            weaponInventory.OnLeftWeaponEquipped += (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
+            };
+            weaponInventory.OnLeftWeaponReserveAmmoChanged += UpdateReserve;
+            weaponInventory.OnLeftWeaponMagazinChanged += UpdateMagazin;
+
+            if (weaponInventory.LeftWeapon.weaponTypeIndex == -1)
+            {
+                Disable();
+            }
+            else
+            {
+                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
+                Enable();
+                EquipWeapon(weaponInventory.LeftWeapon);
+
+            }
+        }
+        else
+        {
+            weaponInventory.OnRightWeaponEquipped += (weapon) =>
+            {
+                EquipWeapon(weapon);
+                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
+            };
+            weaponInventory.OnRightWeaponRemoved += UnequipWeapon;
+            weaponInventory.OnRightWeaponReserveAmmoChanged += UpdateReserve;
+            weaponInventory.OnRightWeaponMagazinChanged += UpdateMagazin;
+
+            if (weaponInventory.RightWeapon.weaponTypeIndex == -1)
+            {
+                Disable();
+            }
+            else
+            {
+                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
+                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
+                Enable();
+                EquipWeapon(weaponInventory.RightWeapon);
+
+            }
+        }
+    }
 
     // subscribe to the player body
     protected override void Unsubscribe(PlayerBody body)
@@ -73,71 +130,7 @@ public class WeaponUI : InterfaceItem
 
     }
 
-    protected override void Subscribe(PlayerBody body)
-    {
-
-        weaponInventory = body.WeaponInventory;
-
-        if (leftArm)
-        {
-
-            weaponInventory.OnLeftWeaponRemoved += UnequipWeapon;
-            weaponInventory.OnLeftWeaponRemoved += (weapon) =>
-            {
-                EquipWeapon(weapon);
-                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
-                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
-            };
-            weaponInventory.OnLeftWeaponReserveAmmoChanged += UpdateReserve;
-            weaponInventory.OnLeftWeaponMagazinChanged += UpdateMagazin;
-
-            if (weaponInventory.LeftWeapon.weaponTypeIndex == -1)
-            {
-                Disable();
-            }
-            else
-            {
-                UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
-                UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
-                Enable();
-                EquipWeapon(weaponInventory.LeftWeapon);
-                
-            }
-        }
-        else
-        {
-            weaponInventory.OnRightWeaponEquipped += (weapon) =>
-            {
-                EquipWeapon(weapon);
-                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
-                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
-            };
-            weaponInventory.OnRightWeaponRemoved += UnequipWeapon;
-            weaponInventory.OnRightWeaponReserveAmmoChanged += UpdateReserve;
-            weaponInventory.OnRightWeaponMagazinChanged += UpdateMagazin;
-
-            if (weaponInventory.RightWeapon.weaponTypeIndex == -1)
-            {
-                Disable();
-            }
-            else
-            {
-                UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
-                UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
-                Enable();
-                EquipWeapon(weaponInventory.RightWeapon);
-                
-            }
-        }
-
-       
-
-        
-
-        
-
-        
-    }
+    
 
 
     public void Disable()

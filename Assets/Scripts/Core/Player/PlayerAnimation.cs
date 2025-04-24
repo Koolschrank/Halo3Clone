@@ -16,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
     [SerializeField] Transform weaponSocketLeftHand;
+    [SerializeField] Transform backpackWeaponSocket;
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] MeleeAttacker meleeAttacker;
 
@@ -30,7 +31,6 @@ public class PlayerAnimation : MonoBehaviour
 
     GameObject weaponVisual;
     GameObject weaponVisualLeftHand;
-    [SerializeField] Transform backpackWeaponSocket;
     GameObject backpackWeaponVisual;
 
     [SerializeField] MultiAimConstraint rightHandWeaponGrip;
@@ -322,6 +322,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             Destroy(backpackWeaponVisual.gameObject);
         }
+        if (weapon == null)
+        {
+            return;
+        }
+
         backpackWeaponVisual = Instantiate(weapon.Weapon3rdPersonModel, backpackWeaponSocket);
         backpackWeaponVisual.transform.localPosition = Vector3.zero;
         backpackWeaponVisual.transform.localRotation = Quaternion.identity;

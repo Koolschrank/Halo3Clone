@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb602ebda0be06249a78775222aacc01, type: 3}
   m_Name: Ability_Granade
   m_EditorClassIdentifier: 
+  maxUses: 1
+  rechargeTime: 5
+  granade: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}

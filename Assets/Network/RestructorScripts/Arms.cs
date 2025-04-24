@@ -7,13 +7,16 @@ public abstract class Arms : NetworkBehaviour
     [Header("References")]
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] protected WeaponInventory weaponInventory;
-    [SerializeField] AbilityInventory abilityInventory;
+    [SerializeField] protected AbilityInventory abilityInventory;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] protected PlayerPickUpScan pickUpScan;
+    [SerializeField] Transform rightWeaponDropPosition;
+    [SerializeField] Transform leftWeaponDropPosition;
 
     [Header("Stats")]
     [SerializeField] PlayerMeleeAttack defaultMelee;
+    [SerializeField] float dropForce = 5.0f;
 
     public WeaponInventory WeaponInventory => weaponInventory;
 
@@ -131,6 +134,10 @@ public abstract class Arms : NetworkBehaviour
         {
             MeleeRecoveryTimer_LeftWeapon = TickTimer.None;
         }
+        if (AbilityEndLagTimer.Expired(Runner))
+        {
+            AbilityEndLagTimer = TickTimer.None;
+        }
 
 
 
@@ -175,6 +182,7 @@ public abstract class Arms : NetworkBehaviour
     protected virtual void AssignWeaponToRightHand(Weapon_Arms weapon)
     {
         ReloadTimer_RightWeapon = TickTimer.None;
+        ShootCooldownTimer_RightWeapon = TickTimer.None;
         Weapon_RightHand = weapon;
         GetReadyTimer_RightWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_RightHand.SwitchInTime);
     }
@@ -182,6 +190,7 @@ public abstract class Arms : NetworkBehaviour
     protected virtual void AssignWeaponToLeftHand(Weapon_Arms weapon)
     {
         ReloadTimer_LeftWeapon = TickTimer.None;
+        ShootCooldownTimer_LeftWeapon = TickTimer.None;
         Weapon_LeftHand = weapon;
         GetReadyTimer_LeftWeapon = TickTimer.CreateFromSeconds(Runner, Weapon_LeftHand.SwitchInTime);
     }
@@ -231,6 +240,9 @@ public abstract class Arms : NetworkBehaviour
 
     protected virtual void ReloadLeftWeapon()
     {
+        if (Weapon_LeftHand == null)
+            return;
+
         int ammoInMagazine = WeaponInventory.LeftWeapon.ammoInMagazine;
         int magazineSize = Weapon_LeftHand.MagazineSize;
         int ammoNeeded = magazineSize - ammoInMagazine;
@@ -239,9 +251,9 @@ public abstract class Arms : NetworkBehaviour
     }
 
 
-    protected void InitiateAbilityUse()
+    protected virtual void InitiateAbilityUse()
     {
-        abilityInventory.UseAbility();
+        ReloadTimer_RightWeapon = TickTimer.None;
         var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
 
         if (ability is Ability_Data_Granade)
@@ -256,8 +268,9 @@ public abstract class Arms : NetworkBehaviour
         }
     }
 
-    void UseAbility()
+    protected virtual void UseAbility()
     {
+        abilityInventory.UseAbility();
         var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
         if (ability is Ability_Data_Granade)
         {
@@ -347,6 +360,29 @@ public abstract class Arms : NetworkBehaviour
             var granades = bulletSpawner.ShootGranade(weapon);
             GranadesShot(weapon, granades);
         }
+    }
+
+    public void InitiateWeaponDropRight(WeaponNetworkStruct weaponStruct)
+    {
+
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+
+        var pickUp = Runner.Spawn(weaponData.WeaponPickUp, rightWeaponDropPosition.position, rightWeaponDropPosition.rotation).GetComponent<Weapon_PickUp>();
+        pickUp.Index = weaponStruct.index;
+        pickUp.SetAmmoInMagazin(weaponStruct.ammoInMagazine);
+        pickUp.SetAmmoInReserve(weaponStruct.ammoInReserve);
+        pickUp.AddImpulse(rightWeaponDropPosition.forward, dropForce);
+    }
+
+    public void InitiateWeaponDropLeft(WeaponNetworkStruct weaponStruct)
+    {
+        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+
+        var pickUp = Runner.Spawn(weaponData.WeaponPickUp, leftWeaponDropPosition.position, leftWeaponDropPosition.rotation).GetComponent<Weapon_PickUp>();
+        pickUp.Index = weaponStruct.index;
+        pickUp.SetAmmoInMagazin(weaponStruct.ammoInMagazine);
+        pickUp.SetAmmoInReserve(weaponStruct.ammoInReserve);
+        pickUp.AddImpulse(leftWeaponDropPosition.forward, dropForce);
     }
 
     protected abstract void HitScanHit(Weapon_Arms weapon,Vector3[] hits);

@@ -77,7 +77,8 @@ public class WeaponInventory : NetworkBehaviour
         };
 
         // remove ammo from reserve and add it to the weapon if this was the only weapon of this type
-        if (BackWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex 
+        if (weaponToRemove.weaponTypeIndex != -1
+            && BackWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex 
             && LeftWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex )
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
@@ -95,7 +96,8 @@ public class WeaponInventory : NetworkBehaviour
             weaponTypeIndex = -1,
         };
         // remove ammo from reserve and add it to the weapon if this was the only weapon of this type
-        if (BackWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex
+        if (weaponToRemove.weaponTypeIndex != -1
+            && BackWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex
             && RightWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex)
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
@@ -113,7 +115,8 @@ public class WeaponInventory : NetworkBehaviour
             weaponTypeIndex = -1,
         };
         // remove ammo from reserve and add it to the weapon if this was the only weapon of this type
-        if (LeftWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex
+        if (weaponToRemove.weaponTypeIndex != -1
+            && LeftWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex
             && RightWeapon.weaponTypeIndex != weaponToRemove.weaponTypeIndex)
         {
             weaponToRemove.ammoInReserve = AmmoReserve[weaponToRemove.weaponTypeIndex];
@@ -140,63 +143,11 @@ public class WeaponInventory : NetworkBehaviour
         Equip_BackWeapon(leftWeapon);
     }
 
-    public void PickUp_RightWeapon(WeaponNetworkStruct weapon)
-    {
-        var weaponToDrop = Remove_RightWeapon();
-        Equip_RightWeapon(weapon);
-        if (weaponToDrop.weaponTypeIndex != -1)
-        {
-            DropWeapon(weaponToDrop);
-        }
-    }
+    
 
-    public void PickUp_LeftWeapon(WeaponNetworkStruct weapon)
-    {
-        var weaponToDrop = Remove_LeftWeapon();
-        Equip_LeftWeapon(weapon);
-        if (weaponToDrop.weaponTypeIndex != -1)
-        {
-            DropWeapon(weaponToDrop);
-        }
-    }
+    
 
-    public void PickUp_BackWeapon(WeaponNetworkStruct weapon)
-    {
-        var weaponToDrop = Remove_BackWeapon();
-        Equip_BackWeapon(weapon);
-        if (weaponToDrop.weaponTypeIndex != -1)
-        {
-            DropWeapon(weaponToDrop);
-        }
-    }
-
-
-    public void Drop_RightWeapon()
-    {
-        // remove the weapon from the right hand
-        var weaponToDrop = Remove_RightWeapon();
-        DropWeapon(weaponToDrop);
-    }
-
-    public void Drop_LeftWeapon()
-    {
-        // remove the weapon from the left hand
-        var weaponToDrop = Remove_LeftWeapon();
-        DropWeapon(weaponToDrop);
-    }
-
-    public void Drop_BackWeapon()
-    {
-        // remove the weapon from the back
-        var weaponToDrop = Remove_BackWeapon();
-        DropWeapon(weaponToDrop);
-    }
-
-    public void DropWeapon(WeaponNetworkStruct weapon)
-    {
-        
-
-    }
+    
 
     
 

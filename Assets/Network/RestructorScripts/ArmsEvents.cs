@@ -19,6 +19,8 @@ public class ArmsEvents : Arms
     public Action<Weapon_Arms> OnLeftWeaponShot;
 
     public Action<bool> OnZoomedChanged;
+    public Action<Ability_Data> OnAbilityStarted;
+    public Action<Ability_Data> OnAbilityUsed;
 
     protected override void AssignWeaponToRightHand(Weapon_Arms weapon)
     {
@@ -142,6 +144,20 @@ public class ArmsEvents : Arms
             weapon.OnGranadeShot?.Invoke(granade);
         }
 
+    }
+
+    protected override void InitiateAbilityUse()
+    {
+        base.InitiateAbilityUse();
+        var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
+        OnAbilityStarted?.Invoke(ability);
+    }
+
+    protected override void UseAbility()
+    {
+        base.UseAbility();
+        var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
+        OnAbilityUsed?.Invoke(ability);
     }
 
     public override bool InZoom { get => base.InZoom; protected set

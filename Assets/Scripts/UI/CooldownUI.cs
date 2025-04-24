@@ -47,7 +47,7 @@ public class CooldownUI : InterfaceItem
     {
         if (inventory != null)
         {
-            UpdateCooldown(inventory.RechargePercent);
+            UpdateCooldown(1f - inventory.RechargePercent);
         }
     }
 

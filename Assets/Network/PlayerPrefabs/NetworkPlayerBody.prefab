@@ -11029,7 +11029,10 @@ MonoBehaviour:
   meleeAttacker: {fileID: 8008512304446792098}
   bulletSpawner: {fileID: 737555415851796727}
   pickUpScan: {fileID: 3086695294023934871}
+  rightWeaponDropPosition: {fileID: 8167806766066142118}
+  leftWeaponDropPosition: {fileID: 2372597562941759599}
   defaultMelee: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  dropForce: 5
   input: {fileID: -5009260468559975710}
 --- !u!114 &4889731717858166356
 MonoBehaviour:
@@ -11044,18 +11047,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _RightWeapon:
-    index: 0
-    weaponTypeIndex: 0
+    index: -1
+    weaponTypeIndex: -1
     ammoInMagazine: 0
     ammoInReserve: 0
   _LeftWeapon:
-    index: 0
-    weaponTypeIndex: 0
+    index: -1
+    weaponTypeIndex: -1
     ammoInMagazine: 0
     ammoInReserve: 0
   _BackWeapon:
-    index: 0
-    weaponTypeIndex: 0
+    index: -1
+    weaponTypeIndex: -1
     ammoInMagazine: 0
     ammoInReserve: 0
   _AmmoReserve: 

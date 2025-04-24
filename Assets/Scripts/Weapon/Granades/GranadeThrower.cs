@@ -8,29 +8,18 @@ public class GranadeThrower : MonoBehaviour
     public Action<GranadeStats, float> OnGranadeThrowStart;
 
 
-    float throwDelay = 0f;
     GranadeStats granadeStats = null;
     [SerializeField] Transform mainTransform;
 
     public void ThrowGranadeStart(GranadeStats granadeStats , float timeMultiplier)
     {
         this.granadeStats = granadeStats;
-        throwDelay = granadeStats.ThrowDelay * timeMultiplier;
-    }
+        OnGranadeThrowStart?.Invoke(granadeStats, timeMultiplier);
 
-    public void Update()
-    {
-        if (throwDelay > 0)
-        {
-            throwDelay -= Time.deltaTime;
-
-            if (throwDelay <= 0)
-            {
-                ThrowGranade(granadeStats);
-            }
-        }
 
     }
+
+    
 
     // todo: a lot of redundant code here
     public GameObject ThrowGranadeWithWeapon(GranadeStats granadeStats, Vector3 inaccuracy)

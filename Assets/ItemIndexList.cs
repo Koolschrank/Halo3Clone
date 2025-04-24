@@ -49,7 +49,7 @@ public class ItemIndexList : MonoBehaviour
     {
         if (index < 0 || index >= weaponData.Length)
         {
-            Debug.LogError("Invalid weapon index: " + index);
+            
             return null;
         }
         return weaponData[index];
