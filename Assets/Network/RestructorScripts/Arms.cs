@@ -6,7 +6,7 @@ public abstract class Arms : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] GranadeThrower granadeThrower;
-    [SerializeField] protected WeaponInventory weaponInventory;
+    [SerializeField] protected WeaponInventoryExtended weaponInventory;
     [SerializeField] protected AbilityInventory abilityInventory;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] BulletSpawner bulletSpawner;
@@ -18,7 +18,7 @@ public abstract class Arms : NetworkBehaviour
     [SerializeField] PlayerMeleeAttack defaultMelee;
     [SerializeField] float dropForce = 5.0f;
 
-    public WeaponInventory WeaponInventory => weaponInventory;
+    public WeaponInventoryExtended WeaponInventory => weaponInventory;
 
     public Weapon_Arms Weapon_LeftHand { get; private set; }
     public Weapon_Arms Weapon_RightHand { get; private set; }
@@ -32,7 +32,6 @@ public abstract class Arms : NetworkBehaviour
 
     public bool CanDualWield2HandedWeapons { get; private set; } = false;
 
-    
 
 
     // Right Weapon
@@ -164,7 +163,7 @@ public abstract class Arms : NetworkBehaviour
         }
     }
 
-    bool HasWeaponIndex(Weapon_Arms weapon, WeaponNetworkStruct weaponStruct)
+    protected bool HasWeaponIndex(Weapon_Arms weapon, WeaponNetworkStruct weaponStruct)
     {
         if (weapon == null)
             return false;
@@ -173,7 +172,7 @@ public abstract class Arms : NetworkBehaviour
         return false;
     }
 
-    Weapon_Arms CreateWeaponArms(WeaponNetworkStruct weaponStruct)
+    protected Weapon_Arms CreateWeaponArms(WeaponNetworkStruct weaponStruct)
     {
         Weapon_Arms weapon = new Weapon_Arms(ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex), weaponStruct.index);
         return weapon;
@@ -367,6 +366,8 @@ public abstract class Arms : NetworkBehaviour
 
         var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
 
+        if (!HasStateAuthority) return;
+
         var pickUp = Runner.Spawn(weaponData.WeaponPickUp, rightWeaponDropPosition.position, rightWeaponDropPosition.rotation).GetComponent<Weapon_PickUp>();
         pickUp.Index = weaponStruct.index;
         pickUp.SetAmmoInMagazin(weaponStruct.ammoInMagazine);
@@ -377,6 +378,8 @@ public abstract class Arms : NetworkBehaviour
     public void InitiateWeaponDropLeft(WeaponNetworkStruct weaponStruct)
     {
         var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+
+        if (!HasStateAuthority) return;
 
         var pickUp = Runner.Spawn(weaponData.WeaponPickUp, leftWeaponDropPosition.position, leftWeaponDropPosition.rotation).GetComponent<Weapon_PickUp>();
         pickUp.Index = weaponStruct.index;

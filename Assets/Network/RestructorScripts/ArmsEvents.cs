@@ -6,21 +6,23 @@ public class ArmsEvents : Arms
 {
     public Action<Weapon_Arms> OnRightWeaponEquiped;
     public Action<Weapon_Arms> OnRightWeaponRemoved;
-    public Action<Weapon_Arms> OnRightWeaponStoringStarted;
-    public Action<Weapon_Arms> OnRightWeaponReloadStarted;
-    public Action<Weapon_Arms> OnRightWeaponMeleeStarted;
+    public Action<int> OnRightWeaponStoringStarted;
+    public Action<int> OnRightWeaponReloadStarted;
+    public Action<int> OnRightWeaponMeleeStarted;
     public Action<Weapon_Arms> OnRightWeaponShot;
 
     public Action<Weapon_Arms> OnLeftWeaponEquiped;
     public Action<Weapon_Arms> OnLeftWeaponRemoved;
-    public Action<Weapon_Arms> OnLeftWeaponStoringStarted;
-    public Action<Weapon_Arms> OnLeftWeaponReloadStarted;
-    public Action<Weapon_Arms> OnLeftWeaponMeleeStarted;
+    public Action<int> OnLeftWeaponStoringStarted;
+    public Action<int> OnLeftWeaponReloadStarted;
+    public Action<int> OnLeftWeaponMeleeStarted;
     public Action<Weapon_Arms> OnLeftWeaponShot;
 
     public Action<bool> OnZoomedChanged;
-    public Action<Ability_Data> OnAbilityStarted;
-    public Action<Ability_Data> OnAbilityUsed;
+    public Action<int> OnAbilityStarted;
+    public Action<int> OnAbilityUsed;
+
+    
 
     protected override void AssignWeaponToRightHand(Weapon_Arms weapon)
     {
@@ -56,42 +58,105 @@ public class ArmsEvents : Arms
     protected override void InitiateRightWeaponSwitch()
     {
         base.InitiateRightWeaponSwitch();
-        OnRightWeaponStoringStarted?.Invoke(Weapon_RightHand);
+        if (HasStateAuthority)
+        {
+            RPC_InitiateRightWeaponSwitch();
+        }
+    }
+
+    // rpc
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_InitiateRightWeaponSwitch()
+    {
+        OnRightWeaponStoringStarted?.Invoke(Weapon_RightHand.Data.WeaponTypeIndex);
         Weapon_RightHand.OnSwitchOutStart?.Invoke(RemainingStoreTime_RightWeapon);
     }
 
     protected override void InitiateLeftWeaponSwitch()
     {
         base.InitiateLeftWeaponSwitch();
-        OnLeftWeaponStoringStarted?.Invoke(Weapon_LeftHand);
+        if (HasStateAuthority)
+        {
+            RPC_InitiateLeftWeaponSwitch();
+        }
+    }
+
+    // rpc
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_InitiateLeftWeaponSwitch()
+    {
+        OnLeftWeaponStoringStarted?.Invoke(Weapon_LeftHand.Data.WeaponTypeIndex);
         Weapon_LeftHand.OnSwitchOutStart?.Invoke(RemainingStoreTime_LeftWeapon);
     }
+
+
 
     protected override void InitiateReloadRightWeapon()
     {
         base.InitiateReloadRightWeapon();
-        OnRightWeaponReloadStarted?.Invoke(Weapon_RightHand);
+        
+
+        if (HasStateAuthority)
+        {
+            RPC_ReloadRightWeapon();
+        }
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_ReloadRightWeapon()
+    {
+        OnRightWeaponReloadStarted?.Invoke(Weapon_RightHand.Data.WeaponTypeIndex);
         Weapon_RightHand.OnReloadStart?.Invoke(RemainingReloadTime_RightWeapon);
     }
 
     protected override void InitiateReloadLeftWeapon()
     {
         base.InitiateReloadLeftWeapon();
-        OnLeftWeaponReloadStarted?.Invoke(Weapon_LeftHand);
+        if (HasStateAuthority)
+        {
+            RPC_ReloadLeftWeapon();
+        }
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_ReloadLeftWeapon()
+    {
+        OnLeftWeaponReloadStarted?.Invoke(Weapon_LeftHand.Data.WeaponTypeIndex);
         Weapon_LeftHand.OnReloadStart?.Invoke(RemainingReloadTime_LeftWeapon);
     }
 
     protected override void InitiateMeleeWithRightWeapon()
     {
         base.InitiateMeleeWithRightWeapon();
-        OnRightWeaponMeleeStarted?.Invoke(Weapon_RightHand);
+        if (HasStateAuthority)
+        {
+            RPC_InitiateMeleeWithRightWeapon();
+
+        }
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_InitiateMeleeWithRightWeapon()
+    {
+        OnRightWeaponMeleeStarted?.Invoke(Weapon_RightHand.Data.WeaponTypeIndex);
         Weapon_RightHand.OnMeleeStart?.Invoke(RemainingMeleeTime_RightWeapon);
     }
 
     protected override void InitiateMeleeWithLeftWeapon()
     {
         base.InitiateMeleeWithLeftWeapon();
-        OnLeftWeaponMeleeStarted?.Invoke(Weapon_LeftHand);
+        if (HasStateAuthority)
+        {
+            RPC_InitiateMeleeWithLeftWeapon();
+
+        }
+    }
+
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_InitiateMeleeWithLeftWeapon()
+    {
+        OnLeftWeaponMeleeStarted?.Invoke(Weapon_LeftHand.Data.WeaponTypeIndex);
         Weapon_LeftHand.OnMeleeStart?.Invoke(RemainingMeleeTime_LeftWeapon);
     }
 
@@ -150,14 +215,14 @@ public class ArmsEvents : Arms
     {
         base.InitiateAbilityUse();
         var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
-        OnAbilityStarted?.Invoke(ability);
+        OnAbilityStarted?.Invoke(ability.AbilityTypeIndex);
     }
 
     protected override void UseAbility()
     {
         base.UseAbility();
         var ability = ItemIndexList.Instance.GetAbilityViaIndex(abilityInventory.AbilityIndex);
-        OnAbilityUsed?.Invoke(ability);
+        OnAbilityUsed?.Invoke(ability.AbilityTypeIndex);
     }
 
     public override bool InZoom { get => base.InZoom; protected set

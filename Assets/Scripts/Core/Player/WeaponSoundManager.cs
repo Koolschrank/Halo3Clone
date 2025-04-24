@@ -80,16 +80,16 @@ public class WeaponSoundManager : MonoBehaviour
 
 
 
-    public void ReloadLeftWeapon(Weapon_Arms weapon)
+    public void ReloadLeftWeapon(int weaponTypeIndex)
     {
         float time = playerArms.RemainingReloadTime_LeftWeapon;
-        reloadListLeftWeapon = new TimedSoundListInstance(weapon.ReloadSounds, time);
+        reloadListLeftWeapon = new TimedSoundListInstance(ItemIndexList.Instance.GetWeaponViaIndex(weaponTypeIndex).ReloadSounds, time);
     }
 
-    public void ReloadRightWeapon(Weapon_Arms weapon)
+    public void ReloadRightWeapon(int weaponTypeIndex)
     {
         float time = playerArms.RemainingReloadTime_RightWeapon;
-        reloadListRightWeapon = new TimedSoundListInstance(weapon.ReloadSounds, time);
+        reloadListRightWeapon = new TimedSoundListInstance(ItemIndexList.Instance.GetWeaponViaIndex(weaponTypeIndex).ReloadSounds, time);
     }
 
     public void Update()

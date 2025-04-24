@@ -12,33 +12,10 @@ public class WeaponInventoryUI : InterfaceItem
     [SerializeField] TextMeshProUGUI[] reserveTextToColor;
     [SerializeField] Image weaponSprite;
 
-
-    // subscribe to the player body
-    protected override void Unsubscribe(PlayerBody body)
-    {
-        var inventory = body.WeaponInventory;
-        
-        inventory.OnBackWeaponEquipped -= (weaponStruct) =>
-        {
-            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
-            if (weaponData == null)
-            {
-                Hide();
-                return;
-            }
-
-            Show();
-            UpdateWeaponSprite(weaponData.GunSpriteUI);
-            UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);
-        };
-
-        inventory.OnBackWeaponReserveAmmoChanged -= UpdateAmmo;
-        inventory.OnBackWeaponRemoved -= (weapon) => Hide();
-    }
-
     protected override void Subscribe(PlayerBody body)
     {
         var inventory = body.WeaponInventory;
+        var arms = body.PlayerArms;
 
         inventory.OnBackWeaponEquipped += (weaponStruct) =>
         {
@@ -68,6 +45,32 @@ public class WeaponInventoryUI : InterfaceItem
             Hide();
         }
     }
+
+    // subscribe to the player body
+    protected override void Unsubscribe(PlayerBody body)
+    {
+        var inventory = body.WeaponInventory;
+        
+        
+        inventory.OnBackWeaponEquipped -= (weaponStruct) =>
+        {
+            var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+            if (weaponData == null)
+            {
+                Hide();
+                return;
+            }
+
+            Show();
+            UpdateWeaponSprite(weaponData.GunSpriteUI);
+            UpdateAmmo(inventory.GetReserveAmmoBackWeapon() + weaponStruct.ammoInMagazine);
+        };
+
+        inventory.OnBackWeaponReserveAmmoChanged -= UpdateAmmo;
+        inventory.OnBackWeaponRemoved -= (weapon) => Hide();
+    }
+
+    
 
     public void UpdateWeaponSprite(Sprite sprite)
     {

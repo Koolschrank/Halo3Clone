@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ArmsExtended : ArmsEvents
+public class ArmsExtended : ArmsRender
 {
     [SerializeField] PlayerArmsInput input;
 
@@ -94,7 +94,7 @@ public class ArmsExtended : ArmsEvents
             }
         }
 
-        if (weaponInventory.RightWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.RightWeapon.weaponTypeIndex] > 0)
+        if (weaponInventory.RightWeapon.weaponTypeIndex != -1 && weaponInventory.RightWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.RightWeapon.weaponTypeIndex] > 0)
         {
             if (TryReloadRightWeapon())
             {
@@ -245,7 +245,7 @@ public class ArmsExtended : ArmsEvents
             
         }
 
-        if (weaponInventory.RightWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.RightWeapon.weaponTypeIndex] > 0)
+        if (weaponInventory.RightWeapon.weaponTypeIndex != -1 && weaponInventory.RightWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.RightWeapon.weaponTypeIndex] > 0)
         {
             if (TryReloadRightWeapon())
             {
@@ -253,7 +253,7 @@ public class ArmsExtended : ArmsEvents
             }
         }
 
-        if (weaponInventory.LeftWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.LeftWeapon.weaponTypeIndex] > 0)
+        if (weaponInventory.LeftWeapon.weaponTypeIndex != -1 && weaponInventory.LeftWeapon.ammoInMagazine == 0 && weaponInventory.AmmoReserve[weaponInventory.LeftWeapon.weaponTypeIndex] > 0)
         {
             if (TryReloadLeftWeapon())
             {

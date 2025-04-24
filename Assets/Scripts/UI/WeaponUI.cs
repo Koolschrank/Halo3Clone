@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
+using static UnityEngine.Rendering.GPUSort;
 
 public class WeaponUI : InterfaceItem
 {
@@ -34,14 +35,14 @@ public class WeaponUI : InterfaceItem
 
     protected override void Subscribe(PlayerBody body)
     {
-
+        var arms = body.PlayerArms;
         weaponInventory = body.WeaponInventory;
 
         if (leftArm)
         {
 
-            weaponInventory.OnLeftWeaponRemoved += UnequipWeapon;
-            weaponInventory.OnLeftWeaponEquipped += (weapon) =>
+            arms.OnLeftWeaponRemoved += (weapon) => UnequipWeapon();
+            arms.OnLeftWeaponEquiped += (weapon) =>
             {
                 EquipWeapon(weapon);
                 UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
@@ -59,19 +60,19 @@ public class WeaponUI : InterfaceItem
                 UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
                 UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
                 Enable();
-                EquipWeapon(weaponInventory.LeftWeapon);
+                EquipWeapon(arms.Weapon_LeftHand);
 
             }
         }
         else
         {
-            weaponInventory.OnRightWeaponEquipped += (weapon) =>
+            arms.OnRightWeaponEquiped += (weapon) =>
             {
                 EquipWeapon(weapon);
                 UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
                 UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
             };
-            weaponInventory.OnRightWeaponRemoved += UnequipWeapon;
+            arms.OnRightWeaponRemoved += (weapon) => UnequipWeapon();
             weaponInventory.OnRightWeaponReserveAmmoChanged += UpdateReserve;
             weaponInventory.OnRightWeaponMagazinChanged += UpdateMagazin;
 
@@ -84,7 +85,7 @@ public class WeaponUI : InterfaceItem
                 UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
                 UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
                 Enable();
-                EquipWeapon(weaponInventory.RightWeapon);
+                EquipWeapon(arms.Weapon_RightHand);
 
             }
         }
@@ -93,17 +94,18 @@ public class WeaponUI : InterfaceItem
     // subscribe to the player body
     protected override void Unsubscribe(PlayerBody body)
     {
+        var arms = body.PlayerArms;
 
         if (leftArm)
         {
-            weaponInventory.OnLeftWeaponEquipped -= (weapon) =>
+            arms.OnLeftWeaponEquiped -= (weapon) =>
             {
                 EquipWeapon(weapon);
                 UpdateMagazin(weaponInventory.LeftWeapon.ammoInMagazine);
                 UpdateReserve(weaponInventory.GetReserveAmmoLeftWeapon());
             };
 
-            weaponInventory.OnLeftWeaponRemoved -= UnequipWeapon;
+            arms.OnLeftWeaponRemoved -= (weapon) => UnequipWeapon();
             weaponInventory.OnLeftWeaponReserveAmmoChanged -= UpdateReserve;
             weaponInventory.OnLeftWeaponMagazinChanged -= UpdateMagazin;
 
@@ -111,13 +113,13 @@ public class WeaponUI : InterfaceItem
         }
         else
         {
-            weaponInventory.OnRightWeaponEquipped -= (weapon) =>
+            arms.OnRightWeaponEquiped -= (weapon) =>
             {
                 EquipWeapon(weapon);
                 UpdateMagazin(weaponInventory.RightWeapon.ammoInMagazine);
                 UpdateReserve(weaponInventory.GetReserveAmmoRightWeapon());
             };
-            weaponInventory.OnRightWeaponRemoved -= UnequipWeapon;
+            arms.OnRightWeaponRemoved -= (weapon) => UnequipWeapon();
             weaponInventory.OnRightWeaponReserveAmmoChanged -= UpdateReserve;
             weaponInventory.OnRightWeaponMagazinChanged -= UpdateMagazin;
 
@@ -146,11 +148,12 @@ public class WeaponUI : InterfaceItem
 
 
 
-    void EquipWeapon(WeaponNetworkStruct weaponStruct)
+    void EquipWeapon(Weapon_Arms weapon)
     {
-        if (weaponStruct.weaponTypeIndex == -1) return;
+        if (weapon == null) return;
 
-        var weaponData = ItemIndexList.Instance.GetWeaponViaIndex(weaponStruct.weaponTypeIndex);
+
+        var weaponData = weapon.Data;
 
         gameObject.SetActive(true);
         if (weaponData.ShowAmmoUI)
@@ -192,9 +195,9 @@ public class WeaponUI : InterfaceItem
         UpdateSprite();
     }
 
-    void UnequipWeapon(WeaponNetworkStruct weaponStruct)
+    void UnequipWeapon()
     {
-        if (weaponStruct.weaponTypeIndex == -1) return;
+        //if (weaponStruct.weaponTypeIndex == -1) return;
 
         gameObject.SetActive(false);
 

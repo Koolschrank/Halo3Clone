@@ -69,9 +69,9 @@ public class PlayerAnimation : MonoBehaviour
 
 
         // connect reload
-        playerArms.OnRightWeaponReloadStarted += Reload;
+        playerArms.OnRightWeaponReloadStarted += (index) => Reload();
         // connect switch weapon
-        playerArms.OnRightWeaponStoringStarted += SwitchOutWeapon;
+        playerArms.OnRightWeaponStoringStarted += (index) =>SwitchOutWeapon();
         playerArms.OnRightWeaponEquiped += EquipRightWeapon;
         // throw granade
         granadeThrower.OnGranadeThrowStart += ThrowGranadeStart;
@@ -202,7 +202,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger("Jump");
     }
 
-    public void Reload(Weapon_Arms weapon)
+    public void Reload()
     {
         float animationDuration = playerArms.RemainingReloadTime_RightWeapon;
         var reloadClip = GetAnimationClipByName("Reload");
@@ -211,7 +211,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger("Reload");
     }
 
-    public void SwitchOutWeapon(Weapon_Arms weapon)
+    public void SwitchOutWeapon()
     {
         float animationDuration = playerArms.RemainingStoreTime_RightWeapon;
         var switchOutClip = GetAnimationClipByName("SwitchOut");
