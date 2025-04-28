@@ -1,6 +1,7 @@
 using Fusion;
 using System;
 using UnityEngine;
+using ZakhanSpellsPack;
 
 public class ArmsEvents : Arms
 {
@@ -22,7 +23,21 @@ public class ArmsEvents : Arms
     public Action<int> OnAbilityStarted;
     public Action<int> OnAbilityUsed;
 
-    
+    public override void Spawned()
+    {
+        base.Spawned(); 
+
+        bulletSpawnerHitScan.OnShoot += () =>
+        {
+            OnRightWeaponShot?.Invoke(Weapon_RightHand);
+            Weapon_RightHand.OnShot?.Invoke();
+        };
+        bulletSpawnerHitScan.OnBulletShot += (bulletVector) =>
+        {
+            Weapon_RightHand.OnHitscanShot?.Invoke(bulletVector);
+        };
+    }
+
 
     protected override void AssignWeaponToRightHand(Weapon_Arms weapon)
     {

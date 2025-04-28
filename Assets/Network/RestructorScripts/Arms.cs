@@ -10,6 +10,7 @@ public abstract class Arms : NetworkBehaviour
     [SerializeField] protected AbilityInventory abilityInventory;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] BulletSpawner bulletSpawner;
+    [SerializeField] protected BulletSpawner_HitScan bulletSpawnerHitScan;
     [SerializeField] protected PlayerPickUpScan pickUpScan;
     [SerializeField] Transform rightWeaponDropPosition;
     [SerializeField] Transform leftWeaponDropPosition;
@@ -346,8 +347,9 @@ public abstract class Arms : NetworkBehaviour
 
         if (projectileData is Weapon_Bullet_Hitscan)
         {
-            var hitscan = bulletSpawner.ShootHitScan(weapon);
-            HitScanHit(weapon, hitscan);
+            bulletSpawnerHitScan.FireProjectile(weapon);
+            //var hitscan = bulletSpawner.ShootHitScan(weapon);
+            //HitScanHit(weapon, hitscan);
         }
         else if (projectileData is Weapon_Bullet_Projectile)
         {

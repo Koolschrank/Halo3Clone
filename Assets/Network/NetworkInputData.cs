@@ -1,4 +1,5 @@
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -26,6 +27,19 @@ public struct NetworkInputData : INetworkInput
     public LocalControllerData controllerData6;
     public LocalControllerData controllerData7;
     public LocalControllerData controllerData8;
+
+    readonly LocalControllerData this[int index] => index switch
+    {
+        0 => controllerData1,
+        1 => controllerData2,
+        2 => controllerData3,
+        3 => controllerData4,
+        4 => controllerData5,
+        5 => controllerData6,
+        6 => controllerData7,
+        7 => controllerData8,
+        _ => default
+    };
 }
 
 public struct LocalControllerData : INetworkInput
@@ -38,19 +52,19 @@ public struct LocalControllerData : INetworkInput
 
 public static class InputSplitter
 {
-    public static LocalControllerData GetContollerData(NetworkInputData inputData, int controllerIndex)
+    public static LocalControllerData GetContollerData(this NetworkInputData inputData, int controllerIndex)
     {
-        switch (controllerIndex)
+        return controllerIndex switch
         {
-            case 0: return inputData.controllerData1;
-            case 1: return inputData.controllerData2;
-            case 2: return inputData.controllerData3;
-            case 3: return inputData.controllerData4;
-            case 4: return inputData.controllerData5;
-            case 5: return inputData.controllerData6;
-            case 6: return inputData.controllerData7;
-            case 7: return inputData.controllerData8;
-        }
-        return default(LocalControllerData);
+            0 => inputData.controllerData1,
+            1 => inputData.controllerData2,
+            2 => inputData.controllerData3,
+            3 => inputData.controllerData4,
+            4 => inputData.controllerData5,
+            5 => inputData.controllerData6,
+            6 => inputData.controllerData7,
+            7 => inputData.controllerData8,
+            _ => default,
+        };
     }
 }

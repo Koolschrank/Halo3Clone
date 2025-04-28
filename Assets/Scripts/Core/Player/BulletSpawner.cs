@@ -7,7 +7,7 @@ public class BulletSpawner : MonoBehaviour
     public Action<Transform> OnTargetLost;
 
 
-    Transform target;
+    public Transform Target { get; private set; } = null;
 
 
     [SerializeField] Transform mainTransform;
@@ -73,18 +73,18 @@ public class BulletSpawner : MonoBehaviour
            
 
 
-        if (newTarget != target)
+        if (newTarget != Target)
         {
             if (newTarget)
             {
-                OnTargetLost?.Invoke(target);
+                OnTargetLost?.Invoke(Target);
                 OnTargetAcquired?.Invoke(newTarget);
             }
             else
             {
-                OnTargetLost?.Invoke(target);
+                OnTargetLost?.Invoke(Target);
             }
-            target = newTarget;
+            Target = newTarget;
         }
     }
 

@@ -10549,6 +10549,10 @@ GameObject:
   - component: {fileID: 5436099177385318033}
   - component: {fileID: 4889731717858166356}
   - component: {fileID: 2214214731459028143}
+  - component: {fileID: 3330823116920065502}
+  - component: {fileID: 3126434887839994426}
+  - component: {fileID: 6623681424091490239}
+  - component: {fileID: 2915580101208359425}
   m_Layer: 7
   m_Name: NetworkPlayerBody
   m_TagString: Player
@@ -10608,6 +10612,7 @@ MonoBehaviour:
   playerStartEquipment: {fileID: 8050057614039648062}
   playerAnimation: {fileID: 6646059112641200883}
   granadeThrower: {fileID: 625404246279802593}
+  bulletSpawnerHitScan: {fileID: 3330823116920065502}
 --- !u!114 &7400201383000877008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10914,6 +10919,7 @@ MonoBehaviour:
   - {fileID: 7400201383000877008}
   - {fileID: 8050057614039648062}
   - {fileID: 3068919470916229809}
+  - {fileID: 782412234501442312}
   - {fileID: 7573040687501960069}
   - {fileID: 3232609274750972410}
   - {fileID: 3844945188849078822}
@@ -10923,6 +10929,8 @@ MonoBehaviour:
   - {fileID: 5436099177385318033}
   - {fileID: 4889731717858166356}
   - {fileID: 2214214731459028143}
+  - {fileID: 3330823116920065502}
+  - {fileID: 3126434887839994426}
   - {fileID: 3086695294023934871}
   ForceRemoteRenderTimeframe: 0
 --- !u!54 &4169074679463143072
@@ -10989,10 +10997,10 @@ MonoBehaviour:
     Radius: 0.35
     Height: 1.8
     Extent: 0.035
-    ColliderLayer: 7
+    ColliderLayer: 14
     CollisionLayerMask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 129
     Features: -1
     InputAuthorityBehavior: 0
     StateAuthorityBehavior: 0
@@ -11028,6 +11036,7 @@ MonoBehaviour:
   abilityInventory: {fileID: 2214214731459028143}
   meleeAttacker: {fileID: 8008512304446792098}
   bulletSpawner: {fileID: 737555415851796727}
+  bulletSpawnerHitScan: {fileID: 3330823116920065502}
   pickUpScan: {fileID: 3086695294023934871}
   rightWeaponDropPosition: {fileID: 8167806766066142118}
   leftWeaponDropPosition: {fileID: 2372597562941759599}
@@ -11078,6 +11087,81 @@ MonoBehaviour:
   _UsesLeft: 0
   _MaxUses: 0
   _UseRechargeTime: 0
+--- !u!114 &3330823116920065502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02addd369848ce4c826aa8a7a870017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawner: {fileID: 737555415851796727}
+  bulletSpawnTransform: {fileID: 8067625750732039895}
+--- !u!114 &3126434887839994426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Config: -1
+  BroadRadius: 1.8
+  Offset: {x: 0, y: 0, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes:
+  - {fileID: 6623681424091490239}
+--- !u!114 &6623681424091490239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 3
+  SphereRadius: 0
+  CapsuleRadius: 0.35
+  BoxExtents: {x: 0, y: 0, z: 0}
+  CapsuleExtents: 1.8
+  Offset: {x: 0, y: 0.9, z: 0}
+  Root: {fileID: 3126434887839994426}
+  GizmosColor: {r: 1, g: 0.015686274, b: 0.9825258, a: 1}
+--- !u!136 &2915580101208359425
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.35
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,23 +1,28 @@
+using Fusion;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
     // unity event on death
     public Action OnDeath;
 
-   
 
-    [SerializeField] protected float maxHeath;
-    [SerializeField] protected float currentHeath;
+
+    
+    [SerializeField] [Networked] protected float maxHeath { get; set; } = 100f;
+    [SerializeField][Networked] protected float currentHeath { get; set; } = 100f;
     [SerializeField] protected bool setMaxHeathOnStart = true;
     
 
-    [SerializeField] protected bool hasHealthRegen;
-    [SerializeField] protected float healthRegenDelay;
+    [SerializeField][Networked] protected bool hasHealthRegen { get; set; } = false;
+    [SerializeField][Networked] protected float healthRegenDelay { get; set; } = 4.5f;
+    [Networked] TickTimer healthRegenDelayTimer { get; set; }
+
+
     protected float healthRegenTimer;
-    [SerializeField] protected float healthRegenAmountPerSecond;
+    [SerializeField][Networked] protected float healthRegenAmountPerSecond { get; set; } = 20f;
 
 
     public float MaxHeath => maxHeath;
@@ -103,5 +108,12 @@ public class Health : MonoBehaviour
     }
 
     public float HealthPercentage => currentHeath / maxHeath;
+
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_InitiateRightWeaponSwitch()
+    {
+        
+    }
 
 }

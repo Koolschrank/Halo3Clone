@@ -4,19 +4,21 @@ using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.Events;
 using NUnit.Framework.Internal;
+using Fusion;
 
 public class CharacterHealth : Health
 {
 
     [SerializeField] float damageMultiplier = 1;
-    [SerializeField] bool hasShild = true;
-    [SerializeField] bool headShotOneShot = true;
+    [SerializeField] [Networked] bool hasShild { get; set; } = true;
+    [SerializeField][Networked] bool headShotOneShot { get; set; } = true;
 
-    [SerializeField] float maxShild = 100;
-    [SerializeField] float currentShild = 100;
-    [SerializeField] float shildPopDamageNegation = 25;
-    [SerializeField] float shildRegenDelay = 5;
-    [SerializeField] float shildRegenAmountPerSecond = 20;
+    [SerializeField][Networked] float maxShild { get; set; } = 100;
+    [SerializeField][Networked] float currentShild { get; set; } = 100;
+    [SerializeField][Networked] float shildRegenDelay { get; set; } = 5;
+    [SerializeField][Networked] float shildRegenAmountPerSecond { get; set; } = 20;
+
+    [Networked] TickTimer shildRegenDelayTimer { get; set; }
     float shildRegenTimer;
 
     [SerializeField] HeadShotArea headShotArea;
@@ -43,7 +45,7 @@ public class CharacterHealth : Health
     public Action OnShildRechargeStarted;
 
 
-    float maxShildMultiplier = 1;
+    [Networked] float maxShildMultiplier { get; set; } = 1;
 
     public float MaxShild => maxShild * maxShildMultiplier;
 
@@ -178,7 +180,7 @@ public class CharacterHealth : Health
 
             if (damageAgainstShild >= currentShild)
             {
-                damageAgainstShild -= currentShild + shildPopDamageNegation;
+                damageAgainstShild -= currentShild;
                 damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
                 currentShild = 0;
                 OnShildChanged?.Invoke(0);

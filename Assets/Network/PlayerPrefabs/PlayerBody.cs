@@ -28,6 +28,7 @@ public class PlayerBody : NetworkBehaviour
     [SerializeField] PlayerStartEquipment playerStartEquipment;
     [SerializeField] PlayerAnimation playerAnimation;
     [SerializeField] GranadeThrower granadeThrower;
+    [SerializeField] BulletSpawner_HitScan bulletSpawnerHitScan;
 
     [Networked] int localPlayerIndex { get; set; }
     int visualLayerIndex = 0;
@@ -78,5 +79,7 @@ public class PlayerBody : NetworkBehaviour
     public Transform HeadTransform => head;
 
     public GranadeThrower GranadeThrower => granadeThrower;
+
+    public BulletSpawner_HitScan BulletSpawnerHitScan => bulletSpawnerHitScan;
 
 }
