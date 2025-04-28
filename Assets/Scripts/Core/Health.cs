@@ -7,10 +7,12 @@ public class Health : NetworkBehaviour
 {
     // unity event on death
     public Action OnDeath;
+    public Action<float> OnHealthChanged;
+    public Action<Vector3> OnDamageTaken;
 
 
 
-    
+
     [SerializeField] [Networked] protected float maxHeath { get; set; } = 100f;
     [SerializeField][Networked] protected float currentHeath { get; set; } = 100f;
     [SerializeField] protected bool setMaxHeathOnStart = true;
@@ -18,10 +20,10 @@ public class Health : NetworkBehaviour
 
     [SerializeField][Networked] protected bool hasHealthRegen { get; set; } = false;
     [SerializeField][Networked] protected float healthRegenDelay { get; set; } = 4.5f;
-    [Networked] TickTimer healthRegenDelayTimer { get; set; }
+    [Networked] protected TickTimer healthRegenDelayTimer { get; set; }
 
 
-    protected float healthRegenTimer;
+    
     [SerializeField][Networked] protected float healthRegenAmountPerSecond { get; set; } = 20f;
 
 
@@ -29,13 +31,17 @@ public class Health : NetworkBehaviour
     public float CurrentHeath => currentHeath;
 
     // action health change
-    public Action<float> OnHealthChanged;
-    public Action<DamagePackage> OnDamageTaken;
+    
 
     public bool IsDead => currentHeath <= 0;
 
-    protected virtual void Start()
+    public override void Spawned()
     {
+        base.Spawned();
+        if (hasHealthRegen)
+        {
+            healthRegenDelayTimer = TickTimer.CreateFromSeconds(Runner, healthRegenDelay);
+        }
         if (setMaxHeathOnStart)
         {
             currentHeath = maxHeath;
@@ -43,20 +49,14 @@ public class Health : NetworkBehaviour
         }
     }
 
-    public virtual void Update()
+
+    public override void FixedUpdateNetwork()
     {
-        if (hasHealthRegen)
+        if (hasHealthRegen && healthRegenDelayTimer.ExpiredOrNotRunning(Runner))
         {
-            if (healthRegenTimer > 0)
-            {
-                healthRegenTimer -= Time.deltaTime;
-            }
-            else
-            {
-                Heal(healthRegenAmountPerSecond * Time.deltaTime);
-            }
+            Heal(healthRegenAmountPerSecond * Runner.DeltaTime);
         }
-    }
+    } 
 
 
 
@@ -78,11 +78,12 @@ public class Health : NetworkBehaviour
         {
             if (hasHealthRegen)
             {
-                healthRegenTimer = healthRegenDelay;
+                healthRegenDelayTimer = TickTimer.CreateFromSeconds(Runner, healthRegenDelay);
             }
+            
         }
         OnHealthChanged?.Invoke(HealthPercentage);
-        OnDamageTaken?.Invoke(damagePackage);
+        OnDamageTaken?.Invoke(damagePackage.origin);
     }
 
     public void Heal(float healAmount)
@@ -110,10 +111,6 @@ public class Health : NetworkBehaviour
     public float HealthPercentage => currentHeath / maxHeath;
 
 
-    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
-    void RPC_InitiateRightWeaponSwitch()
-    {
-        
-    }
+    
 
 }

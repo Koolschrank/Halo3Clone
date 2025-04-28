@@ -38,11 +38,75 @@ public class BulletSpawner_HitScan : NetworkBehaviour
         }
 
 
-        var hitOptions = HitOptions.IncludePhysX | HitOptions.IgnoreInputAuthority;
+        float damageMultiplier = 1f;
+        DamagePackage damagePackage = new DamagePackage(projectileData.Damage * damageMultiplier);
+        damagePackage.origin = spawnPosition;
+        damagePackage.owner = gameObject;
+        damagePackage.headShotMultiplier = projectileData.HeadShotMultiplier;
+        damagePackage.shildDamageMultiplier = projectileData.ShildDamageMultiplier;
+        damagePackage.canHeadShotShild = projectileData.CanHeadShotShild;
 
-        if (Runner.LagCompensation.Raycast(spawnPosition, forward, projectileData.Range, Object.InputAuthority, out var hit, projectileData.HitLayer, hitOptions))
+
+
+
+        var hitOptions = HitOptions.IncludePhysX | HitOptions.IgnoreInputAuthority;
+        Vector3 shotDirection = forward;
+        Vector3 shotDirectionForThisBullet = shotDirection + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+
+
+        if (Runner.LagCompensation.Raycast(spawnPosition, shotDirectionForThisBullet, projectileData.Range, Object.InputAuthority, out var hit, projectileData.HitLayer, hitOptions))
         {
-            
+            damagePackage.forceVector = shotDirectionForThisBullet.normalized * projectileData.Force;
+            damagePackage.hitPoint = hit.Point;
+
+
+            bool bodyHit = false;
+            if (hit.Collider.TryGetComponent<Health>(out Health health))
+            {
+                health.TakeDamage(damagePackage);
+
+                bodyHit = true;
+            }
+            else
+            {
+                // if layer is dead player layer
+                if (hit.Collider.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
+                {
+                    bodyHit = true;
+                }
+
+
+            }
+            if (bodyHit)
+            {
+                AudioManager.instance.PlayOneShot(projectileData.BodyHitSound, hit.Point);
+                GameObject impact = Instantiate(projectileData.ImpactBody, hit.Point, Quaternion.identity);
+                // get normal of hit point
+                impact.transform.forward = hit.Normal;
+
+            }
+            else
+            {
+                AudioManager.instance.PlayOneShot(projectileData.GroundHitSound, hit.Point);
+                GameObject impact = Instantiate(projectileData.ImpactGround, hit.Point, Quaternion.identity);
+
+                impact.transform.forward = hit.Normal;
+            }
+
+
+
+            if (hit.Collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
+            {
+                rb.AddForceAtPosition(damagePackage.forceVector, hit.Point, ForceMode.Impulse);
+            }
+
+
+
+            damagePackage.damageAmount = projectileData.Damage * damageMultiplier * projectileData.GetDamageFalloff(hit.Distance);
+
+
+
+
 
             hitPosition = hit.Point;
         }

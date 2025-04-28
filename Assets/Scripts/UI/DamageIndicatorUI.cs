@@ -45,10 +45,10 @@ public class DamageIndicatorUI : InterfaceItem
         damageIndicators.Clear();
     }
 
-    public void AddDamageIndicator(DamagePackage damagePackage)
+    public void AddDamageIndicator(Vector3 origin)
     {
         
-        if (!CheckIfHitIndicatorIsNeeded(damagePackage.origin, transform))
+        if (!CheckIfHitIndicatorIsNeeded(origin, transform))
         {
             return;
         }
@@ -60,7 +60,7 @@ public class DamageIndicatorUI : InterfaceItem
 
 
 
-        damageIndicators.Add(new DamageIndicator(damagePackage, damageIndicatorTime, hitVisual));
+        damageIndicators.Add(new DamageIndicator(origin, damageIndicatorTime, hitVisual));
 
     }
 
@@ -121,21 +121,21 @@ public class DamageIndicatorUI : InterfaceItem
 
 public class DamageIndicator
 {
-    DamagePackage damagePackage;
+    Vector3 origin;
     float lifeTime;
     float lifeTime_left;
     GameObject visual;
 
-    public DamageIndicator(DamagePackage damagePackage, float lifeTime, GameObject visual)
+    public DamageIndicator(Vector3 origin, float lifeTime, GameObject visual)
     {
-        this.damagePackage = damagePackage;
+        this.origin = origin;
         this.lifeTime = lifeTime;
         this.visual = visual;
         lifeTime_left = lifeTime;
         visual.SetActive(false);
     }
 
-    public Vector3 Origin => damagePackage.origin;
+    public Vector3 Origin => origin;
 
     public void Update(Transform playerTransform, float distance)
     {

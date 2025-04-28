@@ -14,12 +14,11 @@ public class CharacterHealth : Health
     [SerializeField][Networked] bool headShotOneShot { get; set; } = true;
 
     [SerializeField][Networked] float maxShild { get; set; } = 100;
-    [SerializeField][Networked] float currentShild { get; set; } = 100;
+    [SerializeField][Networked, OnChangedRender(nameof(UpdateShildVisual))] float currentShild { get; set; } = 100;
     [SerializeField][Networked] float shildRegenDelay { get; set; } = 5;
     [SerializeField][Networked] float shildRegenAmountPerSecond { get; set; } = 20;
 
     [Networked] TickTimer shildRegenDelayTimer { get; set; }
-    float shildRegenTimer;
 
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
@@ -77,10 +76,9 @@ public class CharacterHealth : Health
         this.headShotOneShot = headShotOneShot;
     }
 
-
-    protected override void Start()
+    public override void Spawned()
     {
-        base.Start();
+        base.Spawned();
         if (setMaxHeathOnStart)
             currentShild = MaxShild;
 
@@ -88,40 +86,55 @@ public class CharacterHealth : Health
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
     }
 
-    // update
-    public override void Update()
+    public void UpdateShildVisual()
+    {
+        OnShildChanged?.Invoke(ShildPercentage);
+    }
+
+    // update 
+    public override void FixedUpdateNetwork()
     {
         if (dead)
             return;
 
-        base.Update();
-        if (shildRegenTimer > 0 && hasShild)
-        {
-            shildRegenTimer -= Time.deltaTime;
-            shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
-            if (shildRegenTimer <= 0)
-            {
-                shildRechargeSoundInstance.start();
-            }
-        }
-        else if (currentShild < MaxShild && hasShild)
-        {
+        base.FixedUpdateNetwork();
 
+        if (hasShild)
+        {
             if (currentShild == 0)
             {
-                shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                OnShildRechargeStarted?.Invoke();
+                shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
 
-
-
+                if (shildRegenDelayTimer.Expired(Runner))
+                {
+                    shildRegenDelayTimer = TickTimer.None;
+                    shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                    shildRechargeSoundInstance.start();
+                    currentShild += shildRegenAmountPerSecond * Runner.DeltaTime;
+                }
             }
-            shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            else if (currentShild < maxShild)
+            {
+                shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+                if (shildRegenDelayTimer.Expired(Runner))
+                {
+                    shildRegenDelayTimer = TickTimer.None;
+                    shildRechargeSoundInstance.start();
+                }
 
-            currentShild += shildRegenAmountPerSecond * Time.deltaTime;
-            currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
-            OnShildChanged?.Invoke(ShildPercentage);
+                if (shildRegenDelayTimer.ExpiredOrNotRunning(Runner))
+                {
+                    currentShild += shildRegenAmountPerSecond * Runner.DeltaTime;
+                    currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
+                    OnShildChanged?.Invoke(ShildPercentage);
+                }
 
+                
+            }
         }
+
+
+        
 
         
     }
@@ -222,14 +235,18 @@ public class CharacterHealth : Health
                 damageDealer.CharacterHit(damagePackage, gameObject);
             if (hasHealthRegen)
             {
-                healthRegenTimer = healthRegenDelay;
+                healthRegenDelayTimer = TickTimer.CreateFromSeconds(Runner, healthRegenDelay);
             }
-            shildRegenTimer = shildRegenDelay;
+            if (hasShild)
+            {
+                shildRegenDelayTimer = TickTimer.CreateFromSeconds(Runner, shildRegenDelay);
+            }
+
 
 
         }
 
-        OnDamageTaken?.Invoke(damagePackage);
+        OnDamageTaken?.Invoke(damagePackage.origin);
 
     }
 
