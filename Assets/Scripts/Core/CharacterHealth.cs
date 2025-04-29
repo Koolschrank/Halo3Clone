@@ -5,6 +5,7 @@ using FMOD.Studio;
 using UnityEngine.Events;
 using NUnit.Framework.Internal;
 using Fusion;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CharacterHealth : Health
 {
@@ -23,6 +24,8 @@ public class CharacterHealth : Health
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
     [SerializeField] ArmsExtended playerArms;
+    [SerializeField] HitboxRoot hitboxRoot;
+    [SerializeField] Hitbox[] hitBoxes;
 
 
 
@@ -86,10 +89,7 @@ public class CharacterHealth : Health
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
     }
 
-    public void UpdateShildVisual()
-    {
-        OnShildChanged?.Invoke(ShildPercentage);
-    }
+    
 
     // update 
     public override void FixedUpdateNetwork()
@@ -109,8 +109,9 @@ public class CharacterHealth : Health
                 {
                     shildRegenDelayTimer = TickTimer.None;
                     shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                    shildRechargeSoundInstance.start();
-                    currentShild += shildRegenAmountPerSecond * Runner.DeltaTime;
+                    
+                    if (HasStateAuthority)
+                        RPC_ShildRecharge();
                 }
             }
             else if (currentShild < maxShild)
@@ -119,17 +120,20 @@ public class CharacterHealth : Health
                 if (shildRegenDelayTimer.Expired(Runner))
                 {
                     shildRegenDelayTimer = TickTimer.None;
-                    shildRechargeSoundInstance.start();
-                }
 
-                if (shildRegenDelayTimer.ExpiredOrNotRunning(Runner))
-                {
-                    currentShild += shildRegenAmountPerSecond * Runner.DeltaTime;
-                    currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
-                    OnShildChanged?.Invoke(ShildPercentage);
+                    if (HasStateAuthority)
+                        RPC_ShildRecharge();
                 }
 
                 
+
+                
+            }
+
+            if (shildRegenDelayTimer.ExpiredOrNotRunning(Runner))
+            {
+                currentShild += shildRegenAmountPerSecond * Runner.DeltaTime;
+                currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
             }
         }
 
@@ -182,10 +186,10 @@ public class CharacterHealth : Health
             }
         }
 
-        OnDamageTakenUnityEvent?.Invoke();
+        
 
 
-        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        
         if (hasShild && currentShild > 0)
         {
 
@@ -196,20 +200,24 @@ public class CharacterHealth : Health
                 damageAgainstShild -= currentShild;
                 damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
                 currentShild = 0;
-                OnShildChanged?.Invoke(0);
-                OnShildDamageTaken?.Invoke();
-                OnShildDepleted?.Invoke();
-                AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
+                if (HasStateAuthority)
+                {
+                    RPC_ShildDamaged();
+                    RPC_ShildBrake();
+                }
 
-                shildEmptySoundInstance.start();
+                
+                    
+                
 
             }
             else
             {
-                OnShildDamageTaken?.Invoke();
+                if (HasStateAuthority)
+                    RPC_ShildDamaged();
                 currentShild -= damageAgainstShild;
                 damage = 0;
-                OnShildChanged?.Invoke(ShildPercentage);
+                
 
             }
         }
@@ -246,14 +254,22 @@ public class CharacterHealth : Health
 
         }
 
-        OnDamageTaken?.Invoke(damagePackage.origin);
+        if (HasStateAuthority)
+            RPC_DamageTaken(damagePackage.origin);
 
     }
+
+
+
 
     bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
         base.Die();
+        foreach (var box in hitBoxes)
+        {
+            hitboxRoot.SetHitboxActive(box, false);
+        }
         ragdollTrigger.Activate(damagePackage);
 
         dead = true;
@@ -272,5 +288,55 @@ public class CharacterHealth : Health
         }
     }
 
-    
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_ShildDamaged()
+    {
+
+        OnShildDamageTaken?.Invoke();
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_ShildBrake()
+    {
+
+        OnShildDepleted?.Invoke();
+        AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
+
+        shildEmptySoundInstance.start();
+    }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_DamageTaken(Vector3 origin)
+    {
+        OnDamageTaken?.Invoke(origin);
+        OnDamageTakenUnityEvent?.Invoke();
+    }
+
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_ShildRecharge()
+    {
+        OnShildRechargeStarted?.Invoke();
+        shildRechargeSoundInstance.start();
+    }
+
+
+    float lastShildVale = 0;
+
+    public void UpdateShildVisual()
+    {
+        OnShildChanged?.Invoke(ShildPercentage);
+
+
+        if (ShildPercentage < lastShildVale)
+        {
+            shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+
+        lastShildVale = ShildPercentage;
+
+    }
+
+
 }

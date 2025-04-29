@@ -14,7 +14,7 @@ public class Health : NetworkBehaviour
 
 
     [SerializeField] [Networked] protected float maxHeath { get; set; } = 100f;
-    [SerializeField][Networked] protected float currentHeath { get; set; } = 100f;
+    [SerializeField][Networked, OnChangedRender(nameof(UpdateHealthVisual))] protected float currentHeath { get; set; } = 100f;
     [SerializeField] protected bool setMaxHeathOnStart = true;
     
 
@@ -82,7 +82,7 @@ public class Health : NetworkBehaviour
             }
             
         }
-        OnHealthChanged?.Invoke(HealthPercentage);
+        
         OnDamageTaken?.Invoke(damagePackage.origin);
     }
 
@@ -99,7 +99,7 @@ public class Health : NetworkBehaviour
             currentHeath = maxHeath;
         }
 
-        OnHealthChanged?.Invoke(HealthPercentage);
+        
     }
     protected virtual void Die()
     {
@@ -111,6 +111,9 @@ public class Health : NetworkBehaviour
     public float HealthPercentage => currentHeath / maxHeath;
 
 
-    
+    void UpdateHealthVisual()
+    {
+        OnHealthChanged?.Invoke(HealthPercentage);
+    }
 
 }

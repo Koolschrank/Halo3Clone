@@ -54,14 +54,16 @@ public class BulletSpawner_HitScan : NetworkBehaviour
         Vector3 shotDirectionForThisBullet = shotDirection + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
 
 
-        if (Runner.LagCompensation.Raycast(spawnPosition, shotDirectionForThisBullet, projectileData.Range, Object.InputAuthority, out var hit, projectileData.HitLayer, hitOptions))
+        if (Runner.LagCompensation.Raycast(spawnPosition, shotDirectionForThisBullet, projectileData.Range, Object.InputAuthority, out var hit, projectileData.HitLayer))
         {
             damagePackage.forceVector = shotDirectionForThisBullet.normalized * projectileData.Force;
             damagePackage.hitPoint = hit.Point;
 
 
             bool bodyHit = false;
-            if (hit.Collider.TryGetComponent<Health>(out Health health))
+
+
+            if ( hit.Hitbox.Root != null &&hit.Hitbox.Root.TryGetComponent<Health>(out Health health))
             {
                 health.TakeDamage(damagePackage);
 
@@ -70,12 +72,10 @@ public class BulletSpawner_HitScan : NetworkBehaviour
             else
             {
                 // if layer is dead player layer
-                if (hit.Collider.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
+                if (hit.Hitbox.Root != null && hit.Hitbox.Root.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
                 {
                     bodyHit = true;
                 }
-
-
             }
             if (bodyHit)
             {
@@ -95,7 +95,7 @@ public class BulletSpawner_HitScan : NetworkBehaviour
 
 
 
-            if (hit.Collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
+            if (hit.Hitbox.Root != null && hit.Hitbox.Root.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
                 rb.AddForceAtPosition(damagePackage.forceVector, hit.Point, ForceMode.Impulse);
             }

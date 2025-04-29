@@ -50,9 +50,11 @@ public class PlayerCamera : InterfaceItem
 
     public void SetVignetteIntensity(float power)
     {
+        Debug.Log(power);
+        Debug.Log("pre vol");
         if (volume == null)
             return;
-
+        Debug.Log("post vol");
         volume.profile.TryGet(out Vignette vignette);
         vignette.intensity.value = power;
     }

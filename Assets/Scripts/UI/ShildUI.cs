@@ -18,8 +18,9 @@ public class ShildUI : InterfaceItem
     protected override void Awake()
     {
         base.Awake();
-        if (defaultColor == null)
-            defaultColor = shildBar.color;
+        defaultColor = shildTeamColors[0];
+
+        ShildRecharge();
     }
 
     // subscribe to the player body
@@ -32,6 +33,7 @@ public class ShildUI : InterfaceItem
         health.OnShildDepleted -= ShildDepleted;
         health.OnShildDisabled -= DisableUI;
         health.OnShildEnabled -= EnableUI;
+        health.OnShildRechargeStarted -= ShildRecharge;
         team.OnTeamIndexChanged -= SetTeamColor;
     }
 
@@ -43,6 +45,7 @@ public class ShildUI : InterfaceItem
         health.OnShildDepleted += ShildDepleted;
         health.OnShildDisabled += DisableUI;
         health.OnShildEnabled += EnableUI;
+        health.OnShildRechargeStarted += ShildRecharge;
         team.OnTeamIndexChanged += SetTeamColor;
 
         if (health.MaxShild >0)
@@ -80,16 +83,22 @@ public class ShildUI : InterfaceItem
 
     public void UpdateShild(float shildValue)
     {
-        if (inAlarm && shildValue != 0)
+        if (inAlarm)
         {
-            inAlarm = false;
-            shildBar.color = defaultColor;
+            return;
         }
         shildBar.fillAmount = shildValue;
     }
 
+    public void ShildRecharge()
+    {
+        inAlarm = false;
+        shildBar.color = defaultColor;
+    }
+
     public void ShildDepleted()
     {
+        Debug.Log("yay");
         inAlarm = true;
         alarmTimer = 0;
         alarmColorOn = true;
