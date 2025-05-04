@@ -14,10 +14,10 @@ public class AbilityInventory : NetworkBehaviour
 
     [Networked] public float UseRechargeTime { get; private set; } = 0f;
 
-    [Networked] public TickTimer rechageTimer { get; private set; } = TickTimer.None;
+    [Networked] public TickTimer RechageTimer { get; private set; } = TickTimer.None;
 
 
-    public float RechargePercent => (rechageTimer.RemainingTime(Runner) ?? 0f) / UseRechargeTime;
+    public float RechargePercent => (RechageTimer.RemainingTime(Runner) ?? 0f) / UseRechargeTime;
 
     public void UseAbility()
     {
@@ -27,7 +27,7 @@ public class AbilityInventory : NetworkBehaviour
         {
             UsesLeft--;
             
-            rechageTimer = TickTimer.CreateFromSeconds(Runner, UseRechargeTime);
+            RechageTimer = TickTimer.CreateFromSeconds(Runner, UseRechargeTime);
             OnAbilityUsed?.Invoke(AbilityIndex);
         }
     }
@@ -44,17 +44,17 @@ public class AbilityInventory : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (rechageTimer.Expired(Runner))
+        if (RechageTimer.Expired(Runner))
         {
             
             UsesLeft++;
             if (UsesLeft < MaxUses)
             {
-                rechageTimer = TickTimer.CreateFromSeconds(Runner, UseRechargeTime);
+                RechageTimer = TickTimer.CreateFromSeconds(Runner, UseRechargeTime);
             }
             else
             {
-                rechageTimer = TickTimer.None;
+                RechageTimer = TickTimer.None;
             }
         }
     }

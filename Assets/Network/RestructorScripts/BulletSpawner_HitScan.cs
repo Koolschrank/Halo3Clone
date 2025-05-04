@@ -63,20 +63,22 @@ public class BulletSpawner_HitScan : NetworkBehaviour
             bool bodyHit = false;
 
 
-            if ( hit.Hitbox.Root != null &&hit.Hitbox.Root.TryGetComponent<Health>(out Health health))
+            if (hit.Hitbox != null && hit.Hitbox.Root != null &&hit.Hitbox.Root.TryGetComponent<Health>(out Health health))
             {
                 health.TakeDamage(damagePackage);
 
                 bodyHit = true;
             }
-            else
-            {
-                // if layer is dead player layer
-                if (hit.Hitbox.Root != null && hit.Hitbox.Root.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer())
-                {
-                    bodyHit = true;
-                }
-            }
+            //else
+            //{
+            //    // if layer is dead player layer
+            //    if (hit.Collider != null && hit.Collider.gameObject.layer == PlayerManager.instance.GetDeadPlayerLayer() && hit.Collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
+            //    {
+            //        bodyHit = true;
+            //        rb.AddForceAtPosition(damagePackage.forceVector, hit.Point, ForceMode.Impulse);
+
+            //    }
+            //}
             if (bodyHit)
             {
                 AudioManager.instance.PlayOneShot(projectileData.BodyHitSound, hit.Point);

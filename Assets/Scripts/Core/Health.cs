@@ -103,7 +103,7 @@ public class Health : NetworkBehaviour
     }
     protected virtual void Die()
     {
-        OnDeath?.Invoke();
+        
         
 
     }

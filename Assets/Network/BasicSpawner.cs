@@ -110,6 +110,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         playerInput.enabled = true;
     }
 
+    void FixedUpdate()
+    {
+        // Ensure local physics are simulated if you're not relying on NetworkPhysics
+        if(!_runner.IsServer)
+            Physics.Simulate(Time.fixedDeltaTime);
+    }
+
     private void OnGUI()
     {
         if (_runner == null)

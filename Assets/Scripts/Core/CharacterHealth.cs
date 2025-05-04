@@ -262,7 +262,9 @@ public class CharacterHealth : Health
 
 
 
-    bool dead = false;
+    [Networked] bool dead { get; set; } = false;
+    [Networked] RagddollImpactStruct ragddollImpactStruct { get; set; }
+
     protected void Die(DamagePackage damagePackage)
     {
         base.Die();
@@ -270,15 +272,51 @@ public class CharacterHealth : Health
         {
             hitboxRoot.SetHitboxActive(box, false);
         }
-        ragdollTrigger.Activate(damagePackage);
+
+        
+        ragddollImpactStruct = new RagddollImpactStruct()
+        {
+            singleBodyPart = damagePackage.impactType == ImpactType.singleBodyPart,
+            force = damagePackage.forceVector,
+            hitPoint = damagePackage.hitPoint,
+        };
 
         dead = true;
 
-        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        
         float timeToKill = Time.time - firstShotTime;
         Debug.Log("Time to kill: " + timeToKill);
+
+        
+        if (HasStateAuthority)
+        {
+            RPC_Death(ragddollImpactStruct);
+            Runner.Despawn(Object);
+        }
     }
+
+    [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
+    void RPC_Death(RagddollImpactStruct ragddollImpactStruct)
+    {
+        
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        OnDeath?.Invoke();
+
+        Debug.Log("death");
+        ragdollTrigger.Activate(ragddollImpactStruct);
+
+
+
+        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        base.Despawned(runner, hasState);
+    }
+
+
 
     public float ShildPercentage
     {

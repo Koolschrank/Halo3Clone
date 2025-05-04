@@ -10766,13 +10766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c0c588e9d78924390d41ff5a57b567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3316862365299375133}
-  colliders: []
+  ragdollPrefab: {fileID: 2667379049900679480, guid: 258705ae238a38f4d9c58526768c72be, type: 3}
   cc: {fileID: 4461638039460575108}
-  ragdoll: {fileID: 8712196350449165927}
-  playerArms: {fileID: 3232609274750972410}
-  playerMovement: {fileID: 7400201383000877008}
-  enableRagdollAtStart: 0
+  mesh: {fileID: 8712196350449165927}
 --- !u!114 &3068919470916229809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11826,11 +11822,6 @@ PrefabInstance:
 --- !u!4 &2688980760062710863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8356818453252377002, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
-  m_PrefabInstance: {fileID: 6244328683183300069}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &3316862365299375133 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8696331467768963576, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
   m_PrefabInstance: {fileID: 6244328683183300069}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3353882773872915684 stripped
