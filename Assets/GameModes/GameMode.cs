@@ -18,6 +18,9 @@ public class GameMode : ScriptableObject
     [SerializeField] protected float pointsToWinMultiplier_smallMap = 1f;
 
 
+    
+
+
     public Equipment StartingEquipment { get { return startingEquipment; } }
     public float TimeLimitInMinutes { get { return timeLimitInMinutes; } }
 

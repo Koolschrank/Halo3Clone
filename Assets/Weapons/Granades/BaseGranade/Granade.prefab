@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimerOnFirstCollision: 1
   collisionCooldown: 0.05
-  explosionTime: 2.2
+  explosionTime: 2
   explosionEffect: {fileID: 8386559723769285559, guid: cec942fb091dd3044b7b1320ee8b287a, type: 3}
   mainGranade: {fileID: 3890480776725438845}
   bounceSound:

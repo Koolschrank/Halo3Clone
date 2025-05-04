@@ -46,10 +46,51 @@ public class BodyMindConnection : MonoBehaviour
 
         mind.ConnectPlayerElimination(targetHitCollector);
         SetPlayTeamIndex();
-        playerStartEquipment.GetEquipment(GameModeSelector.gameModeManager.GetEquipment());
+        playerStartEquipment.GetEquipment(GetStartEquipment());
 
 
     }
+
+    public Equipment GetStartEquipment()
+    {
+        var equipment = new Equipment( GameModeSelector.gameModeManager.GetEquipment());
+        bool isSwat = MapLoader.instance.IsSwat();
+        bool dualWieldPlus = MapLoader.instance.IsDualWieldPlus();
+        bool noMiniMap = MapLoader.instance.HasNoMiniMap();
+        bool randomWeaponSpawn = MapLoader.instance.IsRandomWeaponSpawn();
+        float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
+
+        if (isSwat)
+        {
+            equipment.SetWeapons(ItemList.instance.GetPistol(), null, null);
+            equipment.SetMagazins(4, 0, 0);
+            equipment.SetHasShild(false);
+            equipment.SetHeadShotOneShot(false);
+        }
+        if (dualWieldPlus)
+        {
+            equipment.SetCanDualWieldEverything(true);
+        }
+        if (noMiniMap)
+        {
+            equipment.SetHasMiniMap(false);
+        }
+        if (randomWeaponSpawn) {
+            equipment.SetWeapons(ItemList.instance.GetRandomWeapon(), null, null);
+            equipment.SetMagazins(3, 0, 0);
+        }
+
+        if (moveSpeedMultiplier != 1)
+        {
+            equipment.SetMovementSpeedMultiplier(moveSpeedMultiplier);
+        }
+
+
+
+
+        return equipment;
+    }
+
 
     public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
     {

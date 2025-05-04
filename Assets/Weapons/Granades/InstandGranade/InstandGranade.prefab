@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 3413036291496329133}
   - component: {fileID: 2725077803485551492}
   - component: {fileID: 3890480776725438845}
-  - component: {fileID: 8572487180997942644}
+  - component: {fileID: 1257414018265939941}
   m_Layer: 11
   m_Name: InstandGranade
   m_TagString: Untagged
@@ -267,7 +267,7 @@ MonoBehaviour:
       Data3: 390050228
       Data4: 1864634118
     Path: event:/SFX/Granades/BaseGranade/Throw
---- !u!114 &8572487180997942644
+--- !u!114 &1257414018265939941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5187455782990611905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2cf38b16b8ad344b8734df66025552, type: 3}
+  m_Script: {fileID: 11500000, guid: ac3bdedeb63a29542b20ee1bd8303ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startTimerOnFirstCollision: 1
@@ -291,3 +291,7 @@ MonoBehaviour:
       Data3: 1488806821
       Data4: -1878431026
     Path: event:/SFX/Granades/BaseGranade/Bounce
+  raycastDistance: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1

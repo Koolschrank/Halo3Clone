@@ -123,6 +123,47 @@ public class Equipment
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
 
+    public void SetHasShild(bool hasShild)
+    {
+        this.hasShild = hasShild;
+    }
+
+    public void SetHeadShotOneShot(bool headShotOneShot)
+    {
+        this.headShotOneShot = headShotOneShot;
+    }
+
+    public void SetHasMiniMap(bool hasMiniMap)
+    {
+        this.hasMiniMap = hasMiniMap;
+    }
+
+    public void SetCanDualWieldEverything(bool canDualWieldEverything)
+    {
+        this.canDualWieldEverything = canDualWieldEverything;
+    }
+
+    public void SetWeapons(Weapon_Data weaponInHand, Weapon_Data weaponInLeftHand, Weapon_Data sideArm)
+    {
+        this.weaponInHand = weaponInHand;
+        this.weaponInLeftHand = weaponInLeftHand;
+        this.sideArm = sideArm;
+    }
+
+    public void SetMagazins(int magazinsOfWeaponInHand, int magazinsOfWeaponInLeftHand, int magazinsOfSideArm)
+    {
+        this.magazinsOfWeaponInHand = magazinsOfWeaponInHand;
+        this.magazinsOfWeaponInLeftHand = magazinsOfWeaponInLeftHand;
+        this.magazinsOfSideArm = magazinsOfSideArm;
+    }
+
+    public void SetMovementSpeedMultiplier(float movementSpeedMultiplier)
+    {
+        this.movementSpeedMultiplier = movementSpeedMultiplier;
+    }
+
+
+
     public Weapon_Data WeaponInHand => weaponInHand;
     public int MagazinsOfWeaponInHand => magazinsOfWeaponInHand;
 
@@ -140,6 +181,24 @@ public class Equipment
     public float MovementSpeedMultiplier => movementSpeedMultiplier;
 
     public bool CanDualWieldEverything => canDualWieldEverything;
+
+
+    public Equipment(Equipment equipmentToCopy)
+    {
+        this.hasShild = equipmentToCopy.hasShild;
+        this.headShotOneShot = equipmentToCopy.headShotOneShot;
+        this.hasMiniMap = equipmentToCopy.hasMiniMap;
+        this.canDualWieldEverything = equipmentToCopy.canDualWieldEverything;
+        this.movementSpeedMultiplier = equipmentToCopy.movementSpeedMultiplier;
+        this.weaponInHand = equipmentToCopy.weaponInHand;
+        this.magazinsOfWeaponInHand = equipmentToCopy.magazinsOfWeaponInHand;
+        this.weaponInLeftHand = equipmentToCopy.weaponInLeftHand;
+        this.magazinsOfWeaponInLeftHand = equipmentToCopy.magazinsOfWeaponInLeftHand;
+        this.sideArm = equipmentToCopy.sideArm;
+        this.magazinsOfSideArm = equipmentToCopy.magazinsOfSideArm;
+        this.granade = equipmentToCopy.granade;
+        this.granadeCount = equipmentToCopy.granadeCount;
+    }
 
 
 }

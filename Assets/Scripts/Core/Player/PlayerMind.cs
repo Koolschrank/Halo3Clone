@@ -333,7 +333,12 @@ public class PlayerMind : MonoBehaviour
         {
 
             if (playerArms.RightArm.PressReloadButtonIfNothingToPickUp())
+            {
+                playerArms.LeftArm.PressReloadButtonIfNothingToPickUp();
                 return;
+            }
+               
+            
 
             reloadButtonReleased = false;
             StartCoroutine(PickUpWeaponTimer());
@@ -345,6 +350,7 @@ public class PlayerMind : MonoBehaviour
             if (reloadButtonStartPressTime + holdButtonToPickUpTime > Time.time)
             {
                 playerArms.RightArm.PressReloadButton();
+                playerArms.LeftArm.PressReloadButton();
             }
 
             reloadButtonReleased = true;
