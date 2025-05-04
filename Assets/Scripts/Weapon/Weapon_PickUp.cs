@@ -8,11 +8,59 @@ public class Weapon_PickUp : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
     [SerializeField] Weapon_Data weapon_Data;
+    [SerializeField] GameObject destroyParticle;
+    [SerializeField] GameObject weaponDeleteParticle;
     [SerializeField] int ammoInMagazine = 0;
     [SerializeField] int ammoInReserve = 0;
 
+    [SerializeField] float deleteTime = 30f;
+    [SerializeField] float fastDeletTime = 7f;
+    bool inDeleteState = false;
+    float deleteTimer = 0f;
+
     List<int> teamsBlockedFromPickUpThis = new List<int>();
     bool pickedUp = false;
+
+
+    public void EnterDeleteTime()
+    {
+        if (inDeleteState) return;
+        inDeleteState = true;
+
+        if (deleteTimer == 0)
+            deleteTimer = deleteTime;
+
+    }
+
+    public void EnterFastDeleteTime()
+    {
+        inDeleteState = true;
+        deleteTimer = fastDeletTime;
+        destroyParticle.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (inDeleteState)
+        {
+            if (deleteTimer > fastDeletTime && deleteTimer - Time.deltaTime <= fastDeletTime)
+            {
+                EnterFastDeleteTime();
+            }
+
+            deleteTimer -= Time.deltaTime;
+            if (deleteTimer <= 0)
+            {
+                OnPickUp?.Invoke(this);
+
+                Instantiate(weaponDeleteParticle, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+
 
 
     public Weapon_Arms PickUp()
@@ -34,6 +82,12 @@ public class Weapon_PickUp : MonoBehaviour
     {
         ammoInMagazine = Mathf.Min(weapon_Data.MagazineSize, magazine);
         ammoInReserve = Mathf.Min(weapon_Data.ReserveSize, reserve);
+
+
+        if (ammoInReserve == 0 && ammoInMagazine == 0)
+        {
+            EnterFastDeleteTime();
+        }
     }
 
     public void AddImpulse(Vector3 direction, float force)

@@ -480,6 +480,8 @@ public class Arm : MonoBehaviour
         {
             pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
         }
+
+        pickUp.EnterDeleteTime();
         OnWeaponDroped?.Invoke(weaponInHand, pickUp);
         weaponInHand.DropWeapon();
         weaponInHand = null;

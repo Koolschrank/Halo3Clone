@@ -23,6 +23,8 @@ public class BodyMindConnection : MonoBehaviour
 
     PlayerMind mind;
 
+    public PlayerMind Mind => mind;
+
     public void ConnectMind(PlayerMind mind)
     {
         
@@ -54,6 +56,10 @@ public class BodyMindConnection : MonoBehaviour
     public Equipment GetStartEquipment()
     {
         var equipment = new Equipment( GameModeSelector.gameModeManager.GetEquipment());
+        if (MapLoader.instance == null)
+            return equipment;
+
+
         bool isSwat = MapLoader.instance.IsSwat();
         bool dualWieldPlus = MapLoader.instance.IsDualWieldPlus();
         bool noMiniMap = MapLoader.instance.HasNoMiniMap();
@@ -90,6 +96,8 @@ public class BodyMindConnection : MonoBehaviour
 
         return equipment;
     }
+
+    
 
 
     public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)

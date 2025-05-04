@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
     [SerializeField] ObjectiveIndicatorUI[] objectiveIndicatorUIs;
+    [SerializeField] TextMeshProUGUI crownText;
     [Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
@@ -107,6 +109,11 @@ public class PlayerMind : MonoBehaviour
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
+    }
+
+    public void CrownCollected()
+    {
+        crownText.gameObject.SetActive(true);
     }
 
     public GameObject PlayerBody { get { return playerBody; } }
@@ -251,6 +258,8 @@ public class PlayerMind : MonoBehaviour
         playerInput.actions.FindActionMap("Player").Disable();
         playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
+
+        crownText.gameObject.SetActive(false);
     }
 
     public void PlayerElimination(GameObject obj)

@@ -64,6 +64,7 @@ public class PlayerInventory : MonoBehaviour
 
             Weapon_PickUp pickUp = Instantiate(weapon.PickUpVersion, weaponDropPoint.position, weaponDropPoint.rotation);
             pickUp.SetAmmo(weapon.Magazine, TakeAllAmmo(weapon.Data));
+            pickUp.EnterDeleteTime();
             OnWeaponDrop?.Invoke(weapons[0]);
             weapons[0].DropWeapon();
             weapons.RemoveAt(0);
@@ -367,12 +368,7 @@ public class PlayerInventory : MonoBehaviour
             }
 
         }
-        if (ammoInPickUpReserve > 0 || ammoInPickUpMagazine > 0)
-        {
-            pickUp.OnPickUp?.Invoke(pickUp);
-            if (pickUp.WeaponType != WeaponType.oneHanded)
-                Destroy(pickUp.gameObject);
-        }
+        
         OnAmmoChanged?.Invoke(pickUp.WeaponData, GetAmmo(pickUp.WeaponData));
 
     }

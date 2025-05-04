@@ -85,7 +85,8 @@ public class CharacterHealth : Health
         shildEmptySoundInstance = RuntimeManager.CreateInstance(shildEmptySound);
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
 
-        damageMultiplier = MapLoader.instance.GetDamageMultiplier();
+        if (MapLoader.instance != null)
+            damageMultiplier = MapLoader.instance.GetDamageMultiplier();
     }
 
     // update

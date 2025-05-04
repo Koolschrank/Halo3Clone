@@ -94,6 +94,11 @@ public class CrownManager : GameModeManager
         ObjectiveIndicator.instance.GetObjective(0).SetTeamIndex(crownTeamIndex);
         ObjectiveIndicator.instance.GetObjective(0).SetText(GetPointsLeftForTeamToWin(crownTeamIndex).ToString());
 
+        var playerMind = player.GetComponent<BodyMindConnection>().Mind;
+        playerMind.CrownCollected();
+
+
+
         if (gameMode.SetEquipmentOnCrownPickup)
         {
             player.GetComponent<PlayerStartEquipment>().GetEquipment(gameMode.EquipmentOnCrownPickup);
