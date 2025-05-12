@@ -41,6 +41,10 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] int burstAmount;
     [SerializeField] float burstDelay;
 
+    [Header("CameraImpact")]
+    [SerializeField] bool hasKnockback;
+    [SerializeField] GunKnockback gunKnockback;
+
     [Header("dual Wielding")]
     [SerializeField] float damageMultiplier = 1f;
     [SerializeField] float fireRateMultiplier = 1f;
@@ -158,6 +162,10 @@ public class Weapon_Data : ScriptableObject
     public Sprite CrosshairsUI => crosshairs;
 
     public Vector2 CrosshairsSizeUI => crosshairsSize;
+
+    public bool HasKnockback => hasKnockback;
+
+    public GunKnockback GunKnockback => gunKnockback;
 }
 
 

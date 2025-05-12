@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicMelee
   m_EditorClassIdentifier: 
   damage: 90
-  force: 70
+  force: 90
   delay: 0.15
   meleeTime: 0.8
   meleeRadius: 0.9

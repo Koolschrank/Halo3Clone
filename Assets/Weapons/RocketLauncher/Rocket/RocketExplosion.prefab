@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 6
-  damage: 250
+  damage: 270
   damageOnShildMultiplier: 1
   damageFalloff:
     serializedVersion: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  force: 90
+  force: 100
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2

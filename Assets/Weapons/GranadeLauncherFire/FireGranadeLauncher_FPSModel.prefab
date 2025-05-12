@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8779458109269781644}
   - component: {fileID: 6899193775294056288}
   m_Layer: 0
-  m_Name: GranadeLauncher_FPSModel
+  m_Name: FireGranadeLauncher_FPSModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

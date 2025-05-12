@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BRShot
   m_EditorClassIdentifier: 
   damage: 10
-  force: 120
+  force: 240
   shildDamageMultiplier: 1
   headShotMultiplier: 2
   canHeadShotShild: 0

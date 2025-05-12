@@ -255,7 +255,7 @@ public class PlayerMind : MonoBehaviour
         OnPlayerDeath?.Invoke();
         OnPlayerDied?.Invoke(this);
 
-        playerInput.actions.FindActionMap("Player").Disable();
+        playerInput.actions.FindActionMap("Player").Enable();
         playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Disable();
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
 

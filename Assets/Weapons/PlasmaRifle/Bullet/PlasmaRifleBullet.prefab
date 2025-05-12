@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 6
-  force: 50
+  force: 100
   shildDamageMultiplier: 3
   headShotMultiplier: 1
   hitLayer:

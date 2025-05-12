@@ -334,6 +334,10 @@ public class Weapon_Arms
 
     public Vector2 CrosshairSizeUI => weaponData.CrosshairsSizeUI;
 
+    public bool HasKnockback => weaponData.HasKnockback;
+
+    public GunKnockback GunKnockback => weaponData.GunKnockback;
+
     /*public void TransferAmmo(Weapon_PickUp weaponAmmoToTransfer)
     {
         var missingAmmo = weaponData.ReserveSize - Reserve;

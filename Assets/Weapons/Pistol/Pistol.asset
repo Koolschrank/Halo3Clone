@@ -36,6 +36,52 @@ MonoBehaviour:
   canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
+  hasKnockback: 1
+  gunKnockback:
+    power: 1
+    duration: 0.3
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.12680054
+        value: 0.99621964
+        inSlope: -0.37701112
+        outSlope: -0.37701112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.30731252
+      - serializedVersion: 3
+        time: 0.5787892
+        value: 0.5417794
+        inSlope: -1.0440427
+        outSlope: -1.0440427
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.26441047
+      - serializedVersion: 3
+        time: 0.97741395
+        value: 0.010357738
+        inSlope: -1.0514512
+        outSlope: -1.0514512
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26154286
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   damageMultiplier: 0.9
   fireRateMultiplier: 1.25
   inaccuracyMultiplier: 2.5

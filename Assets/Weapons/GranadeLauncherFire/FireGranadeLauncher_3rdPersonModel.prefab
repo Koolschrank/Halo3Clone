@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8787855897626506780}
   - component: {fileID: 7143911765584457256}
   m_Layer: 0
-  m_Name: GranadeLauncher_3rdPersonModel
+  m_Name: FireGranadeLauncher_3rdPersonModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

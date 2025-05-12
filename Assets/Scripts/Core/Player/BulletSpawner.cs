@@ -221,6 +221,7 @@ public class BulletSpawner : MonoBehaviour
                 // if hit health
                 if (hit.collider.TryGetComponent<Health>(out Health health))
                 {
+                    Debug.Log(hit.distance);
                     health.TakeDamage(damagePackage);
                     
                     bodyHit = true;

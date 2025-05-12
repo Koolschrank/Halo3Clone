@@ -35,6 +35,7 @@ public class Arm : MonoBehaviour
     [SerializeField] Transform dropPosition;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] PlayerMeleeAttack basicMeleeAttack;
+    [SerializeField] PlayerAim playerAim;
 
      bool isTriggerPressed;
      bool wasTriggerPressed;
@@ -171,6 +172,7 @@ public class Arm : MonoBehaviour
                             {
                                 armState = ArmState.Shooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
+                                ApplyWeaponKnockback();
                             }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
@@ -189,6 +191,7 @@ public class Arm : MonoBehaviour
                             {
                                 armState = ArmState.InBurstShooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
+                                ApplyWeaponKnockback();
                             }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
@@ -206,6 +209,7 @@ public class Arm : MonoBehaviour
                             {
                                 armState = ArmState.Shooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
+                                ApplyWeaponKnockback();
                             }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
@@ -301,6 +305,14 @@ public class Arm : MonoBehaviour
     {
         zoomButtonPressed = true;
 
+    }
+
+    public void ApplyWeaponKnockback()
+    {
+        if (weaponInHand != null && weaponInHand.HasKnockback)
+        {
+            playerAim.AddGunKnockback(weaponInHand.GunKnockback);
+        }
     }
 
     public void ReleaseZoomButton()

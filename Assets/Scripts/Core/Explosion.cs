@@ -103,7 +103,12 @@ public class Explosion : MonoBehaviour
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
 
 
-                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, hitLayer))
+                float margin = 1f;
+                if (range < margin)
+                {
+                    margin = range /2;
+                }
+                if (Physics.Raycast(transform.position +(margin * direction.normalized) , direction.normalized, out RaycastHit hit, range, hitLayer))
                 {
                     if (hit.collider != collider)
                     {

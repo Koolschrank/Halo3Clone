@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitMarkerUI : MonoBehaviour
 {
     [SerializeField] GameObject hitMarker;
     [SerializeField] GameObject killMarker;
+    [SerializeField] RawImage awsomeSkull;
     [SerializeField] float hitMarkerTime = 0.1f;
     [SerializeField] float killMarkerTime = 0.1f;
+    [SerializeField] float awsomeSkullTime = 0.5f;
+    float awsomeSkullTimer = 0;
+    [SerializeField] AnimationCurve awsomeSkullFadeCurve;
+
 
     public void ShowHitMarker(GameObject target)
     {
@@ -16,7 +22,27 @@ public class HitMarkerUI : MonoBehaviour
     public void ShowKillMarker(GameObject target)
     {
         killMarker.SetActive(true);
+        awsomeSkull.gameObject.SetActive(true);
         Invoke("HideKillMarker", killMarkerTime);
+        awsomeSkullTimer = awsomeSkullTime;
+    }
+
+    private void Update()
+    {
+        if (awsomeSkullTimer > 0)
+        {
+            awsomeSkullTimer -= Time.deltaTime;
+            float t = Mathf.Clamp01(awsomeSkullTimer / awsomeSkullTime);
+            float alpha = awsomeSkullFadeCurve.Evaluate(1-t);
+            Color color = awsomeSkull.color;
+            color.a = alpha;
+            awsomeSkull.color = color;
+
+            if (awsomeSkullTimer <= 0)
+            {
+                awsomeSkull.gameObject.SetActive(false);
+            }
+        }
     }
 
     void HideHitMarker()
@@ -27,6 +53,7 @@ public class HitMarkerUI : MonoBehaviour
     void HideKillMarker()
     {
         killMarker.SetActive(false);
+
     }
 
 

@@ -8,6 +8,10 @@ public class Arm_FPSView : MonoBehaviour
 
     public void SetUp(Arm newArm)
     {
+        if (weaponVisual != null)
+            RemoveWeapon(null);
+
+
         if (playerArm != null)
         {
             playerArm.OnWeaponEquipStarted -= EquipWeapon;

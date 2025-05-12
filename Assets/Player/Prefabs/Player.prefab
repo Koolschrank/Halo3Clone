@@ -52,7 +52,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 1.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3086695294023934871
 MonoBehaviour:
@@ -10952,6 +10952,7 @@ MonoBehaviour:
   dropPosition: {fileID: 2372597562941759599}
   meleeAttacker: {fileID: 8008512304446792098}
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  playerAim: {fileID: 3068919470916229809}
   weaponDropForce: 10
   reloadInputBuffer: 0.29
   switchInputBuffer: 0.29
@@ -10980,6 +10981,7 @@ MonoBehaviour:
   dropPosition: {fileID: 8167806766066142118}
   meleeAttacker: {fileID: 8008512304446792098}
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  playerAim: {fileID: 3068919470916229809}
   weaponDropForce: 10
   reloadInputBuffer: 0.29
   switchInputBuffer: 0.29

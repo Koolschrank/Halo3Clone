@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
-  m_Name: GranadeLauncher
+  m_Name: FireGranadeLauncher
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
   weaponBullet: {fileID: 11400000, guid: 493bff523ad4231438344edc14f40c1e, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 54ea18052248b46448a6c2a99c1d94cd, type: 3}
   weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 43472cc0bb0af404aa547ab04554588f, type: 3}
-  weaponName: Granade Launcher
+  weaponName: Fire Granade Launcher
   shootType: 0
   fireRate: 0.9
   bulletsPerShot: 1
@@ -36,6 +36,43 @@ MonoBehaviour:
   canNotBeInInventory: 0
   burstAmount: 3
   burstDelay: 0.3
+  hasKnockback: 1
+  gunKnockback:
+    power: 3
+    duration: 0.5
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 8.444545
+        outSlope: 8.444545
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11797333
+        value: 0.9962311
+        inSlope: -0.10924992
+        outSlope: -0.10924992
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.3700746
+      - serializedVersion: 3
+        time: 0.98666674
+        value: 0.0065975916
+        inSlope: -1.1392207
+        outSlope: -1.1392207
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   damageMultiplier: 1
   fireRateMultiplier: 1.2
   inaccuracyMultiplier: 1

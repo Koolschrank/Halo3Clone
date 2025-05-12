@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1713fd735b7714384ada99685c76d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copyTransitionSpeed: 0.75
+  copyTransitionSpeed: 1
   throwSound:
     Guid:
       Data1: -1854044668
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimerOnFirstCollision: 1
   collisionCooldown: 0.05
-  explosionTime: 2
+  explosionTime: 1.75
   explosionEffect: {fileID: 8386559723769285559, guid: cec942fb091dd3044b7b1320ee8b287a, type: 3}
   mainGranade: {fileID: 3890480776725438845}
   bounceSound:

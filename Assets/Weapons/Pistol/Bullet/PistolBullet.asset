@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PistolBullet
   m_EditorClassIdentifier: 
   damage: 20
-  force: 200
+  force: 270
   shildDamageMultiplier: 1
   headShotMultiplier: 1.5
   canHeadShotShild: 0
