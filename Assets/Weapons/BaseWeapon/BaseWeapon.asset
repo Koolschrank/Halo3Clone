@@ -118,4 +118,4 @@ MonoBehaviour:
   bulletSize: {x: 1, y: 1}
   bulletsPerRow: 21
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
-  crosshairsSize: {x: 0.6, y: 0.6}
+  crosshairsSize: {x: 0.45, y: 0.45}

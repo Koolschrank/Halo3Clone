@@ -45,6 +45,8 @@ public class PlayerSettings
 {
     public string deviceName;
 
+
+    public string playerName = "Player";
     public int playerIndex = 0;
     public float sensitivity = 1;
     
@@ -64,5 +66,26 @@ public class PlayerSettings
     public void SetSensitivity(float value)
     {
         sensitivity = value;
+    }
+
+    public void SetRandomName()
+    {
+
+        Debug.Log("Old name: " + playerName);
+
+        playerName = NameList.instance.GetRandomNameBasic();
+        Debug.Log("New name: " + playerName);
+    }
+
+    public void SetRandomNameAdvanced()
+    {
+        Debug.Log("Old name: " + playerName);
+        playerName = NameList.instance.GetRandomNameAdvanced();
+        Debug.Log("New name: " + playerName);
+    }
+
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
     }
 }

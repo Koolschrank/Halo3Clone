@@ -543,6 +543,22 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
+    public void ChangeName(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerSettings.SetRandomName();
+        }
+    }
+
+    public void ChangeNameAdvanced(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerSettings.SetRandomNameAdvanced();
+        }
+    }
+
     IEnumerator PickUpWeaponTimer_2()
     {
         yield return new WaitForSeconds(holdButtonToPickUpTime);

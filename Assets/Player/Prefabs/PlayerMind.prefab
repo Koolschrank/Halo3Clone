@@ -787,11 +787,35 @@ MonoBehaviour:
     m_ActionId: c5f448b6-a939-4a02-8e3a-2a5acfdfd97e
     m_ActionName: 'QuickMenuInput/Right[/XInputControllerWindows/dpad/right]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: ChangeName
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 88275807-fd5a-4d3f-b14b-8cfa2055e904
     m_ActionName: 'QuickMenuInput/Down[/XInputControllerWindows/dpad/down]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6762101414911299386}
+        m_TargetAssemblyTypeName: PlayerMind, Assembly-CSharp
+        m_MethodName: ChangeNameAdvanced
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3fb0100b-1156-4647-9e92-ddfa0c5ffc9d
     m_ActionName: 'QuickMenuInput/Up[/XInputControllerWindows/dpad/up]'
   m_NeverAutoSwitchControlSchemes: 0

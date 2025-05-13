@@ -319,6 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 109673446}
   - component: {fileID: 109673445}
+  - component: {fileID: 109673447}
   m_Layer: 0
   m_Name: ItemList
   m_TagString: Untagged
@@ -368,6 +369,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109673447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109673444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001a7e3343c7d1b4292ea35915e9ec30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names_basic:
+  - Elias
+  - Emily
+  - Richard
+  - Magnus
+  - Jeff
+  - Lars
+  - Jona
+  - Chalotte
+  - Manoah
+  - Silas
+  - Simon
+  names_advanced:
+  - John
+  - Elden John
+  - Fortnite 2
+  - Magum
+  - Goon
+  - Email
+  - Gmail
+  - Halo 3
+  - Magus
+  - 'Halo 2 '
+  - Gunges
+  - Chungus
+  - Fungus
 --- !u!1 &152134187
 GameObject:
   m_ObjectHideFlags: 0
