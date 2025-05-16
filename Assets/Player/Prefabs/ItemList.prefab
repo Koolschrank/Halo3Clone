@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &61178410152433682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839180046596232811}
+  - component: {fileID: 3003357504085447443}
+  - component: {fileID: 7885288791504513576}
+  m_Layer: 0
+  m_Name: ItemList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839180046596232811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61178410152433682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.6089463, y: -0.14851677, z: -0.6848297}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3003357504085447443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61178410152433682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5685e69fa523c4280acfa1c258db3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+  - {fileID: 11400000, guid: 650909fc6bcc65a45ad4ae3ee3128392, type: 2}
+  - {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+  - {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
+  - {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
+  - {fileID: 11400000, guid: efcebe5d52d7af841a969659fdd9092a, type: 2}
+  - {fileID: 11400000, guid: cb17908b6a45b7a478e801369c9a68d7, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
+  - {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
+  - {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
+  - {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
+  - {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
+  - {fileID: 11400000, guid: 1636b14fbf5b1754c8bd0759dfe88df5, type: 2}
+--- !u!114 &7885288791504513576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61178410152433682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001a7e3343c7d1b4292ea35915e9ec30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names_basic:
+  - Elias
+  - Emily
+  - Richard
+  - Magnus
+  - Jeff
+  - Lars
+  - Jona
+  - Chalotte
+  - Manoah
+  - Silas
+  - Simon
+  names_advanced:
+  - John
+  - Elden John
+  - Fortnite 2
+  - Magum
+  - Goon
+  - Email
+  - Gmail
+  - Halo 3
+  - Magus
+  - 'Halo 2 '
+  - Gunges
+  - Chungus
+  - Fungus
+  - Tapferer Bus
+  - Coolschrank
+  - Obama
+  - 'George Bush '
+  - Ronald Reagan
+  - Bill Clinton
+  - John F. Kennedy

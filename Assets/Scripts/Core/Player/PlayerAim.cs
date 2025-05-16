@@ -122,6 +122,10 @@ public class PlayerAim : MonoBehaviour
 
     }
 
+    public Action<String> OnHoverOnEnemy;
+    public Action<String> OnHoverOnAlly;
+    public Action OnHoverOnNothing;
+
     public bool CheckIfHoverOverEnemy()
     {
         Ray ray = new Ray(playerHead.transform.position, playerHead.transform.forward);
@@ -129,12 +133,26 @@ public class PlayerAim : MonoBehaviour
         if (Physics.Raycast(ray, out hit, aimSupportDistance, aimSupportLayerMask))
         {
             // check if hit has health component
-            if (hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam t) && t.TeamIndex != playerTeam.TeamIndex)
+            bool hasHitPlayer = hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam t);
+
+            if (hasHitPlayer && t.TeamIndex != playerTeam.TeamIndex)
+            {
+                OnHoverOnEnemy?.Invoke(hit.collider.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
                 return true;
+            }
+            else if (hasHitPlayer && t.TeamIndex == playerTeam.TeamIndex)
+            {
+                OnHoverOnAlly?.Invoke(hit.collider.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
+                return false;
+            }
+
+            OnHoverOnNothing?.Invoke();
 
 
             return false;
         }
+        OnHoverOnNothing?.Invoke();
+
         return false;
     }
 
@@ -150,7 +168,6 @@ public class PlayerAim : MonoBehaviour
         if (sensitivityMultiplier < 0.49999)
         {
             sensitivityChange /= 2;
-
         }
 
         AddToSensetivityMultiplier(sensitivityChange);

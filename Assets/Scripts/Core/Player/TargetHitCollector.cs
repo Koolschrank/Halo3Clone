@@ -20,5 +20,8 @@ public class TargetHitCollector : MonoBehaviour
     public void CharacterKill(DamagePackage damage, GameObject target)
     {
         OnCharacterKill?.Invoke(target);
+
+
+
     }
 }

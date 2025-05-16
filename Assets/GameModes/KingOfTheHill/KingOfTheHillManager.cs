@@ -72,6 +72,7 @@ public class KingOfTheHillManager : GameModeManager
     void StartRandomHill()
     {
         StartHill(GetRandomHillIndex());
+        LogSystem.logSystem.PrintLog("Hill moved");
     }
 
     int GetRandomHillIndex()

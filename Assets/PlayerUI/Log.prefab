@@ -65,11 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123<size=-1.5> XP</size>
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6d070d3aaf6160f42b5e8124261b645e, type: 2}
-  m_sharedMaterial: {fileID: -3016009729354918782, guid: 6d070d3aaf6160f42b5e8124261b645e,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 02479d586e688df45842f13ac3faf2db, type: 2}
+  m_sharedMaterial: {fileID: -1389305967821746214, guid: 02479d586e688df45842f13ac3faf2db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -88,20 +87,20 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -202,11 +201,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123<size=-1.5> XP</size>
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6d070d3aaf6160f42b5e8124261b645e, type: 2}
-  m_sharedMaterial: {fileID: -3016009729354918782, guid: 6d070d3aaf6160f42b5e8124261b645e,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 02479d586e688df45842f13ac3faf2db, type: 2}
+  m_sharedMaterial: {fileID: -1389305967821746214, guid: 02479d586e688df45842f13ac3faf2db, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -225,20 +223,20 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -326,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   permanent: 0
-  lifetime: 2
+  lifetime: 3
   unscaledTime: 0
   enable3DGame: 0
   faceCameraView: 1
@@ -344,7 +342,7 @@ MonoBehaviour:
   fovCamera: {fileID: 0}
   cameraOverride: {fileID: 0}
   enableNumber: 1
-  number: 123
+  number: 0
   numberSettings:
     bold: 0
     italic: 0
@@ -377,7 +375,7 @@ MonoBehaviour:
     suffixDecimals: 1
     suffixDecimalChar: .
     suffixHideZeros: 0
-  enableLeftText: 0
+  enableLeftText: 1
   leftText: 
   leftTextSettings:
     bold: 0
@@ -394,7 +392,7 @@ MonoBehaviour:
     characterSpacing: 0
     size: 0
   enableRightText: 1
-  rightText: ' XP'
+  rightText: 
   rightTextSettings:
     bold: 0
     italic: 0
@@ -480,8 +478,8 @@ MonoBehaviour:
   offsetFadeIn: {x: 0.5, y: 0}
   enableScaleFadeIn: 0
   scaleFadeIn: {x: 2, y: 2}
-  enableCrossScaleFadeIn: 1
-  crossScaleFadeIn: {x: 4, y: 4}
+  enableCrossScaleFadeIn: 0
+  crossScaleFadeIn: {x: 1, y: 1.5}
   enableShakeFadeIn: 0
   shakeOffsetFadeIn: {x: 0, y: 1.5}
   shakeFrequencyFadeIn: 4
@@ -498,10 +496,10 @@ MonoBehaviour:
   enableLerp: 1
   lerpSettings:
     speed: 5
-    minX: -0.4
-    maxX: 0.4
-    minY: 0.7
-    maxY: 1
+    minX: 0
+    maxX: 0
+    minY: 0
+    maxY: 0
     randomFlip: 0
   enableVelocity: 0
   velocitySettings:
@@ -572,12 +570,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  enableScaleByNumber: 1
+  enableScaleByNumber: 0
   scaleByNumberSettings:
     fromNumber: 0
     toNumber: 1000
     fromScale: 1
-    toScale: 1.2
+    toScale: 2
   enableScaleOverTime: 0
   scaleOverTime:
     serializedVersion: 2
@@ -608,11 +606,11 @@ MonoBehaviour:
   maxOrthographicSize: 1.5
   orthographicCamera: {fileID: 0}
   spamGroup: Experience
-  enableCombination: 1
+  enableCombination: 0
   combinationSettings:
     method: 0
-    maxDistance: 3
-    spawnDelay: 0.1
+    maxDistance: 10
+    spawnDelay: 0.2
     absorbDuration: 0.4
     scaleCurve:
       serializedVersion: 2
@@ -627,17 +625,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.7
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -652,15 +641,6 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.5
         value: 1
         inSlope: 0
         outSlope: 0
@@ -744,10 +724,10 @@ MonoBehaviour:
     radius: 0.5
     pushFactor: 1
     desiredDirection: {x: 0, y: 0, z: 0}
-  enablePush: 0
+  enablePush: 1
   pushSettings:
-    radius: 3
-    pushOffset: 1
+    radius: 4
+    pushOffset: 0.8
   updateDelay: 0.0125
   enablePooling: 0
   poolSize: 50

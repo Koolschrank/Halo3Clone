@@ -46,6 +46,9 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] MinimapUI minimapUI;
     [SerializeField] ObjectiveIndicatorUI[] objectiveIndicatorUIs;
     [SerializeField] TextMeshProUGUI crownText;
+    [SerializeField] GameLogUI gameLogUI;
+    [SerializeField] TextMeshProUGUI playerName;
+    [SerializeField] PlayerNamePopUp playerNamePopUp;
     [Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
@@ -64,7 +67,7 @@ public class PlayerMind : MonoBehaviour
     BulletSpawner bulletSpawner;
     PlayerPickUpScan playerPickUpScan;
     PlayerInventory playerInventory;
-    PlayerSettings playerSettings;
+    public PlayerSettings playerSettings { get; private set; }
 
 
 
@@ -96,12 +99,17 @@ public class PlayerMind : MonoBehaviour
         string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
         Debug.Log(deviceName + " joined");
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
+        playerName.text = playerSettings.playerName;
 
 
         PlayerManager.instance.AddPlayer(this);
 
         playerInput.actions.FindActionMap("QuickMenu").Enable();
-        
+
+
+        LogSystem.logSystem.OnLogPrinted += gameLogUI.Print;
+
+
     }
 
     public int PlayerIndex { get { return playerSettings.playerIndex; } }
@@ -170,6 +178,8 @@ public class PlayerMind : MonoBehaviour
         playerAim = aim;
 
         aim.OnSensitivityMultiplierChanged += sensitivitySlider.UpdateValues;
+
+        playerNamePopUp.SetUp(aim);
     }
 
     // set arms
@@ -274,7 +284,11 @@ public class PlayerMind : MonoBehaviour
             {
                 OnPlayerElimination?.Invoke(obj, this);
 
+
+
             }
+
+            LogSystem.logSystem.PlayerKilled(playerSettings.playerName, obj.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
         }
         
 
@@ -548,6 +562,7 @@ public class PlayerMind : MonoBehaviour
         if (context.performed)
         {
             playerSettings.SetRandomName();
+            playerName.text = playerSettings.playerName;
         }
     }
 
@@ -556,6 +571,7 @@ public class PlayerMind : MonoBehaviour
         if (context.performed)
         {
             playerSettings.SetRandomNameAdvanced();
+            playerName.text = playerSettings.playerName;
         }
     }
 

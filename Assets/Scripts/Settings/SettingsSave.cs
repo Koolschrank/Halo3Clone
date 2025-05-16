@@ -54,6 +54,7 @@ public class PlayerSettings
     public PlayerSettings()
     {
         sensitivity = 1;
+        SetRandomNameAdvanced();
     }
 
     public PlayerSettings(string deviceName, int playerIndex)
@@ -61,6 +62,8 @@ public class PlayerSettings
         this.deviceName = deviceName;
         sensitivity = 1;
         this.playerIndex = playerIndex;
+
+        SetRandomNameAdvanced();
     }
 
     public void SetSensitivity(float value)

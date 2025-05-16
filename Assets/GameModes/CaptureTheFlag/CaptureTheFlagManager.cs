@@ -73,6 +73,7 @@ public class CaptureTheFlagManager : GameModeManager
             ObjectiveIndicator.instance.GetObjective(0).SetText(((int)flag1_dropedTimer).ToString());
             if (flag1_dropedTimer <= 0)
             {
+                LogSystem.logSystem.PrintLog("Blue Flag Reset");
                 SpawnFlagPrefab_Team1();
             }
         }
@@ -88,6 +89,8 @@ public class CaptureTheFlagManager : GameModeManager
             if (Vector3.Distance(team1_Flag.transform.position, team2_Base.position) < scoreRange)
             {
                 GainPoints(1, 1);
+
+                LogSystem.logSystem.PrintLog("Red Team Scored");
                 if (team1_Flag.TryGetComponent<PlayerArms>(out PlayerArms arms))
                 {
                     arms.DeleteWeapon(team1_FlagData);
@@ -119,6 +122,7 @@ public class CaptureTheFlagManager : GameModeManager
             if (flag2_dropedTimer <= 0)
             {
                 SpawnFlagPrefab_Team2();
+                LogSystem.logSystem.PrintLog("Red Flag Reset");
             }
         }
         else
@@ -132,6 +136,7 @@ public class CaptureTheFlagManager : GameModeManager
             if (Vector3.Distance(team2_Flag.transform.position, team1_Base.position) < scoreRange)
             {
                 GainPoints(0, 1);
+                LogSystem.logSystem.PrintLog("Blue Team Scored");
                 if (team2_Flag.TryGetComponent<PlayerArms>(out PlayerArms arms))
                 {
                     arms.DeleteWeapon(team2_FlagData);
