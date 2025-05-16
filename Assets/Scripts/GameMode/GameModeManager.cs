@@ -30,7 +30,12 @@ public class GameModeManager : MonoBehaviour
 
     public virtual Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
     {
-        int teamIndex = playerMind.TeamIndex;
+        return GetFarthestSpawnPointFromEnemeies(playerMind.TeamIndex);
+        
+    }
+
+    public virtual Transform GetFarthestSpawnPointFromEnemeies(int teamIndex)
+    {
         List<Transform> enemies = new List<Transform>();
         foreach (var team in teams)
         {
@@ -49,6 +54,8 @@ public class GameModeManager : MonoBehaviour
 
         return spawnSystem.GetFarthestSpawnPointFromEnemeies(enemies);
     }
+
+
 
     public virtual void ResetGame()
     {

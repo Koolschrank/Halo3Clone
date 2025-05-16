@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded => cc.isGrounded || Time.time - lastGroundTouch < cyoteTime;
     float lastGroundTouch;
     [SerializeField] float crouchSpeed = 0.5f;
+    [SerializeField] bool ignoreAimDirection = false;
 
 
     float maxMoveSpeedMultiplier = 1f;
@@ -114,10 +115,18 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
         Vector3 camForward = head.transform.forward;
+        Vector3 camRight = head.transform.right;
+        if (ignoreAimDirection)
+        {
+            camForward = Vector3.forward;
+            camRight = Vector3.right;
+        }
+       
+
         camForward.y = 0;
         camForward.Normalize();
         
-        Vector3 move = camForward * moveInput.z + head.transform.right * moveInput.x;
+        Vector3 move = camForward * moveInput.z + camRight * moveInput.x;
 
 
         if (move.magnitude == 0)
@@ -202,6 +211,8 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = input;
     }
+
+
 
 
     public void ToggleCrouch()

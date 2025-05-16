@@ -186,6 +186,12 @@ public class PlayerManager : MonoBehaviour
         connector.SetPlayerColor(playerColors[mind.TeamIndex]);
     }
 
+    public void UpdateTeamOfEnemyAI(BodyMindConnection body, int team)
+    {
+        body.SetPlayTeamIndex(team);
+        body.SetPlayerColor(playerColors[team]);
+    }
+
     public void RespawnPlayer(PlayerMind player)
     {
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);

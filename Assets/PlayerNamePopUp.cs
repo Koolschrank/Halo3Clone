@@ -34,7 +34,6 @@ public class PlayerNamePopUp : MonoBehaviour
 
     public void HoverOff()
     {
-        Debug.Log("Hover on non: ");
         playerNameText.text = "";
     }
 

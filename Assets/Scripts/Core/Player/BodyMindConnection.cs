@@ -114,6 +114,11 @@ public class BodyMindConnection : MonoBehaviour
         playerTeam.SetTeamIndex(mind.TeamIndex);
     }
 
+    public void SetPlayTeamIndex(int teamIndex)
+    {
+        playerTeam.SetTeamIndex(teamIndex);
+    }
+
     public void SetMaterial(Material material)
     {
         foreach (var mesh in meshes)

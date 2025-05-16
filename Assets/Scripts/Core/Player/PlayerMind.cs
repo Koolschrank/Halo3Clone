@@ -288,7 +288,14 @@ public class PlayerMind : MonoBehaviour
 
             }
 
-            LogSystem.logSystem.PlayerKilled(playerSettings.playerName, obj.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
+
+            var mind = obj.GetComponent<BodyMindConnection>().Mind;
+            if (mind != null)
+            {
+                LogSystem.logSystem.PlayerKilled(playerSettings.playerName,mind.playerSettings.playerName);
+            }
+            
+            
         }
         
 

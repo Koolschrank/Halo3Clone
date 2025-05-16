@@ -42,6 +42,7 @@ public class PlayerAim : MonoBehaviour
     List<GunKnockbackInstance> gunKnockbackInstances = new List<GunKnockbackInstance>();
 
 
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -125,9 +126,11 @@ public class PlayerAim : MonoBehaviour
     public Action<String> OnHoverOnEnemy;
     public Action<String> OnHoverOnAlly;
     public Action OnHoverOnNothing;
+    public bool OnTarget;
 
     public bool CheckIfHoverOverEnemy()
     {
+        OnTarget = false;
         Ray ray = new Ray(playerHead.transform.position, playerHead.transform.forward);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, aimSupportDistance, aimSupportLayerMask))
@@ -137,12 +140,24 @@ public class PlayerAim : MonoBehaviour
 
             if (hasHitPlayer && t.TeamIndex != playerTeam.TeamIndex)
             {
-                OnHoverOnEnemy?.Invoke(hit.collider.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
+                var mind = hit.collider.GetComponent<BodyMindConnection>().Mind;
+                if (mind != null)
+                {
+                    
+                    OnHoverOnEnemy?.Invoke(mind.playerSettings.playerName);
+                }
+                OnTarget = true;
                 return true;
             }
             else if (hasHitPlayer && t.TeamIndex == playerTeam.TeamIndex)
             {
-                OnHoverOnAlly?.Invoke(hit.collider.GetComponent<BodyMindConnection>().Mind.playerSettings.playerName);
+
+                var mind = hit.collider.GetComponent<BodyMindConnection>().Mind;
+                if (mind != null)
+                {
+                    OnHoverOnAlly?.Invoke(mind.playerSettings.playerName);
+                }
+                
                 return false;
             }
 
