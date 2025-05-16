@@ -13,17 +13,28 @@ public class PlayerStartEquipment : MonoBehaviour
     [SerializeField] PlayerInventory playerInventory;
     [SerializeField] CharacterHealth health;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] bool isNonPlayer = false;
 
 
 
     public void GetEquipment(Equipment equipment)
     {
+        var weaponInHand = equipment.WeaponInHand;
 
-        if (equipment.WeaponInHand != null)
+        if (isNonPlayer)
+        {
+            if (weaponInHand.HasEnemyAiWeaponData)
+            {
+                weaponInHand = weaponInHand.EnemyAiWeaponData;
+            }
+        }
+
+
+        if (weaponInHand != null)
         {
             playerArms.RightArm.PickUpWeapon(
             SpawnWeapon(
-                equipment.WeaponInHand,
+                weaponInHand,
                 equipment.MagazinsOfWeaponInHand));
         }
 

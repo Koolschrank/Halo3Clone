@@ -146,7 +146,8 @@ public class PlayerAim : MonoBehaviour
                     
                     OnHoverOnEnemy?.Invoke(mind.playerSettings.playerName);
                 }
-                OnTarget = true;
+                if (playerArms.RightArm.GetWeaponInHand() != null)
+                    OnTarget = (hit.distance <= playerArms.RightArm.GetWeaponInHand().Data.AutoAim.RaycastLenght);
                 return true;
             }
             else if (hasHitPlayer && t.TeamIndex == playerTeam.TeamIndex)

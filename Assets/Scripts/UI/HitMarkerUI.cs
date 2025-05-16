@@ -15,12 +15,21 @@ public class HitMarkerUI : MonoBehaviour
 
     public void ShowHitMarker(GameObject target)
     {
+        if (target.tag == "AIEnemy")
+            return;
+
+
         hitMarker.SetActive(true);
         Invoke("HideHitMarker", hitMarkerTime);
     }
 
     public void ShowKillMarker(GameObject target)
     {
+        if (target.tag == "AIEnemy")
+        {
+            return;
+        }
+
         killMarker.SetActive(true);
         awsomeSkull.gameObject.SetActive(true);
         Invoke("HideKillMarker", killMarkerTime);

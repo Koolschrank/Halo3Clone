@@ -35,13 +35,24 @@ public class WeaponSoundManager : MonoBehaviour
 
     public void HitTarget(GameObject target)
     {
-        
+        if (target.tag == "AIEnemy")
+        {
+
+            return;
+        }
+            
+
         AudioManager.instance.PlayOneShot(hitSound, transform.position);
     }
 
     public void KillTarget(GameObject target)
     {
-       
+        if (target.tag == "AIEnemy")
+        {
+            AudioManager.instance.PlayOneShot(hitSound, transform.position);
+            return;
+        }
+
         AudioManager.instance.PlayOneShot(killSound, transform.position);
     }
 

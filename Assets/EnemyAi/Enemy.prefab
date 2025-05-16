@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 5650545179290865720}
   - component: {fileID: 8505334828251919786}
   - component: {fileID: 1541098619169745859}
+  - component: {fileID: 257349262746929979}
+  - component: {fileID: 3391056616264683622}
+  - component: {fileID: 7996945524363997151}
   m_Layer: 7
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -60,7 +63,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069980226933503108}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf878e41e777dd9479ce0f2219d3ae46, type: 3}
   m_Name: 
@@ -71,7 +74,7 @@ MonoBehaviour:
     hasMiniMap: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+    weaponInHand: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
     magazinsOfWeaponInHand: 5
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
@@ -92,10 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43abc5b3bd1e4b746bc46cf2e8331a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 0.6
+  stateMachine: {fileID: 257349262746929979}
+  lookForPlayer: {fileID: 3391056616264683622}
+  alwaysKnowsWherePlayerIs: 1
   playerMovement: {fileID: 753626866741659943}
   target: {fileID: 8029323305840259631}
   agent: {fileID: 1618324563476685136}
+  playerArms: {fileID: 4619331289028681485}
+  playerAim: {fileID: 5066934035753808966}
 --- !u!114 &8029323305840259631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98a05486547848438fef6e9bc50a857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysKnowsWherePlayerIs: 1
   framesToCheckForNewTarget: 20
 --- !u!114 &5650545179290865720
 MonoBehaviour:
@@ -121,10 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94215e6838df274289e44aa0202ce31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alwaysKnowsWherePlayerIs: 1
+  stateMachine: {fileID: 257349262746929979}
   aim: {fileID: 5066934035753808966}
   head: {fileID: 2222735024375511362}
   target: {fileID: 8029323305840259631}
-  aimSpeedMultiplier: 0.5
+  aimSpeedMultiplier: 2
 --- !u!114 &8505334828251919786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +149,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAim: {fileID: 5066934035753808966}
   playerArms: {fileID: 4619331289028681485}
-  focusGainWhenOnTarget: 1
-  focusLossWhenNotOnTarget: 0.4
 --- !u!114 &1541098619169745859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +163,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterHealth: {fileID: 7357773068672706047}
   playerAim: {fileID: 5066934035753808966}
+--- !u!114 &257349262746929979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3df6c881dd9dcb43bba26829ec2ebea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth: {fileID: 7357773068672706047}
+  lookForPlayer: {fileID: 3391056616264683622}
+  currentState: 0
+--- !u!114 &3391056616264683622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a10281dee52a2f44a16ece57738aca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScript: {fileID: 8029323305840259631}
+  range: 30
+  fieldOfViewAngle: 170
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1
+  frameInterval: 10
+--- !u!114 &7996945524363997151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91e6201d1842734cad105dd5f257ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 257349262746929979}
+  radius: 10
+  allyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &8857529426304999730
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +631,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 8050057614039648062, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: isNonPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8099804787671539590, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
@@ -588,6 +654,10 @@ PrefabInstance:
     - target: {fileID: 8289933859456780900, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8289933859456780900, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_TagString
+      value: AIEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8335073051360787677, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer

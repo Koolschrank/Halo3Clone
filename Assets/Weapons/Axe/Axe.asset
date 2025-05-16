@@ -36,6 +36,16 @@ MonoBehaviour:
   canNotBeInInventory: 0
   burstAmount: 0
   burstDelay: 0
+  hasKnockback: 0
+  gunKnockback:
+    power: 0
+    duration: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   damageMultiplier: 1
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
@@ -58,3 +68,9 @@ MonoBehaviour:
   bulletsPerRow: 0
   crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
   crosshairsSize: {x: 0.7, y: 0.7}
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 0
+    focusGainWhenOnTarget: 5
+    focusLossWhenNotOnTarget: 0.5
+    moveSpeedWithGun: 1

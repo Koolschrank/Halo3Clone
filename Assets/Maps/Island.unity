@@ -78184,21 +78184,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4749024633911424598, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 62d78de0a2dd7234baf30138e04e57f6, type: 2}
     - target: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: m_Name
       value: EnemyManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
-      propertyPath: spawnInterval
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

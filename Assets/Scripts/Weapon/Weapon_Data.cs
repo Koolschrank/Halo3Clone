@@ -13,6 +13,7 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] Weapon_Bullet weaponBullet;
     [SerializeField] Weapon_Visual weaponFPSModel;
     [SerializeField] GameObject weapon3rdPersonModel;
+    
 
 
     [Header("WeaponStats")]
@@ -64,6 +65,10 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] int bulletsPerRow;
     [SerializeField] Sprite crosshairs = null;
     [SerializeField] Vector2 crosshairsSize = Vector2.one;
+
+    [Header("AI")]
+    [SerializeField] Weapon_Data enemyAiWeaponData;
+    [SerializeField] GunAiBehaviour gunAiBehaviour;
 
 
 
@@ -166,6 +171,11 @@ public class Weapon_Data : ScriptableObject
     public bool HasKnockback => hasKnockback;
 
     public GunKnockback GunKnockback => gunKnockback;
+
+    public bool HasEnemyAiWeaponData => enemyAiWeaponData != null;
+    public Weapon_Data EnemyAiWeaponData => enemyAiWeaponData;
+
+    public GunAiBehaviour GunAiBehaviour => gunAiBehaviour;
 }
 
 
@@ -183,6 +193,17 @@ public enum WeaponType
     oneHanded,
     twoHanded,
     massive
+
+}
+
+[Serializable]
+public class GunAiBehaviour
+{
+    public float IdealRange = 10;
+
+    public float focusGainWhenOnTarget = 1f;
+    public float focusLossWhenNotOnTarget = 0.5f;
+    public float moveSpeedWithGun = 1f;
 
 }
 

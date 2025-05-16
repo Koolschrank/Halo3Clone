@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class AI_Aim : MonoBehaviour
 {
+    [SerializeField] bool alwaysKnowsWherePlayerIs = false;
+    [SerializeField] AI_StateMachine stateMachine;
     [SerializeField] PlayerAim aim;
     [SerializeField] GameObject head;
     [SerializeField] AI_Target target;
 
     [SerializeField] float aimSpeedMultiplier = 5f;
 
-
+    Vector3 targetPosition;
+    private void Awake()
+    {
+        stateMachine.OnTargetFound += OnTargetFound;
+    }
     private void Update()
     {
         Vector2 aimInput = Vector2.zero;
-        Vector3 targetPosition = target.GetTargetPosition();
+        
+        if(alwaysKnowsWherePlayerIs || stateMachine.CurrentState == AIState.Attack)
+            targetPosition = target.GetTargetPosition();
         // head forward direction
         Vector3 headForward = head.transform.forward;
         float angleX = Vector3.SignedAngle(headForward, targetPosition - head.transform.position, head.transform.up);
@@ -33,5 +41,10 @@ public class AI_Aim : MonoBehaviour
 
 
         aim.UpdateAimInput(aimInput);
+    }
+
+    private void OnTargetFound(Vector3 targetPosition)
+    {
+        this.targetPosition = targetPosition;
     }
 }

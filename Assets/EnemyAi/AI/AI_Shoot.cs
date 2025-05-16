@@ -6,9 +6,7 @@ public class AI_Shoot : MonoBehaviour
     [SerializeField] PlayerArms playerArms;
 
 
-    [SerializeField] float focusGainWhenOnTarget = 2f;
-
-    [SerializeField] float focusLossWhenNotOnTarget = 0.5f;
+    
 
     float focuse = 0;
 
@@ -18,7 +16,7 @@ public class AI_Shoot : MonoBehaviour
     {
         if (playerAim.OnTarget)
         {
-            focuse += Time.deltaTime * focusGainWhenOnTarget;
+            focuse += Time.deltaTime * playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.focusGainWhenOnTarget;
             if (focuse > 1)
             {
                 focuse = 1;
@@ -26,7 +24,7 @@ public class AI_Shoot : MonoBehaviour
         }
         else
         {
-            focuse -= Time.deltaTime * focusLossWhenNotOnTarget;
+            focuse -= Time.deltaTime * playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.focusLossWhenNotOnTarget;
             if (focuse < 0)
             {
                 focuse = 0;

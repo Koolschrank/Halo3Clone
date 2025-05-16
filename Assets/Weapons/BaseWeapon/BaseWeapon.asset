@@ -16,6 +16,7 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: 54245a2b12894ed41b5df1dda442b33e, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 02e1c6e11b7f26a45b9af10e7362627a, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: d0d50155b6402bc4dbd9438144eef083, type: 3}
+  enemyAiWeaponData: {fileID: 11400000, guid: 921ef2f94fd4b634eb62fccf8b211169, type: 2}
   weaponName: Assult Rifle
   shootType: 1
   fireRate: 0.09

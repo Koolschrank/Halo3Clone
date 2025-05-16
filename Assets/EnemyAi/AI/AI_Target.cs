@@ -5,6 +5,7 @@ public class AI_Target : MonoBehaviour
 {
     GameObject target;
 
+    [SerializeField] bool alwaysKnowsWherePlayerIs = false;
     [SerializeField] int framesToCheckForNewTarget = 20;
 
 
@@ -29,14 +30,24 @@ public class AI_Target : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        AssignToClosesPlayer();
+    }
+
     private void Update()
     {
         
 
-        if (Time.frameCount % framesToCheckForNewTarget ==0)
+        if (alwaysKnowsWherePlayerIs && Time.frameCount % framesToCheckForNewTarget ==0)
         {
             AssignToClosesPlayer();
         }
+    }
+
+    public void AssignTarget(Transform target)
+    {
+        this.target = target.gameObject;
     }
 
     public Vector3 GetTargetPosition()

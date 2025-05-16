@@ -34,6 +34,8 @@ public class GameModeManager : MonoBehaviour
         
     }
 
+    
+
     public virtual Transform GetFarthestSpawnPointFromEnemeies(int teamIndex)
     {
         List<Transform> enemies = new List<Transform>();
@@ -54,6 +56,88 @@ public class GameModeManager : MonoBehaviour
 
         return spawnSystem.GetFarthestSpawnPointFromEnemeies(enemies);
     }
+
+    public virtual Transform GetRandomFarthestSpawnPoint(int teamIndex, int count)
+    {
+        var spawnPointsOrderd = GetSpawnPointsOrderedByDistance(teamIndex);
+
+        if (spawnPointsOrderd.Length == 0)
+        {
+            return spawnSystem.GetStartSpawnPoint(teamIndex);
+        }
+
+        if (spawnPointsOrderd.Length < count)
+        {
+            count = spawnPointsOrderd.Length;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, count);
+        Transform spawnPoint = spawnPointsOrderd[spawnPointsOrderd.Length - 1 - randomIndex];
+        return spawnPoint;
+    }
+
+    public virtual Transform[] GetSpawnPointsOrderedByDistance(int teamIndex)
+    {
+        Transform[] spawnPoints = new Transform[spawnSystem.basicSpawnPoints.Length];
+        float[] distanceToEnemies = new float[spawnSystem.basicSpawnPoints.Length];
+        List<Transform> enemies = new List<Transform>();
+        foreach (var team in teams)
+        {
+            if (team.Count > 0 && team[0].TeamIndex != teamIndex)
+            {
+                foreach (var player in team)
+                {
+                    enemies.Add(player.transform);
+                }
+            }
+        }
+
+        if (enemies.Count == 0)
+        {
+            return spawnSystem.basicSpawnPoints;
+        }
+        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        {
+            float distance = 0;
+            foreach (var enemy in enemies)
+            {
+                distance += Vector3.Distance(spawnSystem.basicSpawnPoints[i].position, enemy.position);
+            }
+            distanceToEnemies[i] = distance;
+        }
+
+        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        {
+            spawnPoints[i] = spawnSystem.basicSpawnPoints[i];
+        }
+
+        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        {
+            for (int j = 0; j < spawnSystem.basicSpawnPoints.Length - 1; j++)
+            {
+                if (distanceToEnemies[j] > distanceToEnemies[j + 1])
+                {
+                    float tempDistance = distanceToEnemies[j];
+                    distanceToEnemies[j] = distanceToEnemies[j + 1];
+                    distanceToEnemies[j + 1] = tempDistance;
+                    Transform tempTransform = spawnPoints[j];
+                    spawnPoints[j] = spawnPoints[j + 1];
+                    spawnPoints[j + 1] = tempTransform;
+                }
+            }
+        }
+
+        
+
+
+
+
+
+        return spawnPoints;
+
+    }
+
+
 
 
 

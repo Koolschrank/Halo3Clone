@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d4ca8d111e6fb49b8961cd268b7b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 400
+  speed: 40
 --- !u!114 &9207851313103302896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,16 +113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damageAmount: 12
   force: 200
   shildDamageMultiplier: 1
-  headShotMultiplier: 4
+  headShotMultiplier: 1
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  radius: 0.2
+  radius: 0.1
   copyTransitionSpeed: 10
-  hitParticle: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  bodyHitPartical: {fileID: 0}
+  groundHitPartical: {fileID: 0}
   destroyObjects: []
   bodyHitSound:
     Guid:
