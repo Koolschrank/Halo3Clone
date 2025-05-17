@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class AI_Shoot : MonoBehaviour
 {
+    [SerializeField] AI_Target target;
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerArms playerArms;
 
+    [SerializeField] Vector2 distanceToThrowGranade = new Vector2(8, 12);
 
-    
+
+
 
     float focuse = 0;
 
@@ -34,6 +37,14 @@ public class AI_Shoot : MonoBehaviour
         if (focuse == 1)
         {
             playerArms.RightArm.UpdateWeaponTrigger(true);
+
+            var distanceToTarget = Vector3.Distance(transform.position, target.GetTargetPosition());
+            if (distanceToTarget > distanceToThrowGranade.x && distanceToTarget < distanceToThrowGranade.y)
+            {
+                playerArms.RightArm.TryThrowGranade();
+            }
+            
+            
         }
         else
         {
@@ -45,5 +56,10 @@ public class AI_Shoot : MonoBehaviour
             playerArms.RightArm.UpdateWeaponTrigger(false);
         }
 
+    }
+
+    private void OnDisable()
+    {
+        playerArms.RightArm.UpdateWeaponTrigger(false);
     }
 }

@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] float spawnInterval = 5f;
 
+
+    [SerializeField] bool onlyUseFirstEquipment = false;
     [SerializeField] Equipment[] enemyEquipments;
 
     float nextSpawnTime;
@@ -32,7 +34,13 @@ public class EnemySpawner : MonoBehaviour
         Quaternion spawnRotation = spawnPoint.rotation;
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
-        enemy.GetComponent<PlayerStartEquipment>().GetEquipment(enemyEquipments[Random.Range(0, enemyEquipments.Length)]);
+
+        var equipment = enemyEquipments[Random.Range(0, enemyEquipments.Length)];
+        if (onlyUseFirstEquipment)
+        {
+            equipment = enemyEquipments[0];
+        }
+        enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
 
         // get child of name EnemyAI
         PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), enemyTeamId);

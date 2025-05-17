@@ -2260,7 +2260,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
   - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
   - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
-  - {fileID: 11400000, guid: 218fe6aa2a643bd4aa85b7d90134b514, type: 2}
+  - {fileID: 11400000, guid: ec9b9ff723da9d543bb01894799e6d41, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
   buttonSpacing: -60

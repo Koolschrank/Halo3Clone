@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: AI_Sniper
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 452e36dff484b9d4494eeed92ef2cc3e, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: fdade90f77645c94999b3134ae9e4740, type: 3}
+  weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 34f45053683dfdc46b33bc95460b2076, type: 3}
+  weaponName: Sniper
+  shootType: 1
+  fireRate: 2
+  bulletsPerShot: 1
+  magazineSize: 4
+  maxAmmoInReserve: 12
+  reloadTime: 3.2
+  inaccuracy: 0.15
+  switchOutTime: 0.3
+  switchInTime: 0.6
+  canZoom: 1
+  zoomFOV: 30
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
+  autoAim: {fileID: 11400000, guid: 114b6c000414c6d409ced44182d6d27e, type: 2}
+  weaponType: 1
+  canNotBeInInventory: 0
+  burstAmount: 0
+  burstDelay: 0
+  hasKnockback: 1
+  gunKnockback:
+    power: 4
+    duration: 0.7
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.10399628
+        value: 0.99809647
+        inSlope: -0.37701112
+        outSlope: -0.37701112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.30731252
+      - serializedVersion: 3
+        time: 0.5787892
+        value: 0.5417794
+        inSlope: -1.0440427
+        outSlope: -1.0440427
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.26441047
+      - serializedVersion: 3
+        time: 0.97741395
+        value: 0.010357738
+        inSlope: -1.0514512
+        outSlope: -1.0514512
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26154286
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 0.8
+  fireRateMultiplier: 1.2
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1.4
+  shootSound:
+    Guid:
+      Data1: -1791521769
+      Data2: 1323760878
+      Data3: 1735243453
+      Data4: -1688200613
+    Path: event:/SFX/Guns/Sniper/SniperShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+    - soundReference:
+        Guid:
+          Data1: 1758231728
+          Data2: 1228898713
+          Data3: 500376759
+          Data4: 1423635945
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPutIn
+      timeOfPlay: 0.65
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 7a1360bacac1db241b5980429f7afb58, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 0c490a240a177f2439ebce94aeba4dbe, type: 3}
+  bulletSize: {x: 3, y: 1.6}
+  bulletsPerRow: 8
+  crosshairs: {fileID: 21300000, guid: 158696241aed0cb4a88b6d8e7dabd2a9, type: 3}
+  crosshairsSize: {x: 0.7, y: 0.7}
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 25
+    focusGainWhenOnTarget: 0.4
+    focusLossWhenNotOnTarget: 0.3
+    moveSpeedWithGun: 0.5

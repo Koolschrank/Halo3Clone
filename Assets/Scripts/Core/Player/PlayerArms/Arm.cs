@@ -60,6 +60,7 @@ public class Arm : MonoBehaviour
     float granadeThrowInputBufferTimer;
     [SerializeField] float meleeAttackTimeMultiplierInDualWielding = 1.5f;
     [SerializeField] float granadeThrowTimeMultiplierInDualWielding = 1.5f;
+    [SerializeField] bool reloadWeaponWhenDroped = false;
 
     private void Start()
     {
@@ -91,7 +92,7 @@ public class Arm : MonoBehaviour
         weaponInHand?.UpdateWeapon();
 
         // input buffers
-        if (switchInputBufferTimer > 0)
+        if (switchInputBufferTimer > 0 ||( (isTriggerPressed&&CurrentWeapon != null && !playerArms.IsDualWielding &&CurrentWeapon.Magazine == 0 && inventory.GetAmmo(CurrentWeapon.Data) <= 0 && inventory.HasWeapon && (inventory.GetWeapon().Magazine !=0||inventory.GetAmmo(inventory.GetWeapon().Data) != 0)) ))
         {
             switchInputBufferTimer -= Time.deltaTime;
             TrySwitchWeapon();
@@ -158,6 +159,8 @@ public class Arm : MonoBehaviour
             {
                 TryReload();
             }
+
+
 
 
             switch (weaponInHand.ShootType)
@@ -478,6 +481,13 @@ public class Arm : MonoBehaviour
         if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
         {
             return null;
+        }
+
+        if (reloadWeaponWhenDroped)
+        {
+            int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
+            int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
+            weaponInHand.ReloadFinished(ammoAdded);
         }
 
         var pickUpVersion = weaponInHand.PickUpVersion;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RocketLauncher
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
-  weaponBullet: {fileID: 11400000, guid: e93e228661b18bb4b8a893b6ceb378d8, type: 2}
+  weaponBullet: {fileID: 11400000, guid: 81ac3f179941a684b841ffcef217b403, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 590b1fd23e1c8064b835d39ba4ad4255, type: 3}
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 287b81575db7118408b3d163744ecd0e, type: 3}
   weaponName: Rocket Launcher
@@ -22,8 +22,8 @@ MonoBehaviour:
   bulletsPerShot: 1
   magazineSize: 2
   maxAmmoInReserve: 3
-  reloadTime: 2.8
-  inaccuracy: 0
+  reloadTime: 4
+  inaccuracy: 0.1
   switchOutTime: 0.3
   switchInTime: 0.8
   canZoom: 0
@@ -103,3 +103,9 @@ MonoBehaviour:
   bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 33dfa090efe1bc442b27c137d87e3ad5, type: 3}
   crosshairsSize: {x: 0.7, y: 0.7}
+  enemyAiWeaponData: {fileID: 11400000, guid: 7ef99013cbc7d7d4d8ee5ab209603d96, type: 2}
+  gunAiBehaviour:
+    IdealRange: 10
+    focusGainWhenOnTarget: 0.35
+    focusLossWhenNotOnTarget: 0.3
+    moveSpeedWithGun: 0.5

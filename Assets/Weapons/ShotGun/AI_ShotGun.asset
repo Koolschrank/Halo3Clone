@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: AI_ShotGun
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 875420519fd23124c9872c57b921a743, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 99c7feea649c9484684d08bea235b939, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: c159a167a7e836945a9aa3cfb8199950, type: 3}
+  weapon3rdPersonModel: {fileID: 9209568620739521198, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
+  weaponName: ShotGun
+  shootType: 1
+  fireRate: 1.8
+  bulletsPerShot: 12
+  magazineSize: 2
+  maxAmmoInReserve: 10
+  reloadTime: 2.5
+  inaccuracy: 0.25
+  switchOutTime: 0.25
+  switchInTime: 0.6
+  canZoom: 0
+  zoomFOV: 0
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 0}
+  autoAim: {fileID: 11400000, guid: 5410cb33179973f4e8f2696bf1f697f6, type: 2}
+  weaponType: 1
+  canNotBeInInventory: 0
+  burstAmount: 0
+  burstDelay: 0
+  hasKnockback: 1
+  gunKnockback:
+    power: 13
+    duration: 0.1
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 0.9
+  fireRateMultiplier: 1
+  inaccuracyMultiplier: 1.5
+  reloadTimeMultiplier: 1.5
+  shootSound:
+    Guid:
+      Data1: -1842625480
+      Data2: 1109917477
+      Data3: -1980225869
+      Data4: 1628706485
+    Path: event:/SFX/Guns/ShotGun/ShotGunShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1232892853
+          Data2: 1258534099
+          Data3: -758304624
+          Data4: -855647888
+        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+      timeOfPlay: 0.25
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -1420753444
+          Data2: 1208158006
+          Data3: 1003640223
+          Data4: 1897514351
+        Path: event:/SFX/Guns/ShotGun/Reload/OpenBarrel
+      timeOfPlay: 0.12
+    - soundReference:
+        Guid:
+          Data1: -771642470
+          Data2: 1310303921
+          Data3: -1110256225
+          Data4: -1629882881
+        Path: event:/SFX/Guns/ShotGun/Reload/PutInBullets
+      timeOfPlay: 0.32
+    - soundReference:
+        Guid:
+          Data1: -1332733654
+          Data2: 1115094356
+          Data3: -1780033092
+          Data4: 1883517362
+        Path: event:/SFX/Guns/ShotGun/Reload/CloseBarrel
+      timeOfPlay: 0.6
+    - soundReference:
+        Guid:
+          Data1: -465851604
+          Data2: 1243092690
+          Data3: -348078417
+          Data4: 534116276
+        Path: event:/SFX/Guns/ShotGun/Reload/ChargeBolt
+      timeOfPlay: 0.9
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 854037e5ea70f1e48bfdc78fe5fb2261, type: 3}
+  bulletSprite: {fileID: 21300000, guid: c8fb4c1e73d92a04787384e53fd847b5, type: 3}
+  bulletSize: {x: 3, y: 2}
+  bulletsPerRow: 6
+  crosshairs: {fileID: 21300000, guid: 3f79c894eb9dcea408efd9d0684d46cb, type: 3}
+  crosshairsSize: {x: 0.8, y: 0.8}
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 3
+    focusGainWhenOnTarget: 0.5
+    focusLossWhenNotOnTarget: 0.5
+    moveSpeedWithGun: 0.65

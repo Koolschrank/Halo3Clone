@@ -6,7 +6,7 @@ public class AI_Target : MonoBehaviour
     GameObject target;
 
     [SerializeField] bool alwaysKnowsWherePlayerIs = false;
-    [SerializeField] int framesToCheckForNewTarget = 20;
+    [SerializeField] int framesToCheckForNewTarget = 100;
 
 
 

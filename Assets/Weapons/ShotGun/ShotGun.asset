@@ -126,9 +126,9 @@ MonoBehaviour:
   bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 3f79c894eb9dcea408efd9d0684d46cb, type: 3}
   crosshairsSize: {x: 0.8, y: 0.8}
-  enemyAiWeaponData: {fileID: 0}
+  enemyAiWeaponData: {fileID: 11400000, guid: ddb6ce711463cf148a5c68df7925fd34, type: 2}
   gunAiBehaviour:
     IdealRange: 10
-    focusGainWhenOnTarget: 1
+    focusGainWhenOnTarget: 0.7
     focusLossWhenNotOnTarget: 0.5
     moveSpeedWithGun: 1

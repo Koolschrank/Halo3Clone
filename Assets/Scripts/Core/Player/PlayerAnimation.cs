@@ -477,6 +477,11 @@ public class PlayerAnimation : MonoBehaviour
 
     }
 
+    public void Stun()
+    {
+        animator.SetTrigger("Hit");
+    }
+
     public void SetLeftHandGrip(bool value)
     {
         leftHandGripActive = value;

@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: AI_GranadeLauncher 1
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 8993b6c6bdb1cfb4182972b8d2b33835, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 9004ff41f24b36d42807e43a659853fa, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: b538a9a765fccd948812ff6a07829b0b, type: 3}
+  weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 69a0f5348f2506a4bb4f6817512b29c3, type: 3}
+  weaponName: Granade Launcher
+  shootType: 1
+  fireRate: 0.75
+  bulletsPerShot: 1
+  magazineSize: 3
+  maxAmmoInReserve: 18
+  reloadTime: 2
+  inaccuracy: 0.1
+  switchOutTime: 0.3
+  switchInTime: 0.6
+  canZoom: 1
+  zoomFOV: 35
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  weaponType: 1
+  canNotBeInInventory: 0
+  burstAmount: 3
+  burstDelay: 0.3
+  hasKnockback: 1
+  gunKnockback:
+    power: 3
+    duration: 0.5
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 8.444545
+        outSlope: 8.444545
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11797333
+        value: 0.9962311
+        inSlope: -0.10924992
+        outSlope: -0.10924992
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.3700746
+      - serializedVersion: 3
+        time: 0.98666674
+        value: 0.0065975916
+        inSlope: -1.1392207
+        outSlope: -1.1392207
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 1
+  fireRateMultiplier: 1.2
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1.5
+  shootSound:
+    Guid:
+      Data1: 728853818
+      Data2: 1211351120
+      Data3: 631168438
+      Data4: -744795755
+    Path: event:/SFX/Guns/GranadeTrower/GranadeShoot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 205059569
+          Data2: 1135460609
+          Data3: -1246379088
+          Data4: -133436094
+        Path: event:/SFX/Guns/GranadeTrower/GranadeTrowerSwitchIn
+      timeOfPlay: 0.4
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1968341117
+          Data2: 1319590580
+          Data3: 1583735957
+          Data4: -1423667669
+        Path: event:/SFX/Guns/GranadeTrower/Reload/OpenGranadeLauncher
+      timeOfPlay: 0.1
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.35
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.5
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.65
+    - soundReference:
+        Guid:
+          Data1: 424646063
+          Data2: 1191360246
+          Data3: 1892993195
+          Data4: -879277789
+        Path: event:/SFX/Guns/GranadeTrower/Reload/CloseGranadeLauncher
+      timeOfPlay: 0.85
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 3370b011756b5a64a90acaddd0e9852b, type: 3}
+  bulletSize: {x: 1.9, y: 1.9}
+  bulletsPerRow: 5
+  crosshairs: {fileID: 21300000, guid: ee579ce34746d084682cedad1f645b0a, type: 3}
+  crosshairsSize: {x: 0.7, y: 0.7}
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 12
+    focusGainWhenOnTarget: 0.5
+    focusLossWhenNotOnTarget: 0.3
+    moveSpeedWithGun: 0.6

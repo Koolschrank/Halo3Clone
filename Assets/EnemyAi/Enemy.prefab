@@ -16,9 +16,7 @@ GameObject:
   - component: {fileID: 5650545179290865720}
   - component: {fileID: 8505334828251919786}
   - component: {fileID: 1541098619169745859}
-  - component: {fileID: 257349262746929979}
-  - component: {fileID: 3391056616264683622}
-  - component: {fileID: 7996945524363997151}
+  - component: {fileID: 5792146997314068955}
   m_Layer: 7
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -95,14 +93,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43abc5b3bd1e4b746bc46cf2e8331a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateMachine: {fileID: 257349262746929979}
-  lookForPlayer: {fileID: 3391056616264683622}
   alwaysKnowsWherePlayerIs: 1
   playerMovement: {fileID: 753626866741659943}
   target: {fileID: 8029323305840259631}
   agent: {fileID: 1618324563476685136}
   playerArms: {fileID: 4619331289028681485}
   playerAim: {fileID: 5066934035753808966}
+  framesToUpdateNavAgent: 100
+  framesToUpdateNavAgentIfClose: 10
+  distanceToUpdateNavAgent: 5
 --- !u!114 &8029323305840259631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysKnowsWherePlayerIs: 1
-  framesToCheckForNewTarget: 20
+  framesToCheckForNewTarget: 60
 --- !u!114 &5650545179290865720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysKnowsWherePlayerIs: 1
-  stateMachine: {fileID: 257349262746929979}
   aim: {fileID: 5066934035753808966}
   head: {fileID: 2222735024375511362}
   target: {fileID: 8029323305840259631}
@@ -147,8 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70702e953bc0ba429a15881e9c19fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 8029323305840259631}
   playerAim: {fileID: 5066934035753808966}
   playerArms: {fileID: 4619331289028681485}
+  distanceToThrowGranade: {x: 8, y: 12}
 --- !u!114 &1541098619169745859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,60 +163,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterHealth: {fileID: 7357773068672706047}
   playerAim: {fileID: 5066934035753808966}
---- !u!114 &257349262746929979
+--- !u!114 &5792146997314068955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069980226933503108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3df6c881dd9dcb43bba26829ec2ebea, type: 3}
+  m_Script: {fileID: 11500000, guid: bca71875ee0c81941883ebad1a3d5928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterHealth: {fileID: 7357773068672706047}
-  lookForPlayer: {fileID: 3391056616264683622}
-  currentState: 0
---- !u!114 &3391056616264683622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069980226933503108}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a10281dee52a2f44a16ece57738aca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScript: {fileID: 8029323305840259631}
-  range: 30
-  fieldOfViewAngle: 170
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 1
-  frameInterval: 10
---- !u!114 &7996945524363997151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069980226933503108}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d91e6201d1842734cad105dd5f257ccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateMachine: {fileID: 257349262746929979}
-  radius: 10
-  allyLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  health: {fileID: 7357773068672706047}
+  AIanimation: {fileID: 3529744430442933252}
+  aim: {fileID: 5650545179290865720}
+  movement: {fileID: 5666477850914292363}
+  weapon: {fileID: 8505334828251919786}
+  stunDuration: 1
 --- !u!1 &8857529426304999730
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +383,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 3970420054294455764, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: reloadWeaponWhenDroped
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4070478646150821296, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
@@ -615,6 +583,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 7573040687501960069, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: rechargeGranadeTime
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7697820511645445431, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
@@ -727,6 +699,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5698032335818744442, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
   m_PrefabInstance: {fileID: 7838409973482450679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3529744430442933252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6646059112641200883, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+  m_PrefabInstance: {fileID: 7838409973482450679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17b5b3dad00bad499e41e19d9e38a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4619331289028681485 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3232609274750972410, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}

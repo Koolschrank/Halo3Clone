@@ -122,6 +122,6 @@ MonoBehaviour:
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 5
-    focusGainWhenOnTarget: 1
+    focusGainWhenOnTarget: 0.75
     focusLossWhenNotOnTarget: 0.3
     moveSpeedWithGun: 0.6
