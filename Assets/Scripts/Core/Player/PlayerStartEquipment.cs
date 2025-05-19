@@ -11,6 +11,7 @@ public class PlayerStartEquipment : MonoBehaviour
     [Header("References")]
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] CharacterHealth health;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] bool isNonPlayer = false;
@@ -60,15 +61,20 @@ public class PlayerStartEquipment : MonoBehaviour
                 equipment.MagazinsOfSideArm));
         }
 
-        if (equipment.Granade != null)
+        if (equipment.Ability != null)
         {
-            playerInventory.ChangeGranade(equipment.Granade);
-            playerInventory.AddGranades(equipment.GranadeCount);
+            abilityInventory.AddAbility(equipment.Ability);
         }
-        else
+        if (equipment.Ability2 != null)
         {
-            playerInventory.ChangeGranade(null);
+
+            abilityInventory.AddAbility(equipment.Ability2);
         }
+        if (equipment.Ability3 != null)
+        {
+            abilityInventory.AddAbility(equipment.Ability3);
+        }
+
 
         playerMovement.SetMovementSpeedMultiplier(equipment.MovementSpeedMultiplier);
 
@@ -132,8 +138,9 @@ public class Equipment
     [SerializeField] Weapon_Data sideArm;
     [SerializeField] int magazinsOfSideArm = 5;
 
-    [SerializeField] GranadeStats granade;
-    [SerializeField] int granadeCount = 0;
+    [SerializeField] AbilityData ability;
+    [SerializeField] AbilityData ability2;
+    [SerializeField] AbilityData ability3;
 
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
@@ -190,8 +197,9 @@ public class Equipment
     public Weapon_Data SideArm => sideArm;
     public int MagazinsOfSideArm => magazinsOfSideArm;
 
-    public GranadeStats Granade => granade;
-    public int GranadeCount => granadeCount;
+    public AbilityData Ability => ability;
+    public AbilityData Ability2 => ability2;
+    public AbilityData Ability3 => ability3;
 
     public bool HasMiniMap => hasMiniMap;
 
@@ -213,8 +221,9 @@ public class Equipment
         this.magazinsOfWeaponInLeftHand = equipmentToCopy.magazinsOfWeaponInLeftHand;
         this.sideArm = equipmentToCopy.sideArm;
         this.magazinsOfSideArm = equipmentToCopy.magazinsOfSideArm;
-        this.granade = equipmentToCopy.granade;
-        this.granadeCount = equipmentToCopy.granadeCount;
+        this.ability = equipmentToCopy.ability;
+        this.ability2 = equipmentToCopy.ability2;
+        this.ability3 = equipmentToCopy.ability3;
     }
 
 

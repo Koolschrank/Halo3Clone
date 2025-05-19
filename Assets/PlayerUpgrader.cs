@@ -51,7 +51,7 @@ public class PlayerUpgrader : MonoBehaviour
             player.OnUpgradeSelectionFinished -= UpgradePlayer;
         }
 
-
+        playersUpgraded = 0;
         Time.timeScale = 1;
     }
 

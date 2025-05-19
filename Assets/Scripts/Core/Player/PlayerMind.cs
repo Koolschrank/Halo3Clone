@@ -42,7 +42,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PickUpUI pickUpUI;
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
-    [SerializeField] CooldownUI granadeCooldown;
+    [SerializeField] CooldownUISystem cooldownSystem;
     [SerializeField] TeamWinUI teamWinUI;
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
@@ -71,6 +71,7 @@ public class PlayerMind : MonoBehaviour
     BulletSpawner bulletSpawner;
     PlayerPickUpScan playerPickUpScan;
     PlayerInventory playerInventory;
+    AbilityInventory abilityInventory;
     public PlayerSettings playerSettings { get; private set; }
 
     public PlayerUpgrades PlayerUpgrades { get { return playerUpgrader; } }
@@ -137,8 +138,8 @@ public class PlayerMind : MonoBehaviour
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
+        playerUpgrader.AssignBody(body);
 
-        
     }
 
     public void ApplyUpgrades()
@@ -176,20 +177,22 @@ public class PlayerMind : MonoBehaviour
     {
         if (playerInventory != null)
         {
-            playerInventory.OnGranadeChargeChanged -= granadeCooldown.UpdateCooldown;
             playerInventory.OnMiniMapDisabled -= minimapUI.DisableMiniMap;
             playerInventory.OnMiniMapEnabled -= minimapUI.EnableMiniMap;
-            inventory.OnMaxGranadeCountChanged -= (count) => granadeCooldown.SetActive(count == 0 ? false : true);
         }
 
         playerInventory = inventory;
-        inventory.OnGranadeChargeChanged += granadeCooldown.UpdateCooldown;
         inventory.OnMiniMapDisabled += minimapUI.DisableMiniMap;
         inventory.OnMiniMapEnabled += minimapUI.EnableMiniMap;
-        inventory.OnMaxGranadeCountChanged += (count) => granadeCooldown.SetActive(count == 0 ? false : true);
-        granadeCooldown.SetActive(inventory.GranadeInventorySize == 0 ? false : true);
+
 
         weaponInventoryUI.SetUp(playerInventory);
+    }
+
+    public void SetAbilityInventory(AbilityInventory inventory)
+    {
+        abilityInventory = inventory;
+        cooldownSystem.Setup(inventory, this);
     }
 
     public void SetCinemaCamera(CinemachineCamera cCam)
@@ -299,7 +302,7 @@ public class PlayerMind : MonoBehaviour
         crownText.gameObject.SetActive(false);
 
         isDead = true;
-
+        
         GameModeSelector.gameModeManager.PlayerDied(this);
     }
 
@@ -788,12 +791,17 @@ public class PlayerMind : MonoBehaviour
 
 
         playerInput.actions.FindActionMap("UpgradeSelection").Enable();
-        
+        upgradeSelected = false;
 
     }
 
+    bool upgradeSelected = false;
+
     public void UpgradeSelected(int index)
     {
+
+        upgradeMenu.OnUpgradeSelected -= UpgradeSelected;
+        upgradeSelected = true;
         int upgradeIndex = upgradeIndexs[index];
         playerUpgrader.Upgrade(upgradeIndex);
         OnUpgradeSelectionFinished?.Invoke();
@@ -804,7 +812,7 @@ public class PlayerMind : MonoBehaviour
 
     public void Upgrade_1(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed&& !upgradeSelected)
         {
             upgradeMenu.Select1();
         }
@@ -812,7 +820,7 @@ public class PlayerMind : MonoBehaviour
 
     public void Upgrade_2(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !upgradeSelected)
         {
             upgradeMenu.Select2();
         }
@@ -820,7 +828,7 @@ public class PlayerMind : MonoBehaviour
 
     public void Upgrade_3(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !upgradeSelected)
         {
             upgradeMenu.Select3();
         }

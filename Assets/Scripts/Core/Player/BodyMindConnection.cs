@@ -13,6 +13,7 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] Transform spectatorCameraTarget;
     [SerializeField] PlayerInventory playerInventory;
+    [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] TargetHitCollector targetHitCollector;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] PlayerStartEquipment playerStartEquipment;
@@ -41,6 +42,7 @@ public class BodyMindConnection : MonoBehaviour
         mind.SetBulletSpawner(bulletSpawner);
         
         mind.SetPlayerInventory(playerInventory);
+        mind.SetAbilityInventory(abilityInventory);
         mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
 

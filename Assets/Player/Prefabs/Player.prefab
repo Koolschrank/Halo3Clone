@@ -10547,6 +10547,7 @@ GameObject:
   - component: {fileID: 3232609274750972410}
   - component: {fileID: 3844945188849078822}
   - component: {fileID: 3970420054294455764}
+  - component: {fileID: 4267228126375275963}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -10711,6 +10712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerArms: {fileID: 3232609274750972410}
   playerInventory: {fileID: 7573040687501960069}
+  abilityInventory: {fileID: 4267228126375275963}
   health: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
   isNonPlayer: 0
@@ -10776,10 +10778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponInvetorySize: 1
-  granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}
-  granadeInventorySize: 1
-  rechargeGranades: 1
-  rechargeGranadeTime: 13
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
 --- !u!114 &4471171138262044766
@@ -10804,6 +10802,7 @@ MonoBehaviour:
   bulletSpawner: {fileID: 737555415851796727}
   spectatorCameraTarget: {fileID: 3521633971492238688}
   playerInventory: {fileID: 7573040687501960069}
+  abilityInventory: {fileID: 4267228126375275963}
   targetHitCollector: {fileID: 6138964545677116144}
   playerTeam: {fileID: 2295363821645548979}
   playerStartEquipment: {fileID: 8050057614039648062}
@@ -10952,6 +10951,7 @@ MonoBehaviour:
   bulletSpawner: {fileID: 737555415851796727}
   granadeThrower: {fileID: 625404246279802593}
   inventory: {fileID: 7573040687501960069}
+  abilityInventory: {fileID: 4267228126375275963}
   pickUpScan: {fileID: 3086695294023934871}
   dropPosition: {fileID: 2372597562941759599}
   meleeAttacker: {fileID: 8008512304446792098}
@@ -10982,6 +10982,7 @@ MonoBehaviour:
   bulletSpawner: {fileID: 737555415851796727}
   granadeThrower: {fileID: 625404246279802593}
   inventory: {fileID: 7573040687501960069}
+  abilityInventory: {fileID: 4267228126375275963}
   pickUpScan: {fileID: 3086695294023934871}
   dropPosition: {fileID: 8167806766066142118}
   meleeAttacker: {fileID: 8008512304446792098}
@@ -10994,6 +10995,20 @@ MonoBehaviour:
   meleeAttackTimeMultiplierInDualWielding: 1.5
   granadeThrowTimeMultiplierInDualWielding: 1.6
   reloadWeaponWhenDroped: 0
+--- !u!114 &4267228126375275963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792b0f13b6d09d448830c3eb8713d4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAbilities: 3
+  currentAbilityIndex: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

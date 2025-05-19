@@ -54,10 +54,12 @@ public class GranadeThrower : MonoBehaviour
     {
         if (granadeStats == null) return null;
 
-        GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation);
+        GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation) as GameObject;
+
         Rigidbody rb = granade.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * granadeStats.ThrowForce, ForceMode.Impulse);
         rb.AddForce(transform.up * granadeStats.ThrowForce * granadeStats.ThrowAngle, ForceMode.Impulse);
+        Debug.Log(granade.name);
         OnGranadeThrow?.Invoke(granade);
 
         if (granade.TryGetComponent<Granade>(out Granade granadeScript))

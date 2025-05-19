@@ -473,7 +473,7 @@ MonoBehaviour:
   pickUpUI: {fileID: 262086610966318391}
   damageIndicatorUI: {fileID: 9077592386559092330}
   crosshairUI: {fileID: 4052545988799435235}
-  granadeCooldown: {fileID: 690526591888578700}
+  cooldownSystem: {fileID: 3382669633514685416}
   teamWinUI: {fileID: 3547538324909370986}
   hitMarkerUI: {fileID: 973657641611872543}
   minimapUI: {fileID: 8725600332119897690}
@@ -938,7 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6426c0b78c182448af4888f702661b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoUpgradeEverything: 1
+  autoUpgradeEverything: 0
   upgrades:
   - {fileID: 11400000, guid: c8242b1b9392ad54f92015d3553af797, type: 2}
   - {fileID: 11400000, guid: 249cbbc5957aea44db2c678a34b18745, type: 2}
@@ -946,9 +946,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8174fbe708f9d7148aad5d697382a586, type: 2}
   - {fileID: 11400000, guid: b4e8cc68a8829a441b10ce8cad8e6283, type: 2}
   - {fileID: 11400000, guid: 46f5fa65434f8f345b9d0daa9e87855c, type: 2}
-  - {fileID: 11400000, guid: 1babcade6bad72041b376016a33e852e, type: 2}
   - {fileID: 11400000, guid: 4af985a307b9fce49bd0f93f171c8b6a, type: 2}
   - {fileID: 11400000, guid: 772e4cce855a5594792ef14a33d2bec4, type: 2}
+  - {fileID: 11400000, guid: 372f207e64becbe409db9b1841c78ddc, type: 2}
+  - {fileID: 11400000, guid: dc3f8dbe3b0abfb46be1ee320c6cc746, type: 2}
+  - {fileID: 11400000, guid: 427f362ab111b494fae682eeedaa06ef, type: 2}
 --- !u!1 &7104922266481455783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1329,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1242805700049856749, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 490
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242805700049856749, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -70
+      objectReference: {fileID: 0}
     - target: {fileID: 2267043410257924088, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1519,17 +1529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19e7e15f3fc08946bafa1493f5ea4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &690526591888578700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 674807498447230609, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
-  m_PrefabInstance: {fileID: 56395733494746653}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8f3527ed15bbd4285a2f1e1adfa31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &831203468997040502 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 811031354797545323, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
@@ -1588,6 +1587,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4920d2d7885c4a4caa2f0fd42ae8a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3382669633514685416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3330961142979333621, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+  m_PrefabInstance: {fileID: 56395733494746653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fcfa74471b1c4749a1855b33a0e58c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3547538324909370986 stripped

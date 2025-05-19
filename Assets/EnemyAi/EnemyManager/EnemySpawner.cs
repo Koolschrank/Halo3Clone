@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Enemy_Wave[] enemyWaves;
     [SerializeField] int waveIndex = 0;
     EnemyWaveInstance activeWave;
-
+    [SerializeField] float spawnRateMultiplier = 1; // Multiplier for spawn rate
     float nextWaveDelay = 5;
 
 
@@ -33,9 +33,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            
-
-            activeWave.UpdateTimers();
+            activeWave.UpdateTimers(Time.deltaTime,spawnRateMultiplier);
 
             if (activeWave.CanSpawnEnemy())
             {
@@ -89,10 +87,10 @@ public class EnemyWaveInstance
         nextSpawnTimer = enemyWave.spawnInterval;
     }
 
-    public void UpdateTimers()
+    public void UpdateTimers(float delta, float spawnRateMult)
     {
-        duration -= Time.deltaTime;
-        nextSpawnTimer -= Time.deltaTime;
+        duration -= delta;
+        nextSpawnTimer -= delta * spawnRateMult;
 
     }
 

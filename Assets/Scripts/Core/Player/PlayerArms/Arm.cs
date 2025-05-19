@@ -31,6 +31,7 @@ public class Arm : MonoBehaviour
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] Controller controller;
     [SerializeField] protected PlayerInventory inventory;
+    [SerializeField] protected AbilityInventory abilityInventory;
     [SerializeField] protected PlayerPickUpScan pickUpScan;
     [SerializeField] Transform dropPosition;
     [SerializeField] MeleeAttacker meleeAttacker;
@@ -601,29 +602,51 @@ public class Arm : MonoBehaviour
         granadeThrowInputBufferTimer = granadeThrowInputBuffer;
     }
 
+
+    
     public virtual void TryThrowGranade()
     {
         if (armState != ArmState.Ready) return;
-        if (inventory.HasGranades)
+        if (abilityInventory.CanUseCurrentAbility() && abilityInventory.IsCurrentAbilityAGranade())
         {
             IfZoomedInExitZoom();
-            var granade = inventory.GranadeStats;
+            var ability = abilityInventory.GetCurrentAbility().abilityData as AbilityData_Granade;
+            if (ability == null)
+            {
+                Debug.LogError("Ability is not a granade");
+                return;
+            }
+
+
             float timeMultiplier = 1;
             if (playerArms.IsDualWielding)
             {
                 timeMultiplier = granadeThrowTimeMultiplierInDualWielding;
             }
-            granadeThrower.ThrowGranadeStart(granade, timeMultiplier);
-            inventory.UseGranade();
+            granadeThrower.ThrowGranadeStart(ability.granadeStats, timeMultiplier);
+            
             armState = ArmState.InGranadeThrow;
-            granadeThrowTimer = granade.ThrowTime * timeMultiplier;
-            OnGranadeThrowStarted?.Invoke(granade, granadeThrowTimer);
+            granadeThrowTimer = ability.granadeStats.ThrowTime * timeMultiplier;
+            OnGranadeThrowStarted?.Invoke(ability.granadeStats, granadeThrowTimer);
+            
+           
+            abilityInventory.UseSelectedIndex();
         }
     }
 
     void SendGranadeThrowSignal(GameObject granade)
     {
-        OnGranadeThrow?.Invoke(granade, inventory.GranadeStats);
+       
+        Debug.Log(granade.name);
+        var ability = abilityInventory.GetLastAbility();
+        Debug.Log(ability);
+        var granadeAbility = (ability.abilityData as AbilityData_Granade);
+        Debug.Log(granadeAbility);
+
+        var granadestats = granadeAbility.granadeStats;
+        Debug.Log(granadestats);
+
+        OnGranadeThrow?.Invoke(granade, granadestats);
     }
 
     public void PressMeleeButton()

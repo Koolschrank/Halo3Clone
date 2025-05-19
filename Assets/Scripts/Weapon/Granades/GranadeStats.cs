@@ -21,4 +21,15 @@ public class GranadeStats : ScriptableObject
     public GameObject GranadePrefab => granadePrefab;
 
     public GameObject GranadeClonePrefab => granadeClonePrefab;
+
+
+    public GranadeStats(GranadeStats statsToCopy)
+    {
+        throwDelay = statsToCopy.throwDelay;
+        throwTime = statsToCopy.throwTime;
+        throwAngle = statsToCopy.throwAngle;
+        throwForce = statsToCopy.throwForce;
+        granadePrefab = statsToCopy.granadePrefab;
+        granadeClonePrefab = statsToCopy.granadeClonePrefab;
+    }
 }

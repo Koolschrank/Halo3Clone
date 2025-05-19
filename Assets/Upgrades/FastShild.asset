@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FastShild
   m_EditorClassIdentifier: 
   UpgradeName: Fast Regen
-  Description: Shild regeneration starts 1 second earlier
+  Description: Shild regeneration starts 1.5 second earlier
   Icon: {fileID: 0}
   timeReduction: 1

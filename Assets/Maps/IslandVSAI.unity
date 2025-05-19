@@ -46930,7 +46930,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3f27e41ec5a44554384d65a63c3c7007, type: 2}
     - target: {fileID: 465907222396707810, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'expRequirments.Array.data[0]'
-      value: 1000
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 465907222396707810, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'expRequirments.Array.data[1]'
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 465907222396707810, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'expRequirments.Array.data[2]'
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 903774208047818906, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47062,7 +47070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5296435443718249776, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.854
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5296435443718249776, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.z
@@ -73896,11 +73904,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: waveIndex
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: spawnInterval
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: spawnRateMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: enemyWaves.Array.size

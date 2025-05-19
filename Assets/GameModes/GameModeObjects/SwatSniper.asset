@@ -26,8 +26,7 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
-    granade: {fileID: 0}
-    granadeCount: 1
+    ability: {fileID: 0}
   timeLimitInMinutes: 10
   pointsToWin: 15
   teamCount: 8

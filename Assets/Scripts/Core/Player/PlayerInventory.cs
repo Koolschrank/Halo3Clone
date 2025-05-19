@@ -7,10 +7,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public Action<Weapon_Arms, int> OnWeaponAddedToInventory;
     public Action<Weapon_Arms> OnWeaponDrop;
-    public Action<int> OnGranadeCountChanged;
 
-    public Action<int> OnMaxGranadeCountChanged;
-    public Action<float> OnGranadeChargeChanged;
     public Action OnMiniMapDisabled;
     public Action OnMiniMapEnabled;
     public Action<Weapon_Data,int> OnAmmoChanged;
@@ -29,14 +26,8 @@ public class PlayerInventory : MonoBehaviour
 
 
 
-    [SerializeField] GranadeStats granadeStats = null;
-    [SerializeField] int granadeInventorySize = 1;
-    [SerializeField] bool rechargeGranades = false;
-    [SerializeField] float rechargeGranadeTime = 5;
     [SerializeField] Transform weaponDropPoint;
     [SerializeField] CharacterHealth characterHealth;
-    float rechargeGranadeTimer;
-    int granadeCount = 0;
 
     public bool HasWeapon => weapons.Count > 0;
 
@@ -79,21 +70,7 @@ public class PlayerInventory : MonoBehaviour
             weapon.UpdateWeapon();
         }
 
-        if (rechargeGranades && granadeCount < granadeInventorySize)
-        {
-            if (rechargeGranadeTimer > 0)
-            {
-                rechargeGranadeTimer -= Time.deltaTime;
-                OnGranadeChargeChanged?.Invoke(1-(rechargeGranadeTimer / rechargeGranadeTime));
-            }
-            else
-            {
-                AddGranade();
-                rechargeGranadeTimer = rechargeGranadeTime;
-                OnGranadeChargeChanged?.Invoke(1);
-
-            }
-        }
+        
     }
 
     public void AddWeapon(Weapon_Arms weapon)
@@ -151,65 +128,6 @@ public class PlayerInventory : MonoBehaviour
 
     public bool Full => weapons.Count >= weaponInvetorySize;
 
-    // add granade
-
-    public void ChangeGranade(GranadeStats granade)
-    {
-        granadeStats = granade;
-        if (granadeStats != null)
-        {
-            OnMaxGranadeCountChanged?.Invoke(granadeInventorySize);
-        }
-        else
-        {
-            OnMaxGranadeCountChanged?.Invoke(0);
-        }
-    }
-
-    public int GranadeInventorySize => granadeStats == null ? 0 : granadeInventorySize;
-
-
-    public void AddGranades(int count)
-    {
-        for (int i = 0; i < count; i++)
-        {
-            AddGranade();
-        }
-    }
-
-    public void AddGranade()
-    {
-        if (granadeCount < granadeInventorySize)
-        {
-            granadeCount++;
-            OnGranadeCountChanged?.Invoke(granadeCount);
-            if (granadeCount == granadeInventorySize)
-            {
-                OnGranadeChargeChanged?.Invoke(1);
-            }
-        }
-    }
-
-    // has granade
-    public bool HasGranades => granadeStats != null && granadeCount > 0;
-
-    // reduce granade
-    public void UseGranade()
-    {
-        if (granadeCount > 0)
-        {
-            granadeCount--;
-            OnGranadeCountChanged?.Invoke(granadeCount);
-
-            if (rechargeGranades)
-            {
-                rechargeGranadeTimer = rechargeGranadeTime;
-                OnGranadeChargeChanged?.Invoke(0);
-            }
-        }
-    }
-
-    public GranadeStats GranadeStats => granadeStats;
 
     public void AddAmmo(Weapon_Data weaponType, int ammo)
     {

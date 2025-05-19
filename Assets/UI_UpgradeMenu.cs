@@ -31,6 +31,7 @@ public class UI_UpgradeMenu : MonoBehaviour
                 Destroy(box.GetChild(0).gameObject);
             }
         }
+        
     }
 
     public void Select1()

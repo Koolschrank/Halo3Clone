@@ -17,7 +17,7 @@ public class AI_Target : MonoBehaviour
         float closestDistance = Mathf.Infinity;
         foreach (var player in players)
         {
-            if (player != null && player.gameObject.activeInHierarchy)
+            if (player != null && player.gameObject.activeInHierarchy && !player.IsDead)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (distance < closestDistance)

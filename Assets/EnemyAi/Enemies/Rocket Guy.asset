@@ -16,6 +16,7 @@ MonoBehaviour:
     hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 0
+    canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
@@ -27,7 +28,7 @@ MonoBehaviour:
     granade: {fileID: 0}
     granadeCount: 0
   healthMultiplier: 1
-  shildMultiplier: 1
+  shildMultiplier: 2.5
   speedMultiplier: 1
   teamIdOverrride: 7
   scoreForKill: 120
