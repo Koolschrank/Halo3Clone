@@ -13,8 +13,13 @@ public class LeftArm : Arm
         
         if (armState == ArmState.SwitchingOut) return;
 
+        if (!playerArms.CanDualWield) return;
+
         if (pickUpScan.CanPickUpWeapon())
         {
+            var weaponToPickUp = pickUpScan.GetClosesPickUp();
+            
+
             IfZoomedInExitZoom();
             var newWeapon = pickUpScan.PickUpWeapon();
 

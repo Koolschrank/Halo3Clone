@@ -17,6 +17,7 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
+    canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 650909fc6bcc65a45ad4ae3ee3128392, type: 2}
@@ -35,12 +36,14 @@ MonoBehaviour:
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 0.75
   pointsToWinMultiplier_smallMap: 1
+  looseWhenAllPlayersDead: 0
   timeToScore: 1
   setEquipmentOnCrownPickup: 1
   equipmentOnCrownPickup:
     hasShild: 0
     headShotOneShot: 1
     hasMiniMap: 1
+    canDualWield: 0
     canDualWieldEverything: 1
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}

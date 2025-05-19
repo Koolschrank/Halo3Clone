@@ -16,12 +16,26 @@ public class PlayerArms : MonoBehaviour
     [SerializeField] RightArm rightArm;
     [SerializeField] LeftArm leftArm;
     [SerializeField] PlayerInventory inventory;
+    [SerializeField] bool canDualWield = false;
     [SerializeField] bool canDualWield2HandedWeapons = false;
 
     bool isDualWielding = false;
 
     float movementSpeedMultiplier = 1;
 
+
+    public bool CanDualWield
+    {
+        get
+        {
+            return canDualWield;
+        }
+    }
+
+    public void SetCanDualWield(bool value)
+    {
+        canDualWield = value;
+    }
     public void SetCanDualWield2HandedWeapons(bool value)
     {
         canDualWield2HandedWeapons = value;

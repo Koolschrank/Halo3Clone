@@ -23,7 +23,7 @@ MonoBehaviour:
   magazineSize: 4
   maxAmmoInReserve: 12
   reloadTime: 3.2
-  inaccuracy: 0.15
+  inaccuracy: 0.09
   switchOutTime: 0.3
   switchInTime: 0.6
   canZoom: 1
@@ -131,6 +131,6 @@ MonoBehaviour:
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 25
-    focusGainWhenOnTarget: 0.4
+    focusGainWhenOnTarget: 0.5
     focusLossWhenNotOnTarget: 0.3
     moveSpeedWithGun: 0.5

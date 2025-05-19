@@ -32,6 +32,34 @@ public class Weapon_Arms
 
     bool isBeingDualWielded = false;
 
+    int extraBulletsInMagazine = 0;
+
+    bool reloadOnPickup = false;
+
+    float fireRateMultiplier = 1f;
+
+    public void SetFireRateMultiplier(float fireRateMultiplier)
+    {
+        this.fireRateMultiplier = fireRateMultiplier;
+    }
+
+    public bool ReloadOnPickup
+    {
+        get => reloadOnPickup;
+        set => reloadOnPickup = value;
+    }
+
+
+    public void SetExtraBulletsInMagazine(int extraBulletsInMagazine)
+    {
+        this.extraBulletsInMagazine = extraBulletsInMagazine;
+    }
+
+    public int GetExtraBulletsInMagazine()
+    {
+        return extraBulletsInMagazine;
+    }
+
     public void SetIsBeingDualWielded(bool isBeingDualWielded)
     {
         this.isBeingDualWielded = isBeingDualWielded;
@@ -72,7 +100,7 @@ public class Weapon_Arms
         }
     }
 
-    public int MagazineSize => weaponData.MagazineSize;
+    public int MagazineSize => weaponData.MagazineSize + extraBulletsInMagazine;
 
 
     public void SetBulletSpawner(BulletSpawner bulletSpawner)
@@ -133,7 +161,7 @@ public class Weapon_Arms
         {
             shotsLeftInBurst = weaponData.BulletsInBurst;
             Shoot();
-            shootCooldownInBurst = weaponData.BurstFireRate;
+            shootCooldownInBurst = weaponData.BurstFireRate / fireRateMultiplier;
             shotsLeftInBurst--;
             return true;
         }
@@ -142,7 +170,7 @@ public class Weapon_Arms
 
     public void ResetShootCooldown()
     {
-        shootCooldown = weaponData.GetFireRate(isBeingDualWielded);
+        shootCooldown = weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier;
     }
 
     private void Shoot()
@@ -151,7 +179,7 @@ public class Weapon_Arms
         {
             OnShot?.Invoke();
 
-            shootCooldown += weaponData.GetFireRate(isBeingDualWielded);
+            shootCooldown += weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier;
             Magazine--;
 
             if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
@@ -201,7 +229,7 @@ public class Weapon_Arms
 
     public bool CanReload()
     {
-        return Magazine < weaponData.MagazineSize;
+        return Magazine < MagazineSize;
     }
 
     public void ReloadStart(float reloadTime)
@@ -226,7 +254,7 @@ public class Weapon_Arms
 
     public void ReloadFinished(int ammoAdded)
     {
-        int missingAmmo = weaponData.MagazineSize - Magazine;
+        int missingAmmo = MagazineSize - Magazine;
         Magazine += ammoAdded;
 
     }
@@ -245,7 +273,7 @@ public class Weapon_Arms
 
     public void SetAmmo(int magazine)
     {
-        Magazine = Mathf.Min(weaponData.MagazineSize, magazine);
+        Magazine = Mathf.Min(MagazineSize, magazine);
         //Reserve = Mathf.Min(weaponData.MaxAmmoInReserve, reserve);
     }
 

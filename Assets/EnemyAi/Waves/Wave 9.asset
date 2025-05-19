@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058328fc45d79ce4c96a84bba54d2389, type: 3}
+  m_Name: Wave 9
+  m_EditorClassIdentifier: 
+  enemyStats:
+  - {fileID: 11400000, guid: f58a252253212f84d96563ca62e888cb, type: 2}
+  - {fileID: 11400000, guid: bc90694182b6a144a80ce6fc4f19fb96, type: 2}
+  - {fileID: 11400000, guid: 4198c8b4b627c3341a8d65f8b3a46ffc, type: 2}
+  - {fileID: 11400000, guid: e851f00bcc519f845b8b9a81b2d81242, type: 2}
+  - {fileID: 11400000, guid: 2cabf6e9d85d0534f996d06d27c2fab6, type: 2}
+  - {fileID: 11400000, guid: f3a3dcdf96f2a82408fb12d70b0cb92f, type: 2}
+  - {fileID: 11400000, guid: fbacd5baf1a816d469e917e2a264c9e0, type: 2}
+  - {fileID: 11400000, guid: a4be1bacd41d8114bb0d52937972d152, type: 2}
+  spawnInterval: 3
+  duration: 999
+  waveEndBrakeTime: 15

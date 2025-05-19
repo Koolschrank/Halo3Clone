@@ -89,6 +89,7 @@ public class PlayerStartEquipment : MonoBehaviour
         health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);
 
+        playerArms.SetCanDualWield(equipment.CanDualWield);
         playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
 
     }
@@ -104,7 +105,8 @@ public class PlayerStartEquipment : MonoBehaviour
     public Weapon_Arms SpawnWeapon(Weapon_Data data, int magazins)
     {
         var weapon = new Weapon_Arms(data);
-        weapon.FillMagazine();
+        if (magazins != 0)
+            weapon.FillMagazine();
         playerInventory.AddAmmo(data, data.MagazineSize * (magazins -1));
         return weapon;
     }
@@ -117,6 +119,8 @@ public class Equipment
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
     [SerializeField] bool hasMiniMap = true;
+
+    [SerializeField] bool canDualWield = true;
     [SerializeField] bool canDualWieldEverything = false;
     [SerializeField] float movementSpeedMultiplier = 1;
 
@@ -133,6 +137,8 @@ public class Equipment
 
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
+
+    public bool CanDualWield => canDualWield;
 
     public void SetHasShild(bool hasShild)
     {

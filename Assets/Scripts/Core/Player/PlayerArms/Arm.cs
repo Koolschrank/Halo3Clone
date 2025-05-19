@@ -62,11 +62,71 @@ public class Arm : MonoBehaviour
     [SerializeField] float granadeThrowTimeMultiplierInDualWielding = 1.5f;
     [SerializeField] bool reloadWeaponWhenDroped = false;
 
+
+    int extraBulletsInMagazine = 0;
+
+    float bulletRecoveryChance = 0;
+    float reloadWeaponSpeedMultiplier = 1;
+    float fireRateMultiplier = 1;
+
+    public void AddToFireRateMultiplier(float value)
+    {
+        fireRateMultiplier += value;
+        if (weaponInHand != null)
+        {
+            weaponInHand.SetFireRateMultiplier(fireRateMultiplier);
+        }
+        if (inventory.HasWeapon)
+        {
+            inventory.GetWeapon().SetFireRateMultiplier(fireRateMultiplier);
+        }
+    }
+
+    public void SetReloadWeaponSpeedMultiplier(float multiplier)
+    {
+        reloadWeaponSpeedMultiplier = multiplier;
+    }
+
+    public void SetBulletRecoveryChance(float chance)
+    {
+        bulletRecoveryChance = chance;
+    }
+
+
+    public int ExtraBulletsInMagazine
+    {
+        get
+        {
+            return extraBulletsInMagazine;
+        }
+        set
+        {
+            extraBulletsInMagazine = value;
+
+            if (weaponInHand != null)
+            {
+                weaponInHand.SetExtraBulletsInMagazine(extraBulletsInMagazine);
+            }
+
+            if (inventory.HasWeapon)
+            {
+                inventory.GetWeapon().SetExtraBulletsInMagazine(extraBulletsInMagazine);
+            }
+        }
+    }
+
+    public void AddExtraBullets(int amount)
+    {
+        extraBulletsInMagazine += amount;
+    }
+
     private void Start()
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
         characterHealth.OnDeath += DropWeaponWithNoForce;
         inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
+
+        OnWeaponShoot += (Weapon_Arms) => TryBulletRecovery();
 
     }
 
@@ -269,6 +329,19 @@ public class Arm : MonoBehaviour
         return true;
     }
 
+    public void TryBulletRecovery()
+    {
+        if (bulletRecoveryChance == 0) return;
+
+        if (UnityEngine.Random.Range(0f, 1f) < bulletRecoveryChance)
+        {
+            if (weaponInHand != null)
+            {
+                inventory.AddAmmo(weaponInHand.Data, 1);
+            }
+        }
+    }
+
     public void PressReloadButton()
     {
         reloadInputBufferTimer = reloadInputBuffer;
@@ -284,8 +357,8 @@ public class Arm : MonoBehaviour
         {
             IfZoomedInExitZoom();
             armState = ArmState.Reloading;
-            reloadTimer = weaponInHand.ReloadTime;
-            OnWeaponReloadStarted?.Invoke(weaponInHand, weaponInHand.ReloadTime);
+            reloadTimer = weaponInHand.ReloadTime * reloadWeaponSpeedMultiplier;
+            OnWeaponReloadStarted?.Invoke(weaponInHand, reloadTimer);
             weaponInHand.ReloadStart(reloadTimer);
         }
     }
@@ -295,7 +368,7 @@ public class Arm : MonoBehaviour
         armState = ArmState.Ready;
         if (weaponInHand != null)
         {
-            int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
+            int ammoNeeded = weaponInHand.MagazineSize - weaponInHand.Magazine;
             int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
             weaponInHand.ReloadFinished(ammoAdded);
         }
@@ -476,7 +549,8 @@ public class Arm : MonoBehaviour
         if (weaponInHand == null) return null;
 
         IfZoomedInExitZoom();
-        
+        weaponInHand.SetExtraBulletsInMagazine(0);
+
         // if weapon is empty return null
         if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
         {
@@ -485,9 +559,10 @@ public class Arm : MonoBehaviour
 
         if (reloadWeaponWhenDroped)
         {
-            int ammoNeeded = weaponInHand.Data.MagazineSize - weaponInHand.Magazine;
+            int ammoNeeded = weaponInHand.MagazineSize - weaponInHand.Magazine;
             int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
             weaponInHand.ReloadFinished(ammoAdded);
+            
         }
 
         var pickUpVersion = weaponInHand.PickUpVersion;
@@ -502,8 +577,12 @@ public class Arm : MonoBehaviour
         {
             pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
         }
+        if (reloadWeaponWhenDroped)
+        {
+            pickUp.ReloadOnPickup = true;
+        }
 
-        pickUp.EnterDeleteTime();
+            pickUp.EnterDeleteTime();
         OnWeaponDroped?.Invoke(weaponInHand, pickUp);
         weaponInHand.DropWeapon();
         weaponInHand = null;
@@ -601,11 +680,23 @@ public class Arm : MonoBehaviour
         }
 
         weaponInHand = weapon;
+        weaponInHand.SetExtraBulletsInMagazine(extraBulletsInMagazine);
+        weaponInHand.SetFireRateMultiplier(fireRateMultiplier);
         switchInTimer = weaponInHand.SwitchInTime;
         armState = ArmState.SwitchingIn;
         OnWeaponEquipStarted?.Invoke(weaponInHand, weaponInHand.SwitchInTime);
 
         SetUpWeapon(weaponInHand);
+
+        if (weapon.ReloadOnPickup)
+        {
+            ReloadFinished();
+            weapon.ReloadOnPickup = false;
+        }
+
+       
+
+
         weaponInHand.SwitchInStart(switchInTimer);
     }
 
@@ -617,6 +708,10 @@ public class Arm : MonoBehaviour
         }
     }
 
+    public BulletSpawner GetBulletSpawner()
+    {
+        return bulletSpawner;
+    }
 
     public Weapon_Arms GetWeaponInHand()
     {

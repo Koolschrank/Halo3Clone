@@ -921,6 +921,107 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UpgradeSelection"",
+            ""id"": ""c5e4d345-afcf-4688-9afa-870782e1a068"",
+            ""actions"": [
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""55693354-2a4c-418d-932b-cbfe1ae6275b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""2"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebbba6e1-338d-4714-a91d-a9f9b63a24aa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""3"",
+                    ""type"": ""Button"",
+                    ""id"": ""15cb258e-f3bd-4d06-97d9-0613c247389e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ccb27616-4ef0-4d6e-a9a3-d933e3369499"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb04ddb6-f29c-495f-a034-2ea45e6eb958"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45808bfe-5259-43e6-9eb3-e9ac8416cbae"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9651cf4b-1a5b-4033-b0af-37642dfd8e4e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccaa2a02-b367-41b4-80df-6fc686a23f7a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f13640d1-cf7c-4934-8023-ece0bedbbf17"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -984,6 +1085,11 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_QuickMenu_Right = m_QuickMenu.FindAction("Right", throwIfNotFound: true);
         m_QuickMenu_Down = m_QuickMenu.FindAction("Down", throwIfNotFound: true);
         m_QuickMenu_Up = m_QuickMenu.FindAction("Up", throwIfNotFound: true);
+        // UpgradeSelection
+        m_UpgradeSelection = asset.FindActionMap("UpgradeSelection", throwIfNotFound: true);
+        m_UpgradeSelection__1 = m_UpgradeSelection.FindAction("1", throwIfNotFound: true);
+        m_UpgradeSelection__2 = m_UpgradeSelection.FindAction("2", throwIfNotFound: true);
+        m_UpgradeSelection__3 = m_UpgradeSelection.FindAction("3", throwIfNotFound: true);
     }
 
     ~@Controller()
@@ -992,6 +1098,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_PlayerGunPlay_SingleWeapon.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_SingleWeapon.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerGunPlay_DualWeapons.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_DualWeapons.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_QuickMenu.enabled, "This will cause a leak and performance issues, Controller.QuickMenu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UpgradeSelection.enabled, "This will cause a leak and performance issues, Controller.UpgradeSelection.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1385,6 +1492,68 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         }
     }
     public QuickMenuActions @QuickMenu => new QuickMenuActions(this);
+
+    // UpgradeSelection
+    private readonly InputActionMap m_UpgradeSelection;
+    private List<IUpgradeSelectionActions> m_UpgradeSelectionActionsCallbackInterfaces = new List<IUpgradeSelectionActions>();
+    private readonly InputAction m_UpgradeSelection__1;
+    private readonly InputAction m_UpgradeSelection__2;
+    private readonly InputAction m_UpgradeSelection__3;
+    public struct UpgradeSelectionActions
+    {
+        private @Controller m_Wrapper;
+        public UpgradeSelectionActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @_1 => m_Wrapper.m_UpgradeSelection__1;
+        public InputAction @_2 => m_Wrapper.m_UpgradeSelection__2;
+        public InputAction @_3 => m_Wrapper.m_UpgradeSelection__3;
+        public InputActionMap Get() { return m_Wrapper.m_UpgradeSelection; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UpgradeSelectionActions set) { return set.Get(); }
+        public void AddCallbacks(IUpgradeSelectionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UpgradeSelectionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UpgradeSelectionActionsCallbackInterfaces.Add(instance);
+            @_1.started += instance.On_1;
+            @_1.performed += instance.On_1;
+            @_1.canceled += instance.On_1;
+            @_2.started += instance.On_2;
+            @_2.performed += instance.On_2;
+            @_2.canceled += instance.On_2;
+            @_3.started += instance.On_3;
+            @_3.performed += instance.On_3;
+            @_3.canceled += instance.On_3;
+        }
+
+        private void UnregisterCallbacks(IUpgradeSelectionActions instance)
+        {
+            @_1.started -= instance.On_1;
+            @_1.performed -= instance.On_1;
+            @_1.canceled -= instance.On_1;
+            @_2.started -= instance.On_2;
+            @_2.performed -= instance.On_2;
+            @_2.canceled -= instance.On_2;
+            @_3.started -= instance.On_3;
+            @_3.performed -= instance.On_3;
+            @_3.canceled -= instance.On_3;
+        }
+
+        public void RemoveCallbacks(IUpgradeSelectionActions instance)
+        {
+            if (m_Wrapper.m_UpgradeSelectionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUpgradeSelectionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UpgradeSelectionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UpgradeSelectionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UpgradeSelectionActions @UpgradeSelection => new UpgradeSelectionActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -1437,5 +1606,11 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
+    }
+    public interface IUpgradeSelectionActions
+    {
+        void On_1(InputAction.CallbackContext context);
+        void On_2(InputAction.CallbackContext context);
+        void On_3(InputAction.CallbackContext context);
     }
 }

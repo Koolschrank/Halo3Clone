@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Maps/Island.unity
     guid: 0e5567724aa309040871641a1dd9f865
+  - enabled: 1
+    path: Assets/Maps/IslandVSAI.unity
+    guid: d7a41cb8508ab6c45bf2041631c7259b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f35337ef2a27d9441967cf9acbdf46bf, type: 2}
   m_UseUCBPForAssetBundles: 0

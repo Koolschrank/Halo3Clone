@@ -10681,6 +10681,7 @@ MonoBehaviour:
   gravity: 15
   cyoteTime: 0.3
   crouchSpeed: 4
+  ignoreAimDirection: 0
   walkSound:
     Guid:
       Data1: -890825783
@@ -10712,6 +10713,7 @@ MonoBehaviour:
   playerInventory: {fileID: 7573040687501960069}
   health: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
+  isNonPlayer: 0
 --- !u!114 &4355240392448193639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10760,6 +10762,7 @@ MonoBehaviour:
   minSensitivity: 0.1
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1
+  OnTarget: 0
 --- !u!114 &7573040687501960069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10930,6 +10933,7 @@ MonoBehaviour:
   rightArm: {fileID: 3970420054294455764}
   leftArm: {fileID: 3844945188849078822}
   inventory: {fileID: 7573040687501960069}
+  canDualWield: 1
   canDualWield2HandedWeapons: 0
 --- !u!114 &3844945188849078822
 MonoBehaviour:
@@ -10959,6 +10963,7 @@ MonoBehaviour:
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
   granadeThrowTimeMultiplierInDualWielding: 1.5
+  reloadWeaponWhenDroped: 0
   noInvectoryInteraction: 1
 --- !u!114 &3970420054294455764
 MonoBehaviour:
@@ -10988,6 +10993,7 @@ MonoBehaviour:
   granadeThrowInputBuffer: 0.4
   meleeAttackTimeMultiplierInDualWielding: 1.5
   granadeThrowTimeMultiplierInDualWielding: 1.6
+  reloadWeaponWhenDroped: 0
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

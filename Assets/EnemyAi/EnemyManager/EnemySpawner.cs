@@ -1,32 +1,55 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] int enemyTeamId = 1; // Team ID for the enemy team
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] float spawnInterval = 5f;
 
 
-    [SerializeField] bool onlyUseFirstEquipment = false;
-    [SerializeField] Equipment[] enemyEquipments;
+    [SerializeField] Enemy_Wave[] enemyWaves;
+    [SerializeField] int waveIndex = 0;
+    EnemyWaveInstance activeWave;
 
-    float nextSpawnTime;
+    float nextWaveDelay = 5;
 
-    private void Start()
+
+    public void StartNextWave()
     {
-        nextSpawnTime = Time.time + spawnInterval;
+        activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
+        waveIndex++;
     }
 
     private void Update()
     {
-        if (Time.time >= nextSpawnTime)
+        if (activeWave == null)
         {
-            SpawnEnemy();
-            nextSpawnTime = Time.time + spawnInterval;
+            if (nextWaveDelay > 0)
+            {
+                nextWaveDelay -= Time.deltaTime;
+                return;
+            }
+            StartNextWave();
+        }
+        else
+        {
+            
+
+            activeWave.UpdateTimers();
+
+            if (activeWave.CanSpawnEnemy())
+            {
+                SpawnEnemy(activeWave.GetRandomEnemy());
+            }
+            if (activeWave.IsWaveOver())
+            {
+                nextWaveDelay = activeWave.GetWaveEndBrakeTime();
+                activeWave = null;
+            }
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(Enemy_Stats stats)
     {
 
         Transform spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId,3);
@@ -35,14 +58,76 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
 
-        var equipment = enemyEquipments[Random.Range(0, enemyEquipments.Length)];
-        if (onlyUseFirstEquipment)
-        {
-            equipment = enemyEquipments[0];
-        }
+        var equipment = stats.equipment;
         enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
+        var health = enemy.GetComponent<CharacterHealth>();
+        health.MultiplyHealth(stats.healthMultiplier);
+        health.MultiplyShild(stats.shildMultiplier);
+        var movement = enemy.GetComponent<PlayerMovement>();
+        movement.MultiplySpeed(stats.speedMultiplier);
 
         // get child of name EnemyAI
-        PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), enemyTeamId);
+        var teamId = stats.teamIdOverrride;
+        var score = enemy.GetComponent<GainScore>();
+        score.scoreAmount = stats.scoreForKill;
+
+        PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
     }
+}
+
+
+public class EnemyWaveInstance
+{
+    Enemy_Wave enemyWave;
+    float duration;
+    float nextSpawnTimer;
+
+    public EnemyWaveInstance(Enemy_Wave enemyWave)
+    {
+        this.enemyWave = enemyWave;
+        duration = enemyWave.duration;
+        nextSpawnTimer = enemyWave.spawnInterval;
+    }
+
+    public void UpdateTimers()
+    {
+        duration -= Time.deltaTime;
+        nextSpawnTimer -= Time.deltaTime;
+
+    }
+
+    public bool CanSpawnEnemy()
+    {
+        if (nextSpawnTimer <= 0)
+        {
+            nextSpawnTimer = enemyWave.spawnInterval;
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsWaveOver()
+    {
+        if (duration <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Enemy_Stats GetRandomEnemy()
+    {
+        return enemyWave.GetRandomEnemy();
+    }   
+
+    public float GetWaveEndBrakeTime()
+    {
+        return enemyWave.waveEndBrakeTime;
+    }
+
+
+
+
+
+
 }

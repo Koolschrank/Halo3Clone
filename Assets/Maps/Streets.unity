@@ -17171,6 +17171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4826002856353710818, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 10

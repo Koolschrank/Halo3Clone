@@ -37,7 +37,7 @@ public class PlayerPickUpScan : MonoBehaviour
             OnWeaponPickUpUpdate?.Invoke(closesWeapon);
 
             var weaponInRightHand = playerArms.RightArm.GetWeaponInHand();
-            if (weaponInRightHand != null && closesWeapon != null)
+            if (playerArms.CanDualWield  && weaponInRightHand != null && closesWeapon != null )
             {
                 var weaponTypeOfWeaponInHand = weaponInRightHand.WeaponType;
                 bool isDualWieldable = weaponTypeOfWeaponInHand == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons;

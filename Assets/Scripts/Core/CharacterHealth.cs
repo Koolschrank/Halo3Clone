@@ -47,6 +47,18 @@ public class CharacterHealth : Health
 
     float MaxShild => maxShild * maxShildMultiplier;
 
+    public void MultiplyHealth(float multiplier)
+    {
+        maxHeath *= multiplier;
+        currentHeath = maxHeath;
+    }
+
+    public void MultiplyShild(float multiplier)
+    {
+        maxShild *= multiplier;
+        currentShild = maxShild;
+    }
+
     public void SetHasShild(bool hasShild)
     {
         if (this.hasShild == hasShild)
@@ -68,6 +80,11 @@ public class CharacterHealth : Health
         }
 
 
+    }
+
+    public void ReduceShildRegenTime(float amountOfReduction)
+    {
+        shildRegenDelay -= amountOfReduction;
     }
 
     public void SetHeadShotOneShot(bool headShotOneShot)

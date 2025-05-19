@@ -21,6 +21,13 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] GranadeThrower granadeThrower;
     [SerializeField] LayerMask wallCheck;
 
+    float accuracyMultiplier = 1f;
+    public float AccuracyMultiplier
+    {
+        get { return accuracyMultiplier; }
+        set { accuracyMultiplier = value; }
+    }
+
 
     //AutoAim autoAimOfCurrentWeapon;
 
@@ -150,7 +157,7 @@ public class BulletSpawner : MonoBehaviour
         for (int i = 0; i < bulletCount; i++)
         {
             //var forwardForThisBullet = forward + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
-            var inaccuracy = UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+            var inaccuracy = UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy * AccuracyMultiplier;
             // spawn projectile at transform position and rotate it to forward
             granades[i] = granadeThrower.ThrowGranadeWithWeapon(granade_data.GranadeStats, inaccuracy);
 
@@ -206,7 +213,7 @@ public class BulletSpawner : MonoBehaviour
         Vector3[] hitPoints = new Vector3[bulletCount];
         for (int i = 0; i < bulletCount; i++)
         {
-            Vector3 shotDirectionForThisBullet = shotDirection + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+            Vector3 shotDirectionForThisBullet = shotDirection + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy * AccuracyMultiplier;
 
             if (Physics.Raycast(cameraTransform.position, shotDirectionForThisBullet, out hit, range, hitLayer))
             {
@@ -290,7 +297,7 @@ public class BulletSpawner : MonoBehaviour
         GameObject[] bullets = new GameObject[bulletCount];
         for (int i = 0; i < bulletCount; i++)
         {
-            var forwardForThisBullet = forward + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy;
+            var forwardForThisBullet = forward + UnityEngine.Random.insideUnitSphere * weapon.Inaccuracy * AccuracyMultiplier;
             // spawn projectile at transform position and rotate it to forward
             GameObject projectile = Instantiate(bullet_data.BulletPrefab, transform.position, Quaternion.LookRotation(forwardForThisBullet));
 

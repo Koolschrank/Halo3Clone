@@ -17,8 +17,10 @@ public class GameMode : ScriptableObject
     [SerializeField] protected float pointsToWinMultiplier_MoreThan4Players = 1f;
     [SerializeField] protected float pointsToWinMultiplier_smallMap = 1f;
 
+    [SerializeField] protected bool looseWhenAllPlayersDead = false; // if true, when all players are dead, the game is over and the team with the most points wins
 
-    
+
+
 
 
     public Equipment StartingEquipment { get { return startingEquipment; } }
@@ -51,5 +53,7 @@ public class GameMode : ScriptableObject
     public bool ReasignsTeamsInPlayerOrder { get { return reasignsTeamsInPlayerOrder; } }
 
     public float RespawnTime {  get { return respawnTime; } }
+
+    public bool LooseWhenAllPlayersDead { get { return looseWhenAllPlayersDead; } }
 }
 

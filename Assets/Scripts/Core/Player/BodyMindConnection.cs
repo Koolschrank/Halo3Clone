@@ -49,6 +49,9 @@ public class BodyMindConnection : MonoBehaviour
         mind.ConnectPlayerElimination(targetHitCollector);
         SetPlayTeamIndex();
         playerStartEquipment.GetEquipment(GetStartEquipment());
+        mind.ApplyUpgrades();
+        mind.SetAlive();
+        
 
 
     }

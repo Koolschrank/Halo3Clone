@@ -59,6 +59,16 @@ public class PlayerMovement : MonoBehaviour
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
+    public void MultiplyMaxMoveSpeed(float multiplier)
+    {
+        maxMoveSpeed *= multiplier;
+    }
+
+
+    public void MultiplySpeed(float multiplier)
+    {
+        maxMoveSpeedMultiplier *= multiplier;
+    }
 
     // update
     void Update()

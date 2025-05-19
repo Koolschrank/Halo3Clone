@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
@@ -28,6 +29,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerCamera playerCamera;
     //[SerializeField] CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerTeam team;
+    [SerializeField] PlayerUpgrades playerUpgrader;
 
 
     [Header("UI")]
@@ -49,6 +51,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] GameLogUI gameLogUI;
     [SerializeField] TextMeshProUGUI playerName;
     [SerializeField] PlayerNamePopUp playerNamePopUp;
+    [SerializeField] UI_Score scoreUI;
+    [SerializeField] UI_UpgradeMenu upgradeMenu;
     [Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
@@ -69,10 +73,23 @@ public class PlayerMind : MonoBehaviour
     PlayerInventory playerInventory;
     public PlayerSettings playerSettings { get; private set; }
 
-
+    public PlayerUpgrades PlayerUpgrades { get { return playerUpgrader; } }
 
     int firstPersonLayer;
     int thirdPersonLayer;
+
+    int score = 0;
+
+    public Action<int> OnScoreChanged;
+    public Action<int> OnScoreAdded;
+    bool isDead = false;
+
+    public bool IsDead { get { return isDead; } }
+
+    public void SetAlive()
+    {
+        isDead = false;
+    }
 
 
     public void EnterOneWeaponMode()
@@ -109,6 +126,9 @@ public class PlayerMind : MonoBehaviour
 
         LogSystem.logSystem.OnLogPrinted += gameLogUI.Print;
 
+        OnScoreAdded += scoreUI.SpawnScoreGain;
+        OnScoreChanged += scoreUI.UpdateScore;
+
 
     }
 
@@ -117,6 +137,13 @@ public class PlayerMind : MonoBehaviour
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
+
+        
+    }
+
+    public void ApplyUpgrades()
+    {
+        playerUpgrader.ApplyAllUpgradesOnBody(playerBody);
     }
 
     public void CrownCollected()
@@ -270,6 +297,10 @@ public class PlayerMind : MonoBehaviour
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
 
         crownText.gameObject.SetActive(false);
+
+        isDead = true;
+
+        GameModeSelector.gameModeManager.PlayerDied(this);
     }
 
     public void PlayerElimination(GameObject obj)
@@ -283,9 +314,6 @@ public class PlayerMind : MonoBehaviour
             else
             {
                 OnPlayerElimination?.Invoke(obj, this);
-
-
-
             }
 
 
@@ -294,12 +322,18 @@ public class PlayerMind : MonoBehaviour
             {
                 LogSystem.logSystem.PlayerKilled(playerSettings.playerName,mind.playerSettings.playerName);
             }
-            
-            
         }
-        
+        var score = obj.GetComponent<GainScore>();
+        if (score != null)
+        {
+            this.score += score.scoreAmount;
+            OnScoreAdded?.Invoke(score.scoreAmount);
+            OnScoreChanged?.Invoke(this.score);
+            PlayerProgression.instance.GainEXP(score.scoreAmount); 
+        }
 
-            
+
+
     }
 
     // set pick up scan
@@ -687,7 +721,8 @@ public class PlayerMind : MonoBehaviour
     {
         SwitchToSpectatorCamera();
         yield return new WaitForSeconds(delay);
-        Respawn();
+        if (IsDead)
+            Respawn();
     }
 
     public void Respawn()
@@ -730,6 +765,70 @@ public class PlayerMind : MonoBehaviour
         hitCollector.OnCharacterHit += hitMarkerUI.ShowHitMarker;
         hitCollector.OnCharacterKill += hitMarkerUI.ShowKillMarker;
     }
+
+
+
+    public Action OnUpgradeSelectionFinished;
+    int[] upgradeIndexs;
+    public void SetUpUpgradeMenu(int amountOfUpgrades)
+    {
+
+        upgradeMenu.gameObject.SetActive(true);
+
+        upgradeIndexs = playerUpgrader.GetIndexOfRandomAbiliyNotEarnedYet(amountOfUpgrades);
+
+        List<Upgrade> upgrades = new List<Upgrade>();
+        for (int i = 0; i < upgradeIndexs.Length; i++)
+        {
+            upgrades.Add(playerUpgrader.GetUpgrade(upgradeIndexs[i]));
+        }
+
+        upgradeMenu.AddUpgradeBoxes(upgrades.ToArray());
+        upgradeMenu.OnUpgradeSelected += UpgradeSelected;
+
+
+        playerInput.actions.FindActionMap("UpgradeSelection").Enable();
+        
+
+    }
+
+    public void UpgradeSelected(int index)
+    {
+        int upgradeIndex = upgradeIndexs[index];
+        playerUpgrader.Upgrade(upgradeIndex);
+        OnUpgradeSelectionFinished?.Invoke();
+
+        playerInput.actions.FindActionMap("UpgradeSelection").Disable();
+        upgradeMenu.gameObject.SetActive(false);
+    }
+
+    public void Upgrade_1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            upgradeMenu.Select1();
+        }
+    }
+
+    public void Upgrade_2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            upgradeMenu.Select2();
+        }
+    }
+
+    public void Upgrade_3(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            upgradeMenu.Select3();
+        }
+    }
+
+
+
+
 
 
 }

@@ -21,6 +21,13 @@ public class Weapon_PickUp : MonoBehaviour
     List<int> teamsBlockedFromPickUpThis = new List<int>();
     bool pickedUp = false;
 
+    bool reloadOnPickup = false;
+
+    public bool ReloadOnPickup
+    {
+        get => reloadOnPickup;
+        set => reloadOnPickup = value;
+    }
 
     public void EnterDeleteTime()
     {
@@ -69,6 +76,7 @@ public class Weapon_PickUp : MonoBehaviour
         var weapon = new Weapon_Arms(weapon_Data, ammoInMagazine);
         pickedUp = true;
         OnPickUp?.Invoke(this);
+        weapon.ReloadOnPickup = reloadOnPickup;
         Destroy(gameObject, 0.01f); // Destroy the pickup object after 0.01 seconds to avoid multiple pickups
         return weapon;
 
