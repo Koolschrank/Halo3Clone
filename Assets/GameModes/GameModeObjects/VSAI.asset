@@ -29,6 +29,17 @@ MonoBehaviour:
     ability: {fileID: 0}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 1
+      showHealthBar: 1
+      health: 125
+      shild: 100
+      healthRegenStartTime: 8
+      shildRegenStartTime: 4.5
+      healthRegen: 3
+      shildRegen: 25
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   timeLimitInMinutes: 10
   pointsToWin: 250
   teamCount: 1
@@ -38,3 +49,4 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 1
+  hasAiPlayers: 0

@@ -27,6 +27,19 @@ MonoBehaviour:
     sideArm: {fileID: 0}
     magazinsOfSideArm: 0
     ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability2: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability3: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   timeLimitInMinutes: 10
   pointsToWin: 20
   teamCount: 8
@@ -36,3 +49,4 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0

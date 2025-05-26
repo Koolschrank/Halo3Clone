@@ -7,36 +7,49 @@ public class AI_Aim : MonoBehaviour
     [SerializeField] GameObject head;
     [SerializeField] AI_Target target;
 
-    [SerializeField] float aimSpeedMultiplier = 5f;
+    [SerializeField] float aimSpeedMultiplier_X = 5f;
+    [SerializeField] float aimSpeedMultiplier_Y = 5f;
 
     Vector3 targetPosition;
 
     private void Update()
     {
         Vector2 aimInput = Vector2.zero;
-        
+
         targetPosition = target.GetTargetPosition();
-        // head forward direction
-        Vector3 headForward = head.transform.forward;
-        float angleX = Vector3.SignedAngle(headForward, targetPosition - head.transform.position, head.transform.up);
 
-        angleX = Mathf.Clamp(angleX, -1f, 1f); 
-        // aim input
-        aimInput.x = angleX * aimSpeedMultiplier;
-
-        // head right direction
-        Vector3 headRight = head.transform.right;
-        float angleY = Vector3.SignedAngle(headRight, targetPosition - head.transform.position, head.transform.forward);
-        angleY = Mathf.Clamp(angleY, -1f, 1f);
-        // aim input
-        aimInput.y = angleY * aimSpeedMultiplier;
+        var angles = GetYawPitchToTarget(transform,head.transform, targetPosition);
 
 
 
+        aimInput.x = angles.x * aimSpeedMultiplier_X;
+
+        // vertical angle (pitch)
+       
+        
+        aimInput.y = angles.y * aimSpeedMultiplier_Y;
+        Debug.Log(angles);
 
 
         aim.UpdateAimInput(aimInput);
     }
+
+    Vector2 GetYawPitchToTarget(Transform body, Transform head, Vector3 target)
+    {
+        // Direction to target in world space
+        Vector3 toTargetWorld = (target - head.position).normalized;
+
+        // Convert toTarget into the local space of the body (for yaw)
+        Vector3 toTargetLocalToBody = body.InverseTransformDirection(toTargetWorld);
+        float yaw = Mathf.Atan2(toTargetLocalToBody.x, toTargetLocalToBody.z) * Mathf.Rad2Deg;
+
+        // Convert toTarget into the local space of the head (for pitch)
+        Vector3 toTargetLocalToHead = head.InverseTransformDirection(toTargetWorld);
+        float pitch = -Mathf.Asin(toTargetLocalToHead.y) * Mathf.Rad2Deg;
+
+        return new Vector2(yaw, -pitch); // x = yaw for body, y = pitch for head
+    }
+
 
     private void OnDisable()
     {

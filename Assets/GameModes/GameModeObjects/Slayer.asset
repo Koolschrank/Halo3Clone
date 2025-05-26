@@ -15,7 +15,7 @@ MonoBehaviour:
   gameModeName: 'Elimination '
   startingEquipment:
     hasShild: 1
-    headShotOneShot: 1
+    headShotOneShot: 0
     hasMiniMap: 1
     canDualWield: 1
     canDualWieldEverything: 0
@@ -38,3 +38,4 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0

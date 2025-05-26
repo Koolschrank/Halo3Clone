@@ -7278,10 +7278,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 17.21
       objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: AIPerTeam
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: isAutoActiveOnThisMap
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3895335363518957410, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 495493e7cd48e0b4b8257d221cc38ad3, type: 2}
     - target: {fileID: 4219503754727054592, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.75

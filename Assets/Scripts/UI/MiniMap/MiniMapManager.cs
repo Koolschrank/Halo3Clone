@@ -90,6 +90,9 @@ public class MiniMapManager : MonoBehaviour
         var positionWithoutY = new Vector3(position.x, 0, position.z);
         foreach (MiniMapObject obj in miniMapObjects)
         {
+            if (obj == null || obj.gameObject == null || obj.IsHiddenOnMiniMap)
+                continue;
+
             var objPosWithoutY = new Vector3(obj.transform.position.x, 0, obj.transform.position.z);
             var distance = Vector3.Distance(positionWithoutY, objPosWithoutY);
             if (distance <= maxDistance)

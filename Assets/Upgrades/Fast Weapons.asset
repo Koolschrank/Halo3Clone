@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Fast Weapons
   m_EditorClassIdentifier: 
   UpgradeName: Fire Rate Up
-  Description: 30% faster shooting
+  Description: 25% faster shooting
   Icon: {fileID: 0}
-  fireRateIncrease: 0.3
+  fireRateIncrease: 0.25

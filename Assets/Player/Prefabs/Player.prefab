@@ -10647,13 +10647,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!114 &7400201383000877008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10683,6 +10683,12 @@ MonoBehaviour:
   cyoteTime: 0.3
   crouchSpeed: 4
   ignoreAimDirection: 0
+  playerStandingHitbox:
+    Height: 1.8
+    Offset: -0.1
+  playerCrouchingHitbox:
+    Height: 1.4
+    Offset: -0.35
   walkSound:
     Guid:
       Data1: -890825783
@@ -10828,6 +10834,7 @@ MonoBehaviour:
   hasHealthRegen: 1
   healthRegenDelay: 2.5
   healthRegenAmountPerSecond: 10
+  spawnInvulnerabilityTime: 1
   damageMultiplier: 1
   hasShild: 1
   headShotOneShot: 1
@@ -10917,6 +10924,9 @@ MonoBehaviour:
   icon_Enemy: {fileID: 6297355074296030630, guid: 4930c2003ec96234eba6140a1b8dc078, type: 3}
   playerTeam: {fileID: 2295363821645548979}
   characterHealth: {fileID: 782412234501442312}
+  characterController: {fileID: 1567991787468202011}
+  isHiddenOnMiniMap: 0
+  movementSpeedForVisibility: 2
 --- !u!114 &3232609274750972410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11008,6 +11018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAbilities: 3
+  abilities: []
   currentAbilityIndex: 0
 --- !u!1 &8515099566964434118
 GameObject:

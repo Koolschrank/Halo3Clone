@@ -260,7 +260,7 @@ public class BulletSpawner : MonoBehaviour
                 {
                     AudioManager.instance.PlayOneShot(bullet.GroundHitSound, hit.point);
                     GameObject impact = Instantiate(bullet.ImpactGround, hit.point, Quaternion.identity);
-                    
+                   
                     impact.transform.forward = hit.normal;
                 }
                 hitPoints[i] = hit.point;

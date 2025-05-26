@@ -25,6 +25,8 @@ public class CharacterHealth : Health
 
 
 
+
+
     [Header("Sound")]
     [SerializeField] EventReference shildEmptySound;
     EventInstance shildEmptySoundInstance;
@@ -80,6 +82,19 @@ public class CharacterHealth : Health
         }
 
 
+    }
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHeath += amount;
+        currentHeath = Mathf.Clamp(currentHeath + amount, 0, maxHeath);
+        OnHealthChanged?.Invoke(HealthPercentage);
+    }
+
+    public void IncreaseHealthRegen(float amount)
+    {
+        healthRegenAmountPerSecond += amount;
+        hasHealthRegen = healthRegenAmountPerSecond > 0;
     }
 
     public void ReduceShildRegenTime(float amountOfReduction)
@@ -144,6 +159,33 @@ public class CharacterHealth : Health
         
     }
 
+    public void SetHealthOverride(HealthOverride newHealth)
+    {
+        if (newHealth == null ||!newHealth.hasHealthOverride) return;
+        maxHeath = newHealth.health;
+        maxShild = newHealth.shild;
+        currentHeath = maxHeath;
+        currentShild = maxShild;
+        hasShild = maxShild > 0;
+        healthRegenAmountPerSecond = newHealth.healthRegen;
+        hasHealthRegen = healthRegenAmountPerSecond > 0;
+        healthRegenDelay = newHealth.healthRegenStartTime;
+
+        shildRegenAmountPerSecond = newHealth.shildRegen;
+        shildRegenDelay = newHealth.shildRegenStartTime;
+
+        spawnInvulnerabilityTime = newHealth.spawnInvulnerabilityTime;
+        shildPopDamageNegation = newHealth.shildPopDamageNegation;
+
+        if (newHealth.showHealthBar)
+        {
+            OnShowHealthBar?.Invoke();
+            Debug.Log("Health bar shown for " + gameObject.name);
+        }
+            
+
+    }
+
 
 
     public bool IsHeadAreaCloserThanMainBody(Vector3 hitPoint)
@@ -188,7 +230,7 @@ public class CharacterHealth : Health
         }
 
         OnDamageTakenUnityEvent?.Invoke();
-
+        
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         if (hasShild && currentShild > 0)
@@ -218,8 +260,10 @@ public class CharacterHealth : Health
 
             }
         }
+        bool hasHealthDamage = false;
         if (damage > 0)
         {
+            hasHealthDamage = true;
             currentHeath -= damage;
             OnHealthChanged?.Invoke(HealthPercentage);
             OnHealthDamageTaken?.Invoke();
@@ -238,7 +282,7 @@ public class CharacterHealth : Health
         {
             if (damageDealer != null)
                 damageDealer.CharacterHit(damagePackage, gameObject);
-            if (hasHealthRegen)
+            if (hasHealthRegen && hasHealthDamage)
             {
                 healthRegenTimer = healthRegenDelay;
             }

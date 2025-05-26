@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AccuracyUp
   m_EditorClassIdentifier: 
   UpgradeName: Accuracy Up
-  Description: Double Accruacy
+  Description: Weapons have 40% more Accruacy
   Icon: {fileID: 0}
-  accuracyMultiplier: 0.5
+  accuracyMultiplier: 0.4

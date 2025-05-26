@@ -1,17 +1,101 @@
+using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] bool isAutoActiveOnThisMap = true; // Flag to check if the spawner is active
+
+     bool isPvPGame = false; // Flag to check if it's a PvP game
+    [SerializeField] int AIPerTeam = 3; // Number of AI enemies per team
+
+
     [SerializeField] int enemyTeamId = 1; // Team ID for the enemy team
     [SerializeField] GameObject enemyPrefab;
 
 
     [SerializeField] Enemy_Wave[] enemyWaves;
+
+    [SerializeField] Enemy_Wave enemiesForPVPGames;
+
     [SerializeField] int waveIndex = 0;
     EnemyWaveInstance activeWave;
     [SerializeField] float spawnRateMultiplier = 1; // Multiplier for spawn rate
     float nextWaveDelay = 5;
+
+    public List<GameObject> activeEnemies = new List<GameObject>();
+
+    public static EnemySpawner instance;
+
+
+    int team1EnemyCount = 0;
+    int team2EnemyCount = 0;
+
+    public bool IsAutoActiveOnThisMap => isAutoActiveOnThisMap;
+
+    public void SetPVPGame()
+    {
+        isPvPGame = true;
+
+        activeWave = new EnemyWaveInstance(enemiesForPVPGames);
+
+        activeWave.SetDuration(1000000000000f); // bassicly infinite duration
+    }
+
+    private void Awake()
+    {
+        
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+        
+
+
+    }
+
+    public void Start()
+    {
+        var maploader = MapLoader.instance;
+        if (maploader != null)
+        {
+            AIPerTeam = Math.Max(1, (int)(AIPerTeam * maploader.AIAmountMultiplier));
+            var wave = maploader.Enemies;
+            if (wave != null)
+                enemiesForPVPGames = wave;
+        }
+    }
+
+    public void StartEnemySpawner()
+    {
+        if (isAutoActiveOnThisMap)
+        {
+            return;
+        }
+        else
+        {
+            if (GameModeSelector.gameModeManager.GameModeStats.HasAiPlayers || (MapLoader.instance != null && MapLoader.instance.HasAIEnemies()))
+            {
+                SetPVPGame();
+
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+                
+        }
+
+
+
+    }
 
 
     public void StartNextWave()
@@ -29,6 +113,10 @@ public class EnemySpawner : MonoBehaviour
                 nextWaveDelay -= Time.deltaTime;
                 return;
             }
+
+
+
+
             StartNextWave();
         }
         else
@@ -39,7 +127,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 SpawnEnemy(activeWave.GetRandomEnemy());
             }
-            if (activeWave.IsWaveOver())
+            if (!isPvPGame &&activeWave.IsWaveOver())
             {
                 nextWaveDelay = activeWave.GetWaveEndBrakeTime();
                 activeWave = null;
@@ -50,7 +138,43 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy(Enemy_Stats stats)
     {
 
-        Transform spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId,3);
+        Transform spawnPoint;
+        var teamId = stats.teamIdOverrride;
+        if (isPvPGame)
+        {
+            if (team1EnemyCount >= AIPerTeam && team2EnemyCount >= AIPerTeam)
+            {
+                activeWave.SetDuration(1);
+                return;
+            }
+
+
+            teamId = 0;
+            if (team1EnemyCount < AIPerTeam && team2EnemyCount > team1EnemyCount)
+            {
+                teamId = 0;
+                team1EnemyCount++;
+               
+            }
+            else if (team2EnemyCount < AIPerTeam)
+            {
+                teamId = 1;
+                team2EnemyCount++;
+               
+            }
+
+
+
+            spawnPoint = GetPVPSpawnPoint(teamId);
+        }
+        else
+        {
+            spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 3);
+        }
+
+
+
+            
         Vector3 spawnPosition = spawnPoint.position;
         Quaternion spawnRotation = spawnPoint.rotation;
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
@@ -61,15 +185,55 @@ public class EnemySpawner : MonoBehaviour
         var health = enemy.GetComponent<CharacterHealth>();
         health.MultiplyHealth(stats.healthMultiplier);
         health.MultiplyShild(stats.shildMultiplier);
+
+        activeEnemies.Add(enemy);
+        health.OnDeath += () =>
+        {
+            activeEnemies.Remove(enemy);
+            Destroy(enemy, 120f);
+        };
+
         var movement = enemy.GetComponent<PlayerMovement>();
         movement.MultiplySpeed(stats.speedMultiplier);
 
         // get child of name EnemyAI
-        var teamId = stats.teamIdOverrride;
+        
         var score = enemy.GetComponent<GainScore>();
         score.scoreAmount = stats.scoreForKill;
 
+
+
+        if (isPvPGame)
+        {
+            if (teamId == 0)
+            {
+                health.OnDeath += () =>
+                {
+                    team1EnemyCount--;
+                };
+            }
+            else
+            {
+                health.OnDeath += () =>
+                {
+                    team2EnemyCount--;
+                };
+            }
+
+        }
+        
+
+
         PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
+
+
+    }
+
+
+    public Transform GetPVPSpawnPoint(int teamIndex)
+    {
+        Transform spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointInCludingAIEnemies(teamIndex);
+        return spawnPoint;
     }
 }
 
@@ -121,6 +285,11 @@ public class EnemyWaveInstance
     public float GetWaveEndBrakeTime()
     {
         return enemyWave.waveEndBrakeTime;
+    }
+
+    public void SetDuration(float duration)
+    {
+        this.duration = duration;
     }
 
 

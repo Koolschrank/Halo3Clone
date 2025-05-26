@@ -5,6 +5,7 @@ public class WeaponSway : MonoBehaviour
 
     [SerializeField] CharacterController cc;
     [SerializeField] PlayerMovement mover;
+    [SerializeField] PlayerAim aim;
 
     [Header("Sway")]
     [SerializeField] float step = 0.01f;
@@ -12,7 +13,8 @@ public class WeaponSway : MonoBehaviour
     Vector3 swayPos;
 
     [Header("Sway Rotation")]
-    [SerializeField] float rotationStep = 4f;
+    [SerializeField] float rotationStepX = 4f;
+    [SerializeField] float rotationStepY = 4f;
     [SerializeField] float maxRotationStep = 5f;
     Vector3 swayEulerRot;
 
@@ -38,7 +40,6 @@ public class WeaponSway : MonoBehaviour
     public void SetUp(PlayerMovement mover)
     {
         if (mover != null) {
-            mover.OnAimUpdated -= UpdateLookInput;
             mover.OnMoveUpdated -= UpdateWalkInput;
         }
 
@@ -51,8 +52,19 @@ public class WeaponSway : MonoBehaviour
         }
 
         
-        mover.OnAimUpdated += UpdateLookInput;
         mover.OnMoveUpdated += UpdateWalkInput;
+    }
+
+    public void SetUp(PlayerAim aim)
+    {
+        if (aim != null)
+        {
+            aim.OnAimUpdated -= UpdateLookInput;
+        }
+
+
+        aim.OnAimUpdated += UpdateLookInput;
+
     }
 
 
@@ -104,7 +116,7 @@ public class WeaponSway : MonoBehaviour
 
     void SwayRotation()
     {
-        Vector2 invertLook = lookInput * -rotationStep;
+        Vector2 invertLook = new Vector2(lookInput.x * -rotationStepX, lookInput.y * -rotationStepY)    ;
         invertLook.x = Mathf.Clamp(invertLook.x, -maxRotationStep, maxRotationStep);
         invertLook.y = Mathf.Clamp(invertLook.y, -maxRotationStep, maxRotationStep);
         swayEulerRot = new Vector3(invertLook.y, invertLook.x, invertLook.x);

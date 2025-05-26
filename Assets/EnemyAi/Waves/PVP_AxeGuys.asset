@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058328fc45d79ce4c96a84bba54d2389, type: 3}
+  m_Name: PVP_AxeGuys
+  m_EditorClassIdentifier: 
+  enemyStats:
+  - {fileID: 11400000, guid: dee58c30de91e49478441aba780f7eaa, type: 2}
+  spawnInterval: 0.4
+  duration: 999
+  waveEndBrakeTime: 15

@@ -95,6 +95,8 @@ public class PlayerStartEquipment : MonoBehaviour
         health.SetHasShild(equipment.HasShild);
         health.SetHeadShotOneShot(equipment.HeadShotOneShot);
 
+        health.SetHealthOverride(equipment.HealthOverride);
+
         playerArms.SetCanDualWield(equipment.CanDualWield);
         playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
 
@@ -141,6 +143,11 @@ public class Equipment
     [SerializeField] AbilityData ability;
     [SerializeField] AbilityData ability2;
     [SerializeField] AbilityData ability3;
+
+    [SerializeField] HealthOverride healthOverride;
+
+
+    public HealthOverride HealthOverride => healthOverride;
 
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
@@ -213,6 +220,7 @@ public class Equipment
         this.hasShild = equipmentToCopy.hasShild;
         this.headShotOneShot = equipmentToCopy.headShotOneShot;
         this.hasMiniMap = equipmentToCopy.hasMiniMap;
+        this.canDualWield = equipmentToCopy.canDualWield;
         this.canDualWieldEverything = equipmentToCopy.canDualWieldEverything;
         this.movementSpeedMultiplier = equipmentToCopy.movementSpeedMultiplier;
         this.weaponInHand = equipmentToCopy.weaponInHand;
@@ -224,7 +232,24 @@ public class Equipment
         this.ability = equipmentToCopy.ability;
         this.ability2 = equipmentToCopy.ability2;
         this.ability3 = equipmentToCopy.ability3;
+        this.healthOverride = equipmentToCopy.healthOverride;
     }
 
 
+}
+
+[Serializable]
+public class HealthOverride
+{
+    public bool hasHealthOverride = false;
+    public bool showHealthBar = false;
+    public float health;
+    public float shild;
+    public float healthRegenStartTime = 0.5f;
+    public float shildRegenStartTime = 0.5f;
+    public float healthRegen;
+    public float shildRegen;
+    public float spawnInvulnerabilityTime = 5f; // time in seconds to be invulnerable after spawn
+
+    public float shildPopDamageNegation = 30f;
 }

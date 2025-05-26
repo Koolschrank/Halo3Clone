@@ -18,6 +18,7 @@ public class GameMode : ScriptableObject
     [SerializeField] protected float pointsToWinMultiplier_smallMap = 1f;
 
     [SerializeField] protected bool looseWhenAllPlayersDead = false; // if true, when all players are dead, the game is over and the team with the most points wins
+    [SerializeField] protected bool hasAiPlayers;
 
 
 
@@ -55,5 +56,7 @@ public class GameMode : ScriptableObject
     public float RespawnTime {  get { return respawnTime; } }
 
     public bool LooseWhenAllPlayersDead { get { return looseWhenAllPlayersDead; } }
+
+    public bool HasAiPlayers { get { return hasAiPlayers; } }
 }
 

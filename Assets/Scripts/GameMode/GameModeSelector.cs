@@ -47,6 +47,8 @@ public class GameModeSelector : MonoBehaviour
         }
 
         gameModeManager.OnTeamWon += StartReloadGameWithTimer;
+
+        EnemySpawner.instance.StartEnemySpawner();
     }
 
     public void StartReloadGameWithTimer(int teamWon)

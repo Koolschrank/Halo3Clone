@@ -70,6 +70,7 @@ MonoBehaviour:
     hasShild: 0
     headShotOneShot: 0
     hasMiniMap: 0
+    canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
@@ -78,8 +79,20 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 0
     sideArm: {fileID: 0}
     magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
+    ability: {fileID: 0}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   playerStartEquipment: {fileID: 247747358258883017}
 --- !u!114 &5666477850914292363
 MonoBehaviour:
@@ -102,6 +115,10 @@ MonoBehaviour:
   framesToUpdateNavAgent: 100
   framesToUpdateNavAgentIfClose: 10
   distanceToUpdateNavAgent: 5
+  straveDistance: 2
+  straveTime: 0.5
+  straveOffset: {x: 0, y: 0, z: 0}
+  followObjectiveChance: 0.4
 --- !u!114 &8029323305840259631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alwaysKnowsWherePlayerIs: 1
   framesToCheckForNewTarget: 60
+  CheckForAIEnemies: 1
+  team: {fileID: 8294897600436085572}
 --- !u!114 &5650545179290865720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +151,8 @@ MonoBehaviour:
   aim: {fileID: 5066934035753808966}
   head: {fileID: 2222735024375511362}
   target: {fileID: 8029323305840259631}
-  aimSpeedMultiplier: 2
+  aimSpeedMultiplier_X: 0.2
+  aimSpeedMultiplier_Y: 0.2
 --- !u!114 &8505334828251919786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +318,10 @@ PrefabInstance:
     - target: {fileID: 1671190552556489165, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680555677729628207, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: movementSpeedForVisibility
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1713135194471093861, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
@@ -777,5 +801,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 505f5921ce3eb7b4ba29631c55673d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8294897600436085572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2295363821645548979, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+  m_PrefabInstance: {fileID: 7838409973482450679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2291314865742767251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457a0c336a456b248beb85dfa00fbad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

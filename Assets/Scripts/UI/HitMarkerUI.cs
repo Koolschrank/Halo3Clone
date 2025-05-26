@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class HitMarkerUI : MonoBehaviour
 {
+    [SerializeField] bool showHitMarker = true;
+    [SerializeField] bool showKillMarker = true;
     [SerializeField] GameObject hitMarker;
     [SerializeField] GameObject killMarker;
     [SerializeField] RawImage awsomeSkull;
@@ -15,6 +17,8 @@ public class HitMarkerUI : MonoBehaviour
 
     public void ShowHitMarker(GameObject target)
     {
+        if (!showHitMarker)
+            return;
         if (target.tag == "AIEnemy")
             return;
 
@@ -25,6 +29,8 @@ public class HitMarkerUI : MonoBehaviour
 
     public void ShowKillMarker(GameObject target)
     {
+        if (!showKillMarker)
+            return;
         if (target.tag == "AIEnemy")
         {
             return;

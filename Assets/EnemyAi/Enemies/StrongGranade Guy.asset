@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3c364a43dc8544a339ece5dbb3b10, type: 3}
+  m_Name: StrongGranade Guy
+  m_EditorClassIdentifier: 
+  equipment:
+    hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 0
+    canDualWield: 0
+    canDualWieldEverything: 0
+    movementSpeedMultiplier: 1
+    weaponInHand: {fileID: 11400000, guid: 1636b14fbf5b1754c8bd0759dfe88df5, type: 2}
+    magazinsOfWeaponInHand: 1
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 0
+    sideArm: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
+    magazinsOfSideArm: 4
+    granade: {fileID: 0}
+    granadeCount: 0
+  healthMultiplier: 1
+  shildMultiplier: 2.5
+  speedMultiplier: 1
+  teamIdOverrride: 7
+  scoreForKill: 100

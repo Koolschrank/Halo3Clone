@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerProgression : MonoBehaviour
 {
+    [SerializeField] public bool canGainEXP = false; // if false, player will not gain exp
+
     // singelton 
     public static PlayerProgression instance;
 
@@ -28,6 +30,7 @@ public class PlayerProgression : MonoBehaviour
 
     public void GainEXP(int value)
     {
+        if (!canGainEXP) return;
         exp += value;
         if (exp >= expRequirments[currentLevel])
         {

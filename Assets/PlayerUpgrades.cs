@@ -31,7 +31,7 @@ public class PlayerUpgrades : MonoBehaviour
     public void AssignBody(GameObject body)
     {
         playerBody = body;
-        ApplyAllUpgradesOnBody(body);
+        
     }
 
     public void ApplyAllUpgradesOnBody(GameObject body)

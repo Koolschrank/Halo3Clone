@@ -17,6 +17,8 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] protected SpawnSystem spawnSystem;
     [SerializeField] bool smallMap = false;
 
+    public GameMode GameModeStats => gameModeStats;
+
 
     public Transform GetStartingSpawnPoint(int teamIndex)
     {
@@ -30,7 +32,7 @@ public class GameModeManager : MonoBehaviour
 
     public virtual Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
     {
-        return GetFarthestSpawnPointFromEnemeies(playerMind.TeamIndex);
+        return GetFarthestSpawnPointInCludingAIEnemies(playerMind.TeamIndex);
         
     }
 
@@ -45,7 +47,8 @@ public class GameModeManager : MonoBehaviour
             {
                 foreach (var player in team)
                 {
-                    enemies.Add(player.transform);
+                    if (!player.IsDead)
+                        enemies.Add(player.transform);
                 }
             }
         }
@@ -74,6 +77,41 @@ public class GameModeManager : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, count);
         Transform spawnPoint = spawnPointsOrderd[spawnPointsOrderd.Length - 1 - randomIndex];
         return spawnPoint;
+    }
+
+    public virtual Transform GetFarthestSpawnPointInCludingAIEnemies(int teamIndex)
+    {
+        List<Transform> enemies = new List<Transform>();
+        foreach (var team in teams)
+        {
+            if (team.Count > 0 && team[0].TeamIndex != teamIndex)
+            {
+                foreach (var player in team)
+                {
+                    if (!player.IsDead)
+                        enemies.Add(player.transform);
+                }
+            }
+        }
+
+        var aiEnemies = EnemySpawner.instance.activeEnemies;
+        foreach (var enemy in aiEnemies)
+        {
+            if (enemy != null && enemy.gameObject.activeInHierarchy && !enemy.GetComponent<CharacterHealth>().IsDead && enemy.GetComponent<PlayerTeam>().TeamIndex != teamIndex)
+            {
+                enemies.Add(enemy.transform);
+            }
+        }
+
+
+
+
+        if (enemies.Count == 0)
+        {
+            return spawnSystem.GetStartSpawnPoint(teamIndex);
+        }
+
+        return spawnSystem.GetFarthestSpawnPointFromEnemeies(enemies);
     }
 
     public virtual Transform[] GetSpawnPointsOrderedByDistance(int teamIndex)

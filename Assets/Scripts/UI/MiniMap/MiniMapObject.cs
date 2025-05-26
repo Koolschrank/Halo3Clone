@@ -7,6 +7,12 @@ public class MiniMapObject : MonoBehaviour
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth characterHealth;
 
+
+    [SerializeField] CharacterController characterController;
+    [SerializeField] bool isHiddenOnMiniMap = false;
+    [SerializeField] float movementSpeedForVisibility = 0.1f; // Speed threshold to determine visibility on the minimap
+    public bool IsHiddenOnMiniMap => isHiddenOnMiniMap;
+
     private void Start()
     {
         AddSelfToMapManager();
@@ -33,6 +39,28 @@ public class MiniMapObject : MonoBehaviour
         {
             return icon_Enemy;
         }
+    }
+
+    public void Update()
+    {
+        if (characterController != null && characterController.velocity.magnitude > movementSpeedForVisibility)
+        {
+            MakeVisible();
+        }
+        else
+        {
+            MakeHidden();
+        }
+    }
+
+    public void MakeVisible()
+    {
+        isHiddenOnMiniMap = false;
+    }
+
+    public void MakeHidden()
+    {
+        isHiddenOnMiniMap = true;
     }
 
 

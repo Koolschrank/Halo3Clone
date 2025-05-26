@@ -173,7 +173,7 @@ public class Ability
     public Ability(AbilityData abilityData)
     {
         this.abilityData = abilityData;
-        cooldownTime = 0;
+        cooldownTime = -1;
         charges = abilityData.maxCharges;
     }
 
@@ -196,7 +196,7 @@ public class Ability
             OnCooldownChanged?.Invoke(1- cooldownTime/abilityData.cooldownTime);
         }
 
-        if (cooldownTime <= 0)
+        if (cooldownTime <= 0 && charges < abilityData.maxCharges)
         {
             Debug.Log("Cooldown finished for ability: " + abilityData.name);
             cooldownTime = 0;

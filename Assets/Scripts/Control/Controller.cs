@@ -187,7 +187,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""83fb2d38-454e-4c41-878c-1d5db15f6cef"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -340,17 +340,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""17262c52-0095-4ea5-9c8e-593afa4c5718"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickUpWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -708,17 +697,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Reload_Weapon2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""82767387-a592-464a-9270-06558e1c1e38"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickUpWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ExtraAmmo
   m_EditorClassIdentifier: 
   UpgradeName: Extra Ammo
-  Description: 50% chance to recover bullets when shooting
+  Description: 40% chance to recover bullets when shooting
   Icon: {fileID: 0}
-  bulletRecoveryAmount: 0.5
+  bulletRecoveryAmount: 0.4

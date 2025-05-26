@@ -8,11 +8,18 @@ public class ModifiersSelector : MonoBehaviour
     [SerializeField] Toggle dualWieldPlusToggle;
     [SerializeField] Toggle minimapToggle;
     [SerializeField] Toggle randomWeaponSpawnToggle;
+    [SerializeField] Toggle aiEnemies;
 
     [SerializeField] Slider moveSpeedSlider;
     [SerializeField] TextMeshProUGUI moveSpeedValue;
     [SerializeField] Slider damageMultiplierSlider;
     [SerializeField] TextMeshProUGUI damageMultiplierValue;
+    [SerializeField] Slider aiAmountSlider;
+    [SerializeField] TextMeshProUGUI aiAmountText;
+
+
+
+    [SerializeField] Enemy_Wave[] enemyWaves;
 
 
     private void Start()
@@ -21,10 +28,15 @@ public class ModifiersSelector : MonoBehaviour
         bool dualWieldPlus = MapLoader.instance.IsDualWieldPlus();
         bool minimap = MapLoader.instance.HasNoMiniMap();
         bool randomWeaponSpawn = MapLoader.instance.IsRandomWeaponSpawn();
+        bool aiEnemiesValue = MapLoader.instance.HasAIEnemies();
         float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
         float damageMultiplier = MapLoader.instance.GetDamageMultiplier();
+        float aiAmount = MapLoader.instance.AIAmountMultiplier;
+
         int moveSpeedValueInt = Mathf.RoundToInt(moveSpeedMultiplier * 10);
         int damageMultiplierValueInt = Mathf.RoundToInt(damageMultiplier * 10);
+
+        int aiAmountValueInt = Mathf.RoundToInt(aiAmount * 10);
 
 
         swatToggle.isOn = isSwat;
@@ -33,9 +45,14 @@ public class ModifiersSelector : MonoBehaviour
         randomWeaponSpawnToggle.isOn = randomWeaponSpawn;
         moveSpeedSlider.value = moveSpeedValueInt;
         damageMultiplierSlider.value = damageMultiplierValueInt;
+        aiAmountSlider.value = aiAmountValueInt;
+        aiEnemies.isOn = aiEnemiesValue;
+
 
         moveSpeedValue.text = (moveSpeedMultiplier).ToString("F1");
         damageMultiplierValue.text = (damageMultiplier).ToString("F1");
+        aiAmountText.text = (aiAmount).ToString("F1");
+
 
 
 
@@ -43,9 +60,12 @@ public class ModifiersSelector : MonoBehaviour
         dualWieldPlusToggle.onValueChanged.AddListener(SetDualWieldPlus);
         minimapToggle.onValueChanged.AddListener(SetNoMiniMap);
         randomWeaponSpawnToggle.onValueChanged.AddListener(SetRandomWeaponSpawn);
+        aiEnemies.onValueChanged.AddListener(MapLoader.instance.SetAIEnemies);
 
         moveSpeedSlider.onValueChanged.AddListener(SetMoveSpeedMultiplier);
         damageMultiplierSlider.onValueChanged.AddListener(SetDamageMultiplier);
+        aiAmountSlider.onValueChanged.AddListener(SetAIAmount);
+
 
     }
 
@@ -56,6 +76,7 @@ public class ModifiersSelector : MonoBehaviour
         dualWieldPlusToggle.onValueChanged.RemoveListener(SetDualWieldPlus);
         minimapToggle.onValueChanged.RemoveListener(SetNoMiniMap);
         randomWeaponSpawnToggle.onValueChanged.RemoveListener(SetRandomWeaponSpawn);
+        aiEnemies.onValueChanged.RemoveListener(MapLoader.instance.SetAIEnemies);
 
         moveSpeedSlider.onValueChanged.RemoveListener(SetMoveSpeedMultiplier);
 
@@ -82,6 +103,11 @@ public class ModifiersSelector : MonoBehaviour
         MapLoader.instance.SetRandomWeaponSpawn(value);
     }
 
+    private void SetAIEnemies(bool value)
+    {
+        MapLoader.instance.SetAIEnemies(value);
+    }
+
     private void SetMoveSpeedMultiplier(float value)
     {
         MapLoader.instance.SetMoveSpeedMultiplier(value / 10);
@@ -92,5 +118,17 @@ public class ModifiersSelector : MonoBehaviour
     {
         MapLoader.instance.SetDamageMultiplier(value / 10);
         damageMultiplierValue.text = (value / 10).ToString("F1");
+    }
+
+    private void SetAIAmount(float value)
+    {
+        MapLoader.instance.SetAIAmount(value / 10);
+        aiAmountText.text = (value / 10).ToString("F1");
+
+    }
+
+    public void SetEnemies(int index)
+    {
+        MapLoader.instance.SetEnemies(enemyWaves[index]);
     }
 }

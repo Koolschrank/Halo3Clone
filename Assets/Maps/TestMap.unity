@@ -7328,6 +7328,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 18.41
       objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: isAutoActiveOnThisMap
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3895335363518957410, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_Enabled
       value: 0

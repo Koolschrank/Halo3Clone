@@ -204,6 +204,7 @@ public class GunAiBehaviour
     public float focusGainWhenOnTarget = 1f;
     public float focusLossWhenNotOnTarget = 0.5f;
     public float moveSpeedWithGun = 1f;
+    public float crouchDistance = 1f;
 
 }
 

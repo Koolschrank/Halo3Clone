@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
 {
     // unity event on death
     public Action OnDeath;
+    public Action OnShowHealthBar;
 
    
 
@@ -18,6 +19,8 @@ public class Health : MonoBehaviour
     [SerializeField] protected float healthRegenDelay;
     protected float healthRegenTimer;
     [SerializeField] protected float healthRegenAmountPerSecond;
+    [SerializeField] protected float spawnInvulnerabilityTime = 0.5f; // time in seconds to be invulnerable after spawn
+    float spawnTime;
 
 
     public float MaxHeath => maxHeath;
@@ -31,6 +34,7 @@ public class Health : MonoBehaviour
 
     protected virtual void Start()
     {
+        spawnTime = Time.time;
         if (setMaxHeathOnStart)
         {
             currentHeath = maxHeath;
@@ -58,8 +62,16 @@ public class Health : MonoBehaviour
     
     public virtual void TakeDamage(DamagePackage damagePackage)
     {
+
+
         if (currentHeath <= 0)
         {
+            return;
+        }
+
+        if (Time.time - spawnTime < spawnInvulnerabilityTime)
+        {
+            // if we are in the spawn invulnerability time, ignore the damage
             return;
         }
 

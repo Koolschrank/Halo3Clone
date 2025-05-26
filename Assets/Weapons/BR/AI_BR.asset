@@ -129,7 +129,8 @@ MonoBehaviour:
   crosshairsSize: {x: 0.5, y: 0.5}
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
-    IdealRange: 16
+    IdealRange: 8
     focusGainWhenOnTarget: 0.7
     focusLossWhenNotOnTarget: 0.3
-    moveSpeedWithGun: 0.5
+    moveSpeedWithGun: 0.8
+    crouchDistance: 20

@@ -27,12 +27,15 @@ MonoBehaviour:
     sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfSideArm: 3
     ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
   timeLimitInMinutes: 10
   pointsToWin: 20
   teamCount: 2
-  respawnTime: 3
+  respawnTime: 8
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1.5
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0

@@ -210,6 +210,9 @@ public class PlayerMind : MonoBehaviour
         aim.OnSensitivityMultiplierChanged += sensitivitySlider.UpdateValues;
 
         playerNamePopUp.SetUp(aim);
+
+        weaponSway1.SetUp(aim);
+        weaponSway2.SetUp(aim);
     }
 
     // set arms
@@ -327,7 +330,7 @@ public class PlayerMind : MonoBehaviour
             }
         }
         var score = obj.GetComponent<GainScore>();
-        if (score != null)
+        if (score != null && PlayerProgression.instance.canGainEXP)
         {
             this.score += score.scoreAmount;
             OnScoreAdded?.Invoke(score.scoreAmount);
@@ -790,9 +793,16 @@ public class PlayerMind : MonoBehaviour
         upgradeMenu.OnUpgradeSelected += UpgradeSelected;
 
 
-        playerInput.actions.FindActionMap("UpgradeSelection").Enable();
+        StartCoroutine(UpgradePickDelay());
         upgradeSelected = false;
 
+    }
+
+
+    IEnumerator UpgradePickDelay()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        playerInput.actions.FindActionMap("UpgradeSelection").Enable();
     }
 
     bool upgradeSelected = false;

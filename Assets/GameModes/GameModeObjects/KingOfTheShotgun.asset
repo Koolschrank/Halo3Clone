@@ -27,6 +27,8 @@ MonoBehaviour:
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
     ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
   timeLimitInMinutes: 10
   pointsToWin: 100
   teamCount: 8
@@ -36,6 +38,7 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0
   timeToScore: 1
   moveHill: 1
   hillMoveTime: 50

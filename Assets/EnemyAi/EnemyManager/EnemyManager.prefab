@@ -294,75 +294,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3756dc1f47a17749bcf84c19ed5f45e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPvPGame: 1
+  AIPerTeam: 4
   enemyTeamId: 5
   enemyPrefab: {fileID: 2291314865742767251, guid: 347d4799b322ffc4182ab30374aaf0c3, type: 3}
-  spawnInterval: 5
-  enemyEquipments:
-  - hasShild: 1
-    headShotOneShot: 1
-    hasMiniMap: 0
-    canDualWieldEverything: 0
-    movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
-    magazinsOfWeaponInHand: 5
-    weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
-  - hasShild: 1
-    headShotOneShot: 1
-    hasMiniMap: 0
-    canDualWieldEverything: 0
-    movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
-    magazinsOfWeaponInHand: 5
-    weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
-  - hasShild: 1
-    headShotOneShot: 1
-    hasMiniMap: 0
-    canDualWieldEverything: 0
-    movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
-    magazinsOfWeaponInHand: 5
-    weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
-  - hasShild: 1
-    headShotOneShot: 1
-    hasMiniMap: 0
-    canDualWieldEverything: 0
-    movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: cb17908b6a45b7a478e801369c9a68d7, type: 2}
-    magazinsOfWeaponInHand: 5
-    weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
-  - hasShild: 1
-    headShotOneShot: 1
-    hasMiniMap: 0
-    canDualWieldEverything: 0
-    movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: b4de0336ad4832c4ebbf183f2af555ea, type: 2}
-    magazinsOfWeaponInHand: 5
-    weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 0}
-    magazinsOfSideArm: 0
-    granade: {fileID: 0}
-    granadeCount: 0
+  enemyWaves:
+  - {fileID: 11400000, guid: 61ca079aa12edb648bf2306db6acc2ce, type: 2}
+  - {fileID: 11400000, guid: 018d41a2bc4da954d8bf8ad4c22699f1, type: 2}
+  - {fileID: 11400000, guid: 2d0512d86cf81854ea78a48814e9dc22, type: 2}
+  - {fileID: 11400000, guid: c1ffa7cd27648904fa9bd8a4fb9262b3, type: 2}
+  - {fileID: 11400000, guid: 1c959b8d0cfc802429ae8bfb7d99ce34, type: 2}
+  - {fileID: 11400000, guid: 056680eea03e3494d81b824df00fd180, type: 2}
+  - {fileID: 11400000, guid: e107794905c0df24b9bbab6307ff9ec6, type: 2}
+  - {fileID: 11400000, guid: 586f2fb4bc1b0b5468b1885d80aa98b6, type: 2}
+  - {fileID: 11400000, guid: 7bd82eb01806def4788c317772c50f6a, type: 2}
+  enemiesForPVPGames: {fileID: 11400000, guid: 504d77a11e8f36641b72838aa38f9f3f, type: 2}
+  waveIndex: 0
+  spawnRateMultiplier: 1
+  activeEnemies: []
 --- !u!1 &4920288026983771375
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +459,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 1
+  m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -518,7 +467,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 23cb23e40f2406f47ab489843be96f39, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8cd5370c6e5ffb646a73d5772233cd32, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &6674885108718579732
 GameObject:

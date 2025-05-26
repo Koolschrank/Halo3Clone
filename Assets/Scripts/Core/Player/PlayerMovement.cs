@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float crouchSpeed = 0.5f;
     [SerializeField] bool ignoreAimDirection = false;
 
+    [SerializeField] PlayerHitBoxSize playerStandingHitbox;
+    [SerializeField] PlayerHitBoxSize playerCrouchingHitbox;
+
 
     float maxMoveSpeedMultiplier = 1f;
 
@@ -106,10 +109,22 @@ public class PlayerMovement : MonoBehaviour
         if ( inCrouch)
         {
             head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Time.deltaTime);
+
+            if (cc.height != playerCrouchingHitbox.Height || cc.center.y != playerCrouchingHitbox.Offset)
+            {
+                cc.height = playerCrouchingHitbox.Height;
+                cc.center = new Vector3(0, playerCrouchingHitbox.Offset, 0);
+            }
         }
         else
         {
             head.transform.position = Vector3.MoveTowards(head.transform.position, head_normalPosition.position, crouchSpeed * Time.deltaTime);
+
+            if (cc.height != playerStandingHitbox.Height || cc.center.y != playerStandingHitbox.Offset)
+            {
+                cc.height = playerStandingHitbox.Height;
+                cc.center = new Vector3(0, playerStandingHitbox.Offset, 0);
+            }
         }
     }
 
@@ -243,5 +258,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void TryCrouch()
+    {
+        Debug.Log("Trying to crouch");
 
+        if (!inCrouch&&cc.isGrounded)
+        {
+            inCrouch = true;
+            OnCrouch?.Invoke();
+        }
+    }
+
+    public void TryStandUp()
+    {
+        if (inCrouch)
+        {
+            inCrouch = false;
+            OnStandUp?.Invoke();
+        }
+    }
+
+
+}
+
+
+[Serializable]
+public struct PlayerHitBoxSize
+{
+    public float Height;
+    public float Offset;
 }
