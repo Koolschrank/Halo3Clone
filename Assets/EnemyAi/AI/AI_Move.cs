@@ -229,7 +229,7 @@ public class AI_Move : MonoBehaviour
 
 
         
-        if ((!followObjective ||distanceToTarget < 3f ) && playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange )
+        if (((!followObjective && playerAim.OnTarget) ||(followObjective && distanceToTarget < 3f )) && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange )
         {
             playerMovement.UpdateMoveInput(Vector2.zero);
             //if (straveTimer <=0)
