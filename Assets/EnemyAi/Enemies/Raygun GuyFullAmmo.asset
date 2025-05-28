@@ -23,7 +23,7 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
-    sideArm: {fileID: 11400000, guid: 650909fc6bcc65a45ad4ae3ee3128392, type: 2}
+    sideArm: {fileID: 11400000, guid: 3935029da2e725d4db216d70624c2277, type: 2}
     magazinsOfSideArm: 2
     ability: {fileID: 0}
     ability2: {fileID: 0}

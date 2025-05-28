@@ -6,6 +6,7 @@ public class AI_Aim : MonoBehaviour
     [SerializeField] PlayerAim aim;
     [SerializeField] GameObject head;
     [SerializeField] AI_Target target;
+    
 
     [SerializeField] float aimSpeedMultiplier_X = 5f;
     [SerializeField] float aimSpeedMultiplier_Y = 5f;

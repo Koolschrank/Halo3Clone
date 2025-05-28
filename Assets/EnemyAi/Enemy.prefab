@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 8505334828251919786}
   - component: {fileID: 1541098619169745859}
   - component: {fileID: 5792146997314068955}
+  - component: {fileID: 1163059816146870362}
+  - component: {fileID: 6517739778669486501}
   m_Layer: 7
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -112,13 +114,20 @@ MonoBehaviour:
   agent: {fileID: 1618324563476685136}
   playerArms: {fileID: 4619331289028681485}
   playerAim: {fileID: 5066934035753808966}
+  playerBody: {fileID: 2291314865742767251}
+  playerHealth: {fileID: 7357773068672706047}
+  aiStun: {fileID: 5792146997314068955}
   framesToUpdateNavAgent: 100
   framesToUpdateNavAgentIfClose: 10
   distanceToUpdateNavAgent: 5
-  straveDistance: 2
-  straveTime: 0.5
-  straveOffset: {x: 0, y: 0, z: 0}
   followObjectiveChance: 0.4
+  crouchRecoveryTime: 1
+  rollCooldownTime: 2.25
+  maxStraveOffsetDistance: 7
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  wallCheckDistance: 2.5
 --- !u!114 &8029323305840259631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +210,39 @@ MonoBehaviour:
   movement: {fileID: 5666477850914292363}
   weapon: {fileID: 8505334828251919786}
   stunDuration: 1
+--- !u!114 &1163059816146870362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242da629bc218124a9b248f2b8185e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerAvoidanceRadius: 0.8
+  dangerLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  framePause: 5
+  move: {fileID: 5666477850914292363}
+--- !u!114 &6517739778669486501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408f94a7b1afa074082285a1a8df2251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerObject: {fileID: 7548156510967508686, guid: a382756464614cc47a8e242b4bdc63bd, type: 3}
+  minDamageForDanger: 80
+  health: {fileID: 7357773068672706047}
 --- !u!1 &8857529426304999730
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +408,10 @@ PrefabInstance:
     - target: {fileID: 3046561825363096839, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068919470916229809, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: inputSlowDownStopsInput
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3142858357439699233, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
@@ -600,8 +646,16 @@ PrefabInstance:
       value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: rollTime
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: ignoreAimDirection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: moveSpeedRoolMultiplier
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 7400564445336568803, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
@@ -697,6 +751,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8289933859456780900, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3557664827753892049}
+    - targetCorrespondingSourceObject: {fileID: 8289933859456780900, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1016796866808458517}
   m_SourcePrefab: {fileID: 100100000, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
 --- !u!114 &247747358258883017 stripped
 MonoBehaviour:
@@ -743,6 +800,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmount: 10
+--- !u!114 &1016796866808458517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2291314865742767251}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408f94a7b1afa074082285a1a8df2251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerObject: {fileID: 7548156510967508686, guid: a382756464614cc47a8e242b4bdc63bd, type: 3}
+  minDamageForDanger: 80
+  health: {fileID: 7357773068672706047}
 --- !u!4 &2581928657042181261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5698032335818744442, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}

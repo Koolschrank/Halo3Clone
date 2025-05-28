@@ -38,7 +38,7 @@ public class LeftArm : Arm
     {
         if (noInvectoryInteraction)
         {
-            playerArms.RightArm.TrySwitchWeapon();
+            //playerArms.RightArm.TrySwitchWeapon();
             DropWeapon();
             return;
         }
@@ -104,7 +104,7 @@ public class LeftArm : Arm
 
     public override void DropWeapon()
     {
-
+        Debug.Log("Dropping weapon");
         base.DropWeapon();
         
     }
@@ -118,7 +118,18 @@ public class LeftArm : Arm
         }
     }
 
-    
+    protected override void TryReload()
+    {
+        // if weapon empty drop W
+        if (weaponInHand == null || (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)) DropWeapon();
+        else
+        {
+            base.TryReload();
+        }
+    }
+
+
+
 
     protected override void EquipWeapon(Weapon_Arms weapon)
     {

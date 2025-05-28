@@ -37,6 +37,7 @@ public class Arm : MonoBehaviour
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] PlayerMeleeAttack basicMeleeAttack;
     [SerializeField] PlayerAim playerAim;
+    [SerializeField] PlayerMovement playerMovement;
 
      bool isTriggerPressed;
      bool wasTriggerPressed;
@@ -69,6 +70,7 @@ public class Arm : MonoBehaviour
     float bulletRecoveryChance = 0;
     float reloadWeaponSpeedMultiplier = 1;
     float fireRateMultiplier = 1;
+    bool inRoll = false;
 
     public void AddToFireRateMultiplier(float value)
     {
@@ -129,6 +131,22 @@ public class Arm : MonoBehaviour
 
         OnWeaponShoot += (Weapon_Arms) => TryBulletRecovery();
 
+        playerMovement.OnRollStarted += (direction, duration) =>
+        {
+            inRoll = true;
+            IfZoomedInExitZoom();
+            armState = ArmState.Empty; // set arm state to empty so that player cannot shoot or reload while rolling
+            isTriggerPressed = false; // reset trigger pressed state to prevent shooting while rolling
+            if (CurrentWeapon != null)
+                CurrentWeapon.RollStart(duration); // call roll start on the weapon in hand
+        };
+
+        playerMovement.OnRollEnded += () =>
+        {
+            inRoll = false;
+            armState = ArmState.Ready; // set arm state to ready after roll ends
+        };
+
     }
 
     public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
@@ -151,6 +169,8 @@ public class Arm : MonoBehaviour
     void Update()
     {
         weaponInHand?.UpdateWeapon();
+
+        if (inRoll) return;
 
         // input buffers
         if (switchInputBufferTimer > 0 ||( (isTriggerPressed&&CurrentWeapon != null && !playerArms.IsDualWielding &&CurrentWeapon.Magazine == 0 && inventory.GetAmmo(CurrentWeapon.Data) <= 0 && inventory.HasWeapon && (inventory.GetWeapon().Magazine !=0||inventory.GetAmmo(inventory.GetWeapon().Data) != 0)) ))
@@ -219,6 +239,7 @@ public class Arm : MonoBehaviour
             if (weaponInHand.Magazine == 0)
             {
                 TryReload();
+                if (weaponInHand == null) return;
             }
 
 
@@ -349,7 +370,7 @@ public class Arm : MonoBehaviour
         switchInputBufferTimer = 0;
     }
 
-    void TryReload()
+    protected virtual void TryReload()
     {
         if (armState != ArmState.Ready) return;
         reloadInputBufferTimer = 0;
@@ -538,8 +559,11 @@ public class Arm : MonoBehaviour
     public virtual void DropWeapon()
     {
 
+        Debug.Log("Dropping weapon1");
         if (weaponInHand == null) return;
+        Debug.Log("Dropping weapon2");
         var pickUp = LetGoOfWeapon();
+        Debug.Log("Dropping weapon3");
         if (pickUp == null) return;
 
         pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
@@ -548,45 +572,53 @@ public class Arm : MonoBehaviour
     Weapon_PickUp LetGoOfWeapon()
     {
         if (weaponInHand == null) return null;
+        var weapon = weaponInHand;
+        weaponInHand = null;
 
+        Debug.Log("Dropping weapon5");
         IfZoomedInExitZoom();
-        weaponInHand.SetExtraBulletsInMagazine(0);
+        weapon.SetExtraBulletsInMagazine(0);
 
-        // if weapon is empty return null
-        if (weaponInHand.Magazine == 0 && inventory.GetAmmo(weaponInHand.Data) == 0)
-        {
-            return null;
-        }
+        
 
         if (reloadWeaponWhenDroped)
         {
-            int ammoNeeded = weaponInHand.MagazineSize - weaponInHand.Magazine;
-            int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
-            weaponInHand.ReloadFinished(ammoAdded);
+            int ammoNeeded = weapon.MagazineSize - weapon.Magazine;
+            int ammoAdded = inventory.TakeAmmo(weapon.Data, ammoNeeded);
+            weapon.ReloadFinished(ammoAdded);
             
         }
 
-        var pickUpVersion = weaponInHand.PickUpVersion;
+        var pickUpVersion = weapon.PickUpVersion;
         var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
 
 
-        if (playerArms.HasMultipleOfTheSameWeapon(weaponInHand.Data))
+        if (playerArms.HasMultipleOfTheSameWeapon(weapon.Data))
         {
-            pickUp.SetAmmo(weaponInHand.Magazine, 0); 
+            pickUp.SetAmmo(weapon.Magazine, 0); 
         }
         else
         {
-            pickUp.SetAmmo(weaponInHand.Magazine, inventory.TakeAllAmmo(weaponInHand.Data));
+            pickUp.SetAmmo(weapon.Magazine, inventory.TakeAllAmmo(weapon.Data));
         }
         if (reloadWeaponWhenDroped)
         {
             pickUp.ReloadOnPickup = true;
         }
 
+        if (pickUp.AmmoInReserve == 0 && pickUp.AmmoInMagazine ==0)
+        {
+            pickUp.EnterFastDeleteTime();
+        }
+        else
+        {
             pickUp.EnterDeleteTime();
-        OnWeaponDroped?.Invoke(weaponInHand, pickUp);
-        weaponInHand.DropWeapon();
-        weaponInHand = null;
+        }
+
+            
+        OnWeaponDroped?.Invoke(weapon, pickUp);
+        weapon.DropWeapon();
+        
         return pickUp;
     }
 

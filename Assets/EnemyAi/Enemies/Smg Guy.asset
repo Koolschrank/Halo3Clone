@@ -20,7 +20,7 @@ MonoBehaviour:
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
-    magazinsOfWeaponInHand: 6
+    magazinsOfWeaponInHand: 7
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
     sideArm: {fileID: 0}

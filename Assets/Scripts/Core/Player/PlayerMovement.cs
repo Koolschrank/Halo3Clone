@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     public Action<Vector3> OnMoveUpdated;
     public Action<Vector2> OnAimUpdated;
 
+    public Action<Vector3, float> OnRollStarted;
+    public Action OnRollEnded;
+
     // character controller 
     [Header("References")]
     [SerializeField] CharacterController cc;
@@ -21,13 +24,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform head_crouchPosition;
     [SerializeField] PlayerArms arms;
     [Header("Settings")]
+
+
     // movement speed
     [SerializeField] float maxMoveSpeed = 12f;
+    [SerializeField] float moveSpeedRoolMultiplier = 1.6f; // multiplier for the move speed, used by modifiers and other things
     [SerializeField] float moveSpeedCrouchMultiplier = 0.4f;
     [SerializeField] float acceleration_ground = 10f;
     [SerializeField] float acceleration_air = 5f;
     [SerializeField] float deceleration_ground = 10f;
     [SerializeField] float deceleration_air = 5f;
+    [SerializeField] float acceleration_roll = 5f;
 
     [SerializeField] float jumpPower = 9.8f;
     [SerializeField] float jumpCooldown = 0.5f;
@@ -41,9 +48,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] PlayerHitBoxSize playerStandingHitbox;
     [SerializeField] PlayerHitBoxSize playerCrouchingHitbox;
-
+    [SerializeField] float rollTime = 1; // time it takes to roll
+    [SerializeField] AnimationCurve rollCurve; // curve for the roll animation, used to determine the speed of the roll
 
     float maxMoveSpeedMultiplier = 1f;
+    
+
 
 
     [Header("Sound")]
@@ -62,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
+
+    bool inRoll = false;
+    Vector3 rollDirection = Vector3.zero;
+    float rollTimer = 0;
+
     public void MultiplyMaxMoveSpeed(float multiplier)
     {
         maxMoveSpeed *= multiplier;
@@ -76,8 +91,27 @@ public class PlayerMovement : MonoBehaviour
     // update
     void Update()
     {
-        UpdateCrouch();
-        UpdateMove();
+        if (inRoll)
+        {
+            UpdateRoll();
+        }
+        else
+        {
+            UpdateCrouch();
+            UpdateMove();
+
+            if (moveVelocity.magnitude > 0 && cc.isGrounded)
+            {
+                distanceToWalkSoundLeft -= moveVelocity.magnitude * Time.deltaTime;
+                if (distanceToWalkSoundLeft <= 0)
+                {
+                    AudioManager.instance.PlayOneShot(walkSound, transform.position);
+                    distanceToWalkSoundLeft = distanceForWalkSound;
+                }
+            }
+        }
+
+            
         UpdateGravity();
 
         var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
@@ -85,15 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
         OnMoveUpdated?.Invoke(moveVector);
 
-        if (moveVelocity.magnitude > 0 && cc.isGrounded)
-        {
-            distanceToWalkSoundLeft -= moveVelocity.magnitude * Time.deltaTime;
-            if (distanceToWalkSoundLeft <= 0)
-            {
-                AudioManager.instance.PlayOneShot(walkSound, transform.position);
-                distanceToWalkSoundLeft = distanceForWalkSound;
-            }
-        }
+        
 
         if (cc.isGrounded)
         {
@@ -218,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryJump()
     {
-        if (isGrounded && jumpCooldownTimer <= 0)
+        if (isGrounded && !inRoll && jumpCooldownTimer <= 0)
         {
             AudioManager.instance.PlayOneShot(jumpSound, transform.position);
             gravityVelocity = jumpPower;
@@ -231,10 +257,61 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void UpdateRoll()
+    {
+        rollTimer -= Time.deltaTime;
+        var rollSpeed = rollCurve.Evaluate(1 - (rollTimer / rollTime)); // evaluate the curve based on the remaining time
+
+        head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Time.deltaTime);
+        moveVelocity = Vector3.MoveTowards(moveVelocity, rollSpeed * rollDirection * MaxMoveSpeed * moveSpeedRoolMultiplier, acceleration_roll * Time.deltaTime);
+
+        if (cc.height != playerCrouchingHitbox.Height || cc.center.y != playerCrouchingHitbox.Offset)
+        {
+            cc.height = playerCrouchingHitbox.Height;
+            cc.center = new Vector3(0, playerCrouchingHitbox.Offset, 0);
+        }
+
+        if (rollTimer <= 0)
+        {
+            EndRoll();
+        }
+    }
+
+    public bool CanRoll()
+    {
+        return isGrounded && jumpCooldownTimer <= 0 && moveInput != Vector2.zero && !inRoll && (moveInput.normalized).magnitude > 0.9f;
+    }
+
+    public void TryRoll()
+    {
+        if (isGrounded && jumpCooldownTimer <= 0 && moveInput != Vector2.zero && !inRoll && (moveInput.normalized).magnitude > 0.9f)
+        {
+            TryStandUp();
+            var forward = transform.forward;
+            // use input and forward direction to determine roll direction
+            var rollDirection = (forward * moveInput.y + transform.right * moveInput.x).normalized;
+            rollDirection.y = 0; // ensure we are rolling on the ground plane
+            inRoll = true;
+            
+            this.rollDirection = rollDirection;
+            rollTimer = rollTime;
+            OnRollStarted?.Invoke(rollDirection, rollTime);
+
+        }
+    }
+
+    public void EndRoll()
+    {
+        inRoll = false;
+        OnRollEnded?.Invoke();
+        moveVelocity = Vector3.zero; // reset move velocity after roll
+    }
+
     // player input funtion
     public void UpdateMoveInput(Vector2 input)
     {
         moveInput = input;
+
     }
 
 
@@ -260,7 +337,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void TryCrouch()
     {
-        Debug.Log("Trying to crouch");
 
         if (!inCrouch&&cc.isGrounded)
         {

@@ -393,6 +393,15 @@ public class PlayerMind : MonoBehaviour
         playerArms.RightArm.UpdateWeaponTrigger(context.ReadValue<float>()> 0);
     }
 
+    public void Roll(InputAction.CallbackContext context)
+    {
+        if (playerMovement == null) return;
+        if (context.performed)
+        {
+            playerMovement.TryRoll();
+        }
+    }
+
 
     bool reloadButtonReleased = true;
     float reloadButtonStartPressTime = 0;

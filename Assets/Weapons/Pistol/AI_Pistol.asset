@@ -20,7 +20,7 @@ MonoBehaviour:
   shootType: 1
   fireRate: 0.45
   bulletsPerShot: 1
-  magazineSize: 10
+  magazineSize: 6
   maxAmmoInReserve: 40
   reloadTime: 2
   inaccuracy: 0.05
@@ -130,7 +130,9 @@ MonoBehaviour:
   crosshairsSize: {x: 0.3, y: 0.3}
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
-    IdealRange: 12
+    IdealRange: 5
     focusGainWhenOnTarget: 0.7
     focusLossWhenNotOnTarget: 0.4
-    moveSpeedWithGun: 0.6
+    moveSpeedWithGun: 0.9
+    crouchDistance: 10
+    minDistanceToDogeWhenTakingDamage: 20

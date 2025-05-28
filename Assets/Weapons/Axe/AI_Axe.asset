@@ -74,3 +74,5 @@ MonoBehaviour:
     focusGainWhenOnTarget: 5
     focusLossWhenNotOnTarget: 0.5
     moveSpeedWithGun: 1
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 50

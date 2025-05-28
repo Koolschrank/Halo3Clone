@@ -12,6 +12,7 @@ public class TimedExplosion : MonoBehaviour
     [SerializeField] GameObject explosionEffect;
 
     [SerializeField] Granade mainGranade;
+    [SerializeField] GameObject[] gameObjectsToEnableOnTimerStart;
 
     float timer;
 
@@ -47,7 +48,20 @@ public class TimedExplosion : MonoBehaviour
         RuntimeManager.PlayOneShot(bounceSound, transform.position);
         if (startTimerOnFirstCollision)
         {
+            if (!timerActive)
+            {
+                foreach (var obj in gameObjectsToEnableOnTimerStart)
+                {
+                    if (obj != null)
+                    {
+                        obj.SetActive(true);
+                    }
+                }
+            }
+
+
             timerActive = true;
+
         }
     }
 

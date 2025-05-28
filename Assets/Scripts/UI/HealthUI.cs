@@ -58,8 +58,7 @@ public class HealthUI : MonoBehaviour
     public void UpdateHealth(float healthValue)
     {
         var valueLost = 1 - healthValue;
-        var barValue = Mathf.Clamp(1 - valueLost * healthBarDepletMultiplier, 0.02f, 1);
-        healthBar.fillAmount = barValue;
+        
 
 
 
@@ -72,6 +71,8 @@ public class HealthUI : MonoBehaviour
         
         if (showHealthBar)
         {
+            var barValue = Mathf.Clamp(1 - valueLost * healthBarDepletMultiplier, 0.02f, 1);
+            healthBar.fillAmount = barValue;
             if (healthValue >= 0.5)
             {
                 valueLost = 0;
@@ -80,13 +81,15 @@ public class HealthUI : MonoBehaviour
             {
                 valueLost = 1 - (healthValue * 2); // scale to 0-1 range for the curve
             }
+            var color = healthBarColor.Evaluate(healthValue);
+            healthBar.color = color;
         }
-
+        
 
         playerCam.SetVignetteIntensity(blodyScreenCurve.Evaluate(valueLost));
 
-        var color = healthBarColor.Evaluate(healthValue);
-        healthBar.color = color;
+        
+       
     }
 
     public void Clear()

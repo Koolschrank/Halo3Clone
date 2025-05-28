@@ -15,12 +15,12 @@ MonoBehaviour:
   weaponPickUp: {fileID: 1358379668584700671, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   weaponBullet: {fileID: 11400000, guid: de347623a03552740aab6d7bfc813c71, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
-  weapon3rdPersonModel: {fileID: 1535552099913994392, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
+  weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 4ee43ceabea92be4bac68d6956c65753, type: 3}
   weaponName: Plasma Rifle
   shootType: 1
   fireRate: 0.1
   bulletsPerShot: 1
-  magazineSize: 20
+  magazineSize: 14
   maxAmmoInReserve: 100
   reloadTime: 1.6
   inaccuracy: 0.2
@@ -112,7 +112,9 @@ MonoBehaviour:
   crosshairsSize: {x: 0.5, y: 0.6}
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
-    IdealRange: 3
+    IdealRange: 2
     focusGainWhenOnTarget: 0.75
     focusLossWhenNotOnTarget: 0.3
-    moveSpeedWithGun: 0.8
+    moveSpeedWithGun: 0.9
+    crouchDistance: 6
+    minDistanceToDogeWhenTakingDamage: 15

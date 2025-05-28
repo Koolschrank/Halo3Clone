@@ -12,6 +12,7 @@ public class Weapon_Arms
     public Action<float> OnSwitchOutStart;
     public Action<float> OnSwitchInStart;
     public Action<float> OnMeleeStart;
+    public Action<float> OnRollStart;
     public Action OnShot;
 
     public Action<GameObject> OnProjectileShot;
@@ -250,6 +251,11 @@ public class Weapon_Arms
     public void MeleeStart(float meleeTime)
     {
         OnMeleeStart?.Invoke(meleeTime);
+    }
+
+    public void RollStart(float rollTime)
+    {
+        OnRollStart?.Invoke(rollTime);
     }
 
     public void ReloadFinished(int ammoAdded)

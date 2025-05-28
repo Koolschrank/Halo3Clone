@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 69a0f5348f2506a4bb4f6817512b29c3, type: 3}
   weaponName: Granade Launcher
   shootType: 1
-  fireRate: 0.75
+  fireRate: 1
   bulletsPerShot: 1
   magazineSize: 3
   maxAmmoInReserve: 18
@@ -145,7 +145,9 @@ MonoBehaviour:
   crosshairsSize: {x: 0.7, y: 0.7}
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
-    IdealRange: 12
+    IdealRange: 8
     focusGainWhenOnTarget: 0.5
     focusLossWhenNotOnTarget: 0.3
     moveSpeedWithGun: 0.6
+    crouchDistance: 14
+    minDistanceToDogeWhenTakingDamage: 20

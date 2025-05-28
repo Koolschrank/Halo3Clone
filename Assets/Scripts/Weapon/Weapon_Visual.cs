@@ -20,6 +20,7 @@ public class Weapon_Visual : Weapon_Model
         weapon.OnSwitchOutStart += SwitchOut;
         weapon.OnShot += Shoot;
         weapon.OnMeleeStart += MeleeAttackStart;
+        weapon.OnRollStart += Roll;
     }
 
     public override void OnDestroy()
@@ -32,7 +33,7 @@ public class Weapon_Visual : Weapon_Model
         weapon.OnSwitchOutStart -= SwitchOut;
         weapon.OnShot -= Shoot;
         weapon.OnMeleeStart -= MeleeAttackStart;
-
+        weapon.OnRollStart -= Roll;
     }
 
 
@@ -52,6 +53,15 @@ public class Weapon_Visual : Weapon_Model
         OnShoot.Invoke();
 
 
+    }
+
+    public void Roll(float time)
+    {
+        // set animation time to time
+        var rollClip = GetAnimationClipByName("Roll");
+        var animationLenght = GetAnimationLenght(rollClip);
+        SetAnimationSpeed(rollClip, animationLenght, time);
+        animator.SetTrigger("Roll");
     }
 
     public void Reload(float time)

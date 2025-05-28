@@ -67,6 +67,7 @@ public class EnemySpawner : MonoBehaviour
         if (maploader != null)
         {
             AIPerTeam = Math.Max(1, (int)(AIPerTeam * maploader.AIAmountMultiplier));
+            spawnRateMultiplier *= maploader.AIAmountMultiplier;
             var wave = maploader.Enemies;
             if (wave != null)
                 enemiesForPVPGames = wave;
@@ -200,6 +201,12 @@ public class EnemySpawner : MonoBehaviour
         
         var score = enemy.GetComponent<GainScore>();
         score.scoreAmount = stats.scoreForKill;
+
+        if (isAutoActiveOnThisMap)
+        {
+            var arms = enemy.GetComponent<PlayerArms>();
+            arms.RightArm.GetBulletSpawner().SetOnlyEnemyIsPlayerTeam(true);
+        }
 
 
 

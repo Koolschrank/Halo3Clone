@@ -7,7 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SMG
-  m_Controller: {fileID: 9100000, guid: 4e46790d75d71484cb99fea83ee0a0d7, type: 2}
+  m_Controller: {fileID: 9100000, guid: bbd9d89b9ab40d247b96c2bf1ab7a7d7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: c2fa035e39ccbf04a8bc2a5725a92b95, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 4198468c87be2a74c8ded40b7eba461b, type: 2}

@@ -20,14 +20,25 @@ MonoBehaviour:
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 1636b14fbf5b1754c8bd0759dfe88df5, type: 2}
-    magazinsOfWeaponInHand: 1
+    magazinsOfWeaponInHand: 2
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
-    sideArm: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
+    sideArm: {fileID: 11400000, guid: b4de0336ad4832c4ebbf183f2af555ea, type: 2}
     magazinsOfSideArm: 4
     ability: {fileID: 0}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   healthMultiplier: 1
   shildMultiplier: 1
   speedMultiplier: 1

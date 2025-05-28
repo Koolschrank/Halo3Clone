@@ -21,12 +21,22 @@ public class PlayerStartEquipment : MonoBehaviour
     public void GetEquipment(Equipment equipment)
     {
         var weaponInHand = equipment.WeaponInHand;
+        var sideArm = equipment.SideArm;
+        var weaponInLeftHand = equipment.WeaponInLeftHand;
 
         if (isNonPlayer)
         {
-            if (weaponInHand.HasEnemyAiWeaponData)
+            if (weaponInHand != null &&weaponInHand.HasEnemyAiWeaponData)
             {
                 weaponInHand = weaponInHand.EnemyAiWeaponData;
+            }
+            if (sideArm != null && sideArm.HasEnemyAiWeaponData)
+            {
+                sideArm = sideArm.EnemyAiWeaponData;
+            }
+            if (weaponInLeftHand != null && weaponInLeftHand.HasEnemyAiWeaponData)
+            {
+                weaponInLeftHand = weaponInLeftHand.EnemyAiWeaponData;
             }
         }
 
@@ -43,7 +53,7 @@ public class PlayerStartEquipment : MonoBehaviour
         {
             playerArms.LeftArm.PickUpWeapon(
             SpawnWeapon(
-                equipment.WeaponInLeftHand,
+                weaponInLeftHand,
                 equipment.MagazinsOfWeaponInLeftHand));
         }
 
@@ -57,7 +67,7 @@ public class PlayerStartEquipment : MonoBehaviour
 
             playerInventory.AddWeapon(
             SpawnWeapon(
-                equipment.SideArm,
+                sideArm,
                 equipment.MagazinsOfSideArm));
         }
 

@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -14,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
     [SerializeField] Transform weaponSocketLeftHand;
+    [SerializeField] Rig rig;
 
 
     [Header("Shild")]
@@ -46,10 +49,14 @@ public class PlayerAnimation : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] float gripChangeTime = 0.1f;
+    [SerializeField] float localIdealDirectionChangeTime = 0.1f; // time it takes to change the local ideal direction
 
     [Header("Granade")]
     [SerializeField] Transform granadeSocket;
     GameObject granadeVisual;
+
+    Vector3 localIdealDirection = Vector3.forward;
+
 
 
 
@@ -59,7 +66,9 @@ public class PlayerAnimation : MonoBehaviour
         playerMovement.OnJump += Jump;
         playerMovement.OnCrouch += () => UpdateCrouch(true);
         playerMovement.OnStandUp += () => UpdateCrouch(false);
-        
+        playerMovement.OnRollStarted += Roll;
+        playerMovement.OnRollEnded += RollEnd;
+
 
         // connect reload
         playerArms.RightArm.OnWeaponReloadStarted += Reload;
@@ -107,13 +116,77 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void ChangeLocalIdealDirection(Vector3 direction)
+    {
+        localIdealDirection = direction.normalized;
+    }
+
+    public void ResetLocalIdealDirection()
+    {
+        localIdealDirection = Vector3.forward; // reset to the parent forward direction
+    }
+
     public void Update()
     {
+       // UpdateLocalDirection();
         UpdateInAir();
         UpdateMove();
         UpdateGrip();
         UpdateAim();
         UpdateShild();
+    }
+
+    public void Roll(Vector3 direction, float rollTime)
+    {
+        ChangeLocalIdealDirection(direction);
+
+        var rollClip = GetAnimationClipByName("Roll");
+        var animationLenght = GetAnimationLenght(rollClip);
+        SetAnimationSpeed(rollClip, animationLenght, rollTime);
+        animator.SetTrigger("Roll");
+        animator.SetLayerWeight(0, 0);
+        animator.SetLayerWeight(1, 0);
+        animator.SetLayerWeight(3, 1);
+
+        DisableLeftHandGrip();
+        DisableRightHandGrip();
+        rig.weight = 0; // disable rigging during roll
+    }
+
+    public void RollEnd()
+    {
+        StartCoroutine(RollEndDelay());
+    }
+
+    IEnumerator RollEndDelay()
+    {
+        yield return new WaitForSeconds(0.0f); // wait for a short time before ending the roll
+        ResetLocalIdealDirection();
+        animator.SetLayerWeight(0, 1);
+        animator.SetLayerWeight(1, 1);
+        animator.SetLayerWeight(3, 0); // reset roll layer weight
+        EnableLeftHandGrip();
+        EnableRightHandGrip();
+        rig.weight = 1; // enable rigging after roll
+    }
+
+    public void UpdateLocalDirection()
+    {
+        if (localIdealDirection == Vector3.zero)
+        {
+            return; // no change
+        }
+        
+        // lerp the local ideal direction to the new direction
+        var currentDirection = transform.forward;
+        if (currentDirection == localIdealDirection)
+        {
+            return; // no change needed
+        }
+        var newDirection = Vector3.MoveTowards(currentDirection, localIdealDirection, Time.deltaTime * localIdealDirectionChangeTime);
+        // set lokal forward
+        transform.forward = transform.parent.forward + newDirection;
+
     }
 
     public void UpdateAim()

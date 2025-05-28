@@ -922,6 +922,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 15cb258e-f3bd-4d06-97d9-0613c247389e
     m_ActionName: 'UpgradeSelection/3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eaf7e7f5-232d-40fc-a8bf-20d8187a2591
+    m_ActionName: 'Player/Roll[/XInputControllerWindows/buttonEast,/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1232,7 +1236,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1

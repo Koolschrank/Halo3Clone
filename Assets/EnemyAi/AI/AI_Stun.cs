@@ -16,6 +16,11 @@ public class AI_Stun : MonoBehaviour
         health.OnShildDepleted += Stun;
     }
 
+    public bool IsStunned()
+    {
+        return stunTimer > 0;
+    }
+
     private void Stun()
     {
         aim.enabled = false;

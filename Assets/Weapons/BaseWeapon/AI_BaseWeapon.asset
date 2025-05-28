@@ -20,7 +20,7 @@ MonoBehaviour:
   shootType: 1
   fireRate: 0.1
   bulletsPerShot: 1
-  magazineSize: 30
+  magazineSize: 24
   maxAmmoInReserve: 168
   reloadTime: 2
   inaccuracy: 0.1
@@ -126,3 +126,4 @@ MonoBehaviour:
     focusLossWhenNotOnTarget: 0.3
     moveSpeedWithGun: 0.9
     crouchDistance: 11
+    minDistanceToDogeWhenTakingDamage: 20

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 
 public class PlayerAim : MonoBehaviour
@@ -16,6 +17,8 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth playerHealth;
+    [SerializeField] PlayerMovement playerMovement;
+
 
     [Header("Settings")]
     [SerializeField] float aimSpeed_x = 10f;
@@ -39,9 +42,11 @@ public class PlayerAim : MonoBehaviour
     
     [SerializeField] float sensitivityChangeSteps = 0.10f;
 
+    [SerializeField] bool inputSlowDownStopsInput;
+
     List<GunKnockbackInstance> gunKnockbackInstances = new List<GunKnockbackInstance>();
 
-
+    bool inputSlowDown = false;
 
     private void Start()
     {
@@ -54,12 +59,37 @@ public class PlayerAim : MonoBehaviour
         //{
         //    sensitivityMultiplier = 0;
         //};
+
+        playerMovement.OnRollStarted += (direction, duration) =>
+        {
+            BlockInput();
+        };
+        playerMovement.OnRollEnded += UnblockInput;
+    }
+
+    public void BlockInput()
+    {
+        aimInput = Vector2.zero;
+        inputSlowDown = true;
+        OnAimUpdated?.Invoke(aimInput);
+    }
+
+    public void UnblockInput()
+    {
+        inputSlowDown = false;
     }
 
     void Update()
     {
         UpdateAim();
         UpdateGunKnockbacks();
+    }
+
+    public void ForceRotation(Vector3 lookRotation)
+    {
+        // Force rotation of the player and head
+        transform.eulerAngles = new Vector3(0, lookRotation.y, 0);
+        playerHead.transform.eulerAngles = new Vector3(lookRotation.x, lookRotation.y, 0);
     }
 
     private void UpdateAim()
@@ -172,8 +202,18 @@ public class PlayerAim : MonoBehaviour
         return false;
     }
 
+   
+
     public void UpdateAimInput(Vector2 input)
     {
+        if (inputSlowDown)
+        {
+            input = input/2; // slow down input when rolling
+            if (inputSlowDownStopsInput)
+            {
+                input = Vector2.zero; // stop input when rolling
+            }
+        }
         aimInput = input;
         OnAimUpdated?.Invoke(input);
     }

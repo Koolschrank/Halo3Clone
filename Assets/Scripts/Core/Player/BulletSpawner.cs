@@ -22,12 +22,20 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] LayerMask wallCheck;
 
     float accuracyMultiplier = 1f;
+    bool onlyEnemyIsPlayerTeam = false;
+
+
     public float AccuracyMultiplier
     {
         get { return accuracyMultiplier; }
         set { accuracyMultiplier = value; }
     }
 
+
+    public void SetOnlyEnemyIsPlayerTeam(bool onlyEnemyIsPlayerTeam)
+    {
+        this.onlyEnemyIsPlayerTeam = onlyEnemyIsPlayerTeam;
+    }
 
     //AutoAim autoAimOfCurrentWeapon;
 
@@ -114,7 +122,7 @@ public class BulletSpawner : MonoBehaviour
 
             if (hit.collider.TryGetComponent<PlayerTeam>(out PlayerTeam pt))
             {
-                if (pt.TeamIndex == playerTeam.TeamIndex)
+                if ( pt.TeamIndex == playerTeam.TeamIndex || (onlyEnemyIsPlayerTeam && playerTeam.TeamIndex == 0))
                 {
                     
                     return null;

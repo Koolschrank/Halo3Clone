@@ -5,6 +5,8 @@ public class PlayerProgression : MonoBehaviour
 {
     [SerializeField] public bool canGainEXP = false; // if false, player will not gain exp
 
+    float xpGainRate = 1f; // rate at which exp is gained, can be modified later
+
     // singelton 
     public static PlayerProgression instance;
 
@@ -18,6 +20,12 @@ public class PlayerProgression : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        var maploader = MapLoader.instance;
+        if (maploader != null)
+        {
+            xpGainRate /= maploader.AIAmountMultiplier;
+        }
     }
 
 
@@ -30,6 +38,8 @@ public class PlayerProgression : MonoBehaviour
 
     public void GainEXP(int value)
     {
+
+        value = Mathf.RoundToInt(value * xpGainRate); // apply xp gain rate
         if (!canGainEXP) return;
         exp += value;
         if (exp >= expRequirments[currentLevel])
