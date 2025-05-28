@@ -43,7 +43,7 @@ public class PlayerInterface : MonoBehaviour
     public void SetInterfaceLayer(int layer)
     {
         interfaceLayer = layer;
-        gameObject.layer = layer;
+        UtilityFunctions.SetLayerRecursively(gameObject, layer);
     }
 
     public void SetHiddenLayer(int layer)

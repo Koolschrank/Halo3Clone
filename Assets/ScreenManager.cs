@@ -75,6 +75,7 @@ public class ScreenManager : MonoBehaviour
             {
                 if (j != i)
                 {
+                    Debug.Log(fpsLayers[j]);
                     pif.DisableLayerInCamera(fpsLayers[j]);
                     pif.EnableLayerInCamera(thirdPersonLayers[j]);
                 }
