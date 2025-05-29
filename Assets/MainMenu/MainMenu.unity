@@ -2617,7 +2617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8514513fbedaa6b448ee922a5184bd63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: {fileID: 11400000, guid: 12e2246d1299bf94ab2b2611d6633a6d, type: 2}
+  gameMode: {fileID: 11400000, guid: b3b691cdb854dbe41973632627ef625b, type: 2}
   sceneToLoad: Villiage
   isSwat: 0
   dualWieldPlus: 0
@@ -2626,8 +2626,8 @@ MonoBehaviour:
   damageMultiplier: 1
   moveSpeedMultiplier: 1
   aiAmountMultiplier: 1
-  aiEnemies: 0
-  aiEnemyWave: {fileID: 0}
+  aiEnemies: 1
+  aiEnemyWave: {fileID: 11400000, guid: 504d77a11e8f36641b72838aa38f9f3f, type: 2}
 --- !u!4 &915985327
 Transform:
   m_ObjectHideFlags: 0
@@ -3633,7 +3633,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
   - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
   - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
-  - {fileID: 11400000, guid: ec9b9ff723da9d543bb01894799e6d41, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
   buttonSpacing: -60
@@ -4156,7 +4155,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'No Map
+  m_Text: 'No Mini Map
 
 '
 --- !u!222 &1396014230
@@ -4791,7 +4790,6 @@ MonoBehaviour:
   - Villiage
   - Island
   - Streets
-  - IslandVSAI
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   mapButtonParent: {fileID: 9380848}
   buttonSpacing: -170

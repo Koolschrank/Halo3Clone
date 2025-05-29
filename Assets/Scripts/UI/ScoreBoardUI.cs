@@ -28,7 +28,7 @@ public class ScoreBoardUI : MonoBehaviour
         for (int i = 0; i < teams.Count; i++)
         {
             var team = teams[i];
-            if (team > 0)
+            if (team > 0 || i <2)
             {
                 scoreBars[i].gameObject.SetActive(true);
                 scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore());

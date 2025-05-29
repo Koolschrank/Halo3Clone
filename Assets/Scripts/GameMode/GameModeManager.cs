@@ -36,6 +36,13 @@ public class GameModeManager : MonoBehaviour
         
     }
 
+    public bool HasTeam1AlmostWon()
+    {
+        var score = teamPoints[0];
+        var maxScore = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
+        return score >= maxScore * 0.5f;
+    }
+
     
 
     public virtual Transform GetFarthestSpawnPointFromEnemeies(int teamIndex)
@@ -197,6 +204,7 @@ public class GameModeManager : MonoBehaviour
         ResetGame();
         PlayerManager.instance.OnPlayerAdded += PlayerJoined;
         PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
+        
     }
 
     public virtual void PlayerJoined(PlayerMind player)
@@ -344,6 +352,11 @@ public class GameModeManager : MonoBehaviour
         }
     }
 
+    public void AIGainsPoints(int teamIndex, int points)
+    {
+        GainPoints(teamIndex, points);
+    }
+
     protected void GainPoints(int teamIndex, int points)
     {
         teamPoints[teamIndex] += points;
@@ -380,6 +393,8 @@ public class GameModeManager : MonoBehaviour
     public List<int> GetTeamsWithPlayers()
     {
         List<int> teamsWithPlayers = new List<int>();
+        
+
         for (int i = 0; i < teams.Count; i++)
         {
             if (teams[i].Count > 0)

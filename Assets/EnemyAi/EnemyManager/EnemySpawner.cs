@@ -143,21 +143,43 @@ public class EnemySpawner : MonoBehaviour
         var teamId = stats.teamIdOverrride;
         if (isPvPGame)
         {
-            if (team1EnemyCount >= AIPerTeam && team2EnemyCount >= AIPerTeam)
+            var AIPerTeam1 = AIPerTeam;
+            var AIPerTeam2 = AIPerTeam;
+
+            
+            if (!PlayerManager.instance.HasTeam2Players())
+            {
+                
+                bool hasTeam1almostWon = GameModeSelector.gameModeManager.HasTeam1AlmostWon();
+                int playersInTeam1 = PlayerManager.instance.PlayersInTeam1();
+
+                AIPerTeam1 -= (int)(playersInTeam1 * spawnRateMultiplier);
+
+                AIPerTeam2 +=  (int)(playersInTeam1 * spawnRateMultiplier);
+                if (hasTeam1almostWon)
+                {
+                    AIPerTeam2 += (int)(playersInTeam1 * spawnRateMultiplier);
+                }
+
+            }
+
+            if (team1EnemyCount >= AIPerTeam1 && team2EnemyCount >= AIPerTeam2)
             {
                 activeWave.SetDuration(1);
                 return;
             }
+           
+
 
 
             teamId = 0;
-            if (team1EnemyCount < AIPerTeam && team2EnemyCount > team1EnemyCount)
+            if (team1EnemyCount < AIPerTeam1 && team2EnemyCount > team1EnemyCount)
             {
                 teamId = 0;
                 team1EnemyCount++;
                
             }
-            else if (team2EnemyCount < AIPerTeam)
+            else if (team2EnemyCount < AIPerTeam2)
             {
                 teamId = 1;
                 team2EnemyCount++;

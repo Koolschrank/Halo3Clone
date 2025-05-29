@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5792146997314068955}
   - component: {fileID: 1163059816146870362}
   - component: {fileID: 6517739778669486501}
+  - component: {fileID: 8440946660245693327}
   m_Layer: 7
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -243,6 +244,20 @@ MonoBehaviour:
   dangerObject: {fileID: 7548156510967508686, guid: a382756464614cc47a8e242b4bdc63bd, type: 3}
   minDamageForDanger: 80
   health: {fileID: 7357773068672706047}
+--- !u!114 &8440946660245693327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069980226933503108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931a8c4a9e44cca49bf1dc6c5fb80885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: {fileID: 8294897600436085572}
+  targetHitCollector: {fileID: 4176626781396249607}
 --- !u!1 &8857529426304999730
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +844,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c17b5b3dad00bad499e41e19d9e38a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4176626781396249607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6138964545677116144, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+  m_PrefabInstance: {fileID: 7838409973482450679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2291314865742767251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87bd9cf34b994ab49b218954bf35e605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4619331289028681485 stripped

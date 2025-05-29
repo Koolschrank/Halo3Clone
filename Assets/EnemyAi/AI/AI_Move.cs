@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -75,7 +76,7 @@ public class AI_Move : MonoBehaviour
         else
         {
             // If the danger is not clearly to the left or right, roll in a random direction
-            if (Random.Range(0f, 1f) < 0.5f)
+            if (UnityEngine.Random.Range(0f, 1f) < 0.5f)
             {
                 RollToTheRightSide();
             }
@@ -149,7 +150,7 @@ public class AI_Move : MonoBehaviour
         playerHealth.OnDamageTaken += DamageTaken;
 
 
-        var randomInSperee = Random.insideUnitSphere;
+        var randomInSperee = UnityEngine.Random.insideUnitSphere;
         randomInSperee.y = 0; // keep it on the ground
         targetOffset = randomInSperee.normalized * maxStraveOffsetDistance;
     }
@@ -187,7 +188,7 @@ public class AI_Move : MonoBehaviour
         if (GameModeSelector.gameModeManager is KingOfTheHillManager )
         {
             // check probability to follow objective
-            if (Random.Range(0f, 1f) < followObjectiveChance)
+            if (UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
             {
                 followObjective = true;
                 
@@ -209,10 +210,9 @@ public class AI_Move : MonoBehaviour
             targetPosition = ObjectiveIndicator.instance.GetObjective(0).Position;
         }
 
-
+        Vector3 offsetPosition = targetPosition + targetOffset;
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
-
-
+        float distanceToOffsetPosition = Vector3.Distance(transform.position, offsetPosition);
         if (playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.crouchDistance)
         {
             playerMovement.TryCrouch();
@@ -228,8 +228,10 @@ public class AI_Move : MonoBehaviour
         }
 
 
-        
-        if (((!followObjective && playerAim.OnTarget) ||(followObjective && distanceToTarget < 3f )) && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange )
+        var idealRange = playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange;
+        if (
+            ((!followObjective && playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange) 
+            || (followObjective &&  (distanceToTarget < 3f || distanceToOffsetPosition < 1f))) )
         {
             playerMovement.UpdateMoveInput(Vector2.zero);
             //if (straveTimer <=0)
@@ -259,7 +261,7 @@ public class AI_Move : MonoBehaviour
         }
 
         // do a raycast to check if there is a wall between the target and target+offset
-        Vector3 offsetPosition = targetPosition + targetOffset;
+        
         RaycastHit hit;
         if (!Physics.Raycast(targetPosition, targetOffset.normalized, out hit, targetOffset.magnitude, wallLayerMask))
         {

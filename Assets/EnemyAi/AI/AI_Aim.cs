@@ -29,7 +29,7 @@ public class AI_Aim : MonoBehaviour
        
         
         aimInput.y = angles.y * aimSpeedMultiplier_Y;
-        Debug.Log(angles);
+
 
 
         aim.UpdateAimInput(aimInput);

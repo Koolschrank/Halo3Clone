@@ -64,6 +64,31 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    public int PlayersInTeam1()
+    {
+        int count = 0;
+        foreach (var player in players)
+        {
+            if (player.TeamIndex == 0)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public bool HasTeam2Players()
+    {
+        foreach (var player in players)
+        {
+            if (player.TeamIndex == 1)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<PlayerMind> GetAllPlayers()
     {
         return players;

@@ -179,7 +179,7 @@ public class Ability
 
     public void UpdateCooldown(float deltaTime)
     {
-        Debug.Log("Updating cooldown for ability: " + abilityData.name);
+        
         if (charges >= abilityData.maxCharges)
         {
             return;
