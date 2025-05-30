@@ -348,8 +348,6 @@ public abstract class Arms : NetworkBehaviour
         if (projectileData is Weapon_Bullet_Hitscan)
         {
             bulletSpawnerHitScan.FireProjectile(weapon);
-            //var hitscan = bulletSpawner.ShootHitScan(weapon);
-            //HitScanHit(weapon, hitscan);
         }
         else if (projectileData is Weapon_Bullet_Projectile)
         {

@@ -68,8 +68,8 @@ public class GameModeManager : MonoBehaviour
         this.gameModeStats = gameModeStats;
         gameObject.SetActive(true);
         ResetGame();
-        PlayerManager.instance.OnPlayerAdded += PlayerJoined;
-        PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
+        //PlayerManager.instance.OnPlayerAdded += PlayerJoined;
+        //PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
     }
 
     public virtual void PlayerJoined(PlayerMind player)

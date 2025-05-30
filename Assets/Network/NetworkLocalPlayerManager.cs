@@ -27,10 +27,8 @@ public class NetworkLocalPlayerManager : NetworkBehaviour
     private void RPC_LocalPlayerSpawn(PlayerRef player)
     {
 
-        // Create a unique position for the player
         Vector3 spawnPosition = new Vector3((player.RawEncoded % Runner.Config.Simulation.PlayerCount) * 1.5f, 3, 0);
         NetworkObject networkPlayerObject = Runner.Spawn(playerMindPrefab, spawnPosition, Quaternion.identity, player);
-        // Keep track of the player avatars for easy access
         _spawnedCharacters.Add(networkPlayerObject);
         networkPlayerObject.transform.SetParent(transform);
 

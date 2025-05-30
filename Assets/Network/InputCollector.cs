@@ -10,7 +10,6 @@ public class InputCollector : MonoBehaviour
 {
     
 
-    // singleton instance
     public static InputCollector Instance { get; private set; }
 
     private void Awake()

@@ -79,7 +79,6 @@ public class ArmsEvents : Arms
         }
     }
 
-    // rpc
     [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
     void RPC_InitiateRightWeaponSwitch()
     {
@@ -96,7 +95,6 @@ public class ArmsEvents : Arms
         }
     }
 
-    // rpc
     [Rpc(sources: RpcSources.StateAuthority, targets: RpcTargets.All)]
     void RPC_InitiateLeftWeaponSwitch()
     {

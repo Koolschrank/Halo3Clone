@@ -15,37 +15,23 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
-    // singelon instance
     public static BasicSpawner Instance { get; private set; }
     private void Awake()
     {
         Instance = this;
     }
 
-    //public void OnLocalPlayerSpawn(PlayerRef player)
-    //{
-    //    var runner = GetComponent<NetworkRunner>();
-    //    if (runner.IsServer)
-    //    {
-    //        // Create a unique position for the player
-    //        Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 1.5f, 3, 0);
-    //        NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-    //        // Keep track of the player avatars for easy access
-    //        _spawnedCharacters2.Add(networkPlayerObject);
-    //    }
-    //}
+
 
     int index = 0;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) 
     {
         if (runner.IsServer)
         {
-            // Create a unique position for the player
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 1.5f, 3, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             networkPlayerObject.name += " " + index.ToString();
             index++;
-            // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
     }
@@ -82,12 +68,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     async void StartGame(GameMode mode)
     {
-        // Create the Fusion runner and let it know that we will be providing user input
         _runner = gameObject.GetComponent<NetworkRunner>();
         _runner.ProvideInput = true;
 
-
-        // Create the NetworkSceneInfo from the current scene
         var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
         var sceneInfo = new NetworkSceneInfo();
         if (scene.IsValid)
@@ -95,8 +78,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
         }
 
-        Debug.Log("Starting game with mode: " + mode);
-        // Start or join (depends on gamemode) a session with a specific name
         await _runner.StartGame(new StartGameArgs()
         {
             GameMode = mode,
@@ -112,8 +93,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     void FixedUpdate()
     {
-        // Ensure local physics are simulated if you're not relying on NetworkPhysics
-        if(!_runner.IsServer)
+        if(_runner != null && !_runner.IsServer)
             Physics.Simulate(Time.fixedDeltaTime);
     }
 

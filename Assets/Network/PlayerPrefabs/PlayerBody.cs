@@ -54,7 +54,6 @@ public class PlayerBody : NetworkBehaviour
         camera.Follow = head.transform;
         camera.LookAt = head.transform;
 
-        //mind.SetSpectatorTarget(spectatorCamera);
         spectatorCamera.Follow = transform;
         spectatorCamera.LookAt = spectatorCameraTarget;
     }
