@@ -112,6 +112,7 @@ MonoBehaviour:
   alwaysKnowsWherePlayerIs: 1
   playerMovement: {fileID: 753626866741659943}
   target: {fileID: 8029323305840259631}
+  targetHitCollector: {fileID: 4176626781396249607}
   agent: {fileID: 1618324563476685136}
   playerArms: {fileID: 4619331289028681485}
   playerAim: {fileID: 5066934035753808966}
@@ -129,6 +130,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   wallCheckDistance: 2.5
+  tBagStanceTime: 5
+  tBagSpeed: 0.1
+  tBagDistance: 0.6
 --- !u!114 &8029323305840259631
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,8 @@ public class AI_Move : MonoBehaviour
     [SerializeField] bool alwaysKnowsWherePlayerIs = false;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] AI_Target target;
-    
+    [SerializeField] TargetHitCollector targetHitCollector;
+
     [SerializeField] NavMeshAgent agent;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerAim playerAim;
@@ -40,6 +41,15 @@ public class AI_Move : MonoBehaviour
     float crouchRecoveryTimer = 0f;
 
     bool followObjective = false;
+
+    bool IsInTBagStance = false;
+    [SerializeField] float tBagStanceTime = 10f; // time to stay in T-Bag stance
+    [SerializeField] float tBagSpeed = 0.8f; // speed to move towards T-Bag target
+    [SerializeField] float tBagDistance = 0.4f; // distance to T-Bag target before starting to T-Bag
+    float tBagStanceTimer = 0f; // timer to track T-Bag stance time
+    GameObject tbagTarget;
+    float tBagTimer = 0f; // timer to track T-Bag stance time
+
 
 
 
@@ -153,6 +163,18 @@ public class AI_Move : MonoBehaviour
         var randomInSperee = UnityEngine.Random.insideUnitSphere;
         randomInSperee.y = 0; // keep it on the ground
         targetOffset = randomInSperee.normalized * maxStraveOffsetDistance;
+
+        targetHitCollector.OnTbagStanceTriggered += EnterTBagStance;
+    }
+
+    public void EnterTBagStance(GameObject tBagTarget)
+    {
+        if (IsInTBagStance) return;
+        IsInTBagStance = true;
+        this.tbagTarget = tBagTarget;
+        tBagStanceTimer = tBagStanceTime;
+        playerMovement.UpdateMoveInput(Vector2.zero);
+        playerMovement.TryStandUp();
     }
 
     public void DamageTaken(DamagePackage damage)
@@ -200,6 +222,56 @@ public class AI_Move : MonoBehaviour
 
     private void Update()
     {
+        if (IsInTBagStance)
+        {
+            if (Time.frameCount % framesToUpdateNavAgentIfClose == 0)
+            {
+                agent.transform.localPosition = Vector3.zero;
+                agent.SetDestination(tbagTarget.transform.position);
+
+            }
+            Vector3 tBagdirection = agent.desiredVelocity.normalized;
+            float distanceToTBagTarget = Vector3.Distance(transform.position, tbagTarget.transform.position);
+
+            if (distanceToTBagTarget> tBagDistance)
+            {
+                playerMovement.UpdateMoveInput(new Vector2(tBagdirection.x, tBagdirection.z) * 1);
+            }
+            else
+            {
+                tBagStanceTimer -= Time.deltaTime;
+                playerMovement.UpdateMoveInput(Vector2.zero);
+
+                tBagTimer -= Time.deltaTime;
+                if (tBagTimer <= 0f)
+                {
+                    tBagTimer = tBagSpeed;
+                    playerMovement.ToggleCrouch();
+                }
+
+
+
+            }
+            if (tBagStanceTimer <= 0f)
+            {
+                IsInTBagStance = false;
+                playerMovement.TryStandUp();
+                playerMovement.UpdateMoveInput(Vector2.zero);
+                tbagTarget = null;
+            }
+
+
+            return;
+
+
+
+
+                
+        }
+
+
+
+
         rollCooldownTimer -= Time.deltaTime;
         
 

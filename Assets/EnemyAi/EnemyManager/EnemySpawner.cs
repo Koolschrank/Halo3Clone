@@ -146,8 +146,11 @@ public class EnemySpawner : MonoBehaviour
             var AIPerTeam1 = AIPerTeam;
             var AIPerTeam2 = AIPerTeam;
 
-            
-            if (!PlayerManager.instance.HasTeam2Players())
+            bool hasTeam1AIEnemies = MapLoader.instance.IsAIEnemiesTeam1();
+            bool hasTeam2AIEnemies = MapLoader.instance.IsAIEnemiesTeam2();
+
+
+            if (hasTeam1AIEnemies && hasTeam2AIEnemies && !PlayerManager.instance.HasTeam2Players())
             {
                 
                 bool hasTeam1almostWon = GameModeSelector.gameModeManager.HasTeam1AlmostWon();
@@ -162,6 +165,28 @@ public class EnemySpawner : MonoBehaviour
                 }
 
             }
+            else
+            {
+                var team1PlayerCount = PlayerManager.instance.PlayersInTeam1();
+                var team2PlayerCount = PlayerManager.instance.PlayersInTeam2();
+
+                AIPerTeam1 +=  -team1PlayerCount + team2PlayerCount;
+                AIPerTeam2 += -team2PlayerCount + team1PlayerCount;
+
+            }
+
+            
+
+            if (hasTeam1AIEnemies && !hasTeam2AIEnemies)
+            {
+                AIPerTeam2 = 0;
+            }
+            else if (!hasTeam1AIEnemies && hasTeam2AIEnemies)
+            {
+                AIPerTeam1 = 0;
+            }
+
+
 
             if (team1EnemyCount >= AIPerTeam1 && team2EnemyCount >= AIPerTeam2)
             {

@@ -19,9 +19,11 @@ public class CharacterHealth : Health
     [SerializeField] float shildRegenAmountPerSecond = 20;
     float shildRegenTimer;
 
+    [Header("References")]
     [SerializeField] HeadShotArea headShotArea;
     [SerializeField] RagdollTrigger ragdollTrigger;
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] PlayerBodyStatSheet statSheet;
 
 
 
@@ -105,6 +107,33 @@ public class CharacterHealth : Health
     public void SetHeadShotOneShot(bool headShotOneShot)
     {
         this.headShotOneShot = headShotOneShot;
+    }
+
+    private void Awake()
+    {
+        if (statSheet != null)
+        {
+            statSheet.OnStatSheetUpdated += SetStatSheet;
+        }
+    }
+
+    public void SetStatSheet()
+    {
+        if (!statSheet.useStatSheet) return;
+
+        var statSheetInstance = statSheet.playerStatsSheetInstance;
+        var maxHealthChange = statSheetInstance.maxHealth - maxHeath;
+
+        maxHeath = statSheetInstance.maxHealth;
+        currentHeath = Mathf.Clamp(currentHeath + maxHealthChange, 0, maxHeath);
+
+        healthRegenAmountPerSecond = statSheetInstance.healthRegenPerSecond;
+        healthRegenDelay = statSheetInstance.healthRegenDelay;
+        maxShild = statSheetInstance.maxShild;
+        currentShild = Mathf.Clamp(currentShild, 0, maxShild);
+        hasShild = maxShild > 0;
+        shildRegenAmountPerSecond = statSheetInstance.shieldRegenPerSecond;
+        shildRegenDelay = statSheetInstance.shieldRegenDelay;
     }
 
 

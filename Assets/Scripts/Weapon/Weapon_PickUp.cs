@@ -15,6 +15,7 @@ public class Weapon_PickUp : MonoBehaviour
 
     [SerializeField] float deleteTime = 30f;
     [SerializeField] float fastDeletTime = 7f;
+    [SerializeField] bool destroyWhenEmpty = true;
     bool inDeleteState = false;
     float deleteTimer = 0f;
 
@@ -56,7 +57,11 @@ public class Weapon_PickUp : MonoBehaviour
             }
 
             deleteTimer -= Time.deltaTime;
-            if (deleteTimer <= 0)
+
+            int ammo = ammoInMagazine + ammoInReserve;
+
+
+            if (deleteTimer <= 0|| (ammo <= 0 && destroyWhenEmpty))
             {
                 OnPickUp?.Invoke(this);
 

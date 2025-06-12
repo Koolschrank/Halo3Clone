@@ -39,6 +39,10 @@ public class Weapon_Arms
 
     float fireRateMultiplier = 1f;
 
+
+    
+
+
     public void SetFireRateMultiplier(float fireRateMultiplier)
     {
         this.fireRateMultiplier = fireRateMultiplier;

@@ -58,6 +58,7 @@ MonoBehaviour:
   ammoInReserve: 1
   deleteTime: 1e+11
   fastDeletTime: 1
+  destroyWhenEmpty: 0
 --- !u!65 &2423767624266625226
 BoxCollider:
   m_ObjectHideFlags: 0

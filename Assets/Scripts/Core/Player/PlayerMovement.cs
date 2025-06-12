@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform head_normalPosition;
     [SerializeField] Transform head_crouchPosition;
     [SerializeField] PlayerArms arms;
+    [SerializeField] PlayerBodyStatSheet statSheet;
     [Header("Settings")]
 
 
@@ -77,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 rollDirection = Vector3.zero;
     float rollTimer = 0;
 
+
+    float moveSpeedStatSheetMultiplier = 1f; // multiplier for the move speed, used by modifiers and other things
+
     public void MultiplyMaxMoveSpeed(float multiplier)
     {
         maxMoveSpeed *= multiplier;
@@ -86,6 +90,22 @@ public class PlayerMovement : MonoBehaviour
     public void MultiplySpeed(float multiplier)
     {
         maxMoveSpeedMultiplier *= multiplier;
+    }
+
+    private void Awake()
+    {
+        if (statSheet != null)
+        {
+            statSheet.OnStatSheetUpdated += UpdateStatSheet;
+        }
+    }
+
+    public void UpdateStatSheet()
+    {
+        if (!statSheet.useStatSheet) return;
+
+        moveSpeedStatSheetMultiplier = statSheet.playerStatsSheetInstance.movementSpeedMultiplier;
+
     }
 
     // update
@@ -213,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
                 speedMultiplier *= moveSpeedCrouchMultiplier;
             }
 
-            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier, acceleration * Time.deltaTime);
+            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier * moveSpeedStatSheetMultiplier, acceleration * Time.deltaTime);
         }
 
         

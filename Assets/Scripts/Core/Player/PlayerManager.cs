@@ -77,6 +77,19 @@ public class PlayerManager : MonoBehaviour
         return count;
     }
 
+    public int PlayersInTeam2()
+    {
+        int count = 0;
+        foreach (var player in players)
+        {
+            if (player.TeamIndex == 1)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public bool HasTeam2Players()
     {
         foreach (var player in players)

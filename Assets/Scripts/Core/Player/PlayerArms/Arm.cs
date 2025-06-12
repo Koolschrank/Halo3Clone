@@ -38,8 +38,9 @@ public class Arm : MonoBehaviour
     [SerializeField] PlayerMeleeAttack basicMeleeAttack;
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
 
-     bool isTriggerPressed;
+    bool isTriggerPressed;
      bool wasTriggerPressed;
      float reloadTimer;
     protected float switchOutTimer;
@@ -71,6 +72,10 @@ public class Arm : MonoBehaviour
     float reloadWeaponSpeedMultiplier = 1;
     float fireRateMultiplier = 1;
     bool inRoll = false;
+
+
+    
+
 
     public void AddToFireRateMultiplier(float value)
     {

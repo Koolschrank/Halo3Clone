@@ -20,7 +20,7 @@ public class AI_Score : MonoBehaviour
             
             return;
         }
-
+        return;
 
         if (character.GetComponent<PlayerTeam>().TeamIndex == team.TeamIndex)
         {

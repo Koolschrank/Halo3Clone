@@ -37,14 +37,25 @@ public class MapLoader : MonoBehaviour
     [SerializeField] float moveSpeedMultiplier = 1;
     [SerializeField] float aiAmountMultiplier = 1;
 
-    [SerializeField] bool aiEnemies;
+    [SerializeField] bool aiEnemiesTeam1;
+    [SerializeField] bool aiEnemiesTeam2;
 
     [SerializeField] Enemy_Wave aiEnemyWave;
 
 
     public bool HasAIEnemies()
     {
-        return aiEnemies;
+        return aiEnemiesTeam1 || aiEnemiesTeam2;
+    }
+
+    public bool IsAIEnemiesTeam1()
+    {
+        return aiEnemiesTeam1;
+    }
+
+    public bool IsAIEnemiesTeam2()
+    {
+        return aiEnemiesTeam2;
     }
 
     public void LoadMap()
@@ -130,9 +141,14 @@ public class MapLoader : MonoBehaviour
         this.moveSpeedMultiplier = moveSpeedMultiplier;
     }
 
-    public void SetAIEnemies(bool aiEnemies)
+    public void SetAIEnemiesTeam1(bool aiEnemies)
     {
-        this.aiEnemies = aiEnemies;
+        this.aiEnemiesTeam1 = aiEnemies;
+    }
+
+    public void SetAIEnemiesTeam2(bool aiEnemies)
+    {
+        this.aiEnemiesTeam2 = aiEnemies;
     }
 
     public void SetAIAmount(float value)

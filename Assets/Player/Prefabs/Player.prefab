@@ -10548,6 +10548,7 @@ GameObject:
   - component: {fileID: 3844945188849078822}
   - component: {fileID: 3970420054294455764}
   - component: {fileID: 4267228126375275963}
+  - component: {fileID: 6520564595086861149}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -10672,7 +10673,7 @@ MonoBehaviour:
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
   maxMoveSpeed: 4.9
-  moveSpeedRoolMultiplier: 1.6
+  moveSpeedRoolMultiplier: 2
   moveSpeedCrouchMultiplier: 0.4
   acceleration_ground: 35
   acceleration_air: 10
@@ -10691,7 +10692,7 @@ MonoBehaviour:
   playerCrouchingHitbox:
     Height: 1.4
     Offset: -0.35
-  rollTime: 1.5
+  rollTime: 0.8
   rollCurve:
     serializedVersion: 2
     m_Curve:
@@ -10816,6 +10817,7 @@ MonoBehaviour:
   minSensitivity: 0.1
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1
+  inputSlowDownStopsInput: 0
   OnTarget: 0
 --- !u!114 &7573040687501960069
 MonoBehaviour:
@@ -10859,6 +10861,7 @@ MonoBehaviour:
   playerTeam: {fileID: 2295363821645548979}
   playerStartEquipment: {fileID: 8050057614039648062}
   playerAnimation: {fileID: 6646059112641200883}
+  playerHead: {fileID: 1741222393793741544}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -10941,6 +10944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTeam: {fileID: 2295363821645548979}
+  tBagOnKill: 1
 --- !u!114 &2295363821645548979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10972,7 +10976,7 @@ MonoBehaviour:
   characterHealth: {fileID: 782412234501442312}
   characterController: {fileID: 1567991787468202011}
   isHiddenOnMiniMap: 0
-  movementSpeedForVisibility: 2
+  movementSpeedForVisibility: 2.1
 --- !u!114 &3232609274750972410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11068,6 +11072,18 @@ MonoBehaviour:
   maxAbilities: 3
   abilities: []
   currentAbilityIndex: 0
+--- !u!114 &6520564595086861149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b4c3abb38358a468e6cf5a7cbf9d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0
@@ -11371,6 +11387,11 @@ PrefabInstance:
       addedObject: {fileID: 31787514644032290}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+--- !u!1 &1741222393793741544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5657188882570305293, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+  m_PrefabInstance: {fileID: 6244328683183300069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2688980760062710863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8356818453252377002, guid: a30f8588204e0324eab3d2da725014f5, type: 3}

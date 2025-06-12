@@ -8,7 +8,8 @@ public class ModifiersSelector : MonoBehaviour
     [SerializeField] Toggle dualWieldPlusToggle;
     [SerializeField] Toggle minimapToggle;
     [SerializeField] Toggle randomWeaponSpawnToggle;
-    [SerializeField] Toggle aiEnemies;
+    [SerializeField] Toggle aiEnemiesTeam1;
+    [SerializeField] Toggle aiEnemiesTeam2;
 
     [SerializeField] Slider moveSpeedSlider;
     [SerializeField] TextMeshProUGUI moveSpeedValue;
@@ -28,7 +29,8 @@ public class ModifiersSelector : MonoBehaviour
         bool dualWieldPlus = MapLoader.instance.IsDualWieldPlus();
         bool minimap = MapLoader.instance.HasNoMiniMap();
         bool randomWeaponSpawn = MapLoader.instance.IsRandomWeaponSpawn();
-        bool aiEnemiesValue = MapLoader.instance.HasAIEnemies();
+        bool aiEnemies1Value = MapLoader.instance.IsAIEnemiesTeam1();
+        bool aiEnemies2Value = MapLoader.instance.IsAIEnemiesTeam2();
         float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
         float damageMultiplier = MapLoader.instance.GetDamageMultiplier();
         float aiAmount = MapLoader.instance.AIAmountMultiplier;
@@ -46,7 +48,8 @@ public class ModifiersSelector : MonoBehaviour
         moveSpeedSlider.value = moveSpeedValueInt;
         damageMultiplierSlider.value = damageMultiplierValueInt;
         aiAmountSlider.value = aiAmountValueInt;
-        aiEnemies.isOn = aiEnemiesValue;
+        aiEnemiesTeam1.isOn = aiEnemies1Value;
+        aiEnemiesTeam2.isOn = aiEnemies2Value;
 
 
         moveSpeedValue.text = (moveSpeedMultiplier).ToString("F1");
@@ -60,7 +63,8 @@ public class ModifiersSelector : MonoBehaviour
         dualWieldPlusToggle.onValueChanged.AddListener(SetDualWieldPlus);
         minimapToggle.onValueChanged.AddListener(SetNoMiniMap);
         randomWeaponSpawnToggle.onValueChanged.AddListener(SetRandomWeaponSpawn);
-        aiEnemies.onValueChanged.AddListener(MapLoader.instance.SetAIEnemies);
+        aiEnemiesTeam1.onValueChanged.AddListener(MapLoader.instance.SetAIEnemiesTeam1);
+        aiEnemiesTeam2.onValueChanged.AddListener(MapLoader.instance.SetAIEnemiesTeam2);
 
         moveSpeedSlider.onValueChanged.AddListener(SetMoveSpeedMultiplier);
         damageMultiplierSlider.onValueChanged.AddListener(SetDamageMultiplier);
@@ -76,7 +80,8 @@ public class ModifiersSelector : MonoBehaviour
         dualWieldPlusToggle.onValueChanged.RemoveListener(SetDualWieldPlus);
         minimapToggle.onValueChanged.RemoveListener(SetNoMiniMap);
         randomWeaponSpawnToggle.onValueChanged.RemoveListener(SetRandomWeaponSpawn);
-        aiEnemies.onValueChanged.RemoveListener(MapLoader.instance.SetAIEnemies);
+        aiEnemiesTeam1.onValueChanged.RemoveListener(MapLoader.instance.SetAIEnemiesTeam1);
+        aiEnemiesTeam2.onValueChanged.RemoveListener(MapLoader.instance.SetAIEnemiesTeam2);
 
         moveSpeedSlider.onValueChanged.RemoveListener(SetMoveSpeedMultiplier);
 
@@ -105,7 +110,7 @@ public class ModifiersSelector : MonoBehaviour
 
     private void SetAIEnemies(bool value)
     {
-        MapLoader.instance.SetAIEnemies(value);
+        MapLoader.instance.SetAIEnemiesTeam1(value);
     }
 
     private void SetMoveSpeedMultiplier(float value)

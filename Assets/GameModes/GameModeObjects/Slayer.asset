@@ -29,10 +29,21 @@ MonoBehaviour:
     ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   timeLimitInMinutes: 10
   pointsToWin: 10
   teamCount: 8
-  respawnTime: 2
+  respawnTime: 4
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
