@@ -15,8 +15,78 @@ public class PlayerStartEquipment : MonoBehaviour
     [SerializeField] CharacterHealth health;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] bool isNonPlayer = false;
+    [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
 
 
+    private void Awake()
+    {
+        playerBodyStatSheet.OnStartEquipmentEquip += OnStatSheetEquip;
+    }
+
+    public void OnStatSheetEquip()
+    {
+        if (!playerBodyStatSheet.useStatSheet) return;
+        var weaponInHand = playerBodyStatSheet.playerStatsSheetInstance.startingWeapon;
+        var weaponInLeftHand = playerBodyStatSheet.playerStatsSheetInstance.startingWeapon_Left;
+        var sideArm = playerBodyStatSheet.playerStatsSheetInstance.startingWeaponReserve;
+        var sideArmLeft = playerBodyStatSheet.playerStatsSheetInstance.startingWeaponReserve_Left;
+
+        var ability1 = playerBodyStatSheet.playerStatsSheetInstance.startingAbility1;
+        var ability2 = playerBodyStatSheet.playerStatsSheetInstance.startingAbility2;
+        var ability3 = playerBodyStatSheet.playerStatsSheetInstance.startingAbility3;
+
+        if (weaponInHand != null)
+        {
+            playerArms.RightArm.PickUpWeapon(
+            SpawnWeapon(
+                weaponInHand,
+                99));
+        }
+
+        if (weaponInLeftHand != null)
+        {
+            playerArms.LeftArm.PickUpWeapon(
+            SpawnWeapon(
+                weaponInLeftHand,
+                99));
+        }
+
+        if (sideArm != null)
+        {
+            playerInventory.Clear();
+            playerInventory.AddWeapon(
+            SpawnWeapon(
+                sideArm,
+                99));
+        }
+
+        /*
+        if (sideArmLeft != null)
+        {
+            playerInventory.AddWeapon(
+            SpawnWeapon(
+                sideArmLeft,
+                99));
+        }*/
+
+        abilityInventory.RemoveAllAbilities();
+
+        if (ability1 != null)
+        {
+            abilityInventory.AddAbility(ability1);
+        }
+        if (ability2 != null)
+        {
+
+            abilityInventory.AddAbility(ability2);
+        }
+        if (ability3)
+        {
+            abilityInventory.AddAbility(ability3);
+        }
+
+
+    }
 
     public void GetEquipment(Equipment equipment)
     {
@@ -149,6 +219,8 @@ public class Equipment
     [SerializeField] int magazinsOfWeaponInLeftHand = 3;
     [SerializeField] Weapon_Data sideArm;
     [SerializeField] int magazinsOfSideArm = 5;
+    [SerializeField] Weapon_Data sideArmLeft;
+    [SerializeField] int magazinsOfSideArmLeft = 5;
 
     [SerializeField] AbilityData ability;
     [SerializeField] AbilityData ability2;
@@ -213,6 +285,10 @@ public class Equipment
 
     public Weapon_Data SideArm => sideArm;
     public int MagazinsOfSideArm => magazinsOfSideArm;
+
+    public Weapon_Data SideArmLeft => sideArmLeft;
+
+    public int MagazinsOfSideArmLeft => magazinsOfSideArmLeft;
 
     public AbilityData Ability => ability;
     public AbilityData Ability2 => ability2;

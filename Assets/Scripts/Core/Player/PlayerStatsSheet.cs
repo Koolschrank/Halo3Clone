@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,6 +8,7 @@ public class PlayerStatsSheet : ScriptableObject
 {
     public Action<PassiveEffectType, bool> OnPassiveEffectChanged;
     public Action<StatType, float> OnStatChanged;
+    
 
 
     public float maxHealth = 100;
@@ -37,6 +39,22 @@ public class PlayerStatsSheet : ScriptableObject
 
 
 
+    [Header("StartEquipment")]
+    public Weapon_Data startingWeapon = null;
+    public Weapon_Data startingWeapon_Left = null;
+    public Weapon_Data startingWeaponReserve = null;
+    public Weapon_Data startingWeaponReserve_Left = null;
+
+    public AbilityData startingAbility1 = null;
+    public AbilityData startingAbility2 = null;
+    public AbilityData startingAbility3 = null;
+
+
+
+
+
+
+
     [Header("Unique Abilities")]
     public bool dualWielding = false;
     public float healOnMeleeKillAmount = 20f;
@@ -52,6 +70,27 @@ public class PlayerStatsSheet : ScriptableObject
 
     public bool instantRevive = false;
     public bool expesiveBullets = false;
+
+    public List<StatUpgrader> statUpgraders = new List<StatUpgrader>();
+
+    public bool HasModifier(StatUpgrader upgrader)
+    {
+        return statUpgraders.Contains(upgrader);
+    }
+
+    public void ApplyModifiers(StatUpgrader upgrader)
+    {
+        foreach (StatModifier stat in upgrader.statModifiers)
+        {
+            AddStat(stat.type, stat.value);
+        }
+        foreach (PassiveModifier passive in upgrader.passiveModifiers)
+        {
+            SetPassiveEffect(passive.effectType, passive.isActive);
+        }
+
+        statUpgraders.Add(upgrader);
+    }
 
     public void SetPassiveEffect(PassiveEffectType effect, bool value)
         {
@@ -73,6 +112,8 @@ public class PlayerStatsSheet : ScriptableObject
 
         OnPassiveEffectChanged?.Invoke(effect, value);
     }
+
+
 
     public void AddStat(StatType type, float value)
         {
@@ -211,6 +252,17 @@ public class PlayerStatsSheet : ScriptableObject
         crouchBuff_reloadMultiplier = statsToCopy.crouchBuff_reloadMultiplier;
         instantRevive = statsToCopy.instantRevive;
         expesiveBullets = statsToCopy.expesiveBullets;
+
+        startingWeapon = statsToCopy.startingWeapon;
+        startingWeapon_Left = statsToCopy.startingWeapon_Left;
+        startingWeaponReserve = statsToCopy.startingWeaponReserve;
+        startingWeaponReserve_Left = statsToCopy.startingWeaponReserve_Left;
+        startingAbility1 = statsToCopy.startingAbility1;
+        startingAbility2 = statsToCopy.startingAbility2;
+        startingAbility3 = statsToCopy.startingAbility3;
+
+        statUpgraders = statsToCopy.statUpgraders;
+
     }
 
 }

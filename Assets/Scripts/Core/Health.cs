@@ -7,8 +7,9 @@ public class Health : MonoBehaviour
     // unity event on death
     public Action OnDeath;
     public Action OnShowHealthBar;
+    public Action OnPreDeath;
 
-   
+
 
     [SerializeField] protected float maxHeath;
     [SerializeField] protected float currentHeath;
@@ -109,6 +110,7 @@ public class Health : MonoBehaviour
     }
     protected virtual void Die()
     {
+        OnPreDeath?.Invoke();
         OnDeath?.Invoke();
         
 

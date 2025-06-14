@@ -1,0 +1,42 @@
+using System.Collections;
+using UnityEngine;
+
+public class Interactable_GainWeapon : Interactable
+{
+    public Transform weaponSpawnPoint;
+    public float weaponDropForce = 5f;
+    public Weapon_Data[] weaponsToGain;
+
+    [SerializeField] Collider activationBox;
+    [SerializeField] float activationCooldown = 1f;
+
+    IEnumerator ActivationCooldown()
+    {
+        activationBox.enabled = false;
+        yield return new WaitForSeconds(activationCooldown);
+        activationBox.enabled = true;
+    }
+
+    public override void Interact(GameObject player)
+    {
+        base.Interact(player);
+        var weaponToGain = GetRandomWeapon();
+
+        Weapon_PickUp weapon_PickUp = Instantiate(weaponToGain.WeaponPickUp, weaponSpawnPoint.position, weaponSpawnPoint.rotation);
+        weapon_PickUp.transform.SetParent(null); // Detach from parent
+        var rb = weapon_PickUp.GetComponent<Rigidbody>();
+        rb.AddForce(weaponSpawnPoint.forward * weaponDropForce, ForceMode.Impulse); // Apply force to drop the weapon
+
+        StartCoroutine(ActivationCooldown());
+    }
+
+    
+
+    private Weapon_Data GetRandomWeapon()
+    {
+        if (weaponsToGain.Length == 0) return null;
+        int randomIndex = Random.Range(0, weaponsToGain.Length);
+        return weaponsToGain[randomIndex];
+
+    }
+}

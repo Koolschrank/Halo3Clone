@@ -45,6 +45,7 @@ public class CharacterHealth : Health
     public Action OnShildDamageTaken;
     public Action OnHealthDamageTaken;
     public Action OnShildRechargeStarted;
+    
 
 
     float maxShildMultiplier = 1;
@@ -327,6 +328,7 @@ public class CharacterHealth : Health
     bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
+        
         base.Die();
         ragdollTrigger.Activate(damagePackage);
 

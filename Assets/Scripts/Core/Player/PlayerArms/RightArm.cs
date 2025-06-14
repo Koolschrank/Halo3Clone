@@ -6,6 +6,17 @@ public class RightArm : Arm
 
     public override void TryPickUpWeapon()
     {
+
+        Debug.Log("interact");
+        if (playerInteractableTrigger.CanInteract())
+        {
+            Debug.Log("interact2");
+            playerInteractableTrigger.Interact();
+            return;
+        }
+
+
+
         if (playerArms.LeftArm.CurrentWeapon == null)
         {
             base.TryPickUpWeapon();

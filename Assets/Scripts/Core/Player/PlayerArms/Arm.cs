@@ -39,6 +39,7 @@ public class Arm : MonoBehaviour
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
+    [SerializeField] protected PlayerInteractableTrigger playerInteractableTrigger;
 
     bool isTriggerPressed;
      bool wasTriggerPressed;
@@ -126,6 +127,25 @@ public class Arm : MonoBehaviour
     public void AddExtraBullets(int amount)
     {
         extraBulletsInMagazine += amount;
+    }
+
+    private void Awake()
+    {
+        if (playerBodyStatSheet != null)
+        {
+            playerBodyStatSheet.OnStatSheetUpdated += ApplyStatSheet;
+            
+        }
+    }
+
+    public void ApplyStatSheet()
+    {
+        if (playerBodyStatSheet == null) return;
+        if (weaponInHand != null)
+        {
+            weaponInHand.SetStatSheet(playerBodyStatSheet);
+        }
+
     }
 
     private void Start()
@@ -564,11 +584,8 @@ public class Arm : MonoBehaviour
     public virtual void DropWeapon()
     {
 
-        Debug.Log("Dropping weapon1");
         if (weaponInHand == null) return;
-        Debug.Log("Dropping weapon2");
         var pickUp = LetGoOfWeapon();
-        Debug.Log("Dropping weapon3");
         if (pickUp == null) return;
 
         pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
@@ -660,6 +677,8 @@ public class Arm : MonoBehaviour
             {
                 timeMultiplier = granadeThrowTimeMultiplierInDualWielding;
             }
+            timeMultiplier /= abilityInventory.abilityUseSpeedMultiplier;
+
             granadeThrower.ThrowGranadeStart(ability.granadeStats, timeMultiplier);
             
             armState = ArmState.InGranadeThrow;
@@ -754,7 +773,11 @@ public class Arm : MonoBehaviour
             weapon.ReloadOnPickup = false;
         }
 
-       
+        if (playerBodyStatSheet != null && playerBodyStatSheet.playerStatsSheetInstance != null)
+        {
+            weaponInHand.SetStatSheet(playerBodyStatSheet);
+        }
+
 
 
         weaponInHand.SwitchInStart(switchInTimer);

@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 2923737641940389727}
   - component: {fileID: 367694579518745841}
   - component: {fileID: 9040322732282011191}
+  - component: {fileID: 3585907214944871867}
   m_Layer: 0
   m_Name: PlayerMind
   m_TagString: Untagged
@@ -466,6 +467,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7384835890734412225}
   team: {fileID: 367694579518745841}
   playerUpgrader: {fileID: 9040322732282011191}
+  playerMindStatSheet: {fileID: 3585907214944871867}
   UIContainer: {fileID: 4247939652203469467}
   healthUI: {fileID: 3963887290950628199}
   shildUI: {fileID: 1102817728189394635}
@@ -493,6 +495,7 @@ MonoBehaviour:
   settingsQuickMenu: {fileID: 8575887476298330554}
   sensitivitySlider: {fileID: 3880309612561890731}
   holdButtonToPickUpTime: 0.175
+  score: 1500
 --- !u!114 &2923737641940389727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,6 +974,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 372f207e64becbe409db9b1841c78ddc, type: 2}
   - {fileID: 11400000, guid: dc3f8dbe3b0abfb46be1ee320c6cc746, type: 2}
   - {fileID: 11400000, guid: 427f362ab111b494fae682eeedaa06ef, type: 2}
+--- !u!114 &3585907214944871867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6575293768710529257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5b2bf0bda19334fa41c147bab9ecfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatsSheetBlueprint: {fileID: 11400000, guid: 145bf0bb3c3bf914993d1064b170c8ca, type: 2}
+  usePlayerStatsSheet: 1
 --- !u!1 &7104922266481455783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1207,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 6135
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1347,6 +1364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4645109039399102668}
     m_Modifications:
+    - target: {fileID: 246367556456530730, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: playerMind
+      value: 
+      objectReference: {fileID: 6762101414911299386}
     - target: {fileID: 781354266759541272, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_Name
       value: UI

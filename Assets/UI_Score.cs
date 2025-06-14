@@ -11,7 +11,7 @@ public class UI_Score : MonoBehaviour
 
     public void UpdateScore(int value)
     {
-        scoreText.text = value.ToString();
+        scoreText.text = value.ToString() +"$";
     }
 
     public void SpawnScoreGain(int value)

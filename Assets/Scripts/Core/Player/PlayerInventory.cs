@@ -28,10 +28,13 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] Transform weaponDropPoint;
     [SerializeField] CharacterHealth characterHealth;
+    
 
     public bool HasWeapon => weapons.Count > 0;
 
     public Weapon_Arms FirstWeaponInInventory => weapons.Count > 0 ? weapons[0] : null;
+
+    
 
     // start
     public void Start()

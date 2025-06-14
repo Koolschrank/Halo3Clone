@@ -19,7 +19,7 @@ TagManager:
   - PickUp
   - HitBox
   - Granade
-  - 
+  - Interactable
   - 
   - Danger
   - Player1_FPS

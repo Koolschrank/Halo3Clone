@@ -6,7 +6,9 @@ public class PickUpUI : MonoBehaviour
 {
     [SerializeField] string pickUpText = "Press E to pick up ";
     [SerializeField] string dualWieldText = "Press E to dual wield ";
-    [SerializeField] PlayerPickUpScan pickUpScan;
+    PlayerPickUpScan pickUpScan;
+    PlayerInteractableTrigger interactableTrigger;
+
     [SerializeField] GameObject pickUpTextObject;
 
     [SerializeField] TextMeshProUGUI weaponName;
@@ -14,6 +16,12 @@ public class PickUpUI : MonoBehaviour
 
     [SerializeField] GameObject dualwieldObject;
     [SerializeField] TextMeshProUGUI dualWieldName;
+    [SerializeField] TextMeshProUGUI price;
+
+    [SerializeField] TextMeshProUGUI discription;
+    [SerializeField] Color basePriceColor = Color.white;
+    [SerializeField] Color notBuyablePriceColor = Color.red;
+    [SerializeField] PlayerMind playerMind;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void SetUp(PlayerPickUpScan pickUpScan)
@@ -29,13 +37,72 @@ public class PickUpUI : MonoBehaviour
         pickUpScan.OnWeaponPickUp += ClearPickUpUI;
         pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
         ClearPickUpUI();
+        this.pickUpScan = pickUpScan;
+    }
+
+    public void SetUp(PlayerInteractableTrigger interactableTrigger)
+    {
+        if (interactableTrigger != null)
+        {
+            interactableTrigger.OnNewInteractable -= UpdateInteractable;
+            interactableTrigger.OnRemoveInteractable -= ClearInteractableUI;
+        }
+        
+        interactableTrigger.OnNewInteractable += UpdateInteractable;
+        interactableTrigger.OnRemoveInteractable += ClearInteractableUI;
+        ClearInteractableUI();
+        this.interactableTrigger = interactableTrigger;
+
+    }
+    bool isOnInteractable = false;
+
+    void UpdateInteractable(Interactable interactable)
+    {
+        isOnInteractable = true;
+        price.gameObject.SetActive(interactable.HasPrice);
+        if (interactable.HasPrice)
+        {
+            
+            price.text = "Cost: " + interactable.Price.ToString() + "$";
+            if (playerMind != null && !interactable.CanAfford(playerMind.Score))
+            {
+                price.color = notBuyablePriceColor;
+            }
+            else
+            {
+                price.color = basePriceColor;
+            }
+        }
+        else
+        {
+            price.text = "";
+
+        }
+
+        weaponImage.sprite = null;
+        weaponImage.enabled = false;
+        pickUpTextObject.SetActive(true);
+        weaponName.text = interactable.discription;
+        discription.text = interactable.extraDiscription;
+    }
+
+    void ClearInteractableUI()
+    {
+        isOnInteractable = false;
+        weaponName.text = "";
+        price.text = "";
+        pickUpTextObject.SetActive(false);
+
+        discription.text = "";
     }
 
 
     void UpdatePickUpUI(Weapon_PickUp weapon_PickUp)
     {
+        if (isOnInteractable) return;
         if (weapon_PickUp == null)
         {
+            if (isOnInteractable) return;
             weaponName.text = "";
             pickUpTextObject.SetActive(false);
             return;
@@ -55,6 +122,7 @@ public class PickUpUI : MonoBehaviour
             weaponImage.sprite = null;
             weaponImage.enabled = false;
         }
+        discription.text = "";
     }
 
     void ClearPickUpUI()
@@ -63,6 +131,7 @@ public class PickUpUI : MonoBehaviour
         pickUpTextObject.SetActive(false);
         weaponImage.sprite = null;
         weaponImage.enabled = false;
+        discription.text = "";
     }
 
     void UpdateDualWieldText(Weapon_PickUp weapon_PickUp)
@@ -74,5 +143,6 @@ public class PickUpUI : MonoBehaviour
         }
         dualwieldObject.SetActive(true);
         dualWieldName.text = dualWieldText;// + weapon_PickUp.WeaponName;
+        discription.text = "";
     }
 }

@@ -40,6 +40,20 @@ public class Weapon_Arms
     float fireRateMultiplier = 1f;
 
 
+    float fireRateMultiplierStat = 1;
+    float reloadTimeMultiplierStat = 1;
+    float switchTimeMultiplierStat = 1;
+
+
+    public void SetStatSheet(PlayerBodyStatSheet statSheet)
+    {
+        if (!statSheet.useStatSheet) return;
+
+        fireRateMultiplierStat = statSheet.playerStatsSheetInstance.fireRateMultiplier;
+        reloadTimeMultiplierStat = statSheet.playerStatsSheetInstance.reloadSpeedMultiplier;
+        switchTimeMultiplierStat = statSheet.playerStatsSheetInstance.weaponSwitchSpeedMultiplier;
+
+    }
     
 
 
@@ -166,7 +180,7 @@ public class Weapon_Arms
         {
             shotsLeftInBurst = weaponData.BulletsInBurst;
             Shoot();
-            shootCooldownInBurst = weaponData.BurstFireRate / fireRateMultiplier;
+            shootCooldownInBurst = weaponData.BurstFireRate / fireRateMultiplier / fireRateMultiplierStat;
             shotsLeftInBurst--;
             return true;
         }
@@ -175,7 +189,7 @@ public class Weapon_Arms
 
     public void ResetShootCooldown()
     {
-        shootCooldown = weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier;
+        shootCooldown = weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier / fireRateMultiplierStat;
     }
 
     private void Shoot()
@@ -184,7 +198,7 @@ public class Weapon_Arms
         {
             OnShot?.Invoke();
 
-            shootCooldown += weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier;
+            shootCooldown += weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier / fireRateMultiplierStat; 
             Magazine--;
 
             if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
@@ -269,13 +283,13 @@ public class Weapon_Arms
 
     }
 
-    public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded);
+    public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded) / reloadTimeMultiplierStat;
 
     public ShootType ShootType => weaponData.ShootType;
 
-    public float SwitchInTime => weaponData.SwitchInTime;
+    public float SwitchInTime => weaponData.SwitchInTime / switchTimeMultiplierStat;
 
-    public float SwitchOutTime => weaponData.SwitchOutTime;
+    public float SwitchOutTime => weaponData.SwitchOutTime / switchTimeMultiplierStat;
 
     public Weapon_PickUp PickUpVersion => weaponData.WeaponPickUp;
 

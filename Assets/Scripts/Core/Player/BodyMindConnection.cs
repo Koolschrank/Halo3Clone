@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] PlayerStartEquipment playerStartEquipment;
     [SerializeField] PlayerAnimation playerAnimation;
     [SerializeField] GameObject playerHead;
+    [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
+    [SerializeField] PlayerInteractableTrigger playerInteractableTrigger;
 
     [SerializeField] SkinnedMeshRenderer[] meshes;
 
@@ -27,7 +30,7 @@ public class BodyMindConnection : MonoBehaviour
 
     public PlayerMind Mind => mind;
 
-    public void ConnectMind(PlayerMind mind)
+    public async Task ConnectMind(PlayerMind mind)
     {
         
 
@@ -44,6 +47,7 @@ public class BodyMindConnection : MonoBehaviour
         
         mind.SetPlayerInventory(playerInventory);
         mind.SetAbilityInventory(abilityInventory);
+        mind.SetInteractable(playerInteractableTrigger);
         mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
 
@@ -54,8 +58,53 @@ public class BodyMindConnection : MonoBehaviour
         playerStartEquipment.GetEquipment(GetStartEquipment());
         mind.ApplyUpgrades();
         mind.SetAlive();
+
+        // wait for  0.5 seconds before setting the stat sheet
+
         
 
+        if (mind.PlayerMindStatSheet.usePlayerStatsSheet)
+            playerBodyStatSheet.SetStatSheet(mind.PlayerMindStatSheet.playerStatSheetInstance);
+
+        health.OnPreDeath += TrySaveEquipment;
+        
+    }
+
+    public void ApplyUpgradeToMind(StatUpgrader statUpgrader)
+    {
+        if (mind.PlayerMindStatSheet.usePlayerStatsSheet)
+            mind.PlayerMindStatSheet.playerStatSheetInstance.ApplyModifiers(statUpgrader);
+    }
+
+    
+    public void TrySaveEquipment()
+    {
+       if (mind == null)
+            return;
+        var statSheet = mind.PlayerMindStatSheet.playerStatSheetInstance;
+
+        var weaponInHand = playerArms.RightArm.GetWeaponInHand();
+        var weaponInLeftHand = playerArms.LeftArm.GetWeaponInHand();
+        var weaponInBack = playerInventory.GetWeapon();
+        var weaponInBackLeftHand = playerInventory.GetWeapon();
+
+        var ability1 = abilityInventory.GetAbility(0);
+        var ability2 = abilityInventory.GetAbility(1);
+        var ability3 = abilityInventory.GetAbility(2);
+
+        if (weaponInHand != null)
+            statSheet.startingWeapon = weaponInHand.Data;
+        if (weaponInLeftHand != null)
+            statSheet.startingWeapon_Left = weaponInLeftHand.Data;
+        if (weaponInBack != null)
+            statSheet.startingWeaponReserve = weaponInBack.Data;
+        if (weaponInBackLeftHand != null)
+            statSheet.startingWeaponReserve_Left = weaponInBackLeftHand.Data;
+        statSheet.startingAbility1 = ability1;
+        statSheet.startingAbility2 = ability2;
+        statSheet.startingAbility3 = ability3;
+
+        
 
     }
 

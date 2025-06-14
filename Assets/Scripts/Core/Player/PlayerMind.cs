@@ -30,7 +30,7 @@ public class PlayerMind : MonoBehaviour
     //[SerializeField] CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerTeam team;
     [SerializeField] PlayerUpgrades playerUpgrader;
-
+    [SerializeField] PlayerMindStatSheet playerMindStatSheet;
 
     [Header("UI")]
     [SerializeField] Transform UIContainer;
@@ -53,6 +53,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerNamePopUp playerNamePopUp;
     [SerializeField] UI_Score scoreUI;
     [SerializeField] UI_UpgradeMenu upgradeMenu;
+    
     [Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
@@ -79,13 +80,17 @@ public class PlayerMind : MonoBehaviour
     int firstPersonLayer;
     int thirdPersonLayer;
 
-    int score = 0;
+    public int score = 0;
 
     public Action<int> OnScoreChanged;
     public Action<int> OnScoreAdded;
+    public Action<int> OnScoreLost;
     bool isDead = false;
 
     public bool IsDead { get { return isDead; } }
+
+    public PlayerMindStatSheet PlayerMindStatSheet { get { return playerMindStatSheet; } }
+
 
     public void SetAlive()
     {
@@ -129,6 +134,10 @@ public class PlayerMind : MonoBehaviour
 
         OnScoreAdded += scoreUI.SpawnScoreGain;
         OnScoreChanged += scoreUI.UpdateScore;
+        if (score > 0)
+        {
+            scoreUI.UpdateScore(score);
+        }
 
 
     }
@@ -187,6 +196,11 @@ public class PlayerMind : MonoBehaviour
 
 
         weaponInventoryUI.SetUp(playerInventory);
+    }
+
+    public void SetInteractable(PlayerInteractableTrigger interactableTrigger)
+    {
+        pickUpUI.SetUp(interactableTrigger);
     }
 
     public void SetAbilityInventory(AbilityInventory inventory)
@@ -342,6 +356,18 @@ public class PlayerMind : MonoBehaviour
 
     }
 
+    public int Score => score;
+
+    public void LooseScore(int amount)
+    {
+        score -= amount;
+        if (score < 0) score = 0;
+        OnScoreLost?.Invoke(amount);
+        OnScoreChanged?.Invoke(score);
+    }
+
+
+
     // set pick up scan
     public void SetPickUpScan(PlayerPickUpScan pickUpScan)
     {
@@ -414,7 +440,6 @@ public class PlayerMind : MonoBehaviour
             if (playerArms.RightArm.PressReloadButtonIfNothingToPickUp())
             {
                 playerArms.LeftArm.PressReloadButtonIfNothingToPickUp();
-                return;
             }
                
             

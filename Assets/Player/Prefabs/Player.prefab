@@ -10429,6 +10429,7 @@ GameObject:
   - component: {fileID: 737555415851796727}
   - component: {fileID: 8008512304446792098}
   - component: {fileID: 5352841395007449006}
+  - component: {fileID: 2538411085385556190}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -10522,6 +10523,24 @@ MonoBehaviour:
       Data3: 1971360937
       Data4: 133366026
     Path: event:/SFX/HitMarker/KillHitmarker
+--- !u!114 &2538411085385556190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223324349368915893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3ff9fd417c0754da085f252feb781b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 0.5
+  interactionDistance: 2
+  interactableLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  body: {fileID: 4471171138262044766}
 --- !u!1 &8289933859456780900
 GameObject:
   m_ObjectHideFlags: 0
@@ -10672,6 +10691,7 @@ MonoBehaviour:
   head_normalPosition: {fileID: 4151376091086984915}
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
+  statSheet: {fileID: 6520564595086861149}
   maxMoveSpeed: 4.9
   moveSpeedRoolMultiplier: 2
   moveSpeedCrouchMultiplier: 0.4
@@ -10768,6 +10788,7 @@ MonoBehaviour:
   health: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
   isNonPlayer: 0
+  playerBodyStatSheet: {fileID: 6520564595086861149}
 --- !u!114 &4355240392448193639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10862,6 +10883,8 @@ MonoBehaviour:
   playerStartEquipment: {fileID: 8050057614039648062}
   playerAnimation: {fileID: 6646059112641200883}
   playerHead: {fileID: 1741222393793741544}
+  playerBodyStatSheet: {fileID: 6520564595086861149}
+  playerInteractableTrigger: {fileID: 2538411085385556190}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -10895,6 +10918,7 @@ MonoBehaviour:
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
   playerArms: {fileID: 3232609274750972410}
+  statSheet: {fileID: 6520564595086861149}
   shildEmptySound:
     Guid:
       Data1: 1763954669
@@ -11018,6 +11042,8 @@ MonoBehaviour:
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   playerAim: {fileID: 3068919470916229809}
   playerMovement: {fileID: 7400201383000877008}
+  playerBodyStatSheet: {fileID: 6520564595086861149}
+  playerInteractableTrigger: {fileID: 0}
   weaponDropForce: 10
   reloadInputBuffer: 0.29
   switchInputBuffer: 0.29
@@ -11050,6 +11076,8 @@ MonoBehaviour:
   basicMeleeAttack: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   playerAim: {fileID: 3068919470916229809}
   playerMovement: {fileID: 7400201383000877008}
+  playerBodyStatSheet: {fileID: 6520564595086861149}
+  playerInteractableTrigger: {fileID: 2538411085385556190}
   weaponDropForce: 10
   reloadInputBuffer: 0.29
   switchInputBuffer: 0.29
@@ -11072,6 +11100,7 @@ MonoBehaviour:
   maxAbilities: 3
   abilities: []
   currentAbilityIndex: 0
+  playerBodyStatSheet: {fileID: 6520564595086861149}
 --- !u!114 &6520564595086861149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11084,6 +11113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b4c3abb38358a468e6cf5a7cbf9d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatsSheetBlueprint: {fileID: 0}
+  useStatSheet: 0
+  playerStatsSheetInstance: {fileID: 0}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

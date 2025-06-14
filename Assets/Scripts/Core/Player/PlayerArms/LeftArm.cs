@@ -104,7 +104,6 @@ public class LeftArm : Arm
 
     public override void DropWeapon()
     {
-        Debug.Log("Dropping weapon");
         base.DropWeapon();
         
     }

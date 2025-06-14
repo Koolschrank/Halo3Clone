@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerBodyStatSheet : MonoBehaviour
 {
     public Action OnStatSheetUpdated;
+    public Action OnStartEquipmentEquip;
 
 
     public PlayerStatsSheet playerStatsSheetBlueprint;
@@ -15,18 +16,20 @@ public class PlayerBodyStatSheet : MonoBehaviour
 
     private void Start()
     {
-        if (playerStatsSheetBlueprint != null)
+        if (useStatSheet && playerStatsSheetBlueprint != null)
         {
-            playerStatsSheetInstance = new PlayerStatsSheet(playerStatsSheetBlueprint);
-            OnStatSheetUpdated?.Invoke();
+            SetStatSheet(playerStatsSheetBlueprint);
         }
     }
 
 
     public void SetStatSheet(PlayerStatsSheet newStatSheet)
     {
-        playerStatsSheetInstance = newStatSheet;
+        useStatSheet = true;
+        playerStatsSheetInstance = ScriptableObject.Instantiate(newStatSheet); 
         OnStatSheetUpdated?.Invoke();
+        OnStartEquipmentEquip?.Invoke();
+        
     }
 
     public void ApplyStatUpgrade(StatUpgrader stat)
@@ -36,8 +39,12 @@ public class PlayerBodyStatSheet : MonoBehaviour
             Debug.LogError("PlayerStatsSheet instance is null. Cannot apply stat upgrader.");
             return;
         }
-        stat.ApplyModifiers(playerStatsSheetInstance);
+
+        playerStatsSheetInstance.ApplyModifiers(stat);
         OnStatSheetUpdated?.Invoke();
+
+
+        GetComponent<BodyMindConnection>().ApplyUpgradeToMind(stat);
     }
 
 

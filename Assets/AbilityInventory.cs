@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UIElements;
 
 public class AbilityInventory : MonoBehaviour
 {
@@ -10,11 +11,57 @@ public class AbilityInventory : MonoBehaviour
     public Action<int> OnAbilityIndexChanged;
     public int LastUsedAbility { get; private set; } = 0;
 
-    [SerializeField] int maxAbilities = 3;
+    public int maxAbilities = 3;
     [SerializeField] List<Ability> abilities = new List<Ability>();
     [SerializeField] int currentAbilityIndex = 0;
 
     public List<Ability> Abilities => abilities;
+
+    float cooldownMultiplier = 1f;
+    [NonSerialized]
+    public float abilityUseSpeedMultiplier = 1f;
+
+
+    [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
+
+    private void Awake()
+    {
+        if (playerBodyStatSheet != null)
+        {
+            playerBodyStatSheet.OnStatSheetUpdated += OnStatChanged;
+        }
+    }
+
+    private void OnStatChanged()
+    {
+        if (!playerBodyStatSheet.useStatSheet) return;
+        cooldownMultiplier = playerBodyStatSheet.playerStatsSheetInstance.abilityCooldownMultiplier;
+        abilityUseSpeedMultiplier = playerBodyStatSheet.playerStatsSheetInstance.abilityUseSpeedMultiplier;
+
+
+    }
+
+    public AbilityData GetAbility(int index)
+        {
+        if (index < 0 || index >= abilities.Count)
+        {
+            
+            return null;
+        }
+        return abilities[index].abilityData;
+    }
+
+    public void RemoveAllAbilities()
+    {
+        foreach (var ability in abilities)
+        {
+            OnAbilityRemoved?.Invoke(ability, abilities.Count);
+        }
+        abilities.Clear();
+        currentAbilityIndex = 0;
+        LastUsedAbility = 0;
+    }
+
 
     public void AddAbility(AbilityData abilityData)
     {
@@ -32,7 +79,7 @@ public class AbilityInventory : MonoBehaviour
 
     public void Update()
     {
-        UpdateAbilities(Time.deltaTime);
+        UpdateAbilities(Time.deltaTime * cooldownMultiplier);
     }
 
     public Ability GetLastAbility()
