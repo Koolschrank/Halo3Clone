@@ -41,6 +41,18 @@ public class AbilityInventory : MonoBehaviour
 
     }
 
+    public bool HasAbility(AbilityData abilityData)
+    {
+        foreach (var ability in abilities)
+        {
+            if (ability.abilityData == abilityData)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public AbilityData GetAbility(int index)
         {
         if (index < 0 || index >= abilities.Count)

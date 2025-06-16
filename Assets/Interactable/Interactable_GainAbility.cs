@@ -23,6 +23,10 @@ public class Interactable_GainAbility : Interactable
 
         var abilityCount = abilityInventory.Abilities.Count;
 
+        if (abilityInventory.HasAbility(abilityData))
+            return false;
+
+
         if (abilityCount >= abilityInventory.maxAbilities)
         {
             

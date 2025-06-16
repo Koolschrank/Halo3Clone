@@ -39,7 +39,9 @@ public class PlayerInventory : MonoBehaviour
     // start
     public void Start()
     {
-        characterHealth.OnDeath += DropWeapon;
+        if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
+            characterHealth.OnDeath += DropWeapon;
+
         OnAmmoChanged += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 

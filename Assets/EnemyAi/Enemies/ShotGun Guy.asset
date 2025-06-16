@@ -25,11 +25,24 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 0
     sideArm: {fileID: 0}
     magazinsOfSideArm: 4
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
     ability: {fileID: 0}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   healthMultiplier: 1
   shildMultiplier: 1
   speedMultiplier: 1
   teamIdOverrride: 1
-  scoreForKill: 60
+  scoreForKill: 170

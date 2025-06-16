@@ -151,7 +151,10 @@ public class Arm : MonoBehaviour
     private void Start()
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
-        characterHealth.OnDeath += DropWeaponWithNoForce;
+
+        if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
+            characterHealth.OnDeath += DropWeaponWithNoForce;
+
         inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
 
         OnWeaponShoot += (Weapon_Arms) => TryBulletRecovery();

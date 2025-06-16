@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Interactable_GainWeapon : Interactable
 {
+    public int priceAfterFirstUse = 600; // Price after the first use, if applicable
     public Transform weaponSpawnPoint;
     public float weaponDropForce = 5f;
     public Weapon_Data[] weaponsToGain;
 
     [SerializeField] Collider activationBox;
     [SerializeField] float activationCooldown = 1f;
+    [SerializeField] bool destroyAfterInteraction = false;
 
     IEnumerator ActivationCooldown()
     {
@@ -23,11 +25,18 @@ public class Interactable_GainWeapon : Interactable
         var weaponToGain = GetRandomWeapon();
 
         Weapon_PickUp weapon_PickUp = Instantiate(weaponToGain.WeaponPickUp, weaponSpawnPoint.position, weaponSpawnPoint.rotation);
+        weapon_PickUp.SetAmmoInMagazin(9999);
+        weapon_PickUp.SetAmmoInReserve(9999);
         weapon_PickUp.transform.SetParent(null); // Detach from parent
         var rb = weapon_PickUp.GetComponent<Rigidbody>();
         rb.AddForce(weaponSpawnPoint.forward * weaponDropForce, ForceMode.Impulse); // Apply force to drop the weapon
 
-        StartCoroutine(ActivationCooldown());
+        if (!destroyAfterInteraction)
+            StartCoroutine(ActivationCooldown());
+        else
+            Destroy(gameObject, 0.01f); // Destroy the interactable object after a short delay
+
+        currentPrice = priceAfterFirstUse; 
     }
 
     

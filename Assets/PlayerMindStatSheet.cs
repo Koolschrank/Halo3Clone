@@ -11,7 +11,14 @@ public class PlayerMindStatSheet : MonoBehaviour
 
     private void Awake()
     {
-        playerStatSheetInstance = ScriptableObject.Instantiate(playerStatsSheetBlueprint);
+        if (playerStatsSheetBlueprint != null)
+            playerStatSheetInstance = ScriptableObject.Instantiate(playerStatsSheetBlueprint);
+    }
+
+    public void SetStatSheet(PlayerStatsSheet sheet)
+    {
+        usePlayerStatsSheet = true;
+        playerStatSheetInstance = ScriptableObject.Instantiate(sheet);
     }
 
 

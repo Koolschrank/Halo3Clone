@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RocketLauncher
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
-  weaponBullet: {fileID: 11400000, guid: 81ac3f179941a684b841ffcef217b403, type: 2}
+  weaponBullet: {fileID: 11400000, guid: e93e228661b18bb4b8a893b6ceb378d8, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 590b1fd23e1c8064b835d39ba4ad4255, type: 3}
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 287b81575db7118408b3d163744ecd0e, type: 3}
   weaponName: Rocket Launcher
@@ -21,7 +21,7 @@ MonoBehaviour:
   fireRate: 0.9
   bulletsPerShot: 1
   magazineSize: 2
-  maxAmmoInReserve: 3
+  maxAmmoInReserve: 2
   reloadTime: 4
   inaccuracy: 0
   switchOutTime: 0.3
@@ -109,3 +109,5 @@ MonoBehaviour:
     focusGainWhenOnTarget: 0.35
     focusLossWhenNotOnTarget: 0.3
     moveSpeedWithGun: 0.5
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20

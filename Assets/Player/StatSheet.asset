@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StatSheet
   m_EditorClassIdentifier: 
   maxHealth: 100
-  healthRegenPerSecond: 0
+  healthRegenPerSecond: 4
   healthRegenDelay: 4
   maxShild: 50
   shieldRegenPerSecond: 10
@@ -21,17 +21,17 @@ MonoBehaviour:
   weaponDamageMultiplier: 1
   abilityDamageMultiplier: 1
   meleeDamageMultiplier: 1
-  fireRateMultiplier: 3
-  reloadSpeedMultiplier: 3
+  fireRateMultiplier: 1
+  reloadSpeedMultiplier: 1
   magazineSizeMultiplier: 1
-  weaponSwitchSpeedMultiplier: 3
-  abilityUseSpeedMultiplier: 3
-  abilityCooldownMultiplier: 3
+  weaponSwitchSpeedMultiplier: 1
+  abilityUseSpeedMultiplier: 1
+  abilityCooldownMultiplier: 1
   movementSpeedMultiplier: 1
   ammoRegenerationMultiplierChance: 1
   reviveSpeedMultiplier: 1
   meleeSpeedMultiplier: 1
-  abilitySlots: 1
+  abilitySlots: 2
   startingWeapon: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
   startingWeapon_Left: {fileID: 0}
   startingWeaponReserve: {fileID: 0}

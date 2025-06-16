@@ -15,17 +15,19 @@ MonoBehaviour:
   gameModeName: 'Player VS AI '
   startingEquipment:
     hasShild: 1
-    headShotOneShot: 1
+    headShotOneShot: 0
     hasMiniMap: 1
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    weaponInHand: {fileID: 0}
     magazinsOfWeaponInHand: 100
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
     sideArm: {fileID: 0}
     magazinsOfSideArm: 3
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
     ability: {fileID: 0}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
@@ -41,7 +43,7 @@ MonoBehaviour:
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
   timeLimitInMinutes: 10
-  pointsToWin: 250
+  pointsToWin: 2000
   teamCount: 1
   respawnTime: 15
   hasWeaponPickups: 0
@@ -50,3 +52,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 1
   hasAiPlayers: 0
+  useStatSheets: 1
+  dontDropWeaponsOnDeath: 1
+  startScore: 300
+  playerStatsSheetBlueprint: {fileID: 11400000, guid: 145bf0bb3c3bf914993d1064b170c8ca, type: 2}

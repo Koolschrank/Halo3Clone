@@ -124,13 +124,21 @@ public class PlayerMind : MonoBehaviour
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
         playerName.text = playerSettings.playerName;
 
+        var gamemode = GameModeSelector.gameModeManager;
+        if (gamemode.GameModeStats.UseStatSheet)
+        {
+            playerMindStatSheet.SetStatSheet(gamemode.GameModeStats.PlayerStatSheet);
+        }
 
-        PlayerManager.instance.AddPlayer(this);
+            PlayerManager.instance.AddPlayer(this);
 
         playerInput.actions.FindActionMap("QuickMenu").Enable();
 
 
         LogSystem.logSystem.OnLogPrinted += gameLogUI.Print;
+
+        score += GameModeSelector.gameModeManager.GameModeStats.StartScore;
+
 
         OnScoreAdded += scoreUI.SpawnScoreGain;
         OnScoreChanged += scoreUI.UpdateScore;

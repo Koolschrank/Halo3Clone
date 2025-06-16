@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
@@ -6,9 +7,15 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] int BasePrice = 0;
     public string discription = "Interactable Object";
     public string extraDiscription = "";
-    int currentPrice = 0;
+    protected int currentPrice = 0;
 
     public bool isInteractable = true;
+
+    [SerializeField] Interactable[] connectedInteractables;
+    
+
+    [NonSerialized]
+    public bool inInteraction = false;
 
     protected virtual void Awake()
     {
@@ -31,12 +38,40 @@ public abstract class Interactable : MonoBehaviour
         return !HasPrice || playerMoney >= currentPrice;
     }
 
+   
 
     public virtual void Interact(GameObject player)
     {
-        if (HasPrice)
+
+        if (HasPrice && !IsConnectedInteractableInInteraction())
             PayPrice(player);
 
+        InteractAllConnectedObjects(player);
+    }
+
+    void InteractAllConnectedObjects(GameObject player)
+    {
+        inInteraction = true;
+        foreach (var interactable in connectedInteractables)
+        {
+            if (interactable != null && !interactable.inInteraction)
+            {
+                interactable.Interact(player);
+            }
+        }
+        inInteraction = false;
+    }
+
+    public bool IsConnectedInteractableInInteraction()
+    {
+        foreach (var interactable in connectedInteractables)
+        {
+            if (interactable != null && interactable.inInteraction)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public virtual void PayPrice(GameObject player)

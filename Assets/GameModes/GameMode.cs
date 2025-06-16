@@ -19,7 +19,11 @@ public class GameMode : ScriptableObject
 
     [SerializeField] protected bool looseWhenAllPlayersDead = false; // if true, when all players are dead, the game is over and the team with the most points wins
     [SerializeField] protected bool hasAiPlayers;
-
+    [SerializeField] protected bool useStatSheets = false;
+    [SerializeField] protected bool dontDropWeaponsOnDeath = false; // if true, players do not drop their weapons on death, instead they respawn with their starting equipment
+    [SerializeField] int startScore = 0; // starting score for each player, used in the scoreboard
+    [SerializeField] PlayerStatsSheet playerStatsSheetBlueprint;
+    
 
 
 
@@ -58,5 +62,12 @@ public class GameMode : ScriptableObject
     public bool LooseWhenAllPlayersDead { get { return looseWhenAllPlayersDead; } }
 
     public bool HasAiPlayers { get { return hasAiPlayers; } }
+
+    public bool UseStatSheet { get { return useStatSheets; } }
+
+    public int StartScore { get { return startScore; } }
+
+    public bool DontDropWeaponsOnDeath { get { return dontDropWeaponsOnDeath; } }
+    public PlayerStatsSheet PlayerStatSheet { get { return playerStatsSheetBlueprint; } }
 }
 

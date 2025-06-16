@@ -69,7 +69,7 @@ public class GameModeManager : MonoBehaviour
 
     public virtual Transform GetRandomFarthestSpawnPoint(int teamIndex, int count)
     {
-        var spawnPointsOrderd = GetSpawnPointsOrderedByDistance(teamIndex);
+        var spawnPointsOrderd = GetActiveSpawnPointsOrderedByDistance(teamIndex);
 
         if (spawnPointsOrderd.Length == 0)
         {
@@ -121,10 +121,20 @@ public class GameModeManager : MonoBehaviour
         return spawnSystem.GetFarthestSpawnPointFromEnemeies(enemies);
     }
 
-    public virtual Transform[] GetSpawnPointsOrderedByDistance(int teamIndex)
+    public virtual Transform[] GetActiveSpawnPointsOrderedByDistance(int teamIndex)
     {
-        Transform[] spawnPoints = new Transform[spawnSystem.basicSpawnPoints.Length];
-        float[] distanceToEnemies = new float[spawnSystem.basicSpawnPoints.Length];
+        List<Transform> usableSpawnPoints = new List<Transform>();
+        foreach (var spawnPoint in spawnSystem.basicSpawnPoints)
+        {
+            if (spawnPoint != null && spawnPoint.gameObject.activeInHierarchy)
+            {
+                usableSpawnPoints.Add(spawnPoint);
+            }
+        }
+
+
+        Transform[] spawnPoints = new Transform[usableSpawnPoints.Count];
+        float[] distanceToEnemies = new float[usableSpawnPoints.Count];
         List<Transform> enemies = new List<Transform>();
         foreach (var team in teams)
         {
@@ -139,26 +149,26 @@ public class GameModeManager : MonoBehaviour
 
         if (enemies.Count == 0)
         {
-            return spawnSystem.basicSpawnPoints;
+            return usableSpawnPoints.ToArray();
         }
-        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        for (int i = 0; i < usableSpawnPoints.Count; i++)
         {
             float distance = 0;
             foreach (var enemy in enemies)
             {
-                distance += Vector3.Distance(spawnSystem.basicSpawnPoints[i].position, enemy.position);
+                distance += Vector3.Distance(usableSpawnPoints[i].position, enemy.position);
             }
             distanceToEnemies[i] = distance;
         }
 
-        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        for (int i = 0; i < usableSpawnPoints.Count; i++)
         {
             spawnPoints[i] = spawnSystem.basicSpawnPoints[i];
         }
 
-        for (int i = 0; i < spawnSystem.basicSpawnPoints.Length; i++)
+        for (int i = 0; i < usableSpawnPoints.Count; i++)
         {
-            for (int j = 0; j < spawnSystem.basicSpawnPoints.Length - 1; j++)
+            for (int j = 0; j < usableSpawnPoints.Count - 1; j++)
             {
                 if (distanceToEnemies[j] > distanceToEnemies[j + 1])
                 {

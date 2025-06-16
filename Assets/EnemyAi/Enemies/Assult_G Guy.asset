@@ -25,6 +25,8 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 0
     sideArm: {fileID: 0}
     magazinsOfSideArm: 0
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
     ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
@@ -43,4 +45,4 @@ MonoBehaviour:
   shildMultiplier: 1
   speedMultiplier: 1
   teamIdOverrride: 1
-  scoreForKill: 50
+  scoreForKill: 150

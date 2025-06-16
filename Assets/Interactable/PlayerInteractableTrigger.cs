@@ -12,6 +12,8 @@ public class PlayerInteractableTrigger : MonoBehaviour
     [SerializeField] float interactionRadius = 3f;
     [SerializeField] float interactionDistance = 2f;
     [SerializeField] LayerMask interactableLayerMask;
+    [SerializeField] float interactionCooldown = 0.5f; // Cooldown for interaction to prevent spamming
+    float lastInteractionTime = 0f;
 
     Interactable currentInteractable;
 
@@ -32,7 +34,13 @@ public class PlayerInteractableTrigger : MonoBehaviour
 
     private void Update()
     {
-        
+
+        // Check if the interaction cooldown has passed
+        if (Time.time - lastInteractionTime < interactionCooldown)
+        {
+            return; // Exit if still in cooldown
+        }
+
 
         // make a sphere cast in front of the player to find interactable objects
         RaycastHit hit;
@@ -80,6 +88,8 @@ public class PlayerInteractableTrigger : MonoBehaviour
     public void Interact()
     {
         currentInteractable.Interact(body.gameObject);
+        RemoveInteractable(); // Remove interactable after interaction
+        lastInteractionTime = Time.time; // Reset interaction cooldown timer
     }
 
 
@@ -102,6 +112,7 @@ public class PlayerInteractableTrigger : MonoBehaviour
         {
             OnRemoveInteractable?.Invoke();
             currentInteractable = null;
+            
         }
 
     }

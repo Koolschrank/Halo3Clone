@@ -495,7 +495,7 @@ MonoBehaviour:
   settingsQuickMenu: {fileID: 8575887476298330554}
   sensitivitySlider: {fileID: 3880309612561890731}
   holdButtonToPickUpTime: 0.175
-  score: 1500
+  score: 0
 --- !u!114 &2923737641940389727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatsSheetBlueprint: {fileID: 11400000, guid: 145bf0bb3c3bf914993d1064b170c8ca, type: 2}
-  usePlayerStatsSheet: 1
+  usePlayerStatsSheet: 0
 --- !u!1 &7104922266481455783
 GameObject:
   m_ObjectHideFlags: 0

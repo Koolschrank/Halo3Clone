@@ -62,6 +62,7 @@ public class BodyMindConnection : MonoBehaviour
         // wait for  0.5 seconds before setting the stat sheet
 
         
+        
 
         if (mind.PlayerMindStatSheet.usePlayerStatsSheet)
             playerBodyStatSheet.SetStatSheet(mind.PlayerMindStatSheet.playerStatSheetInstance);
