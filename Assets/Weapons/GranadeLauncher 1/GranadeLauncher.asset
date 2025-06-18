@@ -151,3 +151,4 @@ MonoBehaviour:
     moveSpeedWithGun: 1
     crouchDistance: 1
     minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 11400000, guid: 2d8e74a020e21884b95e42ba57068737, type: 2}

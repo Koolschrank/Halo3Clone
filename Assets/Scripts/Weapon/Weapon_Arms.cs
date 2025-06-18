@@ -324,6 +324,8 @@ public class Weapon_Arms
         Magazine = weaponData.MagazineSize;
     }
 
+    
+
     //public void FillReserve()
     //{
     //    Reserve = weaponData.MaxAmmoInReserve;

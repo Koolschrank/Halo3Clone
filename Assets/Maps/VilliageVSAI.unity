@@ -1446,10 +1446,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
   - {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
   - {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
-  - {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
+  - {fileID: 11400000, guid: 3b331734a6901aa4c859e3c288e537c5, type: 2}
   - {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
   - {fileID: 11400000, guid: 1636b14fbf5b1754c8bd0759dfe88df5, type: 2}
   - {fileID: 11400000, guid: 650909fc6bcc65a45ad4ae3ee3128392, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
   activationBox: {fileID: 143294167}
   activationCooldown: 1
   destroyAfterInteraction: 0
@@ -2598,6 +2605,10 @@ PrefabInstance:
     - target: {fileID: 3137004044014330267, guid: 2d6e5dca1707b65479c186d7158b5159, type: 3}
       propertyPath: m_Name
       value: UpgradeMachine (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3137004044014330267, guid: 2d6e5dca1707b65479c186d7158b5159, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4564428712448334130, guid: 2d6e5dca1707b65479c186d7158b5159, type: 3}
       propertyPath: perk
@@ -11330,6 +11341,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Team1 SpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 5737897190084315960, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: pickUpDropTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737897190084315960, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: cooldownLossOnKill
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: smallMap
       value: 1
@@ -19191,6 +19210,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2036236454}
+  - {fileID: 4114994307075157838}
   - {fileID: 434620007}
   - {fileID: 378653999}
   - {fileID: 490566152}
@@ -20455,6 +20475,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883217a334bd94143a73f13d693c67d5, type: 3}
+--- !u!1001 &4114994307075157837
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2038918318}
+    m_Modifications:
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.579323
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.20357007
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -41.36043
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99988663
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.015057422
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5356737135873979909, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: m_Name
+      value: Upgrade Weapon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+--- !u!4 &4114994307075157838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+  m_PrefabInstance: {fileID: 4114994307075157837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public Action<GameObject> OnEnemySpawned;
+
+
     [SerializeField] bool isAutoActiveOnThisMap = true; // Flag to check if the spawner is active
 
      bool isPvPGame = false; // Flag to check if it's a PvP game
@@ -31,6 +34,28 @@ public class EnemySpawner : MonoBehaviour
 
     int team1EnemyCount = 0;
     int team2EnemyCount = 0;
+
+
+    public void KillAllEnemies()
+    {
+        DamagePackage damagePackage = new DamagePackage(1000000);
+
+
+        // revers for loop through all active enemies and apply damage
+        for (int i = activeEnemies.Count - 1; i >= 0; i--)
+        {
+            var enemy = activeEnemies[i];
+            if (enemy != null)
+            {
+                var health = enemy.GetComponent<CharacterHealth>();
+                if (health != null)
+                {
+                    health.TakeDamage(damagePackage);
+                }
+            }
+        }
+        activeEnemies.Clear();
+    }
 
     public bool IsAutoActiveOnThisMap => isAutoActiveOnThisMap;
 
@@ -275,12 +300,10 @@ public class EnemySpawner : MonoBehaviour
             }
 
         }
-        
-
 
         PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
 
-
+        OnEnemySpawned?.Invoke(enemy);
     }
 
 

@@ -45,7 +45,7 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 2000
   teamCount: 1
-  respawnTime: 15
+  respawnTime: 10000
   hasWeaponPickups: 0
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1

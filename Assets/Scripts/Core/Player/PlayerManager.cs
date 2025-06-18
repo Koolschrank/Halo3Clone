@@ -233,6 +233,12 @@ public class PlayerManager : MonoBehaviour
     public void RespawnPlayer(PlayerMind player)
     {
         var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
+        if (GameModeSelector.gameModeManager.GameModeStats.UseStatSheet)
+        {
+            spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+        }
+
+
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player);
         playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));

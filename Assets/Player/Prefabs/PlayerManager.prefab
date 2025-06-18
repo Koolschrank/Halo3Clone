@@ -3762,8 +3762,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5737897190084315960}
   m_SourcePrefab: {fileID: 100100000, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+--- !u!1 &4145466410243524237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+  m_PrefabInstance: {fileID: 8916707306788399844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5737897190084315960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145466410243524237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a63388e1288f6a4196aad38abb9ba4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPickUp: {fileID: 8901296202802042443, guid: d43a97205b9192e4897a2a58d476bade, type: 3}
+  ammoPickUp: {fileID: 5359682072341727517, guid: c2876a618140a9c419889b92f162ddc7, type: 3}
+  basicPickUps:
+  - {fileID: 5767244253329865065, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
+  - {fileID: 5767244253329865065, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
+  - {fileID: 4303496020491196030, guid: c7b222ca12b82714fbbe3365ca560731, type: 3}
+  - {fileID: 5359682072341727517, guid: c2876a618140a9c419889b92f162ddc7, type: 3}
+  pickUpDropTime: 50
+  emergencyDropTime: 30
+  framesToCheckForPlayerState: 300
 --- !u!4 &7316653019559665505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2177344367002662277, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}

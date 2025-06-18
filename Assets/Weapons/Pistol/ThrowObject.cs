@@ -10,6 +10,11 @@ public class ThrowObject : MonoBehaviour
     
     public void Throw()
     {
+        if (objectToThrow == null || throwPoint == null)
+        {
+            return;
+        }
+
         GameObject thrownObject = Instantiate(objectToThrow, throwPoint.position, throwPoint.rotation);
         Rigidbody rb = thrownObject.GetComponent<Rigidbody>();
         rb.AddForce(throwPoint.forward * throwForce, ForceMode.Impulse);

@@ -1768,6 +1768,10 @@ MonoBehaviour:
   - {fileID: 3956244410411594158}
   - {fileID: 4032683264739939171}
   healthBarDepletMultiplier: 1.2
+  healthBarRect: {fileID: 2319943984753203429}
+  healthBarRectBackground: {fileID: 5577282354107833279}
+  shortBarWidth: 300
+  longBarWidth: 900
 --- !u!1 &3818998527767115892
 GameObject:
   m_ObjectHideFlags: 0
@@ -5492,6 +5496,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3230228102046291623, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
+      propertyPath: shildBarRect
+      value: 
+      objectReference: {fileID: 7811526906979550375}
+    - target: {fileID: 3230228102046291623, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
+      propertyPath: shildBarRectBackground
+      value: 
+      objectReference: {fileID: 7939441229886812728}
     - target: {fileID: 5584245407203738697, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
       propertyPath: m_SizeDelta.y
       value: 50
@@ -5508,6 +5520,16 @@ PrefabInstance:
 --- !u!224 &588836121322260912 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3132888451202367425, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
+  m_PrefabInstance: {fileID: 2545015546089453169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7811526906979550375 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5708779210775868118, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
+  m_PrefabInstance: {fileID: 2545015546089453169}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &7939441229886812728 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5584245407203738697, guid: ccade49a851eeec49b7c3976039a6237, type: 3}
   m_PrefabInstance: {fileID: 2545015546089453169}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4174353111352641197

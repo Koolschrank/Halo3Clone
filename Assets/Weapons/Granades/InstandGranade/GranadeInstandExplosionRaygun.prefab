@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  damage: 40
-  damageOnShildMultiplier: 2.4
+  damage: 50
+  damageOnShildMultiplier: 1.9
   damageFalloff:
     serializedVersion: 2
     m_Curve:

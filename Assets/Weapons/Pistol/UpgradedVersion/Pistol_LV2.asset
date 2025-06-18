@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: Pistol_LV2
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 981ea78fad8bc2a439ddbec66cbdc138, type: 3}
+  weaponBullet: {fileID: 11400000, guid: d7217d15c5096fe4fa0acff12334a99a, type: 2}
+  weaponFPSModel: {fileID: 3192954955445254701, guid: e050645e4ea6737459aaecdc284a82f9, type: 3}
+  weapon3rdPersonModel: {fileID: 4848280889717057939, guid: c709648b2ebd2f54eac236b2d21974a5, type: 3}
+  weaponName: Pistol
+  shootType: 0
+  fireRate: 0.28
+  bulletsPerShot: 1
+  magazineSize: 6
+  maxAmmoInReserve: 200
+  reloadTime: 1
+  inaccuracy: 0.013
+  switchOutTime: 0.15
+  switchInTime: 0.2
+  canZoom: 1
+  zoomFOV: 35
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
+  autoAim: {fileID: 11400000, guid: b1220f81241b91d478ae61ae3dae0db5, type: 2}
+  weaponType: 0
+  canNotBeInInventory: 0
+  burstAmount: 0
+  burstDelay: 0
+  hasKnockback: 1
+  gunKnockback:
+    power: 1
+    duration: 0.3
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.12680054
+        value: 0.99621964
+        inSlope: -0.37701112
+        outSlope: -0.37701112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.30731252
+      - serializedVersion: 3
+        time: 0.5787892
+        value: 0.5417794
+        inSlope: -1.0440427
+        outSlope: -1.0440427
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.26441047
+      - serializedVersion: 3
+        time: 0.97741395
+        value: 0.010357738
+        inSlope: -1.0514512
+        outSlope: -1.0514512
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.26154286
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 0.9
+  fireRateMultiplier: 1.25
+  inaccuracyMultiplier: 2.5
+  reloadTimeMultiplier: 1.5
+  shootSound:
+    Guid:
+      Data1: 653112923
+      Data2: 1178020046
+      Data3: 2008632475
+      Data4: -2059630751
+    Path: event:/SFX/Guns/Pistol/PistolShoot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -1069721791
+          Data2: 1295931201
+          Data3: 1919505326
+          Data4: 648640732
+        Path: event:/SFX/Guns/Pistol/EnableGun
+      timeOfPlay: 0.2
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 80687303
+          Data2: 1103882339
+          Data3: 229146760
+          Data4: -1026335697
+        Path: event:/SFX/Guns/Pistol/Reload/MagOut
+      timeOfPlay: 0.15
+    - soundReference:
+        Guid:
+          Data1: -1962612281
+          Data2: 1111252155
+          Data3: 2136841631
+          Data4: 2081986932
+        Path: event:/SFX/Guns/Pistol/Reload/MagIn
+      timeOfPlay: 0.65
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: a765bf6a421bcc348957c4bc06d8215f, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 6ecaae872ef19374e8fd872ffa47eb86, type: 3}
+  bulletSize: {x: 2, y: 2}
+  bulletsPerRow: 10
+  crosshairs: {fileID: 21300000, guid: 39c73e1f08ca5e54196153e30d0d53f7, type: 3}
+  crosshairsSize: {x: 0.3, y: 0.3}
+  enemyAiWeaponData: {fileID: 11400000, guid: 3f00457beb22cd04fb20fea487ac9fc2, type: 2}
+  gunAiBehaviour:
+    IdealRange: 10
+    focusGainWhenOnTarget: 1
+    focusLossWhenNotOnTarget: 0.5
+    moveSpeedWithGun: 1
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 0}

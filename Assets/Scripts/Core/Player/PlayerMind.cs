@@ -354,10 +354,7 @@ public class PlayerMind : MonoBehaviour
         var score = obj.GetComponent<GainScore>();
         if (score != null && PlayerProgression.instance.canGainEXP)
         {
-            this.score += score.scoreAmount;
-            OnScoreAdded?.Invoke(score.scoreAmount);
-            OnScoreChanged?.Invoke(this.score);
-            PlayerProgression.instance.GainEXP(score.scoreAmount); 
+            AddScore(score.scoreAmount);
         }
 
 
@@ -365,6 +362,14 @@ public class PlayerMind : MonoBehaviour
     }
 
     public int Score => score;
+
+    public void AddScore(int amount)
+    {
+        this.score += amount;
+        OnScoreAdded?.Invoke(amount);
+        OnScoreChanged?.Invoke(this.score);
+        PlayerProgression.instance.GainEXP(amount);
+    }
 
     public void LooseScore(int amount)
     {

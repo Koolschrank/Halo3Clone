@@ -16,5 +16,5 @@ MonoBehaviour:
   throwTime: 0.5
   throwAngle: 0.08
   throwForce: 26
-  granadePrefab: {fileID: 5187455782990611905, guid: f6c815c02ed80d44db48b386f61c43d5, type: 3}
+  granadePrefab: {fileID: 5187455782990611905, guid: dd49c66faaed4144eb6bdf97b1378c53, type: 3}
   granadeClonePrefab: {fileID: 5187455782990611905, guid: 3296cc831bb514349aa036a4f2048e76, type: 3}

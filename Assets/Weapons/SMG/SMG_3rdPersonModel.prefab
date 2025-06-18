@@ -110,8 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 969070417993527505}
-  muzzleFlashSpawnPoint: {fileID: 3096316663620730735}
-  muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  muzzleFlash: {fileID: 0}
   weaponAnimationIndex: 0
 --- !u!1001 &6146352072547485545
 PrefabInstance:
@@ -175,6 +174,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6997417127840186166, guid: 5e372ef540bf53c43beaa85a63110d06, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7121388396979574246, guid: 5e372ef540bf53c43beaa85a63110d06, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7660624483632653708, guid: 5e372ef540bf53c43beaa85a63110d06, type: 3}

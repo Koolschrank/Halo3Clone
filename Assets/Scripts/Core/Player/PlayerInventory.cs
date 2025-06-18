@@ -45,6 +45,21 @@ public class PlayerInventory : MonoBehaviour
         OnAmmoChanged += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 
+    public void RefillReserveOfAllWeaponsYouOwn()
+    {
+        foreach (var weapon in weapons)
+        {
+            if (weapon != null && weapon.Data != null)
+            {
+                int ammoToAdd = weapon.Data.ReserveSize - GetAmmo(weapon.Data);
+                if (ammoToAdd > 0)
+                {
+                    AddAmmo(weapon.Data, ammoToAdd);
+                }
+            }
+        }
+    }
+
     public void Clear()
         { weapons.Clear(); }
 

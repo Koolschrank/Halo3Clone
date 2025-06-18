@@ -101,6 +101,13 @@ public class Arm : MonoBehaviour
         bulletRecoveryChance = chance;
     }
 
+    public void RefillAmmoOfWeapon()
+    {         if (weaponInHand == null) return;
+        weaponInHand.FillMagazine();
+
+
+        inventory.AddAmmo(weaponInHand.Data, 999999);
+    }
 
     public int ExtraBulletsInMagazine
     {
@@ -145,6 +152,8 @@ public class Arm : MonoBehaviour
         {
             weaponInHand.SetStatSheet(playerBodyStatSheet);
         }
+
+        playerArms.SetCanDualWield(playerBodyStatSheet.playerStatsSheetInstance.dualWielding);
 
     }
 
@@ -592,6 +601,20 @@ public class Arm : MonoBehaviour
         if (pickUp == null) return;
 
         pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
+    }
+
+    public void ReplaceWeapon(Weapon_Arms newWeapon)
+    {
+        if (weaponInHand != null)
+        {
+            weaponInHand.DropWeapon();
+            weaponInHand = null;
+        }
+
+        EquipWeapon(newWeapon);
+
+        inventory.AddAmmo(newWeapon.Data, 99999);
+
     }
 
     Weapon_PickUp LetGoOfWeapon()

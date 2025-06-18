@@ -84,6 +84,11 @@ public class PlayerPickUpScan : MonoBehaviour
                 TrySendUpdates();
             }
         }
+        else if ( other.gameObject.TryGetComponent(out AutoPickUp pickUpObject))
+        {
+            
+            pickUpObject.PickUp(playerArms.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)

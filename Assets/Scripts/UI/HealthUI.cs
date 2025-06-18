@@ -14,18 +14,43 @@ public class HealthUI : MonoBehaviour
     [SerializeField] GameObject[] healthBarObjects;
     [SerializeField] float healthBarDepletMultiplier = 1.2f; // multiplier to adjust the speed of health bar depletion
 
+    [SerializeField] RectTransform healthBarRect;
+    [SerializeField] RectTransform healthBarRectBackground;
+
+    [SerializeField] float shortBarWidth = 500f;
+    [SerializeField] float longBarWidth = 1000f;
+
+
+    public void SetWidth(bool lenght)
+    {
+        if (lenght)
+        {
+            healthBarRect.sizeDelta = new Vector2(longBarWidth, healthBarRect.sizeDelta.y);
+            healthBarRectBackground.sizeDelta = new Vector2(longBarWidth+25, healthBarRectBackground.sizeDelta.y);
+
+        }
+        else
+        {
+            healthBarRect.sizeDelta = new Vector2(shortBarWidth, healthBarRect.sizeDelta.y);
+            healthBarRectBackground.sizeDelta = new Vector2(shortBarWidth+ 25, healthBarRectBackground.sizeDelta.y);
+        }
+
+    }
+
     public void SetUp(Health health)
     {
         if (this.health != null)
         {
             health.OnHealthChanged -= UpdateHealth;
             health.OnShowHealthBar -= ShowHealthBar;
+            health.OnMaxHealthChanged -= UpdateMaxHealth;
         }
 
 
         this.health = health;
         health.OnHealthChanged += UpdateHealth;
         health.OnDeath += Clear;
+        health.OnMaxHealthChanged += UpdateMaxHealth;
         UpdateHealth(health.HealthPercentage);
 
         health.OnShowHealthBar += ShowHealthBar;
@@ -42,7 +67,21 @@ public class HealthUI : MonoBehaviour
             }
         }
 
+        UpdateMaxHealth(health.MaxHeath);
 
+
+    }
+
+    public void UpdateMaxHealth(float maxHealth)
+    {
+        if (maxHealth < 150f)
+        {
+            SetWidth(false);
+        }
+        else
+        {
+            SetWidth(true);
+        }
     }
 
     public void ShowHealthBar()

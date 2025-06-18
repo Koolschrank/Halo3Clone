@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
 
 
+
     [SerializeField] protected float maxHeath;
     [SerializeField] protected float currentHeath;
     [SerializeField] protected bool setMaxHeathOnStart = true;
@@ -25,10 +26,13 @@ public class Health : MonoBehaviour
 
 
     public float MaxHeath => maxHeath;
+
+    
     public float CurrentHeath => currentHeath;
 
     // action health change
     public Action<float> OnHealthChanged;
+    public Action<float> OnMaxHealthChanged;
     public Action<DamagePackage> OnDamageTaken;
 
     public bool IsDead => currentHeath <= 0;

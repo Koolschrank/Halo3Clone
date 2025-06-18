@@ -70,6 +70,9 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] Weapon_Data enemyAiWeaponData;
     [SerializeField] GunAiBehaviour gunAiBehaviour;
 
+    [Header("Upgrade")]
+    [SerializeField] Weapon_Data upgradedWeaponData = null;
+    
 
 
     public ShootType ShootType => shootType;
@@ -176,6 +179,8 @@ public class Weapon_Data : ScriptableObject
     public Weapon_Data EnemyAiWeaponData => enemyAiWeaponData;
 
     public GunAiBehaviour GunAiBehaviour => gunAiBehaviour;
+
+    public Weapon_Data UpgradedWeaponData => upgradedWeaponData;
 }
 
 

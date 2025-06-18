@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e42c0ea4cc5613349978263455e0e4d7, type: 3}
   weaponName: Raygun
   shootType: 0
-  fireRate: 0.6
+  fireRate: 0.5
   bulletsPerShot: 1
   magazineSize: 5
   maxAmmoInReserve: 10
@@ -127,3 +127,4 @@ MonoBehaviour:
     moveSpeedWithGun: 1
     crouchDistance: 1
     minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 11400000, guid: 106b0dc44ea0e0543b76206877df60d5, type: 2}

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: Laser Rifle_LV2
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: bfce2d6e75e653248a251788d954cf40, type: 3}
+  weaponBullet: {fileID: 11400000, guid: d5f9c7690f86ec647a6ae50552ddc029, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: 5923de7ad5fe3924e8dd43986005e361, type: 3}
+  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 5b9df280c07d1bb4397f40be7aeae708, type: 3}
+  weaponName: Laser Rifle
+  shootType: 2
+  fireRate: 0.3
+  bulletsPerShot: 1
+  magazineSize: 200
+  maxAmmoInReserve: 1000
+  reloadTime: 2
+  inaccuracy: 0
+  switchOutTime: 0.5
+  switchInTime: 0.8
+  canZoom: 1
+  zoomFOV: 35
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 0}
+  autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
+  weaponType: 1
+  canNotBeInInventory: 0
+  burstAmount: 40
+  burstDelay: 0.016
+  hasKnockback: 0
+  gunKnockback:
+    power: 0
+    duration: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 1
+  fireRateMultiplier: 1
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1
+  shootSound:
+    Guid:
+      Data1: 440703412
+      Data2: 1220775816
+      Data3: -1088993891
+      Data4: -5924873
+    Path: event:/SFX/Guns/PlasmaRifle/PlasmaShot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.3
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -619505912
+          Data2: 1140018917
+          Data3: -671243335
+          Data4: 44528707
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadStart
+      timeOfPlay: 0.2
+    - soundReference:
+        Guid:
+          Data1: 1737366809
+          Data2: 1246450988
+          Data3: 54988733
+          Data4: -602697179
+        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+      timeOfPlay: 0.6
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
+  bulletSprite: {fileID: 0}
+  bulletSize: {x: 0.03, y: 0.4}
+  bulletsPerRow: 200
+  crosshairs: {fileID: 21300000, guid: 271f94386cb35fe4c8b7fe9437bd9840, type: 3}
+  crosshairsSize: {x: 0.5, y: 0.5}
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 10
+    focusGainWhenOnTarget: 1
+    focusLossWhenNotOnTarget: 0.5
+    moveSpeedWithGun: 1
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 0}

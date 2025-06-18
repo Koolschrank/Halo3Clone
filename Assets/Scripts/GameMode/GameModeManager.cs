@@ -357,7 +357,7 @@ public class GameModeManager : MonoBehaviour
             if (allPlayersDead)
             {
                 Debug.Log("loss");
-                GainPoints(teamIndex, 1000);
+                GainPoints(teamIndex, 10000);
             }
         }
     }

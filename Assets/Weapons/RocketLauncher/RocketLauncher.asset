@@ -21,7 +21,7 @@ MonoBehaviour:
   fireRate: 0.9
   bulletsPerShot: 1
   magazineSize: 2
-  maxAmmoInReserve: 2
+  maxAmmoInReserve: 6
   reloadTime: 4
   inaccuracy: 0
   switchOutTime: 0.3
@@ -111,3 +111,4 @@ MonoBehaviour:
     moveSpeedWithGun: 0.5
     crouchDistance: 1
     minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 0}

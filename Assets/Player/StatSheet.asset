@@ -20,7 +20,7 @@ MonoBehaviour:
   shieldRegenDelay: 4.5
   weaponDamageMultiplier: 1
   abilityDamageMultiplier: 1
-  meleeDamageMultiplier: 1
+  meleeDamageMultiplier: 0.75
   fireRateMultiplier: 1
   reloadSpeedMultiplier: 1
   magazineSizeMultiplier: 1

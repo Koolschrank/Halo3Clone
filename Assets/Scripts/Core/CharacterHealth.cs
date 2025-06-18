@@ -38,6 +38,7 @@ public class CharacterHealth : Health
 
 
     public Action<float> OnShildChanged;
+    public Action<float> OnMaxShildChanged;
     public Action OnShildDepleted;
     public UnityEvent OnDamageTakenUnityEvent;
     public Action OnShildEnabled;
@@ -50,18 +51,22 @@ public class CharacterHealth : Health
 
     float maxShildMultiplier = 1;
 
-    float MaxShild => maxShild * maxShildMultiplier;
+    public float MaxShild => maxShild * maxShildMultiplier;
 
     public void MultiplyHealth(float multiplier)
     {
         maxHeath *= multiplier;
         currentHeath = maxHeath;
+
+        OnMaxHealthChanged?.Invoke(maxHeath);
     }
 
     public void MultiplyShild(float multiplier)
     {
         maxShild *= multiplier;
         currentShild = maxShild;
+
+        OnMaxShildChanged?.Invoke(MaxShild);
     }
 
     public void SetHasShild(bool hasShild)
@@ -92,6 +97,7 @@ public class CharacterHealth : Health
         maxHeath += amount;
         currentHeath = Mathf.Clamp(currentHeath + amount, 0, maxHeath);
         OnHealthChanged?.Invoke(HealthPercentage);
+        OnMaxHealthChanged?.Invoke(maxHeath);
     }
 
     public void IncreaseHealthRegen(float amount)
@@ -135,6 +141,9 @@ public class CharacterHealth : Health
         hasShild = maxShild > 0;
         shildRegenAmountPerSecond = statSheetInstance.shieldRegenPerSecond;
         shildRegenDelay = statSheetInstance.shieldRegenDelay;
+
+        OnMaxShildChanged?.Invoke(MaxShild);
+        OnMaxHealthChanged?.Invoke(maxHeath);
     }
 
 
@@ -212,7 +221,9 @@ public class CharacterHealth : Health
             OnShowHealthBar?.Invoke();
             Debug.Log("Health bar shown for " + gameObject.name);
         }
-            
+
+        OnMaxShildChanged?.Invoke(MaxShild);
+
 
     }
 

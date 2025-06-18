@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017ad178e417bfe44bf330bbbb430b61, type: 3}
   m_Name: RayGunShot
   m_EditorClassIdentifier: 
-  granadeStats: {fileID: 11400000, guid: 68d3d63d1a3d4804ba13547e819de257, type: 2}
+  granadeStats: {fileID: 11400000, guid: 8cdbe4043d33fa1499f850586099aa44, type: 2}

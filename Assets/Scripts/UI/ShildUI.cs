@@ -15,6 +15,30 @@ public class ShildUI : MonoBehaviour
     bool inAlarm;
     bool alarmColorOn;
 
+
+    [SerializeField] RectTransform shildBarRect;
+    [SerializeField] RectTransform shildBarRectBackground;
+
+    [SerializeField] float shortBarWidth = 500f;
+    [SerializeField] float longBarWidth = 1000f;
+
+
+    public void SetWidth(bool lenght)
+    {
+        if (lenght)
+        {
+            shildBarRect.sizeDelta = new Vector2(longBarWidth -20, shildBarRect.sizeDelta.y);
+            shildBarRectBackground.sizeDelta = new Vector2(longBarWidth, shildBarRectBackground.sizeDelta.y);
+
+        }
+        else
+        {
+            shildBarRect.sizeDelta = new Vector2(shortBarWidth - 20, shildBarRect.sizeDelta.y);
+            shildBarRectBackground.sizeDelta = new Vector2(shortBarWidth, shildBarRectBackground.sizeDelta.y);
+        }
+
+    }
+
     private void Start()
     {
         if (defaultColor == null)
@@ -34,6 +58,7 @@ public class ShildUI : MonoBehaviour
         {
             this.health.OnShildChanged -= UpdateShild;
             this.health.OnShildDepleted -= ShildDepleted;
+            this.health.OnShildDisabled -= DisableUI;
         }
 
 
@@ -42,11 +67,27 @@ public class ShildUI : MonoBehaviour
         health.OnShildDepleted += ShildDepleted;
         health.OnShildDisabled += DisableUI;
         health.OnShildEnabled += EnableUI;
+        health.OnMaxShildChanged += UpdateMaxShildUI;
 
         UpdateShild(health.ShildPercentage);
 
+        SetWidth( health.MaxShild > 55f);
+
 
     }
+
+    public void UpdateMaxShildUI(float maxShildValue)
+    {
+        if (maxShildValue > 55f)
+        {
+            SetWidth(true);
+        }
+        else
+        {
+            SetWidth(false);
+        }
+    }
+
 
     public void EnableUI()
     {

@@ -11,10 +11,35 @@ public class MeleeAttacker : MonoBehaviour
     [SerializeField] float velocityYOffset = 0.5f;
     PlayerMeleeAttack meleeData;
     float attackDelay = 0f;
+    [SerializeField] PlayerBodyStatSheet statSheet; // reference to the body stat sheet for damage calculation
+
+    float damageMultiplier = 1f; // multiplier for damage, can be set by other scripts if needed
+
+    private void Awake()
+    {
+        if (statSheet != null)
+        {
+            statSheet.OnStatSheetUpdated += SetStatSheet;
+        }
+    }
+
+    public void SetStatSheet()
+    {
+        if (!statSheet.useStatSheet) 
+        {
+            return;
+        }
+
+        damageMultiplier = statSheet.playerStatsSheetInstance.meleeDamageMultiplier;
+    }
+
 
     private void Start()
     {
         health.OnDeath += CancelAttack;
+
+
+
     }
 
     public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier)
@@ -52,7 +77,7 @@ public class MeleeAttacker : MonoBehaviour
 
         foreach (var collider in colliders)
         {
-            DamagePackage damagePackage = new DamagePackage(attackData.Damage);
+            DamagePackage damagePackage = new DamagePackage(attackData.Damage * damageMultiplier);
             damagePackage.origin = hitPoint;
             // direction of self move 
             var direction = transform.forward;

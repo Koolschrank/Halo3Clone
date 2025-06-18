@@ -82,6 +82,8 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 0
     sideArm: {fileID: 0}
     magazinsOfSideArm: 0
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
     ability: {fileID: 0}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
@@ -380,6 +382,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 1671755444411188924, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1680555677729628207, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: movementSpeedForVisibility
       value: -0.1
@@ -395,6 +401,10 @@ PrefabInstance:
     - target: {fileID: 1827648141200565292, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858554398235414277, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2052528466734826808, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
@@ -431,6 +441,10 @@ PrefabInstance:
     - target: {fileID: 3068919470916229809, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: inputSlowDownStopsInput
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086695294023934871, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3142858357439699233, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer

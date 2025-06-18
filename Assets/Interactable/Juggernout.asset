@@ -17,4 +17,6 @@ MonoBehaviour:
   statModifiers:
   - type: 0
     value: 200
+  - type: 1
+    value: 2
   passiveModifiers: []

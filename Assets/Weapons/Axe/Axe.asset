@@ -74,3 +74,6 @@ MonoBehaviour:
     focusGainWhenOnTarget: 5
     focusLossWhenNotOnTarget: 0.5
     moveSpeedWithGun: 1
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
