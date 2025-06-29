@@ -21,21 +21,42 @@ public class GameMode : ScriptableObject
     [SerializeField] protected bool hasAiPlayers;
     [SerializeField] protected bool useStatSheets = false;
     [SerializeField] protected bool dontDropWeaponsOnDeath = false; // if true, players do not drop their weapons on death, instead they respawn with their starting equipment
+    
     [SerializeField] int startScore = 0; // starting score for each player, used in the scoreboard
     [SerializeField] PlayerStatsSheet playerStatsSheetBlueprint;
-    
+    public bool EnemyTeamsWorkingTogether = false; // if true, enemy teams work together, otherwise they fight each other
+
+    public bool team2usesOtherPointsToWin = false; // if true, team 2 uses a different points to win value, otherwise both teams use the same value
+    public int team2PointsToWin = 0; // points to win for team 2, if team2usesOtherPointsToWin is true
+    public bool team2LoosesScoreWhenTeam1scores = false; // if true, team 2 looses score when team 1 scores, otherwise they do not loose score
+    public int amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints = 0; // amount of points team 1 needs to score to make team 2 loose points, if team2LoosesScoreWhenTeam1scores is true
+    public bool useEnemyWaves;
+    public bool noDualWieldDamageReduction = false; // if true, dual wielding does not reduce damage, otherwise it does
 
 
 
 
-    public Equipment StartingEquipment { get { return startingEquipment; } }
+	public Equipment StartingEquipment { get { return startingEquipment; } }
     public float TimeLimitInMinutes { get { return timeLimitInMinutes; } }
 
-    public int GetPointsToWin(int playerCount, bool isSmallMap)
+    public int GetPointsToWin(int playerCount, bool isSmallMap, int teamIndex)
     {
         int points = pointsToWin;
 
-        if (playerCount >= 4)
+		if (team2usesOtherPointsToWin)
+		{
+			if (teamIndex == 1)
+            {
+                return team2PointsToWin;
+			}
+            else
+                {
+                return pointsToWin;
+			}
+
+		}
+
+		if (playerCount >= 4)
         {
             points = Mathf.RoundToInt(points * pointsToWinMultiplier_MoreThan4Players);
 
@@ -44,7 +65,14 @@ public class GameMode : ScriptableObject
         {
             points = Mathf.RoundToInt(points * pointsToWinMultiplier_smallMap);
         }
-        return points;
+
+
+        
+
+
+
+
+		return points;
     }
 
     public int PointsToWin { get { return pointsToWin; } }

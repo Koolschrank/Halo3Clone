@@ -39,7 +39,7 @@ public class GameModeManager : MonoBehaviour
     public bool HasTeam1AlmostWon()
     {
         var score = teamPoints[0];
-        var maxScore = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
+        var maxScore = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap,0);
         return score >= maxScore * 0.5f;
     }
 
@@ -200,7 +200,7 @@ public class GameModeManager : MonoBehaviour
     {
         teams.Clear();
         teamPoints.Clear();
-        for (int i = 0; i < gameModeStats.TeamCount; i++)
+        for (int i = 0; i < Mathf.Max(2, gameModeStats.TeamCount); i++)
         {
             teams.Add(new List<PlayerMind>());
             teamPoints.Add(0);
@@ -214,8 +214,11 @@ public class GameModeManager : MonoBehaviour
         ResetGame();
         PlayerManager.instance.OnPlayerAdded += PlayerJoined;
         PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
-        
+        EnemySpawner.instance.OnEnemySpawned += AISpawned;
+
     }
+
+
 
     public virtual void PlayerJoined(PlayerMind player)
     {
@@ -235,6 +238,12 @@ public class GameModeManager : MonoBehaviour
     }
 
     public virtual void PlayerSpawned(PlayerMind player)
+    {
+        
+
+    }
+
+    public virtual void AISpawned(GameObject aiCharacter)
     {
 
     }
@@ -318,8 +327,11 @@ public class GameModeManager : MonoBehaviour
 
     int GetIndexOfNextTeamToJoin()
     {
-        // return index of team with least players
-        int index = 0;
+        if (gameModeStats.TeamCount == 1)
+            return 0;
+
+		// return index of team with least players
+		int index = 0;
         int min = int.MaxValue;
         for (int i = 0; i < teams.Count; i++)
         {
@@ -367,8 +379,15 @@ public class GameModeManager : MonoBehaviour
         GainPoints(teamIndex, points);
     }
 
-    protected void GainPoints(int teamIndex, int points)
+    protected virtual void GainPoints(int teamIndex, int points)
     {
+        if (gameModeStats.EnemyTeamsWorkingTogether && teamIndex >1)
+        {
+            teamIndex = 1; 
+        }
+
+
+
         teamPoints[teamIndex] += points;
         Debug.Log("Team " + teamIndex + " gained " + points + " points. Total: " + teamPoints[teamIndex]);
 
@@ -382,17 +401,31 @@ public class GameModeManager : MonoBehaviour
         }
 
 
-    }
+        if(teamIndex == 0 && gameModeStats.team2LoosesScoreWhenTeam1scores && teamPoints[teamIndex] % gameModeStats.amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints ==0)
+        {
+            LosePoints(1, 1);
+        }
+
+
+	}
 
     protected void LosePoints(int teamIndex, int points)
     {
         teamPoints[teamIndex] -= points;
-        Debug.Log("Team " + teamIndex + " lost " + points + " points. Total: " + teamPoints[teamIndex]);
+
+        if (teamPoints[teamIndex] < 0)
+        {
+            teamPoints[teamIndex] = 0;
+		}
+
+		OnPointsUpdated?.Invoke(teamIndex, teamPoints[teamIndex]);
+
+		Debug.Log("Team " + teamIndex + " lost " + points + " points. Total: " + teamPoints[teamIndex]);
     }
 
     bool HasTeamWon(int teamIndex)
     {
-        return teamPoints[teamIndex] >= gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
+        return teamPoints[teamIndex] >= gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap,teamIndex);
     }
 
     public Equipment GetEquipment()
@@ -424,9 +457,9 @@ public class GameModeManager : MonoBehaviour
         return teamPoints;
     }
 
-    public int GetMaxScore()
+    public int GetMaxScore(int teamIndex)
     {
-        return gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
+        return gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap, teamIndex);
     }
 
     public bool HasWeaponPickups => gameModeStats.HasWeaponPickups;
@@ -435,7 +468,7 @@ public class GameModeManager : MonoBehaviour
 
     public int GetPointsLeftForTeamToWin(int teamIndex)
     {
-        int pointsToWin = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap);
+        int pointsToWin = gameModeStats.GetPointsToWin(PlayerManager.instance.GetAllPlayers().Count, smallMap, teamIndex);
         int pointsOfTeam = teamPoints[teamIndex];
         return pointsToWin - pointsOfTeam;
     }

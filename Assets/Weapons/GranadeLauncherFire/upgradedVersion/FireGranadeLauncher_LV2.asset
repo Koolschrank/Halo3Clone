@@ -20,7 +20,7 @@ MonoBehaviour:
   shootType: 0
   fireRate: 0.6
   bulletsPerShot: 1
-  magazineSize: 5
+  magazineSize: 6
   maxAmmoInReserve: 10
   reloadTime: 3
   inaccuracy: 0

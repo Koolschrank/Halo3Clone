@@ -41,6 +41,7 @@ public class AI_Move : MonoBehaviour
     float crouchRecoveryTimer = 0f;
 
     bool followObjective = false;
+    bool goCloseToTarget = false; // flag to check if AI should go close to target
 
     bool IsInTBagStance = false;
     [SerializeField] float tBagStanceTime = 10f; // time to stay in T-Bag stance
@@ -50,9 +51,9 @@ public class AI_Move : MonoBehaviour
     GameObject tbagTarget;
     float tBagTimer = 0f; // timer to track T-Bag stance time
 
-
-
-
+    float timeToIgnorePathInvalid = 1.5f; // time to ignore path invalid status
+	float pathInvalidTime = 0f;
+    
 
     public void RollAwayFromDanger(Vector3 dangerPosition)
     {
@@ -207,22 +208,34 @@ public class AI_Move : MonoBehaviour
 
     public void Start()
     {
-        if (GameModeSelector.gameModeManager is KingOfTheHillManager )
+        if (GameModeSelector.gameModeManager is KingOfTheHillManager || GameModeSelector.gameModeManager is CrownManager)
         {
             // check probability to follow objective
             if (UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
             {
                 followObjective = true;
-                
+                if (GameModeSelector.gameModeManager is CrownManager)
+                {
+                    goCloseToTarget = true;
+                    targetOffset = Vector3.zero; // no offset for CrownManager
+                }
             }
-            
+
+           
+
         }
 
     }
 
+    bool targetCanReach = true;
+
     private void Update()
     {
-        if (IsInTBagStance)
+
+       
+
+
+			if (IsInTBagStance)
         {
             if (Time.frameCount % framesToUpdateNavAgentIfClose == 0)
             {
@@ -236,7 +249,10 @@ public class AI_Move : MonoBehaviour
             if (distanceToTBagTarget> tBagDistance)
             {
                 playerMovement.UpdateMoveInput(new Vector2(tBagdirection.x, tBagdirection.z) * 1);
-            }
+
+				tBagTimer -= Time.deltaTime/3;
+
+			}
             else
             {
                 tBagStanceTimer -= Time.deltaTime;
@@ -277,13 +293,60 @@ public class AI_Move : MonoBehaviour
 
 
         targetPosition = target.GetTargetPosition();
-        if (followObjective)
+
+
+
+        var followObjectiveThisFrame = false;
+
+        if (!followObjective || playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange < 1)
         {
-            targetPosition = ObjectiveIndicator.instance.GetObjective(0).Position;
+            Debug.Log(agent.pathStatus == NavMeshPathStatus.PathPartial);
+
+			if (agent.pathStatus == NavMeshPathStatus.PathPartial)
+            {
+                pathInvalidTime += Time.deltaTime;
+                if (pathInvalidTime > timeToIgnorePathInvalid)
+                {
+                    followObjectiveThisFrame = true;
+					targetCanReach = false;
+
+
+				}
+            }
+			else if ( !targetCanReach && Time.frameCount % framesToUpdateNavAgent == 0)
+			{
+				NavMeshPath path = new NavMeshPath();
+				bool hasPath = NavMesh.CalculatePath(agent.transform.position, targetPosition, NavMesh.AllAreas, path);
+
+				if (hasPath && path.status == NavMeshPathStatus.PathComplete)
+				{
+                    Debug.Log("target positble");
+
+					followObjectiveThisFrame = false;
+					pathInvalidTime = 0f;
+                    targetCanReach = true;
+				}
+			}
+            followObjectiveThisFrame = !targetCanReach;
+		}
+        else
+        {
+            followObjectiveThisFrame = true;
+		}
+
+
+		if (followObjectiveThisFrame)
+        {
+			targetPosition = ObjectiveIndicator.instance.GetObjective(0).Position;
         }
 
         Vector3 offsetPosition = targetPosition + targetOffset;
-        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+		
+
+		float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+
+        
+
         float distanceToOffsetPosition = Vector3.Distance(transform.position, offsetPosition);
         if (playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.crouchDistance)
         {
@@ -299,11 +362,33 @@ public class AI_Move : MonoBehaviour
             }
         }
 
+        float targetValue = 3f;
+        float targetValue2 = 1f;
+        
+        if (goCloseToTarget)
+        {
+            targetValue = 0.75f;
+            targetValue2 = 0.75f;
 
-        var idealRange = playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange;
-        if (
-            ((!followObjective && playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange) 
-            || (followObjective &&  (distanceToTarget < 3f || distanceToOffsetPosition < 1f))) )
+
+        }
+
+        bool closeToObjective = false;
+        if (followObjectiveThisFrame)
+        {
+            if ( closeToObjective = distanceToTarget < targetValue + 0.5f)
+            {
+                closeToObjective = true;
+            }
+        }
+        
+
+
+
+            var idealRange = playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange;
+        if ( closeToObjective ||
+            (((!followObjectiveThisFrame && playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange) 
+            || (followObjectiveThisFrame &&  (  distanceToTarget < targetValue || distanceToOffsetPosition < targetValue2))) ) )
         {
             playerMovement.UpdateMoveInput(Vector2.zero);
             //if (straveTimer <=0)
@@ -359,6 +444,7 @@ public class AI_Move : MonoBehaviour
                 
             }
         }
+
 
 
         Vector3 direction = agent.desiredVelocity.normalized;

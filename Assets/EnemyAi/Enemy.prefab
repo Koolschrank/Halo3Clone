@@ -133,7 +133,7 @@ MonoBehaviour:
     m_Bits: 1
   wallCheckDistance: 2.5
   tBagStanceTime: 5
-  tBagSpeed: 0.1
+  tBagSpeed: 0.05
   tBagDistance: 0.6
 --- !u!114 &8029323305840259631
 MonoBehaviour:

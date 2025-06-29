@@ -23,7 +23,7 @@ MonoBehaviour:
   magazineSize: 84
   maxAmmoInReserve: 800
   reloadTime: 3
-  inaccuracy: 0.045
+  inaccuracy: 0.055
   switchOutTime: 0.25
   switchInTime: 0.4
   canZoom: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   bulletSize: {x: 1, y: 1}
   bulletsPerRow: 28
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
-  crosshairsSize: {x: 0.45, y: 0.45}
+  crosshairsSize: {x: 0.55, y: 0.55}
   enemyAiWeaponData: {fileID: 11400000, guid: 921ef2f94fd4b634eb62fccf8b211169, type: 2}
   gunAiBehaviour:
     IdealRange: 10

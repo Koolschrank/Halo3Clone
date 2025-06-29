@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 6
   force: 100
-  shildDamageMultiplier: 7
+  shildDamageMultiplier: 3
   headShotMultiplier: 1
   hitLayer:
     serializedVersion: 2

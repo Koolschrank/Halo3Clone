@@ -261,7 +261,7 @@ public class CharacterHealth : Health
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if ((currentShild <= 0 || damagePackage.canHeadShotShild) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
+        if ((currentShild <= 0 ||(  damagePackage.canHeadShotShild && currentShild < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)

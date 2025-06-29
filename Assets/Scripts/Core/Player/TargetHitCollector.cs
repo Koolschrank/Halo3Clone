@@ -10,6 +10,8 @@ public class TargetHitCollector : MonoBehaviour
 
     [SerializeField] bool tBagOnKill = true;
 
+    public Action<GameObject, GameObject> OnKill;
+
 
 
     public void CharacterHit(DamagePackage damage,GameObject target)
@@ -26,13 +28,19 @@ public class TargetHitCollector : MonoBehaviour
     {
         OnCharacterKill?.Invoke(target);
 
-        if (tBagOnKill && target.GetComponent<BodyMindConnection>().Mind != null)
+        OnKill?.Invoke(gameObject, target);
+
+        if (target.GetComponent<BodyMindConnection>().Mind != null)
         {
+            if (tBagOnKill)
+            {
+                OnTbagStanceTriggered?.Invoke(target.GetComponent<BodyMindConnection>().GetPlayerHead());
+            }
 
             
-            OnTbagStanceTriggered?.Invoke(target.GetComponent<BodyMindConnection>().GetPlayerHead());
-
         }
+
+       
 
 
 

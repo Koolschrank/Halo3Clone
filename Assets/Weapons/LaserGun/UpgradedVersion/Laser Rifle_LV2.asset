@@ -17,10 +17,10 @@ MonoBehaviour:
   weaponFPSModel: {fileID: 6899193775294056288, guid: 5923de7ad5fe3924e8dd43986005e361, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 5b9df280c07d1bb4397f40be7aeae708, type: 3}
   weaponName: Laser Rifle
-  shootType: 2
-  fireRate: 0.3
+  shootType: 1
+  fireRate: 0.011
   bulletsPerShot: 1
-  magazineSize: 200
+  magazineSize: 130
   maxAmmoInReserve: 1000
   reloadTime: 2
   inaccuracy: 0
@@ -88,8 +88,8 @@ MonoBehaviour:
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
   bulletSprite: {fileID: 0}
-  bulletSize: {x: 0.03, y: 0.4}
-  bulletsPerRow: 200
+  bulletSize: {x: 0.06, y: 0.4}
+  bulletsPerRow: 130
   crosshairs: {fileID: 21300000, guid: 271f94386cb35fe4c8b7fe9437bd9840, type: 3}
   crosshairsSize: {x: 0.5, y: 0.5}
   enemyAiWeaponData: {fileID: 0}

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class KingOfTheHillManager : GameModeManager
 {
+    public Action OnNextHillPlaced;
     
     [SerializeField] int hillStartIndex = 0;
     [SerializeField] Hill[] hills;
@@ -17,13 +18,14 @@ public class KingOfTheHillManager : GameModeManager
 
     public Action<int> OnDominatingTeamChanged;
     public Action<float> OnHillMoveTimerChanged;
-    int teamOnHill = -1;
+    public int teamOnHill = -1;
     float timeOnHillUntilNextPointScore = 0;
     float hillMoveTimer = 0;
 
 
+	
 
-    public override void ResetGame()
+	public override void ResetGame()
     {
         base.ResetGame();
 
@@ -42,7 +44,17 @@ public class KingOfTheHillManager : GameModeManager
 
 
     }
-    public void EndGame()
+
+	protected override void GainPoints(int teamIndex, int points)
+    {
+        base.GainPoints(teamIndex, points);
+        var gameModeStats = (GameMode_KingOfTheHill)this.gameModeStats;
+		if (teamIndex == 0 && gameModeStats.moveHillWhenScoreReached && teamPoints[teamIndex] % gameModeStats.scoreToMoveHill == 0)
+        {
+            hillMoveTimer = 0;
+        }
+    }
+	public void EndGame()
     {
 
     }
@@ -63,7 +75,8 @@ public class KingOfTheHillManager : GameModeManager
         {
             StartRandomHill();
             ResetHillMoveTimer();
-        }
+            OnNextHillPlaced?.Invoke();
+		}
 
 
 
@@ -163,7 +176,20 @@ public class KingOfTheHillManager : GameModeManager
             return;
         }
         hillMoveTimer -= Time.deltaTime;
-        ObjectiveIndicator.instance.GetObjective(0).SetText(((int)hillMoveTimer).ToString());
+        if (KTH_values.team2usesOtherPointsToWin  && teamPoints.Count>1)
+        {
+
+
+            var pointsTeam2NeedsToWin = KTH_values.team2PointsToWin - teamPoints[1];
+			ObjectiveIndicator.instance.GetObjective(0).SetText(pointsTeam2NeedsToWin.ToString());
+		}
+        else
+        {
+			ObjectiveIndicator.instance.GetObjective(0).SetText(((int)hillMoveTimer).ToString());
+		}
+
+
+            
     }
 
     public bool CanMoveHill()

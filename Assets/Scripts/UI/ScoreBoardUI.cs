@@ -20,6 +20,8 @@ public class ScoreBoardUI : MonoBehaviour
         }
 
         TeamJoined();
+
+
     }
 
     public void TeamJoined()
@@ -31,7 +33,7 @@ public class ScoreBoardUI : MonoBehaviour
             if (team > 0 || i <2)
             {
                 scoreBars[i].gameObject.SetActive(true);
-                scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore());
+                scoreBars[i].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore(i));
             }
             else
             {
@@ -40,6 +42,9 @@ public class ScoreBoardUI : MonoBehaviour
 
 
         }
+
+        scoreBars[1].gameObject.SetActive(true);
+        scoreBars[1].SetMaxScore(GameModeSelector.gameModeManager.GetMaxScore(1));
     }
 
     public void SetScore(int team,int score)

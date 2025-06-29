@@ -258,6 +258,9 @@ MonoBehaviour:
     - m_Text: All Explosion
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: With Strong Enemies
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1811,6 +1814,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb3697dd0c45d0d4086bfc0001e89814, type: 2}
   - {fileID: 11400000, guid: 9127d7daa727af342a3da8868dee5f65, type: 2}
   - {fileID: 11400000, guid: 83458d19fc62e8749bb73356de8059d4, type: 2}
+  - {fileID: 11400000, guid: 6dc9cb39474ccfc4691a3e7aacb3f71c, type: 2}
 --- !u!1 &608695019
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,7 +3969,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
   - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
   - {fileID: 11400000, guid: ec9b9ff723da9d543bb01894799e6d41, type: 2}
-  - {fileID: 11400000, guid: 147592ac2c914934d89b1ca850351095, type: 2}
+  - {fileID: 11400000, guid: 1bf5703245bc80840a69349b465e9356, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
   buttonSpacing: -60
@@ -5123,6 +5127,8 @@ MonoBehaviour:
   - Villiage
   - Island
   - Streets
+  - Villiage2
+  - Island2
   - VilliageVSAI
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   mapButtonParent: {fileID: 9380848}

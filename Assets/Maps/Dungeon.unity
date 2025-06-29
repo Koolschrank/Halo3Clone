@@ -441,12 +441,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: AIPerTeam
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: enemyWaves.Array.size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: isAutoActiveOnThisMap
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: dd80dde5fa30b4248abbbb3c0eda22e8, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fa2bac412f5773942b80b61ea2d2ccbe, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ff1c011f7374da84eb75a118950fd5cf, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 01e9038ac45899345a33ab41ece2f875, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a364dac58bd87b84c8a9f32cb325f75c, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c46d3fb759f9ed498e251d2774f22e7, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9dfb9ead69393624b8481c8c299ffbf0, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 892b1ab42b57d314c897ef7fe0c90236, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fe3cbc2d651a234d9a40b1474117d06, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 836d890a44b619a4ca2f53f14b55ca55, type: 2}
     - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_NavMeshData
       value: 
@@ -30096,7 +30140,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

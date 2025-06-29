@@ -5,7 +5,8 @@ using FMODUnity;
 public class Weapon_Bullet_Hitscan : Weapon_Bullet
 {
     [SerializeField] float damage = 10f;
-    [SerializeField] float force = 1f;
+    public float damageMultiplierVSAI = 1f;
+	[SerializeField] float force = 1f;
     [SerializeField] float shildDamageMultiplier = 1f;
     [SerializeField] float headShotMultiplier = 1f;
     [SerializeField] bool canHeadShotShild = false;

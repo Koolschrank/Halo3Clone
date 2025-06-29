@@ -1929,7 +1929,7 @@ Transform:
   m_GameObject: {fileID: 190403270}
   serializedVersion: 2
   m_LocalRotation: {x: -0.31928095, y: -0, z: -0, w: 0.9476601}
-  m_LocalPosition: {x: 0, y: 1.26, z: 0.39}
+  m_LocalPosition: {x: 0, y: 1.573, z: 0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3899,7 +3899,7 @@ PrefabInstance:
       objectReference: {fileID: 1592149286}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: connectedInteractables.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: 'connectedInteractables.Array.data[0]'
@@ -3909,6 +3909,10 @@ PrefabInstance:
       propertyPath: 'connectedInteractables.Array.data[1]'
       value: 
       objectReference: {fileID: 1365586116}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1072371610}
     - target: {fileID: 8341327335164272968, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.57
@@ -4958,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f96aaf0be32ba9d4a879d8e822978b02, type: 2}
     - target: {fileID: 6818847792677675785, guid: 5643c63c0708c7842a5e1d098636b181, type: 3}
       propertyPath: BasePrice
-      value: 120
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 6818847792677675785, guid: 5643c63c0708c7842a5e1d098636b181, type: 3}
       propertyPath: abilityData
@@ -5070,7 +5074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: connectedInteractables.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: 'connectedInteractables.Array.data[0]'
@@ -5080,6 +5084,10 @@ PrefabInstance:
       propertyPath: 'connectedInteractables.Array.data[1]'
       value: 
       objectReference: {fileID: 357295038}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1072371610}
     - target: {fileID: 8341327335164272968, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.82000005
@@ -9081,6 +9089,22 @@ PrefabInstance:
       propertyPath: BasePrice
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: connectedInteractables.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[0]'
+      value: 
+      objectReference: {fileID: 479526707}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1365586116}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[2]'
+      value: 
+      objectReference: {fileID: 357295038}
     - target: {fileID: 8341327335164272968, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.45
@@ -9951,6 +9975,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6269132852331495964, guid: af11b45e3d568f946be2cdb52ca3f1c0, type: 3}
   m_PrefabInstance: {fileID: 1066305723}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1072371610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+  m_PrefabInstance: {fileID: 1015532330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5419d0c70a9f4da43a7ea3cff491746d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1077998872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11126,8 +11161,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: waveIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: enemyWaves.Array.size
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: isAutoActiveOnThisMap
@@ -11136,39 +11175,39 @@ PrefabInstance:
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 199b49fba26030542b60f1a106d043f0, type: 2}
+      objectReference: {fileID: 11400000, guid: 61ca079aa12edb648bf2306db6acc2ce, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 61ca079aa12edb648bf2306db6acc2ce, type: 2}
+      objectReference: {fileID: 11400000, guid: 018d41a2bc4da954d8bf8ad4c22699f1, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 018d41a2bc4da954d8bf8ad4c22699f1, type: 2}
+      objectReference: {fileID: 11400000, guid: 2d0512d86cf81854ea78a48814e9dc22, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 2d0512d86cf81854ea78a48814e9dc22, type: 2}
+      objectReference: {fileID: 11400000, guid: c1ffa7cd27648904fa9bd8a4fb9262b3, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: c1ffa7cd27648904fa9bd8a4fb9262b3, type: 2}
+      objectReference: {fileID: 11400000, guid: 1c959b8d0cfc802429ae8bfb7d99ce34, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[5]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1c959b8d0cfc802429ae8bfb7d99ce34, type: 2}
+      objectReference: {fileID: 11400000, guid: 056680eea03e3494d81b824df00fd180, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[6]'
       value: 
-      objectReference: {fileID: 11400000, guid: 056680eea03e3494d81b824df00fd180, type: 2}
+      objectReference: {fileID: 11400000, guid: e107794905c0df24b9bbab6307ff9ec6, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[7]'
       value: 
-      objectReference: {fileID: 11400000, guid: e107794905c0df24b9bbab6307ff9ec6, type: 2}
+      objectReference: {fileID: 11400000, guid: 586f2fb4bc1b0b5468b1885d80aa98b6, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[8]'
       value: 
-      objectReference: {fileID: 11400000, guid: 586f2fb4bc1b0b5468b1885d80aa98b6, type: 2}
+      objectReference: {fileID: 11400000, guid: 7bd82eb01806def4788c317772c50f6a, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[9]'
       value: 
@@ -11178,9 +11217,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 4fc6917f0d3e5014ab8363b6ddaae2cb, type: 2}
+    - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_UseGeometry
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4204513445403303090, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_GenerateLinks
       value: 1
@@ -11349,6 +11396,14 @@ PrefabInstance:
       propertyPath: cooldownLossOnKill
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5737897190084315960, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: basicPickUps.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737897190084315960, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'basicPickUps.Array.data[4]'
+      value: 
+      objectReference: {fileID: 5359682072341727517, guid: c2876a618140a9c419889b92f162ddc7, type: 3}
     - target: {fileID: 5778423917874009010, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: smallMap
       value: 1
@@ -12693,7 +12748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: connectedInteractables.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: 'connectedInteractables.Array.data[0]'
@@ -12703,6 +12758,10 @@ PrefabInstance:
       propertyPath: 'connectedInteractables.Array.data[1]'
       value: 
       objectReference: {fileID: 357295038}
+    - target: {fileID: 5200315855819132028, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
+      propertyPath: 'connectedInteractables.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1072371610}
     - target: {fileID: 8341327335164272968, guid: b03ad6b83ea845947abff31511fc80c3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.78
@@ -20483,6 +20542,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2038918318}
     m_Modifications:
+    - target: {fileID: 386630814299558, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: HasPrice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 386630814299558, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
+      propertyPath: BasePrice
+      value: 2500
+      objectReference: {fileID: 0}
     - target: {fileID: 3194439109043116620, guid: 087a3d6cebad6bb47ae3005174d19df2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.579323

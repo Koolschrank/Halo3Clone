@@ -37,9 +37,17 @@ public class BulletSpawner : MonoBehaviour
         this.onlyEnemyIsPlayerTeam = onlyEnemyIsPlayerTeam;
     }
 
-    //AutoAim autoAimOfCurrentWeapon;
+    bool ignoreDualWieldDamageMultiplier = false;
+	private void Start()
+	{
+        var gamemodeStats = GameModeSelector.gameModeManager.GameModeStats;
+		ignoreDualWieldDamageMultiplier = gamemodeStats.noDualWieldDamageReduction;
 
-    /*
+	}
+
+	//AutoAim autoAimOfCurrentWeapon;
+
+	/*
     public void Start()
     {
         playerArms.RightArm.OnWeaponEquipStarted += (weapon, time) =>
@@ -64,7 +72,7 @@ public class BulletSpawner : MonoBehaviour
 
     }*/
 
-    public void Update()
+	public void Update()
     {
         Transform newTarget = null;
         var rightArmWeapon = rightArm.CurrentWeapon;
@@ -191,12 +199,17 @@ public class BulletSpawner : MonoBehaviour
         LayerMask hitLayer = bullet.HitLayer;
 
         float damageMultiplier = 1f;
-        if (weapon.IsBeingDualWielded)
+        if (weapon.IsBeingDualWielded && !ignoreDualWieldDamageMultiplier)
         {
             damageMultiplier = weapon.DamageMultiplierWhenDualWielded;
         }
 
-        DamagePackage damagePackage = new DamagePackage(bullet.Damage * damageMultiplier);
+		if (GameModeSelector.gameModeManager.GameModeStats.team2LoosesScoreWhenTeam1scores)
+		{
+			damageMultiplier *= bullet.damageMultiplierVSAI;
+		}
+
+		DamagePackage damagePackage = new DamagePackage(bullet.Damage * damageMultiplier);
         damagePackage.origin = mainTransform.position;
         damagePackage.owner = mainTransform.gameObject;
         damagePackage.headShotMultiplier = bullet.HeadShotMultiplier;
@@ -301,7 +314,9 @@ public class BulletSpawner : MonoBehaviour
             forward = Vector3.Lerp(forward, (target.position - transform.position), autoAimLerp).normalized;
         }
 
-        int bulletCount = weapon.BulletsPerShot;
+        
+
+		int bulletCount = weapon.BulletsPerShot;
         GameObject[] bullets = new GameObject[bulletCount];
         for (int i = 0; i < bulletCount; i++)
         {
@@ -312,11 +327,12 @@ public class BulletSpawner : MonoBehaviour
             if (projectile.TryGetComponent<Bullet>(out Bullet bullet))
             {
                 bullet.SetUp(mainTransform.gameObject);
-
-                if (weapon.IsBeingDualWielded)
+                 
+                if (weapon.IsBeingDualWielded && !ignoreDualWieldDamageMultiplier)
                 {
                     bullet.ApplyDamageMultiplier(weapon.DamageMultiplierWhenDualWielded);
                 }
+                
 
             }
             bullets[i] = projectile;

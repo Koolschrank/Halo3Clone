@@ -23,6 +23,7 @@ public class HealthUI : MonoBehaviour
 
     public void SetWidth(bool lenght)
     {
+        return;
         if (lenght)
         {
             healthBarRect.sizeDelta = new Vector2(longBarWidth, healthBarRect.sizeDelta.y);

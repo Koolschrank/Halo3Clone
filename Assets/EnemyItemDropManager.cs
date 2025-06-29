@@ -20,11 +20,21 @@ public class EnemyItemDropManager : MonoBehaviour
 
     GameObject lastDropedItem = null;
 
+    bool disableDrops = false;
+
     private void Start()
     {
+        
+
         dropCooldown = pickUpDropTime;
 
         var enemySpawner = EnemySpawner.instance;
+        if (!enemySpawner.isAutoActiveOnThisMap)
+        {
+            disableDrops = true;
+            enabled = false;
+        }
+            
         enemySpawner.OnEnemySpawned += (enemy) => 
         {
             enemy.GetComponent<Health>().OnPreDeath += () => EnemyKilled(enemy);
@@ -34,6 +44,8 @@ public class EnemyItemDropManager : MonoBehaviour
 
     private void Update()
     {
+
+
         if ( Time.frameCount % framesToCheckForPlayerState == 0)
         {
             if (!shortOnHealth && !shortOnAmmo && ArePlayersShortOnAmmo())
@@ -54,6 +66,8 @@ public class EnemyItemDropManager : MonoBehaviour
 
     public void EnemyKilled(GameObject enemy)
     {
+        if (disableDrops) return;
+
         dropCooldown -= cooldownLossOnKill;
 
         if (dropCooldown > 0) return;

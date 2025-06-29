@@ -10,5 +10,9 @@ public class AI_AssignTeam : MonoBehaviour
     private void Start()
     {
         PlayerManager.instance.UpdateTeamOfEnemyAI(bodyMindConnection, teamIndex);
+
+        PlayerManager.instance.UpdateColorOfEnemyAI(bodyMindConnection, teamIndex);
+
+        
     }
 }

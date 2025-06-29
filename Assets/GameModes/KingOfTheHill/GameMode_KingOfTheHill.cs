@@ -12,6 +12,9 @@ public class GameMode_KingOfTheHill : GameMode
     [SerializeField] bool moveHill = false;
     [SerializeField] float hillMoveTime = 0;
 
+    public bool moveHillWhenScoreReached = false;
+	public int scoreToMoveHill = 50;
+
 
     public float TimeToScore { get { return timeToScore; } }
     public bool MoveHill { get { return moveHill; } }

@@ -16,9 +16,9 @@ MonoBehaviour:
   upgraderDescription: Speed up Reload/Weapon Swap/Ability use
   statModifiers:
   - type: 10
-    value: 0.25
+    value: 0.3
   - type: 12
-    value: 0.4
+    value: 0.8
   - type: 13
-    value: 0.4
+    value: 0.6
   passiveModifiers: []

@@ -227,6 +227,12 @@ public class PlayerManager : MonoBehaviour
     public void UpdateTeamOfEnemyAI(BodyMindConnection body, int team)
     {
         body.SetPlayTeamIndex(team);
+
+        
+    }
+
+    public void UpdateColorOfEnemyAI(BodyMindConnection body, int team)
+    {
         body.SetPlayerColor(playerColors[team]);
     }
 

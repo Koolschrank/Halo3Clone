@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Maps/VilliageVSAI.unity
     guid: 7440ac480955f764ea408ceca4adc2ae
+  - enabled: 1
+    path: Assets/Maps/Villiage2.unity
+    guid: f9c0dc451eabb014884a54883778f26b
+  - enabled: 1
+    path: Assets/Maps/Island2.unity
+    guid: 506ef793a888f464b9784d52aee951e7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f35337ef2a27d9441967cf9acbdf46bf, type: 2}
   m_UseUCBPForAssetBundles: 0

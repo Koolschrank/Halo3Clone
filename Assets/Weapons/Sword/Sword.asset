@@ -29,7 +29,7 @@ MonoBehaviour:
   canZoom: 0
   zoomFOV: 0
   moveSpeedMultiplier: 1
-  damageReduction: 0.25
+  damageReduction: 0
   meleeData: {fileID: 11400000, guid: dd3f5b5bb5d13ad4f8f00cd928b88704, type: 2}
   autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
   weaponType: 1
@@ -74,3 +74,6 @@ MonoBehaviour:
     focusGainWhenOnTarget: 2
     focusLossWhenNotOnTarget: 0.5
     moveSpeedWithGun: 0.9
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 0}

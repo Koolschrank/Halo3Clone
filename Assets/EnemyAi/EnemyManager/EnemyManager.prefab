@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3756dc1f47a17749bcf84c19ed5f45e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPvPGame: 1
+  isAutoActiveOnThisMap: 1
   AIPerTeam: 4
   enemyTeamId: 5
   enemyPrefab: {fileID: 2291314865742767251, guid: 347d4799b322ffc4182ab30374aaf0c3, type: 3}
@@ -309,6 +309,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 586f2fb4bc1b0b5468b1885d80aa98b6, type: 2}
   - {fileID: 11400000, guid: 7bd82eb01806def4788c317772c50f6a, type: 2}
   enemiesForPVPGames: {fileID: 11400000, guid: 504d77a11e8f36641b72838aa38f9f3f, type: 2}
+  alliesForPVPGames: {fileID: 11400000, guid: af0ecbfe51a6c564eb0a0364b1e21c22, type: 2}
   waveIndex: 0
   spawnRateMultiplier: 1
   activeEnemies: []

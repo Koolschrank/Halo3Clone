@@ -13,34 +13,61 @@ public class CrownManager : GameModeManager
     float timeToScore;
     int crownTeamIndex = -1;
 
+    public override void AISpawned(GameObject aiCharacter)
+    {
+        base.AISpawned(aiCharacter);
+
+        aiCharacter.GetComponent<TargetHitCollector>().OnKill += OnPlayerKill;
+    }
+
+    public override void PlayerSpawned(PlayerMind player)
+    {
+        base.PlayerSpawned(player);
+        var body = player.PlayerBody;
+        if (body == null)
+        {
+            Debug.LogError("Player body is null for player: " + player.name);
+            return;
+        }
+        body.GetComponent<TargetHitCollector>().OnKill += OnPlayerKill;
+    }
+
     public override void PlayerJoined(PlayerMind player)
     {
         base.PlayerJoined(player);
-        player.OnPlayerElimination += OnPlayerElimination;
-        player.OnTeamKill += OnTeamKill;
+        
 
         player.EnableObjectiveUIMarker();
     }
 
-    public void OnPlayerElimination(GameObject killedPlayer, PlayerMind player)
+    public void OnPlayerKill( PlayerMind killer, GameObject killedPlayer)
+    {
+        OnPlayerKill(killedPlayer, killer.PlayerBody);
+    }
+
+    public void OnPlayerKill( GameObject killer, GameObject killedPlayer)
     {
 
-
+        Debug.Log("OnPlayerKill: " + killedPlayer.name + " killed by " + killer.name);
         if (playerWithCrown == killedPlayer)
         {
-            var isDead = player.PlayerBody.GetComponent<CharacterHealth>().IsDead;
-            if (isDead)
+            var isDead = killer.GetComponent<CharacterHealth>().IsDead;
+            var sameTeam = killer.GetComponent<PlayerTeam>().TeamIndex == killedPlayer.GetComponent<PlayerTeam>().TeamIndex;
+            if (isDead || sameTeam)
             {
                 playerWithCrown = null;
                 SpawnCrown();
             }
             else
             {
-                TransferCrownToPlayer(player.PlayerBody);
+                TransferCrownToPlayer(killer);
             }
             
         }
     }
+
+
+    
 
     public void OnTeamKill(GameObject killedPlayer, PlayerMind player)
     {
@@ -95,7 +122,16 @@ public class CrownManager : GameModeManager
         ObjectiveIndicator.instance.GetObjective(0).SetText(GetPointsLeftForTeamToWin(crownTeamIndex).ToString());
 
         var playerMind = player.GetComponent<BodyMindConnection>().Mind;
-        playerMind.CrownCollected();
+
+        if (playerMind != null)
+        {
+            playerMind.CrownCollected();
+        }
+        else
+        {
+
+        }
+            
 
 
 

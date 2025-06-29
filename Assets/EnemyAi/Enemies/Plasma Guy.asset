@@ -45,4 +45,4 @@ MonoBehaviour:
   shildMultiplier: 1
   speedMultiplier: 1
   teamIdOverrride: 1
-  scoreForKill: 110
+  scoreForKill: 175

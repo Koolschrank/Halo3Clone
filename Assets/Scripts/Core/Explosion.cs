@@ -18,7 +18,8 @@ public class Explosion : MonoBehaviour
     // curve to control the damage falloff
 
     [SerializeField] LayerMask hitLayer;
-    [SerializeField] float damageReductionIfObstructed = 0.4f;
+	[SerializeField] LayerMask wallLayers =  1 << 0;
+	[SerializeField] float damageReductionIfObstructed = 0.4f;
 
     [SerializeField] float timeForSelfDestruction = 5f;
 
@@ -75,7 +76,7 @@ public class Explosion : MonoBehaviour
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
 
                 // cast a ray to check if the object is obstructed
-                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, hitLayer))
+                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, wallLayers))
                 {
                     if (hit.collider != collider)
                     {

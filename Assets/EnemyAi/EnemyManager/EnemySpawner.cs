@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Action<GameObject> OnEnemySpawned;
 
 
-    [SerializeField] bool isAutoActiveOnThisMap = true; // Flag to check if the spawner is active
+    [SerializeField] public bool isAutoActiveOnThisMap = true; // Flag to check if the spawner is active
 
      bool isPvPGame = false; // Flag to check if it's a PvP game
     [SerializeField] int AIPerTeam = 3; // Number of AI enemies per team
@@ -22,7 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] Enemy_Wave enemiesForPVPGames;
 
-    [SerializeField] int waveIndex = 0;
+	[SerializeField] Enemy_Wave alliesForPVPGames;
+
+	[SerializeField] int waveIndex = 0;
     EnemyWaveInstance activeWave;
     [SerializeField] float spawnRateMultiplier = 1; // Multiplier for spawn rate
     float nextWaveDelay = 5;
@@ -35,8 +37,12 @@ public class EnemySpawner : MonoBehaviour
     int team1EnemyCount = 0;
     int team2EnemyCount = 0;
 
+    KingOfTheHillManager kingOfTheHillManager;
 
-    public void KillAllEnemies()
+
+   
+
+	public void KillAllEnemies()
     {
         DamagePackage damagePackage = new DamagePackage(1000000);
 
@@ -63,7 +69,33 @@ public class EnemySpawner : MonoBehaviour
     {
         isPvPGame = true;
 
-        activeWave = new EnemyWaveInstance(enemiesForPVPGames);
+		if (GameModeSelector.gameModeManager.GameModeStats.useEnemyWaves)
+		{
+			activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
+            if (GameModeSelector.gameModeManager is KingOfTheHillManager)
+            {
+				kingOfTheHillManager = (KingOfTheHillManager)GameModeSelector.gameModeManager;
+				
+
+				kingOfTheHillManager.OnNextHillPlaced += () =>
+                {
+                    waveIndex++;
+                    if (waveIndex >= enemyWaves.Length)
+                    {
+                        waveIndex = 0; // Reset to the first wave if we reach the end
+					}
+					activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
+				};
+			}
+		}
+        else
+        {
+			activeWave = new EnemyWaveInstance(enemiesForPVPGames);
+		}
+           
+
+        
+
 
         activeWave.SetDuration(1000000000000f); // bassicly infinite duration
     }
@@ -147,7 +179,15 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            activeWave.UpdateTimers(Time.deltaTime,spawnRateMultiplier);
+            float delta = Time.deltaTime;
+			if (kingOfTheHillManager != null && kingOfTheHillManager.teamOnHill == 1)
+            {
+                delta *= 0.15f;
+
+			}
+
+
+				activeWave.UpdateTimers(delta, spawnRateMultiplier);
 
             if (activeWave.CanSpawnEnemy())
             {
@@ -166,7 +206,8 @@ public class EnemySpawner : MonoBehaviour
 
         Transform spawnPoint;
         var teamId = stats.teamIdOverrride;
-        if (isPvPGame)
+		var gamemode = GameModeSelector.gameModeManager.GameModeStats;
+		if (isPvPGame)
         {
             var AIPerTeam1 = AIPerTeam;
             var AIPerTeam2 = AIPerTeam;
@@ -209,11 +250,16 @@ public class EnemySpawner : MonoBehaviour
             else if (!hasTeam1AIEnemies && hasTeam2AIEnemies)
             {
                 AIPerTeam1 = 0;
-            }
+                
 
+			}
+            if(gamemode.team2LoosesScoreWhenTeam1scores)
+            {
+				AIPerTeam2 = (int)((float)AIPerTeam2 / activeWave.enemyWave.spawnInterval);
+			}
+			
 
-
-            if (team1EnemyCount >= AIPerTeam1 && team2EnemyCount >= AIPerTeam2)
+			if (team1EnemyCount >= AIPerTeam1 && team2EnemyCount >= AIPerTeam2)
             {
                 activeWave.SetDuration(1);
                 return;
@@ -236,7 +282,7 @@ public class EnemySpawner : MonoBehaviour
                
             }
 
-
+            
 
             spawnPoint = GetPVPSpawnPoint(teamId);
         }
@@ -252,8 +298,15 @@ public class EnemySpawner : MonoBehaviour
         Quaternion spawnRotation = spawnPoint.rotation;
         GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
+        
 
-        var equipment = stats.equipment;
+        if (teamId == 0 && gamemode.team2LoosesScoreWhenTeam1scores)
+        {
+            stats = alliesForPVPGames.GetRandomEnemy();
+		}
+
+
+		var equipment = stats.equipment;
         enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
         var health = enemy.GetComponent<CharacterHealth>();
         health.MultiplyHealth(stats.healthMultiplier);
@@ -303,6 +356,14 @@ public class EnemySpawner : MonoBehaviour
 
         PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
 
+
+        int colorIndex = teamId;
+        if (GameModeSelector.gameModeManager.GameModeStats.EnemyTeamsWorkingTogether && teamId != 0)
+        {
+            colorIndex = stats.teamIdOverrride;
+        }
+        PlayerManager.instance.UpdateColorOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), colorIndex);
+
         OnEnemySpawned?.Invoke(enemy);
     }
 
@@ -317,7 +378,7 @@ public class EnemySpawner : MonoBehaviour
 
 public class EnemyWaveInstance
 {
-    Enemy_Wave enemyWave;
+    public Enemy_Wave enemyWave;
     float duration;
     float nextSpawnTimer;
 
@@ -330,6 +391,9 @@ public class EnemyWaveInstance
 
     public void UpdateTimers(float delta, float spawnRateMult)
     {
+        
+
+
         duration -= delta;
         nextSpawnTimer -= delta * spawnRateMult;
 

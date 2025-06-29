@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  damage: 50
-  damageOnShildMultiplier: 1.9
+  damage: 45
+  damageOnShildMultiplier: 2.35
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -103,6 +103,9 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 1
   damageReductionIfObstructed: 0.3
   timeForSelfDestruction: 5
   explosionSound:
@@ -399,6 +402,10 @@ PrefabInstance:
       propertyPath: m_MaxParticleSize
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 3951330854367108389, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4244849121197222172, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: scalingMode
       value: 0
@@ -440,6 +447,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.69411767
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.7372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358718804541679065, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
       value: 0.7
       objectReference: {fileID: 0}
@@ -454,6 +469,14 @@ PrefabInstance:
     - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.8117647
       objectReference: {fileID: 0}
     - target: {fileID: 6814306293647039833, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
@@ -530,6 +553,14 @@ PrefabInstance:
     - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812655650704647926, guid: 9717840783a09714488ffa729e4b8050, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.65882355
       objectReference: {fileID: 0}
     - target: {fileID: 7821638685914312980, guid: 9717840783a09714488ffa729e4b8050, type: 3}
       propertyPath: scalingMode

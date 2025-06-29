@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058328fc45d79ce4c96a84bba54d2389, type: 3}
+  m_Name: KOTH Wave10
+  m_EditorClassIdentifier: 
+  enemyStats:
+  - {fileID: 11400000, guid: 4198c8b4b627c3341a8d65f8b3a46ffc, type: 2}
+  - {fileID: 11400000, guid: e851f00bcc519f845b8b9a81b2d81242, type: 2}
+  - {fileID: 11400000, guid: 827d570780a601e4b8d1282b70c7c947, type: 2}
+  - {fileID: 11400000, guid: fdf65de87c379ce448b2611afda50ccb, type: 2}
+  - {fileID: 11400000, guid: 02cab846f5ab0514ea8810c2df9508fc, type: 2}
+  - {fileID: 11400000, guid: f58a252253212f84d96563ca62e888cb, type: 2}
+  - {fileID: 11400000, guid: 2cabf6e9d85d0534f996d06d27c2fab6, type: 2}
+  spawnInterval: 0.5
+  duration: 999
+  waveEndBrakeTime: 15

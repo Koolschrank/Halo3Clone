@@ -59,7 +59,10 @@ public class Hill : MonoBehaviour
             }
         }
 
-        var dominatingTeam = GetDominatingTeamOnHill(playersOnHill);
+        
+
+
+		var dominatingTeam = GetDominatingTeamOnHill(playersOnHill);
         if (dominatingTeam != teamOnHill)
         {
             SetTeamOnHill(dominatingTeam);
@@ -95,7 +98,19 @@ public class Hill : MonoBehaviour
                 maxIndex = -1;
             }
         }
-        return maxIndex;
+
+        if (teamCounts[0] >0)
+        {
+			var KOTHstats = (GameMode_KingOfTheHill)GameModeSelector.gameModeManager.GameModeStats;
+			if (KOTHstats.team2LoosesScoreWhenTeam1scores)
+			{
+                return 0; // team 1 is always dominating if they have players on the hill
+			}
+		}
+
+		
+
+		return maxIndex;
 
     }
 
