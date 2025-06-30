@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ShildUI : MonoBehaviour
 {
+    [SerializeField]
+	ShildEffectUI shildEffectUI;
 	[SerializeField] PlayerCamera playerCam;
 	[SerializeField] CharacterHealth health;
     [SerializeField] Image shildBar;
@@ -27,7 +29,8 @@ public class ShildUI : MonoBehaviour
     [SerializeField] float shortBarWidth = 500f;
     [SerializeField] float longBarWidth = 1000f;
     [SerializeField] float damageBarTime = 0.2f;
-    [SerializeField] AnimationCurve damageBarVisibilityCurve;
+    [SerializeField] float shildRegenWidth = 0.1f; // width of the shild regen bar in percentage
+	[SerializeField] AnimationCurve damageBarVisibilityCurve;
     float damageBarTimer = 0f;
 
 
@@ -114,8 +117,13 @@ public class ShildUI : MonoBehaviour
     float lastShildValue = 0f;
 	public void UpdateShild(float shildValue)
     {
-        if (lastShildValue>= shildValue)
+        if (lastShildValue> shildValue)
         {
+            shildEffectUI.TriggerEffect();
+            if (shildValue <=0)
+                shildEffectUI.Stop(); // stop effect if shild is depleted
+
+
 			playerCam.EnterShildBloom(); // trigger bloom effect on shild change
 
             if (damageBarTimer<= 0f)
@@ -123,11 +131,17 @@ public class ShildUI : MonoBehaviour
             
             damageBarTimer = damageBarTime;
 		}
+        else if (lastShildValue < shildValue)
+        {
+		    shildBar_damage.fillAmount = shildValue + shildRegenWidth;
+			damageBarTimer = damageBarTime;
+		}
+		
 
-        if (inAlarm && shildValue != 0)
+			if (inAlarm && shildValue != 0)
         {
             inAlarm = false;
-			shildBarColor.color = defaultColor;
+            shildBarColor.color = defaultColor;
         }
         shildBar.fillAmount = shildValue;
 

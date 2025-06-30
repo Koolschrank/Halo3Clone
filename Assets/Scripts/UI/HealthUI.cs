@@ -4,7 +4,8 @@ using Image = UnityEngine.UI.Image;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] Health health;
+    [SerializeField] ShildEffectUI shildEffectUI;
+	[SerializeField] Health health;
     [SerializeField] Image healthBar;
     [SerializeField] PlayerCamera playerCam;
     [SerializeField] AnimationCurve blodyScreenCurve;
@@ -101,7 +102,9 @@ public class HealthUI : MonoBehaviour
         if (healthValue < lastHealthValue)
         {
             playerCam.EnterHealthBloom();
-        }
+            shildEffectUI.TriggerEffect();
+
+		}
 
 
         var valueLost = 1 - healthValue;

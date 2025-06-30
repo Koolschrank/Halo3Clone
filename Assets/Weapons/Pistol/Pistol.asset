@@ -85,7 +85,7 @@ MonoBehaviour:
   damageMultiplier: 0.9
   fireRateMultiplier: 1.25
   inaccuracyMultiplier: 2.5
-  reloadTimeMultiplier: 1.5
+  reloadTimeMultiplier: 1.25
   shootSound:
     Guid:
       Data1: 653112923
