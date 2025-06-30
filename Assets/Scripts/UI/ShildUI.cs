@@ -3,10 +3,15 @@ using UnityEngine.UI;
 
 public class ShildUI : MonoBehaviour
 {
-    [SerializeField] CharacterHealth health;
+	[SerializeField] PlayerCamera playerCam;
+	[SerializeField] CharacterHealth health;
     [SerializeField] Image shildBar;
+	[SerializeField] Image shildBar_damage;
 
-    Color defaultColor;
+	[SerializeField] Image shildBar_damageColor;
+	[SerializeField] Image shildBarColor;
+
+	Color defaultColor;
     [SerializeField] Color[] shildTeamColors;
 
     [SerializeField] Color alarmColor;
@@ -21,10 +26,14 @@ public class ShildUI : MonoBehaviour
 
     [SerializeField] float shortBarWidth = 500f;
     [SerializeField] float longBarWidth = 1000f;
+    [SerializeField] float damageBarTime = 0.2f;
+    [SerializeField] AnimationCurve damageBarVisibilityCurve;
+    float damageBarTimer = 0f;
 
 
-    public void SetWidth(bool lenght)
+	public void SetWidth(bool lenght)
     {
+        return;
         if (lenght)
         {
             shildBarRect.sizeDelta = new Vector2(longBarWidth -20, shildBarRect.sizeDelta.y);
@@ -42,13 +51,13 @@ public class ShildUI : MonoBehaviour
     private void Start()
     {
         if (defaultColor == null)
-            defaultColor = shildBar.color;
+            defaultColor = shildBarColor.color;
     }
 
     public void SetTeamColor(int index)
     {
         defaultColor = shildTeamColors[index];
-        shildBar.color = defaultColor;
+		shildBarColor.color = defaultColor;
     }
 
 
@@ -102,24 +111,46 @@ public class ShildUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void UpdateShild(float shildValue)
+    float lastShildValue = 0f;
+	public void UpdateShild(float shildValue)
     {
+        if (lastShildValue>= shildValue)
+        {
+			playerCam.EnterShildBloom(); // trigger bloom effect on shild change
+
+            if (damageBarTimer<= 0f)
+                shildBar_damage.fillAmount = lastShildValue;
+            
+            damageBarTimer = damageBarTime;
+		}
+
         if (inAlarm && shildValue != 0)
         {
             inAlarm = false;
-            shildBar.color = defaultColor;
+			shildBarColor.color = defaultColor;
         }
         shildBar.fillAmount = shildValue;
-    }
+
+
+		
+        
+
+        lastShildValue = shildValue;
+	}
+
+
 
     public void ShildDepleted()
     {
         inAlarm = true;
         alarmTimer = 0;
         alarmColorOn = true;
-        shildBar.color = alarmColor;
+		shildBarColor.color = alarmColor;
         shildBar.fillAmount = 1;
-    }
+
+        shildBar_damage.fillAmount = 0;
+        damageBarTimer = 0f;
+	}
 
     // update alarm
     private void Update()
@@ -132,9 +163,26 @@ public class ShildUI : MonoBehaviour
                 Color transparent = new Color(0, 0, 0, 0);
                 alarmTimer = 0;
                 alarmColorOn = !alarmColorOn;
-                shildBar.color = alarmColorOn ? alarmColor : transparent;
+                shildBarColor.color = alarmColorOn ? alarmColor : transparent;
             }
         }
+        else
+        {
+            if (damageBarTimer > 0)
+            {
+                damageBarTimer -= Time.deltaTime;
+                float visibility = damageBarVisibilityCurve.Evaluate(1f - (damageBarTimer / damageBarTime));
+
+                var c = shildBar_damageColor.color;
+				shildBar_damageColor.color = new Color(c.r, c.g, c.b, visibility);
+
+            }
+            else             {
+                shildBar_damageColor.color = new Color(shildBar_damageColor.color.r, shildBar_damageColor.color.g, shildBar_damageColor.color.b, 0f);
+                shildBar_damage.fillAmount = 0f;
+			}
+		}
+            
     }
 
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HitScan
   m_EditorClassIdentifier: 
   damage: 11.5
+  damageMultiplierVSAI: 1
   force: 150
   shildDamageMultiplier: 1
   headShotMultiplier: 1

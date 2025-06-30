@@ -335,7 +335,9 @@ public class PlayerMind : MonoBehaviour
     {
         var otherPlayer = obj.GetComponent<PlayerTeam>();
         if (otherPlayer != null) {
-            if (otherPlayer.TeamIndex == team.TeamIndex)
+
+			
+			if (otherPlayer.TeamIndex == team.TeamIndex)
             {
                 OnTeamKill?.Invoke(obj,this);
             }
@@ -349,6 +351,10 @@ public class PlayerMind : MonoBehaviour
             if (mind != null)
             {
                 LogSystem.logSystem.PlayerKilled(playerSettings.playerName,mind.playerSettings.playerName);
+
+                
+
+
             }
         }
         var score = obj.GetComponent<GainScore>();

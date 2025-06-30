@@ -490,10 +490,10 @@ public class PlayerAnimation : MonoBehaviour
     {
         SetShildVisualPower(0);
         shildVisualRecoveryTimer = 0;
-        foreach (var partical in shildBrakeParticals)
-        {
-            partical.gameObject.SetActive(true);
-        }
+        //foreach (var partical in shildBrakeParticals)
+        //{
+        //    partical.gameObject.SetActive(true);
+        //}
         shildDepletedVisual.SetActive(true);
     }
 

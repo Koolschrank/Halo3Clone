@@ -3,19 +3,28 @@ using UnityEngine.UI;
 
 public class CooldownUI : MonoBehaviour
 {
+    [SerializeField] bool replaceImage = true;
     [SerializeField] GameObject barObject;
     [SerializeField] Image[] cooldownBars;
+    [SerializeField]
+    Image[] cooldownColorBar;
     [SerializeField] GameObject selectedObject;
 
     [SerializeField] Image[] sprites;
 
-    Color defaultColor;
+	[SerializeField] Color defaultColor;
     [SerializeField] Color filledColor;
 
     Ability ability;
     public void Setup(Ability ability)
     {
-        this.ability = ability;
+        if (this.ability != null)
+        {
+            this.ability.OnCooldownChanged -= UpdateCooldown;
+            this.ability.OnChargeGained -= SetFilledColor;
+		}
+
+		this.ability = ability;
         ability.OnCooldownChanged += UpdateCooldown;
         ability.OnChargeGained += SetFilledColor;
 
@@ -23,19 +32,28 @@ public class CooldownUI : MonoBehaviour
         
 
         barObject.SetActive(true);
-        foreach (Image sprite in sprites)
+        if (replaceImage)
         {
-            sprite.sprite = ability.abilityData.icon;
-        }
+			foreach (Image sprite in sprites)
+			{
+
+				sprite.sprite = ability.abilityData.icon;
+			}
+		}
+        
 
         foreach (var bar in cooldownBars)
         {
             
 
             bar.fillAmount = 0;
-            bar.color = defaultColor;
         }
-        UpdateCooldown(1);
+        foreach (var bar in cooldownColorBar)
+        {
+            bar.color = defaultColor;
+		}
+
+		UpdateCooldown(1);
     }
 
     public void OnDisable()
@@ -44,15 +62,6 @@ public class CooldownUI : MonoBehaviour
         {
             ability.OnCooldownChanged -= UpdateCooldown;
             ability.OnChargeGained -= SetFilledColor;
-        }
-    }
-
-
-    private void Awake()
-    {
-        foreach (var bar in cooldownBars)
-        {
-            defaultColor = bar.color;
         }
     }
 
@@ -67,22 +76,31 @@ public class CooldownUI : MonoBehaviour
         foreach (var bar in cooldownBars)
         {
             bar.fillAmount = value;
-            if (value == 1)
+           
+        }
+		if (value == 1)
+		{
+            foreach (var bar in cooldownColorBar)
             {
                 bar.color = filledColor;
-            }
-            else
+			}
+		}
+		else
+		{
+            foreach (var bar in cooldownColorBar)
             {
                 bar.color = defaultColor;
-            }
-        }
-    }
+			}
+		}
+	}
 
     public void SetFilledColor(int value)
     {
-        foreach (var bar in cooldownBars)
+        foreach (var bar in cooldownColorBar)
+        {
             bar.color = filledColor;
-    }
+		}
+	}
 
     public void SetSelected(bool selected)
     {

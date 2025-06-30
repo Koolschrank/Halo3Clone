@@ -75,8 +75,14 @@ public class Explosion : MonoBehaviour
                 damagePackage.impactType = ImpactType.wholeBody;
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
 
-                // cast a ray to check if the object is obstructed
-                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, range, wallLayers))
+				float margin = 1f;
+				if (range < margin)
+				{
+					margin = range / 2;
+				}
+
+				// cast a ray to check if the object is obstructed
+				if (Physics.Raycast(transform.position + (margin * direction.normalized), direction.normalized, out RaycastHit hit, range, wallLayers))
                 {
                     if (hit.collider != collider)
                     {
@@ -109,7 +115,7 @@ public class Explosion : MonoBehaviour
                 {
                     margin = range /2;
                 }
-                if (Physics.Raycast(transform.position +(margin * direction.normalized) , direction.normalized, out RaycastHit hit, range, hitLayer))
+                if (Physics.Raycast(transform.position +(margin * direction.normalized) , direction.normalized, out RaycastHit hit, range, wallLayers))
                 {
                     if (hit.collider != collider)
                     {

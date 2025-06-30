@@ -416,12 +416,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8f3527ed15bbd4285a2f1e1adfa31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  replaceImage: 1
   barObject: {fileID: 4014023505681362909}
   cooldownBars:
   - {fileID: 6648583814963219292}
+  cooldownColorBar: []
   selectedObject: {fileID: 3885517545629129299}
   sprites:
   - {fileID: 7242521637961000125}
+  - {fileID: 6648583814963219292}
   - {fileID: 6648583814963219292}
   filledColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8043789476328615241

@@ -95,8 +95,15 @@ public class HealthUI : MonoBehaviour
     }
 
 
-    public void UpdateHealth(float healthValue)
+    float lastHealthValue = 1f; 
+	public void UpdateHealth(float healthValue)
     {
+        if (healthValue < lastHealthValue)
+        {
+            playerCam.EnterHealthBloom();
+        }
+
+
         var valueLost = 1 - healthValue;
         
 
@@ -106,7 +113,8 @@ public class HealthUI : MonoBehaviour
         if (healthValue <= 0) // disable on death
         {
             playerCam.SetVignetteIntensity(0);
-        }
+            playerCam.ExitBloom();
+		}
 
         
         if (showHealthBar)
@@ -128,9 +136,10 @@ public class HealthUI : MonoBehaviour
 
         playerCam.SetVignetteIntensity(blodyScreenCurve.Evaluate(valueLost));
 
-        
-       
-    }
+        lastHealthValue = healthValue;
+
+
+	}
 
     public void Clear()
     {

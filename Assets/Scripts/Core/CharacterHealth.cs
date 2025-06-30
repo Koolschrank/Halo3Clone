@@ -24,6 +24,8 @@ public class CharacterHealth : Health
     [SerializeField] RagdollTrigger ragdollTrigger;
     [SerializeField] PlayerArms playerArms;
     [SerializeField] PlayerBodyStatSheet statSheet;
+    [SerializeField] GameObject shildBreakParticle;
+    [SerializeField] GameObject deathParticle;
 
 
 
@@ -287,7 +289,8 @@ public class CharacterHealth : Health
                 OnShildChanged?.Invoke(0);
                 OnShildDamageTaken?.Invoke();
                 OnShildDepleted?.Invoke();
-                AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
+                shildBreakParticle.SetActive(true);
+				AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
 
                 shildEmptySoundInstance.start();
 
@@ -341,7 +344,10 @@ public class CharacterHealth : Health
     {
         
         base.Die();
-        ragdollTrigger.Activate(damagePackage);
+
+
+        deathParticle.SetActive(true);
+		ragdollTrigger.Activate(damagePackage);
 
         dead = true;
 
