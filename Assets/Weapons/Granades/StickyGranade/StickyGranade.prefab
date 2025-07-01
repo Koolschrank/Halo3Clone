@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1713fd735b7714384ada99685c76d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copyTransitionSpeed: 1
+  copyTransitionSpeed: 1.7
   throwSound:
     Guid:
       Data1: -1854044668
@@ -341,6 +341,9 @@ MonoBehaviour:
   mainGranade: {fileID: 3890480776725438845}
   gameObjectsToEnableOnTimerStart:
   - {fileID: 3823317000831684551}
+  hasChargeObject: 1
+  timeUntilExplosionToSpawnChargeObject: 1.4
+  chargeObjectPrefab: {fileID: 4921346081555748454, guid: fb9ade85743c9e54e9406e5bc07445ee, type: 3}
   bounceSound:
     Guid:
       Data1: 2049862455

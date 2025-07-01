@@ -1,14 +1,43 @@
 using UnityEngine;
+using System.Collections;
 
 public class PickUpSpawn : MonoBehaviour
 {
     [SerializeField] AutoPickUp pickUpPrefab;
     [SerializeField] float spawnTime = 20f;
-    float timer = 0f;
+    float timer = 1f;
 	bool isPickUpActive = false;
+
+	bool started = false;
+	public void Start()
+	{
+		StartCoroutine(StartDelay());
+	}
+
+	IEnumerator StartDelay()
+	{
+		yield return new WaitForSeconds(0.1f);
+		DelayStart();
+	}
+
+	public void DelayStart()
+	{
+		if (!GameModeSelector.gameModeManager.HasWeaponPickups)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		started = true; // Set started to true to indicate the spawn has begun
+	}
+
 
 	private void Update()
 	{
+		if (!started)
+		{
+			return; // Exit if the spawn has not started yet
+		}
+
 		if (isPickUpActive)
 		{
 			return; // Exit if a pick-up is already active

@@ -17,9 +17,13 @@ public class TimedExplosion : MonoBehaviour
 
     float timer;
 
+    [SerializeField] bool hasChargeObject = false;
+    [SerializeField] float timeUntilExplosionToSpawnChargeObject = 1f;
+    [SerializeField] GameObject chargeObjectPrefab;
+    bool chargeObjectSpawned = false;
 
 
-    [Header("Sound")]
+	[Header("Sound")]
     [SerializeField] EventReference bounceSound;
     
 
@@ -86,9 +90,26 @@ public class TimedExplosion : MonoBehaviour
         {
             Explode();
         }
-    }
 
-    void Explode()
+        if (hasChargeObject && !chargeObjectSpawned && timer <= timeUntilExplosionToSpawnChargeObject)
+        {
+            SpawnChargeObject();
+		}
+	}
+
+    void SpawnChargeObject()
+    {
+        if (chargeObjectPrefab != null)
+        {
+            var charge =Instantiate(chargeObjectPrefab, transform);
+            chargeObjectSpawned = true;
+
+
+		}
+		
+	}
+
+	void Explode()
     {
         var explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity) as GameObject;
         if (explosion.TryGetComponent<Explosion>(out Explosion expo))

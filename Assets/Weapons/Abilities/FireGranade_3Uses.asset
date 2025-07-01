@@ -16,4 +16,4 @@ MonoBehaviour:
   cooldownTime: 99999
   maxCharges: 3
   removeWhenEmpty: 1
-  granadeStats: {fileID: 11400000, guid: 83e8cd95a0274d4409bf0f6cdcb00779, type: 2}
+  granadeStats: {fileID: 11400000, guid: f5fb59f6eb0864448b8d41e428d0e648, type: 2}
