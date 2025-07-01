@@ -79,7 +79,7 @@ public class PickUpSpawn : MonoBehaviour
 
 
 	// draw gizmo sphere in editor
-	private void OnDrawGizmosSelected()
+	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere(transform.position, 0.5f); // Adjust the radius as needed

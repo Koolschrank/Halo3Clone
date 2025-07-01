@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3608769182915472673}
   serializedVersion: 2
   m_LocalRotation: {x: -0.3842889, y: 0.5959985, z: 0.38987738, w: 0.58745515}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0.246, z: 0}
   m_LocalScale: {x: 280, y: 279.99988, z: 279.99988}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48,92 +48,6 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3608769182915472673}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 3357d75e18eb11b4c92cf3b4dd33fd7d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5885346118899088999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2895507612538323610}
-  - component: {fileID: 1714571475770450484}
-  - component: {fileID: 1506317512563875423}
-  m_Layer: 0
-  m_Name: Fire Granade (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2895507612538323610
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885346118899088999}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.3842889, y: 0.5959985, z: 0.38987738, w: 0.58745515}
-  m_LocalPosition: {x: 0.291, y: -0.356, z: 0}
-  m_LocalScale: {x: 280, y: 279.99988, z: 279.99988}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3117479272796477236}
-  m_LocalEulerAnglesHint: {x: -66.382, y: 90.827, z: 0}
---- !u!33 &1714571475770450484
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885346118899088999}
-  m_Mesh: {fileID: -8031502829385147155, guid: 3ca8f11cc7fca9747b2bf3be79dac021, type: 3}
---- !u!23 &1506317512563875423
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885346118899088999}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -285,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 6927839776043896326}
   serializedVersion: 2
   m_LocalRotation: {x: -0.3842889, y: 0.5959985, z: 0.38987738, w: 0.58745515}
-  m_LocalPosition: {x: -0.37, y: -0.33, z: 0}
+  m_LocalPosition: {x: -0.226, y: -0.169, z: 0}
   m_LocalScale: {x: 280, y: 279.99988, z: 279.99988}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -540,9 +454,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4680306686699878435, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3313701085971357647}
-    - targetCorrespondingSourceObject: {fileID: 4680306686699878435, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2895507612538323610}
     - targetCorrespondingSourceObject: {fileID: 4680306686699878435, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8069045301205184656}
