@@ -82,7 +82,7 @@ public class Explosion : MonoBehaviour
 				}
 
 				// cast a ray to check if the object is obstructed
-				if (Physics.Raycast(transform.position + (margin * direction.normalized), direction.normalized, out RaycastHit hit, range, wallLayers))
+				if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance, wallLayers))
                 {
                     if (hit.collider != collider)
                     {
@@ -115,7 +115,7 @@ public class Explosion : MonoBehaviour
                 {
                     margin = range /2;
                 }
-                if (Physics.Raycast(transform.position +(margin * direction.normalized) , direction.normalized, out RaycastHit hit, range, wallLayers))
+                if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance, wallLayers))
                 {
                     if (hit.collider != collider)
                     {

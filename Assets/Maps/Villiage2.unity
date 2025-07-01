@@ -1771,7 +1771,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 17d1adcd0749c26429114851868ecbf1, type: 3}
   spawnTime: 120
-  magazines: 3
+  magazines: 4
 --- !u!1 &231015948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
   spawnTime: 120
-  magazines: 2
+  magazines: 3
 --- !u!1001 &396482788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11273,7 +11273,7 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 875420519fd23124c9872c57b921a743, type: 3}
   spawnTime: 120
-  magazines: 5
+  magazines: 6
 --- !u!1001 &1293158909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11909,6 +11909,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4764293196696219720, guid: ad36c3d044d312e44a986a07f2c7f0b2, type: 3}
   m_PrefabInstance: {fileID: 1412152739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1415156094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1415156095}
+  - component: {fileID: 1415156096}
+  m_Layer: 0
+  m_Name: Plasma grande
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1415156095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415156094}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.31224146, z: -0, w: 0.9500028}
+  m_LocalPosition: {x: -5.24, y: -4.9, z: -3.022}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107224114}
+  m_LocalEulerAnglesHint: {x: 0, y: 36.389, z: 0}
+--- !u!114 &1415156096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415156094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9898cfd34e6c704468511d9e1ba78832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpPrefab: {fileID: 3936383614693992749, guid: 5db25a7b64e1e0d4ea8ed89392f816d7, type: 3}
+  spawnTime: 30
 --- !u!1001 &1423869257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17427,6 +17473,7 @@ Transform:
   - {fileID: 1443288513}
   - {fileID: 1020963089}
   - {fileID: 1346299931}
+  - {fileID: 1415156095}
   - {fileID: 744746396}
   - {fileID: 1139755185}
   - {fileID: 789833771}

@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 public class AutoPickUp : MonoBehaviour
 {
-    public virtual void PickUp(GameObject player)
+    public Action OnPickUp;
+
+	public virtual void PickUp(GameObject player)
     {
        
 
         Destroy(gameObject);
-    }
+        OnPickUp?.Invoke();
+	}
 }

@@ -4,7 +4,8 @@ using FMODUnity;
 public class TimedExplosion : MonoBehaviour
 {
     [SerializeField] bool startTimerOnFirstCollision = true;
-    [SerializeField] float collisionCooldown = 0.05f;
+    [SerializeField] bool stickOnCollision = false;
+	[SerializeField] float collisionCooldown = 0.05f;
     float spawnTime;
 
     bool timerActive = false;
@@ -63,7 +64,15 @@ public class TimedExplosion : MonoBehaviour
             timerActive = true;
 
         }
-    }
+
+        if (stickOnCollision)
+        {
+            // stick to the object
+            transform.SetParent(collision.transform);
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+        
+	}
 
     void Update()
     {

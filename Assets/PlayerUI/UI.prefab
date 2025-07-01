@@ -404,8 +404,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1242805700049856749}
   - {fileID: 3976382566544676904}
+  - {fileID: 1242805700049856749}
   - {fileID: 3995783579699978989}
   - {fileID: 8307079327624337307}
   - {fileID: 3745635187134044286}
@@ -550,6 +550,8 @@ MonoBehaviour:
   - {fileID: 6582827337167580658}
   - {fileID: 620933063364575415}
   - {fileID: 8948037243579771589}
+  hasPermanentObject: 0
+  permanentObject: {fileID: 0}
 --- !u!1 &969742393425230487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,6 +1774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdbb3a859d42fa42ae2cdea29dff302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shildEffectUI: {fileID: 0}
   health: {fileID: 0}
   healthBar: {fileID: 7909987892742073277}
   playerCam: {fileID: 0}

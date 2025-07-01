@@ -5129,10 +5129,10 @@ MonoBehaviour:
   - Streets
   - Villiage2
   - Island2
-  - VilliageVSAI
+  - Streets2
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   mapButtonParent: {fileID: 9380848}
-  buttonSpacing: -170
+  buttonSpacing: -100
 --- !u!114 &1572874593
 MonoBehaviour:
   m_ObjectHideFlags: 0

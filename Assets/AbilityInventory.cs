@@ -24,6 +24,9 @@ public class AbilityInventory : MonoBehaviour
 
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
 
+    public bool alwaysSwitchToNewestAbility = false;
+    public bool alwaysReplaceSecondAbility = false;
+
     private void Awake()
     {
         if (playerBodyStatSheet != null)
@@ -77,11 +80,30 @@ public class AbilityInventory : MonoBehaviour
 
     public void AddAbility(AbilityData abilityData)
     {
-        var ability = new Ability(abilityData);
+		if (alwaysReplaceSecondAbility && abilities.Count == 2)
+		{
+            RemoveAbility(1);
+		}
+
+
+		var ability = new Ability(abilityData);
         abilities.Add(ability);
         OnAbilityAdded?.Invoke(ability, abilities.Count - 1);
-        SelectNextAbilityWithChages();
-    }
+		if (alwaysSwitchToNewestAbility)
+		{
+			currentAbilityIndex = abilities.Count - 1;
+			OnAbilityIndexChanged?.Invoke(currentAbilityIndex);
+			LastUsedAbility = currentAbilityIndex;
+		}
+	}
+
+    public void RemoveAbility(int index)
+    {
+        var ability = abilities[index];
+		abilities.RemoveAt(index);
+
+		OnAbilityRemoved?.Invoke(ability, index);
+	}
 
     public void RemoveAbility(Ability ability)
     {
@@ -109,7 +131,8 @@ public class AbilityInventory : MonoBehaviour
         {
             ability.UpdateCooldown(deltaTime);
         }
-        SelectNextAbilityWithChages();
+        if (!alwaysSwitchToNewestAbility)
+            SelectNextAbilityWithChages();
     }
 
     public bool CanUseCurrentAbility()
@@ -161,6 +184,16 @@ public class AbilityInventory : MonoBehaviour
         currentAbility.UseAbility();
         LastUsedAbility = currentAbilityIndex;
         SelectNextAbilityWithChages();
+
+
+        if (currentAbility.ShouldRemoveWhenEmpty())
+        {
+            RemoveAbility(currentAbility);
+			currentAbilityIndex = 0;
+            OnAbilityIndexChanged?.Invoke(currentAbilityIndex);
+			LastUsedAbility = currentAbilityIndex;
+
+		}
        
     }
 
@@ -246,7 +279,6 @@ public class Ability
 
         if (cooldownTime > 0)
         {
-            Debug.Log("Cooldown time: " + cooldownTime);
             cooldownTime -= deltaTime;
             if (cooldownTime < 0)
             {
@@ -257,7 +289,6 @@ public class Ability
 
         if (cooldownTime <= 0 && charges < abilityData.maxCharges)
         {
-            Debug.Log("Cooldown finished for ability: " + abilityData.name);
             cooldownTime = 0;
             charges++;
             OnChargeGained?.Invoke(charges);
@@ -266,9 +297,12 @@ public class Ability
         }
     }
 
-    
+    public bool ShouldRemoveWhenEmpty()
+    {
+        return abilityData.removeWhenEmpty && charges <= 0;
+	}
 
-    public void UseAbility()
+	public void UseAbility()
     {
         Debug.Log("Using ability: " + abilityData.name);
         if (charges > 0)
@@ -277,6 +311,8 @@ public class Ability
             OnChargeLost?.Invoke(charges);
             cooldownTime = abilityData.cooldownTime;
             OnCooldownChanged?.Invoke(cooldownTime);
+
+            
             
         }
     }

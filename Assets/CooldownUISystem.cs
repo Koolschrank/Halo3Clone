@@ -6,7 +6,10 @@ public class CooldownUISystem : MonoBehaviour
 {
     [SerializeField] GameObject cooldownUIPrefab;
     [SerializeField] Transform[] cooldownUIParent;
-    List<CooldownUI> cooldownUIs = new List<CooldownUI>();
+
+    [SerializeField] bool hasPermanentObject = false;
+    public CooldownUI permanentObject;
+	List<CooldownUI> cooldownUIs = new List<CooldownUI>();
 
     AbilityInventory abilityInventory;
 
@@ -20,6 +23,8 @@ public class CooldownUISystem : MonoBehaviour
             this.abilityInventory.OnAbilityAdded -= OnAbilityAdded;
             this.abilityInventory.OnAbilityRemoved -= OnAbilityRemoved;
             this.abilityInventory.OnAbilityIndexChanged -= UpdateSelection;
+
+
         }
 
         foreach (var item in cooldownUIs)
@@ -49,6 +54,14 @@ public class CooldownUISystem : MonoBehaviour
 
         UpdatePositions();
 
+        if (hasPermanentObject && index == 0)
+        {
+            permanentObject.Setup(ability);
+
+		}
+
+
+
     }
 
     private void OnAbilityRemoved(Ability ability, int index)
@@ -73,22 +86,22 @@ public class CooldownUISystem : MonoBehaviour
         }
         else if (cooldownUIs.Count == 2)
         {
-            cooldownUIs[0].transform.SetParent(cooldownUIParent[1]);
-            var rectTransform0 = cooldownUIs[0].GetComponent<RectTransform>();
-            rectTransform0.localPosition = Vector3.zero;
-            cooldownUIs[1].transform.SetParent(cooldownUIParent[0]);
-            var rectTransform1 = cooldownUIs[1].GetComponent<RectTransform>();
-            rectTransform1.localPosition = Vector3.zero;
-        }
-        else if (cooldownUIs.Count == 3)
-        {
-            cooldownUIs[0].transform.SetParent(cooldownUIParent[2]);
+            cooldownUIs[0].transform.SetParent(cooldownUIParent[0]);
             var rectTransform0 = cooldownUIs[0].GetComponent<RectTransform>();
             rectTransform0.localPosition = Vector3.zero;
             cooldownUIs[1].transform.SetParent(cooldownUIParent[1]);
             var rectTransform1 = cooldownUIs[1].GetComponent<RectTransform>();
             rectTransform1.localPosition = Vector3.zero;
-            cooldownUIs[2].transform.SetParent(cooldownUIParent[0]);
+        }
+        else if (cooldownUIs.Count == 3)
+        {
+            cooldownUIs[0].transform.SetParent(cooldownUIParent[0]);
+            var rectTransform0 = cooldownUIs[0].GetComponent<RectTransform>();
+            rectTransform0.localPosition = Vector3.zero;
+            cooldownUIs[1].transform.SetParent(cooldownUIParent[1]);
+            var rectTransform1 = cooldownUIs[1].GetComponent<RectTransform>();
+            rectTransform1.localPosition = Vector3.zero;
+            cooldownUIs[2].transform.SetParent(cooldownUIParent[2]);
             var rectTransform2 = cooldownUIs[2].GetComponent<RectTransform>();
             rectTransform2.localPosition = Vector3.zero;
         }

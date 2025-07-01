@@ -142,7 +142,8 @@ public class ShildUI : MonoBehaviour
         {
             inAlarm = false;
             shildBarColor.color = defaultColor;
-        }
+			shildBar.gameObject.SetActive(true);
+		}
         shildBar.fillAmount = shildValue;
 
 
@@ -177,7 +178,18 @@ public class ShildUI : MonoBehaviour
                 Color transparent = new Color(0, 0, 0, 0);
                 alarmTimer = 0;
                 alarmColorOn = !alarmColorOn;
-                shildBarColor.color = alarmColorOn ? alarmColor : transparent;
+                if (alarmColorOn)
+                {
+                    shildBarColor.color = alarmColor;
+                    shildBar.gameObject.SetActive(true);
+
+				}
+                else
+                {
+					shildBarColor.color = new Color(0, 0, 0, 0);
+                    shildBar.gameObject.SetActive(false);
+				}
+
             }
         }
         else

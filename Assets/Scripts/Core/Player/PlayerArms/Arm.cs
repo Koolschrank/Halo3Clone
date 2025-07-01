@@ -691,7 +691,8 @@ public class Arm : MonoBehaviour
         {
             IfZoomedInExitZoom();
             var ability = abilityInventory.GetCurrentAbility().abilityData as AbilityData_Granade;
-            if (ability == null)
+            Debug.Log(ability.name);
+			if (ability == null)
             {
                 Debug.LogError("Ability is not a granade");
                 return;
@@ -712,7 +713,7 @@ public class Arm : MonoBehaviour
             OnGranadeThrowStarted?.Invoke(ability.granadeStats, granadeThrowTimer);
             
            
-            abilityInventory.UseSelectedIndex();
+           
         }
     }
 

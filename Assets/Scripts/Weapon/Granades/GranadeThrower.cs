@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Playables;
 using UnityEngine;
 
 public class GranadeThrower : MonoBehaviour
@@ -10,8 +11,9 @@ public class GranadeThrower : MonoBehaviour
     float throwDelay = 0f;
     GranadeStats granadeStats = null;
     [SerializeField] Transform mainTransform;
+    [SerializeField] AbilityInventory abilityInventory;
 
-    public void ThrowGranadeStart(GranadeStats granadeStats , float timeMultiplier)
+	public void ThrowGranadeStart(GranadeStats granadeStats , float timeMultiplier)
     {
         this.granadeStats = granadeStats;
         throwDelay = granadeStats.ThrowDelay * timeMultiplier;
@@ -54,7 +56,8 @@ public class GranadeThrower : MonoBehaviour
     {
         if (granadeStats == null) return null;
 
-        GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation) as GameObject;
+		Debug.Log(granadeStats.name);
+		GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation) as GameObject;
 
         Rigidbody rb = granade.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * granadeStats.ThrowForce, ForceMode.Impulse);
@@ -67,8 +70,8 @@ public class GranadeThrower : MonoBehaviour
             granadeScript.SetOwner(mainTransform.gameObject);
 
         }
-
-        return granade;
+		abilityInventory.UseSelectedIndex();
+		return granade;
     }
 
 

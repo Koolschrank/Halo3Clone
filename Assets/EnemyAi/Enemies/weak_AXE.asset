@@ -43,6 +43,6 @@ MonoBehaviour:
       shildPopDamageNegation: 30
   healthMultiplier: 1
   shildMultiplier: 1
-  speedMultiplier: 1
+  speedMultiplier: 0.6
   teamIdOverrride: 6
   scoreForKill: 100

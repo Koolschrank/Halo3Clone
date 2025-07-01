@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,23 +16,32 @@ public class CooldownUI : MonoBehaviour
 	[SerializeField] Color defaultColor;
     [SerializeField] Color filledColor;
 
-    Ability ability;
+    [SerializeField] bool updateCharges = false;
+    [SerializeField] TextMeshProUGUI chargeText;
+
+	Ability ability;
     public void Setup(Ability ability)
     {
         if (this.ability != null)
         {
             this.ability.OnCooldownChanged -= UpdateCooldown;
             this.ability.OnChargeGained -= SetFilledColor;
+            this.ability.OnChargeGained -= UpdateCharge;
+            this.ability.OnChargeLost -= UpdateCharge;
 		}
 
 		this.ability = ability;
         ability.OnCooldownChanged += UpdateCooldown;
         ability.OnChargeGained += SetFilledColor;
+        ability.OnChargeGained += UpdateCharge;
+        ability.OnChargeLost += UpdateCharge;
+
+        UpdateCharge(ability.charges);
 
 
-        
 
-        barObject.SetActive(true);
+
+		barObject.SetActive(true);
         if (replaceImage)
         {
 			foreach (Image sprite in sprites)
@@ -44,8 +54,6 @@ public class CooldownUI : MonoBehaviour
 
         foreach (var bar in cooldownBars)
         {
-            
-
             bar.fillAmount = 0;
         }
         foreach (var bar in cooldownColorBar)
@@ -56,7 +64,21 @@ public class CooldownUI : MonoBehaviour
 		UpdateCooldown(1);
     }
 
-    public void OnDisable()
+
+	public void UpdateCharge(int amont)
+        {
+        
+		if (!updateCharges) return;
+		
+		if (chargeText != null)
+        {
+			Debug.Log("UpdateCharge: " + ability.charges.ToString());
+			chargeText.text = ability.charges.ToString();
+
+		}
+	}
+
+	public void OnDisable()
     {
         if (ability != null)
         {
@@ -73,25 +95,37 @@ public class CooldownUI : MonoBehaviour
 
     public void UpdateCooldown(float value)
     {
-        foreach (var bar in cooldownBars)
+        if (ability.charges == 0)
         {
-            bar.fillAmount = value;
-           
-        }
-		if (value == 1)
-		{
+			foreach (var bar in cooldownBars)
+			{
+				bar.fillAmount = value;
+
+			}
+		}
+        else
+        {
+			foreach (var bar in cooldownBars)
+			{
+				bar.fillAmount = 1;
+
+			}
+		}
+
+        if (value == 1 || ability.charges > 0)
+        {
             foreach (var bar in cooldownColorBar)
             {
                 bar.color = filledColor;
-			}
-		}
-		else
-		{
+            }
+        }
+        else
+        {
             foreach (var bar in cooldownColorBar)
             {
                 bar.color = defaultColor;
-			}
-		}
+            }
+        }
 	}
 
     public void SetFilledColor(int value)
