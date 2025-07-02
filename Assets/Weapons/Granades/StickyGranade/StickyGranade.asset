@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwDelay: 0.3
   throwTime: 0.75
-  throwAngle: 0.25
-  throwForce: 11
+  throwAngle: 0.2
+  throwForce: 11.5
   granadePrefab: {fileID: 5187455782990611905, guid: 9b8288614a15d114eb42fa9ff7746a3b, type: 3}
   granadeClonePrefab: {fileID: 5187455782990611905, guid: 8558fbcc24732214197c1b59b65e2d07, type: 3}

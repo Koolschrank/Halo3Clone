@@ -5,7 +5,7 @@ public class PickUpSpawn : MonoBehaviour
 {
     [SerializeField] AutoPickUp pickUpPrefab;
     [SerializeField] float spawnTime = 20f;
-    float timer = 1f;
+    float timer = 1.1f;
 	bool isPickUpActive = false;
 
 	bool started = false;
@@ -16,7 +16,7 @@ public class PickUpSpawn : MonoBehaviour
 
 	IEnumerator StartDelay()
 	{
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(1f);
 		DelayStart();
 	}
 

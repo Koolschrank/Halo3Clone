@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7560da4ae543c414688ef0922c10bd08, type: 2}
+  - {fileID: 2100000, guid: f8b8eb741ed507a4e8f90b73c1c8fa03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7560da4ae543c414688ef0922c10bd08, type: 2}
+  - {fileID: 2100000, guid: f8b8eb741ed507a4e8f90b73c1c8fa03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -301,7 +301,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0, g: 0.38964462, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.96224594, a: 1}
   m_Intensity: 4
   m_Range: 10
   m_SpotAngle: 30
@@ -441,7 +441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5767244253329865065, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
       propertyPath: m_Name
-      value: GranadePickUp
+      value: PoisonGranade
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163433542252383221, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 102600236551496581, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
@@ -487,4 +491,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f0e1497a6e1964d83757502a798a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityData: {fileID: 11400000, guid: 008458124efb1e744b09dd70c957e11f, type: 2}
+  abilityData: {fileID: 11400000, guid: 9dabb750be7ff8840bdad34244bac8a2, type: 2}

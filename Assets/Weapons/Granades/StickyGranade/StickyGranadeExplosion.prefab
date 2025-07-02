@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 6
-  damage: 130
+  damage: 200
   damageOnShildMultiplier: 2
   damageFalloff:
     serializedVersion: 2
@@ -56,17 +56,26 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.0033340454
       value: 1.0065918
-      inSlope: -1.0127952
-      outSlope: -1.0127952
+      inSlope: -6.501001
+      outSlope: -6.501001
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 0.06567582
+      value: 0.60130787
+      inSlope: -0.55946964
+      outSlope: -0.55946964
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.61820805
+      outWeight: 0.1977263
+    - serializedVersion: 3
       time: 1
       value: -0.0028266907
-      inSlope: -1.0127952
-      outSlope: -1.0127952
+      inSlope: -0.64660054
+      outSlope: -0.64660054
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -387,6 +396,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 198190743066484924}
     m_Modifications:
     - target: {fileID: 978895403509120903, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978895403509120903, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
+      propertyPath: m_Color.g
+      value: 0.028196335
+      objectReference: {fileID: 0}
+    - target: {fileID: 978895403509120903, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 978895403509120903, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978895403509120903, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
       propertyPath: m_BoundingSphereOverride.x
       value: 5.32e-43
       objectReference: {fileID: 0}
@@ -417,6 +442,10 @@ PrefabInstance:
     - target: {fileID: 3883788703181803750, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
       propertyPath: simulationSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032571370275434739, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4336402204210802743, guid: 650a414192aebd84d81e5cc4611a8618, type: 3}
       propertyPath: m_Name

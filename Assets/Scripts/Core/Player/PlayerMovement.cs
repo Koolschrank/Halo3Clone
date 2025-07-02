@@ -80,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     float moveSpeedStatSheetMultiplier = 1f; // multiplier for the move speed, used by modifiers and other things
+    [NonSerialized]
+    public float aura_moveSpeedReduction = 0f;
 
     public void MultiplyMaxMoveSpeed(float multiplier)
     {
@@ -233,7 +235,14 @@ public class PlayerMovement : MonoBehaviour
                 speedMultiplier *= moveSpeedCrouchMultiplier;
             }
 
-            moveVelocity = Vector3.MoveTowards(moveVelocity, move * speedMultiplier * moveSpeedStatSheetMultiplier, acceleration * Time.deltaTime);
+            var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
+            if (aura_moveSpeedReduction != 0)
+            {
+                ideal *= 1 - aura_moveSpeedReduction;
+			}
+
+
+			moveVelocity = Vector3.MoveTowards(moveVelocity, ideal, acceleration * Time.deltaTime);
         }
 
         
@@ -283,7 +292,14 @@ public class PlayerMovement : MonoBehaviour
         var rollSpeed = rollCurve.Evaluate(1 - (rollTimer / rollTime)); // evaluate the curve based on the remaining time
 
         head.transform.position = Vector3.MoveTowards(head.transform.position, head_crouchPosition.position, crouchSpeed * Time.deltaTime);
-        moveVelocity = Vector3.MoveTowards(moveVelocity, rollSpeed * rollDirection * MaxMoveSpeed * moveSpeedRoolMultiplier, acceleration_roll * Time.deltaTime);
+
+        var ideal = rollSpeed * rollDirection * MaxMoveSpeed * moveSpeedRoolMultiplier;
+		if (aura_moveSpeedReduction != 0)
+		{
+			ideal *= 1 - aura_moveSpeedReduction;
+		}
+
+		moveVelocity = Vector3.MoveTowards(moveVelocity, ideal, acceleration_roll * Time.deltaTime);
 
         if (cc.height != playerCrouchingHitbox.Height || cc.center.y != playerCrouchingHitbox.Offset)
         {

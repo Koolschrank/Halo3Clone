@@ -6,6 +6,7 @@ public class ShildUI : MonoBehaviour
     [SerializeField]
 	ShildEffectUI shildEffectUI;
 
+    [SerializeField] ShildEffectUI healAuraEffect;
 	[SerializeField] ShildEffectUI shildHealEffectUI;
 	[SerializeField] PlayerCamera playerCam;
 	[SerializeField] CharacterHealth health;
@@ -76,6 +77,7 @@ public class ShildUI : MonoBehaviour
             this.health.OnShildEnabled -= EnableUI;
             this.health.OnMaxShildChanged -= UpdateMaxShildUI;
             this.health.OnShildHealStarted -= ShildRechargeStarted;
+            this.health.OnInHealthAura -= TriggerHealAura;
 
 		}
 
@@ -87,12 +89,21 @@ public class ShildUI : MonoBehaviour
         health.OnShildEnabled += EnableUI;
         health.OnMaxShildChanged += UpdateMaxShildUI;
         health.OnShildHealStarted += ShildRechargeStarted;
+        health.OnInHealthAura += TriggerHealAura;
 		UpdateShild(health.ShildPercentage);
 
         SetWidth( health.MaxShild > 55f);
 
 
     }
+
+    public void TriggerHealAura()
+    {
+		healAuraEffect.TriggerEffect();
+
+	}
+
+
 
     public void ShildRechargeStarted()
     {

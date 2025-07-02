@@ -443,6 +443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseGranadePickup
       objectReference: {fileID: 0}
+    - target: {fileID: 9163433542252383221, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 102600236551496581, guid: 36bc2fa1552e0dc45b4f842460629a78, type: 3}
     m_RemovedGameObjects:

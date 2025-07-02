@@ -50,6 +50,7 @@ public class CharacterHealth : Health
     public Action OnShildRechargeStarted;
 
     public Action OnShildHealStarted;
+    public Action OnInHealthAura;
     
 
 
@@ -58,6 +59,15 @@ public class CharacterHealth : Health
     public float MaxShild => maxShild * maxShildMultiplier;
 
     public RagdollTrigger RagdollTrigger => ragdollTrigger;
+
+
+    [NonSerialized]
+    public float aura_DamageReduction = 0.0f;
+	[NonSerialized]
+	public float aura_shildRegenDelay = 0.0f;
+    [NonSerialized]
+    public float aura_poisonDamage = 0.0f;
+
 
 	public void MultiplyHealth(float multiplier)
     {
@@ -97,6 +107,12 @@ public class CharacterHealth : Health
 
 
     }
+
+    public void InShild()
+    {
+        OnInHealthAura?.Invoke();
+
+	}
 
     public void IncreaseMaxHealth(float amount)
     {
@@ -175,7 +191,7 @@ public class CharacterHealth : Health
         base.Update();
         if (shildRegenTimer > 0 && hasShild)
         {
-            shildRegenTimer -= Time.deltaTime;
+            shildRegenTimer -= Time.deltaTime  * (1 + aura_shildRegenDelay );
             shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
             if (shildRegenTimer <= 0)
             {
@@ -203,8 +219,34 @@ public class CharacterHealth : Health
 
         }
 
+
+        if (aura_poisonDamage != 0)
+        {
+            var damagePackage = new DamagePackage
+            {
+                damageAmount = aura_poisonDamage * Time.deltaTime,
+                owner = ownerOfLastDamage,
+                canHeadShotShild = false,
+                headShotMultiplier = 1f,
+                shildDamageMultiplier = 1f
+            };
+            damagePackage.noScreenShake = true; // no screen shake for poison damage
+
+			TakeDamage(damagePackage);
+		}
         
     }
+
+    public void GainShild(float amount)
+    {
+        currentShild += amount;
+		currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
+		OnShildChanged?.Invoke(ShildPercentage);
+
+        shildRegenTimer = 0;
+		shildRechargeSoundInstance.start();
+		OnShildHealStarted?.Invoke();
+	}
 
     public void SetHealthOverride(HealthOverride newHealth)
     {
@@ -252,7 +294,9 @@ public class CharacterHealth : Health
         return headShotArea.transform;
     }
 
-    float firstShotTime = 0;
+
+    GameObject ownerOfLastDamage = null;
+	float firstShotTime = 0;
 
     public override void TakeDamage(DamagePackage damagePackage)
     {
@@ -262,7 +306,7 @@ public class CharacterHealth : Health
         }
 
         float damageReduction = playerArms.DamageReduction;
-        float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction);
+        float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
 
         TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)
@@ -278,7 +322,8 @@ public class CharacterHealth : Health
             }
         }
 
-        OnDamageTakenUnityEvent?.Invoke();
+        if (!damagePackage.noScreenShake)
+            OnDamageTakenUnityEvent?.Invoke();
         
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -342,8 +387,10 @@ public class CharacterHealth : Health
         }
 
         OnDamageTaken?.Invoke(damagePackage);
+		ownerOfLastDamage = damagePackage.owner;
 
-    }
+
+	}
 
     bool dead = false;
     protected void Die(DamagePackage damagePackage)

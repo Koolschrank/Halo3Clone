@@ -25,6 +25,8 @@ public class DamageIndicatorUI : MonoBehaviour
 
     public void AddDamageIndicator(DamagePackage damagePackage)
     {
+        if (damagePackage.noScreenShake) return;
+
         
         if (!CheckIfHitIndicatorIsNeeded(damagePackage.origin, transform))
         {
