@@ -8,6 +8,7 @@ public class ShildEffectUI : MonoBehaviour
 	[SerializeField] float alphaPower = 1f;
 	[SerializeField] AnimationCurve alphaCurve;
 	[SerializeField] Image image;
+	
 	float timer = 0f;
 
 	public void Stop()

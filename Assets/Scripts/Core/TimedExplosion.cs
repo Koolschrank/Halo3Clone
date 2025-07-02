@@ -71,9 +71,20 @@ public class TimedExplosion : MonoBehaviour
 
         if (stickOnCollision)
         {
-            // stick to the object
-            transform.SetParent(collision.transform);
-            GetComponent<Rigidbody>().isKinematic = true;
+			GetComponent<Rigidbody>().isKinematic = true;
+			if (collision.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth body))
+            {
+               var bodyPart = body.RagdollTrigger.GetClosesRigidbody(transform.position);
+                transform.SetParent(bodyPart.transform);
+
+			}
+            else
+            {
+				// stick to the object
+				transform.SetParent(collision.transform);
+				
+			}
+                
         }
         
 	}

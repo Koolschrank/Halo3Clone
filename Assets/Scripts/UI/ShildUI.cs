@@ -5,6 +5,8 @@ public class ShildUI : MonoBehaviour
 {
     [SerializeField]
 	ShildEffectUI shildEffectUI;
+
+	[SerializeField] ShildEffectUI shildHealEffectUI;
 	[SerializeField] PlayerCamera playerCam;
 	[SerializeField] CharacterHealth health;
     [SerializeField] Image shildBar;
@@ -71,7 +73,11 @@ public class ShildUI : MonoBehaviour
             this.health.OnShildChanged -= UpdateShild;
             this.health.OnShildDepleted -= ShildDepleted;
             this.health.OnShildDisabled -= DisableUI;
-        }
+            this.health.OnShildEnabled -= EnableUI;
+            this.health.OnMaxShildChanged -= UpdateMaxShildUI;
+            this.health.OnShildHealStarted -= ShildRechargeStarted;
+
+		}
 
 
         this.health = health;
@@ -80,13 +86,19 @@ public class ShildUI : MonoBehaviour
         health.OnShildDisabled += DisableUI;
         health.OnShildEnabled += EnableUI;
         health.OnMaxShildChanged += UpdateMaxShildUI;
-
-        UpdateShild(health.ShildPercentage);
+        health.OnShildHealStarted += ShildRechargeStarted;
+		UpdateShild(health.ShildPercentage);
 
         SetWidth( health.MaxShild > 55f);
 
 
     }
+
+    public void ShildRechargeStarted()
+    {
+        shildHealEffectUI.TriggerEffect();
+
+	}
 
     public void UpdateMaxShildUI(float maxShildValue)
     {
@@ -120,7 +132,9 @@ public class ShildUI : MonoBehaviour
         if (lastShildValue> shildValue)
         {
             shildEffectUI.TriggerEffect();
-            if (shildValue <=0)
+			shildHealEffectUI.Stop(); // stop heal effect if shild is damaged
+
+			if (shildValue <=0)
                 shildEffectUI.Stop(); // stop effect if shild is depleted
 
 

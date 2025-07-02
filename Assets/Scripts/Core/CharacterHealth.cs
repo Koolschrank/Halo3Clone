@@ -48,6 +48,8 @@ public class CharacterHealth : Health
     public Action OnShildDamageTaken;
     public Action OnHealthDamageTaken;
     public Action OnShildRechargeStarted;
+
+    public Action OnShildHealStarted;
     
 
 
@@ -55,7 +57,9 @@ public class CharacterHealth : Health
 
     public float MaxShild => maxShild * maxShildMultiplier;
 
-    public void MultiplyHealth(float multiplier)
+    public RagdollTrigger RagdollTrigger => ragdollTrigger;
+
+	public void MultiplyHealth(float multiplier)
     {
         maxHeath *= multiplier;
         currentHeath = maxHeath;
@@ -176,7 +180,9 @@ public class CharacterHealth : Health
             if (shildRegenTimer <= 0)
             {
                 shildRechargeSoundInstance.start();
-            }
+                OnShildHealStarted?.Invoke();
+
+			}
         }
         else if (currentShild < MaxShild && hasShild)
         {
