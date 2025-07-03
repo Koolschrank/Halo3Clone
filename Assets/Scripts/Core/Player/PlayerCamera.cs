@@ -12,6 +12,7 @@ public class PlayerCamera : MonoBehaviour
 
     [SerializeField] Color healthBloomColor;
     [SerializeField] Color shildBloomColor;
+    [SerializeField] Color armorBloomColor;
 	[SerializeField] float shildBloomIntensity = 0.5f;
     [SerializeField] float shildBloomTime = 0.5f;
     [SerializeField] AnimationCurve shildBloomCurve;
@@ -83,11 +84,19 @@ public class PlayerCamera : MonoBehaviour
 			return;
 		volume.profile.TryGet(out Bloom bloom);
 		bloom.tint.value = shildBloomColor;
+	}
 
+	public void EnterArmorBloom()
+	{
+		bloomTimer = shildBloomTime;
+		if (volume == null)
+			return;
+		volume.profile.TryGet(out Bloom bloom);
+		bloom.tint.value = armorBloomColor;
 	}
 
 
-    public void SetBloom(float power)
+	public void SetBloom(float power)
         {
         if (volume == null)
             return;

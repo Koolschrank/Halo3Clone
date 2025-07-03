@@ -170,11 +170,6 @@ public class ShildUI : MonoBehaviour
 			shildBar.gameObject.SetActive(true);
 		}
         shildBar.fillAmount = shildValue;
-
-
-		
-        
-
         lastShildValue = shildValue;
 	}
 

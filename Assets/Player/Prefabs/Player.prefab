@@ -10917,8 +10917,10 @@ MonoBehaviour:
   maxShild: 100
   currentShild: 100
   shildPopDamageNegation: 0
+  shildPopDamageNegationWhenArmored: 30
   shildRegenDelay: 4.5
   shildRegenAmountPerSecond: 25
+  maxArmor: 150
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
   playerArms: {fileID: 3232609274750972410}

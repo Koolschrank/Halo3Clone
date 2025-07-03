@@ -36,7 +36,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] Transform UIContainer;
     [SerializeField] HealthUI healthUI;
     [SerializeField] ShildUI shildUI;
-    [SerializeField] WeaponUI weaponUI_RightArm;
+	[SerializeField] ArmorUI armorUI;
+	[SerializeField] WeaponUI weaponUI_RightArm;
     [SerializeField] WeaponUI weaponUI_LeftArm;
     [SerializeField] WeaponInventoryUI weaponInventoryUI;
     [SerializeField] PickUpUI pickUpUI;
@@ -308,8 +309,9 @@ public class PlayerMind : MonoBehaviour
         playerHealth = health;
         healthUI.SetUp(playerHealth);
         shildUI.SetUp(playerHealth as CharacterHealth);
-        // connect health on death unity event with this function
-        playerHealth.OnDeath += PlayerDeath;
+        armorUI.SetUp(playerHealth as CharacterHealth);
+		// connect health on death unity event with this function
+		playerHealth.OnDeath += PlayerDeath;
 
         playerHealth.OnDamageTaken += damageIndicatorUI.AddDamageIndicator;
         playerHealth.OnDeath += damageIndicatorUI.Clear;

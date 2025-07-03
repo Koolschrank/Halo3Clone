@@ -15,9 +15,13 @@ public class CharacterHealth : Health
     [SerializeField] float maxShild = 100;
     [SerializeField] float currentShild = 100;
     [SerializeField] float shildPopDamageNegation = 25;
-    [SerializeField] float shildRegenDelay = 5;
+
+	[SerializeField] float shildPopDamageNegationWhenArmored = 25;
+	[SerializeField] float shildRegenDelay = 5;
     [SerializeField] float shildRegenAmountPerSecond = 20;
-    float shildRegenTimer;
+    [SerializeField] float maxArmor = 100;
+    float currentArmor = 0;
+	float shildRegenTimer;
 
     [Header("References")]
     [SerializeField] HeadShotArea headShotArea;
@@ -51,10 +55,12 @@ public class CharacterHealth : Health
 
     public Action OnShildHealStarted;
     public Action OnInHealthAura;
-    
+
+    public Action<float> OnArmorChanged;
 
 
-    float maxShildMultiplier = 1;
+
+	float maxShildMultiplier = 1;
 
     public float MaxShild => maxShild * maxShildMultiplier;
 
@@ -68,7 +74,9 @@ public class CharacterHealth : Health
     [NonSerialized]
     public float aura_poisonDamage = 0.0f;
 
-
+    public float ArmorValue     {
+        get { return currentArmor / maxArmor; }
+	}
 	public void MultiplyHealth(float multiplier)
     {
         maxHeath *= multiplier;
@@ -313,7 +321,7 @@ public class CharacterHealth : Health
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if ((currentShild <= 0 ||(  damagePackage.canHeadShotShild && currentShild < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
+        if (((currentShild <= 0 && currentArmor <=0) ||(  damagePackage.canHeadShotShild && currentShild + currentArmor < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)
@@ -334,7 +342,14 @@ public class CharacterHealth : Health
 
             if (damageAgainstShild >= currentShild)
             {
-                damageAgainstShild -= currentShild + shildPopDamageNegation;
+                var damageNegation = shildPopDamageNegation;
+                if (currentArmor > 0)
+                {
+                    damageNegation = shildPopDamageNegationWhenArmored;
+				}
+
+
+				damageAgainstShild -= currentShild + damageNegation;
                 damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
                 currentShild = 0;
                 OnShildChanged?.Invoke(0);
@@ -357,11 +372,34 @@ public class CharacterHealth : Health
         }
         bool hasHealthDamage = false;
         if (damage > 0)
-        {
-            hasHealthDamage = true;
-            currentHeath -= damage;
-            OnHealthChanged?.Invoke(HealthPercentage);
-            OnHealthDamageTaken?.Invoke();
+		{
+            if (currentArmor > 0)
+            {
+                // if we have armor, reduce the damage by armor
+                
+                if (damage >= currentArmor)
+                {
+					damage -= currentArmor;
+                    currentArmor = 0;
+                    OnArmorChanged?.Invoke(0);
+                }
+                else
+                {
+                    currentArmor -= damage;
+                    damage = 0;
+                    OnArmorChanged?.Invoke(currentArmor / maxArmor);
+				}
+			}
+			if (damage > 0)
+			{
+				hasHealthDamage = true;
+				currentHeath -= damage;
+				OnHealthChanged?.Invoke(HealthPercentage);
+				OnHealthDamageTaken?.Invoke();
+			}
+
+
+			
         }
 
 
@@ -392,7 +430,14 @@ public class CharacterHealth : Health
 
 	}
 
-    bool dead = false;
+    public void FillArmor()
+        {
+        currentArmor = maxArmor;
+        OnArmorChanged?.Invoke(currentArmor / maxArmor);
+	}
+
+
+	bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
         
