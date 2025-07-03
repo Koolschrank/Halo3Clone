@@ -653,7 +653,7 @@ public class PlayerMind : MonoBehaviour
         {
             if (reloadButtonStartPressTime_2 + holdButtonToPickUpTime > Time.time)
             {
-                playerArms.LeftArm.PressReloadButton();
+                playerArms.LeftArm.DropWeapon();
             }
             reloadButtonReleased_2 = true;
         }

@@ -210,7 +210,14 @@ public class Arm : MonoBehaviour
         if (inRoll) return;
 
         // input buffers
-        if (switchInputBufferTimer > 0 ||( (isTriggerPressed&&CurrentWeapon != null && !playerArms.IsDualWielding &&CurrentWeapon.Magazine == 0 && inventory.GetAmmo(CurrentWeapon.Data) <= 0 && inventory.HasWeapon && (inventory.GetWeapon().Magazine !=0||inventory.GetAmmo(inventory.GetWeapon().Data) != 0)) ))
+        if (switchInputBufferTimer > 0 ||
+            ( (isTriggerPressed&&CurrentWeapon != null 
+            && !playerArms.IsDualWielding 
+            &&CurrentWeapon.Magazine == 0 
+            && inventory.GetAmmo(CurrentWeapon.Data) <= 0 
+            && inventory.HasWeapon 
+            && (inventory.GetWeapon().Magazine !=0
+            ||inventory.GetAmmo(inventory.GetWeapon().Data) != 0)) ))
         {
             switchInputBufferTimer -= Time.deltaTime;
             TrySwitchWeapon();
@@ -529,7 +536,7 @@ public class Arm : MonoBehaviour
     {
         Debug.Log("Switching weapon try");
 
-        if (armState != ArmState.Ready && armState != ArmState.Reloading) return;
+        if (armState != ArmState.Ready && armState != ArmState.Reloading && !(armState == ArmState.Shooting && weaponInHand.IsShootCooldownLessThanHalf())) return;
 
         if (weaponInHand != null && weaponInHand.CanNotBeInInventory)
         {
@@ -686,7 +693,7 @@ public class Arm : MonoBehaviour
     
     public virtual void TryThrowGranade()
     {
-        if (armState != ArmState.Ready) return;
+        if (armState != ArmState.Ready && armState != ArmState.Reloading && !(armState == ArmState.Shooting && weaponInHand.IsShootCooldownLessThanHalf())) return;
         if (abilityInventory.CanUseCurrentAbility() && abilityInventory.IsCurrentAbilityAGranade())
         {
             IfZoomedInExitZoom();
@@ -720,14 +727,10 @@ public class Arm : MonoBehaviour
     void SendGranadeThrowSignal(GameObject granade)
     {
        
-        Debug.Log(granade.name);
         var ability = abilityInventory.GetLastAbility();
-        Debug.Log(ability);
         var granadeAbility = (ability.abilityData as AbilityData_Granade);
-        Debug.Log(granadeAbility);
 
         var granadestats = granadeAbility.granadeStats;
-        Debug.Log(granadestats);
 
         OnGranadeThrow?.Invoke(granade, granadestats);
     }

@@ -138,6 +138,8 @@ public class Aura : MonoBehaviour
                 RemovePlayerFromAura(body);
             }
 		}
+
+        playersInAura.Clear(); 
 	}
     
 }

@@ -241,7 +241,14 @@ public class Weapon_Arms
         return shootCooldown > 0;
     }
 
-    public bool CanShoot()
+    public bool IsShootCooldownLessThanHalf()
+    {
+        return shootCooldown < weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier / fireRateMultiplierStat / 2;
+	}
+
+	public float ShootCooldown => shootCooldown;
+
+	public bool CanShoot()
     {
         return shootCooldown <= 0 && Magazine > 0;
     }
