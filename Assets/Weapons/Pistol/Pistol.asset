@@ -23,7 +23,8 @@ MonoBehaviour:
   magazineSize: 10
   maxAmmoInReserve: 200
   reloadTime: 1.5
-  inaccuracy: 0.009
+  reloadGainAmmoTrigger: 0.7
+  inaccuracy: 0.006
   switchOutTime: 0.15
   switchInTime: 0.2
   canZoom: 1
@@ -82,10 +83,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.9
+  damageMultiplier: 0.85
   fireRateMultiplier: 1.25
   inaccuracyMultiplier: 2.5
-  reloadTimeMultiplier: 1.25
+  reloadTimeMultiplier: 1.35
   shootSound:
     Guid:
       Data1: 653112923

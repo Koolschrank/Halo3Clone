@@ -17,12 +17,13 @@ MonoBehaviour:
   weaponFPSModel: {fileID: 3192954955445254701, guid: e050645e4ea6737459aaecdc284a82f9, type: 3}
   weapon3rdPersonModel: {fileID: 4848280889717057939, guid: c709648b2ebd2f54eac236b2d21974a5, type: 3}
   weaponName: Pistol
-  shootType: 0
-  fireRate: 0.28
+  shootType: 1
+  fireRate: 0.192
   bulletsPerShot: 1
-  magazineSize: 6
+  magazineSize: 10
   maxAmmoInReserve: 200
   reloadTime: 1
+  reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.013
   switchOutTime: 0.15
   switchInTime: 0.2

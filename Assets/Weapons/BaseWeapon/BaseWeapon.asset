@@ -23,6 +23,7 @@ MonoBehaviour:
   magazineSize: 42
   maxAmmoInReserve: 400
   reloadTime: 2
+  reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.035
   switchOutTime: 0.25
   switchInTime: 0.4

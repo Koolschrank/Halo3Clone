@@ -25,6 +25,8 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] int magazineSize;
     [SerializeField] int maxAmmoInReserve;
     [SerializeField] float reloadTime;
+    [Range(0, 1)]
+    [SerializeField] float reloadGainAmmoTrigger = 0.9f;
     [SerializeField] float inaccuracy;
     [SerializeField] float switchOutTime;
     [SerializeField] float switchInTime;
@@ -181,6 +183,8 @@ public class Weapon_Data : ScriptableObject
     public GunAiBehaviour GunAiBehaviour => gunAiBehaviour;
 
     public Weapon_Data UpgradedWeaponData => upgradedWeaponData;
+
+    public float ReloadGainAmmoTrigger => reloadGainAmmoTrigger;
 }
 
 

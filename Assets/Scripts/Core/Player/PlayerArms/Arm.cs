@@ -73,12 +73,12 @@ public class Arm : MonoBehaviour
     float reloadWeaponSpeedMultiplier = 1;
     float fireRateMultiplier = 1;
     bool inRoll = false;
+    bool ammoGainedFromReload = false;
 
 
-    
 
 
-    public void AddToFireRateMultiplier(float value)
+	public void AddToFireRateMultiplier(float value)
     {
         fireRateMultiplier += value;
         if (weaponInHand != null)
@@ -240,7 +240,21 @@ public class Arm : MonoBehaviour
         if (armState == ArmState.Reloading)
         {
             reloadTimer -= Time.deltaTime;
-            if (reloadTimer <= 0)
+
+
+            if (!ammoGainedFromReload)
+            {
+				var ammoGainTrigger = weaponInHand.Data.ReloadGainAmmoTrigger;
+				var reloadPercent = 1 - (reloadTimer / (weaponInHand.ReloadTime * reloadWeaponSpeedMultiplier));
+				if (reloadPercent >= ammoGainTrigger)
+				{
+					GainAmmoFromReload();
+                    ammoGainedFromReload = true;
+				}
+			}
+            
+
+			if (reloadTimer <= 0)
             {
                 ReloadFinished();
             }
@@ -426,19 +440,25 @@ public class Arm : MonoBehaviour
             reloadTimer = weaponInHand.ReloadTime * reloadWeaponSpeedMultiplier;
             OnWeaponReloadStarted?.Invoke(weaponInHand, reloadTimer);
             weaponInHand.ReloadStart(reloadTimer);
-        }
+            ammoGainedFromReload = false;
+		}
     }
 
-    void ReloadFinished()
+    void GainAmmoFromReload()
+    {
+		if (weaponInHand != null)
+		{
+			int ammoNeeded = weaponInHand.MagazineSize - weaponInHand.Magazine;
+			int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
+			weaponInHand.ReloadFinished(ammoAdded);
+		}
+
+	}
+
+	void ReloadFinished()
     {
         armState = ArmState.Ready;
-        if (weaponInHand != null)
-        {
-            int ammoNeeded = weaponInHand.MagazineSize - weaponInHand.Magazine;
-            int ammoAdded = inventory.TakeAmmo(weaponInHand.Data, ammoNeeded);
-            weaponInHand.ReloadFinished(ammoAdded);
-        }
-            
+           
     }
 
 
@@ -799,7 +819,9 @@ public class Arm : MonoBehaviour
 
         if (weapon.ReloadOnPickup)
         {
-            ReloadFinished();
+            GainAmmoFromReload();
+
+			ReloadFinished();
             weapon.ReloadOnPickup = false;
         }
 
