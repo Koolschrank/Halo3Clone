@@ -27,7 +27,9 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] int waveIndex = 0;
     EnemyWaveInstance activeWave;
     [SerializeField] float spawnRateMultiplier = 1; // Multiplier for spawn rate
-    float nextWaveDelay = 5;
+
+	[SerializeField] float spawnRateCooldownMultiplier = 0.5f; // Multiplier for spawn rate
+	float nextWaveDelay = 5;
 
     public List<GameObject> activeEnemies = new List<GameObject>();
 
@@ -179,10 +181,10 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            float delta = Time.deltaTime;
+            float delta = Time.deltaTime * spawnRateCooldownMultiplier;
 			if (kingOfTheHillManager != null && kingOfTheHillManager.teamOnHill == 1)
             {
-                delta *= 0.15f;
+                delta *= 0.05f;
 
 			}
 
@@ -225,10 +227,10 @@ public class EnemySpawner : MonoBehaviour
                 AIPerTeam1 -= (int)(playersInTeam1 * spawnRateMultiplier);
 
                 AIPerTeam2 +=  (int)(playersInTeam1 * spawnRateMultiplier);
-                if (hasTeam1almostWon)
-                {
-                    AIPerTeam2 += (int)(playersInTeam1 * spawnRateMultiplier);
-                }
+                //if (hasTeam1almostWon)
+                //{
+                //    AIPerTeam2 += (int)(playersInTeam1 * spawnRateMultiplier);
+                //}
 
             }
             else

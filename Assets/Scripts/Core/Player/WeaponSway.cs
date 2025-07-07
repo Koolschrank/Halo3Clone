@@ -3,6 +3,8 @@ using UnityEngine;
 public class WeaponSway : MonoBehaviour
 {
 
+    public float strenght = 1;
+
     [SerializeField] CharacterController cc;
     [SerializeField] PlayerMovement mover;
     [SerializeField] PlayerAim aim;
@@ -111,7 +113,7 @@ public class WeaponSway : MonoBehaviour
         invertLook.x = Mathf.Clamp(invertLook.x, -maxStepDistance, maxStepDistance);
         invertLook.y = Mathf.Clamp(invertLook.y, -maxStepDistance, maxStepDistance);
 
-        swayPos = invertLook;
+        swayPos = invertLook * strenght;
     }
 
     void SwayRotation()
@@ -119,12 +121,12 @@ public class WeaponSway : MonoBehaviour
         Vector2 invertLook = new Vector2(lookInput.x * -rotationStepX, lookInput.y * -rotationStepY)    ;
         invertLook.x = Mathf.Clamp(invertLook.x, -maxRotationStep, maxRotationStep);
         invertLook.y = Mathf.Clamp(invertLook.y, -maxRotationStep, maxRotationStep);
-        swayEulerRot = new Vector3(invertLook.y, invertLook.x, invertLook.x);
+        swayEulerRot = new Vector3(invertLook.y, invertLook.x, invertLook.x) * strenght;
     }
 
     void CompositePositionRotation()
     {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, swayPos + bobPosition, Time.deltaTime * smooth);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, (swayPos + bobPosition), Time.deltaTime * smooth) ;
         transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(swayEulerRot) * Quaternion.Euler(bobEulerRotation), Time.deltaTime * smoothRot);
     }
 
@@ -133,16 +135,16 @@ public class WeaponSway : MonoBehaviour
         if (cc == null) return;
         speedCurve += Time.deltaTime * (cc.isGrounded ? (walkInput.x + walkInput.y) * bobExaggeration : 1f) + 0.01f;
 
-        bobPosition.x = (curveCos * bobLimit.x * (cc.isGrounded ? 1 : 0)) - (walkInput.x * travelLimit.x);
-        bobPosition.y = (curveSin * bobLimit.y) - (walkInput.y * travelLimit.y);
-        bobPosition.z = -(walkInput.y * travelLimit.z);
+        bobPosition.x = (curveCos * bobLimit.x * (cc.isGrounded ? 1 : 0)) - (walkInput.x * travelLimit.x) * strenght;
+        bobPosition.y = (curveSin * bobLimit.y) - (walkInput.y * travelLimit.y)     * strenght;
+        bobPosition.z = -(walkInput.y * travelLimit.z) * strenght;
     }
 
     void BobRotation()
     {
-        bobEulerRotation.x = (walkInput != Vector2.zero ? multiplier.x * (Mathf.Sin(2 * speedCurve)) : multiplier.x * (Mathf.Sin(2 * speedCurve) / 2));
-        bobEulerRotation.y = (walkInput != Vector2.zero ? multiplier.y * curveCos : 0);
-        bobEulerRotation.z = (walkInput != Vector2.zero ? multiplier.z * curveCos * walkInput.x : 0);
+        bobEulerRotation.x = (walkInput != Vector2.zero ? multiplier.x * (Mathf.Sin(2 * speedCurve)) : multiplier.x * (Mathf.Sin(2 * speedCurve) / 2)) * strenght;
+        bobEulerRotation.y = (walkInput != Vector2.zero ? multiplier.y * curveCos : 0) * strenght;
+        bobEulerRotation.z = (walkInput != Vector2.zero ? multiplier.z * curveCos * walkInput.x : 0) * strenght;
     }
 
 }

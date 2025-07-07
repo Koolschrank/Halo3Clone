@@ -10839,6 +10839,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   aimSupportSlowDown: 0.4
+  hasAimCorrection: 1
+  aimCorrectionDistance: 30
+  aimCorrectionWidth: 10
+  aimCorrectionMaxAngle: 20
+  aimCorrectionDeadzoneAngle: 2
+  aimCorrectionPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  aimCorrectionWallLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  aimCorrectionSpeed: 10
   minSensitivity: 0.1
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1
@@ -10920,7 +10932,7 @@ MonoBehaviour:
   shildPopDamageNegationWhenArmored: 30
   shildRegenDelay: 4.5
   shildRegenAmountPerSecond: 25
-  maxArmor: 150
+  maxArmor: 200
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
   playerArms: {fileID: 3232609274750972410}

@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class Weapon_Visual : Weapon_Model
 {
     [SerializeField] Animator animator;
+    [SerializeField] Transform aimPosition;
 
     public UnityEvent OnShoot = new UnityEvent();
 
@@ -36,7 +37,9 @@ public class Weapon_Visual : Weapon_Model
         weapon.OnRollStart -= Roll;
     }
 
+    public bool HasAimPosition => aimPosition != null;
 
+    public Transform AimPosition => aimPosition;
 
     public void Shoot()
     {

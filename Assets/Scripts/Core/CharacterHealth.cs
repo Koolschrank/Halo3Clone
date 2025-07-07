@@ -20,6 +20,7 @@ public class CharacterHealth : Health
 	[SerializeField] float shildRegenDelay = 5;
     [SerializeField] float shildRegenAmountPerSecond = 20;
     [SerializeField] float maxArmor = 100;
+
     float currentArmor = 0;
 	float shildRegenTimer;
 
@@ -314,7 +315,17 @@ public class CharacterHealth : Health
         }
 
         float damageReduction = playerArms.DamageReduction;
-        float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
+		
+		float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
+
+        if (
+            playerArms.RightArm.IsInZoom 
+            && playerArms.RightArm.CurrentWeapon != null 
+            && playerArms.RightArm.CurrentWeapon.Data.HasBlock 
+            && playerArms.RightArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
+        {
+            damage *= (1 - playerArms.RightArm.CurrentWeapon.Data.DamageBlock.blockPercentage);
+        }
 
         TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)
@@ -464,4 +475,21 @@ public class CharacterHealth : Health
     }
 
     
+}
+
+
+[Serializable]
+public class Block
+{
+    [Range(0f,1f)]
+    public float blockPercentage = 0.5f;
+    [Range(0f,360f)]
+    [SerializeField] float blockAngle = 0;
+    public bool IsBlocking(Transform self, Vector3 damagePosition)
+    {
+        Vector3 directionOfAttack = (damagePosition - self.transform.position).normalized;
+        var forward = self.transform.forward;
+        var angle = Vector3.Angle(forward, directionOfAttack);
+        return angle <= blockAngle / 2f;
+    }
 }

@@ -29,17 +29,19 @@ MonoBehaviour:
   switchInTime: 0.2
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 0
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 3
   burstDelay: 0.1
   hasKnockback: 1
   gunKnockback:
-    power: 1
+    power: 0.7
     duration: 0.1
     curve:
       serializedVersion: 2
@@ -69,6 +71,10 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 2.75
   reloadTimeMultiplier: 1.25
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
       Data1: 1709653785

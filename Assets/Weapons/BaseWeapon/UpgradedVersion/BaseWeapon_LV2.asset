@@ -27,8 +27,9 @@ MonoBehaviour:
   inaccuracy: 0.055
   switchOutTime: 0.25
   switchInTime: 0.4
-  canZoom: 0
-  zoomFOV: 0
+  canZoom: 1
+  zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
@@ -78,6 +79,10 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
   reloadTimeMultiplier: 1.4
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
       Data1: 1709653785

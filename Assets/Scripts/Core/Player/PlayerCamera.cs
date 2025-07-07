@@ -119,7 +119,15 @@ public class PlayerCamera : MonoBehaviour
 
     public void ZoomIn(Weapon_Arms weapon)
     {
-        zoomedInFOV = weapon.ZoomFOV;
+        if (weapon.ZoomFOV ==0)
+        {
+            zoomedInFOV = baseFOV;
+		}
+        else
+        {
+			zoomedInFOV = weapon.ZoomFOV;
+		}
+            
         isZoomedIn = true;
     }
 

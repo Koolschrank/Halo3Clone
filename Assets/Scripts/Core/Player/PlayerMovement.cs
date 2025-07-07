@@ -189,6 +189,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
         Vector3 camForward = head.transform.forward;
         Vector3 camRight = head.transform.right;
+
+
+
         if (ignoreAimDirection)
         {
             camForward = Vector3.forward;
@@ -234,8 +237,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 speedMultiplier *= moveSpeedCrouchMultiplier;
             }
+            else if (arms.RightArm.IsInZoom)
+            {
+                speedMultiplier *= arms.RightArm.CurrentWeapon.Data.ZoomMoveSpeed;
+			}
+            else if (arms.LeftArm.IsInZoom)
+			{
+                speedMultiplier *= arms.LeftArm.CurrentWeapon.Data.ZoomMoveSpeed;
+			}
 
-            var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
+			var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
             if (aura_moveSpeedReduction != 0)
             {
                 ideal *= 1 - aura_moveSpeedReduction;

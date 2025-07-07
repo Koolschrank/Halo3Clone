@@ -32,15 +32,23 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float switchInTime;
     [SerializeField] bool canZoom;
     [SerializeField] float zoomFOV;
-    [SerializeField] float moveSpeedMultiplier = 1f;
+
+	[Range(0, 1)]
+	[SerializeField] float zoomMoveSpeed = 1f;
+	[SerializeField] float moveSpeedMultiplier = 1f;
     [SerializeField] float damageReduction = 0f;
     [SerializeField] PlayerMeleeAttack meleeData;
-    [SerializeField] AutoAim autoAim;
     [SerializeField] WeaponType weaponType;
     [SerializeField] bool canNotBeInInventory = false;
 
 
-    [Header("Burst Values")]
+
+	[Header("Aim Support")]
+	[SerializeField] AutoAim autoAim;
+    [SerializeField] AutoAimType autoAimType = AutoAimType.followBody;
+
+
+	[Header("Burst Values")]
     [SerializeField] int burstAmount;
     [SerializeField] float burstDelay;
 
@@ -54,7 +62,12 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float inaccuracyMultiplier = 1f;
     [SerializeField] float reloadTimeMultiplier = 1f;
 
-    [Header("Sound")]
+
+    [Header("Block")]
+    [SerializeField] bool hasBlock;
+    [SerializeField] Block block;
+
+	[Header("Sound")]
     [SerializeField] EventReference shootSound;
     [SerializeField] TimedSoundList switchInSound;
     [SerializeField] TimedSoundList reloadSounds;
@@ -94,6 +107,8 @@ public class Weapon_Data : ScriptableObject
 
     public float ReloadTime => reloadTime;
 
+    public float ZoomMoveSpeed => zoomMoveSpeed;
+
     public float GetReloadTime(bool isBeingDualWielded)
     {
         if (isBeingDualWielded)
@@ -103,7 +118,9 @@ public class Weapon_Data : ScriptableObject
         return reloadTime;
     }
 
-    public Weapon_Bullet WeaponBullet => weaponBullet;
+    public AutoAimType AutoAimType => autoAimType;
+
+	public Weapon_Bullet WeaponBullet => weaponBullet;
 
     public float Inaccuracy => inaccuracy;
 
@@ -119,6 +136,10 @@ public class Weapon_Data : ScriptableObject
     public float DualWieldDamageMultiplier => damageMultiplier;
 
     public Weapon_PickUp WeaponPickUp => weaponPickUp;
+
+    public bool HasBlock => hasBlock;
+
+    public Block DamageBlock => block;
 
     public float SwitchOutTime => switchOutTime;
     public float SwitchInTime => switchInTime;
@@ -194,7 +215,8 @@ public enum ShootType
     Single,
     Auto,
     Burst,
-    Melee
+    Melee,
+    Zoom
 }
 
 public enum WeaponType
@@ -218,3 +240,10 @@ public class GunAiBehaviour
 
 }
 
+
+public enum AutoAimType
+{
+    followBody,
+    followHead,
+    none
+}

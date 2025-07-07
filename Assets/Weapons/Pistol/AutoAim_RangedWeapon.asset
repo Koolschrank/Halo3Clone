@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AutoAim_RangedWeapon
   m_EditorClassIdentifier: 
   raycastLenght: 60
-  radius: 0.5
+  radius: 0.35
   aimLerp: 0.08

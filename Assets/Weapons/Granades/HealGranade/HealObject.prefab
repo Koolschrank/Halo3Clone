@@ -436,9 +436,29 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 751392561000310045, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 751392561000310045, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 751392562202428643, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 751392562574102492, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 751392562574102492, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 751392562574102492, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1273933799824790256, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: m_IsActive
@@ -586,7 +606,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5611849403655671717, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: m_Radius
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011366437888015380, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011366437888015380, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011366437888015380, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 8039376991116594011, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: m_Name

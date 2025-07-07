@@ -32,7 +32,20 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] LayerMask aimSupportLayerMask;
     [SerializeField] float aimSupportSlowDown = 0.5f;
 
-    Vector2 aimInput = Vector2.zero;
+	[Header("Aim Correction Settings")]
+    [SerializeField] bool hasAimCorrection = true;
+	[SerializeField] float aimCorrectionDistance = 10f;
+    [SerializeField] float aimCorrectionWidth = 10f;
+    [SerializeField] float aimCorrectionMaxAngle = 45f;
+
+	[SerializeField] float aimCorrectionDeadzoneAngle = 1f;
+	[SerializeField] LayerMask aimCorrectionPlayerLayer;
+	[SerializeField] LayerMask aimCorrectionWallLayer;
+	[SerializeField] float aimCorrectionSpeed = 0.1f;
+
+
+
+	Vector2 aimInput = Vector2.zero;
 
     
     float sensitivityMultiplier = 1f;
@@ -113,6 +126,22 @@ public class PlayerAim : MonoBehaviour
             rotationY *= zoomAimSpeedMultiplier;
         }
 
+        if (hasAimCorrection && playerArms.RightArm.CurrentWeapon != null)
+        {
+            var autoAimType = playerArms.RightArm.CurrentWeapon.Data.AutoAimType;
+            if (autoAimType != AutoAimType.none)
+            {
+				UpdateAimCorrection();
+				var closestPlayer = GetPlayerInAimCorrectionWithClosesAngle(autoAimType);
+				var aimCorrectionInput = AimCorrectTowardsTarget(closestPlayer);
+				if (aimCorrectionInput != Vector2.zero)
+				{
+					rotationX += aimCorrectionInput.x * aimCorrectionSpeed * Time.deltaTime;
+					rotationY += aimCorrectionInput.y * aimCorrectionSpeed * Time.deltaTime;
+				}
+			}
+		}
+
         playerXRotation += rotationX;
         playerYRotation -= rotationY;
         //playerYRotation = Mathf.Clamp(playerYRotation, minAngle, maxAngle);
@@ -124,7 +153,108 @@ public class PlayerAim : MonoBehaviour
 
     }
 
-    public void AddGunKnockback(GunKnockback gunKnockback)
+    List<GameObject> playersInAimCorrection = new List<GameObject>();
+    public void UpdateAimCorrection()
+    {
+        playersInAimCorrection.Clear();
+
+        // box cast in front of the player
+        Vector3 position = playerHead.transform.position; //+ playerHead.transform.forward * aimCorrectionDistance;
+        Vector3 direction = playerHead.transform.forward;
+        Vector3 size = new Vector3(aimCorrectionWidth, aimCorrectionWidth, 0.1f);
+        var forwardRotation = Quaternion.LookRotation(direction);
+		RaycastHit[] hits = Physics.BoxCastAll(position, size / 2, direction, forwardRotation, aimCorrectionDistance, aimCorrectionPlayerLayer);
+        foreach (var hit in hits)
+        {
+            if (hit.transform.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex) continue;
+
+            Debug.Log("aim 1");
+
+			// get angle from player forward towards hit point
+            Vector3 hitDirection = (hit.point - playerHead.transform.position).normalized;
+            float angle = Vector3.Angle(playerHead.transform.forward, hitDirection);
+            // if the angle is greater than the max angle, skip this hit
+            if (angle > aimCorrectionMaxAngle) continue;
+
+			Debug.Log("aim 2");
+
+			// check if wall is between player and hit point
+			RaycastHit wallHit;
+            float hitDistance = Vector3.Distance(playerHead.transform.position, hit.point);
+
+			if (Physics.Raycast(playerHead.transform.position, hitDirection, out wallHit, hitDistance, aimCorrectionWallLayer))
+            {
+                continue;
+			}
+
+			Debug.Log("aim 3");
+
+			if (hit.collider.TryGetComponent<BodyMindConnection>(out BodyMindConnection body))
+            {
+                playersInAimCorrection.Add(body.gameObject);
+            }
+        }
+        
+	}
+
+    public Transform GetPlayerInAimCorrectionWithClosesAngle(AutoAimType autoAimType)
+    {
+        if (playersInAimCorrection.Count == 0) return null;
+        Transform closestPlayer = null;
+        float closestAngle = float.MaxValue;
+        foreach (var player in playersInAimCorrection)
+        {
+            Vector3 hitDirection = (player.transform.position - playerHead.transform.position).normalized;
+            float angle = Vector3.Angle(playerHead.transform.forward, hitDirection);
+            if (angle < closestAngle)
+            {
+                closestAngle = angle;
+                closestPlayer = player.transform;
+            }
+        }
+
+        if (autoAimType == AutoAimType.followHead)
+        {
+            // If the auto aim type is follow head, we need to return the head of the player
+            if (closestPlayer != null)
+            {
+                var bodyMind = closestPlayer.GetComponent<BodyMindConnection>();
+                if (bodyMind != null)
+                {
+                    closestPlayer = bodyMind.GetPlayerHead().transform;
+				}
+			}
+		}
+
+        return closestPlayer;
+	}
+
+    public Vector2 AimCorrectTowardsTarget(Transform target)
+    {
+        if (target == null) return Vector2.zero;
+
+		// You have these:
+		Vector3 playerPosition = playerHead.transform.position;
+		Vector3 playerForward = playerHead.transform.forward;
+		Vector3 playerRight = playerHead.transform.right;
+		Vector3 playerUp = playerHead.transform.up;
+
+		Vector3 enemyPosition = target.position;
+
+		// Direction from player to enemy (in world space)
+		Vector3 toEnemy = (enemyPosition - playerPosition).normalized;
+
+		// Project that onto the player's view plane
+		float x = Vector3.Dot(toEnemy, playerRight);   // Left/right
+		float y = Vector3.Dot(toEnemy, playerUp);      // Up/down
+
+		Vector2 aimDirection = new Vector2(x, y).normalized;
+        Debug.Log($"Aim Correction: {aimDirection}");
+		return aimDirection;
+	}
+
+
+	public void AddGunKnockback(GunKnockback gunKnockback)
     {
         GunKnockbackInstance instance = new GunKnockbackInstance(gunKnockback);
         gunKnockbackInstances.Add(instance);

@@ -1,12 +1,32 @@
+using System;
 using UnityEngine;
 
 public class Arm_FPSView : MonoBehaviour
 {
     [SerializeField] Arm playerArm;
     [SerializeField] Transform granadeSpawnPoint;
-    Weapon_Visual weaponVisual;
+    [SerializeField] WeaponSway weaponSway;
 
-    public void SetUp(Arm newArm)
+	[SerializeField] Transform baseArm;
+	[SerializeField] Transform aimArm;
+    [SerializeField] float aimSpeed;
+	[SerializeField] float aimRotationSpeed;
+    [SerializeField] float goOutOfAimMultiplier = 2f;
+	Weapon_Visual weaponVisual;
+    [SerializeField] bool ignoreAim;
+    [SerializeField] float swayStrenghtWhenAim = 0.3f;
+    [SerializeField] bool autoAim;
+    [SerializeField] bool reverseX;
+
+    bool hasAimPosition;
+    bool inAim;
+
+	private void Update()
+	{
+		UpdateAim();
+	}
+
+	public void SetUp(Arm newArm)
     {
         if (weaponVisual != null)
             RemoveWeapon(null);
@@ -19,7 +39,9 @@ public class Arm_FPSView : MonoBehaviour
             playerArm.OnWeaponDroped -= (weapon,pickUp)  => RemoveWeapon(weapon);
             playerArm.OnGranadeThrowStarted -= ThrowGranadeStart;
             playerArm.OnGranadeThrow -= ThrowGranade;
-        }
+			playerArm.OnZoomIn -= (weapon) => { inAim = true; };
+			playerArm.OnZoomOut -= (weapon) => { inAim = false; };
+		}
 
 
 
@@ -30,8 +52,12 @@ public class Arm_FPSView : MonoBehaviour
         playerArm.OnWeaponDroped += (weapon, pickUp) => RemoveWeapon(weapon);
         playerArm.OnGranadeThrowStarted += ThrowGranadeStart;
         playerArm.OnGranadeThrow += ThrowGranade;
+        playerArm.OnZoomIn += (weapon) => { inAim = true; };
+        playerArm.OnZoomOut += (weapon) => { inAim = false; };
 
-        if (playerArm.CurrentWeapon != null)
+
+
+		if (playerArm.CurrentWeapon != null)
         {
             EquipWeapon(playerArm.CurrentWeapon);
         }
@@ -50,9 +76,27 @@ public class Arm_FPSView : MonoBehaviour
             Destroy(weaponVisual.gameObject);
         }
 
-        weaponVisual = Instantiate(weapon.WeaponFPSModel, transform);
+        weaponVisual = Instantiate(weapon.WeaponFPSModel, baseArm.transform);
         weaponVisual.SetUp(weapon);
         UtilityFunctions.SetLayerRecursively(weaponVisual.gameObject, gameObject.layer);
+
+        hasAimPosition = weaponVisual.HasAimPosition;
+        if (hasAimPosition)
+        {
+			aimArm.transform.localPosition = weaponVisual.AimPosition.localPosition;
+            aimArm.transform.localRotation = weaponVisual.AimPosition.localRotation;
+
+            if (reverseX)
+            {
+                var p = aimArm.transform.localPosition;
+                var r = aimArm.transform.localRotation;
+
+                aimArm.transform.position = new Vector3(-p.x, p.y, p.z);
+				aimArm.transform.localRotation = new Quaternion(r.x, -r.y, -r.z, r.w);
+
+			}
+		}
+            
     }
 
     public void RemoveWeapon(Weapon_Arms weapon_Arms)
@@ -77,6 +121,28 @@ public class Arm_FPSView : MonoBehaviour
         UtilityFunctions.SetLayerRecursively(clone, gameObject.layer);
 
 
+    }
+
+    public void UpdateAim()
+    {
+        if (ignoreAim || !hasAimPosition) return;
+        if (!weaponVisual) return;
+
+
+        if (!ignoreAim && hasAimPosition && (inAim || autoAim))
+        {
+			baseArm.localPosition = Vector3.MoveTowards(baseArm.localPosition, aimArm.localPosition, Time.deltaTime * aimSpeed);
+			baseArm.localRotation = Quaternion.RotateTowards(baseArm.localRotation, aimArm.localRotation, Time.deltaTime * aimRotationSpeed);
+			weaponSway.strenght = swayStrenghtWhenAim;
+
+		}
+        else
+        {
+			baseArm.localPosition = Vector3.MoveTowards(baseArm.localPosition, Vector3.zero, Time.deltaTime * aimSpeed * goOutOfAimMultiplier);
+
+			baseArm.localRotation = Quaternion.RotateTowards(baseArm.localRotation, Quaternion.identity, Time.deltaTime * aimRotationSpeed * goOutOfAimMultiplier);
+			weaponSway.strenght = 1;
+		}
     }
 
     

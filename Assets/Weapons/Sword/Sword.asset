@@ -23,11 +23,13 @@ MonoBehaviour:
   magazineSize: 1
   maxAmmoInReserve: 1
   reloadTime: 1
+  reloadGainAmmoTrigger: 0.9
   inaccuracy: 0
   switchOutTime: 0.3
   switchInTime: 0.5
-  canZoom: 0
+  canZoom: 1
   zoomFOV: 0
+  zoomMoveSpeed: 0.6
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: dd3f5b5bb5d13ad4f8f00cd928b88704, type: 2}
@@ -50,6 +52,10 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1
+  hasBlock: 1
+  block:
+    blockPercentage: 0.6
+    blockAngle: 180
   shootSound:
     Guid:
       Data1: 0

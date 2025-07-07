@@ -665,7 +665,8 @@ public class PlayerMind : MonoBehaviour
         {
             playerSettings.SetRandomName();
             playerName.text = playerSettings.playerName;
-        }
+            settingsQuickMenu.EnableMenu();
+		}
     }
 
     public void ChangeNameAdvanced(InputAction.CallbackContext context)
@@ -674,7 +675,8 @@ public class PlayerMind : MonoBehaviour
         {
             playerSettings.SetRandomNameAdvanced();
             playerName.text = playerSettings.playerName;
-        }
+			settingsQuickMenu.EnableMenu();
+		}
     }
 
     IEnumerator PickUpWeaponTimer_2()

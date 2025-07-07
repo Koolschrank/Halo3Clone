@@ -242,7 +242,7 @@ public class Arm : MonoBehaviour
             reloadTimer -= Time.deltaTime;
 
 
-            if (!ammoGainedFromReload)
+            if (!ammoGainedFromReload && weaponInHand != null)
             {
 				var ammoGainTrigger = weaponInHand.Data.ReloadGainAmmoTrigger;
 				var reloadPercent = 1 - (reloadTimer / (weaponInHand.ReloadTime * reloadWeaponSpeedMultiplier));
@@ -361,14 +361,23 @@ public class Arm : MonoBehaviour
                         }
                     }
                     break;
-                case ShootType.Melee
-                    :
+                case ShootType.Melee:
                     if (!wasTriggerPressed && isTriggerPressed)
                     {
                         TryMeleeAttack();
                     }
                     break;
-            }
+                case ShootType.Zoom:
+					if (isTriggerPressed)
+					{
+                        PressZoomButton();
+					}
+                    else if (wasTriggerPressed && !isTriggerPressed)
+                    {
+                        ReleaseZoomButton();
+                    }
+                        break;
+			}
         }
         if (armState == ArmState.InBurstShooting && weaponInHand != null)
         {

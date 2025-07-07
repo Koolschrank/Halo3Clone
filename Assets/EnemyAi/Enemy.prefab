@@ -439,6 +439,10 @@ PrefabInstance:
       value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 3068919470916229809, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: hasAimCorrection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068919470916229809, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: inputSlowDownStopsInput
       value: 1
       objectReference: {fileID: 0}

@@ -10624,7 +10624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: AIPerTeam
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: enemyWaves.Array.size

@@ -7145,7 +7145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &285926140
 Transform:
   m_ObjectHideFlags: 0
@@ -28242,7 +28242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: AIPerTeam
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: enemyWaves.Array.size
