@@ -23,17 +23,20 @@ MonoBehaviour:
   magazineSize: 1
   maxAmmoInReserve: 4
   reloadTime: 3
+  reloadGainAmmoTrigger: 0.9
   inaccuracy: 0
   switchOutTime: 0.3
   switchInTime: 0.8
   canZoom: 0
   zoomFOV: 30
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 1
@@ -77,6 +80,48 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.1
+  bloomTime: 0.9
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00999999
+      value: 0.50047123
+      inSlope: 3.1102736
+      outSlope: 3.1102736
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19444478
+    - serializedVersion: 3
+      time: 0.059375763
+      value: 0.99430466
+      inSlope: -0.02473777
+      outSlope: -0.02473777
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.69564605
+    - serializedVersion: 3
+      time: 0.9966736
+      value: 0.004711151
+      inSlope: -1.0557941
+      outSlope: -1.0557941
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.5
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
       Data1: -1833630155
@@ -102,7 +147,7 @@ MonoBehaviour:
   bulletSize: {x: 4, y: 2}
   bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 33dfa090efe1bc442b27c137d87e3ad5, type: 3}
-  crosshairsSize: {x: 0.7, y: 0.7}
+  crosshairsSize: {x: 0.5, y: 0.5}
   enemyAiWeaponData: {fileID: 11400000, guid: 7ef99013cbc7d7d4d8ee5ab209603d96, type: 2}
   gunAiBehaviour:
     IdealRange: 10

@@ -71,6 +71,53 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
   reloadTimeMultiplier: 1.5
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.1
+  bloomTime: 0.9
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.006668091
+      value: 0.6003716
+      inSlope: 2.6546643
+      outSlope: 2.6546643
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15660083
+      value: 0.9983927
+      inSlope: -0.0000025096585
+      outSlope: -0.0000025096585
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5390489
+      value: 0.97301096
+      inSlope: -0.025490884
+      outSlope: -0.025490884
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2984506
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.07567155
+      inSlope: -1.9467129
+      outSlope: -1.9467129
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 1
   hasBlock: 0
   block:
     blockPercentage: 0.5

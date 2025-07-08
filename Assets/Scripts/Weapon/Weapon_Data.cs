@@ -62,8 +62,15 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] float inaccuracyMultiplier = 1f;
     [SerializeField] float reloadTimeMultiplier = 1f;
 
+    [Header("Bloom")]
+    [SerializeField] bool bloomOnShoot = false;
+    [SerializeField] bool bloomOnTakingDamage = false;
+    [SerializeField] float bloomInaccuracyMultiplier = 0.5f;
+    [SerializeField] float bloomTime = 0.5f;
+    [SerializeField] AnimationCurve bloomCurve = AnimationCurve.Linear(0, 0, 1, 1);
+    [SerializeField] float bloomCrosshairsSizeMultiplier = 2f;
 
-    [Header("Block")]
+	[Header("Block")]
     [SerializeField] bool hasBlock;
     [SerializeField] Block block;
 
@@ -87,10 +94,18 @@ public class Weapon_Data : ScriptableObject
 
     [Header("Upgrade")]
     [SerializeField] Weapon_Data upgradedWeaponData = null;
+
+
     
+    public bool BloomOnShoot => bloomOnShoot;
+    public bool BloomOnTakingDamage => bloomOnTakingDamage;
+    public float BloomInaccuracyMultiplier => bloomInaccuracyMultiplier;
+    public float BloomTime => bloomTime;
+    public AnimationCurve BloomCurve => bloomCurve;
+    public float BloomCrosshairsSizeMultiplier => bloomCrosshairsSizeMultiplier;
 
 
-    public ShootType ShootType => shootType;
+	public ShootType ShootType => shootType;
     public float FireRate => fireRate;
 
     public float GetFireRate(bool isBeingDualWielded)
@@ -133,7 +148,9 @@ public class Weapon_Data : ScriptableObject
         return inaccuracy;
     }
 
-    public float DualWieldDamageMultiplier => damageMultiplier;
+    public float DualWieldInaccuracy => inaccuracyMultiplier;
+
+	public float DualWieldDamageMultiplier => damageMultiplier;
 
     public Weapon_PickUp WeaponPickUp => weaponPickUp;
 
@@ -247,3 +264,4 @@ public enum AutoAimType
     followHead,
     none
 }
+

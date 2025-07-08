@@ -37,11 +37,13 @@ public class PlayerAim : MonoBehaviour
 	[SerializeField] float aimCorrectionDistance = 10f;
     [SerializeField] float aimCorrectionWidth = 10f;
     [SerializeField] float aimCorrectionMaxAngle = 45f;
+	[SerializeField] float aimCorrectionMaxAngleForAutoCorrection = 10f;
 
 	[SerializeField] float aimCorrectionDeadzoneAngle = 1f;
 	[SerializeField] LayerMask aimCorrectionPlayerLayer;
 	[SerializeField] LayerMask aimCorrectionWallLayer;
-	[SerializeField] float aimCorrectionSpeed = 0.1f;
+	[SerializeField] float aimCorrectionSpeed_Idle = 7.5f;
+	[SerializeField] float aimCorrectionSpeed_Aim = 9f;
 
 
 
@@ -134,10 +136,37 @@ public class PlayerAim : MonoBehaviour
 				UpdateAimCorrection();
 				var closestPlayer = GetPlayerInAimCorrectionWithClosesAngle(autoAimType);
 				var aimCorrectionInput = AimCorrectTowardsTarget(closestPlayer);
+
 				if (aimCorrectionInput != Vector2.zero)
 				{
-					rotationX += aimCorrectionInput.x * aimCorrectionSpeed * Time.deltaTime;
-					rotationY += aimCorrectionInput.y * aimCorrectionSpeed * Time.deltaTime;
+					float aimCorrectionMultiplier = 1f;
+                    float aimCorrectionSpeed = 0f;
+					Vector3 hitDirection = (closestPlayer.transform.position - playerHead.transform.position).normalized;
+					float angle = Vector3.Angle(playerHead.transform.forward, hitDirection);
+
+					if (angle < aimCorrectionDeadzoneAngle)
+					{
+						aimCorrectionMultiplier *= angle / aimCorrectionDeadzoneAngle;
+					}
+
+					if ( angle < aimCorrectionMaxAngleForAutoCorrection)
+					{
+                        aimCorrectionSpeed += aimCorrectionSpeed_Idle;
+					}
+
+                    if (playerArms.RightArm.IsInZoom)
+                    {
+						aimCorrectionMultiplier *= zoomAimSpeedMultiplier;
+                    }
+
+
+					var inputMagnitude = input.magnitude;
+                    var directionOverlap = Vector2.Dot(input.normalized, aimCorrectionInput.normalized);
+                    //Debug.Log(inputMagnitude + " / " + directionOverlap);
+                    if (directionOverlap>0)
+                        aimCorrectionSpeed += aimCorrectionSpeed_Aim * inputMagnitude;// * directionOverlap;
+					rotationX += aimCorrectionInput.x * aimCorrectionSpeed * Time.deltaTime * aimCorrectionMultiplier;
+					rotationY += aimCorrectionInput.y * aimCorrectionSpeed * Time.deltaTime * aimCorrectionMultiplier;
 				}
 			}
 		}
@@ -168,15 +197,13 @@ public class PlayerAim : MonoBehaviour
         {
             if (hit.transform.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex) continue;
 
-            Debug.Log("aim 1");
 
 			// get angle from player forward towards hit point
             Vector3 hitDirection = (hit.point - playerHead.transform.position).normalized;
             float angle = Vector3.Angle(playerHead.transform.forward, hitDirection);
             // if the angle is greater than the max angle, skip this hit
             if (angle > aimCorrectionMaxAngle) continue;
-
-			Debug.Log("aim 2");
+;
 
 			// check if wall is between player and hit point
 			RaycastHit wallHit;
@@ -249,7 +276,6 @@ public class PlayerAim : MonoBehaviour
 		float y = Vector3.Dot(toEnemy, playerUp);      // Up/down
 
 		Vector2 aimDirection = new Vector2(x, y).normalized;
-        Debug.Log($"Aim Correction: {aimDirection}");
 		return aimDirection;
 	}
 

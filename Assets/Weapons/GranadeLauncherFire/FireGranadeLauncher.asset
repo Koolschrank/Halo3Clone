@@ -36,7 +36,7 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
-  autoAimType: 1
+  autoAimType: 2
   burstAmount: 3
   burstDelay: 0.3
   hasKnockback: 1
@@ -80,6 +80,44 @@ MonoBehaviour:
   fireRateMultiplier: 1.2
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1.5
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.9
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00999999
+      value: 0.50047123
+      inSlope: 3.1102736
+      outSlope: 3.1102736
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19444478
+    - serializedVersion: 3
+      time: 0.04631424
+      value: 0.997036
+      inSlope: -0.02473777
+      outSlope: -0.02473777
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.69564605
+    - serializedVersion: 3
+      time: 0.99331665
+      value: 0.07654953
+      inSlope: -0.9720001
+      outSlope: -0.9720001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.75
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -149,7 +187,7 @@ MonoBehaviour:
   bulletSize: {x: 1.9, y: 1.9}
   bulletsPerRow: 5
   crosshairs: {fileID: 21300000, guid: ee579ce34746d084682cedad1f645b0a, type: 3}
-  crosshairsSize: {x: 0.7, y: 0.7}
+  crosshairsSize: {x: 0.5, y: 0.5}
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 10

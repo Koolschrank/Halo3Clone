@@ -9,9 +9,23 @@ public class crosshairUI : MonoBehaviour
     [SerializeField] RawImage crosshairImage;
 
 
-    public void ChangeSprite(Sprite sprite, Vector2 size)
+    Weapon_Arms currentWeapon;
+	public void ChangeSprite(Weapon_Arms weapon)
     {
-        if (crosshairImage != null)
+        if (currentWeapon != null)
+        {
+            currentWeapon.OnBloomUpdate -= UpdateBloom;
+		}
+
+		weapon.OnBloomUpdate += UpdateBloom;
+        currentWeapon = weapon;
+
+
+
+		var sprite = weapon.CrosshairUI;
+        var size = weapon.CrosshairSizeUI;
+
+		if (crosshairImage != null)
         {
             if (sprite == null)
             {
@@ -27,6 +41,15 @@ public class crosshairUI : MonoBehaviour
             crosshairImage.rectTransform.localScale = size;
         }
     }
+
+    void UpdateBloom(float bloom)
+    {
+		crosshairImage.rectTransform.localScale = 
+            currentWeapon.CrosshairSizeUI 
+            * (1f + 
+            bloom * currentWeapon.Data.BloomCrosshairsSizeMultiplier);
+
+	}
 
     //start
     private void Start()

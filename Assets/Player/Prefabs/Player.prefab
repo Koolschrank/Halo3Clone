@@ -10843,14 +10843,16 @@ MonoBehaviour:
   aimCorrectionDistance: 30
   aimCorrectionWidth: 10
   aimCorrectionMaxAngle: 20
-  aimCorrectionDeadzoneAngle: 2
+  aimCorrectionMaxAngleForAutoCorrection: 6
+  aimCorrectionDeadzoneAngle: 1
   aimCorrectionPlayerLayer:
     serializedVersion: 2
     m_Bits: 128
   aimCorrectionWallLayer:
     serializedVersion: 2
     m_Bits: 1
-  aimCorrectionSpeed: 10
+  aimCorrectionSpeed_Idle: 8
+  aimCorrectionSpeed_Aim: 25
   minSensitivity: 0.1
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1

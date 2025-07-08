@@ -80,6 +80,44 @@ MonoBehaviour:
   fireRateMultiplier: 1.2
   inaccuracyMultiplier: 5
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00999999
+      value: 0.50047123
+      inSlope: 3.1102736
+      outSlope: 3.1102736
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19444478
+    - serializedVersion: 3
+      time: 0.15333176
+      value: 1.0075378
+      inSlope: -0.02473777
+      outSlope: -0.02473777
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.69564605
+    - serializedVersion: 3
+      time: 0.9966736
+      value: 0.004711151
+      inSlope: -1.1891106
+      outSlope: -1.1891106
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.5
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -125,7 +163,7 @@ MonoBehaviour:
   bulletSize: {x: 3, y: 2}
   bulletsPerRow: 5
   crosshairs: {fileID: 21300000, guid: f7f976653bae9b04b91ad5b63bb284a8, type: 3}
-  crosshairsSize: {x: 0.7, y: 0.7}
+  crosshairsSize: {x: 0.5, y: 0.5}
   enemyAiWeaponData: {fileID: 11400000, guid: 59e56261a9f778e4c90c204afeae02b4, type: 2}
   gunAiBehaviour:
     IdealRange: 10

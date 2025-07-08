@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 4ee43ceabea92be4bac68d6956c65753, type: 3}
   weaponName: Plasma Rifle
   shootType: 1
-  fireRate: 0.1
+  fireRate: 0.09
   bulletsPerShot: 1
   magazineSize: 20
   maxAmmoInReserve: 300
@@ -29,12 +29,14 @@ MonoBehaviour:
   switchInTime: 0.2
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 0
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 0
@@ -69,6 +71,48 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 4.25
   reloadTimeMultiplier: 1.25
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.003
+  bloomTime: 0.3
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.003905392
+      outSlope: 0.003905392
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5096334
+      value: 1.0019903
+      inSlope: -0.010569545
+      outSlope: -0.010569545
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26708686
+    - serializedVersion: 3
+      time: 1.0066528
+      value: 0.0065994263
+      inSlope: -2.0027204
+      outSlope: -2.0027204
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.3
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
       Data1: 440703412
@@ -110,7 +154,7 @@ MonoBehaviour:
   bulletSize: {x: 1, y: 1}
   bulletsPerRow: 20
   crosshairs: {fileID: 21300000, guid: 726f2df23ded00148a6199fbeaadea8a, type: 3}
-  crosshairsSize: {x: 0.5, y: 0.6}
+  crosshairsSize: {x: 0.4, y: 0.5}
   enemyAiWeaponData: {fileID: 11400000, guid: cb28c8a3d5c98bc4d91d0f36becf952e, type: 2}
   gunAiBehaviour:
     IdealRange: 10

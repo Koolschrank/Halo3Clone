@@ -13,6 +13,7 @@ public class Weapon_Arms
     public Action<float> OnSwitchInStart;
     public Action<float> OnMeleeStart;
     public Action<float> OnRollStart;
+    public Action<float> OnBloomUpdate;
     public Action OnShot;
 
     public Action<GameObject> OnProjectileShot;
@@ -43,9 +44,11 @@ public class Weapon_Arms
     float fireRateMultiplierStat = 1;
     float reloadTimeMultiplierStat = 1;
     float switchTimeMultiplierStat = 1;
+    float bloomTimer = 0f;
 
+    public float BloomValue => bloomTimer != 0 ? weaponData.BloomCurve.Evaluate( 1-bloomTimer / weaponData.BloomTime) : 0;
 
-    public void SetStatSheet(PlayerBodyStatSheet statSheet)
+	public void SetStatSheet(PlayerBodyStatSheet statSheet)
     {
         if (!statSheet.useStatSheet) return;
 
@@ -54,10 +57,29 @@ public class Weapon_Arms
         switchTimeMultiplierStat = statSheet.playerStatsSheetInstance.weaponSwitchSpeedMultiplier;
 
     }
-    
 
 
-    public void SetFireRateMultiplier(float fireRateMultiplier)
+    public void TriggerBloom()
+    {
+        bloomTimer = weaponData.BloomTime;
+        OnBloomUpdate?.Invoke(BloomValue);
+	}
+
+    public void UpdateBloom()
+    {
+        if (bloomTimer > 0)
+        {
+            bloomTimer -= Time.deltaTime;
+            if (bloomTimer < 0)
+            {
+                bloomTimer = 0;
+            }
+            OnBloomUpdate?.Invoke(BloomValue);
+		}
+    }
+
+
+	public void SetFireRateMultiplier(float fireRateMultiplier)
     {
         this.fireRateMultiplier = fireRateMultiplier;
     }
@@ -137,7 +159,10 @@ public class Weapon_Arms
         {
             shootCooldown = 0;
         }
-    }
+
+        UpdateBloom();
+
+	}
 
     public bool UpdateBurstShot()
     {
@@ -230,10 +255,15 @@ public class Weapon_Arms
             {
                 Debug.LogError("Unknown bullet type");
             }
+
+
+            
         }
 
         
     }
+
+   
    
 
     public bool IsInShootCooldown()
@@ -345,9 +375,27 @@ public class Weapon_Arms
 
     public Weapon_Bullet Bullet => weaponData.WeaponBullet;
 
-    public float Inaccuracy => weaponData.GetInaccuracy(isBeingDualWielded);
+    public float Inaccuracy 
+    { get
+        {
+            float inaccuracy = weaponData.GetInaccuracy(isBeingDualWielded);
+            if (bloomTimer > 0)
+            {
+               
+                if (isBeingDualWielded)
+                    inaccuracy += BloomValue * weaponData.BloomInaccuracyMultiplier * weaponData.DualWieldInaccuracy;
+                else
+					inaccuracy += BloomValue * weaponData.BloomInaccuracyMultiplier;
+			}
 
-    public Weapon_Visual WeaponFPSModel => weaponData.WeaponFPSModel;
+			return inaccuracy;
+		}
+           
+    
+    }
+	
+
+	public Weapon_Visual WeaponFPSModel => weaponData.WeaponFPSModel;
 
     public PlayerMeleeAttack MeleeAttack => weaponData.MeleeData;
 

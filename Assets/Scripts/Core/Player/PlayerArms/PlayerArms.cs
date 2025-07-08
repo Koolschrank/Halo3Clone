@@ -23,8 +23,18 @@ public class PlayerArms : MonoBehaviour
 
     float movementSpeedMultiplier = 1;
 
-
-    public bool CanDualWield
+	public void TriggerBloomOnWeapons()
+	{
+		if (leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data.BloomOnShoot )
+		{
+			leftArm.CurrentWeapon.TriggerBloom();
+		}
+        if (rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data.BloomOnShoot)
+        {
+            rightArm.CurrentWeapon.TriggerBloom();
+		}
+	}
+	public bool CanDualWield
     {
         get
         {

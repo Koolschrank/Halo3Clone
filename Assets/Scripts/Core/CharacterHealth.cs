@@ -342,10 +342,23 @@ public class CharacterHealth : Health
         }
 
         if (!damagePackage.noScreenShake)
-            OnDamageTakenUnityEvent?.Invoke();
-        
+        {
+			OnDamageTakenUnityEvent?.Invoke();
 
-        shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            
+        }
+		if (playerArms.LeftArm.CurrentWeapon != null && playerArms.LeftArm.CurrentWeapon.Data.BloomOnTakingDamage)
+		{
+			playerArms.LeftArm.CurrentWeapon.TriggerBloom();
+		}
+		if (playerArms.RightArm.CurrentWeapon != null && playerArms.RightArm.CurrentWeapon.Data.BloomOnTakingDamage)
+		{
+			playerArms.RightArm.CurrentWeapon.TriggerBloom();
+		}
+
+
+
+		shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         if (hasShild && currentShild > 0)
         {
 

@@ -20,11 +20,11 @@ MonoBehaviour:
   shootType: 1
   fireRate: 0.08
   bulletsPerShot: 1
-  magazineSize: 36
+  magazineSize: 42
   maxAmmoInReserve: 400
   reloadTime: 1.75
   reloadGainAmmoTrigger: 0.83
-  inaccuracy: 0.03
+  inaccuracy: 0.003
   switchOutTime: 0.15
   switchInTime: 0.2
   canZoom: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
   burstDelay: 0.1
   hasKnockback: 1
   gunKnockback:
-    power: 0.7
+    power: 0.4
     duration: 0.1
     curve:
       serializedVersion: 2
@@ -71,6 +71,35 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 2.75
   reloadTimeMultiplier: 1.25
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.04
+  bloomTime: 0.3
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.9868353
+      outSlope: -0.9868353
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0066528
+      value: 0.0065994263
+      inSlope: -0.9868353
+      outSlope: -0.9868353
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 1
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -114,9 +143,9 @@ MonoBehaviour:
   gunSprite: {fileID: 21300000, guid: c95ce2627acbe7b45adf84e0b856e637, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
   bulletSize: {x: 1, y: 1}
-  bulletsPerRow: 18
+  bulletsPerRow: 21
   crosshairs: {fileID: 21300000, guid: 39c73e1f08ca5e54196153e30d0d53f7, type: 3}
-  crosshairsSize: {x: 0.4, y: 0.4}
+  crosshairsSize: {x: 0.2, y: 0.2}
   enemyAiWeaponData: {fileID: 11400000, guid: b4de0336ad4832c4ebbf183f2af555ea, type: 2}
   gunAiBehaviour:
     IdealRange: 10

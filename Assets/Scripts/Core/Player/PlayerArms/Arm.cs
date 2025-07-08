@@ -316,6 +316,7 @@ public class Arm : MonoBehaviour
                                 armState = ArmState.Shooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
                                 ApplyWeaponKnockback();
+                                playerArms.TriggerBloomOnWeapons();
                             }
                         }
                         else // if try to shoot but cannot because magazine is empty reload
@@ -335,7 +336,8 @@ public class Arm : MonoBehaviour
                                 armState = ArmState.InBurstShooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
                                 ApplyWeaponKnockback();
-                            }
+								playerArms.TriggerBloomOnWeapons();
+							}
                         }
                         else // if try to shoot but cannot because magazine is empty reload
                         {
@@ -353,7 +355,8 @@ public class Arm : MonoBehaviour
                                 armState = ArmState.Shooting;
                                 OnWeaponShoot?.Invoke(weaponInHand);
                                 ApplyWeaponKnockback();
-                            }
+								playerArms.TriggerBloomOnWeapons();
+							}
                         }
                         else // if try to shoot but cannot because magazine is empty reload
                         {

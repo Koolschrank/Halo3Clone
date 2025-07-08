@@ -41,7 +41,7 @@ MonoBehaviour:
   burstDelay: 0.06800005
   hasKnockback: 1
   gunKnockback:
-    power: 1
+    power: 0.5
     duration: 0.25
     curve:
       serializedVersion: 2
@@ -49,30 +49,39 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 4.6695037
-        outSlope: 4.6695037
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
-        time: 0.21334839
-        value: 0.9962311
-        inSlope: -0.10924992
-        outSlope: -0.10924992
+        time: 0.3092575
+        value: 0.99808884
+        inSlope: -0.37701112
+        outSlope: -0.37701112
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.30731252
+      - serializedVersion: 3
+        time: 0.6928181
+        value: 0.56431663
+        inSlope: -1.0440427
+        outSlope: -1.0440427
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.3700746
+        outWeight: 0.26441047
       - serializedVersion: 3
-        time: 0.98666674
-        value: 0.0065975916
-        inSlope: -1.2797233
-        outSlope: -1.2797233
-        tangentMode: 34
+        time: 0.97741395
+        value: 0.010357738
+        inSlope: -1.0514512
+        outSlope: -1.0514512
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
+        inWeight: 0.26154286
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -80,6 +89,44 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 2
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0
+  bloomTime: 0.25
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0036015548
+      value: 0.49672613
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.20356685
+      value: 0.99650097
+      inSlope: 0.0155195845
+      outSlope: 0.0155195845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9933485
+      value: 0.025448352
+      inSlope: -2.520724
+      outSlope: -2.520724
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08760626
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.25
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -133,7 +180,7 @@ MonoBehaviour:
   bulletSize: {x: 1, y: 1}
   bulletsPerRow: 15
   crosshairs: {fileID: 21300000, guid: b91cf2bf0144e2648bfdb19f3a675230, type: 3}
-  crosshairsSize: {x: 0.35, y: 0.35}
+  crosshairsSize: {x: 0.31, y: 0.31}
   enemyAiWeaponData: {fileID: 11400000, guid: 938e4d067d71b2d408dc82fbd148ea9f, type: 2}
   gunAiBehaviour:
     IdealRange: 10
