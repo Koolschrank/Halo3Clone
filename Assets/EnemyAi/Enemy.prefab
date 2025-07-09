@@ -216,6 +216,7 @@ MonoBehaviour:
   aim: {fileID: 5650545179290865720}
   movement: {fileID: 5666477850914292363}
   weapon: {fileID: 8505334828251919786}
+  granadeThrower: {fileID: 7235667831307345942}
   stunDuration: 1
 --- !u!114 &1163059816146870362
 MonoBehaviour:
@@ -235,6 +236,7 @@ MonoBehaviour:
     m_Bits: 16384
   framePause: 5
   move: {fileID: 5666477850914292363}
+  granadeThrower: {fileID: 7235667831307345942}
 --- !u!114 &6517739778669486501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,6 +916,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66b5d240d082db045a78ed61ae81f0a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7235667831307345942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 625404246279802593, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+  m_PrefabInstance: {fileID: 7838409973482450679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99b0023d39523347b4f982ea8d7f173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7357773068672706047 stripped

@@ -11,6 +11,13 @@ public class GranadeThrower : MonoBehaviour
     GranadeStats granadeStats = null;
     [SerializeField] Transform mainTransform;
     [SerializeField] AbilityInventory abilityInventory;
+    [SerializeField] CharacterHealth characterHealth;
+
+	private void Awake()
+	{
+        characterHealth.OnDeath += TryDropGranade;
+	}
+    public bool InGranadeThrow => throwDelay > 0;
 
 	public void ThrowGranadeStart(GranadeStats granadeStats , float timeMultiplier)
     {
@@ -73,6 +80,33 @@ public class GranadeThrower : MonoBehaviour
 		return granade;
     }
 
+    public void TryDropGranade()
+    {
+		if (throwDelay > 0)
+		{
+			DropGranade(granadeStats);
+            throwDelay = 0f;
+		}
+	}
+
+    public GameObject DropGranade(GranadeStats granadeStats)
+    {
+		if (granadeStats == null) return null;
+
+		Debug.Log(granadeStats.name);
+		GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation) as GameObject;
+
+		Rigidbody rb = granade.GetComponent<Rigidbody>();
+		OnGranadeThrow?.Invoke(granade);
+
+		if (granade.TryGetComponent<Granade>(out Granade granadeScript))
+		{
+			granadeScript.SetOwner(mainTransform.gameObject);
+
+		}
+		abilityInventory.UseSelectedIndex();
+		return granade;
+	}
 
 
 

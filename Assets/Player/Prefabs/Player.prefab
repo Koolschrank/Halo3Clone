@@ -10387,6 +10387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTransform: {fileID: 5698032335818744442}
   abilityInventory: {fileID: 4267228126375275963}
+  characterHealth: {fileID: 782412234501442312}
 --- !u!1 &7848658949781454715
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,8 +7,9 @@ public class AI_Stun : MonoBehaviour
     [SerializeField] AI_Aim aim;
     [SerializeField] AI_Move movement;
     [SerializeField] AI_Shoot weapon;
+    [SerializeField] GranadeThrower granadeThrower;
 
-    [SerializeField] float stunDuration = 0.7f;
+	[SerializeField] float stunDuration = 0.7f;
     float stunTimer = 0f;
 
     private void Start()
@@ -28,8 +29,9 @@ public class AI_Stun : MonoBehaviour
         weapon.enabled = false;
         AIanimation.Stun();
         stunTimer = stunDuration;
+        granadeThrower.TryDropGranade();
 
-    }
+	}
 
     private void Update()
     {
