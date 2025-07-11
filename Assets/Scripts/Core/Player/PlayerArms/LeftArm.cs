@@ -3,6 +3,9 @@ using static Arm;
 
 public class LeftArm : Arm
 {
+
+
+
     [SerializeField] bool noInvectoryInteraction = false;
 
     public bool NoInvectoryInteraction => noInvectoryInteraction;

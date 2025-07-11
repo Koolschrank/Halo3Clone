@@ -23,6 +23,7 @@ public class Arm : MonoBehaviour
     public Action<Weapon_Arms> OnZoomIn;
     public Action<Weapon_Arms> OnZoomOut;
     public Action<int> OnReserveAmmoChanged;
+    
 
 
     [Header("References")]
@@ -711,9 +712,9 @@ public class Arm : MonoBehaviour
 
     public void PickUpWeapon(Weapon_Arms weapon)
     {
+		
 
-
-        EquipWeapon(weapon);
+		EquipWeapon(weapon);
     }
 
     public void PressGranadeButton()

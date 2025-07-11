@@ -16,7 +16,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform weaponSocket;
     [SerializeField] Transform weaponSocketLeftHand;
-    [SerializeField] Rig rig;
+
+	[SerializeField] Transform weaponSocketShild;
+
+	[SerializeField] Transform weaponSocketBack;
+	[SerializeField] Rig rig;
 
 
     [Header("Shild")]
@@ -88,7 +92,12 @@ public class PlayerAnimation : MonoBehaviour
         playerArms.LeftArm.OnWeaponDroped += (weapon, pickup) => DropWeaponLeftWeapon(weapon);
         playerArms.LeftArm.OnWeaponUnequipFinished += DropWeaponLeftWeapon;
 
-        characterHealth.OnShildDamageTaken += ShildDamageTaken;
+		playerArms.LeftArm.OnZoomIn += (weapon) => SetShildOnHand();
+
+		playerArms.LeftArm.OnZoomOut += (weapon) => SetShildOnBack();
+
+
+		characterHealth.OnShildDamageTaken += ShildDamageTaken;
         characterHealth.OnShildDepleted += ShildDepleted;
         characterHealth.OnShildRechargeStarted += ShildRechargeStarted;
         characterHealth.OnDeath += DisableShildpPartical;
@@ -267,6 +276,9 @@ public class PlayerAnimation : MonoBehaviour
 
     public void Reload(Weapon_Arms weapon,float animationDuration)
     {
+        if (weaponVisualLeftHand != null && weaponVisualLeftHand.GetComponent<Weapon_Model>().IsShild) return;
+
+
         var reloadClip = GetAnimationClipByName("Reload");
         var animationLenght = GetAnimationLenght(reloadClip);
         SetAnimationSpeed(reloadClip, animationLenght, animationDuration);
@@ -295,6 +307,8 @@ public class PlayerAnimation : MonoBehaviour
         if (weaponVisualLeftHand != null)
         {
             Destroy(weaponVisualLeftHand.gameObject);
+
+            EnableLeftHandGrip();
         }
     }
 
@@ -333,9 +347,20 @@ public class PlayerAnimation : MonoBehaviour
         weaponVisual.transform.localRotation = Quaternion.identity;
         if (weaponVisual.TryGetComponent<Weapon_Model>(out Weapon_Model weaponModel))
         {
-            weaponModel.SetUp(weapon);
+			weaponModel.SetUp(weapon);
+			//if (weaponVisualLeftHand == null || !weaponVisualLeftHand.GetComponent<Weapon_Model>().IsShild)
+            if (!shilding)
+            {
+				
+				var animationValue = 0f;
+				if (weaponModel.WeaponAnimationIndex == 1)
+					animationValue = 0.5f;
+				else if (weaponModel.WeaponAnimationIndex == 2)
+					animationValue = 1f;
+				animator.SetFloat("WeaponType", animationValue);
 
-            animator.SetFloat("WeaponType", (float)weaponModel.WeaponAnimationIndex);
+                EnableLeftHandGrip();
+			}
         }
         UtilityFunctions.SetLayerRecursively(weaponVisual, gameObject.layer);
     }
@@ -363,8 +388,17 @@ public class PlayerAnimation : MonoBehaviour
         if (weaponVisualLeftHand.TryGetComponent<Weapon_Model>(out Weapon_Model weaponModel))
         {
             weaponModel.SetUp(weapon);
+
+            if (weaponModel.IsShild)
+            {
+                SetShildOnBack();
+			}
         }
-        UtilityFunctions.SetLayerRecursively(weaponVisualLeftHand, gameObject.layer);
+
+		
+
+
+		UtilityFunctions.SetLayerRecursively(weaponVisualLeftHand, gameObject.layer);
     }
 
     public void Melee(Weapon_Arms weapon, float animationDuration)
@@ -577,6 +611,8 @@ public class PlayerAnimation : MonoBehaviour
 
     public void EnableLeftHandGrip()
     {
+        if (weaponVisualLeftHand != null && weaponVisualLeftHand.GetComponent<Weapon_Model>().IsShild) return;
+
         leftHandGripActive = true;
     }
 
@@ -584,4 +620,54 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.SetBool("Crouch", value);
     }
+
+    bool shilding = false;
+    public void SetShildOnHand()
+    {
+
+        if (weaponVisualLeftHand == null || !weaponVisualLeftHand.GetComponent<Weapon_Model>().IsShild) return;
+
+		shilding = true;
+
+		weaponVisualLeftHand.transform.SetParent(weaponSocketShild);
+		weaponVisualLeftHand.transform.position = Vector3.zero;
+        weaponVisualLeftHand.transform.rotation = Quaternion.identity;
+
+		animator.SetFloat("WeaponType", 1f);
+		DisableLeftHandGrip();
+		weaponVisualLeftHand.transform.SetParent(weaponSocketShild);
+		weaponVisualLeftHand.transform.localPosition = Vector3.zero;
+		weaponVisualLeftHand.transform.localRotation = Quaternion.identity;
+	}
+
+    public void SetShildOnBack()
+    {
+		if (weaponVisualLeftHand == null || !weaponVisualLeftHand.GetComponent<Weapon_Model>().IsShild) return;
+        shilding = false;
+
+		weaponVisualLeftHand.transform.SetParent(weaponSocketBack);
+		weaponVisualLeftHand.transform.localPosition = Vector3.zero;
+		weaponVisualLeftHand.transform.localRotation = Quaternion.identity;
+
+		var animationValue = 0f;
+
+        if (weaponVisual != null)
+        {
+			var rightWeapon = weaponVisual.GetComponent<Weapon_Model>();
+			if (rightWeapon.WeaponAnimationIndex == 1)
+				animationValue = 0.5f;
+			else if (rightWeapon.WeaponAnimationIndex == 2)
+				animationValue = 1f;
+			animator.SetFloat("WeaponType", animationValue);
+
+			
+		}
+        else
+        {
+			animator.SetFloat("WeaponType", 0f);
+		}
+		EnableLeftHandGrip();
+
+
+	}
 }

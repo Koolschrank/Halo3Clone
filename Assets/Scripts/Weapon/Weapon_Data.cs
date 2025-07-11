@@ -40,6 +40,8 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] PlayerMeleeAttack meleeData;
     [SerializeField] WeaponType weaponType;
     [SerializeField] bool canNotBeInInventory = false;
+    [SerializeField] bool canOnlyBeHeldInLeftHand = false;
+    
 
 
 
@@ -73,6 +75,7 @@ public class Weapon_Data : ScriptableObject
 	[Header("Block")]
     [SerializeField] bool hasBlock;
     [SerializeField] Block block;
+    [SerializeField] bool reduceScreenShakeWhenAiming = false;
 
 	[Header("Sound")]
     [SerializeField] EventReference shootSound;
@@ -167,7 +170,11 @@ public class Weapon_Data : ScriptableObject
 
     public bool CanZoom => canZoom;
 
+    public bool CanOnlyBeInLeftHand => canOnlyBeHeldInLeftHand;
+
     public float ZoomFOV => zoomFOV;
+
+    public bool ReduceScreenShakeWhenAiming => reduceScreenShakeWhenAiming;
 
     public int BulletsPerShoot => Mathf.Max(bulletsPerShot,1);
 

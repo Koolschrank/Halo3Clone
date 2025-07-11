@@ -29,10 +29,11 @@ public class PlayerCamera : MonoBehaviour
     float baseFOV = 75f;
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
+	CinemachineImpulseListener impulseListener;
 
 
 
-    public void SetVignetteIntensity(float power)
+	public void SetVignetteIntensity(float power)
     {
         if (volume == null)
             return;
@@ -104,15 +105,22 @@ public class PlayerCamera : MonoBehaviour
         bloom.intensity.value = power;
 	}
 
-
+	
 	public void SetCinemachineCamera(CinemachineCamera cam)
     {
         cCam = cam;
         volume = cCam.GetComponentInChildren<Volume>();
         SetBaseFOV(cCam.Lens.FieldOfView);
-    }
+		impulseListener = cCam.GetComponent<CinemachineImpulseListener>();
+	}
 
-    public void SetBaseFOV(float fov)
+	public void SetGainOnInpulsListiner(float value)
+	{
+		impulseListener.Gain = value;
+
+	}
+
+	public void SetBaseFOV(float fov)
     {
         baseFOV = fov;
     }
@@ -127,6 +135,11 @@ public class PlayerCamera : MonoBehaviour
         {
 			zoomedInFOV = weapon.ZoomFOV;
 		}
+
+        if (weapon.Data.ReduceScreenShakeWhenAiming)
+        {
+            SetGainOnInpulsListiner(0.3f);
+        }
             
         isZoomedIn = true;
     }
@@ -134,12 +147,14 @@ public class PlayerCamera : MonoBehaviour
     public void ZoomOut()
     {
         isZoomedIn = false;
-    }
+		SetGainOnInpulsListiner(1f);
+	}
 
     public void ZoomOut(Weapon_Arms weapon)
     {
         isZoomedIn = false;
-    }
+		SetGainOnInpulsListiner(1f);
+	}
 
     private void Update()
     {

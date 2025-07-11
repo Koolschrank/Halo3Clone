@@ -85,7 +85,12 @@ public class PlayerArms : MonoBehaviour
         {
             SetDamageReduction();
             SetMovementSpeedMultiplier();
-        };
+
+			if (leftArm.CurrentWeapon != null)
+			{
+				EnterDualWielding();
+			}
+		};
 
         rightArm.OnWeaponDroped += (weapon, pickUp) =>
         {

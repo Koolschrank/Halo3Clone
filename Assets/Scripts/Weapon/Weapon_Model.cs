@@ -6,11 +6,12 @@ public class Weapon_Model : MonoBehaviour
     protected Weapon_Arms weapon;
     [SerializeField] protected Transform bulletSpawnPoint;
     [SerializeField] protected GameObject muzzleFlash;
-    [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol
+    [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol, 2 Shild 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool IsShild => weaponAnimationIndex == 2;
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public virtual void SetUp(Weapon_Arms weapon)
+	public virtual void SetUp(Weapon_Arms weapon)
     {
         this.weapon = weapon;
         weapon.OnProjectileShot += SpawnProjectileClone;

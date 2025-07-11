@@ -17,7 +17,7 @@ public class Aura : MonoBehaviour
     [SerializeField] float damageReductionMultiplier = 0.5f;
 
     [SerializeField] float poisonDamage = 0f;
-    [SerializeField] float moveSpeedHandicap = 0f;
+	[SerializeField] float moveSpeedHandicap = 0f;
     [SerializeField] GameObject forceShild;
     [SerializeField] bool ignoreAICharacters = false;
 

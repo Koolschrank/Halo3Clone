@@ -7,6 +7,7 @@ public class FireDamageOverTime : MonoBehaviour
     [SerializeField] float damage = 1f;
     [SerializeField] LayerMask layerMask;
     [SerializeField] float damageRate = 0.3f;
+    [SerializeField] float damageReductionAgainstBlock = 0f;
     float damageTimer = 0f;
 
     [SerializeField] float height = 1f;
@@ -48,7 +49,7 @@ public class FireDamageOverTime : MonoBehaviour
             damagePackage.owner = owner;
             damagePackage.hasHitMarkerEffect = false;
 
-
+            damagePackage.damageReductionAgainstBlock = damageReductionAgainstBlock;
 
 
             damageTimer = damageRate;

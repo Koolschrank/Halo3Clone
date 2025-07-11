@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
+
 public class PlayerMind : MonoBehaviour
 {
     public UnityEvent OnPlayerDeath;
@@ -218,10 +219,15 @@ public class PlayerMind : MonoBehaviour
         cooldownSystem.Setup(inventory, this);
     }
 
+	
     public void SetCinemaCamera(CinemachineCamera cCam)
     {
         playerCamera.SetCinemachineCamera(cCam);
-    }
+		
+
+	}
+
+    
 
 
 
@@ -245,7 +251,9 @@ public class PlayerMind : MonoBehaviour
         {
             playerArms.RightArm.OnZoomIn -= playerCamera.ZoomIn;
             playerArms.RightArm.OnZoomOut -= playerCamera.ZoomOut;
-            playerArms.OnDualWieldingEntered -= EnterDualWeaponMode;
+			arms.LeftArm.OnZoomIn -= playerCamera.ZoomIn;
+			arms.LeftArm.OnZoomOut -= playerCamera.ZoomOut;
+			playerArms.OnDualWieldingEntered -= EnterDualWeaponMode;
             playerArms.OnDualWieldingExited -= EnterOneWeaponMode;
             playerArms.OnDualWieldingExited -= weaponUI_LeftArm.Disable;
 
@@ -262,9 +270,11 @@ public class PlayerMind : MonoBehaviour
         arms.OnDualWieldingExited += weaponUI_LeftArm.Disable;
         arms.RightArm.OnZoomIn += playerCamera.ZoomIn;
         arms.RightArm.OnZoomOut += playerCamera.ZoomOut;
+		arms.LeftArm.OnZoomIn += playerCamera.ZoomIn;
+		arms.LeftArm.OnZoomOut += playerCamera.ZoomOut;
 
 
-        arms.OnDualWieldingEntered += EnterDualWeaponMode;
+		arms.OnDualWieldingEntered += EnterDualWeaponMode;
         arms.OnDualWieldingExited += EnterOneWeaponMode;
 
         arms.RightArm.OnWeaponEquipStarted += (weapon, time) => crosshairUI.ChangeSprite(weapon);
@@ -500,6 +510,14 @@ public class PlayerMind : MonoBehaviour
         if (playerArms == null) return;
         if (context.performed)
         {
+            if (playerArms.RightArm.CurrentWeapon == null)
+            {
+                playerArms.LeftArm.DropWeapon();
+                playerArms.RightArm.PressSwitchButton();
+                return;
+            }
+
+
             if (playerArms.RightArm.CurrentWeapon.WeaponType != WeaponType.oneHanded && !playerArms.CanDualWield2HandedWeapons)
             {
                 playerArms.RightArm.PressSwitchButton();
@@ -591,11 +609,18 @@ public class PlayerMind : MonoBehaviour
 
         if (context.performed)
         {
-            playerArms.RightArm.PressZoomButton();
-        }
+            if (playerArms.RightArm.CurrentWeapon != null)
+				playerArms.RightArm.PressZoomButton();
+            else 
+                playerArms.LeftArm.PressZoomButton();
+
+		}
         else if (context.canceled)
         {
-            playerArms.RightArm.ReleaseZoomButton();
+			if (playerArms.RightArm.CurrentWeapon != null)
+				playerArms.RightArm.ReleaseZoomButton();
+			else
+				playerArms.LeftArm.ReleaseZoomButton();
         }
     }
 

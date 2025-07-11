@@ -77,7 +77,7 @@ public class CharacterHealth : Health
     [NonSerialized]
     public float aura_poisonDamage = 0.0f;
 
-    public float ArmorValue     {
+	public float ArmorValue     {
         get { return currentArmor / maxArmor; }
 	}
 	public void MultiplyHealth(float multiplier)
@@ -239,7 +239,9 @@ public class CharacterHealth : Health
                 canHeadShotShild = false,
                 headShotMultiplier = 1f,
                 shildDamageMultiplier = 1f
+                
             };
+            damagePackage.damageReductionAgainstBlock = 0;
             damagePackage.noScreenShake = true; // no screen shake for poison damage
 
 			TakeDamage(damagePackage);
@@ -325,10 +327,20 @@ public class CharacterHealth : Health
             && playerArms.RightArm.CurrentWeapon.Data.HasBlock 
             && playerArms.RightArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
         {
-            damage *= (1 - playerArms.RightArm.CurrentWeapon.Data.DamageBlock.blockPercentage);
-        }
+			damage *= (1 - playerArms.RightArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
+		}
+        else if (
+			playerArms.LeftArm.IsInZoom
+			&& playerArms.LeftArm.CurrentWeapon != null
+			&& playerArms.LeftArm.CurrentWeapon.Data.HasBlock
+			&& playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
+        {
+			damage *= (1 - playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
+		}
 
-        TargetHitCollector damageDealer = null;
+        if (damage == 0) return;
+
+			TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();

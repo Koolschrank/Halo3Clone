@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
-  m_Name: Sword
+  m_Name: Shild
   m_EditorClassIdentifier: 
-  weaponPickUp: {fileID: 1358379668584700671, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  weaponPickUp: {fileID: 1358379668584700671, guid: 836a5c72553744c4c9c547956b28d9e8, type: 3}
   weaponBullet: {fileID: 0}
-  weaponFPSModel: {fileID: 6899193775294056288, guid: 447cd0b5175b5ab43a2b590fd1755af8, type: 3}
-  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 0040dcf45c1b5cd4ba15dee487392d6b, type: 3}
-  weaponName: Sword
-  shootType: 3
+  weaponFPSModel: {fileID: 6899193775294056288, guid: e68b3e6fad356984691ebbc7627b163f, type: 3}
+  weapon3rdPersonModel: {fileID: 6065395483224059402, guid: a793b5ebcdc476d4e8ef0ac12949f6b3, type: 3}
+  weaponName: Shild
+  shootType: 4
   fireRate: 1
   bulletsPerShot: 1
   magazineSize: 1
@@ -29,14 +29,15 @@ MonoBehaviour:
   switchInTime: 0.5
   canZoom: 1
   zoomFOV: 0
-  zoomMoveSpeed: 0.6
-  moveSpeedMultiplier: 1
+  zoomMoveSpeed: 0.25
+  moveSpeedMultiplier: 0.8
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: dd3f5b5bb5d13ad4f8f00cd928b88704, type: 2}
-  weaponType: 1
+  meleeData: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  weaponType: 0
   canNotBeInInventory: 0
-  autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
-  autoAimType: 0
+  canOnlyBeHeldInLeftHand: 1
+  autoAim: {fileID: 11400000, guid: 2cba961df9384ee4ea963a87eef5bd5d, type: 2}
+  autoAimType: 2
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 0
@@ -84,9 +85,9 @@ MonoBehaviour:
   bloomCrosshairsSizeMultiplier: 2
   hasBlock: 1
   block:
-    blockPercentage: 0.75
-    blockAngle: 180
-  reduceScreenShakeWhenAiming: 0
+    blockPercentage: 0.95
+    blockAngle: 90
+  reduceScreenShakeWhenAiming: 1
   shootSound:
     Guid:
       Data1: 0
@@ -98,11 +99,11 @@ MonoBehaviour:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: -1010900051
-          Data2: 1210736416
-          Data3: -421522780
-          Data4: -803693305
-        Path: event:/SFX/Guns/Sword/SwitchIn
+          Data1: -1047863842
+          Data2: 1165711099
+          Data3: -595400005
+          Data4: -25755214
+        Path: event:/SFX/Guns/AssultRifle/SwitchIn
       timeOfPlay: 0.05
   reloadSounds:
     timedSounds: []

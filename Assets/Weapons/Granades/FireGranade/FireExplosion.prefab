@@ -197,6 +197,7 @@ MonoBehaviour:
   range: 3
   damage: 70
   damageOnShildMultiplier: 1
+  damageReductionAgainstBlocking: 0.1
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -250,6 +251,9 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 1
   damageReductionIfObstructed: 0.4
   timeForSelfDestruction: 10
   explosionSound:
@@ -281,6 +285,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   damageRate: 0.05
+  damageReductionAgainstBlock: 0
   height: 1
   depth: 1
   aliveTime: 7
