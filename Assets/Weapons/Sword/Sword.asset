@@ -33,9 +33,10 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: dd3f5b5bb5d13ad4f8f00cd928b88704, type: 2}
-  autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 0
@@ -52,6 +53,35 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
   hasBlock: 1
   block:
     blockPercentage: 0.6
@@ -64,7 +94,15 @@ MonoBehaviour:
       Data4: 0
     Path: 
   switchInSound:
-    timedSounds: []
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: -1010900051
+          Data2: 1210736416
+          Data3: -421522780
+          Data4: -803693305
+        Path: event:/SFX/Guns/Sword/SwitchIn
+      timeOfPlay: 0.05
   reloadSounds:
     timedSounds: []
   showAmmo: 0

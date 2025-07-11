@@ -342,12 +342,19 @@ MonoBehaviour:
   gameObjectsToEnableOnTimerStart:
   - {fileID: 3823317000831684551}
   hasChargeObject: 1
-  timeUntilExplosionToSpawnChargeObject: 1.4
+  timeUntilExplosionToSpawnChargeObject: 1
   chargeObjectPrefab: {fileID: 4921346081555748454, guid: fb9ade85743c9e54e9406e5bc07445ee, type: 3}
+  chargeSound:
+    Guid:
+      Data1: -1856954706
+      Data2: 1222690826
+      Data3: 1228148114
+      Data4: 1292131896
+    Path: event:/SFX/Granades/PlasmaGranade/Charge
   bounceSound:
     Guid:
-      Data1: 2049862455
-      Data2: 1121423829
-      Data3: 1488806821
-      Data4: -1878431026
-    Path: event:/SFX/Granades/BaseGranade/Bounce
+      Data1: -1102205679
+      Data2: 1147434515
+      Data3: -1371474299
+      Data4: 1156754275
+    Path: event:/SFX/Granades/PlasmaGranade/Enable

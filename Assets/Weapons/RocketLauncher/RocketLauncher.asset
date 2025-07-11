@@ -133,14 +133,22 @@ MonoBehaviour:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1232892853
-          Data2: 1258534099
-          Data3: -758304624
-          Data4: -855647888
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
-      timeOfPlay: 0.25
+          Data1: 1446750562
+          Data2: 1149312430
+          Data3: -1420783230
+          Data4: -1548802744
+        Path: event:/SFX/Guns/RocketLauncher/SwitchIn
+      timeOfPlay: 0.1
   reloadSounds:
-    timedSounds: []
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1078687015
+          Data2: 1203002884
+          Data3: -1721329226
+          Data4: -509001751
+        Path: event:/SFX/Guns/RocketLauncher/Reload/ReloadEnd
+      timeOfPlay: 0.1
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 3b08c177acc333a4da30da7532c070ab, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}

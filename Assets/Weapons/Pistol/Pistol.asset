@@ -126,7 +126,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  bloomCrosshairsSizeMultiplier: 0.65
+  bloomCrosshairsSizeMultiplier: 0.9
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -146,7 +146,7 @@ MonoBehaviour:
           Data2: 1295931201
           Data3: 1919505326
           Data4: 648640732
-        Path: event:/SFX/Guns/Pistol/EnableGun
+        Path: event:/SFX/Guns/Pistol/SwitchIn
       timeOfPlay: 0.2
   reloadSounds:
     timedSounds:
@@ -172,7 +172,7 @@ MonoBehaviour:
   bulletSize: {x: 2, y: 2}
   bulletsPerRow: 10
   crosshairs: {fileID: 21300000, guid: 39c73e1f08ca5e54196153e30d0d53f7, type: 3}
-  crosshairsSize: {x: 0.2, y: 0.2}
+  crosshairsSize: {x: 0.16, y: 0.16}
   enemyAiWeaponData: {fileID: 11400000, guid: 3f00457beb22cd04fb20fea487ac9fc2, type: 2}
   gunAiBehaviour:
     IdealRange: 10

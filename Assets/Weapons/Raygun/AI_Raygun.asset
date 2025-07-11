@@ -20,20 +20,23 @@ MonoBehaviour:
   shootType: 0
   fireRate: 1
   bulletsPerShot: 1
-  magazineSize: 3
+  magazineSize: 5
   maxAmmoInReserve: 15
   reloadTime: 2.2
+  reloadGainAmmoTrigger: 0.9
   inaccuracy: 0.01
   switchOutTime: 0.2
   switchInTime: 0.5
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 3
   burstDelay: 0.1
   hasKnockback: 1
@@ -77,23 +80,56 @@ MonoBehaviour:
   fireRateMultiplier: 1.2
   inaccuracyMultiplier: 5
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
       Data1: 740982116
       Data2: 1175705474
       Data3: 1506055300
       Data4: 737269529
-    Path: event:/SFX/Guns/PlasmaGranadeLauncher/PlasmaShot
+    Path: event:/SFX/Guns/Raygun/Shoot
   switchInSound:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1737366809
-          Data2: 1246450988
-          Data3: 54988733
-          Data4: -602697179
-        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
-      timeOfPlay: 0.4
+          Data1: -77892396
+          Data2: 1128650640
+          Data3: 2120885934
+          Data4: -1334631121
+        Path: event:/SFX/Guns/Raygun/SwitchIn
+      timeOfPlay: 0.2
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -127,3 +163,4 @@ MonoBehaviour:
     moveSpeedWithGun: 0.7
     crouchDistance: 7
     minDistanceToDogeWhenTakingDamage: 30
+  upgradedWeaponData: {fileID: 0}

@@ -298,3 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae703e257db9d2a4da6fcf7ea79739a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSound:
+    Guid:
+      Data1: -1849834022
+      Data2: 1283254502
+      Data3: -252374117
+      Data4: 2022337303
+    Path: event:/SFX/Player/PickUpPowerUp

@@ -43,8 +43,10 @@ public class CharacterHealth : Health
     EventInstance shildRechargeSoundInstance;
     [SerializeField] EventReference shildPopSound;
 
+	[SerializeField] EventReference deathSound;
 
-    public Action<float> OnShildChanged;
+
+	public Action<float> OnShildChanged;
     public Action<float> OnMaxShildChanged;
     public Action OnShildDepleted;
     public UnityEvent OnDamageTakenUnityEvent;
@@ -187,15 +189,14 @@ public class CharacterHealth : Health
         shildEmptySoundInstance = RuntimeManager.CreateInstance(shildEmptySound);
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
 
-        if (MapLoader.instance != null)
+		if (MapLoader.instance != null)
             damageMultiplier = MapLoader.instance.GetDamageMultiplier();
     }
 
     // update
     public override void Update()
     {
-        if (dead)
-            return;
+        
 
         base.Update();
         if (shildRegenTimer > 0 && hasShild)
@@ -475,7 +476,10 @@ public class CharacterHealth : Health
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        float timeToKill = Time.time - firstShotTime;
+        if (GetComponent<BodyMindConnection>().Mind != null)
+		    AudioManager.instance.PlayOneShot(deathSound, transform.position);
+
+		float timeToKill = Time.time - firstShotTime;
         Debug.Log("Time to kill: " + timeToKill);
     }
 

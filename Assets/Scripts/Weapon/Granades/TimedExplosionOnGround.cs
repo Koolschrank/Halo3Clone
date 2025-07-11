@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class TimedExplosionOnGround : TimedExplosion
@@ -14,9 +15,13 @@ public class TimedExplosionOnGround : TimedExplosion
             base.OnCollisionEnter(collision);
         }
         // if collision has health
-        if (collision.gameObject.TryGetComponent<Health>(out Health health))
+        else if (collision.gameObject.TryGetComponent<Health>(out Health health))
         {
             base.OnCollisionEnter(collision);
         }
-    }
+		else
+		{
+			RuntimeManager.PlayOneShot(bounceSound, transform.position);
+		}
+	}
 }

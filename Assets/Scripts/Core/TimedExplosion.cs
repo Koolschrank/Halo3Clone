@@ -17,14 +17,17 @@ public class TimedExplosion : MonoBehaviour
 
     float timer;
 
+    [Header("Charge")]
     [SerializeField] bool hasChargeObject = false;
     [SerializeField] float timeUntilExplosionToSpawnChargeObject = 1f;
     [SerializeField] GameObject chargeObjectPrefab;
-    bool chargeObjectSpawned = false;
+
+	[SerializeField] EventReference chargeSound;
+	bool chargeObjectSpawned = false;
 
 
 	[Header("Sound")]
-    [SerializeField] EventReference bounceSound;
+    [SerializeField] protected EventReference bounceSound;
     
 
 
@@ -114,8 +117,7 @@ public class TimedExplosion : MonoBehaviour
         {
             var charge =Instantiate(chargeObjectPrefab, transform);
             chargeObjectSpawned = true;
-
-
+			RuntimeManager.PlayOneShot(chargeSound, transform.position);
 		}
 		
 	}

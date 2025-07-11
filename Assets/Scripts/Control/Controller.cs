@@ -80,6 +80,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7dffa01-4062-4e0e-ba91-37cb424957d6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06f80d23-15bb-4f4c-8c5b-faef39817dbc"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afa1fbe9-2fd2-4020-bdc8-ce3b377d6f37"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1071,6 +1102,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player_SwitchTeam = m_Player.FindAction("SwitchTeam", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // PlayerGunPlay_SingleWeapon
         m_PlayerGunPlay_SingleWeapon = asset.FindActionMap("PlayerGunPlay_SingleWeapon", throwIfNotFound: true);
         m_PlayerGunPlay_SingleWeapon_ShootWeapon = m_PlayerGunPlay_SingleWeapon.FindAction("ShootWeapon", throwIfNotFound: true);
@@ -1176,6 +1208,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchTeam;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Roll;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
@@ -1186,6 +1219,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @SwitchTeam => m_Wrapper.m_Player_SwitchTeam;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1213,6 +1247,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1235,6 +1272,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1598,6 +1638,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnSwitchTeam(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPlayerGunPlay_SingleWeaponActions
     {

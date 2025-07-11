@@ -13,6 +13,8 @@ public class GranadeThrower : MonoBehaviour
     [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] CharacterHealth characterHealth;
 
+    float soundTriggerDelay = 0f;
+
 	private void Awake()
 	{
         characterHealth.OnDeath += TryDropGranade;
@@ -23,7 +25,9 @@ public class GranadeThrower : MonoBehaviour
     {
         this.granadeStats = granadeStats;
         throwDelay = granadeStats.ThrowDelay * timeMultiplier;
-    }
+
+        soundTriggerDelay = granadeStats.ThrowSoundDelay * timeMultiplier;
+	}
 
     public void Update()
     {
@@ -37,7 +41,16 @@ public class GranadeThrower : MonoBehaviour
             }
         }
 
-    }
+        if (soundTriggerDelay > 0)
+        {
+            soundTriggerDelay -= Time.deltaTime;
+            if (soundTriggerDelay <= 0)
+            {
+				AudioManager.instance.PlayOneShot(granadeStats.ThrowSound, transform.position);
+			}
+		}
+
+	}
 
     // todo: a lot of redundant code here
     public GameObject ThrowGranadeWithWeapon(GranadeStats granadeStats, Vector3 inaccuracy)

@@ -18,3 +18,11 @@ MonoBehaviour:
   throwForce: 11.5
   granadePrefab: {fileID: 5187455782990611905, guid: 9b8288614a15d114eb42fa9ff7746a3b, type: 3}
   granadeClonePrefab: {fileID: 5187455782990611905, guid: 8558fbcc24732214197c1b59b65e2d07, type: 3}
+  throwSound:
+    Guid:
+      Data1: -81824024
+      Data2: 1169886754
+      Data3: -291200382
+      Data4: 1188716826
+    Path: event:/SFX/Granades/PlasmaGranade/Throw
+  throwSoundDelay: 0.02

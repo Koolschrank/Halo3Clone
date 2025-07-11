@@ -124,11 +124,11 @@ MonoBehaviour:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1737366809
-          Data2: 1246450988
-          Data3: 54988733
-          Data4: -602697179
-        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
+          Data1: -653610065
+          Data2: 1280699490
+          Data3: -784983893
+          Data4: -897674879
+        Path: event:/SFX/Guns/PlasmaRifle/SwitchIn
       timeOfPlay: 0.2
   reloadSounds:
     timedSounds:

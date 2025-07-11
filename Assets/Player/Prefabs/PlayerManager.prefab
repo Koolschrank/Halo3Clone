@@ -1008,6 +1008,7 @@ GameObject:
   - component: {fileID: 7993797489542610563}
   - component: {fileID: 5000775822283282443}
   - component: {fileID: 465907222396707810}
+  - component: {fileID: 8164885341825693715}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1889,6 +1890,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGainEXP: 0
   expRequirments: 96000000fa000000c20100008a02000020030000e8030000e2040000dc050000d6060000d0070000b80b00008813000010270000
+--- !u!114 &8164885341825693715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151862695114880791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae345340663b9d4badf1832be4995a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8781002057444987038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +1976,7 @@ MonoBehaviour:
   - {fileID: 1348920957298140003}
   - {fileID: 1177260246957894900}
   checkInterval: 0.05
+  teamOnHill: -1
 --- !u!1 &8856300298903435038
 GameObject:
   m_ObjectHideFlags: 0

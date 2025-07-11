@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49783adb2bfa017408731de8d90d7991, type: 3}
   m_Name: StickyGranad_3Uses
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3370b011756b5a64a90acaddd0e9852b, type: 3}
+  icon: {fileID: 21300000, guid: 1929084871d37144a86efdb18fb81e8f, type: 3}
   cooldownTime: 999999
   maxCharges: 2
   removeWhenEmpty: 1

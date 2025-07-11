@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/Maps/Island2.unity
     guid: 506ef793a888f464b9784d52aee951e7
   - enabled: 1
+    path: Assets/Maps/SimpleMap.unity
+    guid: f9a39924e6787e348963c077d4b406e8
+  - enabled: 1
     path: Assets/Maps/Streets2.unity
     guid: 92e53a5d78a55c44eb10c9bd32bd771b
   m_configObjects:

@@ -604,6 +604,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f0e1497a6e1964d83757502a798a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSound:
+    Guid:
+      Data1: 165017952
+      Data2: 1102575979
+      Data3: 364017064
+      Data4: 856397052
+    Path: event:/SFX/Player/PickUpGranade
   abilityData: {fileID: 11400000, guid: 42e25d5858c20a94598037810b625068, type: 2}
 --- !u!4 &6333519386684073208 stripped
 Transform:

@@ -26,7 +26,7 @@ public class Granade : MonoBehaviour
     void Start()
     {
         lastPosition = transform.position;
-        RuntimeManager.PlayOneShot(throwSound, transform.position);
+        //RuntimeManager.PlayOneShot(throwSound, transform.position);
     }
 
 

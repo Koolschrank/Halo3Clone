@@ -621,7 +621,15 @@ public class PlayerMind : MonoBehaviour
 
     }
 
-    public void ReduceFromSensetivity(InputAction.CallbackContext context)
+	public void TogglePause(InputAction.CallbackContext context)
+	{
+		if (context.performed)
+		{
+			PauseSystem.instance.TogglePause();
+		}
+	}
+
+	public void ReduceFromSensetivity(InputAction.CallbackContext context)
     {
         if (playerAim == null) return;
         if (context.performed)

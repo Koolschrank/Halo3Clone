@@ -491,4 +491,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f0e1497a6e1964d83757502a798a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSound:
+    Guid:
+      Data1: 165017952
+      Data2: 1102575979
+      Data3: 364017064
+      Data4: 856397052
+    Path: event:/SFX/Player/PickUpGranade
   abilityData: {fileID: 11400000, guid: c359182e53b111b4bad1d7e41b1a2072, type: 2}

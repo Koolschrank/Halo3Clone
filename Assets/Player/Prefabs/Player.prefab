@@ -10963,6 +10963,13 @@ MonoBehaviour:
       Data3: 2109988784
       Data4: -483411535
     Path: event:/SFX/Player/Shild/ShildPop
+  deathSound:
+    Guid:
+      Data1: -1030163476
+      Data2: 1221523337
+      Data3: 1315035575
+      Data4: 543305829
+    Path: event:/SFX/Player/Death
   OnDamageTakenUnityEvent:
     m_PersistentCalls:
       m_Calls:

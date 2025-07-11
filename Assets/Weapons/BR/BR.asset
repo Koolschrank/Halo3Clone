@@ -133,11 +133,11 @@ MonoBehaviour:
     blockAngle: 0
   shootSound:
     Guid:
-      Data1: 2116415683
-      Data2: 1161463764
-      Data3: -1871193710
-      Data4: -835417183
-    Path: event:/SFX/Guns/BR/BRShot
+      Data1: -1921396149
+      Data2: 1234224319
+      Data3: -90131013
+      Data4: -1480584673
+    Path: event:/SFX/Guns/BR/BRShot-Old
   switchInSound:
     timedSounds:
     - soundReference:

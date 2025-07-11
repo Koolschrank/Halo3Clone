@@ -775,6 +775,7 @@ public class Arm : MonoBehaviour
     public virtual void TryMeleeAttack()
     {
         if (armState != ArmState.Ready && armState != ArmState.Shooting && armState != ArmState.Reloading) return;
+        if (CurrentWeapon == null) return;
         IfZoomedInExitZoom();
         var meleeAttack = weaponInHand.MeleeAttack;
         if (meleeAttack == null)

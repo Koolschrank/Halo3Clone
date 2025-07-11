@@ -128,7 +128,7 @@ MonoBehaviour:
       Data2: 1211351120
       Data3: 631168438
       Data4: -744795755
-    Path: event:/SFX/Guns/GranadeTrower/GranadeShoot
+    Path: event:/SFX/Guns/GranadeTrower/Shoot
   switchInSound:
     timedSounds:
     - soundReference:
@@ -137,7 +137,7 @@ MonoBehaviour:
           Data2: 1135460609
           Data3: -1246379088
           Data4: -133436094
-        Path: event:/SFX/Guns/GranadeTrower/GranadeTrowerSwitchIn
+        Path: event:/SFX/Guns/GranadeTrower/SwitchIn
       timeOfPlay: 0.4
   reloadSounds:
     timedSounds:

@@ -103,15 +103,18 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 1
   damageReductionIfObstructed: 0.3
   timeForSelfDestruction: 5
   explosionSound:
     Guid:
-      Data1: 2108464647
-      Data2: 1337839689
-      Data3: 1266807996
-      Data4: -1935789024
-    Path: event:/SFX/Granades/PlasmaGranade/PlasmaExplosion
+      Data1: 344029072
+      Data2: 1081316612
+      Data3: -905164137
+      Data4: 1183457049
+    Path: event:/SFX/Guns/Raygun/Hit
   fireDamageOverTime: {fileID: 0}
   OnExplosion:
     m_PersistentCalls:

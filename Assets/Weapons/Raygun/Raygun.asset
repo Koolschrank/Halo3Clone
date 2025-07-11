@@ -128,35 +128,35 @@ MonoBehaviour:
       Data2: 1175705474
       Data3: 1506055300
       Data4: 737269529
-    Path: event:/SFX/Guns/PlasmaGranadeLauncher/PlasmaShot
+    Path: event:/SFX/Guns/Raygun/Shoot
   switchInSound:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1737366809
-          Data2: 1246450988
-          Data3: 54988733
-          Data4: -602697179
-        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
-      timeOfPlay: 0.4
+          Data1: -77892396
+          Data2: 1128650640
+          Data3: 2120885934
+          Data4: -1334631121
+        Path: event:/SFX/Guns/Raygun/SwitchIn
+      timeOfPlay: 0.2
   reloadSounds:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: -619505912
-          Data2: 1140018917
-          Data3: -671243335
-          Data4: 44528707
-        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadStart
+          Data1: 1069733871
+          Data2: 1279648846
+          Data3: -874244959
+          Data4: -682250641
+        Path: event:/SFX/Guns/Raygun/Reload/ReloadStart
       timeOfPlay: 0.2
     - soundReference:
         Guid:
-          Data1: 1737366809
-          Data2: 1246450988
-          Data3: 54988733
-          Data4: -602697179
-        Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
-      timeOfPlay: 0.6
+          Data1: 696252864
+          Data2: 1216400782
+          Data3: -378744911
+          Data4: -410007532
+        Path: event:/SFX/Guns/Raygun/Reload/ReloadEnd
+      timeOfPlay: 0.4
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}

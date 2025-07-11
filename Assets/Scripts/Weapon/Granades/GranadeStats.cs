@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(fileName = "GranadeStats", menuName = "Granade Stats", order = 1)]
 public class GranadeStats : ScriptableObject
@@ -10,7 +11,11 @@ public class GranadeStats : ScriptableObject
     [SerializeField] GameObject granadePrefab = null;
     [SerializeField] GameObject granadeClonePrefab = null;
 
-    public float ThrowDelay => throwDelay;
+	[Header("Sound")]
+	[SerializeField] EventReference throwSound;
+    [SerializeField] float throwSoundDelay = 0.1f;
+
+	public float ThrowDelay => throwDelay;
 
     public float ThrowTime => throwTime;
 
@@ -22,8 +27,12 @@ public class GranadeStats : ScriptableObject
 
     public GameObject GranadeClonePrefab => granadeClonePrefab;
 
+    public EventReference ThrowSound => throwSound;
 
-    public GranadeStats(GranadeStats statsToCopy)
+    public float ThrowSoundDelay => throwSoundDelay;
+
+
+	public GranadeStats(GranadeStats statsToCopy)
     {
         throwDelay = statsToCopy.throwDelay;
         throwTime = statsToCopy.throwTime;
@@ -31,5 +40,7 @@ public class GranadeStats : ScriptableObject
         throwForce = statsToCopy.throwForce;
         granadePrefab = statsToCopy.granadePrefab;
         granadeClonePrefab = statsToCopy.granadeClonePrefab;
-    }
+        throwSound = statsToCopy.throwSound;
+        throwSoundDelay = statsToCopy.throwSoundDelay;
+	}
 }

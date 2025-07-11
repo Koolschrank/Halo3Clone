@@ -23,15 +23,15 @@ MonoBehaviour:
     m_Bits: 2147483777
   swingSound:
     Guid:
-      Data1: 757403591
-      Data2: 1207635679
-      Data3: -205681753
-      Data4: 917383885
-    Path: event:/SFX/Guns/BaseGunSounds/Melee/MeleeSwing
+      Data1: -442625259
+      Data2: 1145663432
+      Data3: -618696009
+      Data4: 1637804598
+    Path: event:/SFX/Guns/Sword/MeleeSwing
   hitSound:
     Guid:
-      Data1: 126295664
-      Data2: 1168739592
-      Data3: 113948330
-      Data4: -301254074
-    Path: event:/SFX/Guns/BaseGunSounds/Melee/Hit
+      Data1: -758178558
+      Data2: 1120973161
+      Data3: -210108287
+      Data4: -1443322066
+    Path: event:/SFX/Guns/Sword/MeleeHit

@@ -23,17 +23,20 @@ MonoBehaviour:
   magazineSize: 21
   maxAmmoInReserve: 108
   reloadTime: 2.3
+  reloadGainAmmoTrigger: 0.9
   inaccuracy: 0.01
   switchOutTime: 0.25
   switchInTime: 0.9
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 3
   burstDelay: 0.06800005
   hasKnockback: 1
@@ -77,13 +80,46 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 2
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
   shootSound:
     Guid:
-      Data1: 2116415683
-      Data2: 1161463764
-      Data3: -1871193710
-      Data4: -835417183
-    Path: event:/SFX/Guns/BR/BRShot
+      Data1: -1921396149
+      Data2: 1234224319
+      Data3: -90131013
+      Data4: -1480584673
+    Path: event:/SFX/Guns/BR/BRShot-Old
   switchInSound:
     timedSounds:
     - soundReference:
@@ -135,3 +171,4 @@ MonoBehaviour:
     moveSpeedWithGun: 0.8
     crouchDistance: 20
     minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 0}

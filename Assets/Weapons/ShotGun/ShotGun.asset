@@ -128,16 +128,16 @@ MonoBehaviour:
       Data2: 1109917477
       Data3: -1980225869
       Data4: 1628706485
-    Path: event:/SFX/Guns/ShotGun/ShotGunShot
+    Path: event:/SFX/Guns/ShotGun/Shoot
   switchInSound:
     timedSounds:
     - soundReference:
         Guid:
-          Data1: 1232892853
-          Data2: 1258534099
-          Data3: -758304624
-          Data4: -855647888
-        Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
+          Data1: 637497183
+          Data2: 1130767372
+          Data3: 1356198027
+          Data4: -1776528645
+        Path: event:/SFX/Guns/ShotGun/SwitchIn
       timeOfPlay: 0.25
   reloadSounds:
     timedSounds:
