@@ -24,7 +24,8 @@ public class GameMode : ScriptableObject
     
     [SerializeField] int startScore = 0; // starting score for each player, used in the scoreboard
     [SerializeField] PlayerStatsSheet playerStatsSheetBlueprint;
-    public bool EnemyTeamsWorkingTogether = false; // if true, enemy teams work together, otherwise they fight each other
+	public bool spawnWithArmor;
+	public bool EnemyTeamsWorkingTogether = false; // if true, enemy teams work together, otherwise they fight each other
 
     public bool team2usesOtherPointsToWin = false; // if true, team 2 uses a different points to win value, otherwise both teams use the same value
     public int team2PointsToWin = 0; // points to win for team 2, if team2usesOtherPointsToWin is true

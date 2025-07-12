@@ -18,6 +18,7 @@ public class AI_Move : MonoBehaviour
     [SerializeField] GameObject playerBody;
     [SerializeField] CharacterHealth playerHealth;
     [SerializeField] AI_Stun aiStun;
+    [SerializeField] AI_Shoot aiShoot;
 
 
     Vector3 targetPosition;
@@ -57,6 +58,7 @@ public class AI_Move : MonoBehaviour
 
     public void RollAwayFromDanger(Vector3 dangerPosition)
     {
+        if (aiShoot.hasShild) return;
         if (rollCooldownTimer > 0) return;
         bool isWallToTheLeft = IsWallToTheLeft();
         bool isWallToTheRight = IsWallToTheRight();
@@ -187,7 +189,7 @@ public class AI_Move : MonoBehaviour
         if (currentWeapon == null) return;
 
         var distanceToDamage = Vector3.Distance(transform.position, damage.origin);
-        if (distanceToDamage > currentWeapon.Data.GunAiBehaviour.minDistanceToDogeWhenTakingDamage)
+        if (!aiShoot.hasShild&&distanceToDamage > currentWeapon.Data.GunAiBehaviour.minDistanceToDogeWhenTakingDamage)
         {
             StartCoroutine(RollWothDelay(damage.origin));
         }

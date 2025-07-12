@@ -45,7 +45,7 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 8
+  respawnTime: 15
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
@@ -56,6 +56,7 @@ MonoBehaviour:
   dontDropWeaponsOnDeath: 0
   startScore: 0
   playerStatsSheetBlueprint: {fileID: 0}
+  spawnWithArmor: 1
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
   team2PointsToWin: 200
@@ -63,7 +64,7 @@ MonoBehaviour:
   amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
   useEnemyWaves: 1
   noDualWieldDamageReduction: 1
-  timeToScore: 0.35
+  timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000
   moveHillWhenScoreReached: 1

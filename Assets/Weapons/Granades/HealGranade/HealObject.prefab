@@ -343,6 +343,7 @@ MonoBehaviour:
   range: 1
   damage: 1
   damageOnShildMultiplier: 1
+  damageReductionAgainstBlocking: 0.8
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -569,6 +570,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: armorHeal
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: forceShild
       value: 
       objectReference: {fileID: 4382301846494535577}
@@ -590,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: damageReductionMultiplier
-      value: 0.75
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3986253796533468359, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: lengthInSec

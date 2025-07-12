@@ -35,6 +35,7 @@ MonoBehaviour:
   meleeData: {fileID: 0}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 0
   burstAmount: 3
@@ -82,37 +83,47 @@ MonoBehaviour:
   reloadTimeMultiplier: 1.4
   bloomOnShoot: 0
   bloomOnTakingDamage: 0
-  bloomInaccuracyMultiplier: 0.5
-  bloomTime: 0.5
+  bloomInaccuracyMultiplier: 0
+  bloomTime: 0.2
   bloomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
       value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
+      inSlope: -0.011821869
+      outSlope: -0.011821869
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.015665174
+      value: 0.9998148
+      inSlope: -0.106415056
+      outSlope: -0.106415056
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.34976143
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.98333335
+      value: 0.0028276443
+      inSlope: -1.0302986
+      outSlope: -1.0302986
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  bloomCrosshairsSizeMultiplier: 2
+  bloomCrosshairsSizeMultiplier: 0.4
   hasBlock: 0
   block:
     blockPercentage: 0.5
     blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 1709653785

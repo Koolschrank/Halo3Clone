@@ -59,6 +59,12 @@ public class BodyMindConnection : MonoBehaviour
         mind.ApplyUpgrades();
         mind.SetAlive();
 
+        if (GameModeSelector.gameModeManager.GameModeStats.spawnWithArmor)
+        {
+            var characterHealth = GetComponent<CharacterHealth>();
+            characterHealth.FillArmor();
+		}
+
         // wait for  0.5 seconds before setting the stat sheet
 
         

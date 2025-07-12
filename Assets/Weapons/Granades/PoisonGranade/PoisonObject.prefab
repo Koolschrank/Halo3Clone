@@ -101,6 +101,7 @@ MonoBehaviour:
   range: 4.06
   damage: 50
   damageOnShildMultiplier: 1
+  damageReductionAgainstBlocking: 0.8
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -540,6 +541,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2580653625928230571, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
+      propertyPath: armorHeal
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}

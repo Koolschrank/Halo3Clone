@@ -76,6 +76,8 @@ public class CharacterHealth : Health
 	public float aura_shildRegenDelay = 0.0f;
     [NonSerialized]
     public float aura_poisonDamage = 0.0f;
+	[NonSerialized]
+	public float aura_armorHeal = 0.0f;
 
 	public float ArmorValue     {
         get { return currentArmor / maxArmor; }
@@ -246,8 +248,23 @@ public class CharacterHealth : Health
 
 			TakeDamage(damagePackage);
 		}
+        if (aura_armorHeal !=0)
+        {
+            GainArmor(aura_armorHeal * Time.deltaTime);
+		}
         
     }
+
+    public void GainArmor(float armorGain)
+    {
+        currentArmor += armorGain;
+		
+		if (currentArmor> maxArmor)
+            currentArmor = maxArmor;
+        else
+            OnArmorChanged?.Invoke(currentArmor / maxArmor);
+	}
+
 
     public void GainShild(float amount)
     {
@@ -320,14 +337,16 @@ public class CharacterHealth : Health
         float damageReduction = playerArms.DamageReduction;
 		
 		float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
-
-        if (
+        bool blocked = false;
+		if (
             playerArms.RightArm.IsInZoom 
             && playerArms.RightArm.CurrentWeapon != null 
             && playerArms.RightArm.CurrentWeapon.Data.HasBlock 
             && playerArms.RightArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
         {
 			damage *= (1 - playerArms.RightArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
+            blocked = true;
+
 		}
         else if (
 			playerArms.LeftArm.IsInZoom
@@ -336,6 +355,7 @@ public class CharacterHealth : Health
 			&& playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
         {
 			damage *= (1 - playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
+			blocked = true;
 		}
 
         if (damage == 0) return;
@@ -345,7 +365,7 @@ public class CharacterHealth : Health
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if (((currentShild <= 0 && currentArmor <=0) ||(  damagePackage.canHeadShotShild && currentShild + currentArmor < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
+        if (!blocked &&((currentShild <= 0 && currentArmor <=0) ||(  damagePackage.canHeadShotShild && currentShild + currentArmor < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)

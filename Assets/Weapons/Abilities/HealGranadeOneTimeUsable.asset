@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49783adb2bfa017408731de8d90d7991, type: 3}
   m_Name: HealGranadeOneTimeUsable
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 3370b011756b5a64a90acaddd0e9852b, type: 3}
+  icon: {fileID: 21300000, guid: bbd1a94a71bfd4c419bdb35055a38cec, type: 3}
   cooldownTime: 999999
   maxCharges: 1
   removeWhenEmpty: 1

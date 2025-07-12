@@ -86,7 +86,7 @@ MonoBehaviour:
   hasBlock: 1
   block:
     blockPercentage: 0.95
-    blockAngle: 90
+    blockAngle: 80
   reduceScreenShakeWhenAiming: 1
   shootSound:
     Guid:

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AI_Shoot : MonoBehaviour
@@ -5,17 +6,24 @@ public class AI_Shoot : MonoBehaviour
     [SerializeField] AI_Target target;
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerArms playerArms;
+    [SerializeField] AbilityInventory abilityInventory;
 
-    [SerializeField] Vector2 distanceToThrowGranade = new Vector2(8, 12);
+	[SerializeField] Vector2 distanceToThrowGranade = new Vector2(8, 12);
 
 
 
 
     float focuse = 0;
 
-    
+    [NonSerialized]
+    public bool hasShild = false;
+	private void Start()
+	{
+        hasShild = playerArms.LeftArm.CurrentWeapon != null;
 
-    private void Update()
+	}
+
+	private void Update()
     {
         if (playerAim.OnTarget)
         {
@@ -39,12 +47,10 @@ public class AI_Shoot : MonoBehaviour
             playerArms.RightArm.UpdateWeaponTrigger(true);
 
             var distanceToTarget = Vector3.Distance(transform.position, target.GetTargetPosition());
-            if (distanceToTarget > distanceToThrowGranade.x && distanceToTarget < distanceToThrowGranade.y)
+            if (abilityInventory.HasAbility() &&distanceToTarget > distanceToThrowGranade.x && distanceToTarget < distanceToThrowGranade.y )
             {
                 playerArms.RightArm.TryThrowGranade();
             }
-            
-            
         }
         else
         {
@@ -55,6 +61,18 @@ public class AI_Shoot : MonoBehaviour
 
             playerArms.RightArm.UpdateWeaponTrigger(false);
         }
+        if (hasShild)
+        {
+            if (focuse > 0)
+            {
+				playerArms.LeftArm.UpdateWeaponTrigger(true);
+			}
+            else
+            {
+				playerArms.LeftArm.UpdateWeaponTrigger(false);
+			}
+                
+		}
 
     }
 

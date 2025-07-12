@@ -44,7 +44,12 @@ public class AbilityInventory : MonoBehaviour
 
     }
 
-    public bool HasAbility(AbilityData abilityData)
+
+    public bool HasAbility()
+    {
+        return abilities.Count > 0;
+	}
+	public bool HasAbility(AbilityData abilityData)
     {
         foreach (var ability in abilities)
         {

@@ -14,7 +14,9 @@ public class Aura : MonoBehaviour
 	[SerializeField] float instantHealTime = 0.1f;
     [SerializeField] float instantHeal = 50f;
 	[SerializeField] float shildRegenMultiplier = 4f;
-    [SerializeField] float damageReductionMultiplier = 0.5f;
+
+	[SerializeField] float armorHeal = 4f;
+	[SerializeField] float damageReductionMultiplier = 0.5f;
 
     [SerializeField] float poisonDamage = 0f;
 	[SerializeField] float moveSpeedHandicap = 0f;
@@ -100,7 +102,10 @@ public class Aura : MonoBehaviour
                 body.GetComponent<PlayerMovement>().aura_moveSpeedReduction = moveSpeedHandicap;
 			}
 
-				if (timerInstandHeal > 0f)
+            if (armorHeal != 0)
+                health.aura_armorHeal = armorHeal;
+
+			if (timerInstandHeal > 0f)
             {
                 health.GainShild(instantHeal);
                 timerInstandHeal = instantHealTime; // Reset the instant heal timer
@@ -122,7 +127,10 @@ public class Aura : MonoBehaviour
 				health.aura_shildRegenDelay = 0f; // Reset to default value
             if (poisonDamage != 0f)
                 health.aura_poisonDamage = 0f; // Reset to default value
-            if (moveSpeedHandicap != 0f)
+
+			if (armorHeal != 0)
+				health.aura_armorHeal = 0f;
+			if (moveSpeedHandicap != 0f)
             {
                 body.GetComponent<PlayerMovement>().aura_moveSpeedReduction = 0f; // Reset to default value
             }
