@@ -13,7 +13,8 @@ public class Explosion : MonoBehaviour
 	[SerializeField] AnimationCurve damageFalloff = AnimationCurve.Linear(0, 1, 1, 0);
     
     [SerializeField] float force = 10f;
-    [SerializeField] float forceYOffset = -1f;
+    [SerializeField] float forceOnPlayer = 20f;
+	[SerializeField] float forceYOffset = -1f;
     // force fall off curve
     [SerializeField] AnimationCurve forceFalloff = AnimationCurve.Linear(0, 1, 1, 0);
 
@@ -84,17 +85,43 @@ public class Explosion : MonoBehaviour
 					margin = range / 2;
 				}
 
+                bool obstructed = false;
 				// cast a ray to check if the object is obstructed
 				if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance, wallLayers))
                 {
                     if (hit.collider != collider)
                     {
-                        damagePackage.damageAmount *= damageReductionIfObstructed;
+                        obstructed = true;
+
+						damagePackage.damageAmount *= damageReductionIfObstructed;
                         damagePackage.forceVector *= damageReductionIfObstructed;
                     }
                 }
 
                 health.TakeDamage(damagePackage);
+
+
+                if (!health.IsDead && !obstructed)
+                {
+                    var physicsImpulse = collider.GetComponent<PlayerPhysicsImpulse>();
+                    if (physicsImpulse != null)
+                    {
+                        // apply force to the player
+                        var playerDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
+                        var forceOnPlayerFalloff = forceFalloff.Evaluate(playerDirection.magnitude / range);
+						var playerForce = playerDirection.normalized * forceOnPlayer * forceOnPlayerFalloff;
+
+                        var playerImpact = new PlayerImpactStruct
+                        {
+                            impactForce = playerForce,
+                            resetGravity = false 
+                        };
+
+
+
+						physicsImpulse.AddImpulse(playerImpact);
+					}
+				}
             }
             // add force to the rigidbody
             if (collider.TryGetComponent<Rigidbody>(out Rigidbody rb))

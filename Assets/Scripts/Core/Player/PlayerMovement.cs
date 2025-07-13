@@ -51,8 +51,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerHitBoxSize playerCrouchingHitbox;
     [SerializeField] float rollTime = 1; // time it takes to roll
     [SerializeField] AnimationCurve rollCurve; // curve for the roll animation, used to determine the speed of the roll
+    public float physicsImpactIgnoreGravityResetTime = 0.8f;
 
-    float maxMoveSpeedMultiplier = 1f;
+    float ignoreGravityResetTimer = 0f; // timer to reset the ignore gravity state
+	float maxMoveSpeedMultiplier = 1f;
     
 
 
@@ -67,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     Vector3 moveVelocity = Vector3.zero;
-    float gravityVelocity = 0;
+    [NonSerialized]
+    public float gravityVelocity = 0;
     Vector2 moveInput = Vector2.zero;
 
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
@@ -82,6 +85,17 @@ public class PlayerMovement : MonoBehaviour
     float moveSpeedStatSheetMultiplier = 1f; // multiplier for the move speed, used by modifiers and other things
     [NonSerialized]
     public float aura_moveSpeedReduction = 0f;
+
+    public void ApplyImpact(PlayerImpactStruct impact)
+    {
+		if ( impact.resetGravity)
+		{
+			gravityVelocity = 0;
+		}
+		moveVelocity += new Vector3(impact.impactForce.x, 0, impact.impactForce.z);
+		gravityVelocity += impact.impactForce.y; // apply vertical impact to gravity
+        ignoreGravityResetTimer = physicsImpactIgnoreGravityResetTime; // reset the ignore gravity timer
+	}
 
     public void MultiplyMaxMoveSpeed(float multiplier)
     {
@@ -266,8 +280,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateGravity()
     {
+        ignoreGravityResetTimer -= Time.deltaTime;
 
-        if (cc.isGrounded && jumpCooldownTimer <= 0)
+		if (cc.isGrounded && jumpCooldownTimer <= 0 && ignoreGravityResetTimer <= 0)
         {
             gravityVelocity = -0.1f;
         }

@@ -50,6 +50,7 @@ MonoBehaviour:
   range: 4
   damage: 45
   damageOnShildMultiplier: 2.35
+  damageReductionAgainstBlocking: 0.8
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -75,6 +76,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 75
+  forceOnPlayer: 7
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2

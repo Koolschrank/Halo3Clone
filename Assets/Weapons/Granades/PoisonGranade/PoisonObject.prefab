@@ -126,7 +126,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  force: 10
+  force: 2
+  forceOnPlayer: 20
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2
