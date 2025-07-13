@@ -136,16 +136,24 @@ public class GameModeManager : MonoBehaviour
         Transform[] spawnPoints = new Transform[usableSpawnPoints.Count];
         float[] distanceToEnemies = new float[usableSpawnPoints.Count];
         List<Transform> enemies = new List<Transform>();
-        foreach (var team in teams)
+        //foreach (var team in teams)
+        //{
+        //    if (team.Count > 0 && team[0].TeamIndex != teamIndex)
+        //    {
+        //        foreach (var player in team)
+        //        {
+        //            enemies.Add(player.transform);
+        //        }
+        //    }
+        //}
+        foreach (var player in PlayerManager.instance.GetAllPlayers())
         {
-            if (team.Count > 0 && team[0].TeamIndex != teamIndex)
+            if (player.TeamIndex != teamIndex && !player.IsDead)
             {
-                foreach (var player in team)
-                {
-                    enemies.Add(player.transform);
-                }
-            }
-        }
+                enemies.Add(player.transform);
+			}
+
+		}
 
         if (enemies.Count == 0)
         {

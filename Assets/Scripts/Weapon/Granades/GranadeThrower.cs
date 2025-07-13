@@ -12,6 +12,7 @@ public class GranadeThrower : MonoBehaviour
     [SerializeField] Transform mainTransform;
     [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] CharacterHealth characterHealth;
+    [SerializeField] PlayerMovement playermovement;
 
     float soundTriggerDelay = 0f;
 
@@ -59,8 +60,15 @@ public class GranadeThrower : MonoBehaviour
 
         GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation);
         Rigidbody rb = granade.GetComponent<Rigidbody>();
-        rb.AddForce((transform.forward + inaccuracy) * granadeStats.ThrowForce, ForceMode.Impulse);
-        rb.AddForce((transform.up + inaccuracy) * granadeStats.ThrowForce * granadeStats.ThrowAngle, ForceMode.Impulse);
+
+        var angle = granadeStats.ThrowAngle;
+        if (playermovement.gravityMultiplier != 1)
+        {
+            angle = 0;
+        }
+
+		rb.AddForce((transform.forward + inaccuracy) * granadeStats.ThrowForce, ForceMode.Impulse);
+        rb.AddForce((transform.up + inaccuracy) * granadeStats.ThrowForce * angle, ForceMode.Impulse);
 
         if (granade.TryGetComponent<Granade>(out Granade granadeScript))
         {
@@ -79,8 +87,15 @@ public class GranadeThrower : MonoBehaviour
 		GameObject granade = Instantiate(granadeStats.GranadePrefab, transform.position, transform.rotation) as GameObject;
 
         Rigidbody rb = granade.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * granadeStats.ThrowForce, ForceMode.Impulse);
-        rb.AddForce(transform.up * granadeStats.ThrowForce * granadeStats.ThrowAngle, ForceMode.Impulse);
+
+		var angle = granadeStats.ThrowAngle;
+		if (playermovement.gravityMultiplier != 1)
+		{
+			angle = 0;
+		}
+
+		rb.AddForce(transform.forward * granadeStats.ThrowForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * granadeStats.ThrowForce * angle, ForceMode.Impulse);
         Debug.Log(granade.name);
         OnGranadeThrow?.Invoke(granade);
 

@@ -284,13 +284,16 @@ public class EnemySpawner : MonoBehaviour
                
             }
 
-            
-
-            spawnPoint = GetPVPSpawnPoint(teamId);
-        }
+            if (PlayerManager.instance.PlayersInTeam2() == 0 && teamId ==1)
+				spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 2);
+			else
+			{
+						spawnPoint = GetPVPSpawnPoint(teamId);
+			}
+		}
         else
         {
-            spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 3);
+            spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 2);
         }
 
 

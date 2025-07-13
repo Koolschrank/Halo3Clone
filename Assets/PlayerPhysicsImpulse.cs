@@ -36,6 +36,16 @@ public class PlayerPhysicsImpulse : MonoBehaviour
 		playerMovement.ApplyImpact(impulse);
 	}
 
+    public void ChangeGravity(float value)
+    {
+        if (value != 1 && playerMovement.gravityVelocity <0)
+        {
+            playerMovement.gravityVelocity *= value;
+
+		}
+        playerMovement.gravityMultiplier = value;
+    }
+
 	/*
 	private void Update()
 	{

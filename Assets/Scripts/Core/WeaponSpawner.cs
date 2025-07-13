@@ -7,7 +7,8 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] GameObject weaponPrefab;
     [SerializeField] float spawnTime;
     [SerializeField] int magazines = 4;
-    float spawnTimer;
+    [SerializeField] float weaponDistanceToAttemtRespawn = 5f;
+	float spawnTimer;
 
     Weapon_PickUp weapon;
 
@@ -50,7 +51,17 @@ public class WeaponSpawner : MonoBehaviour
                 spawnTimer = 0;
             }
         }
-    }
+        else
+        {
+			var distanceToWeapon = Vector3.Distance(transform.position, weapon.transform.position);
+			if (weapon != null && distanceToWeapon > weaponDistanceToAttemtRespawn)
+			{
+                WeaponPickedUp(weapon);
+			}
+		}
+            
+
+	}
 
     public void SpawnWeapon()
     {

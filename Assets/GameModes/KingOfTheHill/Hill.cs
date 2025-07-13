@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hill : MonoBehaviour
@@ -53,7 +54,9 @@ public class Hill : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             PlayerTeam player = collider.GetComponent<PlayerTeam>();
-            if (player != null)
+
+
+            if (player != null && player.transform.position.y > transform.position.y -0.5f)
             {
                 playersOnHill.Add(player.TeamIndex);
             }

@@ -8,6 +8,10 @@ public class PhysicsForceArea : MonoBehaviour
 	public float forceOnPlayersMagnitude = 10f;
 	public float forceMultiplierIfYVelocityIsNegative = 2f;
 
+
+	public bool hasPlayerGravity = false;
+	public float playerGravityChange = 0.5f;
+
 	List<Rigidbody> affectedRigidbodies = new List<Rigidbody>();
     List<PlayerPhysicsImpulse> affectedPlayers = new List<PlayerPhysicsImpulse>();
 
@@ -24,32 +28,37 @@ public class PhysicsForceArea : MonoBehaviour
 					vector *= forceMultiplierIfYVelocityIsNegative;
 				}
 
-				rb.AddForce(vector, ForceMode.Force);
+				rb.AddForce(vector * rb.mass, ForceMode.Force);
 			}
 		}
-		foreach (var player in affectedPlayers)
-		{
-			if (player != null)
-			{
-				// Cap the player's gravity force
-				var gravityForce = player.GetPlayerGravityForce();
-				if (gravityForce > playerGravityCap)
-				{
-					continue;
-				}
-				var vector = transform.up * forceOnPlayersMagnitude * deltaTime;
-				if (gravityForce <= 0)
-				{
-					vector.y *= forceMultiplierIfYVelocityIsNegative;
 
-				}
-				player.AddImpulse(new PlayerImpactStruct
+		if (forceOnPlayersMagnitude != 0)
+		{
+			foreach (var player in affectedPlayers)
+			{
+				if (player != null)
 				{
-					impactForce = vector,
-					resetGravity = false
-				});
+					// Cap the player's gravity force
+					var gravityForce = player.GetPlayerGravityForce();
+					if (gravityForce > playerGravityCap)
+					{
+						continue;
+					}
+					var vector = transform.up * forceOnPlayersMagnitude * deltaTime;
+					if (gravityForce <= 0)
+					{
+						vector.y *= forceMultiplierIfYVelocityIsNegative;
+
+					}
+					player.AddImpulse(new PlayerImpactStruct
+					{
+						impactForce = vector,
+						resetGravity = false
+					});
+				}
 			}
 		}
+		
 
 	}
 
@@ -67,6 +76,10 @@ public class PhysicsForceArea : MonoBehaviour
 			if (!affectedPlayers.Contains(player))
 			{
 				affectedPlayers.Add(player);
+				if (hasPlayerGravity)
+				{
+					player.ChangeGravity(playerGravityChange);
+				}
 			}
 		}
 
@@ -86,7 +99,12 @@ public class PhysicsForceArea : MonoBehaviour
 			if (affectedPlayers.Contains(player))
 			{
 				affectedPlayers.Remove(player);
+				if (hasPlayerGravity)
+				{
+					player.ChangeGravity(1);
+				}
 			}
+
 		}
 	}
 }

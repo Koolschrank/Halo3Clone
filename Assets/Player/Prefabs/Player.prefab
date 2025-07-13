@@ -10419,6 +10419,7 @@ MonoBehaviour:
   mainTransform: {fileID: 5698032335818744442}
   abilityInventory: {fileID: 4267228126375275963}
   characterHealth: {fileID: 782412234501442312}
+  playermovement: {fileID: 7400201383000877008}
 --- !u!1 &7848658949781454715
 GameObject:
   m_ObjectHideFlags: 0
@@ -10792,6 +10793,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  physicsImpactIgnoreGravityResetTime: 0.8
   walkSound:
     Guid:
       Data1: -890825783

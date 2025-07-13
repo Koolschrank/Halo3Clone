@@ -369,6 +369,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 1
+  forceOnPlayer: 20
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2
@@ -571,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: armorHeal
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: forceShild
@@ -595,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: damageReductionMultiplier
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3986253796533468359, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: lengthInSec

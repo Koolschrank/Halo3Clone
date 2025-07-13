@@ -11899,7 +11899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1312425997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11916,6 +11916,8 @@ MonoBehaviour:
   playerGravityCap: 10
   forceOnPlayersMagnitude: 20
   forceMultiplierIfYVelocityIsNegative: 2
+  hasPlayerGravity: 0
+  playerGravityChange: 0.3
 --- !u!65 &1312425998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14608,8 +14610,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceOnRigidbodyiesMagnitude: 5000
   playerGravityCap: 10
-  forceOnPlayersMagnitude: 20
+  forceOnPlayersMagnitude: 0
   forceMultiplierIfYVelocityIsNegative: 2
+  hasPlayerGravity: 1
+  playerGravityChange: 0.4
 --- !u!65 &1690131980
 BoxCollider:
   m_ObjectHideFlags: 0

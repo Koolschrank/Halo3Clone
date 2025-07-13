@@ -76,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
     bool inCrouch = false;
 
+	[NonSerialized]
+	public float gravityMultiplier = 1f;
 
     bool inRoll = false;
     Vector3 rollDirection = Vector3.zero;
@@ -114,7 +116,13 @@ public class PlayerMovement : MonoBehaviour
         {
             statSheet.OnStatSheetUpdated += UpdateStatSheet;
         }
-    }
+
+
+		if ( GravityOverrider.Instance != null)
+		{
+            gravityMultiplier = GravityOverrider.Instance.playerGravityMultiplier;
+		}
+	}
 
     public void UpdateStatSheet()
     {
@@ -288,7 +296,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            gravityVelocity -= gravity * Time.deltaTime;
+            gravityVelocity -= gravity * gravityMultiplier * Time.deltaTime;
         }
 
         if (jumpCooldownTimer > 0)
