@@ -15,22 +15,32 @@ public class AI_Stun : MonoBehaviour
     private void Start()
     {
         health.OnShildDepleted += Stun;
-    }
+        health.OnMeleeHit += Stun;
+	}
 
-    public bool IsStunned()
+    public void OnMeleeHit()
+    {
+        if ((health.ShildPercentage <=0 || health.MaxShild == 0) )
+        {
+            Stun();
+		}
+        
+	}
+	public bool IsStunned()
     {
         return stunTimer > 0;
     }
 
     private void Stun()
     {
-        aim.enabled = false;
+        if (IsStunned()) return;
+        weapon.DropLeftWeapon();
+		aim.enabled = false;
         movement.enabled = false;
         weapon.enabled = false;
         AIanimation.Stun();
         stunTimer = stunDuration;
         granadeThrower.TryDropGranade();
-
 	}
 
     private void Update()

@@ -23,6 +23,15 @@ public class AI_Shoot : MonoBehaviour
 
 	}
 
+    public void DropLeftWeapon()
+    {
+        if (hasShild)
+        {
+            playerArms.LeftArm.DropWeapon();
+            hasShild = false;
+		}
+    }
+
 	private void Update()
     {
         if (playerAim.OnTarget)

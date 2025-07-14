@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float damageAmount = 10f;
     [SerializeField] float force = 10f;
     [SerializeField] float shildDamageMultiplier = 1f;
+    [SerializeField] float shildDamagMultiplierVSAI = 1.5f;
     [SerializeField] float headShotMultiplier = 1f;
     [SerializeField] LayerMask hitLayer;
     [SerializeField] float radius = 0.1f;
@@ -51,7 +52,9 @@ public class Bullet : MonoBehaviour
         damagePackage.shildDamageMultiplier = shildDamageMultiplier;
         lastPosition = transform.position;
 
-    }
+		
+
+	}
 
     public void ApplyDamageMultiplier(float multiplier)
     {
@@ -86,7 +89,12 @@ public class Bullet : MonoBehaviour
             bool bodyHit = false;
             if (hit.collider.TryGetComponent<Health>(out Health health))
             {
-                health.TakeDamage(damagePackage);
+				if (GameModeSelector.gameModeManager.GameModeStats.team2LoosesScoreWhenTeam1scores && owner.GetComponent<BodyMindConnection>().Mind != null)
+				{
+					damagePackage.shildDamageMultiplier *= shildDamagMultiplierVSAI;
+				}
+
+				health.TakeDamage(damagePackage);
                 
                 bodyHit = true;
             }

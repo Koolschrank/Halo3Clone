@@ -85,9 +85,10 @@ public class MeleeAttacker : MonoBehaviour
             damagePackage.owner = self;
             damagePackage.hitPoint = hitPoint;
             damagePackage.impactType = ImpactType.wholeBody;
+            damagePackage.isMeleeDamage = true;
 
 
-            if (collider.gameObject == self)
+			if (collider.gameObject == self)
             {
                 continue;
             }

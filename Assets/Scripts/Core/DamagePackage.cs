@@ -20,9 +20,10 @@ public struct DamagePackage
     public bool hasHitMarkerEffect;
     public bool noScreenShake;
     public float damageReductionAgainstBlock;
+    public bool isMeleeDamage;
 
-    // construtor
-    public DamagePackage(float damageAmount)
+	// construtor
+	public DamagePackage(float damageAmount)
     {
         this.damageAmount = damageAmount;
         headShotMultiplier = 1f;
@@ -40,6 +41,7 @@ public struct DamagePackage
         canHeadShotShild = false;
         noScreenShake = false;
         damageReductionAgainstBlock = 1f;
+        isMeleeDamage = false;
 	}
 
     public DamagePackage(float damageAmount, Vector3 hitPoint, Vector3 origin, Vector3 force, ImpactType impactType, GameObject owner, bool canHeadShot, float headShotMultiplier, bool hasHitMarkerEffect,bool canHeadShotShild)
@@ -57,8 +59,9 @@ public struct DamagePackage
         noScreenShake = false; // default value for noScreenShake
 		shildDamageMultiplier = 1f;
         damageReductionAgainstBlock = 1f;
+        isMeleeDamage = false; // default value for isMeleeDamage
 
-        OnDamageApplied = null;
+		OnDamageApplied = null;
         OnKill = null;
     }
 }

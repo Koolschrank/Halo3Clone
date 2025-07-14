@@ -58,6 +58,7 @@ public class CharacterHealth : Health
 
     public Action OnShildHealStarted;
     public Action OnInHealthAura;
+    public Action OnMeleeHit;
 
     public Action<float> OnArmorChanged;
 
@@ -334,7 +335,9 @@ public class CharacterHealth : Health
             firstShotTime = Time.time;
         }
 
-        float damageReduction = playerArms.DamageReduction;
+        
+
+		float damageReduction = playerArms.DamageReduction;
 		
 		float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
         bool blocked = false;
@@ -459,9 +462,12 @@ public class CharacterHealth : Health
 			
         }
 
+		if (damagePackage.isMeleeDamage)
+		{
+			OnMeleeHit?.Invoke();
+		}
 
-
-        if (currentHeath <= 0)
+		if (currentHeath <= 0)
         {
             currentHeath = 0;
             if (damageDealer != null)

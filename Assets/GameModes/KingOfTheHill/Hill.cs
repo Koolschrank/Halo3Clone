@@ -12,7 +12,9 @@ public class Hill : MonoBehaviour
 
 
     [SerializeField] float radius = 10;
-    [SerializeField] LayerMask LayerMask;
+
+	[SerializeField] float height = 10;
+	[SerializeField] LayerMask LayerMask;
 
     
 
@@ -56,7 +58,7 @@ public class Hill : MonoBehaviour
             PlayerTeam player = collider.GetComponent<PlayerTeam>();
 
 
-            if (player != null && player.transform.position.y > transform.position.y -0.5f)
+            if (player != null && player.transform.position.y > transform.position.y -0.5f && player.transform.position.y < transform.position.y + height)
             {
                 playersOnHill.Add(player.TeamIndex);
             }
@@ -130,9 +132,12 @@ public class Hill : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, radius);
-    }
 
-    public float Radius => radius;
+		// draw line from the center of the hill to the top of the hill
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * height);
+	}
+
+	public float Radius => radius;
 
 
 }

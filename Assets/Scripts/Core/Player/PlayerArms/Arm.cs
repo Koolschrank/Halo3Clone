@@ -757,7 +757,15 @@ public class Arm : MonoBehaviour
         }
     }
 
-    void SendGranadeThrowSignal(GameObject granade)
+    public bool InGranadeThrow
+    {
+        get
+        {
+            return armState == ArmState.InGranadeThrow;
+        }
+	}
+
+	void SendGranadeThrowSignal(GameObject granade)
     {
        
         var ability = abilityInventory.GetLastAbility();

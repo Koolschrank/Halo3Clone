@@ -127,6 +127,8 @@ public class GranadeThrower : MonoBehaviour
 		Rigidbody rb = granade.GetComponent<Rigidbody>();
 		OnGranadeThrow?.Invoke(granade);
 
+		rb.AddForce(-transform.up * 0.5f, ForceMode.Impulse);
+
 		if (granade.TryGetComponent<Granade>(out Granade granadeScript))
 		{
 			granadeScript.SetOwner(mainTransform.gameObject);

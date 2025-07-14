@@ -21,7 +21,7 @@ public class AI_Move : MonoBehaviour
     [SerializeField] AI_Shoot aiShoot;
 
 
-    Vector3 targetPosition;
+	Vector3 targetPosition;
     Vector3 targetOffset = Vector3.zero;
 
     [SerializeField] int framesToUpdateNavAgent = 100;
@@ -384,7 +384,11 @@ public class AI_Move : MonoBehaviour
             }
         }
         
-
+        if (playerArms.RightArm.InGranadeThrow)
+        {
+			playerMovement.UpdateMoveInput(Vector2.zero);
+            return;
+		}
 
 
             var idealRange = playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange;
@@ -392,25 +396,25 @@ public class AI_Move : MonoBehaviour
             (((!followObjectiveThisFrame && playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange) 
             || (followObjectiveThisFrame &&  (  distanceToTarget < targetValue || distanceToOffsetPosition < targetValue2))) ) )
         {
-            playerMovement.UpdateMoveInput(Vector2.zero);
-            //if (straveTimer <=0)
-            //{
-            //    straveTimer = 0;
-            //    bool straveToLeft = Random.Range(0, 2) == 0;
-            //    Vector3 straveDirection = straveToLeft ? -transform.right : transform.right;
+			playerMovement.UpdateMoveInput(Vector2.zero);
+			//if (straveTimer <=0)
+			//{
+			//    straveTimer = 0;
+			//    bool straveToLeft = Random.Range(0, 2) == 0;
+			//    Vector3 straveDirection = straveToLeft ? -transform.right : transform.right;
 
-            //    Vector3 straveTarget = straveDirection * straveDistance;
+			//    Vector3 straveTarget = straveDirection * straveDistance;
 
-            //    straveTarget.y = transform.position.y;
+			//    straveTarget.y = transform.position.y;
 
-            //    straveOffset = straveTarget;
-
-
-
-            //}
+			//    straveOffset = straveTarget;
 
 
-            return;
+
+			//}
+
+
+			return;
         }
 
 

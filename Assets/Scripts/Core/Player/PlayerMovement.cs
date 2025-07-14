@@ -88,7 +88,9 @@ public class PlayerMovement : MonoBehaviour
     [NonSerialized]
     public float aura_moveSpeedReduction = 0f;
 
-    public void ApplyImpact(PlayerImpactStruct impact)
+    Vector3 distanceWentThisFrame = Vector3.zero;
+
+	public void ApplyImpact(PlayerImpactStruct impact)
     {
 		if ( impact.resetGravity)
 		{
@@ -135,7 +137,8 @@ public class PlayerMovement : MonoBehaviour
     // update
     void Update()
     {
-        if (inRoll)
+        var lastPosition = transform.position;
+		if (inRoll)
         {
             UpdateRoll();
         }
@@ -170,7 +173,14 @@ public class PlayerMovement : MonoBehaviour
             lastGroundTouch = Time.time;
         }
 
-    }
+        distanceWentThisFrame = transform.position - lastPosition;
+
+        if (gravityVelocity> 0 && distanceWentThisFrame.y <= 0)
+        {
+            gravityVelocity = 0; 
+		}
+
+	}
 
     private void UpdateCrouch()
     {
