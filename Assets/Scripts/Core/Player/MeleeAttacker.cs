@@ -12,8 +12,9 @@ public class MeleeAttacker : MonoBehaviour
     PlayerMeleeAttack meleeData;
     float attackDelay = 0f;
     [SerializeField] PlayerBodyStatSheet statSheet; // reference to the body stat sheet for damage calculation
+    [SerializeField] float dualWieldingDamageMultiplier = 0.75f; // multiplier for dual wielding, can be set by other scripts if needed
 
-    float damageMultiplier = 1f; // multiplier for damage, can be set by other scripts if needed
+	float damageMultiplier = 1f; // multiplier for damage, can be set by other scripts if needed
 
     private void Awake()
     {
@@ -42,11 +43,14 @@ public class MeleeAttacker : MonoBehaviour
 
     }
 
-    public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier)
+    bool isDualWielding = false;
+	public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier, bool isDualWielding)
     {
         meleeData = attackData;
         attackDelay = meleeData.Delay * timeMultiplier;
-        OnAttackStart?.Invoke(attackData);
+        this.isDualWielding = isDualWielding;
+		OnAttackStart?.Invoke(attackData);
+
     }
 
     // update
@@ -78,11 +82,18 @@ public class MeleeAttacker : MonoBehaviour
         foreach (var collider in colliders)
         {
             DamagePackage damagePackage = new DamagePackage(attackData.Damage * damageMultiplier);
-            damagePackage.origin = hitPoint;
+
+            if (isDualWielding)
+            {
+                damagePackage.damageAmount *= dualWieldingDamageMultiplier;
+			}
+
+			damagePackage.origin = hitPoint;
             // direction of self move 
             var direction = transform.forward;
             damagePackage.forceVector = direction * attackData.Force;
             damagePackage.owner = self;
+           
             damagePackage.hitPoint = hitPoint;
             damagePackage.impactType = ImpactType.wholeBody;
             damagePackage.isMeleeDamage = true;
@@ -97,7 +108,8 @@ public class MeleeAttacker : MonoBehaviour
 
             if (collider.TryGetComponent<Health>(out Health health))
             {
-                health.TakeDamage(damagePackage);
+				
+				health.TakeDamage(damagePackage);
                 
             }
 

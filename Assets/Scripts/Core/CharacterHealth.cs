@@ -337,6 +337,8 @@ public class CharacterHealth : Health
 
         
 
+        
+
 		float damageReduction = playerArms.DamageReduction;
 		
 		float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
@@ -345,7 +347,7 @@ public class CharacterHealth : Health
             playerArms.RightArm.IsInZoom 
             && playerArms.RightArm.CurrentWeapon != null 
             && playerArms.RightArm.CurrentWeapon.Data.HasBlock 
-            && playerArms.RightArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
+            && playerArms.RightArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.isMeleeDamage ? damagePackage.owner.transform.position : damagePackage.origin))
         {
 			damage *= (1 - playerArms.RightArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
             blocked = true;
@@ -355,13 +357,15 @@ public class CharacterHealth : Health
 			playerArms.LeftArm.IsInZoom
 			&& playerArms.LeftArm.CurrentWeapon != null
 			&& playerArms.LeftArm.CurrentWeapon.Data.HasBlock
-			&& playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.origin))
+			&& playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.IsBlocking(transform, damagePackage.isMeleeDamage ? damagePackage.owner.transform.position : damagePackage.origin))
         {
 			damage *= (1 - playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
 			blocked = true;
 		}
 
-        if (damage == 0) return;
+		
+
+			if (damage == 0) return;
 
 			TargetHitCollector damageDealer = null;
         if (damagePackage.owner != null)

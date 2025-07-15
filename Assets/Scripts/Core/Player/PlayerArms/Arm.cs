@@ -793,14 +793,15 @@ public class Arm : MonoBehaviour
         }
         armState = ArmState.InMeleeAttack;
         float timeMultiplier = 1;
-        if (playerArms.IsDualWielding)
+        bool isDualWielding = playerArms.IsDualWielding;
+		if (isDualWielding)
         {
             timeMultiplier = meleeAttackTimeMultiplierInDualWielding;
         }
 
 
         meleeAttackTimer = meleeAttack.MeleeTime * timeMultiplier;
-        meleeAttacker.AttackStart(meleeAttack, timeMultiplier);
+        meleeAttacker.AttackStart(meleeAttack, timeMultiplier, isDualWielding);
         weaponInHand.MeleeStart(meleeAttackTimer);
         OnMeleeWithWeaponStarted?.Invoke(weaponInHand, meleeAttackTimer);
 

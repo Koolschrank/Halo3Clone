@@ -15,20 +15,20 @@ public class PhysicsForceArea : MonoBehaviour
 	List<Rigidbody> affectedRigidbodies = new List<Rigidbody>();
     List<PlayerPhysicsImpulse> affectedPlayers = new List<PlayerPhysicsImpulse>();
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		var deltaTime = Time.deltaTime;
 		foreach (var rb in affectedRigidbodies)
 		{
 			if (rb != null)
 			{
-				var vector = transform.up * forceOnRigidbodyiesMagnitude * deltaTime;
+				var vector = transform.up * forceOnRigidbodyiesMagnitude;
 				if (rb.linearVelocity.y < 0)
 				{
 					vector *= forceMultiplierIfYVelocityIsNegative;
 				}
 
-				rb.AddForce(vector * rb.mass, ForceMode.Force);
+				rb.AddForce(vector, ForceMode.Acceleration);
 			}
 		}
 
@@ -101,7 +101,13 @@ public class PhysicsForceArea : MonoBehaviour
 				affectedPlayers.Remove(player);
 				if (hasPlayerGravity)
 				{
-					player.ChangeGravity(1);
+					float baseGravity = 1;
+					var gravityOverride = GravityOverrider.Instance;
+					if (gravityOverride != null)
+					{
+						baseGravity = gravityOverride.playerGravityMultiplier;
+					}
+					player.ChangeGravity(baseGravity);
 				}
 			}
 

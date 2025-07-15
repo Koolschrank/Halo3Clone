@@ -32,9 +32,10 @@ MonoBehaviour:
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 0}
+  meleeData: {fileID: 11400000, guid: 5d97ebd6b2b670441bc8bec487e05b9e, type: 2}
   weaponType: 0
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 0
   burstAmount: 3
@@ -104,6 +105,7 @@ MonoBehaviour:
   block:
     blockPercentage: 0.5
     blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 312487419

@@ -11146,7 +11146,7 @@ MonoBehaviour:
   reloadInputBuffer: 0.29
   switchInputBuffer: 0.29
   granadeThrowInputBuffer: 0.4
-  meleeAttackTimeMultiplierInDualWielding: 1.5
+  meleeAttackTimeMultiplierInDualWielding: 1.4
   granadeThrowTimeMultiplierInDualWielding: 1.6
   reloadWeaponWhenDroped: 0
 --- !u!114 &4267228126375275963
