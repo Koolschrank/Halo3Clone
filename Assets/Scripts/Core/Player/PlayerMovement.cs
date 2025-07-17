@@ -36,8 +36,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float deceleration_ground = 10f;
     [SerializeField] float deceleration_air = 5f;
     [SerializeField] float acceleration_roll = 5f;
+	[SerializeField] float acceleration_pushed = 5f;
 
-    [SerializeField] float jumpPower = 9.8f;
+	[SerializeField] float minPushTime = 0.1f;
+
+	[SerializeField] float jumpPower = 9.8f;
     [SerializeField] float jumpCooldown = 0.5f;
     float jumpCooldownTimer = 0;
     [SerializeField] float gravity = 9.8f;
@@ -90,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 distanceWentThisFrame = Vector3.zero;
 
+    bool inPushedState = false; // if the player is in a pushed state, used to determine if the player can move or not
+    float pushedTimer = 0f; // timer for the pushed state, used to determine if the player can move or not
 	public void ApplyImpact(PlayerImpactStruct impact)
     {
 		if ( impact.resetGravity)
@@ -99,6 +104,9 @@ public class PlayerMovement : MonoBehaviour
 		moveVelocity += new Vector3(impact.impactForce.x, 0, impact.impactForce.z);
 		gravityVelocity += impact.impactForce.y; // apply vertical impact to gravity
         ignoreGravityResetTimer = physicsImpactIgnoreGravityResetTime; // reset the ignore gravity timer
+
+        inPushedState = true; // set the player in a pushed state
+        pushedTimer = minPushTime; // set the pushed timer to the minimum push time
 	}
 
     public void MultiplyMaxMoveSpeed(float multiplier)
@@ -236,17 +244,32 @@ public class PlayerMovement : MonoBehaviour
         
         Vector3 move = camForward * moveInput.z + camRight * moveInput.x;
 
+		var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
 
-        if (move.magnitude == 0)
+		if (inPushedState)
+		{
+			acceleration = acceleration_pushed;
+			pushedTimer -= Time.deltaTime;
+			if (pushedTimer <= 0 && (cc.isGrounded || moveVelocity.magnitude < maxMoveSpeed))
+			{
+				inPushedState = false; // reset the pushed state
+			}
+		}
+
+
+		if (move.magnitude == 0)
         {
-            var deceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
-            moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration * Time.deltaTime);
+            if (!inPushedState)
+			    acceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
+
+
+            moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, acceleration * Time.deltaTime);
         }
         else
         {
-            var acceleration = cc.isGrounded ? acceleration_ground : acceleration_air;
+            
 
-            var moveSpeedMultiplier = 1f;
+			var moveSpeedMultiplier = 1f;
             if (arms.IsDualWielding)
             {
                 moveSpeedMultiplier = arms.MovementSpeedMultiplier;

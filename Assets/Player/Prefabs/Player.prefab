@@ -10529,6 +10529,7 @@ MonoBehaviour:
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
   statSheet: {fileID: 0}
+  dualWieldingDamageMultiplier: 0.75
 --- !u!114 &5352841395007449006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10738,6 +10739,8 @@ MonoBehaviour:
   deceleration_ground: 35
   deceleration_air: 10
   acceleration_roll: 40
+  acceleration_pushed: 3
+  minPushTime: 0.1
   jumpPower: 8
   jumpCooldown: 0.31
   gravity: 15

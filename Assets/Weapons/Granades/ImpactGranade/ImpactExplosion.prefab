@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0776b1c71aefb8544b6d9ee114ffb1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 6
-  damage: 30
+  range: 7.5
+  damage: 15
   damageOnShildMultiplier: 2
   damageReductionAgainstBlocking: 0.8
   damageFalloff:
@@ -76,7 +76,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 150
-  forceOnPlayer: 30
+  forceOnPlayer: 14
   forceYOffset: 0
   forceFalloff:
     serializedVersion: 2
@@ -91,14 +91,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.19333333
     - serializedVersion: 3
-      time: 0.5300102
-      value: 0.99499035
-      inSlope: -0.027899029
-      outSlope: -0.027899029
+      time: 0.75940603
+      value: 0.9411346
+      inSlope: -0.2685329
+      outSlope: -0.2685329
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.20854019
+      outWeight: 0.88824606
     - serializedVersion: 3
       time: 0.997406
       value: 0.019878387

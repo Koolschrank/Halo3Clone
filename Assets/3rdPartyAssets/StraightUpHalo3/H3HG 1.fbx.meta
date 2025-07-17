@@ -1,0 +1,452 @@
+fileFormatVersion: 2
+guid: 8dbd486307a8a224fabc4a1cd2eb51c0
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 840ec4641c1330648a00e69966047cbd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: antenna
+    second: {fileID: 2100000, guid: ae0ef68e7c8d0ce47a424b3e70491013, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clouds_puffy
+    second: {fileID: 2100000, guid: 0e15a1f12173bd04c8589ea85daa2346, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clouds_puffy.001
+    second: {fileID: 2100000, guid: 7c4d98e52a8281144927df4d439a3dce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clouds_puffy.002
+    second: {fileID: 2100000, guid: bcb4881dc51e1174fa5965565027702c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clouds_rolling
+    second: {fileID: 2100000, guid: f423905c0d40a324fb07ae5584e40832, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_big_pipe
+    second: {fileID: 2100000, guid: 64cd60ce0d6e829419b0abdddf110aca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_big_pipe_bracket
+    second: {fileID: 2100000, guid: de5e9fccc52918b40b3af10f905073f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_cliff
+    second: {fileID: 2100000, guid: 6dead9dc3a8e872419d4b840f9898fe9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_cliff_rock
+    second: {fileID: 2100000, guid: 18f8a0bb9993ae346a2a896c3f20c9bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_cliff_rock_wet
+    second: {fileID: 2100000, guid: ceb70b42102293d438c8419cd30227ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_cliff_sky
+    second: {fileID: 2100000, guid: 105a263468672174a883d0c9d358bc45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_floor_a
+    second: {fileID: 2100000, guid: 10e36502ead86304faf2fd3c6a9aea94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_floor_interior_a
+    second: {fileID: 2100000, guid: 9e0166ce83a639a44a38eae8e071dee0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_floor_metal_a
+    second: {fileID: 2100000, guid: af825e05a7f13a649bfe976a69e81b9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a
+    second: {fileID: 2100000, guid: a01e10320a412ea4b861cd6d6861b4b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a_ceiling
+    second: {fileID: 2100000, guid: c31daef3152ca524ead419ba90f7b3ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a_interior
+    second: {fileID: 2100000, guid: 938fc0f8165d01b45b39dacd4ef2c66d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a_rubble
+    second: {fileID: 2100000, guid: d72a514a80fe2274f83109873035afb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a_rubble_edge
+    second: {fileID: 2100000, guid: 218522c47d34c0f4cbab012c5c9f044b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_a_trim
+    second: {fileID: 2100000, guid: 8806d0187ef522b49b8606a17313ac23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_b
+    second: {fileID: 2100000, guid: 44fdea71f0a9de040854134458f41e9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_concrete_wall_c
+    second: {fileID: 2100000, guid: 1bc8db51fcb1d65419a055ba65babc2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_fence_chainlink
+    second: {fileID: 2100000, guid: a94a2bcd44921374e927cf2b942ddcc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_garage_door
+    second: {fileID: 2100000, guid: 2eb1a37fd85444f43a8620c520828e19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_garage_floor
+    second: {fileID: 2100000, guid: 6a80019277180324f9f121245b65ea9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_grate_a
+    second: {fileID: 2100000, guid: a159c64f7c800804198da40fec89dea5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_ground_outer
+    second: {fileID: 2100000, guid: 2dcfc09e3d82f0c44bfea5da1e02e415, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_light_warm_illum
+    second: {fileID: 2100000, guid: 035a3366c71297c40b5c9ac338b8a0ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_metal
+    second: {fileID: 2100000, guid: f5fcdd50a43e32c42a9639ae09f70a1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_metal_panels
+    second: {fileID: 2100000, guid: eba5bddfaa6e8ac4d9819c337ceadfc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_metal_railing
+    second: {fileID: 2100000, guid: a0ada8f5f9987aa479e839059c02d1dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_metal_rivets
+    second: {fileID: 2100000, guid: 063b9e6c42bda6642840c8d59d14d10b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_metal_wall_verticlestripe_a
+    second: {fileID: 2100000, guid: 00f20b4f5a4bf564299dfb636c47b6ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_net
+    second: {fileID: 2100000, guid: e7ff57684349cc546a87ad7909a88d96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_netb
+    second: {fileID: 2100000, guid: edd67a5ce56dea64ca0d8449e3fadf1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_sam
+    second: {fileID: 2100000, guid: 734916ddaeb67424f80602cfb5b9029e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_sam_covers
+    second: {fileID: 2100000, guid: ddb2ed6184fc6ee48aca55c4599cda04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_sam_lift
+    second: {fileID: 2100000, guid: e2df89bb473e7964289e2774d9904c83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_sam_rocket
+    second: {fileID: 2100000, guid: a1c9daf7db6b8a14daaffec86efa9e6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_switch
+    second: {fileID: 2100000, guid: ae02095a3f5085f4e83d074160d1ddc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_tree_bark
+    second: {fileID: 2100000, guid: 1330bf2d9b5bbe24087933855713c3cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deadlock_wire
+    second: {fileID: 2100000, guid: 38c79ef9a8c032e48ab495fd0b9b11da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: decorator_burntgrass
+    second: {fileID: 2100000, guid: c66640b2a14c6a447a6884c1fe288acb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_lightfix_01
+    second: {fileID: 2100000, guid: 7501d1ffb799c1b4f8496f22be6faa3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_lightfix_02
+    second: {fileID: 2100000, guid: d4ec8923c1f4ec34aa0001d607f8880f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_lightfix_03
+    second: {fileID: 2100000, guid: 1799ce7b721cedf47bbca00452c0c161, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_lightfix_05
+    second: {fileID: 2100000, guid: 06ceef83f81a6494f9e310f40bfabb8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_metal_grate_01
+    second: {fileID: 2100000, guid: 6d0b02ee353c2c7439aeb65df1549278, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_metal_painted_olive
+    second: {fileID: 2100000, guid: 5e9970af851904b41ab9f176349034ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_metal_steel_grey
+    second: {fileID: 2100000, guid: f2a178dc037de5a419a910f7d75446dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hb_metal_worklight_unwrap_a
+    second: {fileID: 2100000, guid: 6957f11b631b9fb449f0fe4715135e9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lake
+    second: {fileID: 2100000, guid: 7d751c4738b7b9d45817d3e1a39a51d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_doodad_a_illum_cool
+    second: {fileID: 2100000, guid: 94b289b723924424d9b0e5c58d3d4bfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_h_boltpattern
+    second: {fileID: 2100000, guid: 91125a90d374ae44a9a7e50dba7a120b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_trim_c_hazard
+    second: {fileID: 2100000, guid: 1d2a2db5456fddc43b63b1ef33d4f359, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_trim_d
+    second: {fileID: 2100000, guid: ef9079d564f4c4a46bedf4e12b94a548, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: out_bush
+    second: {fileID: 2100000, guid: 92168b9f2ee14f540856159296514338, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: out_bush_anim
+    second: {fileID: 2100000, guid: 9e0fb1ee9f5c5d543bef78f4d6aceab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: outtree_leaf
+    second: {fileID: 2100000, guid: ababd5bed39dc274cbc7d011a74f4688, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rolling backer
+    second: {fileID: 2100000, guid: 6c56555f376580040a44906a807effc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rubber_wire
+    second: {fileID: 2100000, guid: c688f58d6d0481d4b9545dec3b0fe289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sky
+    second: {fileID: 2100000, guid: 99d726fc1c5342a4c8e4a9313b075e5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sundisk
+    second: {fileID: 2100000, guid: 5952460f9ec702b43ad4053f384d079e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: terrain_africa
+    second: {fileID: 2100000, guid: 846d2b04bd24fe24e8068ca0a43d8be1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: trees
+    second: {fileID: 2100000, guid: eddcaf5959f87874b9b169051cee038c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: under
+    second: {fileID: 2100000, guid: 69093be1096c9974aa98cf014c6bea4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water_edge_breakup
+    second: {fileID: 2100000, guid: 00b338f59b3ab2a488b0b1533f443bdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zanzibar_water_awesome.001
+    second: {fileID: 2100000, guid: 3cec8427a9db05e429440c0f913fe612, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

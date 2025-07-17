@@ -49,6 +49,7 @@ MonoBehaviour:
   range: 6
   damage: 300
   damageOnShildMultiplier: 1
+  damageReductionAgainstBlocking: 0.8
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -74,6 +75,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 100
+  forceOnPlayer: 35
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2
@@ -102,6 +104,9 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 1
   damageReductionIfObstructed: 0.1
   timeForSelfDestruction: 5
   explosionSound:
