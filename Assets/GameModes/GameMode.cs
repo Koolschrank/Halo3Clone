@@ -33,12 +33,18 @@ public class GameMode : ScriptableObject
     public int amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints = 0; // amount of points team 1 needs to score to make team 2 loose points, if team2LoosesScoreWhenTeam1scores is true
     public bool useEnemyWaves;
     public bool noDualWieldDamageReduction = false; // if true, dual wielding does not reduce damage, otherwise it does
-
-
+    public bool startingEquipmentBasedOnPlayerValues = false;
+    public bool cannotDropSwitchOrPickupWeapons = false; // if true, players cannot drop, switch or pickup weapons, they can only use their starting equipment
 
 
 	public Equipment StartingEquipment { get { return startingEquipment; } }
     public float TimeLimitInMinutes { get { return timeLimitInMinutes; } }
+
+    public virtual Equipment GetEquipmentBasedOnPoints(int points)
+    {
+        return StartingEquipment;
+
+	}
 
     public int GetPointsToWin(int playerCount, bool isSmallMap, int teamIndex)
     {

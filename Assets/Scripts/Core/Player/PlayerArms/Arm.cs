@@ -53,7 +53,7 @@ public class Arm : MonoBehaviour
 
     protected Weapon_Arms weaponInHand;
     protected ArmState armState = ArmState.Ready;
-    bool inZoom = false;
+	protected bool inZoom = false;
 
     [Header("Settings")]
     [SerializeField]  float weaponDropForce;
@@ -77,7 +77,8 @@ public class Arm : MonoBehaviour
     bool ammoGainedFromReload = false;
 
 
-
+    [NonSerialized]
+    public bool cannotDropSwapOrPickUpWeapons = false;
 
 	public void AddToFireRateMultiplier(float value)
     {
@@ -475,7 +476,7 @@ public class Arm : MonoBehaviour
     }
 
 
-    bool zoomButtonPressed = false;
+    protected bool zoomButtonPressed = false;
     public void PressZoomButton()
     {
         zoomButtonPressed = true;
@@ -570,8 +571,8 @@ public class Arm : MonoBehaviour
         Debug.Log("Switching weapon try");
 
         if (armState != ArmState.Ready && armState != ArmState.Reloading && !(armState == ArmState.Shooting && weaponInHand.IsShootCooldownLessThanHalf())) return;
-
-        if (weaponInHand != null && weaponInHand.CanNotBeInInventory)
+        if (cannotDropSwapOrPickUpWeapons) return;
+		if (weaponInHand != null && weaponInHand.CanNotBeInInventory)
         {
             DropWeapon();
         }
@@ -598,14 +599,16 @@ public class Arm : MonoBehaviour
 
     public virtual bool CanPickUpWeapon()
     {
-        return pickUpScan.CanPickUpWeapon();
+		if (cannotDropSwapOrPickUpWeapons) return false;
+
+		return pickUpScan.CanPickUpWeapon();
     }
 
     public virtual void TryPickUpWeapon()
     {
         if (armState == ArmState.SwitchingOut) return;
-
-        if (pickUpScan.CanPickUpWeapon())
+		if (cannotDropSwapOrPickUpWeapons) return;
+		if (pickUpScan.CanPickUpWeapon())
         {
             IfZoomedInExitZoom();
             
@@ -630,14 +633,17 @@ public class Arm : MonoBehaviour
     void DropWeaponWithNoForce()
     {
         if (weaponInHand == null) return;
-        var pickUp = LetGoOfWeapon();
+		if (cannotDropSwapOrPickUpWeapons) return;
+		var pickUp = LetGoOfWeapon();
     }
 
     public virtual void DropWeapon()
     {
 
+
         if (weaponInHand == null) return;
-        var pickUp = LetGoOfWeapon();
+		if (cannotDropSwapOrPickUpWeapons) return;
+		var pickUp = LetGoOfWeapon();
         if (pickUp == null) return;
 
         pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
@@ -656,6 +662,16 @@ public class Arm : MonoBehaviour
         inventory.AddAmmo(newWeapon.Data, 99999);
 
     }
+
+    public void RemoveWeapon()
+    {
+		if (weaponInHand == null) return;
+		var weapon = weaponInHand;
+        inZoom = false;
+		OnZoomOut?.Invoke(weaponInHand);
+		weaponInHand = null;
+		OnWeaponDroped?.Invoke(weapon, null);
+	}
 
     Weapon_PickUp LetGoOfWeapon()
     {
@@ -727,7 +743,8 @@ public class Arm : MonoBehaviour
     public virtual void TryThrowGranade()
     {
         if (armState != ArmState.Ready && armState != ArmState.Reloading && !(armState == ArmState.Shooting && weaponInHand.IsShootCooldownLessThanHalf())) return;
-        if (abilityInventory.CanUseCurrentAbility() && abilityInventory.IsCurrentAbilityAGranade())
+		if (cannotDropSwapOrPickUpWeapons) return;
+		if (abilityInventory.CanUseCurrentAbility() && abilityInventory.IsCurrentAbilityAGranade())
         {
             IfZoomedInExitZoom();
             var ability = abilityInventory.GetCurrentAbility().abilityData as AbilityData_Granade;
@@ -826,9 +843,11 @@ public class Arm : MonoBehaviour
             return;
         }
 
-        if (weaponInHand != null)
+		
+		if (weaponInHand != null)
         {
-            OnWeaponUnequipFinished?.Invoke(weaponInHand);
+			
+			OnWeaponUnequipFinished?.Invoke(weaponInHand);
         }
 
         weaponInHand = weapon;

@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CooldownUISystem : MonoBehaviour
 {
@@ -15,10 +16,13 @@ public class CooldownUISystem : MonoBehaviour
 
     public void Setup(AbilityInventory abilityInventory, PlayerMind mind)
     {
-        
+		if (hasPermanentObject)
+		{
+			permanentObject.gameObject.SetActive(false);
+		}
 
 
-        if (this.abilityInventory)
+		if (this.abilityInventory)
         {
             this.abilityInventory.OnAbilityAdded -= OnAbilityAdded;
             this.abilityInventory.OnAbilityRemoved -= OnAbilityRemoved;
@@ -56,7 +60,9 @@ public class CooldownUISystem : MonoBehaviour
 
         if (hasPermanentObject && index == 0)
         {
-            permanentObject.Setup(ability);
+			permanentObject.gameObject.SetActive(true);
+
+			permanentObject.Setup(ability);
 
 		}
 
@@ -72,7 +78,11 @@ public class CooldownUISystem : MonoBehaviour
             cooldownUIs.RemoveAt(index);
             UpdatePositions();
         }
-    }
+        if (hasPermanentObject && index == 0)
+        {
+            permanentObject.gameObject.SetActive(false);
+		}
+	}
 
     public void UpdatePositions()
     {

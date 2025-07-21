@@ -66,7 +66,11 @@ public class BodyMindConnection : MonoBehaviour
 		}
 
         // wait for  0.5 seconds before setting the stat sheet
-
+        if (GameModeSelector.gameModeManager.GameModeStats.cannotDropSwitchOrPickupWeapons)
+        {
+            playerArms.LeftArm.cannotDropSwapOrPickUpWeapons = true;
+            playerArms.RightArm.cannotDropSwapOrPickUpWeapons = true;
+		}
         
         
 
@@ -122,13 +126,21 @@ public class BodyMindConnection : MonoBehaviour
             return equipment;
 
 
-        bool isSwat = MapLoader.instance.IsSwat();
+		if (GameModeSelector.gameModeManager.GameModeStats.startingEquipmentBasedOnPlayerValues)
+		{
+			equipment = new Equipment(GameModeSelector.gameModeManager.GetGunGameEquipment(playerTeam.TeamIndex));
+
+		}
+
+		bool isSwat = MapLoader.instance.IsSwat();
         bool dualWieldPlus = MapLoader.instance.IsDualWieldPlus();
         bool noMiniMap = MapLoader.instance.HasNoMiniMap();
         bool randomWeaponSpawn = MapLoader.instance.IsRandomWeaponSpawn();
         float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
 
-        if (isSwat)
+		
+
+		if (isSwat)
         {
             equipment.SetWeapons(ItemList.instance.GetPistol(), null, null);
             equipment.SetMagazins(4, 0, 0);
@@ -152,6 +164,9 @@ public class BodyMindConnection : MonoBehaviour
         {
             equipment.SetMovementSpeedMultiplier(moveSpeedMultiplier);
         }
+
+
+        
 
 
 

@@ -7,7 +7,8 @@ public class RightArm : Arm
     public override void TryPickUpWeapon()
     {
 
-        Debug.Log("interact");
+		if (cannotDropSwapOrPickUpWeapons) return;
+		Debug.Log("interact");
         if (playerInteractableTrigger.CanInteract())
         {
             Debug.Log("interact2");
@@ -134,7 +135,8 @@ public class RightArm : Arm
 
     public override void TryThrowGranade()
     {
-        base.TryThrowGranade();
+		if (cannotDropSwapOrPickUpWeapons) return;
+		base.TryThrowGranade();
         playerArms.LeftArm.DropWeapon();
     }
 

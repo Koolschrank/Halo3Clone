@@ -35,6 +35,7 @@ MonoBehaviour:
   meleeData: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 1
   burstAmount: 3
@@ -82,7 +83,7 @@ MonoBehaviour:
   reloadTimeMultiplier: 1.4
   bloomOnShoot: 1
   bloomOnTakingDamage: 0
-  bloomInaccuracyMultiplier: 0.5
+  bloomInaccuracyMultiplier: 0
   bloomTime: 0.5
   bloomCurve:
     serializedVersion: 2
@@ -122,6 +123,7 @@ MonoBehaviour:
   block:
     blockPercentage: 0.5
     blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 740982116

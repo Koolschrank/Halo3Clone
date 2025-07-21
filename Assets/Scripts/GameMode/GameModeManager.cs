@@ -20,6 +20,14 @@ public class GameModeManager : MonoBehaviour
     public GameMode GameModeStats => gameModeStats;
 
 
+
+    public Equipment GetGunGameEquipment(int teamIndex)
+    {
+        int points = teamPoints[teamIndex];
+        return gameModeStats.GetEquipmentBasedOnPoints(points);
+
+	}
+
     public Transform GetStartingSpawnPoint(int teamIndex)
     {
         return spawnSystem.GetStartSpawnPoint(teamIndex);

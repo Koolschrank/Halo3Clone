@@ -15,8 +15,8 @@ public class LeftArm : Arm
     {
         
         if (armState == ArmState.SwitchingOut) return;
-
-        if (!playerArms.CanDualWield) return;
+		if (cannotDropSwapOrPickUpWeapons) return;
+		if (!playerArms.CanDualWield) return;
 
         if (pickUpScan.CanPickUpWeapon())
         {
@@ -39,7 +39,8 @@ public class LeftArm : Arm
     }
     public override void TrySwitchWeapon()
     {
-        if (noInvectoryInteraction)
+		if (cannotDropSwapOrPickUpWeapons) return;
+		if (noInvectoryInteraction)
         {
             //playerArms.RightArm.TrySwitchWeapon();
             DropWeapon();
@@ -69,8 +70,9 @@ public class LeftArm : Arm
     {
         var weaponToPickUp = pickUpScan.GetClosesPickUp();
         if (weaponToPickUp == null) return false;
+		if (cannotDropSwapOrPickUpWeapons) return false;
 
-        if (weaponToPickUp.WeaponData.WeaponType == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons)
+		if (weaponToPickUp.WeaponData.WeaponType == WeaponType.oneHanded || playerArms.CanDualWield2HandedWeapons)
         {
             return true;
         }
@@ -80,9 +82,9 @@ public class LeftArm : Arm
     protected override void SwitchWeapon()
     {
 
+		if (cannotDropSwapOrPickUpWeapons) return;
 
-        
-        switchInputBufferTimer = 0;
+		switchInputBufferTimer = 0;
         if (weaponInHand == null)
         {
             Debug.Log("Switching weapon");
@@ -107,6 +109,7 @@ public class LeftArm : Arm
 
     public override void DropWeapon()
     {
+        if (cannotDropSwapOrPickUpWeapons) return;
         base.DropWeapon();
         
     }
@@ -140,5 +143,14 @@ public class LeftArm : Arm
         {
             weapon.SetIsBeingDualWielded(true);
         }
-    }
+
+		if (zoomButtonPressed)
+		{
+			ReleaseZoomButton();
+			inZoom = false;
+			OnZoomOut?.Invoke(weaponInHand);
+			
+		}
+
+	}
 }

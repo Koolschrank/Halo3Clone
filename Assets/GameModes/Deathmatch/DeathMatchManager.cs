@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DeathMatchManager : GameModeManager
 {
@@ -20,6 +22,30 @@ public class DeathMatchManager : GameModeManager
         int teamIndex = playerWhoElimnated.TeamIndex;
         GainPoints(teamIndex, -1);
     }
+
+	protected override void GainPoints(int teamIndex, int points)
+	{
+		base.GainPoints(teamIndex, points);
+
+        if (gameModeStats is GameMode_GunGame)
+        {
+            var allPlayers = PlayerManager.instance.GetAllPlayers();
+            var teamScores = teamPoints[teamIndex];
+			var newEquipment = gameModeStats.GetEquipmentBasedOnPoints(teamScores);
+			foreach (var player in allPlayers)
+            {
+                if (player.TeamIndex == teamIndex && player.PlayerBody != null && !player.PlayerBody.GetComponent<CharacterHealth>().IsDead)
+                {
+                    var startEquipment = player.PlayerBody.GetComponent<PlayerStartEquipment>();
+					startEquipment.ClearEquipment();
+                    startEquipment.GetEquipment(newEquipment);
+				}
+			}
+
+
+            
+		}
+	}
 
 
 

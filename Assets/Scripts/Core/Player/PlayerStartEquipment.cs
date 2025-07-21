@@ -88,6 +88,14 @@ public class PlayerStartEquipment : MonoBehaviour
 
     }
 
+    public void ClearEquipment()
+    {
+        playerArms.RightArm.RemoveWeapon();
+        playerArms.LeftArm.RemoveWeapon();
+        playerInventory.Clear();
+        abilityInventory.RemoveAllAbilities();
+	}
+
     public void GetEquipment(Equipment equipment)
     {
         var weaponInHand = equipment.WeaponInHand;

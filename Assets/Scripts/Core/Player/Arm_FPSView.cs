@@ -75,8 +75,8 @@ public class Arm_FPSView : MonoBehaviour
         {
             Destroy(weaponVisual.gameObject);
         }
-
-        weaponVisual = Instantiate(weapon.WeaponFPSModel, baseArm.transform);
+		baseArm.localPosition = Vector3.zero;
+		weaponVisual = Instantiate(weapon.WeaponFPSModel, baseArm.transform);
         weaponVisual.SetUp(weapon);
         UtilityFunctions.SetLayerRecursively(weaponVisual.gameObject, gameObject.layer);
 
@@ -96,8 +96,9 @@ public class Arm_FPSView : MonoBehaviour
 
 			}
 		}
-            
-    }
+        
+
+	}
 
     public void RemoveWeapon(Weapon_Arms weapon_Arms)
     {

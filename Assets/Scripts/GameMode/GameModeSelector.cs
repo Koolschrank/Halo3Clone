@@ -24,7 +24,7 @@ public class GameModeSelector : MonoBehaviour
         }
 
 
-        if (gameMode is GameMode_Deathmatch)
+        if (gameMode is GameMode_Deathmatch || gameMode is GameMode_GunGame)
         {
             deathMatchManager.StartGame(gameMode);
             gameModeManager = deathMatchManager;
