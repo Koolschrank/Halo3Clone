@@ -6,7 +6,8 @@ public class MeleeAttacker : MonoBehaviour
     public Action<PlayerMeleeAttack> OnAttackStart;
     public Action<PlayerMeleeAttack> OnAttackHit;
 
-    [SerializeField] CharacterHealth health;
+    [SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
+	[SerializeField] CharacterHealth health;
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
     PlayerMeleeAttack meleeData;
@@ -16,7 +17,10 @@ public class MeleeAttacker : MonoBehaviour
 
 	float damageMultiplier = 1f; // multiplier for damage, can be set by other scripts if needed
 
-    private void Awake()
+    [SerializeField] RumbleData meleeRumble_miss;
+    [SerializeField] RumbleData meleeRumble_hit;
+
+	private void Awake()
     {
         if (statSheet != null)
         {
@@ -122,7 +126,22 @@ public class MeleeAttacker : MonoBehaviour
         if (hits > 0)
         {
             OnAttackHit?.Invoke(attackData);
+
+
+            if (bodyMindConnection.Mind != null)
+            {
+                int playerIndex = bodyMindConnection.Mind.PlayerIndex;
+                RumbleManager.Instance.TriggerRumble (meleeRumble_hit, playerIndex);
+			}
         }
+        else
+        {
+            if (bodyMindConnection.Mind != null)
+            {
+                int playerIndex = bodyMindConnection.Mind.PlayerIndex;
+                RumbleManager.Instance.TriggerRumble(meleeRumble_miss, playerIndex);
+			}
+		}
 
     }
 

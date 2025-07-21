@@ -1009,6 +1009,7 @@ GameObject:
   - component: {fileID: 5000775822283282443}
   - component: {fileID: 465907222396707810}
   - component: {fileID: 8164885341825693715}
+  - component: {fileID: 8811581011380500969}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1813,6 +1814,7 @@ MonoBehaviour:
       height: 0.5
       FOV: 75
       targetDisplay: 1
+  forceSpawnTeam1OnSpawnPoint1: 0
 --- !u!114 &8403267331934518576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1902,6 +1904,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae345340663b9d4badf1832be4995a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8811581011380500969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151862695114880791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3436406ecaa354ea024e6a6bd43c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 6178971544052675649}
+  rumbleSettings_test:
+    duration: 0.2
+    intensity: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
+  testRumble: 0
+  testRumbleLoopDuration: 2
+  rumbleTypeSettings_shoot:
+    lowMotorIntensity: 0.3
+    highMotorIntensity: 1
+  rumbleTypeSettings_melee:
+    lowMotorIntensity: 0.5
+    highMotorIntensity: 1
+  rumbleTypeSettings_damage:
+    lowMotorIntensity: 1
+    highMotorIntensity: 0.2
+  rumbleTypeSettings_explosion:
+    lowMotorIntensity: 1.5
+    highMotorIntensity: 0.3
+  rumbleTypeSettings_other:
+    lowMotorIntensity: 0.2
+    highMotorIntensity: 1
 --- !u!1 &8781002057444987038
 GameObject:
   m_ObjectHideFlags: 0

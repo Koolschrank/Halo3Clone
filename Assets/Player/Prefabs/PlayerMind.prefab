@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902132af636f9b24f8f6145028373cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMind: {fileID: 6762101414911299386}
   playerArm: {fileID: 0}
   granadeSpawnPoint: {fileID: 3664815395283841513}
   weaponSway: {fileID: 2127263124048056043}
@@ -3303,6 +3304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902132af636f9b24f8f6145028373cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMind: {fileID: 6762101414911299386}
   playerArm: {fileID: 0}
   granadeSpawnPoint: {fileID: 3664815395283841513}
   weaponSway: {fileID: 101173681999680801}

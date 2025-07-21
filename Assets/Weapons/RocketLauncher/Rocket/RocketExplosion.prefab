@@ -132,6 +132,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  rumbleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  rumbleData:
+    duration: 0.8
+    intensity: 1
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.9962596
+        outSlope: -0.9962596
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99334717
+        value: 0.010368347
+        inSlope: -0.9962596
+        outSlope: -0.9962596
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 3
+  rumbleReach: 10
 --- !u!114 &4132134256405243812
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,6 +46,9 @@ public class CharacterHealth : Health
 
 	[SerializeField] EventReference deathSound;
 
+    public RumbleData rumbleHit;
+    public RumbleData rumbleDeath;
+
 
 	public Action<float> OnShildChanged;
     public Action<float> OnMaxShildChanged;
@@ -80,6 +83,8 @@ public class CharacterHealth : Health
     public float aura_poisonDamage = 0.0f;
 	[NonSerialized]
 	public float aura_armorHeal = 0.0f;
+
+	
 
 	public float ArmorValue     {
         get { return currentArmor / maxArmor; }
@@ -479,14 +484,25 @@ public class CharacterHealth : Health
 
 		if (currentHeath <= 0)
         {
-            currentHeath = 0;
+			if (body.Mind != null)
+			{
+				RumbleManager.Instance.TriggerRumble(rumbleDeath, body.Mind.playerID);
+			}
+
+
+			currentHeath = 0;
             if (damageDealer != null)
                 damageDealer.CharacterKill(damagePackage, gameObject);
             Die(damagePackage);
         }
         else
         {
-            if (damageDealer != null)
+			if (body.Mind != null)
+			{
+				RumbleManager.Instance.TriggerRumble(rumbleHit, body.Mind.playerID);
+			}
+
+			if (damageDealer != null)
                 damageDealer.CharacterHit(damagePackage, gameObject);
             if (hasHealthRegen && hasHealthDamage)
             {

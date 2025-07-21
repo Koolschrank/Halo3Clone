@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using UnityEngine.Events;
+using UnityEditor.UIElements;
 
 public class Explosion : MonoBehaviour
 {
@@ -37,12 +38,18 @@ public class Explosion : MonoBehaviour
     public UnityEvent OnExplosion;
 
 
-    public void Activate(GameObject owner)
+    public LayerMask rumbleMask;
+    public RumbleData rumbleData;
+    public float rumbleReach = 20f;
+
+
+	public void Activate(GameObject owner)
     {
         damagePackage = new DamagePackage(damage);
         damagePackage.owner = owner;
         damagePackage.origin = transform.position;
-        Trigger();
+        RumbleTrigger();
+		Trigger();
 
         if (fireDamageOverTime != null)
         {
@@ -51,6 +58,28 @@ public class Explosion : MonoBehaviour
 
     }
 
+    public void RumbleTrigger()
+    {
+		// sperecast
+
+		Collider[] colliders = Physics.OverlapSphere(transform.position, rumbleReach, rumbleMask);
+        foreach (Collider col in colliders)
+        {
+            if (col.TryGetComponent<BodyMindConnection>(out BodyMindConnection player) && player.Mind != null)
+            {
+                var id = player.Mind.PlayerIndex;
+                var distance = Vector3.Distance(transform.position, player.transform.position);
+                var falloff = Mathf.Clamp01(1 - (distance / rumbleReach));
+                var tempRumbleData = rumbleData;
+                tempRumbleData.intensity *= falloff;
+				if (falloff > 0)
+                {
+                    RumbleManager.Instance.TriggerRumble(tempRumbleData, id);
+				}
+			}
+		}
+
+	}
 
     public void Trigger()
     {

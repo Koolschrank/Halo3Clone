@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using MoreMountains.FeedbacksForThirdParty;
 using MoreMountains.Tools;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,9 +12,14 @@ public class Weapon_Visual : Weapon_Model
     [SerializeField] Animator animator;
     [SerializeField] Transform aimPosition;
 
-    public UnityEvent OnShoot = new UnityEvent();
+    [SerializeField] RumbleData rumble_Shoot;
 
-    public override void SetUp(Weapon_Arms weapon)
+	public UnityEvent OnShoot = new UnityEvent();
+
+    [NonSerialized]
+    public int PlayerID = 0;
+
+	public override void SetUp(Weapon_Arms weapon)
     {
         base.SetUp(weapon);
         weapon.OnReloadStart += Reload;
@@ -53,7 +59,9 @@ public class Weapon_Visual : Weapon_Model
             animator.Play("Shoot");
         }
 
-        OnShoot.Invoke();
+        RumbleManager.Instance.TriggerRumble(rumble_Shoot, PlayerID);
+
+		OnShoot.Invoke();
 
 
     }

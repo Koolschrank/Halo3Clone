@@ -93,8 +93,10 @@ public class PlayerMind : MonoBehaviour
 
     public PlayerMindStatSheet PlayerMindStatSheet { get { return playerMindStatSheet; } }
 
+    [NonSerialized]
+	public int playerID = 0;
 
-    public void SetAlive()
+	public void SetAlive()
     {
         isDead = false;
     }
@@ -117,9 +119,15 @@ public class PlayerMind : MonoBehaviour
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Enable();
     }
 
+
+
     public void Start()
     {
-        GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
+		playerID = RumbleManager.Instance.OnPlayerJoined(playerInput);
+
+
+
+		GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
         string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
         Debug.Log(deviceName + " joined");

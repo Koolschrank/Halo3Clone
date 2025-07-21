@@ -13,8 +13,11 @@ public class GranadeThrower : MonoBehaviour
     [SerializeField] AbilityInventory abilityInventory;
     [SerializeField] CharacterHealth characterHealth;
     [SerializeField] PlayerMovement playermovement;
+    [SerializeField] BodyMindConnection bodyMindConnection;
 
-    float soundTriggerDelay = 0f;
+	float soundTriggerDelay = 0f;
+
+    [SerializeField] RumbleData rumbleData_Throw;
 
 	private void Awake()
 	{
@@ -105,6 +108,11 @@ public class GranadeThrower : MonoBehaviour
 
         }
 		abilityInventory.UseSelectedIndex();
+
+        if (bodyMindConnection.Mind != null)
+        {
+            RumbleManager.Instance.TriggerRumble(rumbleData_Throw, bodyMindConnection.Mind.PlayerIndex);
+		}
 		return granade;
     }
 

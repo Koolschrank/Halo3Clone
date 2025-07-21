@@ -47,10 +47,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnPoint: {fileID: 0}
-  muzzleFlashSpawnPoint: {fileID: 0}
-  muzzleFlashPrefab: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  muzzleFlash: {fileID: 0}
   weaponAnimationIndex: 0
   animator: {fileID: 8242606572955927572}
+  aimPosition: {fileID: 0}
+  rumble_Shoot:
+    duration: 0
+    intensity: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
   OnShoot:
     m_PersistentCalls:
       m_Calls:

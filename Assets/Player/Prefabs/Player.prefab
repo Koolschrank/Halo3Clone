@@ -10420,6 +10420,35 @@ MonoBehaviour:
   abilityInventory: {fileID: 4267228126375275963}
   characterHealth: {fileID: 782412234501442312}
   playermovement: {fileID: 7400201383000877008}
+  bodyMindConnection: {fileID: 4471171138262044766}
+  rumbleData_Throw:
+    duration: 0.2
+    intensity: 0.7
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9866638
+        value: 0.023563385
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 4
 --- !u!1 &7848658949781454715
 GameObject:
   m_ObjectHideFlags: 0
@@ -10525,11 +10554,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0653be2d0781242a2cd5a0aa27fdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyMindConnection: {fileID: 4471171138262044766}
   health: {fileID: 782412234501442312}
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
-  statSheet: {fileID: 0}
+  statSheet: {fileID: 6520564595086861149}
   dualWieldingDamageMultiplier: 0.75
+  meleeRumble_miss:
+    duration: 0.4
+    intensity: 0.6
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9866638
+        value: 0.023563385
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 1
+  meleeRumble_hit:
+    duration: 0.5
+    intensity: 1
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9866638
+        value: 0.023563385
+        inSlope: -0.9896346
+        outSlope: -0.9896346
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 1
 --- !u!114 &5352841395007449006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11008,6 +11094,62 @@ MonoBehaviour:
       Data3: 1315035575
       Data4: 543305829
     Path: event:/SFX/Player/Death
+  rumbleHit:
+    duration: 0.2
+    intensity: 0.75
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1.0019547
+        outSlope: -1.0019547
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99334717
+        value: 0.004711151
+        inSlope: -1.0019547
+        outSlope: -1.0019547
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 2
+  rumbleDeath:
+    duration: 0.4
+    intensity: 1
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1.0019547
+        outSlope: -1.0019547
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99334717
+        value: 0.004711151
+        inSlope: -1.0019547
+        outSlope: -1.0019547
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 2
   OnDamageTakenUnityEvent:
     m_PersistentCalls:
       m_Calls:

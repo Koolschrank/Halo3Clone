@@ -52,6 +52,34 @@ MonoBehaviour:
   weaponAnimationIndex: 0
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 8801371104625405175}
+  rumble_Shoot:
+    duration: 0.12
+    intensity: 0.3
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.5654988
+        outSlope: -0.5654988
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.0100098
+        value: 0.42884064
+        inSlope: -0.5654988
+        outSlope: -0.5654988
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
   OnShoot:
     m_PersistentCalls:
       m_Calls:

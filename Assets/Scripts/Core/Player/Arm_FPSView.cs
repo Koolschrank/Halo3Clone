@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Arm_FPSView : MonoBehaviour
 {
-    [SerializeField] Arm playerArm;
+    [SerializeField] PlayerMind playerMind;
+	[SerializeField] Arm playerArm;
     [SerializeField] Transform granadeSpawnPoint;
     [SerializeField] WeaponSway weaponSway;
 
@@ -78,7 +79,9 @@ public class Arm_FPSView : MonoBehaviour
 		baseArm.localPosition = Vector3.zero;
 		weaponVisual = Instantiate(weapon.WeaponFPSModel, baseArm.transform);
         weaponVisual.SetUp(weapon);
-        UtilityFunctions.SetLayerRecursively(weaponVisual.gameObject, gameObject.layer);
+        weaponVisual.PlayerID = playerMind.playerID;
+
+		UtilityFunctions.SetLayerRecursively(weaponVisual.gameObject, gameObject.layer);
 
         hasAimPosition = weaponVisual.HasAimPosition;
         if (hasAimPosition)
@@ -96,7 +99,7 @@ public class Arm_FPSView : MonoBehaviour
 
 			}
 		}
-        
+		
 
 	}
 

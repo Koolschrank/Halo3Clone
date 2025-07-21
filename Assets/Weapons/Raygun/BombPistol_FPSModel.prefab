@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8779458109269781644}
   - component: {fileID: 6899193775294056288}
   m_Layer: 0
-  m_Name: BombPistol_FPSView
+  m_Name: BombPistol_FPSModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,6 +52,34 @@ MonoBehaviour:
   weaponAnimationIndex: 0
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 2256082244036481574}
+  rumble_Shoot:
+    duration: 0.2
+    intensity: 0.9
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.016666412
+        value: 0.9915161
+        inSlope: -0.4718719
+        outSlope: -0.4718719
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.5117798
+        inSlope: -0.4718719
+        outSlope: -0.4718719
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
   OnShoot:
     m_PersistentCalls:
       m_Calls:
