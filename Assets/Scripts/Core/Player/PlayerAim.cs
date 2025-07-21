@@ -336,7 +336,7 @@ public class PlayerAim : MonoBehaviour
                     OnTarget = (hit.distance <= playerArms.RightArm.GetWeaponInHand().Data.AutoAim.RaycastLenght);
                 return true;
             }
-            else if (hasHitPlayer && t.TeamIndex == playerTeam.TeamIndex)
+            else if (hasHitPlayer && t.TeamIndex == playerTeam.TeamIndex && t.gameObject != playerTeam.gameObject)
             {
 
                 var mind = hit.collider.GetComponent<BodyMindConnection>().Mind;

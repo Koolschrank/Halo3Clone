@@ -122,6 +122,8 @@ MonoBehaviour:
   playerHealth: {fileID: 7357773068672706047}
   aiStun: {fileID: 5792146997314068955}
   aiShoot: {fileID: 8505334828251919786}
+  gravityMultiplyerMaxForAiToStartJumping: 0.45
+  jumpCooldown: 8
   framesToUpdateNavAgent: 100
   framesToUpdateNavAgentIfClose: 10
   distanceToUpdateNavAgent: 5

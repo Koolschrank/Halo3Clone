@@ -27,8 +27,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] ScreenRectArray[] screenRectValues_2Screens;
     [SerializeField] ScreenRectArray[] screenRectValues_3Screens;
 
-
-    List<int> fpsLayers = new List<int>();
+    public bool forceSpawnTeam1OnSpawnPoint1 = false;
+	List<int> fpsLayers = new List<int>();
     List<int> thirdPersonLayers = new List<int>();
 
     // Awake
@@ -243,6 +243,11 @@ public class PlayerManager : MonoBehaviour
         {
             spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
         }
+
+        if ( forceSpawnTeam1OnSpawnPoint1 &&player.TeamIndex == 0)
+        {
+            spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+		}
 
 
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);

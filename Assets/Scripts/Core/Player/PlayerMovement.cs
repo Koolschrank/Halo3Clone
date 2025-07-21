@@ -338,7 +338,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void TryJump()
+    public bool CanJump()
+    {
+        return isGrounded && !inRoll && jumpCooldownTimer <= 0;
+	}
+
+	public void TryJump()
     {
         if (isGrounded && !inRoll && jumpCooldownTimer <= 0)
         {

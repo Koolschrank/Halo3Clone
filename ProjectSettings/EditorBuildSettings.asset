@@ -56,6 +56,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Maps/PracticeCourse.unity
     guid: 98fab55fe35da494a87965fec7be0a19
+  - enabled: 1
+    path: Assets/3rdPartyAssets/Lunar Landscape 3D/Scenes/Moon.unity
+    guid: f4021bc829b444148a3959ec85eeeceb
+  - enabled: 1
+    path: Assets/3rdPartyAssets/Lunar Landscape 3D/Scenes/Moon2.unity
+    guid: c419144c2f7ad0e44b9026c0a2aa8cf6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f35337ef2a27d9441967cf9acbdf46bf, type: 2}
   m_UseUCBPForAssetBundles: 0

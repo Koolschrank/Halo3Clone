@@ -121,7 +121,8 @@ public class BulletSpawner : MonoBehaviour
         if (Physics.SphereCast(transform.position, radius, transform.forward, out RaycastHit hit, lenght, autoAimLayerMask))
         {
             // make a ray cast to check if there is a wall between player and target
-            if (Physics.Raycast(transform.position, (hit.point - transform.position), out RaycastHit wallHit, Vector3.Distance(transform.position, hit.point), wallCheck))
+            var direction = (hit.point - transform.position).normalized;
+			if (Physics.Raycast(transform.position, direction, out RaycastHit wallHit, Vector3.Distance(transform.position, hit.point), wallCheck))
             {
                 return null;
             }
@@ -238,8 +239,14 @@ public class BulletSpawner : MonoBehaviour
 
             if (Physics.Raycast(cameraTransform.position, shotDirectionForThisBullet, out hit, range, hitLayer))
             {
+                if (hit.collider.gameObject == playerTeam.gameObject) // hit self
+                {
+					// do it again but with a small offset to avoid hitting self
+					Physics.Raycast(cameraTransform.position + shotDirectionForThisBullet *0.5f, shotDirectionForThisBullet, out hit, range, hitLayer);
+				}
 
-                damagePackage.forceVector = shotDirectionForThisBullet.normalized * bullet.Force;
+
+				damagePackage.forceVector = shotDirectionForThisBullet.normalized * bullet.Force;
                 damagePackage.hitPoint = hit.point;
 
                 damagePackage.damageAmount = bullet.Damage * damageMultiplier * bullet.GetDamageFalloff(hit.distance);

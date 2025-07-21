@@ -288,7 +288,15 @@ public class EnemySpawner : MonoBehaviour
 				spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 2);
 			else
 			{
-						spawnPoint = GetPVPSpawnPoint(teamId);
+                if (PlayerManager.instance.forceSpawnTeam1OnSpawnPoint1 && teamId == 0)
+                {
+                    spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(0);
+				}
+                else
+                {
+					spawnPoint = GetPVPSpawnPoint(teamId);
+				}
+                    
 			}
 		}
         else

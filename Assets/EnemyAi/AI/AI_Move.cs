@@ -20,6 +20,9 @@ public class AI_Move : MonoBehaviour
     [SerializeField] AI_Stun aiStun;
     [SerializeField] AI_Shoot aiShoot;
 
+    [SerializeField] float gravityMultiplyerMaxForAiToStartJumping = 0.45f; // max gravity multiplyer to start jumping
+    [SerializeField] float jumpCooldown = 7f;
+
 
 	Vector3 targetPosition;
     Vector3 targetOffset = Vector3.zero;
@@ -43,8 +46,9 @@ public class AI_Move : MonoBehaviour
 
     bool followObjective = false;
     bool goCloseToTarget = false; // flag to check if AI should go close to target
+    float jumpCooldownTimer = 0f; // timer to track jump cooldown
 
-    bool IsInTBagStance = false;
+	bool IsInTBagStance = false;
     [SerializeField] float tBagStanceTime = 10f; // time to stay in T-Bag stance
     [SerializeField] float tBagSpeed = 0.8f; // speed to move towards T-Bag target
     [SerializeField] float tBagDistance = 0.4f; // distance to T-Bag target before starting to T-Bag
@@ -54,12 +58,68 @@ public class AI_Move : MonoBehaviour
 
     float timeToIgnorePathInvalid = 1.5f; // time to ignore path invalid status
 	float pathInvalidTime = 0f;
-    
+    bool inJumpState = false; 
 
-    public void RollAwayFromDanger(Vector3 dangerPosition)
+
+    public void Jump(Vector3 goalPosition)
     {
+        var forward = transform.forward;
+		Vector3 direction = (goalPosition - transform.position).normalized;
+
+        Vector2 input;
+        if (Vector3.Dot(direction, forward) > 0.5f)
+        {
+            input = Vector2.up; // jump forward
+        }
+        else if (Vector3.Dot(direction, -forward) > 0.5f)
+        {
+            input = Vector2.down; // jump backward
+        }
+        else if (Vector3.Dot(direction, transform.right) > 0.5f)
+        {
+            input = Vector2.right; // jump right
+        }
+        else if (Vector3.Dot(direction, -transform.right) > 0.5f)
+        {
+            input = Vector2.left; // jump left
+        }
+        else
+        {
+            input = Vector2.zero; // no jump direction
+        }
+
+
+
+		playerMovement.UpdateMoveInput(input);
+        inJumpState = true;
+        jumpCooldownTimer = jumpCooldown; // reset jump cooldown timer
+        playerMovement.TryJump();
+
+	}
+
+    public bool CanJump()
+    {
+        if (inJumpState) return false; // already in jump state
+        if (jumpCooldownTimer > 0) return false; // jump cooldown is active
+        if (playerMovement.gravityMultiplier <= gravityMultiplyerMaxForAiToStartJumping)
+        {
+            return true; // gravity is too low to jump
+		}
+        return false;
+	}
+
+	public void RollAwayFromDanger(Vector3 dangerPosition)
+    {
+        
+
         if (aiShoot.hasShild) return;
         if (rollCooldownTimer > 0) return;
+
+        if (CanJump())
+        {
+            Jump(targetPosition);
+		}
+
         bool isWallToTheLeft = IsWallToTheLeft();
         bool isWallToTheRight = IsWallToTheRight();
         if (isWallToTheLeft && !isWallToTheRight)
@@ -291,10 +351,18 @@ public class AI_Move : MonoBehaviour
 
 
         rollCooldownTimer -= Time.deltaTime;
-        
+        jumpCooldownTimer -= Time.deltaTime;
+
+        if (inJumpState)
+        {
+            if (playerMovement.CanJump())
+                inJumpState = false; // reset jump state if player can jump
+			return;
+        }
 
 
-        targetPosition = target.GetTargetPosition();
+
+		targetPosition = target.GetTargetPosition();
 
 
 
@@ -352,6 +420,11 @@ public class AI_Move : MonoBehaviour
         float distanceToOffsetPosition = Vector3.Distance(transform.position, offsetPosition);
         if (playerAim.OnTarget && distanceToTarget < playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.crouchDistance)
         {
+            if (distanceToTarget >5 && CanJump())
+            {
+                Jump(targetPosition);
+            }
+
             playerMovement.TryCrouch();
             crouchRecoveryTimer = crouchRecoveryTime;
         }
