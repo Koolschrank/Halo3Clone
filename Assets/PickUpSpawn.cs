@@ -11,12 +11,14 @@ public class PickUpSpawn : MonoBehaviour
 	bool started = false;
 	public void Start()
 	{
+		
 		StartCoroutine(StartDelay());
 	}
 
 	IEnumerator StartDelay()
 	{
 		yield return new WaitForSeconds(1f);
+		spawnTime *= GameModeSelector.gameModeManager.GameModeStats.weaponRespawnTimeMultiplier; // Adjust spawn time based on game mode multiplier
 		DelayStart();
 	}
 

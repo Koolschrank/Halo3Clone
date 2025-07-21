@@ -143,7 +143,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if (GameModeSelector.gameModeManager.GameModeStats.HasAiPlayers || (MapLoader.instance != null && MapLoader.instance.HasAIEnemies()))
             {
-                SetPVPGame();
+				MapLoader.instance.SetAIEnemiesTeam2(true);
+				SetPVPGame();
 
             }
             else
@@ -378,7 +379,9 @@ public class EnemySpawner : MonoBehaviour
         PlayerManager.instance.UpdateColorOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), colorIndex);
 
         OnEnemySpawned?.Invoke(enemy);
-    }
+
+        enemy.GetComponent<CharacterHealth>().SetDamageMultiplier(GameModeSelector.gameModeManager.GameModeStats.ai_damageMultiplier);
+	}
 
 
     public Transform GetPVPSpawnPoint(int teamIndex)

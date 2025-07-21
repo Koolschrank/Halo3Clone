@@ -10979,6 +10979,7 @@ MonoBehaviour:
   statSheet: {fileID: 6520564595086861149}
   shildBreakParticle: {fileID: 3193389494117675602}
   deathParticle: {fileID: 1715321759695158391}
+  body: {fileID: 4471171138262044766}
   shildEmptySound:
     Guid:
       Data1: 1763954669

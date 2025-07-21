@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
   m_Name: KingOfTheHillVSAI
   m_EditorClassIdentifier: 
-  gameModeName: VSAI King of the hill
+  gameModeName: VS AI
   startingEquipment:
     hasShild: 1
     headShotOneShot: 1
@@ -45,13 +45,13 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 15
+  respawnTime: 12
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
-  hasAiPlayers: 0
+  hasAiPlayers: 1
   useStatSheets: 0
   dontDropWeaponsOnDeath: 0
   startScore: 0
@@ -64,6 +64,10 @@ MonoBehaviour:
   amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
   useEnemyWaves: 1
   noDualWieldDamageReduction: 1
+  startingEquipmentBasedOnPlayerValues: 0
+  cannotDropSwitchOrPickupWeapons: 0
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

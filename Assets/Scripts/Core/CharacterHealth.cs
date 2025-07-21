@@ -31,6 +31,7 @@ public class CharacterHealth : Health
     [SerializeField] PlayerBodyStatSheet statSheet;
     [SerializeField] GameObject shildBreakParticle;
     [SerializeField] GameObject deathParticle;
+    [SerializeField] BodyMindConnection body;
 
 
 
@@ -99,7 +100,12 @@ public class CharacterHealth : Health
         OnMaxShildChanged?.Invoke(MaxShild);
     }
 
-    public void SetHasShild(bool hasShild)
+    public void SetDamageMultiplier(float value)
+        {
+        damageMultiplier = value;
+	}
+
+	public void SetHasShild(bool hasShild)
     {
         if (this.hasShild == hasShild)
             return;
@@ -192,7 +198,7 @@ public class CharacterHealth : Health
         shildEmptySoundInstance = RuntimeManager.CreateInstance(shildEmptySound);
         shildRechargeSoundInstance = RuntimeManager.CreateInstance(shildRechargeSound);
 
-		if (MapLoader.instance != null)
+		if (MapLoader.instance != null && body.Mind != null)
             damageMultiplier = MapLoader.instance.GetDamageMultiplier();
     }
 

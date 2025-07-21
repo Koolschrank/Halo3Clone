@@ -15,7 +15,10 @@ public class WeaponSpawner : MonoBehaviour
     public void Start()
     {
         StartCoroutine(StartDelay());
-    }
+
+
+        spawnTime *= GameModeSelector.gameModeManager.GameModeStats.weaponRespawnTimeMultiplier;
+	}
 
     IEnumerator StartDelay()
     {

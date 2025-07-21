@@ -10,49 +10,56 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5f06499fee01d74a9ab1b9d0b7d2250, type: 3}
-  m_Name: VSAI
+  m_Name: GranadeCombat
   m_EditorClassIdentifier: 
-  gameModeName: 'Player VS AI '
+  gameModeName: Granade Combat
   startingEquipment:
     hasShild: 1
-    headShotOneShot: 0
+    headShotOneShot: 1
     hasMiniMap: 1
-    canDualWield: 0
+    canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 0}
-    magazinsOfWeaponInHand: 100
+    magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
     sideArm: {fileID: 0}
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
-    ability: {fileID: 0}
+    ability: {fileID: 11400000, guid: 397bb2598ebbea243bb4c0b6ed7da8ad, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
       hasHealthOverride: 1
-      showHealthBar: 1
-      health: 125
+      showHealthBar: 0
+      health: 20
       shild: 100
-      healthRegenStartTime: 8
-      shildRegenStartTime: 4.5
-      healthRegen: 3
-      shildRegen: 25
-      spawnInvulnerabilityTime: 5
-      shildPopDamageNegation: 30
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 20
+      shildRegen: 30
+      spawnInvulnerabilityTime: 1
+      shildPopDamageNegation: 0
   timeLimitInMinutes: 10
-  pointsToWin: 2000
-  teamCount: 1
-  respawnTime: 10000
+  pointsToWin: 10
+  teamCount: 8
+  respawnTime: 3
   hasWeaponPickups: 0
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
-  looseWhenAllPlayersDead: 1
+  looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
-  useStatSheets: 1
+  useStatSheets: 0
   dontDropWeaponsOnDeath: 1
-  startScore: 300
-  playerStatsSheetBlueprint: {fileID: 11400000, guid: 145bf0bb3c3bf914993d1064b170c8ca, type: 2}
+  startScore: 0
+  playerStatsSheetBlueprint: {fileID: 0}
+  EnemyTeamsWorkingTogether: 0
+  team2usesOtherPointsToWin: 0
+  team2PointsToWin: 0
+  team2LoosesScoreWhenTeam1scores: 0
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 0
+  useEnemyWaves: 0
+  noDualWieldDamageReduction: 0

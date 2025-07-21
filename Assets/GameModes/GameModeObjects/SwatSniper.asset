@@ -26,7 +26,22 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
     ability: {fileID: 0}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   timeLimitInMinutes: 10
   pointsToWin: 15
   teamCount: 8
@@ -36,3 +51,20 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0
+  useStatSheets: 0
+  dontDropWeaponsOnDeath: 0
+  startScore: 0
+  playerStatsSheetBlueprint: {fileID: 0}
+  spawnWithArmor: 0
+  EnemyTeamsWorkingTogether: 0
+  team2usesOtherPointsToWin: 0
+  team2PointsToWin: 0
+  team2LoosesScoreWhenTeam1scores: 0
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 0
+  useEnemyWaves: 0
+  noDualWieldDamageReduction: 0
+  startingEquipmentBasedOnPlayerValues: 0
+  cannotDropSwitchOrPickupWeapons: 1
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1

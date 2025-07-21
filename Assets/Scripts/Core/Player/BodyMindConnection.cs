@@ -142,8 +142,8 @@ public class BodyMindConnection : MonoBehaviour
 
 		if (isSwat)
         {
-            equipment.SetWeapons(ItemList.instance.GetPistol(), null, null);
-            equipment.SetMagazins(4, 0, 0);
+            //equipment.SetWeapons(ItemList.instance.GetPistol(), null, null);
+            //equipment.SetMagazins(4, 0, 0);
             equipment.SetHasShild(false);
             equipment.SetHeadShotOneShot(false);
         }

@@ -40,7 +40,10 @@ public class GameMode : ScriptableObject
 	public Equipment StartingEquipment { get { return startingEquipment; } }
     public float TimeLimitInMinutes { get { return timeLimitInMinutes; } }
 
-    public virtual Equipment GetEquipmentBasedOnPoints(int points)
+    public float ai_damageMultiplier = 1f; // multiplier for AI damage, used to balance AI difficulty
+    public float weaponRespawnTimeMultiplier = 1f; // multiplier for weapon respawn time, used to balance weapon respawn time
+
+	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;
 

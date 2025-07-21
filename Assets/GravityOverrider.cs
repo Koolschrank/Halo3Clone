@@ -35,7 +35,13 @@ public class GravityOverrider : MonoBehaviour
 
 	void OnDisable()
 	{
+		
+	}
+
+	void OnDestroy()
+	{
 		SceneManager.sceneLoaded -= ResetGravityOnSceneLoad;
+		Physics.gravity = baseGravity; // Reset to base gravity when destroyed
 	}
 
 	void ResetGravityOnSceneLoad(Scene scene, LoadSceneMode mode)

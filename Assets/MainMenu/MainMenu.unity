@@ -1683,7 +1683,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 600, y: -80}
+  m_AnchoredPosition: {x: 600, y: -33}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &553189306
@@ -3842,7 +3842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: -33}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1285738399
@@ -3963,17 +3963,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5fdb7efe99bbc346aefef6d2692dde4, type: 2}
   - {fileID: 11400000, guid: 007b7356af70ba644ad9c8eb77010a9c, type: 2}
   - {fileID: 11400000, guid: 5498acdb4ab4e1f4dba86dc90f837d80, type: 2}
-  - {fileID: 11400000, guid: ec9cf853cf06b0340bb8a4204e8b28a0, type: 2}
-  - {fileID: 11400000, guid: 3d948b4d8f59e91479ddfe55885aeaf3, type: 2}
-  - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
-  - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
-  - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
-  - {fileID: 11400000, guid: ba44bf85ab27b9845aad08cca477943a, type: 2}
   - {fileID: 11400000, guid: 21a05380091a73f408d548a6a9aaa4eb, type: 2}
+  - {fileID: 11400000, guid: 93c6a84ce4ed1ae47b543ab18b5b96c1, type: 2}
+  - {fileID: 11400000, guid: 3d948b4d8f59e91479ddfe55885aeaf3, type: 2}
+  - {fileID: 11400000, guid: b19b7dbe3c5c60f4aa38411adc695927, type: 2}
+  - {fileID: 11400000, guid: e587eeb7c5c2c1a4e83898efdd49239a, type: 2}
+  - {fileID: 11400000, guid: 74353393ac1895a46aa2ae460bdceaa4, type: 2}
+  - {fileID: 11400000, guid: d7cdb6a07ae8cef44a09e017208d316f, type: 2}
+  - {fileID: 11400000, guid: ba44bf85ab27b9845aad08cca477943a, type: 2}
   - {fileID: 11400000, guid: 1bf5703245bc80840a69349b465e9356, type: 2}
+  - {fileID: 11400000, guid: 4e5a6656de8598a458d5fe29fb9c66ab, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
-  buttonSpacing: -55
+  buttonSpacing: -50
 --- !u!1 &1338291036
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,7 +5110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -600, y: -80}
+  m_AnchoredPosition: {x: -600, y: -33}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1572874592
