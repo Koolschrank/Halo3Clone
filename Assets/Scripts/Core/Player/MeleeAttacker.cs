@@ -130,7 +130,7 @@ public class MeleeAttacker : MonoBehaviour
 
             if (bodyMindConnection.Mind != null)
             {
-                int playerIndex = bodyMindConnection.Mind.PlayerIndex;
+                int playerIndex = bodyMindConnection.Mind.playerID;
                 RumbleManager.Instance.TriggerRumble (meleeRumble_hit, playerIndex);
 			}
         }
@@ -138,7 +138,7 @@ public class MeleeAttacker : MonoBehaviour
         {
             if (bodyMindConnection.Mind != null)
             {
-                int playerIndex = bodyMindConnection.Mind.PlayerIndex;
+                int playerIndex = bodyMindConnection.Mind.playerID;
                 RumbleManager.Instance.TriggerRumble(meleeRumble_miss, playerIndex);
 			}
 		}

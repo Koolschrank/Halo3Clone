@@ -27,7 +27,8 @@ public class RumbleManager : MonoBehaviour
     [SerializeField] RumbleTypeSettings rumbleTypeSettings_melee;
     [SerializeField] RumbleTypeSettings rumbleTypeSettings_damage;
     [SerializeField] RumbleTypeSettings rumbleTypeSettings_explosion;
-    [SerializeField] RumbleTypeSettings rumbleTypeSettings_other;
+    [SerializeField] RumbleTypeSettings rumbleTypeSettings_reload;
+	[SerializeField] RumbleTypeSettings rumbleTypeSettings_other;
 
 	private void Awake()
 	{
@@ -98,7 +99,10 @@ public class RumbleManager : MonoBehaviour
             case RumbleType.explosion:
                 settings = rumbleTypeSettings_explosion;
                 break;
-            case RumbleType.other:
+            case RumbleType.reload:
+                settings = rumbleTypeSettings_reload;
+                break;
+			case RumbleType.other:
                 settings = rumbleTypeSettings_other;
                 break;
 		}
@@ -163,7 +167,8 @@ public enum RumbleType
     melee,
     damage,
     explosion,
-    other
+    reload,
+    other = 20,
 }
 
 public struct RumbleInstance

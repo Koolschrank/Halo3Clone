@@ -1,7 +1,6 @@
 using UnityEngine;
 using FMODUnity;
 using UnityEngine.Events;
-using UnityEditor.UIElements;
 
 public class Explosion : MonoBehaviour
 {
@@ -67,7 +66,7 @@ public class Explosion : MonoBehaviour
         {
             if (col.TryGetComponent<BodyMindConnection>(out BodyMindConnection player) && player.Mind != null)
             {
-                var id = player.Mind.PlayerIndex;
+                var id = player.Mind.playerID;
                 var distance = Vector3.Distance(transform.position, player.transform.position);
                 var falloff = Mathf.Clamp01(1 - (distance / rumbleReach));
                 var tempRumbleData = rumbleData;

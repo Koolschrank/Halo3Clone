@@ -111,7 +111,7 @@ public class GranadeThrower : MonoBehaviour
 
         if (bodyMindConnection.Mind != null)
         {
-            RumbleManager.Instance.TriggerRumble(rumbleData_Throw, bodyMindConnection.Mind.PlayerIndex);
+            RumbleManager.Instance.TriggerRumble(rumbleData_Throw, bodyMindConnection.Mind.playerID);
 		}
 		return granade;
     }

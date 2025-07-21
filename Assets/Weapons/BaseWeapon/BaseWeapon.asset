@@ -141,6 +141,17 @@ MonoBehaviour:
           Data4: -25755214
         Path: event:/SFX/Guns/AssultRifle/SwitchIn
       timeOfPlay: 0.4
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -151,6 +162,35 @@ MonoBehaviour:
           Data4: 1019789825
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinOut
       timeOfPlay: 0.25
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
     - soundReference:
         Guid:
           Data1: 1502081569
@@ -159,6 +199,35 @@ MonoBehaviour:
           Data4: 1818439784
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinIn
       timeOfPlay: 0.65
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}

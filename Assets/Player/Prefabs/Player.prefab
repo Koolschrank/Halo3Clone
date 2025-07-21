@@ -10628,6 +10628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7726a89860a7d094ba3c3b53867517ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyMindConnection: {fileID: 4471171138262044766}
   playerArms: {fileID: 3232609274750972410}
   meleeAttacker: {fileID: 8008512304446792098}
   targetHitCollector: {fileID: 6138964545677116144}
@@ -11096,7 +11097,7 @@ MonoBehaviour:
     Path: event:/SFX/Player/Death
   rumbleHit:
     duration: 0.2
-    intensity: 0.75
+    intensity: 0.65
     intensityCurve:
       serializedVersion: 2
       m_Curve:
@@ -11123,7 +11124,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     rumbleType: 2
   rumbleDeath:
-    duration: 0.4
+    duration: 0.6
     intensity: 1
     intensityCurve:
       serializedVersion: 2

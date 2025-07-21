@@ -35,6 +35,7 @@ MonoBehaviour:
   meleeData: {fileID: 0}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
   autoAimType: 2
   burstAmount: 0
@@ -122,6 +123,7 @@ MonoBehaviour:
   block:
     blockPercentage: 0.5
     blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: -1842625480
@@ -139,6 +141,17 @@ MonoBehaviour:
           Data4: -1776528645
         Path: event:/SFX/Guns/ShotGun/SwitchIn
       timeOfPlay: 0.25
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -149,6 +162,35 @@ MonoBehaviour:
           Data4: 1897514351
         Path: event:/SFX/Guns/ShotGun/Reload/OpenBarrel
       timeOfPlay: 0.12
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
     - soundReference:
         Guid:
           Data1: -771642470
@@ -157,6 +199,35 @@ MonoBehaviour:
           Data4: -1629882881
         Path: event:/SFX/Guns/ShotGun/Reload/PutInBullets
       timeOfPlay: 0.32
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
     - soundReference:
         Guid:
           Data1: -1332733654
@@ -165,6 +236,35 @@ MonoBehaviour:
           Data4: 1883517362
         Path: event:/SFX/Guns/ShotGun/Reload/CloseBarrel
       timeOfPlay: 0.6
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
     - soundReference:
         Guid:
           Data1: -465851604
@@ -173,6 +273,35 @@ MonoBehaviour:
           Data4: 534116276
         Path: event:/SFX/Guns/ShotGun/Reload/ChargeBolt
       timeOfPlay: 0.9
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 854037e5ea70f1e48bfdc78fe5fb2261, type: 3}
   bulletSprite: {fileID: 21300000, guid: c8fb4c1e73d92a04787384e53fd847b5, type: 3}

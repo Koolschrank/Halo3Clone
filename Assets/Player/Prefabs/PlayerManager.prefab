@@ -1937,10 +1937,13 @@ MonoBehaviour:
     highMotorIntensity: 1
   rumbleTypeSettings_damage:
     lowMotorIntensity: 1
-    highMotorIntensity: 0.2
+    highMotorIntensity: 0.3
   rumbleTypeSettings_explosion:
     lowMotorIntensity: 1.5
     highMotorIntensity: 0.3
+  rumbleTypeSettings_reload:
+    lowMotorIntensity: 0.3
+    highMotorIntensity: 1
   rumbleTypeSettings_other:
     lowMotorIntensity: 0.2
     highMotorIntensity: 1

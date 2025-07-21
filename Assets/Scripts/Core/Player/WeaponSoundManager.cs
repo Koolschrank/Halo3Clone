@@ -5,8 +5,8 @@ using FMODUnity;
 
 public class WeaponSoundManager : MonoBehaviour
 {
-
-    [SerializeField] PlayerArms playerArms;
+    [SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
+	[SerializeField] PlayerArms playerArms;
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] TargetHitCollector targetHitCollector;
     TimedSoundListInstance reloadList;
@@ -99,7 +99,18 @@ public class WeaponSoundManager : MonoBehaviour
             soundList.Update(Time.deltaTime);
             if (soundList.IsTimeToPlay())
             {
-                AudioManager.instance.PlayOneShot(soundList.GetNextSound(), transform.position);
+				Debug.Log("Ask Rumble");
+
+				Debug.Log(soundList.HasNextSoundRumble());
+				if (bodyMindConnection.Mind != null && soundList.HasNextSoundRumble())
+                {
+                    Debug.Log("Rumble");
+                    var rumbleData = soundList.GetNextRumble();
+					var playerIndex = bodyMindConnection.Mind.playerID;
+                    RumbleManager.Instance.TriggerRumble(rumbleData, playerIndex);
+				}
+
+				AudioManager.instance.PlayOneShot(soundList.GetNextSound(), transform.position);
             }
         }
     }
@@ -152,7 +163,19 @@ public class TimedSoundListInstance
         return false;
     }
 
-    public EventReference GetNextSound()
+    public bool HasNextSoundRumble()
+    {
+        if (timedSounds.Count == 0) return false;
+        return timedSounds[0].hasRumble;
+	}
+
+    public RumbleData GetNextRumble()
+    {
+        var sound = timedSounds[0];
+        return sound.rumbleData;
+	}
+
+	public EventReference GetNextSound()
     {
         if (timedSounds.Count == 0) return new EventReference();
         var sound = timedSounds[0];
@@ -174,7 +197,10 @@ public class TimedSound
     [SerializeField] EventReference soundReference;
     [SerializeField] float timeOfPlay = 0f;
 
-    public bool IsTimeToPlay(float time)
+    public bool hasRumble = false;
+    public RumbleData rumbleData;
+
+	public bool IsTimeToPlay(float time)
     {
         return time >= timeOfPlay;
     }
