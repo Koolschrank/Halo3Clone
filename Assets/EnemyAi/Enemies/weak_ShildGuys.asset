@@ -35,6 +35,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0
@@ -44,5 +45,5 @@ MonoBehaviour:
   healthMultiplier: 1
   shildMultiplier: 1
   speedMultiplier: 1
-  teamIdOverrride: 6
+  teamIdOverrride: 8
   scoreForKill: 100

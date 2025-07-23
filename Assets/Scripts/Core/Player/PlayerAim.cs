@@ -18,9 +18,10 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] PlayerTeam playerTeam;
     [SerializeField] CharacterHealth playerHealth;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] MeleeAttacker meleeAttacker;
 
 
-    [Header("Settings")]
+	[Header("Settings")]
     [SerializeField] float aimSpeed_x = 10f;
     [SerializeField] float aimSpeed_y = 10f;
     [SerializeField] float minAngle = -70f;
@@ -43,6 +44,8 @@ public class PlayerAim : MonoBehaviour
 	[SerializeField] LayerMask aimCorrectionPlayerLayer;
 	[SerializeField] LayerMask aimCorrectionWallLayer;
 	[SerializeField] float aimCorrectionSpeed_Idle = 7.5f;
+
+	[SerializeField] float aimCorrectionSpeed_InLaunch = 30f;
 	[SerializeField] float aimCorrectionSpeed_Aim = 9f;
 
 
@@ -131,10 +134,15 @@ public class PlayerAim : MonoBehaviour
         if (hasAimCorrection && playerArms.RightArm.CurrentWeapon != null)
         {
             var autoAimType = playerArms.RightArm.CurrentWeapon.Data.AutoAimType;
-            if (autoAimType != AutoAimType.none)
+            if (autoAimType != AutoAimType.none || meleeAttacker.InLaunch)
             {
 				UpdateAimCorrection();
 				var closestPlayer = GetPlayerInAimCorrectionWithClosesAngle(autoAimType);
+
+                if (meleeAttacker.InLaunch)
+                {
+                    closestPlayer = meleeAttacker.launchInstance.target.transform;
+                }
 				var aimCorrectionInput = AimCorrectTowardsTarget(closestPlayer);
 
 				if (aimCorrectionInput != Vector2.zero)
@@ -152,6 +160,16 @@ public class PlayerAim : MonoBehaviour
 					if ( angle < aimCorrectionMaxAngleForAutoCorrection)
 					{
                         aimCorrectionSpeed += aimCorrectionSpeed_Idle;
+
+					}
+
+                    if (meleeAttacker.InLaunch )
+                    {
+                        if (!OnTarget)
+                            aimCorrectionSpeed += aimCorrectionSpeed_InLaunch;
+                        else
+                            aimCorrectionSpeed += aimCorrectionSpeed_InLaunch / 4;
+
 					}
 
                     if (playerArms.RightArm.IsInZoom)
@@ -214,7 +232,6 @@ public class PlayerAim : MonoBehaviour
                 continue;
 			}
 
-			Debug.Log("aim 3");
 
 			if (hit.collider.TryGetComponent<BodyMindConnection>(out BodyMindConnection body))
             {
@@ -313,7 +330,7 @@ public class PlayerAim : MonoBehaviour
     public Action<String> OnHoverOnAlly;
     public Action OnHoverOnNothing;
     public bool OnTarget;
-
+    
     public bool CheckIfHoverOverEnemy()
     {
         OnTarget = false;

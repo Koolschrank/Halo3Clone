@@ -10561,8 +10561,8 @@ MonoBehaviour:
   statSheet: {fileID: 6520564595086861149}
   dualWieldingDamageMultiplier: 0.75
   meleeRumble_miss:
-    duration: 0.4
-    intensity: 0.6
+    duration: 0.25
+    intensity: 0.4
     intensityCurve:
       serializedVersion: 2
       m_Curve:
@@ -10589,7 +10589,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     rumbleType: 1
   meleeRumble_hit:
-    duration: 0.5
+    duration: 0.4
     intensity: 1
     intensityCurve:
       serializedVersion: 2
@@ -10818,6 +10818,7 @@ MonoBehaviour:
   head_crouchPosition: {fileID: 3378977877229724622}
   arms: {fileID: 3232609274750972410}
   statSheet: {fileID: 6520564595086861149}
+  meleeAttacker: {fileID: 8008512304446792098}
   maxMoveSpeed: 4.9
   moveSpeedRoolMultiplier: 2
   moveSpeedCrouchMultiplier: 0.4
@@ -10954,6 +10955,7 @@ MonoBehaviour:
   playerTeam: {fileID: 2295363821645548979}
   playerHealth: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
+  meleeAttacker: {fileID: 8008512304446792098}
   aimSpeed_x: 156.492
   aimSpeed_y: 112.266
   minAngle: -70
@@ -10977,6 +10979,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   aimCorrectionSpeed_Idle: 8
+  aimCorrectionSpeed_InLaunch: 100
   aimCorrectionSpeed_Aim: 25
   minSensitivity: 0.1
   maxSensitivity: 2

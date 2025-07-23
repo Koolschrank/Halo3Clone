@@ -23,6 +23,7 @@ public class Arm : MonoBehaviour
     public Action<Weapon_Arms> OnZoomIn;
     public Action<Weapon_Arms> OnZoomOut;
     public Action<int> OnReserveAmmoChanged;
+    public Action OnReloadCanceld;
     
 
 
@@ -577,9 +578,10 @@ public class Arm : MonoBehaviour
             DropWeapon();
         }
             
+        OnReloadCanceld?.Invoke();
 
 
-        switchInputBufferTimer = 0;
+		switchInputBufferTimer = 0;
         if (inventory.HasWeapon)
         {
             IfZoomedInExitZoom();
@@ -610,7 +612,8 @@ public class Arm : MonoBehaviour
 		if (cannotDropSwapOrPickUpWeapons) return;
 		if (pickUpScan.CanPickUpWeapon())
         {
-            IfZoomedInExitZoom();
+			OnReloadCanceld?.Invoke();
+			IfZoomedInExitZoom();
             
             var newWeapon = pickUpScan.PickUpWeapon();
             OnWeaponPickedUp?.Invoke(newWeapon);
@@ -646,7 +649,8 @@ public class Arm : MonoBehaviour
 		var pickUp = LetGoOfWeapon();
         if (pickUp == null) return;
 
-        pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
+		OnReloadCanceld?.Invoke();
+		pickUp.AddImpulse(dropPosition.forward, weaponDropForce);
     }
 
     public void ReplaceWeapon(Weapon_Arms newWeapon)
@@ -656,8 +660,8 @@ public class Arm : MonoBehaviour
             weaponInHand.DropWeapon();
             weaponInHand = null;
         }
-
-        EquipWeapon(newWeapon);
+		OnReloadCanceld?.Invoke();
+		EquipWeapon(newWeapon);
 
         inventory.AddAmmo(newWeapon.Data, 99999);
 
@@ -815,9 +819,9 @@ public class Arm : MonoBehaviour
         {
             timeMultiplier = meleeAttackTimeMultiplierInDualWielding;
         }
+		OnReloadCanceld?.Invoke();
 
-
-        meleeAttackTimer = meleeAttack.MeleeTime * timeMultiplier;
+		meleeAttackTimer = meleeAttack.MeleeTime * timeMultiplier;
         meleeAttacker.AttackStart(meleeAttack, timeMultiplier, isDualWielding);
         weaponInHand.MeleeStart(meleeAttackTimer);
         OnMeleeWithWeaponStarted?.Invoke(weaponInHand, meleeAttackTimer);
@@ -849,8 +853,8 @@ public class Arm : MonoBehaviour
 			
 			OnWeaponUnequipFinished?.Invoke(weaponInHand);
         }
-
-        weaponInHand = weapon;
+		OnReloadCanceld?.Invoke();
+		weaponInHand = weapon;
         weaponInHand.SetExtraBulletsInMagazine(extraBulletsInMagazine);
         weaponInHand.SetFireRateMultiplier(fireRateMultiplier);
         switchInTimer = weaponInHand.SwitchInTime;

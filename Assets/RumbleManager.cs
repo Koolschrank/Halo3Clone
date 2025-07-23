@@ -43,14 +43,14 @@ public class RumbleManager : MonoBehaviour
 
 	}
 
-    public int OnPlayerJoined(PlayerInput player)
+    public int OnPlayerMindJoined(PlayerInput player)
     {
         players.Add(player);
         var playerRumbleStack = new PlayerRumbleStack();
         playerRumbleStack.gamepad = player.devices[0] as Gamepad; // Get the first device of the player as a Gamepad
         playerRumbleStacks.Add(playerRumbleStack);
 
-		Debug.Log($"Player joined: {player.playerIndex}");
+		Debug.Log($"Player joined: {players.Count}");
 
         return players.Count - 1; // Return the index of the newly added player
 	}

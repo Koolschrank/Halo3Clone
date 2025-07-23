@@ -32,6 +32,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerTeam team;
     [SerializeField] PlayerUpgrades playerUpgrader;
     [SerializeField] PlayerMindStatSheet playerMindStatSheet;
+    [SerializeField] bool hasKillRumble;
+	[SerializeField] RumbleData killRumble;
 
     [Header("UI")]
     [SerializeField] Transform UIContainer;
@@ -123,7 +125,7 @@ public class PlayerMind : MonoBehaviour
 
     public void Start()
     {
-		playerID = RumbleManager.Instance.OnPlayerJoined(playerInput);
+		playerID = RumbleManager.Instance.OnPlayerMindJoined(playerInput);
 
 
 
@@ -372,7 +374,11 @@ public class PlayerMind : MonoBehaviour
             {
                 LogSystem.logSystem.PlayerKilled(playerSettings.playerName,mind.playerSettings.playerName);
 
-                
+                if (hasKillRumble)
+                {
+                    int playerIndex = mind.playerID;
+                    RumbleManager.Instance.TriggerRumble(killRumble, playerIndex);
+				}
 
 
             }

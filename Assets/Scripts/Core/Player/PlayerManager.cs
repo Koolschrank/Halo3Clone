@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using System;
+using Unity.Mathematics;
 public class PlayerManager : MonoBehaviour
 {
     public Action<PlayerMind> OnPlayerAdded;
@@ -204,13 +205,30 @@ public class PlayerManager : MonoBehaviour
 
         OnPlayerAdded?.Invoke(player);
         OnPlayerSpawned?.Invoke(player);
+        var gameMode = GameModeSelector.gameModeManager;
 
 
-        var spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+		var spawnPoint = gameMode.GetStartingSpawnPoint(player.TeamIndex);
         playerBody.transform.position = spawnPoint.position;
         playerBody.transform.rotation = spawnPoint.rotation;
         playerBody.SetPlayTeamIndex();
-        playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
+        if (player.TeamIndex == 0 && gameMode.GameModeStats.recolerTeam1Members)
+        {
+            var playerID = player.playerID;
+            var colors = gameMode.GameModeStats.team1MemberColors;
+
+
+			Debug.Log("player ID:" + playerID);
+			var color = gameMode.GameModeStats.team1MemberColors[math.min(playerID, colors.Length - 1)];
+            playerBody.SetPlayerColor(color);
+
+		}
+        else
+        {
+			playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
+		}
+
+            
 
 
     }
@@ -253,7 +271,23 @@ public class PlayerManager : MonoBehaviour
         var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
         playerBody.ConnectMind(player);
         playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
-        playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
+
+        var gameMode = GameModeSelector.gameModeManager;
+		if (player.TeamIndex == 0 && gameMode.GameModeStats.recolerTeam1Members)
+		{
+			var playerID = player.playerID;
+			var colors = gameMode.GameModeStats.team1MemberColors;
+
+            Debug.Log("player ID:" + playerID);
+			var color = gameMode.GameModeStats.team1MemberColors[math.min(playerID, colors.Length - 1)];
+			playerBody.SetPlayerColor(color);
+
+		}
+		else
+		{
+			playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
+		}
+
         player.UpdateLayers();
         OnPlayerSpawned?.Invoke(player);
     }

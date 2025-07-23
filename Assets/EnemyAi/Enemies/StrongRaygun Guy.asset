@@ -23,7 +23,7 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 2
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
-    sideArm: {fileID: 11400000, guid: 3935029da2e725d4db216d70624c2277, type: 2}
+    sideArm: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
@@ -35,6 +35,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0
@@ -44,5 +45,5 @@ MonoBehaviour:
   healthMultiplier: 1
   shildMultiplier: 2.5
   speedMultiplier: 1
-  teamIdOverrride: 7
+  teamIdOverrride: 9
   scoreForKill: 450

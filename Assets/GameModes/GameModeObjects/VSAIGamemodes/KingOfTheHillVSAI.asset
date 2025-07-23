@@ -36,6 +36,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 100
       shild: 100
+      armor: 0
       healthRegenStartTime: 3
       shildRegenStartTime: 4.5
       healthRegen: 5
@@ -68,6 +69,22 @@ MonoBehaviour:
   cannotDropSwitchOrPickupWeapons: 0
   ai_damageMultiplier: 1
   weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 1
+  team1MemberColors:
+  - {r: 0, g: 0.35839128, b: 1, a: 1}
+  - {r: 0.117099285, g: 1, b: 0, a: 1}
+  - {r: 0.90635145, g: 1, b: 0, a: 1}
+  - {r: 0.86020947, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.8857155, a: 1}
+  team1MemberColorsUI:
+  - {r: 0.44313726, g: 0.4509804, b: 1, a: 0.8627451}
+  - {r: 0.6, g: 1, b: 0.44313726, a: 0.8627451}
+  - {r: 1, g: 0.9843137, b: 0.44313726, a: 0.8627451}
+  - {r: 0.7194542, g: 0.4431373, b: 1, a: 0.8627451}
+  - {r: 0.4431373, g: 1, b: 0.98120797, a: 0.8627451}
+  - {r: 1, g: 0.44705883, b: 0.44313726, a: 0.8627451}
+  - {r: 1, g: 0.6651867, b: 0.4431373, a: 0.8627451}
+  - {r: 1, g: 0.4431373, b: 0.92949015, a: 0.8627451}
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

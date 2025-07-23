@@ -14,13 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   force: 60
+  forceOnPlayers: 12
   delay: 0.14
   meleeTime: 0.63
-  meleeRadius: 1
-  meleeDistance: 1
+  meleeRadius: 0.65
+  meleeDistance: 0.65
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  hasLaunch: 1
+  launchDistance: 3.8
+  launchAngle: 30
+  launchTime: 0.14
+  launchStopDistance: 1.4
+  launchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
   swingSound:
     Guid:
       Data1: 757403591

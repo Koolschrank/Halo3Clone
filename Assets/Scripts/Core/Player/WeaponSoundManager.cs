@@ -10,7 +10,8 @@ public class WeaponSoundManager : MonoBehaviour
     [SerializeField] MeleeAttacker meleeAttacker;
     [SerializeField] TargetHitCollector targetHitCollector;
     TimedSoundListInstance reloadList;
-    TimedSoundListInstance switchInList;
+	TimedSoundListInstance reloadListLeft;
+	TimedSoundListInstance switchInList;
 
     [SerializeField] EventReference hitSound;
     [SerializeField] EventReference killSound;
@@ -22,18 +23,31 @@ public class WeaponSoundManager : MonoBehaviour
         playerArms.RightArm.OnWeaponEquipStarted += SwitchIn;
         playerArms.RightArm.OnWeaponShoot += Shoot;
 
-        playerArms.LeftArm.OnWeaponReloadStarted += Reload;
+        playerArms.LeftArm.OnWeaponReloadStarted += ReloadLeft;
         playerArms.LeftArm.OnWeaponEquipStarted += SwitchIn;
         playerArms.LeftArm.OnWeaponShoot += Shoot;
+        playerArms.RightArm.OnReloadCanceld += CancelReload;
+        playerArms.LeftArm.OnReloadCanceld += CancelReloadLeft;
 
-        meleeAttacker.OnAttackStart += MeleeSwing;
+		meleeAttacker.OnAttackStart += MeleeSwing;
         meleeAttacker.OnAttackHit += MeleeHit;
 
         targetHitCollector.OnCharacterHit += HitTarget;
         targetHitCollector.OnCharacterKill += KillTarget;
     }
 
-    public void HitTarget(GameObject target)
+    public void CancelReload()
+    {
+        reloadList = null;
+	}
+
+    public void CancelReloadLeft()
+    {
+        reloadListLeft = null;
+    }
+
+
+	public void HitTarget(GameObject target)
     {
         if (target.tag == "AIEnemy")
         {
@@ -84,12 +98,19 @@ public class WeaponSoundManager : MonoBehaviour
 
     }
 
-    public void Update()
+    public void ReloadLeft(Weapon_Arms weapon, float time)
+    {
+        reloadListLeft = new TimedSoundListInstance(weapon.ReloadSounds, time);
+	}
+
+	public void Update()
     {
         UpdateSoundList(reloadList);
-        UpdateSoundList(switchInList);
 
-    }
+		UpdateSoundList(reloadListLeft);
+		UpdateSoundList(switchInList);
+
+	}
 
     public void UpdateSoundList(TimedSoundListInstance soundList)
     {
@@ -99,18 +120,18 @@ public class WeaponSoundManager : MonoBehaviour
             soundList.Update(Time.deltaTime);
             if (soundList.IsTimeToPlay())
             {
-				Debug.Log("Ask Rumble");
 
-				Debug.Log(soundList.HasNextSoundRumble());
 				if (bodyMindConnection.Mind != null && soundList.HasNextSoundRumble())
                 {
-                    Debug.Log("Rumble");
                     var rumbleData = soundList.GetNextRumble();
 					var playerIndex = bodyMindConnection.Mind.playerID;
                     RumbleManager.Instance.TriggerRumble(rumbleData, playerIndex);
 				}
 
-				AudioManager.instance.PlayOneShot(soundList.GetNextSound(), transform.position);
+                var nextSound = soundList.GetNextSound();
+
+                if (nextSound.IsNull) return; // skip if sound is null
+				AudioManager.instance.PlayOneShot(nextSound, transform.position);
             }
         }
     }
@@ -127,7 +148,7 @@ public class TimedSoundList
 
 public class TimedSoundListInstance
 {
-    List<TimedSound> timedSounds;
+	List<TimedSound> timedSounds;
     float timeToFinish;
     float timer;
 

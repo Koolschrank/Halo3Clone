@@ -20,6 +20,14 @@ public class MeleeAttacker : MonoBehaviour
     [SerializeField] RumbleData meleeRumble_miss;
     [SerializeField] RumbleData meleeRumble_hit;
 
+
+    [NonSerialized]
+    public bool InLaunch;
+	[NonSerialized]
+	public LaunchInstance launchInstance;
+	[NonSerialized]
+	public float launchTimer = 0f; // timer for launch, can be set by other scripts if needed
+
 	private void Awake()
     {
         if (statSheet != null)
@@ -47,7 +55,61 @@ public class MeleeAttacker : MonoBehaviour
 
     }
 
-    bool isDualWielding = false;
+    public GameObject GetClosesLaunchTarget(PlayerMeleeAttack attackData)
+    {
+
+
+		var colliders = Physics.OverlapSphere(transform.position, attackData.launchDistance, attackData.launchTargetLayer);
+        Transform closesTarget = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject == self)
+            {
+                continue;
+            }
+            
+
+			// Check if the collider is in angle
+			Vector3 hitDirection = (collider.transform.position - transform.position).normalized;
+			float angle = Vector3.Angle(transform.forward, hitDirection);
+            if (angle > attackData.launchAngle)
+            {
+                continue;
+			}
+
+
+			float distance = Vector3.Distance(transform.position, collider.transform.position);
+			if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closesTarget = collider.transform;
+            }
+		}
+
+        return closesTarget != null ? closesTarget.gameObject : null;
+	}
+
+
+    public void SetUpLaunch(GameObject target, PlayerMeleeAttack attackData)
+    {
+        if (target == null)
+        {
+            return;
+        }
+        InLaunch = true;
+
+        var direction = (target.transform.position - self.transform.position).normalized;
+		var targetPosition = target.transform.position - direction * attackData.launchStopDistance;
+
+		launchInstance = new LaunchInstance(attackData, target, self.transform.position, targetPosition);
+        launchTimer = attackData.launchTime;
+	}
+    
+
+
+	bool isDualWielding = false;
 	public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier, bool isDualWielding)
     {
         meleeData = attackData;
@@ -55,7 +117,15 @@ public class MeleeAttacker : MonoBehaviour
         this.isDualWielding = isDualWielding;
 		OnAttackStart?.Invoke(attackData);
 
-    }
+        if (attackData.hasLaunch)
+        {
+			var launchTarget = GetClosesLaunchTarget(attackData);
+			if (launchTarget != null)
+			{
+				SetUpLaunch(launchTarget, attackData);
+			}
+		}
+	}
 
     // update
     public void Update()
@@ -68,7 +138,31 @@ public class MeleeAttacker : MonoBehaviour
                 Attack(meleeData);
             }
         }
+        if (InLaunch)
+        {
+            UpdateLaunch();
+		}
+
     }
+
+    public void UpdateLaunch()
+    {
+        launchTimer -= Time.deltaTime;
+        if (launchTimer <= 0)
+        {
+            InLaunch = false;
+            launchTimer = 0f;
+		}
+
+        var launchProgress = 1f - (launchTimer / launchInstance.meleeAttack.launchTime);
+        launchProgress = launchInstance.meleeAttack.launchCurve.Evaluate(launchProgress);
+
+        var targetPosition = Vector3.Lerp(launchInstance.originalPosition, launchInstance.targetPosition, launchProgress);
+        self.transform.position = targetPosition;
+
+
+	}
+
 
     // attack
     public void Attack(PlayerMeleeAttack attackData)
@@ -114,8 +208,15 @@ public class MeleeAttacker : MonoBehaviour
             {
 				
 				health.TakeDamage(damagePackage);
-                
-            }
+
+                var playerImpact = collider.GetComponent<PlayerPhysicsImpulse>();
+				PlayerImpactStruct playerImpactStruct = new PlayerImpactStruct();
+                var directionToPlayer = (collider.transform.position - transform.position).normalized;
+                playerImpactStruct.impactForce = directionToPlayer * attackData.ForceOnPlayers;
+                playerImpactStruct.resetGravity = false;
+                playerImpact.AddImpulse(playerImpactStruct);
+
+			}
 
             if (collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
@@ -151,4 +252,22 @@ public class MeleeAttacker : MonoBehaviour
     }
 
 
+}
+
+
+public struct LaunchInstance
+{
+	public PlayerMeleeAttack meleeAttack;
+	public GameObject target;
+    public Vector3 originalPosition;
+    public Vector3 targetPosition;
+    
+
+    public LaunchInstance(PlayerMeleeAttack meleeAttack, GameObject target, Vector3 originalPosition, Vector3 targetPosition)
+    {
+        this.meleeAttack = meleeAttack;
+        this.target = target;
+        this.originalPosition = originalPosition;
+        this.targetPosition = targetPosition;
+	}
 }

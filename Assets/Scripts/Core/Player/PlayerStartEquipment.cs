@@ -339,7 +339,9 @@ public class HealthOverride
     public bool showHealthBar = false;
     public float health;
     public float shild;
-    public float healthRegenStartTime = 0.5f;
+
+	public float armor;
+	public float healthRegenStartTime = 0.5f;
     public float shildRegenStartTime = 0.5f;
     public float healthRegen;
     public float shildRegen;

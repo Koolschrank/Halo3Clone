@@ -32,7 +32,7 @@ MonoBehaviour:
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: 268165fa9505197408ba74cc4d2fc398, type: 2}
+  meleeData: {fileID: 0}
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
@@ -141,13 +141,67 @@ MonoBehaviour:
           Data4: -1334631121
         Path: event:/SFX/Guns/Raygun/SwitchIn
       timeOfPlay: 0.2
-      hasRumble: 0
+      hasRumble: 1
       rumbleData:
-        duration: 0
-        intensity: 0
+        duration: 1
+        intensity: 0.8
         intensityCurve:
           serializedVersion: 2
-          m_Curve: []
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: -0.033035606
+            outSlope: -0.033035606
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.1363349
+            value: 0.9954961
+            inSlope: -0.15132104
+            outSlope: -0.15132104
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.23390488
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.21907206
+            value: 0.006440431
+            inSlope: -0.1015273
+            outSlope: -0.1015273
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.4263208
+            value: 0.008110195
+            inSlope: 0.0034887884
+            outSlope: 0.0034887884
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.25282928
+          - serializedVersion: 3
+            time: 0.75412154
+            value: 0.0019317716
+            inSlope: -0.028526887
+            outSlope: -0.028526887
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1.003292
+            value: -0.00758795
+            inSlope: -0.09043341
+            outSlope: -0.09043341
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4

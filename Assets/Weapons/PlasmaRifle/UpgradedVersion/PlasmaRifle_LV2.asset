@@ -29,12 +29,15 @@ MonoBehaviour:
   switchInTime: 0.2
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: 39af5c686c63d6c47b5081f8ca258785, type: 2}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  meleeData: {fileID: 0}
   weaponType: 0
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 0
@@ -69,6 +72,40 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 4.25
   reloadTimeMultiplier: 1.5
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 440703412
@@ -86,6 +123,17 @@ MonoBehaviour:
           Data4: -602697179
         Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
       timeOfPlay: 0.2
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -96,6 +144,17 @@ MonoBehaviour:
           Data4: 44528707
         Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadStart
       timeOfPlay: 0.2
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: 1737366809
@@ -104,6 +163,17 @@ MonoBehaviour:
           Data4: -602697179
         Path: event:/SFX/Guns/PlasmaRifle/Reload/ReloadEnd
       timeOfPlay: 0.6
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}

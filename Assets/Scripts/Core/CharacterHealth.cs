@@ -274,7 +274,7 @@ public class CharacterHealth : Health
 		if (currentArmor> maxArmor)
             currentArmor = maxArmor;
         else
-            OnArmorChanged?.Invoke(currentArmor / maxArmor);
+            OnArmorChanged?.Invoke(maxArmor == 0 ? 0 :  currentArmor / maxArmor);
 	}
 
 
@@ -294,7 +294,8 @@ public class CharacterHealth : Health
         if (newHealth == null ||!newHealth.hasHealthOverride) return;
         maxHeath = newHealth.health;
         maxShild = newHealth.shild;
-        currentHeath = maxHeath;
+        maxArmor = newHealth.armor;
+		currentHeath = maxHeath;
         currentShild = maxShild;
         hasShild = maxShild > 0;
         healthRegenAmountPerSecond = newHealth.healthRegen;
@@ -383,7 +384,7 @@ public class CharacterHealth : Health
         {
             damageDealer = damagePackage.owner.GetComponent<TargetHitCollector>();
         }
-        if (!blocked &&((currentShild <= 0 && currentArmor <=0) ||(  damagePackage.canHeadShotShild && currentShild + currentArmor < damage)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
+        if (!blocked &&((currentShild <= 0 && currentArmor <=0) ||(  damagePackage.canHeadShotShild && currentShild + currentArmor < damage* damagePackage.shildDamageMultiplier)) && damagePackage.headShotMultiplier > 1 && headShotArea.IsHeadShot(damagePackage.hitPoint))
         {
             damage *= damagePackage.headShotMultiplier;
             if (headShotOneShot)
@@ -462,7 +463,7 @@ public class CharacterHealth : Health
                 {
                     currentArmor -= damage;
                     damage = 0;
-                    OnArmorChanged?.Invoke(currentArmor / maxArmor);
+                    OnArmorChanged?.Invoke(maxArmor == 0 ? 0 : currentArmor / maxArmor);
 				}
 			}
 			if (damage > 0)
@@ -522,7 +523,7 @@ public class CharacterHealth : Health
     public void FillArmor()
         {
         currentArmor = maxArmor;
-        OnArmorChanged?.Invoke(currentArmor / maxArmor);
+        OnArmorChanged?.Invoke(maxArmor == 0 ? 0 : currentArmor / maxArmor);
 	}
 
 

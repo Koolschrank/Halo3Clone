@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: f38914d8d954cdc4d90134f2267c78c9, type: 3}
   weaponName: ShotGun
   shootType: 1
-  fireRate: 0.9
+  fireRate: 0.85
   bulletsPerShot: 20
   magazineSize: 2
   maxAmmoInReserve: 20
@@ -75,7 +75,7 @@ MonoBehaviour:
   bloomOnShoot: 1
   bloomOnTakingDamage: 0
   bloomInaccuracyMultiplier: 0.1
-  bloomTime: 0.9
+  bloomTime: 0.85
   bloomCurve:
     serializedVersion: 2
     m_Curve:
@@ -275,7 +275,7 @@ MonoBehaviour:
       timeOfPlay: 0.9
       hasRumble: 1
       rumbleData:
-        duration: 0.125
+        duration: 0.26
         intensity: 1
         intensityCurve:
           serializedVersion: 2
@@ -283,20 +283,29 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 1
-            inSlope: 0
-            outSlope: 0
+            inSlope: -1.0603205
+            outSlope: -1.0603205
             tangentMode: 34
             weightedMode: 0
             inWeight: 0
-            outWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.48
+            value: 0.4910462
+            inSlope: -0.040781558
+            outSlope: -0.040781558
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
             value: 1
-            inSlope: 0
-            outSlope: 0
+            inSlope: 0.9787574
+            outSlope: 0.9787574
             tangentMode: 34
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.33333334
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2

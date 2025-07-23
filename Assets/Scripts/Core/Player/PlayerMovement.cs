@@ -24,7 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform head_crouchPosition;
     [SerializeField] PlayerArms arms;
     [SerializeField] PlayerBodyStatSheet statSheet;
-    [Header("Settings")]
+    [SerializeField] MeleeAttacker meleeAttacker;
+	[Header("Settings")]
 
 
     // movement speed
@@ -170,6 +171,8 @@ public class PlayerMovement : MonoBehaviour
         UpdateGravity();
 
         var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
+        
+
         cc.Move(moveVector * Time.deltaTime);
 
         OnMoveUpdated?.Invoke(moveVector);
@@ -255,21 +258,26 @@ public class PlayerMovement : MonoBehaviour
 				inPushedState = false; // reset the pushed state
 			}
 		}
+        else if (meleeAttacker.InLaunch)
+        {
+			moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration_ground * Time.deltaTime);
+            return;
+		}
 
 
-		if (move.magnitude == 0)
+        if (move.magnitude == 0)
         {
             if (!inPushedState)
-			    acceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
+                acceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
 
 
             moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, acceleration * Time.deltaTime);
         }
         else
         {
-            
 
-			var moveSpeedMultiplier = 1f;
+
+            var moveSpeedMultiplier = 1f;
             if (arms.IsDualWielding)
             {
                 moveSpeedMultiplier = arms.MovementSpeedMultiplier;
@@ -283,9 +291,9 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-           
-            
-            
+
+
+
 
             var speedMultiplier = MaxMoveSpeed * moveSpeedMultiplier;
             if (inCrouch)
@@ -295,20 +303,20 @@ public class PlayerMovement : MonoBehaviour
             else if (arms.RightArm.IsInZoom)
             {
                 speedMultiplier *= arms.RightArm.CurrentWeapon.Data.ZoomMoveSpeed;
-			}
+            }
             else if (arms.LeftArm.IsInZoom)
-			{
+            {
                 speedMultiplier *= arms.LeftArm.CurrentWeapon.Data.ZoomMoveSpeed;
-			}
+            }
 
-			var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
+            var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
             if (aura_moveSpeedReduction != 0)
             {
                 ideal *= 1 - aura_moveSpeedReduction;
-			}
+            }
 
 
-			moveVelocity = Vector3.MoveTowards(moveVelocity, ideal, acceleration * Time.deltaTime);
+            moveVelocity = Vector3.MoveTowards(moveVelocity, ideal, acceleration * Time.deltaTime);
         }
 
         

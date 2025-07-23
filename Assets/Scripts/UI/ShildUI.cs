@@ -1,8 +1,11 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShildUI : MonoBehaviour
 {
+
+    [SerializeField] PlayerMind mind;
     [SerializeField]
 	ShildEffectUI shildEffectUI;
 
@@ -62,8 +65,17 @@ public class ShildUI : MonoBehaviour
 
     public void SetTeamColor(int index)
     {
-        defaultColor = shildTeamColors[index];
+        var color = shildTeamColors[index];
+		if (index == 0 && GameModeSelector.gameModeManager.GameModeStats.recolerTeam1Members)
+		{
+            color = GameModeSelector.gameModeManager.GameModeStats.team1MemberColorsUI[math.min(mind.playerID, 7)];
+
+		}
+
+		defaultColor = color;
 		shildBarColor.color = defaultColor;
+
+        
     }
 
 

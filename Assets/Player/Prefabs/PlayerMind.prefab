@@ -2437,6 +2437,35 @@ MonoBehaviour:
   team: {fileID: 367694579518745841}
   playerUpgrader: {fileID: 9040322732282011191}
   playerMindStatSheet: {fileID: 3585907214944871867}
+  hasKillRumble: 1
+  killRumble:
+    duration: 0.5
+    intensity: 1
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.9778047
+        outSlope: -0.9778047
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9966736
+        value: 0.025447845
+        inSlope: -0.9778047
+        outSlope: -0.9778047
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
   UIContainer: {fileID: 4247939652203469467}
   healthUI: {fileID: 3963887290950628199}
   shildUI: {fileID: 1102817728189394635}
@@ -4467,6 +4496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1118482049791303894, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
+      propertyPath: mind
+      value: 
+      objectReference: {fileID: 6762101414911299386}
     - target: {fileID: 1118482049791303894, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerCam
       value: 

@@ -84,7 +84,7 @@ MonoBehaviour:
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 7417145648753044389}
   rumble_Shoot:
-    duration: 0.4
+    duration: 0.9
     intensity: 1
     intensityCurve:
       serializedVersion: 2
@@ -92,17 +92,62 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.013332367
         value: 1.0028381
-        inSlope: -1.0115998
-        outSlope: -1.0115998
+        inSlope: -2.282696
+        outSlope: -2.282696
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1.000011
-        value: 0.0047142934
-        inSlope: -1.0115998
-        outSlope: -1.0115998
+        time: 0.44846797
+        value: 0.009555876
+        inSlope: -1.5516163
+        outSlope: -1.5516163
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.16191638
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.48939046
+        value: 0.008385802
+        inSlope: -0.009029755
+        outSlope: -0.009029755
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 1
+      - serializedVersion: 3
+        time: 0.6641546
+        value: 0.010531977
+        inSlope: 0.17160031
+        outSlope: 0.17160031
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.68711215
+        outWeight: 1
+      - serializedVersion: 3
+        time: 0.68959326
+        value: 0.29810625
+        inSlope: -0.0006070651
+        outSlope: -0.0006070651
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.79918027
+        value: 0.23950797
+        inSlope: -0.047716852
+        outSlope: -0.047716852
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.98365355
+        value: 0.29731682
+        inSlope: 0.31337246
+        outSlope: 0.31337246
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334

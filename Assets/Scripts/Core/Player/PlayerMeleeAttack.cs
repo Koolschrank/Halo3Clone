@@ -6,22 +6,36 @@ public class PlayerMeleeAttack : ScriptableObject
 {
     [SerializeField] float damage = 80f;
     [SerializeField] float force = 10f;
-    [SerializeField] float delay = 0.3f;
+    [SerializeField] float forceOnPlayers = 5f; // force applied to players hit by the melee attack
+	[SerializeField] float delay = 0.3f;
     [SerializeField] float meleeTime = 1f;
     [SerializeField] float meleeRadius = 1f;
     [SerializeField] float meleeDistance = 1f;
     [SerializeField] LayerMask enemyLayer;
 
-    [Header("Sound")]
+
+	[Header("Launch")]
+	public bool hasLaunch = false;
+	public float launchDistance = 5f;
+	public float launchAngle = 45f;
+	public float launchTime = 0.5f;
+	public float launchStopDistance = 0.1f;
+	public AnimationCurve launchCurve;
+	public LayerMask launchTargetLayer;
+
+	[Header("Sound")]
     [SerializeField] EventReference swingSound;
     [SerializeField] EventReference hitSound;
 
 
-    public float Damage => damage;
+
+	public float Damage => damage;
 
     public float Force => force;
 
-    public float Delay => delay;
+    public float ForceOnPlayers => forceOnPlayers;
+
+	public float Delay => delay;
 
     public float MeleeTime => meleeTime;
 

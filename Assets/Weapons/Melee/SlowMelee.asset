@@ -12,15 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: SlowMelee
   m_EditorClassIdentifier: 
-  damage: 125
+  damage: 110
   force: 100
+  forceOnPlayers: 16
   delay: 0.24
   meleeTime: 1.28
-  meleeRadius: 0.9
-  meleeDistance: 0.9
+  meleeRadius: 0.7
+  meleeDistance: 0.7
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  hasLaunch: 1
+  launchDistance: 3.5
+  launchAngle: 30
+  launchTime: 0.24
+  launchStopDistance: 1.4
+  launchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
   swingSound:
     Guid:
       Data1: 757403591

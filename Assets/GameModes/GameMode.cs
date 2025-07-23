@@ -43,6 +43,10 @@ public class GameMode : ScriptableObject
     public float ai_damageMultiplier = 1f; // multiplier for AI damage, used to balance AI difficulty
     public float weaponRespawnTimeMultiplier = 1f; // multiplier for weapon respawn time, used to balance weapon respawn time
 
+    public bool recolerTeam1Members = false; // if true, team 1 members can recolor each other, otherwise they cannot
+    public Color[] team1MemberColors; // colors for team 1 members, used to recolor team 1 members
+	public Color[] team1MemberColorsUI; // colors for team 1 members, used to recolor team 1 members
+
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;

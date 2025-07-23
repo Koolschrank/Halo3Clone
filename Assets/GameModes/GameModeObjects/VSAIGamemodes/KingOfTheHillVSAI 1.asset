@@ -34,18 +34,19 @@ MonoBehaviour:
     healthOverride:
       hasHealthOverride: 1
       showHealthBar: 0
-      health: 30
-      shild: 60
+      health: 50
+      shild: 100
+      armor: 0
       healthRegenStartTime: 2.5
       shildRegenStartTime: 4.5
       healthRegen: 10
-      shildRegen: 15
+      shildRegen: 25
       spawnInvulnerabilityTime: 5
-      shildPopDamageNegation: 30
+      shildPopDamageNegation: 0
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 20
+  respawnTime: 10
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
@@ -59,7 +60,7 @@ MonoBehaviour:
   spawnWithArmor: 1
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
-  team2PointsToWin: 150
+  team2PointsToWin: 200
   team2LoosesScoreWhenTeam1scores: 1
   amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
   useEnemyWaves: 1
@@ -68,6 +69,22 @@ MonoBehaviour:
   cannotDropSwitchOrPickupWeapons: 0
   ai_damageMultiplier: 0.6
   weaponRespawnTimeMultiplier: 1.5
+  recolerTeam1Members: 1
+  team1MemberColors:
+  - {r: 0, g: 0.35839128, b: 1, a: 1}
+  - {r: 0.117099285, g: 1, b: 0, a: 1}
+  - {r: 0.90635145, g: 1, b: 0, a: 1}
+  - {r: 0.86020947, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.8857155, a: 1}
+  team1MemberColorsUI:
+  - {r: 0.44313726, g: 0.4509804, b: 1, a: 0.8627451}
+  - {r: 0.6, g: 1, b: 0.44313726, a: 0.8627451}
+  - {r: 1, g: 0.9843137, b: 0.44313726, a: 0.8627451}
+  - {r: 0.7194542, g: 0.4431373, b: 1, a: 0.8627451}
+  - {r: 0.4431373, g: 1, b: 0.98120797, a: 0.8627451}
+  - {r: 1, g: 0.44705883, b: 0.44313726, a: 0.8627451}
+  - {r: 1, g: 0.6651867, b: 0.4431373, a: 0.8627451}
+  - {r: 1, g: 0.4431373, b: 0.92949015, a: 0.8627451}
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000
