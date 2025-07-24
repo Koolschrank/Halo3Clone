@@ -260,6 +260,20 @@ public class BulletSpawner : MonoBehaviour
                     health.TakeDamage(damagePackage);
                     
                     bodyHit = true;
+
+
+                    if (!health.IsDead && bullet.DoesApplyForceOnLivingPlayers)
+                    {
+                        var forceVector = shotDirectionForThisBullet.normalized * bullet.ForceOnLivingPlayers;
+                        if (hit.collider.TryGetComponent<PlayerPhysicsImpulse>(out PlayerPhysicsImpulse playerImpulse))
+                        {
+                            playerImpulse.AddImpulse(new PlayerImpactStruct()
+                            {
+                                impactForce = forceVector,
+                                resetGravity = false
+                            });
+						}
+					}
                 }
                 else
                 {

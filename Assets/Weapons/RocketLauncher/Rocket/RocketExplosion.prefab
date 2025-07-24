@@ -75,7 +75,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 100
-  forceOnPlayer: 35
+  forceOnPlayer: 25
   forceYOffset: -1
   forceFalloff:
     serializedVersion: 2

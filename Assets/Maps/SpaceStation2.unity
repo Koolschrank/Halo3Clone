@@ -168,6 +168,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &37591712
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +219,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &78346960
 GameObject:
   m_ObjectHideFlags: 0
@@ -15953,6 +15957,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &518889776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16246,6 +16252,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &653277733
 GameObject:
   m_ObjectHideFlags: 0
@@ -28109,6 +28117,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 3
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1072766427
 GameObject:
   m_ObjectHideFlags: 0
@@ -28328,6 +28338,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1141663056
 GameObject:
   m_ObjectHideFlags: 0
@@ -28377,6 +28389,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1192694117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32996,6 +33010,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 3
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1467767890
 GameObject:
   m_ObjectHideFlags: 0
@@ -34862,6 +34878,8 @@ MonoBehaviour:
   spawnTime: 40
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1718718531
 GameObject:
   m_ObjectHideFlags: 0
@@ -35028,8 +35046,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -74.5, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 10000, y: 30, z: 1000}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

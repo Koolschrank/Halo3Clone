@@ -151,7 +151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &21077496
@@ -1498,7 +1498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &550737054
@@ -3834,8 +3834,8 @@ RectTransform:
   m_GameObject: {fileID: 1285738396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 503090721}
   m_Father: {fileID: 1353598183}
@@ -3973,6 +3973,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba44bf85ab27b9845aad08cca477943a, type: 2}
   - {fileID: 11400000, guid: 1bf5703245bc80840a69349b465e9356, type: 2}
   - {fileID: 11400000, guid: 4e5a6656de8598a458d5fe29fb9c66ab, type: 2}
+  - {fileID: 11400000, guid: 8cdce533fbe838a45a241e17459ec243, type: 2}
+  - {fileID: 11400000, guid: 851f054d3f02e4a4ebbf26f88e7d1fe7, type: 2}
   gameModeButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   gameModeButtonParent: {fileID: 503090721}
   buttonSpacing: -50
@@ -5102,8 +5104,8 @@ RectTransform:
   m_GameObject: {fileID: 1572874590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9380848}
   m_Father: {fileID: 1353598183}
@@ -5140,6 +5142,7 @@ MonoBehaviour:
   - SpaceStation2
   - PracticeCourse2
   - Moon2
+  - FinalDestination
   mapButtonPrefab: {fileID: 5559116522364280665, guid: c6e49f578f2e508458f4a06bb418522b, type: 3}
   mapButtonParent: {fileID: 9380848}
   buttonSpacing: -55

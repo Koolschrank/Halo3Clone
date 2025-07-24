@@ -6,7 +6,8 @@ public class MeleeAttacker : MonoBehaviour
     public Action<PlayerMeleeAttack> OnAttackStart;
     public Action<PlayerMeleeAttack> OnAttackHit;
 
-    [SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
+    [SerializeField] PlayerMovement playerMovement; // reference to the player movement for applying force
+	[SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
 	[SerializeField] CharacterHealth health;
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
@@ -57,7 +58,7 @@ public class MeleeAttacker : MonoBehaviour
 
     public GameObject GetClosesLaunchTarget(PlayerMeleeAttack attackData)
     {
-
+        if (playerMovement.inPushedState) return null;
 
 		var colliders = Physics.OverlapSphere(transform.position, attackData.launchDistance, attackData.launchTargetLayer);
         Transform closesTarget = null;
@@ -99,11 +100,7 @@ public class MeleeAttacker : MonoBehaviour
             return;
         }
         InLaunch = true;
-
-        var direction = (target.transform.position - self.transform.position).normalized;
-		var targetPosition = target.transform.position - direction * attackData.launchStopDistance;
-
-		launchInstance = new LaunchInstance(attackData, target, self.transform.position, targetPosition);
+		launchInstance = new LaunchInstance(attackData, target, self.transform.position);
         launchTimer = attackData.launchTime;
 	}
     
@@ -157,7 +154,10 @@ public class MeleeAttacker : MonoBehaviour
         var launchProgress = 1f - (launchTimer / launchInstance.meleeAttack.launchTime);
         launchProgress = launchInstance.meleeAttack.launchCurve.Evaluate(launchProgress);
 
-        var targetPosition = Vector3.Lerp(launchInstance.originalPosition, launchInstance.targetPosition, launchProgress);
+        var direction = (launchInstance.target.transform.position - self.transform.position).normalized;
+		var goalPosition = launchInstance.target.transform.position - direction * launchInstance.meleeAttack.launchStopDistance;
+
+		var targetPosition = Vector3.Lerp(launchInstance.originalPosition, goalPosition, launchProgress);
         self.transform.position = targetPosition;
 
 
@@ -211,9 +211,12 @@ public class MeleeAttacker : MonoBehaviour
 
                 var playerImpact = collider.GetComponent<PlayerPhysicsImpulse>();
 				PlayerImpactStruct playerImpactStruct = new PlayerImpactStruct();
-                var directionToPlayer = (collider.transform.position - transform.position).normalized;
-                playerImpactStruct.impactForce = directionToPlayer * attackData.ForceOnPlayers;
-                playerImpactStruct.resetGravity = false;
+                var forceDirection = (transform.forward  + Vector3.up * attackData.ForceOffset).normalized; //(collider.transform.position - (transform.position+ Vector3.up * attackData.ForceOffset )).normalized;
+                playerImpactStruct.impactForce = forceDirection * attackData.ForceOnPlayers;
+
+				
+
+				playerImpactStruct.resetGravity = attackData.launchResetsGravity;
                 playerImpact.AddImpulse(playerImpactStruct);
 
 			}
@@ -246,7 +249,14 @@ public class MeleeAttacker : MonoBehaviour
 
     }
 
-    public void CancelAttack()
+    public void CancelLaunch()
+    {
+        InLaunch = false;
+        launchTimer = 0f;
+        launchInstance = new LaunchInstance();
+	}
+
+	public void CancelAttack()
     {
         attackDelay = 0;
     }
@@ -260,14 +270,12 @@ public struct LaunchInstance
 	public PlayerMeleeAttack meleeAttack;
 	public GameObject target;
     public Vector3 originalPosition;
-    public Vector3 targetPosition;
     
 
-    public LaunchInstance(PlayerMeleeAttack meleeAttack, GameObject target, Vector3 originalPosition, Vector3 targetPosition)
+    public LaunchInstance(PlayerMeleeAttack meleeAttack, GameObject target, Vector3 originalPosition)
     {
         this.meleeAttack = meleeAttack;
         this.target = target;
         this.originalPosition = originalPosition;
-        this.targetPosition = targetPosition;
 	}
 }

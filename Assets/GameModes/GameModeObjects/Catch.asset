@@ -20,14 +20,29 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 2
-    weaponInHand: {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
+    weaponInHand: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
     magazinsOfWeaponInHand: 5
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
-    granade: {fileID: 0}
-    granadeCount: 1
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
+    ability: {fileID: 0}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      armor: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
   timeLimitInMinutes: 10
   pointsToWin: 40
   teamCount: 8
@@ -37,6 +52,26 @@ MonoBehaviour:
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0
+  useStatSheets: 0
+  dontDropWeaponsOnDeath: 0
+  startScore: 0
+  playerStatsSheetBlueprint: {fileID: 0}
+  spawnWithArmor: 0
+  EnemyTeamsWorkingTogether: 0
+  team2usesOtherPointsToWin: 0
+  team2PointsToWin: 0
+  team2LoosesScoreWhenTeam1scores: 0
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 0
+  useEnemyWaves: 0
+  noDualWieldDamageReduction: 0
+  startingEquipmentBasedOnPlayerValues: 0
+  cannotDropSwitchOrPickupWeapons: 0
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 0
+  team1MemberColors: []
+  team1MemberColorsUI: []
   timeToScore: 1
   setEquipmentOnCrownPickup: 0
   equipmentOnCrownPickup:
@@ -52,5 +87,20 @@ MonoBehaviour:
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 0}
     magazinsOfSideArm: 5
-    granade: {fileID: 0}
-    granadeCount: 0
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
+    ability: {fileID: 0}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      armor: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30

@@ -10554,6 +10554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0653be2d0781242a2cd5a0aa27fdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 7400201383000877008}
   bodyMindConnection: {fileID: 4471171138262044766}
   health: {fileID: 782412234501442312}
   self: {fileID: 8289933859456780900}
@@ -10828,7 +10829,7 @@ MonoBehaviour:
   deceleration_air: 10
   acceleration_roll: 40
   acceleration_pushed: 3
-  minPushTime: 0.1
+  minPushTime: 0.25
   jumpPower: 8
   jumpCooldown: 0.31
   gravity: 15
@@ -10900,6 +10901,9 @@ MonoBehaviour:
       Data3: -1475204457
       Data4: 275955439
     Path: event:/SFX/Player/Jump
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &8050057614039648062
 MonoBehaviour:
   m_ObjectHideFlags: 0

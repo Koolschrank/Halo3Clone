@@ -209,7 +209,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateInAir()
     {
-        animator.SetBool("InAir", !cc.isGrounded);
+        animator.SetBool("InAir", !cc.isGrounded || playerMovement.inPushedState);
 
         if (!cc.isGrounded && cc.velocity.y < 0)
         {

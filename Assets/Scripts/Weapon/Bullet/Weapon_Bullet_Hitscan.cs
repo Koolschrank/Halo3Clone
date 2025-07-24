@@ -20,11 +20,18 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     [SerializeField] GameObject impact_body;
     [SerializeField] GameObject impact_ground;
 
-    [Header("Sound")]
+    [SerializeField] bool doesApplyForceOnLivingPlayers = false;
+    [SerializeField] float forceOnLivingPlayers = 1f;
+
+	[Header("Sound")]
     [SerializeField] EventReference bodyHitSound;
     [SerializeField] EventReference groundHitSound;
 
-    public float Damage => damage;
+
+    public bool DoesApplyForceOnLivingPlayers => doesApplyForceOnLivingPlayers;
+    public float ForceOnLivingPlayers => forceOnLivingPlayers;
+
+	public float Damage => damage;
 
     public float Force => force;
 

@@ -5,14 +5,20 @@ public class DeathZone : MonoBehaviour
     // on trigger enter if have health take 1000000 damage
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("DeathZone OnTriggerEnter");
         DamagePackage damage = new DamagePackage(1000000);
-        damage.owner = other.gameObject;
-        Health health = other.GetComponent<Health>();
+
+		CharacterHealth health = other.GetComponent<CharacterHealth>();
         if (health != null)
         {
-            Debug.Log("DeathZone OnTriggerEnter Health");
-            health.TakeDamage(damage);
+            var owner = health.ownerOfLastDamage;
+            if (owner == null)
+            {
+                owner = other.gameObject;
+			}
+
+            damage.owner = owner;
+
+			health.TakeDamage(damage);
         }
     }
 }

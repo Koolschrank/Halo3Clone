@@ -94,8 +94,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 distanceWentThisFrame = Vector3.zero;
 
-    bool inPushedState = false; // if the player is in a pushed state, used to determine if the player can move or not
+    [NonSerialized]
+    public bool inPushedState = false; // if the player is in a pushed state, used to determine if the player can move or not
     float pushedTimer = 0f; // timer for the pushed state, used to determine if the player can move or not
+
+    public LayerMask GroundLayer;
 	public void ApplyImpact(PlayerImpactStruct impact)
     {
 		if ( impact.resetGravity)
@@ -108,6 +111,10 @@ public class PlayerMovement : MonoBehaviour
 
         inPushedState = true; // set the player in a pushed state
         pushedTimer = minPushTime; // set the pushed timer to the minimum push time
+        if (impact.impactForce.magnitude > maxMoveSpeed)
+            OnJump?.Invoke();
+
+        meleeAttacker.CancelLaunch(); // cancel the melee attack launch if the player is in a pushed state
 	}
 
     public void MultiplyMaxMoveSpeed(float multiplier)
@@ -188,10 +195,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (gravityVelocity> 0 && distanceWentThisFrame.y <= 0)
         {
-            gravityVelocity = 0; 
+			// raycast up to check if we are hitting the ground
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.up, out hit, 2f, GroundLayer))
+            {
+                // if we are hitting the ground, reset the gravity velocity
+                gravityVelocity = 0;
+			}
+
+
+
 		}
 
 	}
+    
+
 
     private void UpdateCrouch()
     {
@@ -331,7 +349,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ignoreGravityResetTimer -= Time.deltaTime;
 
-		if (cc.isGrounded && jumpCooldownTimer <= 0 && ignoreGravityResetTimer <= 0)
+		if (cc.isGrounded && jumpCooldownTimer <= 0 && ignoreGravityResetTimer <= 0 && !inPushedState)
         {
             gravityVelocity = -0.1f;
         }

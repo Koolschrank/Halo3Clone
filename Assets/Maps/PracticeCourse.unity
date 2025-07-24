@@ -294,6 +294,127 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.004360961, z: 0.00050000084}
   m_Center: {x: -3.5553405e-12, y: 0.0016804802, z: -8.106461e-11}
+--- !u!1 &57681564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57681569}
+  - component: {fileID: 57681568}
+  - component: {fileID: 57681567}
+  - component: {fileID: 57681566}
+  - component: {fileID: 57681565}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &57681565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57681564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d616c6fc489191e44accc092ea45d904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &57681566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57681564}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &57681567
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57681564}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &57681568
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57681564}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &57681569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57681564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -20.9, z: 0}
+  m_LocalScale: {x: 1000, y: 5, z: 1000}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &60072026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,6 +768,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 2
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &178686329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -739,6 +862,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &213669342
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +913,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &224347722
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -879,6 +1006,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 3
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!64 &228924957
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1549,6 +1678,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &436145927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2645,6 +2776,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 2
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &776872819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3119,6 +3252,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 3
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &952114609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5486,6 +5621,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &1407078589
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6140,6 +6277,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &1602529665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6274,6 +6413,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &1705624025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9816,6 +9957,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!65 &2058783934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10052,3 +10195,4 @@ SceneRoots:
   - {fileID: 1214640492}
   - {fileID: 2107224114}
   - {fileID: 1766522965}
+  - {fileID: 57681569}

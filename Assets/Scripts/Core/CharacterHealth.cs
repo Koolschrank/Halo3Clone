@@ -336,8 +336,8 @@ public class CharacterHealth : Health
         return headShotArea.transform;
     }
 
-
-    GameObject ownerOfLastDamage = null;
+    [NonSerialized]
+    public GameObject ownerOfLastDamage = null;
 	float firstShotTime = 0;
 
     public override void TakeDamage(DamagePackage damagePackage)
@@ -346,10 +346,6 @@ public class CharacterHealth : Health
         {
             firstShotTime = Time.time;
         }
-
-        
-
-        
 
 		float damageReduction = playerArms.DamageReduction;
 		
@@ -511,6 +507,8 @@ public class CharacterHealth : Health
             }
             shildRegenTimer = shildRegenDelay;
 
+
+            
 
         }
 

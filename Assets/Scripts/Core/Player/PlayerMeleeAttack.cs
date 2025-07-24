@@ -7,6 +7,7 @@ public class PlayerMeleeAttack : ScriptableObject
     [SerializeField] float damage = 80f;
     [SerializeField] float force = 10f;
     [SerializeField] float forceOnPlayers = 5f; // force applied to players hit by the melee attack
+	[SerializeField] float forceOffset = 0f;
 	[SerializeField] float delay = 0.3f;
     [SerializeField] float meleeTime = 1f;
     [SerializeField] float meleeRadius = 1f;
@@ -20,6 +21,7 @@ public class PlayerMeleeAttack : ScriptableObject
 	public float launchAngle = 45f;
 	public float launchTime = 0.5f;
 	public float launchStopDistance = 0.1f;
+    public bool launchResetsGravity = false;
 	public AnimationCurve launchCurve;
 	public LayerMask launchTargetLayer;
 
@@ -34,6 +36,8 @@ public class PlayerMeleeAttack : ScriptableObject
     public float Force => force;
 
     public float ForceOnPlayers => forceOnPlayers;
+
+    public float ForceOffset => forceOffset;
 
 	public float Delay => delay;
 

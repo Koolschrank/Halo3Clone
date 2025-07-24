@@ -12,7 +12,11 @@ public class WeaponSpawner : MonoBehaviour
 
     Weapon_PickUp weapon;
 
-    public void Start()
+
+    [SerializeField] bool isRandom;
+    [SerializeField] GameObject[] randomWeapons;
+
+	public void Start()
     {
         StartCoroutine(StartDelay());
 
@@ -68,8 +72,14 @@ public class WeaponSpawner : MonoBehaviour
 
     public void SpawnWeapon()
     {
-        weapon = Instantiate(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
-        weapon.SetAmmoWithMagazines(magazines);
+        if (isRandom)
+        {
+            int randomIndex = Random.Range(0, randomWeapons.Length);
+            weaponPrefab = randomWeapons[randomIndex];
+		}
+		weapon = Instantiate(weaponPrefab, transform.position, transform.rotation).GetComponent<Weapon_PickUp>();
+
+		weapon.SetAmmoWithMagazines(magazines);
         weapon.OnPickUp += WeaponPickedUp;
     }
 

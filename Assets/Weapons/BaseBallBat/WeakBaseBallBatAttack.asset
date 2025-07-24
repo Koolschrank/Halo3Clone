@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
+  m_Name: WeakBaseBallBatAttack
+  m_EditorClassIdentifier: 
+  damage: 10
+  force: 130
+  forceOnPlayers: 20
+  forceOffset: 0.3
+  delay: 0.1764
+  meleeTime: 0.63504
+  meleeRadius: 0.8
+  meleeDistance: 0.8
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2147483777
+  hasLaunch: 1
+  launchDistance: 5
+  launchAngle: 30
+  launchTime: 0.1764
+  launchStopDistance: 1.4
+  launchResetsGravity: 1
+  launchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  swingSound:
+    Guid:
+      Data1: 757403591
+      Data2: 1207635679
+      Data3: -205681753
+      Data4: 917383885
+    Path: event:/SFX/Guns/BaseGunSounds/Melee/MeleeSwing
+  hitSound:
+    Guid:
+      Data1: 126295664
+      Data2: 1168739592
+      Data3: 113948330
+      Data4: -301254074
+    Path: event:/SFX/Guns/BaseGunSounds/Melee/Hit
