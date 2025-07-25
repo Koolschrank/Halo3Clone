@@ -49,7 +49,15 @@ public class PlayerArms : MonoBehaviour
     public void SetCanDualWield2HandedWeapons(bool value)
     {
         canDualWield2HandedWeapons = value;
-    }
+
+		bool isLeftWeapon2Handed = leftArm.CurrentWeapon != null && leftArm.CurrentWeapon.Data.WeaponType == WeaponType.twoHanded;
+        bool isRightWeapon2Handed = rightArm.CurrentWeapon != null && rightArm.CurrentWeapon.Data.WeaponType == WeaponType.twoHanded;
+
+		if ( isLeftWeapon2Handed || isRightWeapon2Handed)
+		{
+            leftArm.DropWeapon();
+		}
+	}
 
     public float MovementSpeedMultiplier
     {

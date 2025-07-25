@@ -20,8 +20,9 @@ public class CharacterHealth : Health
 	[SerializeField] float shildRegenDelay = 5;
     [SerializeField] float shildRegenAmountPerSecond = 20;
     [SerializeField] float maxArmor = 100;
+    [SerializeField] bool armorBeforeShild = false;
 
-    float currentArmor = 0;
+	float currentArmor = 0;
 	float shildRegenTimer;
 
     [Header("References")]
@@ -85,7 +86,11 @@ public class CharacterHealth : Health
 	public float aura_armorHeal = 0.0f;
 
 	
-
+    public void RemoveArmor()
+    {
+        currentArmor = 0;
+        OnArmorChanged?.Invoke(0);
+	}
 	public float ArmorValue     {
         get { return currentArmor / maxArmor; }
 	}
@@ -403,7 +408,7 @@ public class CharacterHealth : Health
 		{
 			playerArms.RightArm.CurrentWeapon.TriggerBloom();
 		}
-
+       
 
 
 		shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -412,35 +417,56 @@ public class CharacterHealth : Health
 
             var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
 
-            if (damageAgainstShild >= currentShild)
-            {
-                var damageNegation = shildPopDamageNegation;
-                if (currentArmor > 0)
-                {
-                    damageNegation = shildPopDamageNegationWhenArmored;
+			if ( currentArmor > 0 && armorBeforeShild)
+			{
+				if (damageAgainstShild >= currentArmor)
+				{
+					damageAgainstShild -= currentArmor;
+					currentArmor = 0;
+					OnArmorChanged?.Invoke(0);
 				}
+				else
+				{
+					currentArmor -= damageAgainstShild;
+					damageAgainstShild = 0;
+					OnArmorChanged?.Invoke(maxArmor == 0 ? 0 : currentArmor / maxArmor);
+				}
+			}
 
-
-				damageAgainstShild -= currentShild + damageNegation;
-                damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
-                currentShild = 0;
-                OnShildChanged?.Invoke(0);
-                OnShildDamageTaken?.Invoke();
-                OnShildDepleted?.Invoke();
-                shildBreakParticle.SetActive(true);
-				AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
-
-                shildEmptySoundInstance.start();
-
-            }
-            else
+            if (damageAgainstShild >0)
             {
-                OnShildDamageTaken?.Invoke();
-                currentShild -= damageAgainstShild;
-                damage = 0;
-                OnShildChanged?.Invoke(ShildPercentage);
+				if (damageAgainstShild >= currentShild)
+				{
+					var damageNegation = shildPopDamageNegation;
+					if (currentArmor > 0)
+					{
+						damageNegation = shildPopDamageNegationWhenArmored;
+					}
 
-            }
+
+					damageAgainstShild -= currentShild + damageNegation;
+					damage = damageAgainstShild / damagePackage.shildDamageMultiplier;
+					currentShild = 0;
+					OnShildChanged?.Invoke(0);
+					OnShildDamageTaken?.Invoke();
+					OnShildDepleted?.Invoke();
+					shildBreakParticle.SetActive(true);
+					AudioManager.instance.PlayOneShot(shildPopSound, transform.position);
+
+					shildEmptySoundInstance.start();
+
+				}
+				else
+				{
+					OnShildDamageTaken?.Invoke();
+					currentShild -= damageAgainstShild;
+					damage = 0;
+					OnShildChanged?.Invoke(ShildPercentage);
+
+				}
+			}
+
+			
         }
         bool hasHealthDamage = false;
         if (damage > 0)

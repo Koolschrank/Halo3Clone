@@ -22,8 +22,9 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] GameObject playerHead;
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
     [SerializeField] PlayerInteractableTrigger playerInteractableTrigger;
+    [SerializeField] PlayerBuffs playerBuffs;
 
-    [SerializeField] SkinnedMeshRenderer[] meshes;
+	[SerializeField] SkinnedMeshRenderer[] meshes;
 
 
     PlayerMind mind;
@@ -44,8 +45,9 @@ public class BodyMindConnection : MonoBehaviour
         mind.SetHealth(health);
         mind.SetPickUpScan(playerPickUpScan);
         mind.SetBulletSpawner(bulletSpawner);
-        
-        mind.SetPlayerInventory(playerInventory);
+        mind.SetPlayerBuffs(playerBuffs);
+
+		mind.SetPlayerInventory(playerInventory);
         mind.SetAbilityInventory(abilityInventory);
         mind.SetInteractable(playerInteractableTrigger);
         mind.transform.localPosition = Vector3.zero;

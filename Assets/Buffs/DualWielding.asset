@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881fb2d093a757e43b1ce93e363e9bbe, type: 3}
+  m_Name: DualWielding
+  m_EditorClassIdentifier: 
+  duration: 30
+  buffColor: {r: 1, g: 0, b: 0, a: 1}
+  leftHandWeapon: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+  leftHandWeaponAmmo: 126

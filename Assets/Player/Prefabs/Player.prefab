@@ -10694,6 +10694,7 @@ GameObject:
   - component: {fileID: 4267228126375275963}
   - component: {fileID: 6520564595086861149}
   - component: {fileID: 1114080517313807072}
+  - component: {fileID: 548802099205955812}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -11035,6 +11036,7 @@ MonoBehaviour:
   playerHead: {fileID: 1741222393793741544}
   playerBodyStatSheet: {fileID: 6520564595086861149}
   playerInteractableTrigger: {fileID: 2538411085385556190}
+  playerBuffs: {fileID: 548802099205955812}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -11066,7 +11068,8 @@ MonoBehaviour:
   shildPopDamageNegationWhenArmored: 30
   shildRegenDelay: 4.5
   shildRegenAmountPerSecond: 25
-  maxArmor: 200
+  maxArmor: 150
+  armorBeforeShild: 1
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
   playerArms: {fileID: 3232609274750972410}
@@ -11352,6 +11355,19 @@ MonoBehaviour:
   verticalImpulseMultiplayer_ground: 1
   horizontalImpulseMultiplayer_air: 1
   verticalImpulseMultiplayer_air: 1
+--- !u!114 &548802099205955812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06849ce07fad50e4c8a5e735a074a4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 782412234501442312}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

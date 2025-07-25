@@ -301,6 +301,12 @@ public class PlayerMind : MonoBehaviour
        
     }
 
+    public void SetPlayerBuffs(PlayerBuffs playerBuffs)
+    {
+        armorUI.ConnectBuffs(playerBuffs);
+	}
+
+
     // set bullet spawner
     public void SetBulletSpawner(BulletSpawner spawner)
     {
