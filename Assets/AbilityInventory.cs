@@ -17,7 +17,7 @@ public class AbilityInventory : MonoBehaviour
 
     public List<Ability> Abilities => abilities;
 
-    float cooldownMultiplier = 1f;
+    public float cooldownMultiplier = 1f;
     [NonSerialized]
     public float abilityUseSpeedMultiplier = 1f;
 

@@ -21,15 +21,21 @@ public class PlayerBuffs : MonoBehaviour
 
 		if (activeBuff != null)
         {
-            Debug.LogWarning("A buff is already active. Please remove the current buff before applying a new one.");
-            return;
+            activeBuff.RemoveBuff(gameObject);
         }
-        activeBuff = buff;
-        startDuration = buff.duration;
-        duration = buff.duration;
-        // Additional logic to apply the buff effects can be added here
-        buff.ApplyBuff(gameObject);
-		OnEnterBuff?.Invoke(buff);
+
+		buff.ApplyBuff(gameObject);
+		if ( !buff.nonTimedBuff)
+		{
+			activeBuff = buff;
+			startDuration = buff.duration;
+			duration = buff.duration;
+			// Additional logic to apply the buff effects can be added here
+			
+			OnEnterBuff?.Invoke(buff);
+		}
+
+		
 
 
 	}

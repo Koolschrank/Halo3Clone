@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class ArmorUI : MonoBehaviour
 
 	[SerializeField] float damageBarTime = 0.2f;
 	[SerializeField] AnimationCurve damageBarVisibilityCurve;
+
+	[SerializeField] TextMeshProUGUI nameText;
 	float damageBarTimer = 0f;
 
 	bool isArmor = true;
@@ -53,12 +56,14 @@ public class ArmorUI : MonoBehaviour
 	{
 		SetIsArmor(false);
 		SetColor(buff.buffColor);
+		nameText.text = buff.buffName;
 	}
 
 	public void CancelBuff()
 	{
 		SetIsArmor(true);
 		SetColor(defaultColor);
+		nameText.text = "Armor";
 	}
 
 	public void SetIsArmor(bool value)

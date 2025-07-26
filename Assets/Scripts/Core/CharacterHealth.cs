@@ -33,12 +33,13 @@ public class CharacterHealth : Health
     [SerializeField] GameObject shildBreakParticle;
     [SerializeField] GameObject deathParticle;
     [SerializeField] BodyMindConnection body;
+    [SerializeField] PlayerBuffs playerBuffs;
 
 
 
 
 
-    [Header("Sound")]
+	[Header("Sound")]
     [SerializeField] EventReference shildEmptySound;
     EventInstance shildEmptySoundInstance;
     [SerializeField] EventReference shildRechargeSound;
@@ -275,7 +276,10 @@ public class CharacterHealth : Health
     public void GainArmor(float armorGain)
     {
         currentArmor += armorGain;
-		
+
+		playerBuffs.RemoveBuff();
+
+
 		if (currentArmor> maxArmor)
             currentArmor = maxArmor;
         else
@@ -546,7 +550,8 @@ public class CharacterHealth : Health
 
     public void FillArmor()
         {
-        currentArmor = maxArmor;
+		playerBuffs.RemoveBuff();
+		currentArmor = maxArmor;
         OnArmorChanged?.Invoke(maxArmor == 0 ? 0 : currentArmor / maxArmor);
 	}
 

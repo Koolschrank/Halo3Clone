@@ -11640,6 +11640,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5450974835304227426, guid: 088d33b94eb01e944847b26950138464, type: 3}
+      propertyPath: spawnTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450974835304227426, guid: 088d33b94eb01e944847b26950138464, type: 3}
       propertyPath: pickUpPrefab
       value: 
       objectReference: {fileID: 4564936671672867374, guid: e1f4f85f2d9625745a876f3ec1a121e8, type: 3}

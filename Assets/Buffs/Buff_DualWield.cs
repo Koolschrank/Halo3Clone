@@ -4,8 +4,8 @@ using UnityEngine;
 public class Buff_DualWield : Buff
 {
 
-	[SerializeField] Weapon_Data leftHandWeapon;
-	[SerializeField] int leftHandWeaponAmmo;
+	[SerializeField] Weapon_Data[] leftHandWeapons;
+	[SerializeField] int magazins;
 
 	public override void ApplyBuff(GameObject player)
     {
@@ -15,7 +15,12 @@ public class Buff_DualWield : Buff
 
 			if (arms.LeftArm.CurrentWeapon == null)
 			{
-				arms.LeftArm.PickUpWeapon(new Weapon_Arms(leftHandWeapon, leftHandWeaponAmmo));
+				var randomWeapon = leftHandWeapons[UnityEngine.Random.Range(0, leftHandWeapons.Length)];
+				var ammo = randomWeapon.MagazineSize * (magazins -1 );
+
+
+				arms.LeftArm.PickUpWeapon(new Weapon_Arms(randomWeapon, 100));
+				player.GetComponent<PlayerInventory>().AddAmmo(randomWeapon, ammo);
 			}
 			
 		}

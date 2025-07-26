@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881fb2d093a757e43b1ce93e363e9bbe, type: 3}
   m_Name: DualWielding
   m_EditorClassIdentifier: 
+  buffName: Dualwield Everything
   duration: 30
   buffColor: {r: 1, g: 0, b: 0, a: 1}
-  leftHandWeapon: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
-  leftHandWeaponAmmo: 126
+  leftHandWeapons:
+  - {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+  - {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
+  - {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
+  - {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+  - {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
+  - {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
+  - {fileID: 11400000, guid: 024bbdf8c6821ff4993d1b9eb7a6429f, type: 2}
+  - {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
+  - {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
+  magazins: 3
