@@ -231,18 +231,22 @@ public class EnemySpawner : MonoBehaviour
                 int playersInTeam1 = PlayerManager.instance.PlayersInTeam1();
 
                 AIPerTeam1 -= (int)(playersInTeam1 * spawnRateMultiplier);
+                
 
                 AIPerTeam2 +=  (int)(playersInTeam1 * spawnRateMultiplier);
-                //if (hasTeam1almostWon)
-                //{
-                //    AIPerTeam2 += (int)(playersInTeam1 * spawnRateMultiplier);
-                //}
 
-            }
+                if (AIPerTeam1 <2) AIPerTeam1 = 2; // Ensure at least 2 AI enemies in team 1
+                
+
+												   
+
+			}
             else
             {
                 var team1PlayerCount = PlayerManager.instance.PlayersInTeam1();
                 var team2PlayerCount = PlayerManager.instance.PlayersInTeam2();
+
+
 
                 AIPerTeam1 +=  -team1PlayerCount + team2PlayerCount;
                 AIPerTeam2 += -team2PlayerCount + team1PlayerCount;

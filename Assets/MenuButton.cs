@@ -26,6 +26,7 @@ public class MenuButton : MonoBehaviour
 	public string mapName = "";
 	public bool setAIAmount = false;
 	public float aiAmountMultiplier = 1;
+	public Sprite mapImage;
 
 	public void Select()
 	{

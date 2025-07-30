@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: mapName
       value: SpaceStation2
       objectReference: {fileID: 0}
+    - target: {fileID: 3578841868068274173, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
+      propertyPath: mapImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 5dae911a8867b5747b3ad7e5ef170a0f, type: 3}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_text
       value: Space Station

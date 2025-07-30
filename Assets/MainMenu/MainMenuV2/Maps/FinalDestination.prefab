@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: mapName
       value: FinalDestination
       objectReference: {fileID: 0}
+    - target: {fileID: 3578841868068274173, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
+      propertyPath: mapImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 05b136d611be3fe478de07ca4e581c9a, type: 3}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_text
       value: Final Destination
