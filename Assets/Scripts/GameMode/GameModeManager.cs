@@ -232,7 +232,11 @@ public class GameModeManager : MonoBehaviour
         PlayerManager.instance.OnPlayerSpawned += PlayerSpawned;
         EnemySpawner.instance.OnEnemySpawned += AISpawned;
 
-    }
+
+        WeaponSpawnManager.instance.EnableWeaponList(gameModeStats.usedItemList);
+
+
+	}
 
 
 

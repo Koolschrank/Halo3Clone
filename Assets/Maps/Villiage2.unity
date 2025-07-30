@@ -1830,6 +1830,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &231015948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,8 +3202,10 @@ MonoBehaviour:
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
   spawnTime: 120
-  magazines: 3
+  magazines: 2
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &396482788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5913,6 +5917,8 @@ MonoBehaviour:
   spawnTime: 60
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &749956793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6123,119 +6129,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4646160277296803439, guid: 2d1aed8ada79e4d4e99084037c3b094a, type: 3}
   m_PrefabInstance: {fileID: 764800397}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &779048608
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 569524541}
-    m_Modifications:
-    - target: {fileID: 1241730005603676667, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_Name
-      value: Hill (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2547045619424711877, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2547045619424711877, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2547045619424711877, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662767557391685766, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662767557391685766, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662767557391685766, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6656455422488915298, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 6656455422488915298, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 6656455422488915298, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 7160846074116421294, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-      propertyPath: radius
-      value: 3.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
---- !u!4 &779048609 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5128197194939119102, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-  m_PrefabInstance: {fileID: 779048608}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &779048610 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7160846074116421294, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
-  m_PrefabInstance: {fileID: 779048608}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 197a0a277c27be94fa080a7f34f13033, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &780197843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6444,6 +6337,8 @@ MonoBehaviour:
   spawnTime: 60
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &826756286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8775,6 +8670,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 3
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1025349613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10274,6 +10171,8 @@ MonoBehaviour:
   spawnTime: 60
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1144006418
 GameObject:
   m_ObjectHideFlags: 0
@@ -11256,7 +11155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: hills.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'hills.Array.data[1]'
@@ -11273,7 +11172,7 @@ PrefabInstance:
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'hills.Array.data[4]'
       value: 
-      objectReference: {fileID: 779048610}
+      objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: spawnSystem.basicSpawnPoints.Array.size
       value: 10
@@ -11482,9 +11381,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6248888815015760116, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1373522011}
-    - targetCorrespondingSourceObject: {fileID: 6248888815015760116, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 779048609}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
 --- !u!4 &1214640493 stripped
@@ -11716,6 +11612,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 6
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1293158909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12176,6 +12074,8 @@ MonoBehaviour:
   spawnTime: 60
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1373522010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12603,6 +12503,8 @@ MonoBehaviour:
   spawnTime: 30
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1443321478
 PrefabInstance:
   m_ObjectHideFlags: 0

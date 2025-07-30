@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 465907222396707810}
   - component: {fileID: 8164885341825693715}
   - component: {fileID: 8811581011380500969}
+  - component: {fileID: 7973393272836266417}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1949,6 +1950,18 @@ MonoBehaviour:
   rumbleTypeSettings_other:
     lowMotorIntensity: 0.2
     highMotorIntensity: 1
+--- !u!114 &7973393272836266417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151862695114880791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8de5b8f1215ec45a2be212037a5a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8781002057444987038
 GameObject:
   m_ObjectHideFlags: 0

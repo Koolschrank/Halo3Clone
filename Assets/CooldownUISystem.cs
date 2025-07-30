@@ -58,7 +58,7 @@ public class CooldownUISystem : MonoBehaviour
 
         UpdatePositions();
 
-        if (hasPermanentObject && index == 0)
+        if (hasPermanentObject && index == 0 && !ability.abilityData.cannotUse)
         {
 			permanentObject.gameObject.SetActive(true);
 

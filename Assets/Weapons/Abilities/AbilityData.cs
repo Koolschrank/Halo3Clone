@@ -6,4 +6,5 @@ public abstract class AbilityData : ScriptableObject
     public float cooldownTime;
     public int maxCharges;
     public bool removeWhenEmpty;
+    public bool cannotUse;
 }

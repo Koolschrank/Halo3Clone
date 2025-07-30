@@ -19,7 +19,8 @@ public class GameMode : ScriptableObject
 
     [SerializeField] protected bool looseWhenAllPlayersDead = false; // if true, when all players are dead, the game is over and the team with the most points wins
     [SerializeField] protected bool hasAiPlayers;
-    [SerializeField] protected bool useStatSheets = false;
+	[SerializeField] protected bool hasAiTeamMembers;
+	[SerializeField] protected bool useStatSheets = false;
     [SerializeField] protected bool dontDropWeaponsOnDeath = false; // if true, players do not drop their weapons on death, instead they respawn with their starting equipment
     
     [SerializeField] int startScore = 0; // starting score for each player, used in the scoreboard
@@ -47,6 +48,8 @@ public class GameMode : ScriptableObject
     public Color[] team1MemberColors; // colors for team 1 members, used to recolor team 1 members
 	public Color[] team1MemberColorsUI; // colors for team 1 members, used to recolor team 1 members
 
+
+    public int usedItemList = 0; // used item list, used to determine which item list to use for weapon pickups
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;
@@ -67,7 +70,6 @@ public class GameMode : ScriptableObject
                 {
                 return pointsToWin;
 			}
-
 		}
 
 		if (playerCount >= 4)
@@ -79,13 +81,6 @@ public class GameMode : ScriptableObject
         {
             points = Mathf.RoundToInt(points * pointsToWinMultiplier_smallMap);
         }
-
-
-        
-
-
-
-
 		return points;
     }
 
@@ -105,7 +100,9 @@ public class GameMode : ScriptableObject
 
     public bool HasAiPlayers { get { return hasAiPlayers; } }
 
-    public bool UseStatSheet { get { return useStatSheets; } }
+    public bool HasAiTeamMembers { get { return hasAiTeamMembers; } }
+
+	public bool UseStatSheet { get { return useStatSheets; } }
 
     public int StartScore { get { return startScore; } }
 

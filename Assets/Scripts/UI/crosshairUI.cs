@@ -10,6 +10,13 @@ public class crosshairUI : MonoBehaviour
 
 
     Weapon_Arms currentWeapon;
+
+    public void DisableCrosshair()
+        {
+		crosshairImage.enabled = false;
+	}
+
+
 	public void ChangeSprite(Weapon_Arms weapon)
     {
         if (currentWeapon != null)
@@ -19,7 +26,12 @@ public class crosshairUI : MonoBehaviour
 
 		weapon.OnBloomUpdate += UpdateBloom;
         currentWeapon = weapon;
-
+		if (weapon == null)
+        {
+            crosshairImage.enabled = false;
+            return;
+		}
+		crosshairImage.enabled = true;
 
 
 		var sprite = weapon.CrosshairUI;

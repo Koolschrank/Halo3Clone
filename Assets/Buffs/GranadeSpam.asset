@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffName: Granade Spam
   duration: 30
-  buffColor: {r: 0.36085665, g: 1, b: 0, a: 1}
-  cooldownMultiplier: 5
+  buffColor: {r: 0.9454949, g: 1, b: 0, a: 1}
+  nonTimedBuff: 0
+  cooldownMultiplier: 6

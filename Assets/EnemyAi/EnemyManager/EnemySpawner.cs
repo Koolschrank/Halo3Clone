@@ -144,6 +144,11 @@ public class EnemySpawner : MonoBehaviour
             if (GameModeSelector.gameModeManager.GameModeStats.HasAiPlayers || (MapLoader.instance != null && MapLoader.instance.HasAIEnemies()))
             {
 				MapLoader.instance.SetAIEnemiesTeam2(true);
+                if (GameModeSelector.gameModeManager.GameModeStats.HasAiTeamMembers)
+                {
+					MapLoader.instance.SetAIEnemiesTeam1(true);
+				}
+
 				SetPVPGame();
 
             }

@@ -18,7 +18,7 @@ MonoBehaviour:
     headShotOneShot: 0
     hasMiniMap: 0
     canDualWield: 1
-    canDualWieldEverything: 0
+    canDualWieldEverything: 1
     movementSpeedMultiplier: 1.1
     weaponInHand: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
     magazinsOfWeaponInHand: 3
@@ -54,7 +54,7 @@ MonoBehaviour:
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
   useStatSheets: 0
-  dontDropWeaponsOnDeath: 0
+  dontDropWeaponsOnDeath: 1
   startScore: 0
   playerStatsSheetBlueprint: {fileID: 0}
   spawnWithArmor: 0
@@ -72,13 +72,14 @@ MonoBehaviour:
   recolerTeam1Members: 0
   team1MemberColors: []
   team1MemberColorsUI: []
+  usedItemList: 0
   timeToScore: 1
   setEquipmentOnCrownPickup: 1
   equipmentOnCrownPickup:
     hasShild: 0
     headShotOneShot: 1
     hasMiniMap: 1
-    canDualWield: 0
+    canDualWield: 1
     canDualWieldEverything: 1
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: 2ca9146ab6e00f049adb199853c84d42, type: 2}

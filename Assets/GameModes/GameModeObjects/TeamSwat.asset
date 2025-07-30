@@ -28,7 +28,7 @@ MonoBehaviour:
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
-    ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability: {fileID: 11400000, guid: 7876f6ea7aa65e0458c014eaa13ce4c9, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
@@ -36,6 +36,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0
@@ -66,3 +67,9 @@ MonoBehaviour:
   noDualWieldDamageReduction: 0
   startingEquipmentBasedOnPlayerValues: 0
   cannotDropSwitchOrPickupWeapons: 0
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 0
+  team1MemberColors: []
+  team1MemberColorsUI: []
+  usedItemList: 1

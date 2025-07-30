@@ -869,6 +869,24 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2c3c935-e36f-4dc3-a0a7-38adda579832"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""a75e34c4-c76f-45d2-ab1f-6dd88a894d59"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -957,6 +975,72 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96a41fd6-885e-43a5-8f4f-9c6755404e32"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab76cddc-4946-4e99-bbc5-c1faf14bd2ff"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98a05d4a-0656-4e8c-afd5-1a67f8540955"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a1e68ae-1d48-47e8-a10f-8fe34778e610"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33363eeb-c20b-418b-8832-852600fb0538"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6e5f1a5-d160-4b73-8596-e4f908a9ce2f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1127,6 +1211,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_QuickMenu_Right = m_QuickMenu.FindAction("Right", throwIfNotFound: true);
         m_QuickMenu_Down = m_QuickMenu.FindAction("Down", throwIfNotFound: true);
         m_QuickMenu_Up = m_QuickMenu.FindAction("Up", throwIfNotFound: true);
+        m_QuickMenu_Select = m_QuickMenu.FindAction("Select", throwIfNotFound: true);
+        m_QuickMenu_Cancel = m_QuickMenu.FindAction("Cancel", throwIfNotFound: true);
         // UpgradeSelection
         m_UpgradeSelection = asset.FindActionMap("UpgradeSelection", throwIfNotFound: true);
         m_UpgradeSelection__1 = m_UpgradeSelection.FindAction("1", throwIfNotFound: true);
@@ -1488,6 +1574,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_QuickMenu_Right;
     private readonly InputAction m_QuickMenu_Down;
     private readonly InputAction m_QuickMenu_Up;
+    private readonly InputAction m_QuickMenu_Select;
+    private readonly InputAction m_QuickMenu_Cancel;
     public struct QuickMenuActions
     {
         private @Controller m_Wrapper;
@@ -1496,6 +1584,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @Right => m_Wrapper.m_QuickMenu_Right;
         public InputAction @Down => m_Wrapper.m_QuickMenu_Down;
         public InputAction @Up => m_Wrapper.m_QuickMenu_Up;
+        public InputAction @Select => m_Wrapper.m_QuickMenu_Select;
+        public InputAction @Cancel => m_Wrapper.m_QuickMenu_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_QuickMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1517,6 +1607,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Up.started += instance.OnUp;
             @Up.performed += instance.OnUp;
             @Up.canceled += instance.OnUp;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IQuickMenuActions instance)
@@ -1533,6 +1629,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Up.started -= instance.OnUp;
             @Up.performed -= instance.OnUp;
             @Up.canceled -= instance.OnUp;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IQuickMenuActions instance)
@@ -1666,6 +1768,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
     public interface IUpgradeSelectionActions
     {

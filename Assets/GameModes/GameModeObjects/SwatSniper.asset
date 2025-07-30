@@ -24,7 +24,7 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 4
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 3
-    sideArm: {fileID: 0}
+    sideArm: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
     magazinsOfSideArm: 5
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
@@ -36,6 +36,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0
@@ -53,7 +54,7 @@ MonoBehaviour:
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
   useStatSheets: 0
-  dontDropWeaponsOnDeath: 0
+  dontDropWeaponsOnDeath: 1
   startScore: 0
   playerStatsSheetBlueprint: {fileID: 0}
   spawnWithArmor: 0
@@ -68,3 +69,7 @@ MonoBehaviour:
   cannotDropSwitchOrPickupWeapons: 1
   ai_damageMultiplier: 1
   weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 0
+  team1MemberColors: []
+  team1MemberColorsUI: []
+  usedItemList: 0

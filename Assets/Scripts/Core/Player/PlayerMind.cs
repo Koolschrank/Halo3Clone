@@ -46,7 +46,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PickUpUI pickUpUI;
     [SerializeField] DamageIndicatorUI damageIndicatorUI;
     [SerializeField] crosshairUI crosshairUI;
-    [SerializeField] CooldownUISystem cooldownSystem;
+	[SerializeField] crosshairUI crosshairUI2;
+	[SerializeField] CooldownUISystem cooldownSystem;
     [SerializeField] TeamWinUI teamWinUI;
     [SerializeField] HitMarkerUI hitMarkerUI;
     [SerializeField] MinimapUI minimapUI;
@@ -268,8 +269,18 @@ public class PlayerMind : MonoBehaviour
             playerArms.OnDualWieldingExited -= weaponUI_LeftArm.Disable;
 
             playerArms.RightArm.OnWeaponEquipStarted -= (weapon, time) => crosshairUI.ChangeSprite(weapon);
+			playerArms.LeftArm.OnWeaponEquipStarted -= (weapon, time) => crosshairUI2.ChangeSprite(weapon);
 
-        }
+            playerArms.RightArm.OnWeaponDroped -= (weapon, pickUp) =>
+            {
+                crosshairUI.DisableCrosshair();
+            };
+            playerArms.LeftArm.OnWeaponDroped -= (weapon, pickUp) =>
+            {
+                crosshairUI2.DisableCrosshair();
+            };
+
+		}
 
 
         playerArms = arms;
@@ -288,8 +299,17 @@ public class PlayerMind : MonoBehaviour
         arms.OnDualWieldingExited += EnterOneWeaponMode;
 
         arms.RightArm.OnWeaponEquipStarted += (weapon, time) => crosshairUI.ChangeSprite(weapon);
+		arms.LeftArm.OnWeaponEquipStarted += (weapon, time) => crosshairUI2.ChangeSprite(weapon);
+        arms.RightArm.OnWeaponDroped += (weapon, pickUp) =>
+        {
+            crosshairUI.DisableCrosshair();
+        };
+        arms.LeftArm.OnWeaponDroped += (weapon, pickUp) =>
+        {
+            crosshairUI2.DisableCrosshair();
+        };
 
-        if (arms.LeftArm.CurrentWeapon != null)
+		if (arms.LeftArm.CurrentWeapon != null)
         {
             EnterDualWeaponMode();
         }
@@ -314,7 +334,9 @@ public class PlayerMind : MonoBehaviour
         {
             bulletSpawner.OnTargetAcquired -= crosshairUI.OnTargetAcquired;
             bulletSpawner.OnTargetLost -= crosshairUI.OnTargetLost;
-            crosshairUI.OnTargetLost(null);
+            bulletSpawner.OnTargetAcquired -= crosshairUI2.OnTargetAcquired;
+            bulletSpawner.OnTargetLost -= crosshairUI2.OnTargetLost;
+			crosshairUI.OnTargetLost(null);
         }
 
 
@@ -322,7 +344,9 @@ public class PlayerMind : MonoBehaviour
 
         bulletSpawner.OnTargetAcquired += crosshairUI.OnTargetAcquired;
         bulletSpawner.OnTargetLost += crosshairUI.OnTargetLost;
-    }
+        bulletSpawner.OnTargetAcquired += crosshairUI2.OnTargetAcquired;
+        bulletSpawner.OnTargetLost += crosshairUI2.OnTargetLost;
+	}
 
     // set health
     public void SetHealth(Health health)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotGunBullet
   m_EditorClassIdentifier: 
   damage: 14.25
-  damageMultiplierVSAI: 1.25
+  damageMultiplierVSAI: 1.325
   force: 275
   shildDamageMultiplier: 1
   headShotMultiplier: 1
@@ -50,6 +50,8 @@ MonoBehaviour:
   trail: {fileID: 0}
   impact_body: {fileID: 100002, guid: 0f0f9fc6229e6154bb8985951c94750f, type: 3}
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  doesApplyForceOnLivingPlayers: 0
+  forceOnLivingPlayers: 1
   bodyHitSound:
     Guid:
       Data1: 0

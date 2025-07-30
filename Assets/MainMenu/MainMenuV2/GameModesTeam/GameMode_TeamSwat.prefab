@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8483201609492916679
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 437568447069484546, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_Name
+      value: GameMode_TeamSwat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: gameMode
+      value: 
+      objectReference: {fileID: 11400000, guid: 74353393ac1895a46aa2ae460bdceaa4, type: 2}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: discription
+      value: 'Defeat players from the opposing team to score points.
+
+        No
+        Shild and not Mini Map.
+
+        You spawn with only a pistol'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: SubButtons.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 2a1dd00539cbe2e4e9aa7fea435009df, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: c14f79951ee5ba04cbecede239073596, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: a161e5fe4cfda39459b9e5ec31b2c15e, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 73adc67650af18140b2b395a2fdab467, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 74c007ae51d586749b6788a451132202, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[5]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 957ca6c7c19f2514c9a5135e3ba92e19, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[6]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: e699930b6b9b9964eb613986d6c7bd81, type: 3}
+    - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: m_text
+      value: Swat
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}

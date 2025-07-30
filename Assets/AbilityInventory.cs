@@ -142,7 +142,7 @@ public class AbilityInventory : MonoBehaviour
 
     public bool CanUseCurrentAbility()
     {
-        if (currentAbilityIndex < 0 || currentAbilityIndex >= abilities.Count)
+        if (currentAbilityIndex < 0 || currentAbilityIndex >= abilities.Count || abilities[currentAbilityIndex].abilityData.cannotUse)
         {
             return false;
         }
