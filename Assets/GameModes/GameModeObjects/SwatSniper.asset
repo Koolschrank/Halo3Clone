@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameModeName: Sniper Only
   startingEquipment:
-    hasShild: 0
-    headShotOneShot: 0
+    hasShild: 1
+    headShotOneShot: 1
     hasMiniMap: 0
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
     weaponInHand: {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
-    magazinsOfWeaponInHand: 4
+    magazinsOfWeaponInHand: 10
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
@@ -53,6 +53,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 1
   startScore: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
   useEnemyWaves: 0
   noDualWieldDamageReduction: 0
   startingEquipmentBasedOnPlayerValues: 0
-  cannotDropSwitchOrPickupWeapons: 1
+  cannotDropSwitchOrPickupWeapons: 0
   ai_damageMultiplier: 1
   weaponRespawnTimeMultiplier: 1
   recolerTeam1Members: 0

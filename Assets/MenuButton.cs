@@ -7,6 +7,7 @@ using System;
 public class MenuButton : MonoBehaviour
 {
 	public Action OnHover;
+	public Action<MenuButton> OnClick;
 
 	public Image buttonImage;
 	public List<MenuButton> SubButtons;
@@ -27,6 +28,13 @@ public class MenuButton : MonoBehaviour
 	public bool setAIAmount = false;
 	public float aiAmountMultiplier = 1;
 	public Sprite mapImage;
+	public int tutorialIndex = -1;
+	public bool canBeSelected = true;
+
+	public void Click()
+	{
+		OnClick(this);
+	}
 
 	public void Select()
 	{

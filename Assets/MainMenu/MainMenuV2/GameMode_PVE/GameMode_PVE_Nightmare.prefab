@@ -97,6 +97,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4e5a6656de8598a458d5fe29fb9c66ab, type: 2}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: discription
+      value: 'Secure a Zone to score points.
+
+        You need to score 1000 points
+        to win,
+
+        the enemies need 200 points to win but they lose points
+        when you score points.
+
+        After every 100 points the zone moves to
+        a new place and a new enemy wave starts'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: setAIAmount
       value: 1
       objectReference: {fileID: 0}
@@ -126,11 +139,11 @@ PrefabInstance:
       objectReference: {fileID: 6885655614118209522, guid: a8c1aa3e73cb94b469dd769b80e26403, type: 3}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
-      value: Legendary
+      value: COOP Legendary
       objectReference: {fileID: 0}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_fontSize
-      value: 33.8
+      value: 26.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

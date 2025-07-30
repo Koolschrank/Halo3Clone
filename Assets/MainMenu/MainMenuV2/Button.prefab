@@ -257,7 +257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7816052614347483134}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9122789514552621488}
+        m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9122789514552621488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +289,10 @@ MonoBehaviour:
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0.3330046, g: 1, b: 0.015686274, a: 1}
   selectedColor: {r: 0.96995187, g: 1, b: 0, a: 1}
+  gameMode: {fileID: 0}
+  mapName: 
+  setAIAmount: 0
+  aiAmountMultiplier: 1
+  mapImage: {fileID: 0}
+  tutorialIndex: -1
+  canBeSelected: 1

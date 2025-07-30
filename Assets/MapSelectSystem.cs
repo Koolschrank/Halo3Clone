@@ -30,11 +30,26 @@ public class MapSelectSystem : MenuSystem
 		imageMask.gameObject.SetActive(true);
 	}
 
+	public override void OnClick(MenuButton button)
+	{
+		var index = menuButtons.IndexOf(button);
+		if (selectedButtonIndex == index)
+		{
+			SelectButton();
+			return;
+		}
+		selectedButtonIndex = index;
+		MenuHeadSystem.Instance.SetSelectTypeToNone();
+		
+		MenuHeadSystem.Instance.EnterMapMenu();
+		UpdateButtonSelection();
+	}
+
 	public override void SelectButton()
 	{
 		if (menuButtons.Count == 0) return;
 		MapLoader.instance.SetSceneToLoad(menuButtons[selectedButtonIndex].mapName);
-
+		UpdateButtonSelection();
 		base.SelectButton();
 	}
 }

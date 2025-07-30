@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 437568447069484546, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_Name
-      value: GameMode_PVE_Hard
+      value: GameMode_PVE_War_Hard
       objectReference: {fileID: 0}
     - target: {fileID: 2203902043226737957, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_Pivot.x
@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: gameMode
       value: 
-      objectReference: {fileID: 11400000, guid: 4e5a6656de8598a458d5fe29fb9c66ab, type: 2}
+      objectReference: {fileID: 11400000, guid: 0a62df84472d45645b9bedb9661f9ae8, type: 2}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: discription
       value: 'Secure a Zone to score points.
@@ -107,11 +107,18 @@ PrefabInstance:
         when you score points.
 
         After every 100 points the zone moves to
-        a new place and a new enemy wave starts'
+        a new place and a new enemy wave starts.
+
+        You also have ai controlled
+        team mates'
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: setAIAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: aiAmountMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: SubButtons.Array.size
@@ -120,11 +127,11 @@ PrefabInstance:
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 7cb625597c01b4c4da40854a2946f3f1, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 80a170306d2ccd445b0ff0a3e3b034a4, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[1]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 80a170306d2ccd445b0ff0a3e3b034a4, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 7cb625597c01b4c4da40854a2946f3f1, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[2]'
       value: 
@@ -133,13 +140,17 @@ PrefabInstance:
       propertyPath: 'SubButtons.Array.data[3]'
       value: 
       objectReference: {fileID: 6885655614118209522, guid: a8c1aa3e73cb94b469dd769b80e26403, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 86d41c8628353184da0e162adcc74594, type: 3}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
-      value: COOP Hard
+      value: Single Player HARD
       objectReference: {fileID: 0}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_fontSize
-      value: 34.3
+      value: 26.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

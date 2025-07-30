@@ -257,11 +257,17 @@ public class MenuHeadSystem : MonoBehaviour
 		}
 	}
 
+	public void SetSelectTypeToNone()
+	{
+		menuSelectedType = MenuSelectedType.none;
+	}
+
 }
 
 public enum MenuSelectedType
 {
 	GameType,
 	GameMode,
-	Map
+	Map,
+	none = 10
 }

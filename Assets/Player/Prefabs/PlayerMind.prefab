@@ -2945,6 +2945,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b7dffa01-4062-4e0e-ba91-37cb424957d6
     m_ActionName: 'Player/Pause[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2c3c935-e36f-4dc3-a0a7-38adda579832
+    m_ActionName: 'QuickMenu/Select[/Keyboard/space,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a75e34c4-c76f-45d2-ab1f-6dd88a894d59
+    m_ActionName: 'QuickMenu/Cancel[/Keyboard/backspace,/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4710,7 +4718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620933063364575415, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -353.9
+      value: -460
       objectReference: {fileID: 0}
     - target: {fileID: 620933063364575415, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4838,7 +4846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1242805700049856749, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1359819381782792197, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_LocalScale.x
@@ -4894,7 +4902,7 @@ PrefabInstance:
       objectReference: {fileID: 4014023505681362909, guid: 51f12d52c3887fd4c9fe8f7261e78df7, type: 3}
     - target: {fileID: 3330961142979333621, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: hasPermanentObject
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3698534810967370160, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
@@ -4946,7 +4954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3976382566544676904, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 402.18
+      value: 425.18
       objectReference: {fileID: 0}
     - target: {fileID: 3976382566544676904, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -4954,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3995783579699978989, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4020260791520427386, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerCam
@@ -5170,7 +5178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5428037157577191278, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5577282354107833279, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5242,11 +5250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6582827337167580658, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -351.4
       objectReference: {fileID: 0}
     - target: {fileID: 6582827337167580658, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -225
+      value: 7.200001
       objectReference: {fileID: 0}
     - target: {fileID: 6653059678322050824, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_IsActive
@@ -5326,7 +5334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8307079327624337307, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 402.18
+      value: 425.18
       objectReference: {fileID: 0}
     - target: {fileID: 8781971837434476615, guid: e4a20930b8e38c74998be2485c8ba257, type: 3}
       propertyPath: playerTeam
@@ -6099,6 +6107,10 @@ PrefabInstance:
     - target: {fileID: 4014023505681362909, guid: cf45242054576554281dd3c56f508796, type: 3}
       propertyPath: m_Name
       value: CooldownBarV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014023505681362909, guid: cf45242054576554281dd3c56f508796, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4634244881308965647, guid: cf45242054576554281dd3c56f508796, type: 3}
       propertyPath: m_Pivot.x

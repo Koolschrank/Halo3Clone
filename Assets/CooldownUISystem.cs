@@ -50,6 +50,11 @@ public class CooldownUISystem : MonoBehaviour
 
     private void OnAbilityAdded(Ability ability, int index)
     {
+        if (ability.abilityData.cannotUse) return;
+
+        if (index == 1 && cooldownUIs.Count == 0)
+            index = 0;
+
         var cooldownUI = Instantiate(cooldownUIPrefab, cooldownUIParent[index]);
         var cooldownUIScript = cooldownUI.GetComponent<CooldownUI>();
         cooldownUIScript.Setup(ability);
@@ -72,7 +77,12 @@ public class CooldownUISystem : MonoBehaviour
 
     private void OnAbilityRemoved(Ability ability, int index)
     {
-        if (index < cooldownUIs.Count)
+		if (ability.abilityData.cannotUse) return;
+
+		if (index == 1 && cooldownUIs.Count == 1)
+			index = 0;
+
+		if (index < cooldownUIs.Count)
         {
             Destroy(cooldownUIs[index].gameObject);
             cooldownUIs.RemoveAt(index);

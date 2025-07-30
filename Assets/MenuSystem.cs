@@ -23,7 +23,8 @@ public class MenuSystem : MonoBehaviour
 		// remove existing buttons
         foreach (var button in menuButtons)
         {
-            Destroy(button.gameObject);
+            button.OnClick -= OnClick;
+			Destroy(button.gameObject);
         }
         menuButtons.Clear();
 
@@ -34,9 +35,24 @@ public class MenuSystem : MonoBehaviour
             menuButtons.Add(newButton);
             newButton.GetComponent<RectTransform>().position = firstButtonTransform.position + new Vector3(buttonOffset.x, buttonOffset.y,0) * index;
 			index++;
-		}
 
+            newButton.OnClick += OnClick;
+		}
         selectedButtonIndex = 0;
+	}
+
+    public virtual void OnClick(MenuButton button)
+    {
+  //      var index = menuButtons.IndexOf(button);
+  //      if (index == selectedButtonIndex)
+  //      {
+  //          SelectButton();
+		//}
+  //      else
+  //      {
+		//	selectedButtonIndex = index;
+		//	UpdateButtonSelection();
+		//}
 	}
 
     public void ClearButtons()
@@ -95,7 +111,7 @@ public class MenuSystem : MonoBehaviour
         menuButtons[selectedButtonIndex].Select();
         OnButtonSelect?.Invoke(menuButtons[selectedButtonIndex]);
 	}
-	protected void UpdateButtonSelection()
+	protected virtual void UpdateButtonSelection()
     {
         for (int i = 0; i < menuButtons.Count; i++)
         {
