@@ -41,9 +41,14 @@ public class MapLoader : MonoBehaviour
     [SerializeField] bool aiEnemiesTeam2;
 
     [SerializeField] Enemy_Wave aiEnemyWave;
+    public bool brStart = false;
 
+    public void SetBRStart(bool value)
+    {
+        brStart = value;
+	}
 
-    public bool HasAIEnemies()
+	public bool HasAIEnemies()
     {
         return aiEnemiesTeam1 || aiEnemiesTeam2;
     }

@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 
 
@@ -19,6 +21,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] CharacterHealth playerHealth;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] MeleeAttacker meleeAttacker;
+    [SerializeField] BodyMindConnection bodyMindConnection;
 
 
 	[Header("Settings")]
@@ -65,8 +68,9 @@ public class PlayerAim : MonoBehaviour
     List<GunKnockbackInstance> gunKnockbackInstances = new List<GunKnockbackInstance>();
 
     bool inputSlowDown = false;
-
-    private void Start()
+    bool noAimAssitance = false;
+    public float mouseSensitivityMultiplier = 0.1f; // used for mouse sensitivity, can be set by other scripts if needed
+	private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -83,7 +87,22 @@ public class PlayerAim : MonoBehaviour
             BlockInput();
         };
         playerMovement.OnRollEnded += UnblockInput;
-    }
+
+        StartCoroutine(CheckIfMouse());
+
+
+
+	}
+
+    IEnumerator CheckIfMouse()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+		if (bodyMindConnection.Mind != null &&bodyMindConnection.Mind.gameObject.GetComponent<PlayerInput>().currentControlScheme == "KeyboardAndMouse")
+		{
+			noAimAssitance = true;
+		}
+	}
 
     public void BlockInput()
     {
@@ -117,10 +136,16 @@ public class PlayerAim : MonoBehaviour
         float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Time.deltaTime;
         float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Time.deltaTime;
 
+        if (noAimAssitance)
+        {
+            rotationX *= mouseSensitivityMultiplier;
+            rotationY *= mouseSensitivityMultiplier;
+		}
+
         float playerXRotation = transform.eulerAngles.y;
         float playerYRotation = playerHead.transform.eulerAngles.x;
 
-        if (CheckIfHoverOverEnemy())
+        if (CheckIfHoverOverEnemy() && !noAimAssitance)
         {
             rotationX *= aimSupportSlowDown;
             rotationY *= aimSupportSlowDown;
@@ -131,7 +156,7 @@ public class PlayerAim : MonoBehaviour
             rotationY *= zoomAimSpeedMultiplier;
         }
 
-        if (hasAimCorrection && playerArms.RightArm.CurrentWeapon != null)
+        if (hasAimCorrection && !noAimAssitance && playerArms.RightArm.CurrentWeapon != null)
         {
             var autoAimType = playerArms.RightArm.CurrentWeapon.Data.AutoAimType;
             if (autoAimType != AutoAimType.none || meleeAttacker.InLaunch)

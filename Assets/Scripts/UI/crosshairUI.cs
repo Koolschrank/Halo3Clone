@@ -22,10 +22,15 @@ public class crosshairUI : MonoBehaviour
         if (currentWeapon != null)
         {
             currentWeapon.OnBloomUpdate -= UpdateBloom;
+            currentWeapon.OnEnterDualWield -= () => UpdateBloom(0);
+            currentWeapon.OnExitDualWield -= () => UpdateBloom(0);
 		}
 
 		weapon.OnBloomUpdate += UpdateBloom;
-        currentWeapon = weapon;
+        weapon.OnEnterDualWield += () => UpdateBloom(0);
+        weapon.OnExitDualWield += () => UpdateBloom(0);
+
+		currentWeapon = weapon;
 		if (weapon == null)
         {
             crosshairImage.enabled = false;

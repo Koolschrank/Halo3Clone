@@ -139,8 +139,8 @@ public class BodyMindConnection : MonoBehaviour
         bool noMiniMap = MapLoader.instance.HasNoMiniMap();
         bool randomWeaponSpawn = MapLoader.instance.IsRandomWeaponSpawn();
         float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
+        bool brStart = MapLoader.instance.brStart;
 
-		
 
 		if (isSwat)
         {
@@ -149,6 +149,11 @@ public class BodyMindConnection : MonoBehaviour
             equipment.SetHasShild(false);
             equipment.SetHeadShotOneShot(false);
         }
+        if (brStart)
+        {
+			equipment.SetWeapons(ItemList.instance.GetBR(), null, ItemList.instance.GetSMG());
+			equipment.SetMagazins(4, 0, 4);
+		}
         if (dualWieldPlus)
         {
             equipment.SetCanDualWieldEverything(true);

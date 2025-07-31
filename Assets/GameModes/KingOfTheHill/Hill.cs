@@ -80,8 +80,8 @@ public class Hill : MonoBehaviour
 
     }
 
-
-    public int GetDominatingTeamOnHill(List<int> playersOnHill)
+    int lastTeamOnHill = -1;
+	public int GetDominatingTeamOnHill(List<int> playersOnHill)
     {
         int[] teamCounts = new int[8];
         foreach (int team in playersOnHill)
@@ -103,18 +103,25 @@ public class Hill : MonoBehaviour
                 maxIndex = -1;
             }
         }
-
-        if (teamCounts[0] >0)
+		var KOTHstats = (GameMode_KingOfTheHill)GameModeSelector.gameModeManager.GameModeStats;
+		if (teamCounts[0] >0)
         {
-			var KOTHstats = (GameMode_KingOfTheHill)GameModeSelector.gameModeManager.GameModeStats;
+			
 			if (KOTHstats.team2LoosesScoreWhenTeam1scores)
 			{
-                return 0; // team 1 is always dominating if they have players on the hill
+				lastTeamOnHill = maxIndex;
+				return 0; // team 1 is always dominating if they have players on the hill
 			}
 		}
 
-		
 
+        if (maxIndex == -1 && KOTHstats.keepLastTeamOnHill)
+        {
+            return lastTeamOnHill;
+
+		}
+		
+        lastTeamOnHill = maxIndex;
 		return maxIndex;
 
     }

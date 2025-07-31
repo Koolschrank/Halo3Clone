@@ -254,6 +254,7 @@ MonoBehaviour:
   bulletsPerRow: 21
   crosshairs: {fileID: 21300000, guid: 39c73e1f08ca5e54196153e30d0d53f7, type: 3}
   crosshairsSize: {x: 0.2, y: 0.2}
+  crosshairsSizeMultiplierWhenDualWielded: 1.75
   enemyAiWeaponData: {fileID: 11400000, guid: b4de0336ad4832c4ebbf183f2af555ea, type: 2}
   gunAiBehaviour:
     IdealRange: 10

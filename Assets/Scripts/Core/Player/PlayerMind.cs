@@ -160,7 +160,10 @@ public class PlayerMind : MonoBehaviour
             scoreUI.UpdateScore(score);
         }
 
-
+        if (gameObject.GetComponent<PlayerInput>().currentControlScheme == "KeyboardAndMouse")
+        {
+            pickUpUI.SetKeyboard();
+        }
     }
 
     public int PlayerIndex { get { return playerSettings.playerIndex; } }
@@ -549,7 +552,19 @@ public class PlayerMind : MonoBehaviour
     bool switchButtonReleased = true;
     float switchButtonStartPressTime = 0;
 
-    public void WeaponSwitch(InputAction.CallbackContext context)
+	float pastScroll = 0;
+	public void Scroll(InputAction.CallbackContext context)
+	{
+		float scrollValue = context.ReadValue<float>();
+		if (scrollValue != pastScroll)
+		{
+			playerArms.RightArm.PressSwitchButton();
+		}
+        pastScroll = scrollValue;
+	}
+
+
+	public void WeaponSwitch(InputAction.CallbackContext context)
     {
         if (playerArms == null) return;
         if (context.performed)
@@ -962,7 +977,9 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    public void Upgrade_2(InputAction.CallbackContext context)
+    
+
+	public void Upgrade_2(InputAction.CallbackContext context)
     {
         if (context.performed && !upgradeSelected)
         {

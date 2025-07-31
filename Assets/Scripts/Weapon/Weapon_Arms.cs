@@ -15,8 +15,10 @@ public class Weapon_Arms
     public Action<float> OnRollStart;
     public Action<float> OnBloomUpdate;
     public Action OnShot;
+    public Action OnEnterDualWield;
+    public Action OnExitDualWield;
 
-    public Action<GameObject> OnProjectileShot;
+	public Action<GameObject> OnProjectileShot;
     public Action<Vector3> OnHitscanShot;
     public Action<GameObject> OnGranadeShot;
     public Action OnWeaponDroped;
@@ -104,7 +106,16 @@ public class Weapon_Arms
     public void SetIsBeingDualWielded(bool isBeingDualWielded)
     {
         this.isBeingDualWielded = isBeingDualWielded;
-    }
+
+        if (isBeingDualWielded)
+        {
+            OnEnterDualWield?.Invoke();
+        }
+        else
+        {
+            OnExitDualWield?.Invoke();
+		}
+	}
 
     public bool IsBeingDualWielded => isBeingDualWielded;
 
@@ -441,7 +452,9 @@ public class Weapon_Arms
 
     public Sprite CrosshairUI => weaponData.CrosshairsUI;
 
-    public Vector2 CrosshairSizeUI => weaponData.CrosshairsSizeUI;
+    public Vector2 CrosshairSizeUI => isBeingDualWielded ? 
+        weaponData.CrosshairsSizeUI * weaponData.CrosshairsSizeMultiplierWhenDualWielded 
+        : weaponData.CrosshairsSizeUI;
 
     public bool HasKnockback => weaponData.HasKnockback;
 

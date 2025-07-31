@@ -53,6 +53,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 1
   startScore: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
   useEnemyWaves: 0
   noDualWieldDamageReduction: 0
   startingEquipmentBasedOnPlayerValues: 0
-  cannotDropSwitchOrPickupWeapons: 0
+  cannotDropSwitchOrPickupWeapons: 1
   ai_damageMultiplier: 1
   weaponRespawnTimeMultiplier: 1
   recolerTeam1Members: 0

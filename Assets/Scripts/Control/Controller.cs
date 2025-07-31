@@ -358,6 +358,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseWeel"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""d5c8ce3c-5a87-4b1a-b9bc-3cb43b4d9726"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -569,6 +578,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba55dd23-07d1-4553-95d6-c8bcefdbf792"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""MouseWeel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""014d0a7a-1ceb-4828-86f6-e3532c917a40"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""MouseWeel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -635,6 +666,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""91787daa-fa8d-400e-b9d8-77f18bdb6570"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseWeel"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8c1dda37-dc1b-4590-baa0-60396f7b02fe"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -825,6 +865,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e38c9f1d-63ee-48b8-8d71-873635281a32"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""MouseWeel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80340f1a-eb6e-4b13-963c-db3ece5ce095"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""MouseWeel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1196,6 +1258,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_PlayerGunPlay_SingleWeapon_Melee = m_PlayerGunPlay_SingleWeapon.FindAction("Melee", throwIfNotFound: true);
         m_PlayerGunPlay_SingleWeapon_Zoom = m_PlayerGunPlay_SingleWeapon.FindAction("Zoom", throwIfNotFound: true);
         m_PlayerGunPlay_SingleWeapon_SwitchWeapon = m_PlayerGunPlay_SingleWeapon.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_PlayerGunPlay_SingleWeapon_MouseWeel = m_PlayerGunPlay_SingleWeapon.FindAction("MouseWeel", throwIfNotFound: true);
         // PlayerGunPlay_DualWeapons
         m_PlayerGunPlay_DualWeapons = asset.FindActionMap("PlayerGunPlay_DualWeapons", throwIfNotFound: true);
         m_PlayerGunPlay_DualWeapons_Shoot_Weapon1 = m_PlayerGunPlay_DualWeapons.FindAction("Shoot_Weapon1", throwIfNotFound: true);
@@ -1205,6 +1268,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_PlayerGunPlay_DualWeapons_PickUpWeapon = m_PlayerGunPlay_DualWeapons.FindAction("PickUpWeapon", throwIfNotFound: true);
         m_PlayerGunPlay_DualWeapons_ThrowGranade = m_PlayerGunPlay_DualWeapons.FindAction("ThrowGranade", throwIfNotFound: true);
         m_PlayerGunPlay_DualWeapons_Melee = m_PlayerGunPlay_DualWeapons.FindAction("Melee", throwIfNotFound: true);
+        m_PlayerGunPlay_DualWeapons_MouseWeel = m_PlayerGunPlay_DualWeapons.FindAction("MouseWeel", throwIfNotFound: true);
         // QuickMenu
         m_QuickMenu = asset.FindActionMap("QuickMenu", throwIfNotFound: true);
         m_QuickMenu_Left = m_QuickMenu.FindAction("Left", throwIfNotFound: true);
@@ -1389,6 +1453,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerGunPlay_SingleWeapon_Melee;
     private readonly InputAction m_PlayerGunPlay_SingleWeapon_Zoom;
     private readonly InputAction m_PlayerGunPlay_SingleWeapon_SwitchWeapon;
+    private readonly InputAction m_PlayerGunPlay_SingleWeapon_MouseWeel;
     public struct PlayerGunPlay_SingleWeaponActions
     {
         private @Controller m_Wrapper;
@@ -1400,6 +1465,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @Melee => m_Wrapper.m_PlayerGunPlay_SingleWeapon_Melee;
         public InputAction @Zoom => m_Wrapper.m_PlayerGunPlay_SingleWeapon_Zoom;
         public InputAction @SwitchWeapon => m_Wrapper.m_PlayerGunPlay_SingleWeapon_SwitchWeapon;
+        public InputAction @MouseWeel => m_Wrapper.m_PlayerGunPlay_SingleWeapon_MouseWeel;
         public InputActionMap Get() { return m_Wrapper.m_PlayerGunPlay_SingleWeapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1430,6 +1496,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @SwitchWeapon.started += instance.OnSwitchWeapon;
             @SwitchWeapon.performed += instance.OnSwitchWeapon;
             @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+            @MouseWeel.started += instance.OnMouseWeel;
+            @MouseWeel.performed += instance.OnMouseWeel;
+            @MouseWeel.canceled += instance.OnMouseWeel;
         }
 
         private void UnregisterCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
@@ -1455,6 +1524,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @SwitchWeapon.started -= instance.OnSwitchWeapon;
             @SwitchWeapon.performed -= instance.OnSwitchWeapon;
             @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
+            @MouseWeel.started -= instance.OnMouseWeel;
+            @MouseWeel.performed -= instance.OnMouseWeel;
+            @MouseWeel.canceled -= instance.OnMouseWeel;
         }
 
         public void RemoveCallbacks(IPlayerGunPlay_SingleWeaponActions instance)
@@ -1483,6 +1555,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerGunPlay_DualWeapons_PickUpWeapon;
     private readonly InputAction m_PlayerGunPlay_DualWeapons_ThrowGranade;
     private readonly InputAction m_PlayerGunPlay_DualWeapons_Melee;
+    private readonly InputAction m_PlayerGunPlay_DualWeapons_MouseWeel;
     public struct PlayerGunPlay_DualWeaponsActions
     {
         private @Controller m_Wrapper;
@@ -1494,6 +1567,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @PickUpWeapon => m_Wrapper.m_PlayerGunPlay_DualWeapons_PickUpWeapon;
         public InputAction @ThrowGranade => m_Wrapper.m_PlayerGunPlay_DualWeapons_ThrowGranade;
         public InputAction @Melee => m_Wrapper.m_PlayerGunPlay_DualWeapons_Melee;
+        public InputAction @MouseWeel => m_Wrapper.m_PlayerGunPlay_DualWeapons_MouseWeel;
         public InputActionMap Get() { return m_Wrapper.m_PlayerGunPlay_DualWeapons; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1524,6 +1598,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Melee.started += instance.OnMelee;
             @Melee.performed += instance.OnMelee;
             @Melee.canceled += instance.OnMelee;
+            @MouseWeel.started += instance.OnMouseWeel;
+            @MouseWeel.performed += instance.OnMouseWeel;
+            @MouseWeel.canceled += instance.OnMouseWeel;
         }
 
         private void UnregisterCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
@@ -1549,6 +1626,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Melee.started -= instance.OnMelee;
             @Melee.performed -= instance.OnMelee;
             @Melee.canceled -= instance.OnMelee;
+            @MouseWeel.started -= instance.OnMouseWeel;
+            @MouseWeel.performed -= instance.OnMouseWeel;
+            @MouseWeel.canceled -= instance.OnMouseWeel;
         }
 
         public void RemoveCallbacks(IPlayerGunPlay_DualWeaponsActions instance)
@@ -1751,6 +1831,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnMelee(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
+        void OnMouseWeel(InputAction.CallbackContext context);
     }
     public interface IPlayerGunPlay_DualWeaponsActions
     {
@@ -1761,6 +1842,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnPickUpWeapon(InputAction.CallbackContext context);
         void OnThrowGranade(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
+        void OnMouseWeel(InputAction.CallbackContext context);
     }
     public interface IQuickMenuActions
     {

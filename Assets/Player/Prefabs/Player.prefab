@@ -10961,6 +10961,7 @@ MonoBehaviour:
   playerHealth: {fileID: 782412234501442312}
   playerMovement: {fileID: 7400201383000877008}
   meleeAttacker: {fileID: 8008512304446792098}
+  bodyMindConnection: {fileID: 4471171138262044766}
   aimSpeed_x: 156.492
   aimSpeed_y: 112.266
   minAngle: -70
@@ -10990,6 +10991,7 @@ MonoBehaviour:
   maxSensitivity: 2
   sensitivityChangeSteps: 0.1
   inputSlowDownStopsInput: 0
+  mouseSensitivityMultiplier: 0.25
   OnTarget: 0
 --- !u!114 &7573040687501960069
 MonoBehaviour:
@@ -11322,6 +11324,7 @@ MonoBehaviour:
   maxAbilities: 2
   abilities: []
   currentAbilityIndex: 0
+  cooldownMultiplier: 1
   playerBodyStatSheet: {fileID: 6520564595086861149}
   alwaysSwitchToNewestAbility: 1
   alwaysReplaceSecondAbility: 1

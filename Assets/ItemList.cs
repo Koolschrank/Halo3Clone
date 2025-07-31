@@ -26,7 +26,16 @@ public class ItemList : MonoBehaviour
         return weapons[0];
     }
 
-    public Weapon_Data GetRandomWeapon()
+    public Weapon_Data GetBR()
+    {
+               return weapons[1];
+	}
+    public Weapon_Data GetSMG()
+    {
+        return weapons[2];
+	}
+
+	public Weapon_Data GetRandomWeapon()
     {
         int randomIndex = Random.Range(0, weapons.Length);
         return weapons[randomIndex];

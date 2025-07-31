@@ -23,6 +23,20 @@ public class PickUpUI : MonoBehaviour
     [SerializeField] Color notBuyablePriceColor = Color.red;
     [SerializeField] PlayerMind playerMind;
 
+    [SerializeField] GameObject[] keyboardText;
+
+
+    public void SetKeyboard()
+    {
+        foreach (var text in keyboardText)
+        {
+            if (text != null)
+            {
+                text.SetActive(true);
+            }
+		}
+	}
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void SetUp(PlayerPickUpScan pickUpScan)
     {
@@ -38,6 +52,8 @@ public class PickUpUI : MonoBehaviour
         pickUpScan.OnWeaponDualWieldUpdate += UpdateDualWieldText;
         ClearPickUpUI();
         this.pickUpScan = pickUpScan;
+
+        
     }
 
     public void SetUp(PlayerInteractableTrigger interactableTrigger)

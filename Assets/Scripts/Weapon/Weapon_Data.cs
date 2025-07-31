@@ -90,8 +90,9 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] int bulletsPerRow;
     [SerializeField] Sprite crosshairs = null;
     [SerializeField] Vector2 crosshairsSize = Vector2.one;
+    [SerializeField] float crosshairsSizeMultiplierWhenDualWielded = 1f;
 
-    [Header("AI")]
+	[Header("AI")]
     [SerializeField] Weapon_Data enemyAiWeaponData;
     [SerializeField] GunAiBehaviour gunAiBehaviour;
 
@@ -106,6 +107,8 @@ public class Weapon_Data : ScriptableObject
     public float BloomTime => bloomTime;
     public AnimationCurve BloomCurve => bloomCurve;
     public float BloomCrosshairsSizeMultiplier => bloomCrosshairsSizeMultiplier;
+
+    public float CrosshairsSizeMultiplierWhenDualWielded => crosshairsSizeMultiplierWhenDualWielded;
 
 
 	public ShootType ShootType => shootType;
