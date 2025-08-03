@@ -24,6 +24,8 @@ public class BulletSpawner : MonoBehaviour
     float accuracyMultiplier = 1f;
     bool onlyEnemyIsPlayerTeam = false;
 
+    public bool CannotSpawnBullets = false;
+
 
     public float AccuracyMultiplier
     {
@@ -156,7 +158,12 @@ public class BulletSpawner : MonoBehaviour
 
     public GameObject[] ShootGranade(Weapon_Arms weapon)
     {
-        var autoAim = weapon.AutoAim;
+       if (CannotSpawnBullets)
+        {
+            return new GameObject[0];
+		}
+
+		var autoAim = weapon.AutoAim;
         var autoAimRaycastLenght = autoAim.RaycastLenght;
         var autoAimRadius = autoAim.Radius;
         var autoAimLerp = autoAim.AimLerp;
@@ -189,7 +196,11 @@ public class BulletSpawner : MonoBehaviour
 
     public Vector3[] ShootHitScan(Weapon_Arms weapon)
     {
-        var autoAim = weapon.AutoAim;
+        if (CannotSpawnBullets)
+        {
+            return new Vector3[0];
+		}
+		var autoAim = weapon.AutoAim;
         var autoAimRaycastLenght = autoAim.RaycastLenght;
         var autoAimRadius = autoAim.Radius;
         var autoAimLerp = autoAim.AimLerp;
@@ -322,7 +333,13 @@ public class BulletSpawner : MonoBehaviour
 
     public GameObject[] ShootProjectile(Weapon_Arms weapon)
     {
-        var autoAim = weapon.AutoAim;
+
+        if (CannotSpawnBullets)
+        {
+            return new GameObject[0];
+        }
+
+			var autoAim = weapon.AutoAim;
         var autoAimRaycastLenght = autoAim.RaycastLenght;
         var autoAimRadius = autoAim.Radius;
         var autoAimLerp = autoAim.AimLerp;

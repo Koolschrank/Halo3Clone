@@ -49,23 +49,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 6
   damage: 240
+  damageMultiplierVSAI: 1.25
   damageOnShildMultiplier: 2
   damageReductionAgainstBlocking: 0.8
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0018181573
-      value: 3.9930553
-      inSlope: -33.921173
-      outSlope: -33.921173
+      time: 0.0015883669
+      value: 5.990904
+      inSlope: -0.17709614
+      outSlope: -0.17709614
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.09867295
-      value: 0.58427906
+      time: 0.19290629
+      value: 5.957022
+      inSlope: -0.630631
+      outSlope: -0.630631
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.2122136
+      value: 0.5767412
       inSlope: -0.55946964
       outSlope: -0.55946964
       tangentMode: 0
@@ -75,8 +85,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: -0.0028266907
-      inSlope: -0.6513792
-      outSlope: -0.6513792
+      inSlope: -0.7356917
+      outSlope: -0.7356917
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

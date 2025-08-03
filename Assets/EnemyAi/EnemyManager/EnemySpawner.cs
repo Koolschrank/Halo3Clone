@@ -41,8 +41,12 @@ public class EnemySpawner : MonoBehaviour
 
     KingOfTheHillManager kingOfTheHillManager;
 
+    public bool tutorialMode = false; // Flag to check if it's in tutorial mode
+    public Enemy_Stats[] tutorialEnemyStats; // Enemy stats for the tutorial mode
+    public Transform[] tutorialSpawnPoints; // Spawn point for the tutorial enemies
 
-   
+
+
 
 	public void KillAllEnemies()
     {
@@ -135,6 +139,14 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartEnemySpawner()
     {
+        if (tutorialMode)
+        {
+            EnterTutorialMode();
+			return;
+        }
+
+
+
         if (isAutoActiveOnThisMap)
         {
             return;
@@ -163,6 +175,58 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void EnterTutorialMode()
+    {
+        int index = 0;
+		foreach (var spawnPoint in tutorialSpawnPoints)
+        {
+            SpawnTutorialEnemy(index);
+			index++;
+		}
+	}
+
+    public void SpawnTutorialEnemy(int index)
+    {
+        var spawnPoint = tutorialSpawnPoints[index];
+		var enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+		var stats = tutorialEnemyStats[index];
+		var equipment = stats.equipment;
+		enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
+		var health = enemy.GetComponent<CharacterHealth>();
+		health.MultiplyHealth(stats.healthMultiplier);
+		health.MultiplyShild(stats.shildMultiplier);
+
+		activeEnemies.Add(enemy);
+		health.OnDeath += () =>
+		{
+			activeEnemies.Remove(enemy);
+            SpawnTutorialEnemy(index);
+			Destroy(enemy, 120f);
+
+		};
+
+		var movement = enemy.GetComponent<PlayerMovement>();
+		movement.MultiplySpeed(0);
+
+        var arms = enemy.GetComponent<PlayerArms>();
+        arms.RightArm.GetBulletSpawner().CannotSpawnBullets = true;
+
+		PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), 1);
+
+
+		int colorIndex = stats.teamIdOverrride;
+		
+		PlayerManager.instance.UpdateColorOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), colorIndex);
+
+		OnEnemySpawned?.Invoke(enemy);
+
+		enemy.GetComponent<CharacterHealth>().SetDamageMultiplier(GameModeSelector.gameModeManager.GameModeStats.ai_damageMultiplier);
+
+        enemy.gameObject.GetComponentInChildren<AI_Shoot>().cannotShoot = true;
+
+		activeEnemies.Add(enemy);
+	}
+
 
     public void StartNextWave()
     {
@@ -172,6 +236,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (tutorialMode) return;
+
         if (activeWave == null)
         {
             if (nextWaveDelay > 0)
@@ -179,10 +245,6 @@ public class EnemySpawner : MonoBehaviour
                 nextWaveDelay -= Time.deltaTime;
                 return;
             }
-
-
-
-
             StartNextWave();
         }
         else
@@ -195,7 +257,7 @@ public class EnemySpawner : MonoBehaviour
 			}
 
 
-				activeWave.UpdateTimers(delta, spawnRateMultiplier);
+			activeWave.UpdateTimers(delta, spawnRateMultiplier);
 
             if (activeWave.CanSpawnEnemy())
             {
@@ -212,7 +274,8 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy(Enemy_Stats stats)
     {
 
-        Transform spawnPoint;
+		if (tutorialMode) return;
+		Transform spawnPoint;
         var teamId = stats.teamIdOverrride;
 		var gamemode = GameModeSelector.gameModeManager.GameModeStats;
 		if (isPvPGame)

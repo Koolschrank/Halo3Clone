@@ -547,6 +547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PVP TEAM
       objectReference: {fileID: 0}
+    - target: {fileID: 6411818432450564381, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
       value: 5
@@ -2326,28 +2330,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
       value: 
-      objectReference: {fileID: 6003211742586802010, guid: 182c10aa6a1a91f4d9b12881258a2b68, type: 3}
+      objectReference: {fileID: 6003211742586802010, guid: 0becad027d983cd4dab255eca7aadb72, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[1]'
       value: 
-      objectReference: {fileID: 6003211742586802010, guid: b9cee210e0af6a74c92ad80b36108c63, type: 3}
+      objectReference: {fileID: 6003211742586802010, guid: 182c10aa6a1a91f4d9b12881258a2b68, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[2]'
       value: 
-      objectReference: {fileID: 6003211742586802010, guid: be40c03581f5ea743a7e946a28312df2, type: 3}
+      objectReference: {fileID: 6003211742586802010, guid: b9cee210e0af6a74c92ad80b36108c63, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[3]'
       value: 
-      objectReference: {fileID: 6003211742586802010, guid: a3adc61f34d9f2e4fada8f8b08731c64, type: 3}
+      objectReference: {fileID: 6003211742586802010, guid: be40c03581f5ea743a7e946a28312df2, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[4]'
       value: 
-      objectReference: {fileID: 6003211742586802010, guid: b93dc3a6add6bfe49b4740fb7033ae02, type: 3}
+      objectReference: {fileID: 6003211742586802010, guid: adde41ba26190ed41abec81110915ace, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[5]'
       value: 
@@ -3884,6 +3888,10 @@ PrefabInstance:
     - target: {fileID: 6411818432450564381, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: m_Name
       value: Modifiers
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411818432450564381, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
@@ -14867,6 +14875,10 @@ PrefabInstance:
     - target: {fileID: 6411818432450564381, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: m_Name
       value: PVP
+      objectReference: {fileID: 0}
+    - target: {fileID: 6411818432450564381, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size

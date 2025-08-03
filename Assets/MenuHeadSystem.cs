@@ -22,6 +22,9 @@ public class MenuHeadSystem : MonoBehaviour
 
 	private void Awake()
 	{
+
+		// make mouse visible
+		Cursor.visible = true;
 		if (Instance == null)
 		{
 			Instance = this;

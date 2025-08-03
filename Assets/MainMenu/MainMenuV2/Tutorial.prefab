@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: canBeSelected
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: aiAmountMultiplier
+      value: 0.0000001
+      objectReference: {fileID: 0}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
       value: Controlls

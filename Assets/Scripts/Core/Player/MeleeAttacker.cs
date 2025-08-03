@@ -186,6 +186,11 @@ public class MeleeAttacker : MonoBehaviour
                 damagePackage.damageAmount *= dualWieldingDamageMultiplier;
 			}
 
+            if (collider.gameObject.tag == "AIEnemy")
+            {
+                damagePackage.damageAmount *= attackData.DamageMultiplierVSAI;
+			}
+
 			damagePackage.origin = hitPoint;
             // direction of self move 
             var direction = transform.forward;

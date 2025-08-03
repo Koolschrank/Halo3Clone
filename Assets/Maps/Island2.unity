@@ -2443,6 +2443,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 0d2defa6d9f1ed74cae3ac7dbc442d41, type: 3}
   spawnTime: 120
   magazines: 2
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &45614882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14826,6 +14829,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
   spawnTime: 200
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &295332669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15727,6 +15733,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
   spawnTime: 30
   magazines: 8
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &318842477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18325,6 +18334,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
   spawnTime: 45
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &386162489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22987,6 +22999,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 8993b6c6bdb1cfb4182972b8d2b33835, type: 3}
   spawnTime: 120
   magazines: 3
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &560579731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28556,6 +28571,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 875420519fd23124c9872c57b921a743, type: 3}
   spawnTime: 120
   magazines: 6
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &731732243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44597,6 +44615,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &957735212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44723,6 +44744,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
   spawnTime: 45
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &967225699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45092,9 +45116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
   spawnTime: 200
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &987325947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46694,6 +46721,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 5ab7412178cb19b49b291073a5331a56, type: 3}
   spawnTime: 120
   magazines: 3
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1031240746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48765,6 +48795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d616c6fc489191e44accc092ea45d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSafeTime: 2
 --- !u!65 &1093037305
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51581,6 +51612,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1158102530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64668,6 +64702,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1454851833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66537,6 +66574,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 50019456cbe33e94fbb7aed594e0b9ce, type: 3}
   spawnTime: 200
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1517856089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75322,6 +75362,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   spawnTime: 30
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1707424340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75797,6 +75840,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
   spawnTime: 45
   magazines: 4
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1720240020
 GameObject:
   m_ObjectHideFlags: 0
@@ -83249,6 +83295,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: 33d1b381375f78b4b857b2144737cf7b, type: 3}
   spawnTime: 120
   magazines: 3
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &2027046668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84856,6 +84905,9 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9197169624787015198, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
   spawnTime: 120
   magazines: 2
+  weaponDistanceToAttemtRespawn: 5
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &2094222554
 PrefabInstance:
   m_ObjectHideFlags: 0

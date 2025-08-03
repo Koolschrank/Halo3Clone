@@ -86,8 +86,9 @@ public class CharacterHealth : Health
 	[NonSerialized]
 	public float aura_armorHeal = 0.0f;
 
-	
-    public void RemoveArmor()
+    [NonSerialized]
+	public float spawnTime = 0;
+	public void RemoveArmor()
     {
         currentArmor = 0;
         OnArmorChanged?.Invoke(0);
@@ -175,7 +176,10 @@ public class CharacterHealth : Health
         {
             statSheet.OnStatSheetUpdated += SetStatSheet;
         }
-    }
+
+        spawnTime = Time.timeSinceLevelLoad;
+
+	}
 
     public void SetStatSheet()
     {

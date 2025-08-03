@@ -7,7 +7,8 @@ public class Explosion : MonoBehaviour
     
     [SerializeField] float range = 5f;
     [SerializeField] float damage = 10f;
-    [SerializeField] float damageOnShildMultiplier = 1f;
+	[SerializeField] float damageMultiplierVSAI = 1f;
+	[SerializeField] float damageOnShildMultiplier = 1f;
 
 	[SerializeField] float damageReductionAgainstBlocking = 0.8f;
 	[SerializeField] AnimationCurve damageFalloff = AnimationCurve.Linear(0, 1, 1, 0);
@@ -93,7 +94,10 @@ public class Explosion : MonoBehaviour
 
             if (collider.TryGetComponent<Health>(out Health health))
             {
-                var direction = collider.transform.position - transform.position;
+				
+
+
+				var direction = collider.transform.position - transform.position;
                 var forceDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
                 var distance = direction.magnitude;
                 var falloff = damageFalloff.Evaluate(distance / range);
@@ -106,6 +110,11 @@ public class Explosion : MonoBehaviour
                 damagePackage.impactType = ImpactType.wholeBody;
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
                 damagePackage.damageReductionAgainstBlock = damageReductionAgainstBlocking;
+
+				if (GameModeSelector.gameModeManager.GameModeStats.team2LoosesScoreWhenTeam1scores)
+				{
+					damagePackage.damageAmount *= damageMultiplierVSAI;
+				}
 
 				float margin = 1f;
 				if (range < margin)

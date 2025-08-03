@@ -33,8 +33,10 @@ public class HitMarkerUI : MonoBehaviour
             return;
         if (target.tag == "AIEnemy")
         {
+			hitMarker.SetActive(true);
+			Invoke("HideHitMarker", hitMarkerTime);
             return;
-        }
+		}
 
         killMarker.SetActive(true);
         awsomeSkull.gameObject.SetActive(true);

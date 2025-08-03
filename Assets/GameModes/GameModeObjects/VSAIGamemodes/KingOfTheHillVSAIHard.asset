@@ -68,7 +68,7 @@ MonoBehaviour:
   noDualWieldDamageReduction: 1
   startingEquipmentBasedOnPlayerValues: 0
   cannotDropSwitchOrPickupWeapons: 0
-  ai_damageMultiplier: 0.6
+  ai_damageMultiplier: 0.75
   weaponRespawnTimeMultiplier: 1.5
   recolerTeam1Members: 1
   team1MemberColors:

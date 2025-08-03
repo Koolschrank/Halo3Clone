@@ -12,15 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: SwordAttack
   m_EditorClassIdentifier: 
-  damage: 200
+  damage: 175
   force: 140
+  forceOnPlayers: 8
+  forceOffset: 0.2
   delay: 0.252
   meleeTime: 0.9072
-  meleeRadius: 1.5
-  meleeDistance: 1.5
+  meleeRadius: 1.65
+  meleeDistance: 1.65
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  hasLaunch: 0
+  launchDistance: 5
+  launchAngle: 45
+  launchTime: 0.5
+  launchStopDistance: 0.1
+  launchResetsGravity: 0
+  launchCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 0
   swingSound:
     Guid:
       Data1: -442625259

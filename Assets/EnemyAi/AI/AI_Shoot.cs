@@ -10,10 +10,11 @@ public class AI_Shoot : MonoBehaviour
 
 	[SerializeField] Vector2 distanceToThrowGranade = new Vector2(8, 12);
 
+    [NonSerialized]
+    public bool cannotShoot = false;
 
 
-
-    float focuse = 0;
+	float focuse = 0;
 
     [NonSerialized]
     public bool hasShild = false;
@@ -34,6 +35,8 @@ public class AI_Shoot : MonoBehaviour
 
 	private void Update()
     {
+        if (cannotShoot) return;
+
         if (playerAim.OnTarget)
         {
             focuse += Time.deltaTime * playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.focusGainWhenOnTarget;

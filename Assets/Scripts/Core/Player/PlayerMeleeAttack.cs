@@ -5,7 +5,8 @@ using FMODUnity;
 public class PlayerMeleeAttack : ScriptableObject
 {
     [SerializeField] float damage = 80f;
-    [SerializeField] float force = 10f;
+    [SerializeField] float damageMultiplierVSAI = 1f; // multiplier for damage against AI
+	[SerializeField] float force = 10f;
     [SerializeField] float forceOnPlayers = 5f; // force applied to players hit by the melee attack
 	[SerializeField] float forceOffset = 0f;
 	[SerializeField] float delay = 0.3f;
@@ -33,7 +34,8 @@ public class PlayerMeleeAttack : ScriptableObject
 
 	public float Damage => damage;
 
-    public float Force => force;
+    public float DamageMultiplierVSAI => damageMultiplierVSAI;
+	public float Force => force;
 
     public float ForceOnPlayers => forceOnPlayers;
 

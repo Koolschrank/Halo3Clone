@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BaseBallBatAttack
   m_EditorClassIdentifier: 
   damage: 110
+  damageMultiplierVSAI: 1.25
   force: 130
   forceOnPlayers: 20
   forceOffset: 0.3

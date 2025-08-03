@@ -412,9 +412,11 @@ public class PlayerMind : MonoBehaviour
                     int playerIndex = mind.playerID;
                     RumbleManager.Instance.TriggerRumble(killRumble, playerIndex);
 				}
-
-
             }
+            else
+            {
+				//LogSystem.logSystem.PlayerKilled(playerSettings.playerName, "Enemy");
+			}
         }
         var score = obj.GetComponent<GainScore>();
         if (score != null && PlayerProgression.instance.canGainEXP)

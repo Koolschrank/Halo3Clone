@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using System;
 using Unity.Mathematics;
+using System.Collections;
+using Unity.VisualScripting;
 public class PlayerManager : MonoBehaviour
 {
     public Action<PlayerMind> OnPlayerAdded;
@@ -228,10 +230,18 @@ public class PlayerManager : MonoBehaviour
 			playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
 		}
 
-            
 
 
-    }
+        StartCoroutine(ForcePlayerToSpawn(playerBody.gameObject, spawnPoint));
+	}
+
+    IEnumerator ForcePlayerToSpawn(GameObject player, Transform spawnPoint)
+    {
+        yield return new WaitForNextFrameUnit();
+		player.transform.position = spawnPoint.position;
+        player.transform.rotation = spawnPoint.rotation;
+        
+	}
 
 
     public void UpdateTeamOfBody(PlayerMind mind)
@@ -290,7 +300,9 @@ public class PlayerManager : MonoBehaviour
 
         player.UpdateLayers();
         OnPlayerSpawned?.Invoke(player);
-    }
+
+        playerBody.transform.position = spawnPoint.position;
+	}
 
     public CinemachineCamera GetPlayerCamera(PlayerMind player)
     {

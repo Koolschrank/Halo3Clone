@@ -10542,6 +10542,7 @@ MonoBehaviour:
   wallCheck:
     serializedVersion: 2
     m_Bits: 1
+  CannotSpawnBullets: 0
 --- !u!114 &8008512304446792098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10966,7 +10967,7 @@ MonoBehaviour:
   aimSpeed_y: 112.266
   minAngle: -70
   maxAngle: 70
-  zoomAimSpeedMultiplier: 0.375
+  zoomAimSpeedMultiplier: 0.3
   aimSupportDistance: 20
   aimSupportLayerMask:
     serializedVersion: 2
