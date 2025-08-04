@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +38,8 @@ public class PlayerMind : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] Transform UIContainer;
-    [SerializeField] HealthUI healthUI;
+	[SerializeField] Transform UIContainer_death;
+	[SerializeField] HealthUI healthUI;
     [SerializeField] ShildUI shildUI;
 	[SerializeField] ArmorUI armorUI;
 	[SerializeField] WeaponUI weaponUI_RightArm;
@@ -58,8 +60,10 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerNamePopUp playerNamePopUp;
     [SerializeField] UI_Score scoreUI;
     [SerializeField] UI_UpgradeMenu upgradeMenu;
-    
-    [Header("UI Settings Menu")]
+    [SerializeField] UI_ReviveBar reviveBar;
+
+
+	[Header("UI Settings Menu")]
     [SerializeField] SettingsQuickMenu settingsQuickMenu;
     [SerializeField] SensitivitySlider sensitivitySlider;
 
@@ -98,6 +102,21 @@ public class PlayerMind : MonoBehaviour
 
     [NonSerialized]
 	public int playerID = 0;
+
+
+    [NonSerialized]
+    public bool inRespawn = false;
+	[NonSerialized]
+	public float respawnTimer = 0;
+	[NonSerialized]
+	public float respawnTime = 0;
+
+    public Action<float> OnTokenUseUpdate;
+    public float respawnTokenUseTime = 2f;
+    public float reduceTokenUseTime = 0.5f;
+	float tokenButtonPressTime = 0;
+    bool tokenButtonPressedDown = false;
+
 
 	public void SetAlive()
     {
@@ -166,14 +185,61 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    public int PlayerIndex { get { return playerSettings.playerIndex; } }
+    public Action<float> OnRespawnUpdate;
+
+	private void Update()
+	{
+        if (inRespawn)
+        {
+            respawnTimer -= Time.deltaTime;
+            OnRespawnUpdate?.Invoke(1 - (respawnTimer / respawnTime));
+
+            if (respawnTimer <= 0)
+            {
+                Respawn();
+            }
+
+
+            if (tokenButtonPressedDown && GameModeSelector.gameModeManager.RespawnTokensLeft > 0)
+            {
+                tokenButtonPressTime += Time.deltaTime;
+                
+                if (tokenButtonPressTime >= respawnTokenUseTime)
+                {
+                    tokenButtonPressedDown = false;
+                    Respawn();
+                    GameModeSelector.gameModeManager.UseRespawnToken();
+                    tokenButtonPressTime = 0;
+				}
+				OnTokenUseUpdate?.Invoke(tokenButtonPressTime / respawnTokenUseTime);
+			}
+            else if (tokenButtonPressTime > 0)
+            {
+				tokenButtonPressTime -= Time.deltaTime * reduceTokenUseTime;
+                if (tokenButtonPressTime <= 0)
+                {
+                    tokenButtonPressTime = 0;
+					OnTokenUseUpdate?.Invoke(0);
+				}
+                else
+                {
+					OnTokenUseUpdate?.Invoke(tokenButtonPressTime / respawnTokenUseTime);
+				}
+
+			}
+        }
+	}
+
+	public int PlayerIndex { get { return playerSettings.playerIndex; } }
 
     public void SetPlayerBody(GameObject body)
     {
         playerBody = body;
         playerUpgrader.AssignBody(body);
 
-    }
+        
+
+	}
 
     public void ApplyUpgrades()
     {
@@ -199,7 +265,17 @@ public class PlayerMind : MonoBehaviour
         playerMovement = movement;
         weaponSway1.SetUp(playerMovement);
         weaponSway2.SetUp(playerMovement);
-    }
+
+		
+	}
+
+    public void SetPlayerReviver(PlayerReviver playerReviver)
+    {
+		if (playerReviver != null)
+		{
+			reviveBar.SetUp(playerReviver);
+		}
+	}
 
     public void SetSpectatorTarget(CinemachineCamera camera)
     {
@@ -455,8 +531,12 @@ public class PlayerMind : MonoBehaviour
         pickUpUI.SetUp(pickUpScan);
     }
 
+	public void RespawnTokenUse(InputAction.CallbackContext context)
+	{
+       tokenButtonPressedDown = context.performed;
+	}
 
-    public void Move(InputAction.CallbackContext context)
+	public void Move(InputAction.CallbackContext context)
     {
         if (playerMovement == null) return;
 
@@ -844,12 +924,23 @@ public class PlayerMind : MonoBehaviour
         playerCamera.DisableLayerInCamera(layer);
     }
 
+    public void SetMesh(GameObject mesh)
+    {
+        this.mesh = mesh;
+	}
 
+    GameObject mesh;
     public void RespawnWithDelay()
     {
-        
-        StartCoroutine(RespawnDelay(GameModeSelector.gameModeManager.RespawnTime));
-    }
+        inRespawn = true;
+        respawnTimer = GameModeSelector.gameModeManager.RespawnTime;
+        respawnTime = respawnTimer;
+		SwitchToSpectatorCamera();
+
+		playerInput.actions.FindActionMap("PlayerRespawn").Enable();
+
+		//StartCoroutine(RespawnDelay(GameModeSelector.gameModeManager.RespawnTime));
+	}
 
     public void SwitchToSpectatorCamera()
     {
@@ -860,7 +951,9 @@ public class PlayerMind : MonoBehaviour
         //playerCamera.transform.localRotation = Quaternion.identity;
         leftArmView.gameObject.SetActive(false);
         UIContainer.gameObject.SetActive(false);
-        spectatorCamera.Priority = 100;
+		UIContainer_death.gameObject.SetActive(true);
+
+		spectatorCamera.Priority = 100;
     }
 
     public void SwitchToPlayerCamera()
@@ -870,23 +963,43 @@ public class PlayerMind : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.identity;
         leftArmView.gameObject.SetActive(true);
         UIContainer.gameObject.SetActive(true);
-        spectatorCamera.Priority = 0;
+
+		UIContainer_death.gameObject.SetActive(false);
+		spectatorCamera.Priority = 0;
 
 
     }
-    IEnumerator RespawnDelay(float delay)
-    {
-        SwitchToSpectatorCamera();
-        yield return new WaitForSeconds(delay);
-        if (IsDead)
-            Respawn();
-    }
+	//IEnumerator RespawnDelay(float delay)
+	//{
+	//    SwitchToSpectatorCamera();
+	//    yield return new WaitForSeconds(delay);
+	//    if (IsDead)
+	//        Respawn();
+	//}
 
-    public void Respawn()
+	public void RevivePlayer(Vector3 spawnPoint)
     {
-        PlayerManager.instance.RespawnPlayer(this);
+        Respawn();
+        playerMovement.transform.position =spawnPoint;
+	}
+
+	public void Respawn()
+    {
+        if (!IsDead) return;
+		inRespawn = false;
+		if (mesh != null && GameModeSelector.gameModeManager.GameModeStats.removePlayerBodyWhenRespawned)
+        {
+            Debug.Log("Removing player body on respawn");
+			mesh.SetActive(false);
+		}
+
+	    PlayerManager.instance.RespawnPlayer(this);
         SwitchToPlayerCamera();
-    }
+
+		playerInput.actions.FindActionMap("PlayerRespawn").Disable();
+
+
+	}
 
     public void SetScreenRect(ScreenRectValues screen, int channel)
     {

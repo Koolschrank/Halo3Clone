@@ -13,12 +13,7 @@ public class DeathZone : MonoBehaviour
 		CharacterHealth health = other.GetComponent<CharacterHealth>();
         if (health != null)
         {
-            if (health.spawnTime + spawnSafeTime > Time.timeSinceLevelLoad)
-            {
-                CheckIfOutOfBounds(health);
-				return;
-            }
-
+            
 
             var owner = health.ownerOfLastDamage;
             if (owner == null)
@@ -33,14 +28,5 @@ public class DeathZone : MonoBehaviour
     }
 
 
-    IEnumerator CheckIfOutOfBounds(CharacterHealth character)
-    {
-        yield return new WaitForSeconds(spawnSafeTime * 2);
-        if (character.transform.position.y < -10f)
-        {
-            DamagePackage damage = new DamagePackage(1000000);
-            damage.owner = character.gameObject;
-            character.TakeDamage(damage);
-		}
-	}
+   
 }

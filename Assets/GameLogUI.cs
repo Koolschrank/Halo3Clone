@@ -15,6 +15,7 @@ public class GameLogUI : MonoBehaviour
 
     public void Print(string value)
     {
+        if (!gameObject.activeSelf) return;
         StartCoroutine(LogLoop(value));
     }
 

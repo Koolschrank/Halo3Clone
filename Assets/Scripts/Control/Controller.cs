@@ -1208,6 +1208,56 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerRespawn"",
+            ""id"": ""7d93d706-d996-4d2c-b825-b7ce895c2181"",
+            ""actions"": [
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""be2d3114-96e5-43c4-8fb5-97587e004262"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""45671786-6253-4816-a808-deb614e1297e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a4a0fca-ef06-485f-a727-ee0bfe9a84da"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4abb89b-b8ad-4716-b813-6e77610687c4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1282,6 +1332,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_UpgradeSelection__1 = m_UpgradeSelection.FindAction("1", throwIfNotFound: true);
         m_UpgradeSelection__2 = m_UpgradeSelection.FindAction("2", throwIfNotFound: true);
         m_UpgradeSelection__3 = m_UpgradeSelection.FindAction("3", throwIfNotFound: true);
+        // PlayerRespawn
+        m_PlayerRespawn = asset.FindActionMap("PlayerRespawn", throwIfNotFound: true);
+        m_PlayerRespawn_Respawn = m_PlayerRespawn.FindAction("Respawn", throwIfNotFound: true);
     }
 
     ~@Controller()
@@ -1291,6 +1344,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_PlayerGunPlay_DualWeapons.enabled, "This will cause a leak and performance issues, Controller.PlayerGunPlay_DualWeapons.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_QuickMenu.enabled, "This will cause a leak and performance issues, Controller.QuickMenu.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UpgradeSelection.enabled, "This will cause a leak and performance issues, Controller.UpgradeSelection.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PlayerRespawn.enabled, "This will cause a leak and performance issues, Controller.PlayerRespawn.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1794,6 +1848,52 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         }
     }
     public UpgradeSelectionActions @UpgradeSelection => new UpgradeSelectionActions(this);
+
+    // PlayerRespawn
+    private readonly InputActionMap m_PlayerRespawn;
+    private List<IPlayerRespawnActions> m_PlayerRespawnActionsCallbackInterfaces = new List<IPlayerRespawnActions>();
+    private readonly InputAction m_PlayerRespawn_Respawn;
+    public struct PlayerRespawnActions
+    {
+        private @Controller m_Wrapper;
+        public PlayerRespawnActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Respawn => m_Wrapper.m_PlayerRespawn_Respawn;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerRespawn; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerRespawnActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerRespawnActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerRespawnActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerRespawnActionsCallbackInterfaces.Add(instance);
+            @Respawn.started += instance.OnRespawn;
+            @Respawn.performed += instance.OnRespawn;
+            @Respawn.canceled += instance.OnRespawn;
+        }
+
+        private void UnregisterCallbacks(IPlayerRespawnActions instance)
+        {
+            @Respawn.started -= instance.OnRespawn;
+            @Respawn.performed -= instance.OnRespawn;
+            @Respawn.canceled -= instance.OnRespawn;
+        }
+
+        public void RemoveCallbacks(IPlayerRespawnActions instance)
+        {
+            if (m_Wrapper.m_PlayerRespawnActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerRespawnActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerRespawnActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerRespawnActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerRespawnActions @PlayerRespawn => new PlayerRespawnActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
@@ -1858,5 +1958,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void On_1(InputAction.CallbackContext context);
         void On_2(InputAction.CallbackContext context);
         void On_3(InputAction.CallbackContext context);
+    }
+    public interface IPlayerRespawnActions
+    {
+        void OnRespawn(InputAction.CallbackContext context);
     }
 }

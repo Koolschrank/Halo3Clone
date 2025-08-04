@@ -569,7 +569,6 @@ public class Arm : MonoBehaviour
 
     public virtual void TrySwitchWeapon()
     {
-        Debug.Log("Switching weapon try");
 
         if (armState != ArmState.Ready && armState != ArmState.Reloading && !(armState == ArmState.Shooting && weaponInHand.IsShootCooldownLessThanHalf())) return;
         if (cannotDropSwapOrPickUpWeapons) return;

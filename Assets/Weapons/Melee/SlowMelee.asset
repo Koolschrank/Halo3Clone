@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: SlowMelee
   m_EditorClassIdentifier: 
   damage: 110
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
   force: 100
   forceOnPlayers: 16
+  forceOffset: 0
   delay: 0.24
   meleeTime: 1.28
-  meleeRadius: 0.7
-  meleeDistance: 0.7
+  meleeRadius: 0.75
+  meleeDistance: 0.75
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -27,6 +30,7 @@ MonoBehaviour:
   launchAngle: 30
   launchTime: 0.24
   launchStopDistance: 1.4
+  launchResetsGravity: 0
   launchCurve:
     serializedVersion: 2
     m_Curve:

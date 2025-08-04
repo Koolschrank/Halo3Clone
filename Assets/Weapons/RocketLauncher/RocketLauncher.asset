@@ -32,7 +32,7 @@ MonoBehaviour:
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: c915eed440415604d9f71b11d7ed4878, type: 2}
+  meleeData: {fileID: 0}
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
@@ -198,6 +198,7 @@ MonoBehaviour:
   bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 33dfa090efe1bc442b27c137d87e3ad5, type: 3}
   crosshairsSize: {x: 0.5, y: 0.5}
+  crosshairsSizeMultiplierWhenDualWielded: 1
   enemyAiWeaponData: {fileID: 11400000, guid: 7ef99013cbc7d7d4d8ee5ab209603d96, type: 2}
   gunAiBehaviour:
     IdealRange: 10

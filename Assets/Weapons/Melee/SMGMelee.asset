@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: SMGMelee
   m_EditorClassIdentifier: 
   damage: 100
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
   force: 60
   forceOnPlayers: 12
+  forceOffset: 0
   delay: 0.14
   meleeTime: 0.63
-  meleeRadius: 0.65
-  meleeDistance: 0.65
+  meleeRadius: 0.75
+  meleeDistance: 0.75
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -27,6 +30,7 @@ MonoBehaviour:
   launchAngle: 30
   launchTime: 0.14
   launchStopDistance: 1.4
+  launchResetsGravity: 0
   launchCurve:
     serializedVersion: 2
     m_Curve:

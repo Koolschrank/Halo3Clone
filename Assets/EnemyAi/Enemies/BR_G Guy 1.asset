@@ -27,7 +27,7 @@ MonoBehaviour:
     magazinsOfSideArm: 0
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
-    ability: {fileID: 11400000, guid: d146e142196642a4fa1678bf934db021, type: 2}
+    ability: {fileID: 11400000, guid: 90d650393105d2b4b826becb9f593340, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
@@ -35,6 +35,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0

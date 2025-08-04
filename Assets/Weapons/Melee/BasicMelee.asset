@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: BasicMelee
   m_EditorClassIdentifier: 
   damage: 90
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
   force: 90
   forceOnPlayers: 12
+  forceOffset: 0
   delay: 0.15
   meleeTime: 0.8
-  meleeRadius: 0.65
-  meleeDistance: 0.65
+  meleeRadius: 0.75
+  meleeDistance: 0.75
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -27,6 +30,7 @@ MonoBehaviour:
   launchAngle: 30
   launchTime: 0.15
   launchStopDistance: 1.4
+  launchResetsGravity: 0
   launchCurve:
     serializedVersion: 2
     m_Curve:

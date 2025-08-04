@@ -1,5 +1,101 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1183729009145540778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98474555599828164}
+  - component: {fileID: 6681912531631844439}
+  - component: {fileID: 3305912785743018966}
+  - component: {fileID: 7247932456450648636}
+  m_Layer: 13
+  m_Name: ReviveBody
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98474555599828164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183729009145540778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3798683650232698611}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6681912531631844439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183729009145540778}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bee3ff2a1e6934459704c3572906159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reviveTime: 6
+  timeToReset: 0.5
+--- !u!135 &3305912785743018966
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183729009145540778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7247932456450648636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183729009145540778}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1858554398235414277
 GameObject:
   m_ObjectHideFlags: 0
@@ -10557,6 +10653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 7400201383000877008}
   bodyMindConnection: {fileID: 4471171138262044766}
+  playerTeam: {fileID: 2295363821645548979}
   health: {fileID: 782412234501442312}
   self: {fileID: 8289933859456780900}
   velocityYOffset: -0.5
@@ -10696,6 +10793,7 @@ GameObject:
   - component: {fileID: 6520564595086861149}
   - component: {fileID: 1114080517313807072}
   - component: {fileID: 548802099205955812}
+  - component: {fileID: 4330658133883922663}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -11040,6 +11138,7 @@ MonoBehaviour:
   playerBodyStatSheet: {fileID: 6520564595086861149}
   playerInteractableTrigger: {fileID: 2538411085385556190}
   playerBuffs: {fileID: 548802099205955812}
+  playerReviver: {fileID: 4330658133883922663}
   meshes:
   - {fileID: 6082606815277094945}
   - {fileID: 8840055025692013051}
@@ -11081,6 +11180,7 @@ MonoBehaviour:
   deathParticle: {fileID: 1715321759695158391}
   body: {fileID: 4471171138262044766}
   playerBuffs: {fileID: 548802099205955812}
+  reviveBody: {fileID: 6681912531631844439}
   shildEmptySound:
     Guid:
       Data1: 1763954669
@@ -11194,6 +11294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeam: {fileID: 2295363821645548979}
   tBagOnKill: 1
+  ignoreHit: 0
 --- !u!114 &2295363821645548979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11373,6 +11474,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 782412234501442312}
+--- !u!114 &4330658133883922663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289933859456780900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80d2591e28be204697811f4ef24211e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterHealth: {fileID: 782412234501442312}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0
@@ -11865,6 +11979,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3337096618319444866, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2557860957202376795}
+    - targetCorrespondingSourceObject: {fileID: 7070631061924354838, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 98474555599828164}
     - targetCorrespondingSourceObject: {fileID: 8761944618247802705, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 674176909330399124}
@@ -11923,6 +12040,11 @@ MonoBehaviour:
 --- !u!4 &3521633971492238688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7383392835385583749, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+  m_PrefabInstance: {fileID: 6244328683183300069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3798683650232698611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7070631061924354838, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
   m_PrefabInstance: {fileID: 6244328683183300069}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &6082606815277094945 stripped

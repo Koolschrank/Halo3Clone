@@ -8,6 +8,7 @@ public class MeleeAttacker : MonoBehaviour
 
     [SerializeField] PlayerMovement playerMovement; // reference to the player movement for applying force
 	[SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
+    [SerializeField] PlayerTeam playerTeam; // reference to the player team for team index
 	[SerializeField] CharacterHealth health;
     [SerializeField] GameObject self;
     [SerializeField] float velocityYOffset = 0.5f;
@@ -191,6 +192,8 @@ public class MeleeAttacker : MonoBehaviour
                 damagePackage.damageAmount *= attackData.DamageMultiplierVSAI;
 			}
 
+            
+
 			damagePackage.origin = hitPoint;
             // direction of self move 
             var direction = transform.forward;
@@ -209,9 +212,14 @@ public class MeleeAttacker : MonoBehaviour
             hits++;
 
 
-            if (collider.TryGetComponent<Health>(out Health health))
+            if (collider.TryGetComponent<CharacterHealth>(out CharacterHealth health))
             {
-				
+				if (health.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex)
+                {
+                    damagePackage.damageAmount *= attackData.DamageMultiplierAgainstTeamMates;
+				}
+
+
 				health.TakeDamage(damagePackage);
 
                 var playerImpact = collider.GetComponent<PlayerPhysicsImpulse>();

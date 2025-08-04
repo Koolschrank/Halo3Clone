@@ -12,10 +12,14 @@ public class TargetHitCollector : MonoBehaviour
 
     public Action<GameObject, GameObject> OnKill;
 
+    public bool ignoreHit = false;
+
 
 
     public void CharacterHit(DamagePackage damage,GameObject target)
     {
+        if (ignoreHit) return;
+
         if (damage.hasHitMarkerEffect && target.GetComponent<PlayerTeam>().TeamIndex != playerTeam.TeamIndex)
         {
             OnCharacterHit?.Invoke(target);

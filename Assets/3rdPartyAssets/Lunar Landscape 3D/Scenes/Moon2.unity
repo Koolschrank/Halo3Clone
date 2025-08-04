@@ -583,6 +583,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 3
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &53034921
 Mesh:
   m_ObjectHideFlags: 0
@@ -797,6 +799,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &74728900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1347,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 3
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &184650632
 GameObject:
   m_ObjectHideFlags: 0
@@ -4919,6 +4925,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 3
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &442477007
 Mesh:
   m_ObjectHideFlags: 0
@@ -6191,6 +6199,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &471195580
 GameObject:
   m_ObjectHideFlags: 0
@@ -8216,6 +8226,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &692965964
 Mesh:
   m_ObjectHideFlags: 0
@@ -8455,7 +8467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: AIPerTeam
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: enemyTeamId
@@ -8835,7 +8847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: hills.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'hills.Array.data[3]'
@@ -9650,6 +9662,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 4
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &811551465
 Mesh:
   m_ObjectHideFlags: 0
@@ -9864,6 +9878,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &847372217
 GameObject:
   m_ObjectHideFlags: 0
@@ -15212,6 +15228,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1020986876
 GameObject:
   m_ObjectHideFlags: 0
@@ -15261,6 +15279,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 3
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &1021475268
 Mesh:
   m_ObjectHideFlags: 0
@@ -16191,6 +16211,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1084690109
 GameObject:
   m_ObjectHideFlags: 0
@@ -17707,6 +17729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d616c6fc489191e44accc092ea45d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSafeTime: 2
 --- !u!64 &1121661677
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22949,6 +22972,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &1554531215
 Mesh:
   m_ObjectHideFlags: 0
@@ -30138,6 +30163,8 @@ MonoBehaviour:
   spawnTime: 120
   magazines: 2
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1680217108
 GameObject:
   m_ObjectHideFlags: 0
@@ -31654,6 +31681,8 @@ MonoBehaviour:
   spawnTime: 90
   magazines: 4
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!1 &1706592789
 GameObject:
   m_ObjectHideFlags: 0
@@ -35767,6 +35796,8 @@ MonoBehaviour:
   spawnTime: 45
   magazines: 5
   weaponDistanceToAttemtRespawn: 6
+  isRandom: 0
+  randomWeapons: []
 --- !u!43 &1911608241
 Mesh:
   m_ObjectHideFlags: 0

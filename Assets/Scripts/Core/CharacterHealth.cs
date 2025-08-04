@@ -34,6 +34,7 @@ public class CharacterHealth : Health
     [SerializeField] GameObject deathParticle;
     [SerializeField] BodyMindConnection body;
     [SerializeField] PlayerBuffs playerBuffs;
+    [SerializeField] ReviveBody reviveBody;
 
 
 
@@ -559,23 +560,30 @@ public class CharacterHealth : Health
         OnArmorChanged?.Invoke(maxArmor == 0 ? 0 : currentArmor / maxArmor);
 	}
 
-
 	bool dead = false;
     protected void Die(DamagePackage damagePackage)
     {
-        
-        base.Die();
+		if (body.Mind != null)
+		{
+			if (GameModeSelector.gameModeManager.GameModeStats.hasReviveBodies)
+				reviveBody.Activate(body.Mind);
+		}
+
+
+		base.Die();
 
 
         deathParticle.SetActive(true);
 		ragdollTrigger.Activate(damagePackage);
 
-        dead = true;
+
+        
+
+		dead = true;
 
         shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         shildEmptySoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        if (GetComponent<BodyMindConnection>().Mind != null)
-		    AudioManager.instance.PlayOneShot(deathSound, transform.position);
+		    
 
 		float timeToKill = Time.time - firstShotTime;
         Debug.Log("Time to kill: " + timeToKill);

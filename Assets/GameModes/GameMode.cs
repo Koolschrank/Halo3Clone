@@ -50,6 +50,11 @@ public class GameMode : ScriptableObject
 
 
     public int usedItemList = 0; // used item list, used to determine which item list to use for weapon pickups
+
+    public bool removePlayerBodyWhenRespawned = false; // if true, player body is removed when respawned, otherwise it is not
+    public bool hasRespawnTokens = false; // if true, players have respawn tokens, otherwise they do not
+    public int respawnTokens = 3; // number of respawn tokens each player has, used to determine how many times a player can respawn before they are out of respawn tokens
+    public bool hasReviveBodies = false; // if true, players can revive each other using revive bodies, otherwise they cannot
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;

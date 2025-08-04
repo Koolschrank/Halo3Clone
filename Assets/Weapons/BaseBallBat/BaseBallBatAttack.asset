@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 110
   damageMultiplierVSAI: 1.25
+  damageMultiplierAgainstTeamMates: 0.4
   force: 130
   forceOnPlayers: 20
   forceOffset: 0.3

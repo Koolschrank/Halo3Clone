@@ -46,7 +46,7 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 8
+  respawnTime: 30
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
@@ -90,6 +90,10 @@ MonoBehaviour:
   - {r: 1, g: 0.6651867, b: 0.4431373, a: 0.8627451}
   - {r: 1, g: 0.4431373, b: 0.92949015, a: 0.8627451}
   usedItemList: 0
+  removePlayerBodyWhenRespawned: 1
+  hasRespawnTokens: 1
+  respawnTokens: 9
+  hasReviveBodies: 1
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

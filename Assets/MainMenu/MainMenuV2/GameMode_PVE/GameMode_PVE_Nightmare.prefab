@@ -119,7 +119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -137,6 +137,14 @@ PrefabInstance:
       propertyPath: 'SubButtons.Array.data[3]'
       value: 
       objectReference: {fileID: 6885655614118209522, guid: 7cb625597c01b4c4da40854a2946f3f1, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: f0b980e161f13114b9ac2dded87b699d, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[5]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: f3c7eeeeb00cbf1479a46b569dcf3dd9, type: 3}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
       value: Hard

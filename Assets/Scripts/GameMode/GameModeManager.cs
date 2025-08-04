@@ -20,8 +20,12 @@ public class GameModeManager : MonoBehaviour
     public GameMode GameModeStats => gameModeStats;
 
 
+    int respawnTokens = 0;
 
-    public Equipment GetGunGameEquipment(int teamIndex)
+    public Action<int> OnRespawnTokensChanged;
+
+
+	public Equipment GetGunGameEquipment(int teamIndex)
     {
         int points = teamPoints[teamIndex];
         return gameModeStats.GetEquipmentBasedOnPoints(points);
@@ -221,9 +225,26 @@ public class GameModeManager : MonoBehaviour
             teams.Add(new List<PlayerMind>());
             teamPoints.Add(0);
         }
-    }
 
-    public void StartGame(GameMode gameModeStats)
+        if (gameModeStats.hasRespawnTokens)
+        {
+            respawnTokens = gameModeStats.respawnTokens;
+		}
+	}
+
+    public int RespawnTokensLeft => respawnTokens;
+
+    public void UseRespawnToken()
+    {
+        if (respawnTokens > 0)
+        {
+            respawnTokens--;
+            OnRespawnTokensChanged?.Invoke(respawnTokens);
+		}
+	}
+
+
+	public void StartGame(GameMode gameModeStats)
     {
         this.gameModeStats = gameModeStats;
         gameObject.SetActive(true);
@@ -409,7 +430,6 @@ public class GameModeManager : MonoBehaviour
 
 
         teamPoints[teamIndex] += points;
-        Debug.Log("Team " + teamIndex + " gained " + points + " points. Total: " + teamPoints[teamIndex]);
 
 
 
@@ -417,7 +437,6 @@ public class GameModeManager : MonoBehaviour
         if (HasTeamWon(teamIndex))
         {
             OnTeamWon?.Invoke(teamIndex);
-            Debug.Log("Team " + teamIndex + " has won!");
         }
 
 

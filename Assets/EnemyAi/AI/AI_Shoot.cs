@@ -35,7 +35,7 @@ public class AI_Shoot : MonoBehaviour
 
 	private void Update()
     {
-        if (cannotShoot) return;
+        
 
         if (playerAim.OnTarget)
         {
@@ -54,7 +54,7 @@ public class AI_Shoot : MonoBehaviour
             }
         }
         
-        if (focuse == 1)
+        if (focuse == 1 && !cannotShoot)
         {
             playerArms.RightArm.UpdateWeaponTrigger(true);
 

@@ -201,7 +201,7 @@ public class EnemySpawner : MonoBehaviour
 		{
 			activeEnemies.Remove(enemy);
             SpawnTutorialEnemy(index);
-			Destroy(enemy, 120f);
+			Destroy(enemy, 40f);
 
 		};
 
@@ -402,7 +402,7 @@ public class EnemySpawner : MonoBehaviour
         health.OnDeath += () =>
         {
             activeEnemies.Remove(enemy);
-            Destroy(enemy, 120f);
+            Destroy(enemy, 40f);
         };
 
         var movement = enemy.GetComponent<PlayerMovement>();

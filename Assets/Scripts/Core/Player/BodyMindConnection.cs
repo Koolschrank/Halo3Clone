@@ -23,6 +23,7 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
     [SerializeField] PlayerInteractableTrigger playerInteractableTrigger;
     [SerializeField] PlayerBuffs playerBuffs;
+    [SerializeField] PlayerReviver playerReviver;
 
 	[SerializeField] SkinnedMeshRenderer[] meshes;
 
@@ -36,6 +37,7 @@ public class BodyMindConnection : MonoBehaviour
         
 
         this.mind = mind;
+        mind.SetMesh(mesh);
         mind.SetPlayerBody(gameObject);
         mind.transform.SetParent(mindParent);
         mind.SetPlayerModel(mesh);
@@ -50,7 +52,9 @@ public class BodyMindConnection : MonoBehaviour
 		mind.SetPlayerInventory(playerInventory);
         mind.SetAbilityInventory(abilityInventory);
         mind.SetInteractable(playerInteractableTrigger);
-        mind.transform.localPosition = Vector3.zero;
+        mind.SetPlayerReviver(playerReviver);
+
+		mind.transform.localPosition = Vector3.zero;
         mind.transform.localRotation = Quaternion.identity;
 
         
@@ -211,7 +215,11 @@ public class BodyMindConnection : MonoBehaviour
         }
     }
 
-    public void SetPlayerColor(Color color)
+    public GameObject Mesh     {
+        get { return mesh; }
+	}
+
+	public void SetPlayerColor(Color color)
     {
         playerAnimation.SetPlayerColor(color);
     }
