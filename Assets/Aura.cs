@@ -22,13 +22,29 @@ public class Aura : MonoBehaviour
 	[SerializeField] float moveSpeedHandicap = 0f;
     [SerializeField] GameObject forceShild;
     [SerializeField] bool ignoreAICharacters = false;
+    [SerializeField] bool reviveBody = false;
+    [SerializeField] LayerMask reviveLayer;
 
 	private void Start()
 	{
 		timer = stayTime;
         timerInstandHeal = instantHealTime;
-        // Set the initial values for players in aura
-       
+		// Set the initial values for players in aura
+
+
+		// sperecast for revive body
+        if (reviveBody)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, GetComponent<SphereCollider>().radius, reviveLayer);
+            foreach (var collider in colliders)
+            {
+                if (collider.gameObject.TryGetComponent<ReviveBody>(out ReviveBody body))
+                {
+                    body.Revive();
+                }
+            }
+		}
+
 	}
 
 	// on trigger enter and exit

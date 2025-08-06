@@ -10,7 +10,6 @@ public class UI_ReviveBar : MonoBehaviour
 
 	public void SetUp(PlayerReviver playerRevive)
     {
-        Debug.Log("UI_ReviveBar: SetUp");
 		if (this.playerReviver != null)
         {
 			playerReviver.OnHasReviveBody -= Show;

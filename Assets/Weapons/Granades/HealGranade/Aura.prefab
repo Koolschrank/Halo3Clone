@@ -159,7 +159,16 @@ MonoBehaviour:
   instantHealTime: 0.1
   instantHeal: 0.1
   shildRegenMultiplier: 15
+  armorHeal: 4
   damageReductionMultiplier: 0.3
+  poisonDamage: 0
+  moveSpeedHandicap: 0
+  forceShild: {fileID: 0}
+  ignoreAICharacters: 0
+  reviveBody: 1
+  reviveLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!135 &5611849403655671717
 SphereCollider:
   m_ObjectHideFlags: 0

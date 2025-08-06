@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
-  m_Name: KingOfTheHill
+  m_Script: {fileID: 11500000, guid: 4bd8e9c3626b06f4c92abf9b7116df01, type: 3}
+  m_Name: CaptureTheFlagHardcore
   m_EditorClassIdentifier: 
-  gameModeName: King of the hill
+  gameModeName: Capture The Flag
   startingEquipment:
     hasShild: 1
     headShotOneShot: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
-    magazinsOfWeaponInLeftHand: 2
+    magazinsOfWeaponInLeftHand: 3
     sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
@@ -44,13 +44,13 @@ MonoBehaviour:
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
   timeLimitInMinutes: 10
-  pointsToWin: 100
+  pointsToWin: 2
   teamCount: 2
-  respawnTime: 6
+  respawnTime: 20
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
-  pointsToWinMultiplier_smallMap: 1
+  pointsToWinMultiplier_smallMap: 1.5
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
   hasAiTeamMembers: 0
@@ -74,13 +74,7 @@ MonoBehaviour:
   team1MemberColors: []
   team1MemberColorsUI: []
   usedItemList: 0
-  removePlayerBodyWhenRespawned: 0
+  removePlayerBodyWhenRespawned: 1
   hasRespawnTokens: 0
   respawnTokens: 3
-  hasReviveBodies: 0
-  timeToScore: 1
-  moveHill: 1
-  hillMoveTime: 70
-  moveHillWhenScoreReached: 0
-  scoreToMoveHill: 50
-  keepLastTeamOnHill: 0
+  hasReviveBodies: 1

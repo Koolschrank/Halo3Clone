@@ -390,27 +390,23 @@ public class GameModeManager : MonoBehaviour
 
     public virtual void PlayerDied(PlayerMind player)
     {
-        Debug.Log("loss 0.1");
         int teamIndex = player.TeamIndex;
         if (gameModeStats.LooseWhenAllPlayersDead)
         {
             bool allPlayersDead = true;
             var team = teams[teamIndex];
-            Debug.Log("loss 0.2");
             foreach (var playerInTeam in team)
             {
                 if (!playerInTeam.IsDead)
                 {
-                    Debug.Log("loss 0.3");
                     allPlayersDead = false;
                     break;
                 }
             }
 
-            if (allPlayersDead)
+            if (allPlayersDead && teamIndex == 0 && GameModeSelector.gameModeManager.RespawnTokensLeft ==0)
             {
-                Debug.Log("loss");
-                GainPoints(teamIndex, 10000);
+                GainPoints(1, 10000);
             }
         }
     }

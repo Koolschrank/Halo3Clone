@@ -76,6 +76,19 @@ public class KingOfTheHillManager : GameModeManager
             StartRandomHill();
             ResetHillMoveTimer();
             OnNextHillPlaced?.Invoke();
+
+
+            if (gameModeStats.hasRespawnTokens && RespawnTokensLeft == 0)
+            {
+                var allPlayers = PlayerManager.instance.GetAllPlayers();
+				foreach (var player in allPlayers)
+				{
+					if (player.IsDead)
+                    {
+                        player.Respawn();
+					}
+				}
+			}
 		}
 
 

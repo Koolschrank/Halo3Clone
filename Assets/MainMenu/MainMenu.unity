@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -575,6 +575,14 @@ PrefabInstance:
       propertyPath: 'SubButtons.Array.data[4]'
       value: 
       objectReference: {fileID: 6181505618347800424, guid: aeae88eeee3a17b4cb6a16145e8e9a34, type: 3}
+    - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: 'SubButtons.Array.data[5]'
+      value: 
+      objectReference: {fileID: 6181505618347800424, guid: e55d3c97d02337c4cb685ceef16b45bd, type: 3}
+    - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: 'SubButtons.Array.data[6]'
+      value: 
+      objectReference: {fileID: 6181505618347800424, guid: 820bd366ad2cd954ba4b78326b19437f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

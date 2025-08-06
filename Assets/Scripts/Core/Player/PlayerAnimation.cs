@@ -373,7 +373,6 @@ public class PlayerAnimation : MonoBehaviour
             return;
         }
 
-        Debug.Log("SwitchInLeftWeapon");
 
 
 

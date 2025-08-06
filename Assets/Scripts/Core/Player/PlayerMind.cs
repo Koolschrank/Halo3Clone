@@ -152,7 +152,7 @@ public class PlayerMind : MonoBehaviour
 		GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
         string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
-        Debug.Log(deviceName + " joined");
+        
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
         playerName.text = playerSettings.playerName;
 
@@ -893,7 +893,7 @@ public class PlayerMind : MonoBehaviour
 
     public void EnableObjectiveUIMarker()
     {
-        for (int i = 0; i < objectiveIndicatorUIs.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             objectiveIndicatorUIs[i].gameObject.SetActive(true);
         }

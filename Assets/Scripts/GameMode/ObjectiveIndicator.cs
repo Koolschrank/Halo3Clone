@@ -7,8 +7,7 @@ public class ObjectiveIndicator : MonoBehaviour
 {
     public Action<Objective> OnObjectiveAdded;
 
-    List<Objective> objectives = new List<Objective>();
-    [SerializeField] Vector3 offset = new Vector3(0, 2, 0);
+    public List<Objective> objectives = new List<Objective>();
 
     
 
@@ -29,9 +28,11 @@ public class ObjectiveIndicator : MonoBehaviour
         {
             for (int i = objectives.Count; i <= index; i++)
             {
-                var obj = new Objective();
+                Debug.LogWarning($"Objective with index {index} does not exist, creating a new one.");
+				var obj = new Objective();
                 objectives.Add(obj);
                 OnObjectiveAdded?.Invoke(obj);
+                obj.SetHideDistance(10000);
             }
         }
         return objectives[index];
@@ -43,6 +44,7 @@ public class ObjectiveIndicator : MonoBehaviour
     }
 }
 
+[Serializable]
 public class Objective
 {
 
@@ -63,7 +65,7 @@ public class Objective
     float hideDistance = 0;
     int teamIndex = -1;
     String objectiveText = "";
-    Vector3 position = Vector3.zero;
+    [SerializeField] Vector3 position = Vector3.zero;
 
     public void SetActive(bool active)
     {

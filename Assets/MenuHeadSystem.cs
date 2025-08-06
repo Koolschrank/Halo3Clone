@@ -20,6 +20,8 @@ public class MenuHeadSystem : MonoBehaviour
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 
+	
+
 	private void Awake()
 	{
 
@@ -57,6 +59,8 @@ public class MenuHeadSystem : MonoBehaviour
 	{
 		menuSelectedType = MenuSelectedType.Map;
 		EnterGameTypeMenu();
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
 	}
 
 	private void OnDisable()

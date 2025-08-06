@@ -8,7 +8,17 @@ public class UI_RespawnTimer : MonoBehaviour
 
 	private void Start()
 	{
+		if (GameModeSelector.gameModeManager.GameModeStats.hasRespawnTokens)
+		{
+			this.gameObject.SetActive(false);
+			return;
+		}
+
+
 		playerMind.OnRespawnUpdate += UpdateRespawnSlider;
+
+
+
 	}
 
 	private void UpdateRespawnSlider(float timeLeft)

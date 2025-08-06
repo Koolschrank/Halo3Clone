@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b063a3f511f635408759e74207f004f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectives: []
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1561208987953219289
 GameObject:
@@ -1011,6 +1012,7 @@ GameObject:
   - component: {fileID: 8164885341825693715}
   - component: {fileID: 8811581011380500969}
   - component: {fileID: 7973393272836266417}
+  - component: {fileID: 2792345713832055248}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1963,6 +1965,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponLists: []
+--- !u!114 &2792345713832055248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151862695114880791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a478ba9f0dd7145a5e49bece1ef052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addIndex: 4
 --- !u!1 &8781002057444987038
 GameObject:
   m_ObjectHideFlags: 0

@@ -370,7 +370,6 @@ public class AI_Move : MonoBehaviour
 
         if (!followObjective || playerArms.RightArm.GetWeaponInHand().Data.GunAiBehaviour.IdealRange < 1)
         {
-            Debug.Log(agent.pathStatus == NavMeshPathStatus.PathPartial);
 
 			if (agent.pathStatus == NavMeshPathStatus.PathPartial)
             {

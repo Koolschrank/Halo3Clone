@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1
   damage: 1
+  damageMultiplierVSAI: 1
   damageOnShildMultiplier: 1
   damageReductionAgainstBlocking: 0.8
   damageFalloff:
@@ -426,6 +427,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  rumbleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  rumbleData:
+    duration: 0
+    intensity: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rumbleType: 0
+  rumbleReach: 20
 --- !u!1001 &1251280770630912952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: armorHeal
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: forceShild
@@ -596,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765873687482999346, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: damageReductionMultiplier
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3986253796533468359, guid: 3578516d1b2abee46806429e1bbaba5d, type: 3}
       propertyPath: lengthInSec

@@ -55,19 +55,27 @@ public class ObjectiveIndicatorUI : MonoBehaviour
 
         SetHideDistance(ObjectiveIndicator.instance.GetObjective(indexToFollow).HideDistance);
 
+
+
         if (ObjectiveIndicator.instance.GetObjective(indexToFollow).IsActive)
         {
-            Show();
-            UpdatePosition(ObjectiveIndicator.instance.GetObjective(indexToFollow).Position);
-        }
+            var objective = ObjectiveIndicator.instance.GetObjective(indexToFollow);
+            
+            
+			Show();
+            UpdatePosition(objective.Position);
+			SetHideDistance(objective.HideDistance);
+
+		}
         else
         {
             Hide();
         }
 
     }
+	
 
-    public void SetHideDistance(float distance)
+	public void SetHideDistance(float distance)
     {
         hideDistance = distance;
     }

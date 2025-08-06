@@ -46,12 +46,12 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 40
+  respawnTime: 999999
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
-  looseWhenAllPlayersDead: 0
+  looseWhenAllPlayersDead: 1
   hasAiPlayers: 1
   hasAiTeamMembers: 0
   useStatSheets: 0

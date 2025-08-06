@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bee3ff2a1e6934459704c3572906159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reviveTime: 6
-  timeToReset: 0.5
+  reviveTime: 4
+  timeToReset: 1
 --- !u!135 &3305912785743018966
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11487,6 +11487,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterHealth: {fileID: 782412234501442312}
+  rightArm: {fileID: 3970420054294455764}
+  leftArm: {fileID: 3844945188849078822}
+  meleeAttacker: {fileID: 8008512304446792098}
+  granadeThrower: {fileID: 625404246279802593}
+  playerTeam: {fileID: 2295363821645548979}
 --- !u!1 &8515099566964434118
 GameObject:
   m_ObjectHideFlags: 0

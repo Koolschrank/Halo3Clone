@@ -13,7 +13,9 @@ public class ReviveBody : MonoBehaviour
 	[SerializeField] float reviveTime = 3f;
 	[SerializeField] float timeToReset = 0.5f;
 
-
+	int index = -1;
+	[NonSerialized]
+	public int teamIndex = -1;
 
 	bool active = false;
 	float reviveTimer = 0f;
@@ -44,6 +46,10 @@ public class ReviveBody : MonoBehaviour
 		playerMind = ownerOfBody;
 		active = true;
 		enabled = true;
+		index = ownerOfBody.playerID;
+		teamIndex = ownerOfBody.TeamIndex;
+
+		PlayerReviveManager.Instance.AddBodyToRevive(index,teamIndex, transform);
 	}
 
 
@@ -76,21 +82,11 @@ public class ReviveBody : MonoBehaviour
 		isReviving = false;
 		if (reviveTimer != 0f && lastUpdateTime + timeToReset < Time.timeSinceLevelLoad)
 		{
-			reviveTimer -= Time.deltaTime;
-			if (reviveTime <= 0f)
-			{
-				reviveTimer = 0f;
-				OnReviveProgress?.Invoke(0f);
-			}
-			else
-			{
-				OnReviveProgress?.Invoke(reviveTimer);
-			}
-
-
+			ResetRevive();
 		}
 
 		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
 
 		// set layer index to 13
 		if (gameObject.layer != 13)
@@ -98,6 +94,12 @@ public class ReviveBody : MonoBehaviour
 			gameObject.layer = 13; 
 		}
 		
+	}
+
+	public void ResetRevive()
+	{
+		reviveTimer = 0f;
+		OnReviveProgress?.Invoke(0f);
 	}
 
 	public void AddValue(float value)
@@ -134,11 +136,18 @@ public class ReviveBody : MonoBehaviour
 		reviveTimer = 0f;
 		gameObject.SetActive(false);
 
+		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
+
 		playerMind.RevivePlayer(transform.position + Vector3.up * 1f);
+
+		
 
 	}
 
-
-
-
+	private void OnDisable()
+	{
+		if (index != -1)
+			PlayerReviveManager.Instance.RemoveBodyToRevive(index);
+	}
 }

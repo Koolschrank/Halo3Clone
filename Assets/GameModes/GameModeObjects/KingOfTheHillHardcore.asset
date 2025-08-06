@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0edd736cf786c4047b0c24a0e7f3fefb, type: 3}
-  m_Name: KingOfTheHill
+  m_Name: KingOfTheHillHardcore
   m_EditorClassIdentifier: 
   gameModeName: King of the hill
   startingEquipment:
@@ -46,7 +46,7 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 100
   teamCount: 2
-  respawnTime: 6
+  respawnTime: 20
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
@@ -74,10 +74,10 @@ MonoBehaviour:
   team1MemberColors: []
   team1MemberColorsUI: []
   usedItemList: 0
-  removePlayerBodyWhenRespawned: 0
+  removePlayerBodyWhenRespawned: 1
   hasRespawnTokens: 0
   respawnTokens: 3
-  hasReviveBodies: 0
+  hasReviveBodies: 1
   timeToScore: 1
   moveHill: 1
   hillMoveTime: 70
