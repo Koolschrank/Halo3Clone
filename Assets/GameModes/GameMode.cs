@@ -55,6 +55,8 @@ public class GameMode : ScriptableObject
     public bool hasRespawnTokens = false; // if true, players have respawn tokens, otherwise they do not
     public int respawnTokens = 3; // number of respawn tokens each player has, used to determine how many times a player can respawn before they are out of respawn tokens
     public bool hasReviveBodies = false; // if true, players can revive each other using revive bodies, otherwise they cannot
+
+    public int scoreMultiplier = 1; // score multiplier for team 1, used to determine how many points team 1 gets for scoring
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;

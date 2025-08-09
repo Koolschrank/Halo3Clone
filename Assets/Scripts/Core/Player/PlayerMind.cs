@@ -61,6 +61,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] UI_Score scoreUI;
     [SerializeField] UI_UpgradeMenu upgradeMenu;
     [SerializeField] UI_ReviveBar reviveBar;
+    [SerializeField] UI_RespawnTokenMenu respawnTokenMenu;
 
 
 	[Header("UI Settings Menu")]
@@ -129,8 +130,6 @@ public class PlayerMind : MonoBehaviour
         playerInput.actions.FindActionMap("Player").Enable();
         playerInput.actions.FindActionMap("PlayerGunPlay_SingleWeapon").Enable();
         playerInput.actions.FindActionMap("PlayerGunPlay_DualWeapons").Disable();
-
-        
     }
 
     public void EnterDualWeaponMode()
@@ -181,8 +180,12 @@ public class PlayerMind : MonoBehaviour
 
         if (gameObject.GetComponent<PlayerInput>().currentControlScheme == "KeyboardAndMouse")
         {
-            pickUpUI.SetKeyboard();
-        }
+
+			Debug.Log("Setting keyboard icon for respawn token button");
+			pickUpUI.SetKeyboard();
+			respawnTokenMenu.SetKeyboardIcon();
+
+		}
     }
 
     public Action<float> OnRespawnUpdate;
@@ -207,8 +210,9 @@ public class PlayerMind : MonoBehaviour
                 if (tokenButtonPressTime >= respawnTokenUseTime)
                 {
                     tokenButtonPressedDown = false;
-                    Respawn();
-                    GameModeSelector.gameModeManager.UseRespawnToken();
+
+                    PlayerManager.instance.RespawnAllDeadPlayers();
+					GameModeSelector.gameModeManager.UseRespawnToken();
                     tokenButtonPressTime = 0;
 				}
 				OnTokenUseUpdate?.Invoke(tokenButtonPressTime / respawnTokenUseTime);
@@ -508,7 +512,10 @@ public class PlayerMind : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        this.score += amount;
+        amount *= GameModeSelector.gameModeManager.GameModeStats.scoreMultiplier;
+
+
+		this.score += amount;
         OnScoreAdded?.Invoke(amount);
         OnScoreChanged?.Invoke(this.score);
         PlayerProgression.instance.GainEXP(amount);
@@ -979,8 +986,7 @@ public class PlayerMind : MonoBehaviour
 
 	public void RevivePlayer(Vector3 spawnPoint)
     {
-        Respawn();
-        playerMovement.transform.position =spawnPoint;
+        Revive(spawnPoint);
 	}
 
 	public void Respawn()
@@ -1001,7 +1007,25 @@ public class PlayerMind : MonoBehaviour
 
 	}
 
-    public void SetScreenRect(ScreenRectValues screen, int channel)
+	public void Revive(Vector3 spawnPosition)
+	{
+		if (!IsDead) return;
+		inRespawn = false;
+		if (mesh != null && GameModeSelector.gameModeManager.GameModeStats.removePlayerBodyWhenRespawned)
+		{
+			Debug.Log("Removing player body on respawn");
+			mesh.SetActive(false);
+		}
+
+		PlayerManager.instance.RespawnPlayer(this, spawnPosition, Quaternion.identity);
+		SwitchToPlayerCamera();
+
+		playerInput.actions.FindActionMap("PlayerRespawn").Disable();
+
+
+	}
+
+	public void SetScreenRect(ScreenRectValues screen, int channel)
     {
         playerCamera.SetScreenRect(screen, channel);
     }

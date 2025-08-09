@@ -234,7 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectives: []
-  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1561208987953219289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,8 +1894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c67048a417bc144bcb21b5fcb9880a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canGainEXP: 0
-  expRequirments: 96000000fa000000c20100008a02000020030000e8030000e2040000dc050000d6060000d0070000b80b00008813000010270000
+  canGainEXP: 1
+  expRequirments: 8096980096000000fa000000c20100008a02000020030000e8030000e2040000dc050000d6060000d0070000b80b00008813000010270000
 --- !u!114 &8164885341825693715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3943,6 +3942,66 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4771886722476780649, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].ability
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].sideArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].hasShild
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].hasShild
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].weaponInHand
+      value: 
+      objectReference: {fileID: 11400000, guid: c3ff571aa9887d0498b6ac7a0cf1454c, type: 2}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].weaponInHand
+      value: 
+      objectReference: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].headShotOneShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].headShotOneShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].magazinsOfSideArm
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].magazinsOfSideArm
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].magazinsOfWeaponInHand
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].magazinsOfWeaponInHand
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[5].movementSpeedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5733281072641629761, guid: 3eb48a4eb49e2bb468e5d9822da37c92, type: 3}
+      propertyPath: specialEquipments.Array.data[6].movementSpeedMultiplier
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

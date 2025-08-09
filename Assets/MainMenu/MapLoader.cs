@@ -42,8 +42,14 @@ public class MapLoader : MonoBehaviour
 
     [SerializeField] Enemy_Wave aiEnemyWave;
     public bool brStart = false;
+    public bool wiveMode = false;
 
-    public void SetBRStart(bool value)
+    public void SetWiveMode(bool value)
+    {
+        wiveMode = value;
+	}
+
+	public void SetBRStart(bool value)
     {
         brStart = value;
 	}

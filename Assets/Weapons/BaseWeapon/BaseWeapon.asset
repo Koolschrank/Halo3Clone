@@ -21,7 +21,7 @@ MonoBehaviour:
   fireRate: 0.09
   bulletsPerShot: 1
   magazineSize: 42
-  maxAmmoInReserve: 400
+  maxAmmoInReserve: 210
   reloadTime: 2
   reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.035
@@ -77,10 +77,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.85
+  damageMultiplier: 0.9
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
-  reloadTimeMultiplier: 1.4
+  reloadTimeMultiplier: 1.25
   bloomOnShoot: 0
   bloomOnTakingDamage: 0
   bloomInaccuracyMultiplier: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   bulletsPerRow: 21
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
   crosshairsSize: {x: 0.45, y: 0.45}
+  crosshairsSizeMultiplierWhenDualWielded: 1.5
   enemyAiWeaponData: {fileID: 11400000, guid: 921ef2f94fd4b634eb62fccf8b211169, type: 2}
   gunAiBehaviour:
     IdealRange: 10

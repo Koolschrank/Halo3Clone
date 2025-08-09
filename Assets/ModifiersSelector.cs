@@ -12,6 +12,8 @@ public class ModifiersSelector : MonoBehaviour
     [SerializeField] Toggle aiEnemiesTeam2;
 	[SerializeField] Toggle brStart;
 
+	[SerializeField] Toggle wifeMode;
+
 	[SerializeField] Slider moveSpeedSlider;
     [SerializeField] TextMeshProUGUI moveSpeedValue;
     [SerializeField] Slider damageMultiplierSlider;
@@ -36,11 +38,13 @@ public class ModifiersSelector : MonoBehaviour
 		float moveSpeedMultiplier = MapLoader.instance.GetMoveSpeedMultiplier();
         float damageMultiplier = MapLoader.instance.GetDamageMultiplier();
         float aiAmount = MapLoader.instance.AIAmountMultiplier;
+        bool wiveModeValue = MapLoader.instance.wiveMode;
 
-        int moveSpeedValueInt = Mathf.RoundToInt(moveSpeedMultiplier * 10);
+		int moveSpeedValueInt = Mathf.RoundToInt(moveSpeedMultiplier * 10);
         int damageMultiplierValueInt = Mathf.RoundToInt(damageMultiplier * 10);
 
         int aiAmountValueInt = Mathf.RoundToInt(aiAmount * 10);
+
 
 
         swatToggle.isOn = isSwat;
@@ -53,6 +57,7 @@ public class ModifiersSelector : MonoBehaviour
         aiEnemiesTeam1.isOn = aiEnemies1Value;
         aiEnemiesTeam2.isOn = aiEnemies2Value;
         brStart.isOn = brStartValue;
+        wifeMode.isOn = wiveModeValue;
 
 
 		moveSpeedValue.text = (moveSpeedMultiplier).ToString("F1");
@@ -73,9 +78,10 @@ public class ModifiersSelector : MonoBehaviour
         moveSpeedSlider.onValueChanged.AddListener(SetMoveSpeedMultiplier);
         damageMultiplierSlider.onValueChanged.AddListener(SetDamageMultiplier);
         aiAmountSlider.onValueChanged.AddListener(SetAIAmount);
+        wifeMode.onValueChanged.AddListener(MapLoader.instance.SetWiveMode);
 
 
-    }
+	}
 
     // on disable remove listeners
     private void OnDisable()

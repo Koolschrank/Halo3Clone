@@ -111,10 +111,7 @@ public class Explosion : MonoBehaviour
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
                 damagePackage.damageReductionAgainstBlock = damageReductionAgainstBlocking;
 
-				if (GameModeSelector.gameModeManager.GameModeStats.team2LoosesScoreWhenTeam1scores)
-				{
-					damagePackage.damageAmount *= damageMultiplierVSAI;
-				}
+				
 
 				float margin = 1f;
 				if (range < margin)
@@ -135,7 +132,13 @@ public class Explosion : MonoBehaviour
                     }
                 }
 
-                health.TakeDamage(damagePackage);
+				if (collider.gameObject.CompareTag("AIEnemy"))
+				{
+                    Debug.Log("hit ai");
+					damagePackage.damageAmount *= damageMultiplierVSAI;
+				}
+
+				health.TakeDamage(damagePackage);
 
 
                 if (!health.IsDead && !obstructed)

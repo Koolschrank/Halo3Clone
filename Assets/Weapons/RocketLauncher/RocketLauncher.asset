@@ -18,11 +18,11 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 9209568620739521198, guid: 287b81575db7118408b3d163744ecd0e, type: 3}
   weaponName: Rocket Launcher
   shootType: 0
-  fireRate: 0.9
+  fireRate: 0.4
   bulletsPerShot: 1
-  magazineSize: 2
-  maxAmmoInReserve: 6
-  reloadTime: 3
+  magazineSize: 1
+  maxAmmoInReserve: 5
+  reloadTime: 2.5
   reloadGainAmmoTrigger: 0.8
   inaccuracy: 0
   switchOutTime: 0.3
@@ -80,10 +80,10 @@ MonoBehaviour:
   damageMultiplier: 1
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
-  reloadTimeMultiplier: 1
+  reloadTimeMultiplier: 1.3
   bloomOnShoot: 1
   bloomOnTakingDamage: 0
-  bloomInaccuracyMultiplier: 0.5
+  bloomInaccuracyMultiplier: 0
   bloomTime: 0.9
   bloomCurve:
     serializedVersion: 2
@@ -161,7 +161,7 @@ MonoBehaviour:
           Data3: -1721329226
           Data4: -509001751
         Path: event:/SFX/Guns/RocketLauncher/Reload/ReloadEnd
-      timeOfPlay: 0.1
+      timeOfPlay: 0.02
       hasRumble: 0
       rumbleData:
         duration: 0.125

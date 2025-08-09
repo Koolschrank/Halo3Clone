@@ -34,13 +34,13 @@ MonoBehaviour:
     healthOverride:
       hasHealthOverride: 1
       showHealthBar: 0
-      health: 62.5
-      shild: 125
+      health: 75
+      shild: 150
       armor: 0
       healthRegenStartTime: 2.5
       shildRegenStartTime: 4.5
-      healthRegen: 12.5
-      shildRegen: 31.25
+      healthRegen: 15
+      shildRegen: 37.5
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 0
   timeLimitInMinutes: 10
@@ -61,7 +61,7 @@ MonoBehaviour:
   spawnWithArmor: 1
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
-  team2PointsToWin: 200
+  team2PointsToWin: 250
   team2LoosesScoreWhenTeam1scores: 1
   amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
   useEnemyWaves: 1
@@ -94,6 +94,7 @@ MonoBehaviour:
   hasRespawnTokens: 1
   respawnTokens: 9
   hasReviveBodies: 1
+  scoreMultiplier: 1
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

@@ -16,12 +16,12 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: 54245a2b12894ed41b5df1dda442b33e, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 8d06e80a47dd3d14aa19e7bf67e5881f, type: 3}
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: 71b0642b8ad851e479a24126c51280b6, type: 3}
-  weaponName: Assult Rifle
+  weaponName: Big Gun
   shootType: 1
   fireRate: 0.04
   bulletsPerShot: 1
   magazineSize: 84
-  maxAmmoInReserve: 800
+  maxAmmoInReserve: 168
   reloadTime: 3
   reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.055
@@ -33,9 +33,11 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 0
   burstAmount: 2
   burstDelay: 0.01
   hasKnockback: 0
@@ -79,10 +81,40 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
   hasBlock: 0
   block:
     blockPercentage: 0.5
     blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 1709653785
@@ -100,6 +132,17 @@ MonoBehaviour:
           Data4: -25755214
         Path: event:/SFX/Guns/AssultRifle/AssultRifleSwitchIn
       timeOfPlay: 0.4
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -110,6 +153,17 @@ MonoBehaviour:
           Data4: 1019789825
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinOut
       timeOfPlay: 0.25
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: 1502081569
@@ -118,6 +172,17 @@ MonoBehaviour:
           Data4: 1818439784
         Path: event:/SFX/Guns/AssultRifle/Reload/MagazinIn
       timeOfPlay: 0.65
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 2fa4d724c72f4c0468063c6d3a594158, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
@@ -125,7 +190,8 @@ MonoBehaviour:
   bulletsPerRow: 28
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
   crosshairsSize: {x: 0.55, y: 0.55}
-  enemyAiWeaponData: {fileID: 11400000, guid: 921ef2f94fd4b634eb62fccf8b211169, type: 2}
+  crosshairsSizeMultiplierWhenDualWielded: 1
+  enemyAiWeaponData: {fileID: 11400000, guid: c3ff571aa9887d0498b6ac7a0cf1454c, type: 2}
   gunAiBehaviour:
     IdealRange: 10
     focusGainWhenOnTarget: 1

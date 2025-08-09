@@ -21,7 +21,7 @@ MonoBehaviour:
   fireRate: 0.09
   bulletsPerShot: 1
   magazineSize: 20
-  maxAmmoInReserve: 300
+  maxAmmoInReserve: 80
   reloadTime: 1.6
   reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.025

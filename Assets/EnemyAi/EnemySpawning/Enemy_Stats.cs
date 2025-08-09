@@ -10,4 +10,5 @@ public class Enemy_Stats : ScriptableObject
     public float speedMultiplier = 1;
     public int teamIdOverrride = 5;
     public int scoreForKill = 10;
+    public bool useSpecialEquipment = false;
 }

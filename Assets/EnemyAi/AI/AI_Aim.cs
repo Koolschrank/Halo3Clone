@@ -6,9 +6,10 @@ public class AI_Aim : MonoBehaviour
     [SerializeField] PlayerAim aim;
     [SerializeField] GameObject head;
     [SerializeField] AI_Target target;
-    
+    [SerializeField] PlayerArms arms;
 
-    [SerializeField] float aimSpeedMultiplier_X = 5f;
+
+	[SerializeField] float aimSpeedMultiplier_X = 5f;
     [SerializeField] float aimSpeedMultiplier_Y = 5f;
 
     Vector3 targetPosition;
@@ -16,8 +17,15 @@ public class AI_Aim : MonoBehaviour
     private void Update()
     {
         Vector2 aimInput = Vector2.zero;
+		if (arms.RightArm.InGranadeThrow)
+		{
+			aim.UpdateAimInput(aimInput);
+			return;
+		}
 
-        targetPosition = target.GetTargetPosition();
+
+
+		targetPosition = target.GetTargetPosition();
 
         var angles = GetYawPitchToTarget(transform,head.transform, targetPosition);
 

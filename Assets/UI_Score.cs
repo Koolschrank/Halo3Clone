@@ -1,4 +1,5 @@
 using DamageNumbersPro;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -9,12 +10,36 @@ public class UI_Score : MonoBehaviour
     [SerializeField] DamageNumberGUI textLog;
     [SerializeField] TextMeshProUGUI scoreText;
 
-    public void UpdateScore(int value)
+	[SerializeField] TextMeshProUGUI scoreText2;
+
+    [SerializeField] bool DEBUG_autoSpawn = false;
+
+	public void UpdateScore(int value)
     {
-        scoreText.text = value.ToString() +"$";
+        scoreText2.text = "Score";
+
+		scoreText.text = value.ToString();
     }
 
-    public void SpawnScoreGain(int value)
+	private void Awake()
+	{
+        if (DEBUG_autoSpawn)
+        {
+            StartCoroutine(AutoSpawnLoop());
+        }
+
+	}
+
+    IEnumerator AutoSpawnLoop()
+    {
+        while (DEBUG_autoSpawn)
+        {
+            yield return new WaitForSeconds(1f);
+            SpawnScoreGain(Random.Range(1, 100));
+        }
+	}
+
+	public void SpawnScoreGain(int value)
     {
         if (gameObject.activeSelf)
         {

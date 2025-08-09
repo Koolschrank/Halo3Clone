@@ -22,6 +22,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] Enemy_Wave enemiesForPVPGames;
 
+
+	[SerializeField] Equipment[] specialEquipments;
+
 	[SerializeField] Enemy_Wave alliesForPVPGames;
 
 	[SerializeField] int waveIndex = 0;
@@ -393,6 +396,11 @@ public class EnemySpawner : MonoBehaviour
 
 
 		var equipment = stats.equipment;
+        if (stats.useSpecialEquipment)
+        {
+            equipment = specialEquipments[UnityEngine.Random.Range(0,specialEquipments.Length)];
+		}
+
         enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
         var health = enemy.GetComponent<CharacterHealth>();
         health.MultiplyHealth(stats.healthMultiplier);

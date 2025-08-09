@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipment:
     hasShild: 0
-    headShotOneShot: 0
+    headShotOneShot: 1
     hasMiniMap: 0
     canDualWield: 0
     canDualWieldEverything: 0
@@ -35,6 +35,7 @@ MonoBehaviour:
       showHealthBar: 0
       health: 0
       shild: 0
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 0
@@ -46,3 +47,4 @@ MonoBehaviour:
   speedMultiplier: 0.6
   teamIdOverrride: 6
   scoreForKill: 100
+  useSpecialEquipment: 0

@@ -78,16 +78,18 @@ public class KingOfTheHillManager : GameModeManager
             OnNextHillPlaced?.Invoke();
 
 
-            if (gameModeStats.hasRespawnTokens && RespawnTokensLeft == 0)
+            if (gameModeStats.hasRespawnTokens )
             {
                 var allPlayers = PlayerManager.instance.GetAllPlayers();
-				foreach (var player in allPlayers)
-				{
-					if (player.IsDead)
+                foreach (var player in allPlayers)
+                {
+                    if (!player.IsDead)
                     {
-                        player.Respawn();
-					}
+                        player.AddScore((int)(teamPoints[0] * 0.4));
+                    }
 				}
+
+				PlayerManager.instance.RespawnAllDeadPlayers();
 			}
 		}
 

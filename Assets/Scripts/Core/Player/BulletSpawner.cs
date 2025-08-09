@@ -262,7 +262,6 @@ public class BulletSpawner : MonoBehaviour
 
                 damagePackage.damageAmount = bullet.Damage * damageMultiplier * bullet.GetDamageFalloff(hit.distance);
 
-
                 bool bodyHit = false;
                 // if hit health
                 if (hit.collider.TryGetComponent<Health>(out Health health))

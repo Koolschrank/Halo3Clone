@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class AI_Move : MonoBehaviour
 {
@@ -58,46 +59,41 @@ public class AI_Move : MonoBehaviour
 
     float timeToIgnorePathInvalid = 1.5f; // time to ignore path invalid status
 	float pathInvalidTime = 0f;
-    bool inJumpState = false; 
+    bool inJumpState = false;
 
 
-    public void Jump(Vector3 goalPosition)
-    {
-        var forward = transform.forward;
-		Vector3 direction = (goalPosition - transform.position).normalized;
+	public void Jump(Vector3 goalPosition)
+	{
+		//var direction = goalPosition - transform.position;
+  //      direction.y = 0; // keep the jump horizontal
+  //      var localDirection = playerBody.transform.InverseTransformDirection(direction);
 
-        Vector2 input;
-        if (Vector3.Dot(direction, forward) > 0.5f)
-        {
-            input = Vector2.up; // jump forward
-        }
-        else if (Vector3.Dot(direction, -forward) > 0.5f)
-        {
-            input = Vector2.down; // jump backward
-        }
-        else if (Vector3.Dot(direction, transform.right) > 0.5f)
-        {
-            input = Vector2.right; // jump right
-        }
-        else if (Vector3.Dot(direction, -transform.right) > 0.5f)
-        {
-            input = Vector2.left; // jump left
-        }
-        else
-        {
-            input = Vector2.zero; // no jump direction
-        }
+		//// X = right/left, Z = forward/back in local space
+		//Vector2 input = new Vector2(localDirection.x, localDirection.z);
 
+		//// If target is extremely close, treat as no directional input
+		//if (input.sqrMagnitude < 0.000001f)
+		//{
+		//	input = Vector2.zero;
+		//}
+		//else if (input.sqrMagnitude > 1f)
+		//{
+		//	// Prevent diagonal boost; normalize only when >1
+		//	input.Normalize();
+		//}
+        var direction = goalPosition - transform.position;
+        direction.y = 0; // keep the jump horizontal
+        
+        Vector2 input = new Vector2(direction.x, direction.z);
 
+		playerMovement.UpdateMoveInput(input.normalized);
 
-		playerMovement.UpdateMoveInput(input);
-        inJumpState = true;
-        jumpCooldownTimer = jumpCooldown; // reset jump cooldown timer
-        playerMovement.TryJump();
-
+		inJumpState = true;
+		jumpCooldownTimer = jumpCooldown; // reset cooldown
+		playerMovement.TryJump();
 	}
 
-    public bool CanJump()
+	public bool CanJump()
     {
         if (inJumpState) return false; // already in jump state
         if (jumpCooldownTimer > 0) return false; // jump cooldown is active
@@ -228,7 +224,10 @@ public class AI_Move : MonoBehaviour
         targetOffset = randomInSperee.normalized * maxStraveOffsetDistance;
 
         targetHitCollector.OnTbagStanceTriggered += EnterTBagStance;
-    }
+
+		agent.updatePosition = false;
+		agent.updateRotation = false;
+	}
 
     public void EnterTBagStance(GameObject tBagTarget)
     {
@@ -294,71 +293,105 @@ public class AI_Move : MonoBehaviour
     private void Update()
     {
 
+
+		agent.nextPosition = transform.position;
+
+		rollCooldownTimer -= Time.deltaTime;
+		jumpCooldownTimer -= Time.deltaTime;
+		if (agent.isOnOffMeshLink && jumpCooldownTimer <= 0)
+		{
+			// Find the current link end in the path
+			Vector3 linkEnd = agent.currentOffMeshLinkData.endPos;
+            //Debug.Log("OffMeshLink detected, jumping to: " + linkEnd);
+			/*
+			var corners = agent.path.corners;
+			// Find the index in the path closest to that end
+			int closestIndex = 0;
+			float closestDist = float.MaxValue;
+			for (int i = 0; i < corners.Length; i++)
+			{
+				float dist = Vector3.SqrMagnitude(corners[i] - linkEnd);
+				if (dist < closestDist)
+				{
+					closestDist = dist;
+					closestIndex = i;
+				}
+			}
+
+			// Look ahead by N waypoints, clamp to array end
+			int targetIndex = Mathf.Min(closestIndex + 3, corners.Length - 1);*/
+			//linkEnd.y = transform.position.y; // keep the y position of the player
+
+
+			Jump(linkEnd);
+
+
+
+			return;
+		}
+        
+
        
 
 
-			if (IsInTBagStance)
-        {
-            if (Time.frameCount % framesToUpdateNavAgentIfClose == 0)
-            {
-                agent.transform.localPosition = Vector3.zero;
-                agent.SetDestination(tbagTarget.transform.position);
-
-            }
-            Vector3 tBagdirection = agent.desiredVelocity.normalized;
-            float distanceToTBagTarget = Vector3.Distance(transform.position, tbagTarget.transform.position);
-
-            if (distanceToTBagTarget> tBagDistance)
-            {
-                playerMovement.UpdateMoveInput(new Vector2(tBagdirection.x, tBagdirection.z) * 1);
-
-				tBagTimer -= Time.deltaTime/3;
-
-			}
-            else
-            {
-                tBagStanceTimer -= Time.deltaTime;
-                playerMovement.UpdateMoveInput(Vector2.zero);
-
-                tBagTimer -= Time.deltaTime;
-                if (tBagTimer <= 0f)
-                {
-                    tBagTimer = tBagSpeed;
-                    playerMovement.ToggleCrouch();
-                }
 
 
-
-            }
-            if (tBagStanceTimer <= 0f)
-            {
-                IsInTBagStance = false;
-                playerMovement.TryStandUp();
-                playerMovement.UpdateMoveInput(Vector2.zero);
-                tbagTarget = null;
-            }
-
-
-            return;
-
-
-
-
-                
-        }
-
-
-
-
-        rollCooldownTimer -= Time.deltaTime;
-        jumpCooldownTimer -= Time.deltaTime;
 
         if (inJumpState)
         {
             if (playerMovement.CanJump())
-                inJumpState = false; // reset jump state if player can jump
+            {
+				inJumpState = false; // reset jump state if player can jump
+				agent.SetDestination(targetPosition);
+			}
+                
 			return;
         }
+
+		if (IsInTBagStance)
+		{
+			if (Time.frameCount % framesToUpdateNavAgentIfClose == 0)
+			{
+
+				agent.SetDestination(tbagTarget.transform.position);
+
+			}
+			Vector3 tBagdirection = agent.desiredVelocity.normalized;
+			float distanceToTBagTarget = Vector3.Distance(transform.position, tbagTarget.transform.position);
+
+			if (distanceToTBagTarget > tBagDistance)
+			{
+				playerMovement.UpdateMoveInput(new Vector2(tBagdirection.x, tBagdirection.z) * 1);
+
+				tBagTimer -= Time.deltaTime / 3;
+
+			}
+			else
+			{
+				tBagStanceTimer -= Time.deltaTime;
+				playerMovement.UpdateMoveInput(Vector2.zero);
+
+				tBagTimer -= Time.deltaTime;
+				if (tBagTimer <= 0f)
+				{
+					tBagTimer = tBagSpeed;
+					playerMovement.ToggleCrouch();
+				}
+
+
+
+			}
+			if (tBagStanceTimer <= 0f)
+			{
+				IsInTBagStance = false;
+				playerMovement.TryStandUp();
+				playerMovement.UpdateMoveInput(Vector2.zero);
+				tbagTarget = null;
+			}
+
+
+			return;
+		}
 
 
 

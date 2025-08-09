@@ -32,7 +32,7 @@ MonoBehaviour:
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
-      hasHealthOverride: 1
+      hasHealthOverride: 0
       showHealthBar: 0
       health: 70
       shild: 100
@@ -94,6 +94,7 @@ MonoBehaviour:
   hasRespawnTokens: 1
   respawnTokens: 9
   hasReviveBodies: 1
+  scoreMultiplier: 1
   timeToScore: 0.3
   moveHill: 1
   hillMoveTime: 100000

@@ -159,11 +159,15 @@ public class ObjectiveIndicatorUI : MonoBehaviour
 
     private void Show()
     {
-        uiMarker.gameObject.SetActive(true);
+
+		if (uiMarker == null) return;
+		uiMarker.gameObject.SetActive(true);
     }
 
     private void Hide()
     {
+        if (uiMarker == null) return;
+
         uiMarker.gameObject.SetActive(false);
     }
 

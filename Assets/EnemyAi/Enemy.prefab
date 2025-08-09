@@ -124,8 +124,8 @@ MonoBehaviour:
   aiStun: {fileID: 5792146997314068955}
   aiShoot: {fileID: 8505334828251919786}
   gravityMultiplyerMaxForAiToStartJumping: 0.45
-  jumpCooldown: 8
-  framesToUpdateNavAgent: 100
+  jumpCooldown: 4
+  framesToUpdateNavAgent: 40
   framesToUpdateNavAgentIfClose: 10
   distanceToUpdateNavAgent: 5
   followObjectiveChance: 0.4
@@ -171,6 +171,7 @@ MonoBehaviour:
   aim: {fileID: 5066934035753808966}
   head: {fileID: 2222735024375511362}
   target: {fileID: 8029323305840259631}
+  arms: {fileID: 4619331289028681485}
   aimSpeedMultiplier_X: 0.2
   aimSpeedMultiplier_Y: 0.2
 --- !u!114 &8505334828251919786
@@ -312,7 +313,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8857529426304999730}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.7
+  m_Radius: 0.5
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
@@ -324,7 +325,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 3
 --- !u!1001 &7838409973482450679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -361,6 +362,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 782412234501442312, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: reviveBody
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 792476634734086431, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
@@ -368,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 1168959894761516207, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1183729009145540778, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1228312183110259837, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
@@ -711,7 +720,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: jumpPower
-      value: 5.5
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: acceleration_air
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: ignoreAimDirection
@@ -806,7 +819,8 @@ PrefabInstance:
       value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1183729009145540778, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5698032335818744442, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       insertIndex: -1

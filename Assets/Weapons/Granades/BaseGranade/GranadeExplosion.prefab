@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 6.5
   damage: 220
+  damageMultiplierVSAI: 1.1
   damageOnShildMultiplier: 1
-  damageReductionAgainstBlocking: 0.8
+  damageReductionAgainstBlocking: 0.6
   damageFalloff:
     serializedVersion: 2
     m_Curve:

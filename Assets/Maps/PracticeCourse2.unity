@@ -2830,8 +2830,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: ff0c1aae17fc8e843b1b32f8e3b4652f, type: 3}
-  spawnTime: 90
-  magazines: 2
+  spawnTime: 120
+  magazines: 3
   weaponDistanceToAttemtRespawn: 5
   isRandom: 0
   randomWeapons: []
@@ -4656,6 +4656,14 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2fe3cbc2d651a234d9a40b1474117d06, type: 2}
     - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'enemyWaves.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 836d890a44b619a4ca2f53f14b55ca55, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 836d890a44b619a4ca2f53f14b55ca55, type: 2}
+    - target: {fileID: 3760003005463065765, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'enemyWaves.Array.data[11]'
       value: 
       objectReference: {fileID: 11400000, guid: 836d890a44b619a4ca2f53f14b55ca55, type: 2}
     - target: {fileID: 3895335363518957410, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}

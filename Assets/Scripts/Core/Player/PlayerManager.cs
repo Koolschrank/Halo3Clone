@@ -110,6 +110,18 @@ public class PlayerManager : MonoBehaviour
         return players;
     }
 
+    public void RespawnAllDeadPlayers()
+    {
+		var allPlayers = PlayerManager.instance.GetAllPlayers();
+		foreach (var player in allPlayers)
+		{
+			if (player.IsDead)
+			{
+				player.Respawn();
+			}
+		}
+	}
+
 
     // get dead player layer
     public int GetDeadPlayerLayer()
@@ -266,29 +278,36 @@ public class PlayerManager : MonoBehaviour
 
     public void RespawnPlayer(PlayerMind player)
     {
-        var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
-        if (GameModeSelector.gameModeManager.GameModeStats.UseStatSheet)
-        {
-            spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
-        }
-
-        if ( forceSpawnTeam1OnSpawnPoint1 &&player.TeamIndex == 0)
-        {
-            spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+		var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
+		if (GameModeSelector.gameModeManager.GameModeStats.UseStatSheet)
+		{
+			spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
 		}
 
+		if (forceSpawnTeam1OnSpawnPoint1 && player.TeamIndex == 0)
+		{
+			spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
+		}
 
-        var playerBody = Instantiate(playerBodyPrefab, spawnPoint.position, spawnPoint.rotation);
-        playerBody.ConnectMind(player);
-        playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
+        RespawnPlayer(player, spawnPoint.position, spawnPoint.rotation);
+	}
 
-        var gameMode = GameModeSelector.gameModeManager;
+	public void RespawnPlayer(PlayerMind player, Vector3 spawnPosition, Quaternion spawnRotation)
+	{
+		
+
+
+		var playerBody = Instantiate(playerBodyPrefab, spawnPosition, spawnRotation);
+		playerBody.ConnectMind(player);
+		playerBody.SetCameras(GetPlayerCamera(player), GetPlayerSpectatorCamera(player));
+
+		var gameMode = GameModeSelector.gameModeManager;
 		if (player.TeamIndex == 0 && gameMode.GameModeStats.recolerTeam1Members)
 		{
 			var playerID = player.playerID;
 			var colors = gameMode.GameModeStats.team1MemberColors;
 
-            Debug.Log("player ID:" + playerID);
+			Debug.Log("player ID:" + playerID);
 			var color = gameMode.GameModeStats.team1MemberColors[math.min(playerID, colors.Length - 1)];
 			playerBody.SetPlayerColor(color);
 
@@ -298,13 +317,13 @@ public class PlayerManager : MonoBehaviour
 			playerBody.SetPlayerColor(playerColors[player.TeamIndex]);
 		}
 
-        player.UpdateLayers();
-        OnPlayerSpawned?.Invoke(player);
+		player.UpdateLayers();
+		OnPlayerSpawned?.Invoke(player);
 
-        playerBody.transform.position = spawnPoint.position;
+		playerBody.transform.position = spawnPosition;
 	}
 
-    public CinemachineCamera GetPlayerCamera(PlayerMind player)
+	public CinemachineCamera GetPlayerCamera(PlayerMind player)
     {
         var index = players.IndexOf(player);
         return playerCameras[index];

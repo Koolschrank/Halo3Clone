@@ -10,6 +10,7 @@ public class ReviveBody : MonoBehaviour
 
 
 
+	[SerializeField] Collider reviveCollider;
 	[SerializeField] float reviveTime = 3f;
 	[SerializeField] float timeToReset = 0.5f;
 
@@ -38,6 +39,11 @@ public class ReviveBody : MonoBehaviour
 
 	public void Activate(PlayerMind ownerOfBody)
 	{
+		if (ownerOfBody == null)
+		{
+			return;
+		}
+
 		Debug.Log("ReviveBody: Activate");
 		if (active)
 		{
@@ -50,7 +56,21 @@ public class ReviveBody : MonoBehaviour
 		teamIndex = ownerOfBody.TeamIndex;
 
 		PlayerReviveManager.Instance.AddBodyToRevive(index,teamIndex, transform);
+		reviveCollider.enabled = true;
+		gameObject.SetActive(true);
 	}
+
+
+	private void Start()
+	{
+		if (gameObject.layer != 13)
+		{
+			gameObject.layer = 13;
+		}
+	}
+
+
+
 
 
 	private void OnTriggerEnter(Collider other)
@@ -79,6 +99,11 @@ public class ReviveBody : MonoBehaviour
 	bool isReviving = false;
 	private void Update()
 	{
+		if (!active)
+		{
+			return;
+		}
+
 		isReviving = false;
 		if (reviveTimer != 0f && lastUpdateTime + timeToReset < Time.timeSinceLevelLoad)
 		{
@@ -141,6 +166,7 @@ public class ReviveBody : MonoBehaviour
 
 		playerMind.RevivePlayer(transform.position + Vector3.up * 1f);
 
+		reviveCollider.enabled = false;
 		
 
 	}

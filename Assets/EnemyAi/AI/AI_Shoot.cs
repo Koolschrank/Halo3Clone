@@ -56,7 +56,8 @@ public class AI_Shoot : MonoBehaviour
         
         if (focuse == 1 && !cannotShoot)
         {
-            playerArms.RightArm.UpdateWeaponTrigger(true);
+
+            playerArms.RightArm.ForceWeaponTriggerDown(); // bassically like trigger down but everying turns automatic
 
             var distanceToTarget = Vector3.Distance(transform.position, target.GetTargetPosition());
             if (abilityInventory.HasAbility() &&distanceToTarget > distanceToThrowGranade.x && distanceToTarget < distanceToThrowGranade.y )

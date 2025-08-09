@@ -91,6 +91,13 @@ public class PlayerAim : MonoBehaviour
         StartCoroutine(CheckIfMouse());
 
 
+        if (!MapLoader.instance.wiveMode)
+        {
+            playerHealth.OnDeath += () => inputBlocked = true;
+        }
+
+
+
 
 	}
 
@@ -104,7 +111,9 @@ public class PlayerAim : MonoBehaviour
 		}
 	}
 
-    public void BlockInput()
+    bool inputBlocked = false;
+
+	public void BlockInput()
     {
         aimInput = Vector2.zero;
         inputSlowDown = true;
@@ -131,10 +140,14 @@ public class PlayerAim : MonoBehaviour
 
     private void UpdateAim()
     {
-        // x rotates player y rotates camera
-        Vector2 input = aimInput; //controller.Player.Aim.ReadValue<Vector2>();
+        if (inputBlocked) return;
+
+		// x rotates player y rotates camera
+		Vector2 input = aimInput; //controller.Player.Aim.ReadValue<Vector2>();
         float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Time.deltaTime;
         float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Time.deltaTime;
+        
+
 
         if (noAimAssitance)
         {

@@ -83,7 +83,7 @@ MonoBehaviour:
   reloadTimeMultiplier: 1.5
   bloomOnShoot: 1
   bloomOnTakingDamage: 0
-  bloomInaccuracyMultiplier: 0.5
+  bloomInaccuracyMultiplier: 0
   bloomTime: 0.9
   bloomCurve:
     serializedVersion: 2

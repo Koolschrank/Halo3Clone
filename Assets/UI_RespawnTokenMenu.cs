@@ -7,6 +7,15 @@ public class UI_RespawnTokenMenu : MonoBehaviour
     [SerializeField] PlayerMind playerMind;
 	[SerializeField] TextMeshProUGUI respawnText;
 	[SerializeField] Slider tockenUseTimer;
+
+	[SerializeField] Image tokenButtonIcon;
+	[SerializeField] Sprite keyboardIcon;
+
+	public void SetKeyboardIcon()
+	{
+		Debug.Log("Setting keyboard icon for respawn token button");
+		tokenButtonIcon.sprite = keyboardIcon;
+	}
 	
 
 	private void Awake()

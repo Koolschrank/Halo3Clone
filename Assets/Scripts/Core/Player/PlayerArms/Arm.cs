@@ -921,6 +921,12 @@ public class Arm : MonoBehaviour
         isTriggerPressed = value;
     }
 
+    public void ForceWeaponTriggerDown()
+    {
+        isTriggerPressed = true;
+        wasTriggerPressed = false;
+	}
+
     public bool IsInZoom
     {
         get

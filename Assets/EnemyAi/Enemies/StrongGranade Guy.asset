@@ -47,3 +47,4 @@ MonoBehaviour:
   speedMultiplier: 1
   teamIdOverrride: 9
   scoreForKill: 450
+  useSpecialEquipment: 0
