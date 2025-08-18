@@ -10,8 +10,10 @@ public class GameModeManager : MonoBehaviour
     
     public Action<int, int> OnPointsUpdated;
     public Action<int> OnTeamWon;
+    public Action OnEnterSpeedUp;
+    public Action OnExitSpeedUp;
 
-    protected List<List<PlayerMind>> teams = new List<List<PlayerMind>>();
+	protected List<List<PlayerMind>> teams = new List<List<PlayerMind>>();
     protected List<int> teamPoints = new List<int>();
 
     [SerializeField] protected SpawnSystem spawnSystem;
@@ -23,6 +25,9 @@ public class GameModeManager : MonoBehaviour
     int respawnTokens = 0;
 
     public Action<int> OnRespawnTokensChanged;
+
+    [NonSerialized]
+    public bool inSpeedUp = false;
 
 
 	public Equipment GetGunGameEquipment(int teamIndex)
@@ -210,11 +215,11 @@ public class GameModeManager : MonoBehaviour
 
         return spawnPoints;
 
-    }
+	}
 
 
 
-
+    
 
     public virtual void ResetGame()
     {
@@ -229,6 +234,38 @@ public class GameModeManager : MonoBehaviour
         if (gameModeStats.hasRespawnTokens)
         {
             respawnTokens = gameModeStats.respawnTokens;
+		}
+
+
+        if (gameModeStats.usePVEScoring)
+        {
+           var pveScore = PVEPointsManagment.instance;
+            pveScore.SetLifePointLoss (gameModeStats.pve_scoreLossPerSecond);
+            pveScore.SetLifePointGain(gameModeStats.pve_scoreGainPerSecond);
+
+
+			OnPointsUpdated += (teamIndex, points) =>
+            {
+                if (teamIndex == 0)
+                {
+                    pveScore.StartLifePointsGain();
+
+                    if (points % gameModeStats.pve_pointsForObjectiveCompletion == 0)
+                        pveScore.GainLifePoints(gameModeStats.pve_scoreGainOnObjectiveCompletion);
+                }
+                if (teamIndex == 1)
+                {
+                    pveScore.StartLifeGainLoss();
+                }
+
+            };
+
+            pveScore.OnNoLifePoints += () =>
+            {
+				GainPoints(1, 10000); // team 2 wins
+			};
+
+
 		}
 	}
 
@@ -280,9 +317,26 @@ public class GameModeManager : MonoBehaviour
 
     public virtual void PlayerSpawned(PlayerMind player)
     {
-        
+        if (gameModeStats.usePVEScoring)
+        {
+			// check if all players are alive
+            bool allPlayersAlive = true;
+            foreach (var p in PlayerManager.instance.GetAllPlayers())
+            {
+                if (p.IsDead)
+                {
+                    allPlayersAlive = false;
+                    break;
+                }
+			}
+            if (allPlayersAlive)
+            {
+				inSpeedUp = false;
+				OnExitSpeedUp?.Invoke();
+			}
+		}
 
-    }
+	}
 
     public virtual void AISpawned(GameObject aiCharacter)
     {
@@ -409,6 +463,26 @@ public class GameModeManager : MonoBehaviour
                 GainPoints(1, 10000);
             }
         }
+
+        if (gameModeStats.usePVEScoring)
+        {
+			bool allPlayersDead = true;
+			var team = teams[teamIndex];
+			foreach (var playerInTeam in team)
+			{
+				if (!playerInTeam.IsDead)
+				{
+					allPlayersDead = false;
+					break;
+				}
+			}
+
+			if (allPlayersDead )
+			{
+				inSpeedUp = true;
+				OnEnterSpeedUp?.Invoke();
+			}
+		}
     }
 
     public void AIGainsPoints(int teamIndex, int points)

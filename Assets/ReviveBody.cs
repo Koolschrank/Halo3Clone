@@ -13,6 +13,7 @@ public class ReviveBody : MonoBehaviour
 	[SerializeField] Collider reviveCollider;
 	[SerializeField] float reviveTime = 3f;
 	[SerializeField] float timeToReset = 0.5f;
+	[SerializeField] float valueMultiplierWhenStoped = 0.1f;
 
 	int index = -1;
 	[NonSerialized]
@@ -112,6 +113,7 @@ public class ReviveBody : MonoBehaviour
 
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = Quaternion.identity;
+		stoppedTime -= Time.deltaTime;
 
 		// set layer index to 13
 		if (gameObject.layer != 13)
@@ -127,8 +129,18 @@ public class ReviveBody : MonoBehaviour
 		OnReviveProgress?.Invoke(0f);
 	}
 
+	float stoppedTime = 0f;
+	public void Stop(float stopTime)
+	{
+		stoppedTime = stopTime;
+
+	}
+
 	public void AddValue(float value)
 	{
+		if (stoppedTime > 0)
+			value *= valueMultiplierWhenStoped;
+
 		if (reviveTimer <0)
 		{
 			reviveTimer = 0f;

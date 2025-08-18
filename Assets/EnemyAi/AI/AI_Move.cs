@@ -20,6 +20,7 @@ public class AI_Move : MonoBehaviour
     [SerializeField] CharacterHealth playerHealth;
     [SerializeField] AI_Stun aiStun;
     [SerializeField] AI_Shoot aiShoot;
+    [SerializeField] PlayerTeam aiTeam;
 
     [SerializeField] float gravityMultiplyerMaxForAiToStartJumping = 0.45f; // max gravity multiplyer to start jumping
     [SerializeField] float jumpCooldown = 7f;
@@ -272,7 +273,7 @@ public class AI_Move : MonoBehaviour
         if (GameModeSelector.gameModeManager is KingOfTheHillManager || GameModeSelector.gameModeManager is CrownManager)
         {
             // check probability to follow objective
-            if (UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
+            if (aiTeam.TeamIndex == 0 || UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
             {
                 followObjective = true;
                 if (GameModeSelector.gameModeManager is CrownManager)
@@ -483,7 +484,9 @@ public class AI_Move : MonoBehaviour
         bool closeToObjective = false;
         if (followObjectiveThisFrame)
         {
-            if ( closeToObjective = distanceToTarget < targetValue + 0.5f)
+            //if (distanceToTarget < targetValue + 0.5f)
+            var gamemode = GameModeSelector.gameModeManager as KingOfTheHillManager;
+			if (distanceToTarget < gamemode.currentHill.Radius)
             {
                 closeToObjective = true;
             }
@@ -555,7 +558,11 @@ public class AI_Move : MonoBehaviour
                 
             }
         }
-
+        if (Vector3.Distance(transform.position, targetPosition) < 1.75f)
+        {
+			playerMovement.UpdateMoveInput(new Vector2(0,0));
+            return;
+		}
 
 
         Vector3 direction = agent.desiredVelocity.normalized;

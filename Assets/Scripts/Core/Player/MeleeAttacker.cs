@@ -29,6 +29,8 @@ public class MeleeAttacker : MonoBehaviour
 	public LaunchInstance launchInstance;
 	[NonSerialized]
 	public float launchTimer = 0f; // timer for launch, can be set by other scripts if needed
+	[NonSerialized]
+	public bool shildGainOnMelee = false; 
 
 	private void Awake()
     {
@@ -190,6 +192,11 @@ public class MeleeAttacker : MonoBehaviour
             if (collider.gameObject.tag == "AIEnemy")
             {
                 damagePackage.damageAmount *= attackData.DamageMultiplierVSAI;
+                if (shildGainOnMelee)
+                {
+                    this.health.SetShildRegenMelee();
+
+				}
 			}
 
             

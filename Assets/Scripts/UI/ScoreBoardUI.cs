@@ -6,7 +6,15 @@ public class ScoreBoardUI : MonoBehaviour
 
     public void Start()
     {
-        GameModeSelector.gameModeManager.OnPointsUpdated += SetScore;
+		var gamemodeStats = GameModeSelector.gameModeManager.GameModeStats;
+		if (gamemodeStats.usePVEScoring)
+		{
+			gameObject.SetActive(false);
+			return;
+		}
+
+
+		GameModeSelector.gameModeManager.OnPointsUpdated += SetScore;
         GameModeSelector.gameModeManager.OnTeamAdded += TeamJoined;
 
         var score = GameModeSelector.gameModeManager.GetTeamPoints();

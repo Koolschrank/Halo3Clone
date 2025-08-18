@@ -46,7 +46,7 @@ public class Hill : MonoBehaviour
 
     public void ScanHill()
     {
-        if (!active)
+        if (!active )
         {
             return;
         }
@@ -73,7 +73,20 @@ public class Hill : MonoBehaviour
             SetTeamOnHill(dominatingTeam);
         }
 
-        
+        if (dominatingTeam == 1 &&GameModeSelector.gameModeManager.GameModeStats.usePVEScoring)
+        {
+			var marker = ObjectiveIndicator.instance;
+			marker.GetObjective(0).SetHideDistance(0);
+            marker.GetObjective(0).SetActive(true);
+            marker.GetObjective(0).SetPosition(transform.position + Vector3.up *1);
+           
+		}
+        else
+        {
+			var marker = ObjectiveIndicator.instance;
+			marker.GetObjective(0).SetHideDistance(99999);
+			//marker.GetObjective(0).SetActive(false);
+		}
 
 
 
@@ -125,6 +138,11 @@ public class Hill : MonoBehaviour
 		return maxIndex;
 
     }
+
+    public void SetLastTeamOnHill(int value)
+    {
+        lastTeamOnHill = value;
+	}
 
     public void SetTeamOnHill(int teamIndex)
     {

@@ -76,6 +76,9 @@ MonoBehaviour:
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
     magazinsOfWeaponInHand: 5
     weaponInLeftHand: {fileID: 0}
@@ -123,6 +126,7 @@ MonoBehaviour:
   playerHealth: {fileID: 7357773068672706047}
   aiStun: {fileID: 5792146997314068955}
   aiShoot: {fileID: 8505334828251919786}
+  aiTeam: {fileID: 8294897600436085572}
   gravityMultiplyerMaxForAiToStartJumping: 0.45
   jumpCooldown: 4
   framesToUpdateNavAgent: 40
@@ -801,6 +805,22 @@ PrefabInstance:
     - target: {fileID: 8529157538229764176, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712196350449165927, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712196350449165927, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712196350449165927, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712196350449165927, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8844290368191932460, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer

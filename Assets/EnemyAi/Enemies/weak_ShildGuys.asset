@@ -19,6 +19,9 @@ MonoBehaviour:
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0.925
+    playerSizeOffset: -0.05
+    playerCenterOffset: -0.025
     weaponInHand: {fileID: 11400000, guid: 22dca26e14cf495409061f509c2a044a, type: 2}
     magazinsOfWeaponInHand: 5
     weaponInLeftHand: {fileID: 11400000, guid: 024bbdf8c6821ff4993d1b9eb7a6429f, type: 2}

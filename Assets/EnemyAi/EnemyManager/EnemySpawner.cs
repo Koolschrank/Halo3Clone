@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemySpawner : MonoBehaviour
 {
     public Action<GameObject> OnEnemySpawned;
+    public Action<int> OnWaveStart;
 
 
     [SerializeField] public bool isAutoActiveOnThisMap = true; // Flag to check if the spawner is active
@@ -48,8 +51,13 @@ public class EnemySpawner : MonoBehaviour
     public Enemy_Stats[] tutorialEnemyStats; // Enemy stats for the tutorial mode
     public Transform[] tutorialSpawnPoints; // Spawn point for the tutorial enemies
 
+    public int extraTeammates = 0;
+    public int extraEnemies = 0;
+    public float enemyDamageReduction = 1f; // Damage reduction for enemies
+    public int enemiesThatSpawnAtStartOfWave = 3;
 
-
+    public bool enemiesDoNotDropLoot = false;
+    public LayerMask groundLayer;
 
 	public void KillAllEnemies()
     {
@@ -74,6 +82,8 @@ public class EnemySpawner : MonoBehaviour
 
     public bool IsAutoActiveOnThisMap => isAutoActiveOnThisMap;
 
+    
+
     public void SetPVPGame()
     {
         isPvPGame = true;
@@ -94,7 +104,14 @@ public class EnemySpawner : MonoBehaviour
                         waveIndex = 0; // Reset to the first wave if we reach the end
 					}
 					activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
+                    OnWaveStart?.Invoke(waveIndex);
+
+                    SpawnEnemiesAtObjective(enemiesThatSpawnAtStartOfWave);
+
 				};
+
+
+				OnWaveStart?.Invoke(waveIndex);
 			}
 		}
         else
@@ -274,7 +291,118 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy(Enemy_Stats stats)
+	public void SpawnEnemiesAtObjective(int amount)
+	{
+
+		var gamemode = GameModeSelector.gameModeManager;
+        var gameModeKOTH = gamemode as KingOfTheHillManager;
+        if (gameModeKOTH != null)
+        {
+			var spawnpoint = gameModeKOTH.currentHill.transform;
+			int teamId = 1;
+			for (int i = 0; i < amount; i++)
+            {
+				
+
+				
+				var stats = alliesForPVPGames.GetRandomEnemy();
+				var equipment = stats.equipment;
+				if (stats.useSpecialEquipment)
+				{
+					var newEquipment = specialEquipments[UnityEngine.Random.Range(0, specialEquipments.Length)];
+					newEquipment.ChangeSize(equipment.PlayerSize, equipment.PlayerSizeOffset, equipment.PlayerCenterOffset);
+					equipment = newEquipment;
+				}
+
+				Vector2 randomInCircle = UnityEngine.Random.insideUnitCircle * 4f;
+				Vector3 randomInCircle3D = new Vector3(randomInCircle.x, 0, randomInCircle.y);
+
+				Vector3 spawnPosition = spawnpoint.position + Vector3.up * 2 + randomInCircle3D;
+
+				// make raycast from spawnpoint to spawnPosition to check if it hits the ground
+                RaycastHit hit;
+                if (Physics.Raycast(spawnpoint.position, spawnPosition - spawnpoint.position, out hit, Vector3.Distance(spawnpoint.position, spawnPosition), groundLayer))
+                {
+                    spawnPosition = spawnpoint.position + Vector3.up * 2;
+
+				}
+
+
+					Quaternion spawnRotation = spawnpoint.rotation;
+				GameObject enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+
+				enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
+				var health = enemy.GetComponent<CharacterHealth>();
+				health.MultiplyHealth(stats.healthMultiplier);
+				health.MultiplyShild(stats.shildMultiplier);
+
+				activeEnemies.Add(enemy);
+				health.OnDeath += () =>
+				{
+					activeEnemies.Remove(enemy);
+					Destroy(enemy, 40f);
+				};
+
+				var movement = enemy.GetComponent<PlayerMovement>();
+				movement.MultiplySpeed(stats.speedMultiplier);
+
+				// get child of name EnemyAI
+
+				var score = enemy.GetComponent<GainScore>();
+				score.scoreAmount = stats.scoreForKill;
+
+				if (isAutoActiveOnThisMap)
+				{
+					var arms = enemy.GetComponent<PlayerArms>();
+					arms.RightArm.GetBulletSpawner().SetOnlyEnemyIsPlayerTeam(true);
+				}
+
+
+
+				if (isPvPGame)
+				{
+					if (teamId == 0)
+					{
+						health.OnDeath += () =>
+						{
+							team1EnemyCount--;
+						};
+					}
+					else
+					{
+						health.OnDeath += () =>
+						{
+							team2EnemyCount--;
+						};
+					}
+
+				}
+
+				PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
+
+
+				int colorIndex = teamId;
+				if (GameModeSelector.gameModeManager.GameModeStats.EnemyTeamsWorkingTogether && teamId != 0)
+				{
+					colorIndex = stats.teamIdOverrride;
+				}
+				PlayerManager.instance.UpdateColorOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), colorIndex);
+
+				OnEnemySpawned?.Invoke(enemy);
+
+				enemy.GetComponent<CharacterHealth>().SetDamageMultiplier(GameModeSelector.gameModeManager.GameModeStats.ai_damageMultiplier * enemyDamageReduction);
+
+			}
+
+
+
+
+
+		}
+        
+	}
+
+	private void SpawnEnemy(Enemy_Stats stats)
     {
 
 		if (tutorialMode) return;
@@ -335,6 +463,10 @@ public class EnemySpawner : MonoBehaviour
             {
 				AIPerTeam2 = (int)((float)AIPerTeam2 / activeWave.enemyWave.spawnInterval);
 			}
+
+
+            AIPerTeam1 += extraTeammates;
+            AIPerTeam2 += extraEnemies;
 			
 
 			if (team1EnemyCount >= AIPerTeam1 && team2EnemyCount >= AIPerTeam2)
@@ -398,7 +530,9 @@ public class EnemySpawner : MonoBehaviour
 		var equipment = stats.equipment;
         if (stats.useSpecialEquipment)
         {
-            equipment = specialEquipments[UnityEngine.Random.Range(0,specialEquipments.Length)];
+            var newEquipment = specialEquipments[UnityEngine.Random.Range(0, specialEquipments.Length)];
+            newEquipment.ChangeSize(equipment.PlayerSize, equipment.PlayerSizeOffset, equipment.PlayerCenterOffset);
+			equipment = newEquipment;
 		}
 
         enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
@@ -460,7 +594,8 @@ public class EnemySpawner : MonoBehaviour
 
         OnEnemySpawned?.Invoke(enemy);
 
-        enemy.GetComponent<CharacterHealth>().SetDamageMultiplier(GameModeSelector.gameModeManager.GameModeStats.ai_damageMultiplier);
+        enemy.GetComponent<CharacterHealth>().SetDamageMultiplier(GameModeSelector.gameModeManager.GameModeStats.ai_damageMultiplier * enemyDamageReduction);
+
 	}
 
 

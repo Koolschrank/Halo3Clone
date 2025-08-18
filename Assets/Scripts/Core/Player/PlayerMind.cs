@@ -33,7 +33,8 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] PlayerTeam team;
     [SerializeField] PlayerUpgrades playerUpgrader;
     [SerializeField] PlayerMindStatSheet playerMindStatSheet;
-    [SerializeField] bool hasKillRumble;
+    [SerializeField] float reviveSpeedUpMultiplier = 4f;
+	[SerializeField] bool hasKillRumble;
 	[SerializeField] RumbleData killRumble;
 
     [Header("UI")]
@@ -194,7 +195,14 @@ public class PlayerMind : MonoBehaviour
 	{
         if (inRespawn)
         {
-            respawnTimer -= Time.deltaTime;
+            var gameMode = GameModeSelector.gameModeManager;
+            float multiplier = 1f;
+            if (gameMode.inSpeedUp)
+                {
+                multiplier = reviveSpeedUpMultiplier;
+			}
+
+			respawnTimer -= Time.deltaTime * multiplier; 
             OnRespawnUpdate?.Invoke(1 - (respawnTimer / respawnTime));
 
             if (respawnTimer <= 0)
@@ -203,7 +211,7 @@ public class PlayerMind : MonoBehaviour
             }
 
 
-            if (tokenButtonPressedDown && GameModeSelector.gameModeManager.RespawnTokensLeft > 0)
+            if (tokenButtonPressedDown && gameMode.RespawnTokensLeft > 0)
             {
                 tokenButtonPressTime += Time.deltaTime;
                 
@@ -212,7 +220,7 @@ public class PlayerMind : MonoBehaviour
                     tokenButtonPressedDown = false;
 
                     PlayerManager.instance.RespawnAllDeadPlayers();
-					GameModeSelector.gameModeManager.UseRespawnToken();
+					gameMode.UseRespawnToken();
                     tokenButtonPressTime = 0;
 				}
 				OnTokenUseUpdate?.Invoke(tokenButtonPressTime / respawnTokenUseTime);
@@ -940,7 +948,7 @@ public class PlayerMind : MonoBehaviour
     public void RespawnWithDelay()
     {
         inRespawn = true;
-        respawnTimer = GameModeSelector.gameModeManager.RespawnTime;
+        respawnTimer = GameModeSelector.gameModeManager.RespawnTime * PlayerManager.instance.respawnMultiplier;
         respawnTime = respawnTimer;
 		SwitchToSpectatorCamera();
 

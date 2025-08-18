@@ -94,7 +94,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  force: 90
+  force: 65
   forceOnPlayer: 10
   forceYOffset: -1
   forceFalloff:

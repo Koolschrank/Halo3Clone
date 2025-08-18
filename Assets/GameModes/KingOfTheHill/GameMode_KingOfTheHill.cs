@@ -20,6 +20,8 @@ public class GameMode_KingOfTheHill : GameMode
     public bool MoveHill { get { return moveHill; } }
     public float HillMoveTime { get { return hillMoveTime; } }
 
+    
+
 
 
 

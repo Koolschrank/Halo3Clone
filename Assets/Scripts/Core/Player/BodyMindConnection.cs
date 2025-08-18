@@ -9,8 +9,10 @@ public class BodyMindConnection : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAim playerAim;
     [SerializeField] PlayerArms playerArms;
-    [SerializeField] PlayerPickUpScan playerPickUpScan;
-    [SerializeField] Health health;
+
+	[SerializeField] MeleeAttacker meleeAttacker;
+	[SerializeField] PlayerPickUpScan playerPickUpScan;
+    [SerializeField] CharacterHealth health;
     [SerializeField] BulletSpawner bulletSpawner;
     [SerializeField] Transform spectatorCameraTarget;
     [SerializeField] PlayerInventory playerInventory;
@@ -185,10 +187,21 @@ public class BodyMindConnection : MonoBehaviour
         return equipment;
     }
 
-    
+    // get health
+    public CharacterHealth GetHealth()
+    {
+        return health;
+	}
+
+    public MeleeAttacker GetMeleeAttacker()
+    {
+        return meleeAttacker;
+	}
 
 
-    public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
+
+
+	public void SetCameras(CinemachineCamera camera, CinemachineCamera spectatorCamera)
     {
         camera.Follow = mindParent.transform;
         camera.LookAt = mindParent.transform;

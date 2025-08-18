@@ -164,7 +164,9 @@ public class Arm : MonoBehaviour
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
 
-        if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
+		
+
+		if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
             characterHealth.OnDeath += DropWeaponWithNoForce;
 
         inventory.OnAmmoChanged += TrySendEventToUpdateReserve;
@@ -696,7 +698,18 @@ public class Arm : MonoBehaviour
             
         }
 
-        var pickUpVersion = weapon.PickUpVersion;
+		bool noDrop = gameObject.tag == "AIEnemy";
+		if (noDrop)
+		{
+			noDrop = noDrop && EnemySpawner.instance.enemiesDoNotDropLoot;
+            if (noDrop)
+            {
+				OnWeaponDroped?.Invoke(weapon, null);
+				return null;
+			}
+		}
+
+		var pickUpVersion = weapon.PickUpVersion;
         var pickUp = Instantiate(pickUpVersion, dropPosition.position, dropPosition.rotation);
 
 

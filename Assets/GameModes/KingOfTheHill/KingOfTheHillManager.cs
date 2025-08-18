@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 
 public class KingOfTheHillManager : GameModeManager
@@ -14,7 +15,8 @@ public class KingOfTheHillManager : GameModeManager
 
     float checkTimer = 0;
     List<int> hillsAlreadyUsed = new List<int>();
-    Hill currentHill;
+    [NonSerialized]
+    public Hill currentHill;
 
     public Action<int> OnDominatingTeamChanged;
     public Action<float> OnHillMoveTimerChanged;
@@ -44,6 +46,32 @@ public class KingOfTheHillManager : GameModeManager
 
 
     }
+
+	public override void PlayerDied(PlayerMind player)
+	{
+		base.PlayerDied(player);
+
+
+        if (gameModeStats.usePVEScoring)
+        {
+			// check if all players are dead
+			bool allPlayersDead = true;
+			var allPlayers = PlayerManager.instance.GetAllPlayers();
+			foreach (var p in allPlayers)
+			{
+				if (!p.IsDead)
+				{
+					allPlayersDead = false;
+					break;
+				}
+			}
+			if (allPlayersDead)
+			{
+				currentHill.SetLastTeamOnHill(1);
+			}
+		}
+		
+	}
 
 	protected override void GainPoints(int teamIndex, int points)
     {
@@ -78,7 +106,7 @@ public class KingOfTheHillManager : GameModeManager
             OnNextHillPlaced?.Invoke();
 
 
-            if (gameModeStats.hasRespawnTokens )
+            if (gameModeStats.usePVEScoring )
             {
                 var allPlayers = PlayerManager.instance.GetAllPlayers();
                 foreach (var player in allPlayers)
@@ -89,11 +117,10 @@ public class KingOfTheHillManager : GameModeManager
                     }
 				}
 
-				PlayerManager.instance.RespawnAllDeadPlayers();
 			}
 		}
 
-
+       
 
     }
 
@@ -101,7 +128,12 @@ public class KingOfTheHillManager : GameModeManager
     {
         StartHill(GetRandomHillIndex());
         LogSystem.logSystem.PrintLog("Hill moved");
-    }
+
+		if (gameModeStats.usePVEScoring)
+		{
+			currentHill.SetLastTeamOnHill(1);
+		}
+	}
 
     int GetRandomHillIndex()
     {
@@ -134,7 +166,11 @@ public class KingOfTheHillManager : GameModeManager
         var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
         hillMoveTimer = KTH_values.HillMoveTime;
 
-    }
+
+		
+
+
+	}
 
     void SetDominatingTeam(int team)
     {
@@ -153,6 +189,13 @@ public class KingOfTheHillManager : GameModeManager
     {
         base.PlayerJoined(player);
         ResetHillMoveTimer();
+
+        if (gameModeStats.usePVEScoring)
+        {
+			player.EnableObjectiveUIMarker();
+			var marker = ObjectiveIndicator.instance;
+			marker.GetObjective(0).SetHideDistance(0);
+		}
     }
 
     public void ResetHillMoveTimer()
@@ -195,8 +238,8 @@ public class KingOfTheHillManager : GameModeManager
         {
 
 
-            var pointsTeam2NeedsToWin = KTH_values.team2PointsToWin - teamPoints[1];
-			ObjectiveIndicator.instance.GetObjective(0).SetText(pointsTeam2NeedsToWin.ToString());
+   //         var pointsTeam2NeedsToWin = KTH_values.team2PointsToWin - teamPoints[1];
+			//ObjectiveIndicator.instance.GetObjective(0).SetText(pointsTeam2NeedsToWin.ToString());
 		}
         else
         {

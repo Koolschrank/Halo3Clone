@@ -19,10 +19,10 @@ public class PlayerReviver : MonoBehaviour
 
 	private void Awake()
 	{
-		rightArm.OnWeaponShoot += (weapon) => ResetReviveBody();
-		leftArm.OnWeaponShoot += (weapon) => ResetReviveBody();
-		meleeAttacker.OnAttackStart += (attack) => ResetReviveBody();
-		granadeThrower.OnGranadeThrow += (granade) => ResetReviveBody();
+		rightArm.OnWeaponShoot += (weapon) => StopReviveBody();
+		leftArm.OnWeaponShoot += (weapon) => StopReviveBody();
+		meleeAttacker.OnAttackStart += (attack) => StopReviveBody();
+		granadeThrower.OnGranadeThrow += (granade) => StopReviveBody();
 	}
 
 	public void AddReviveBody(ReviveBody reviveBody)
@@ -80,12 +80,12 @@ public class PlayerReviver : MonoBehaviour
 			
 	}
 
-	public void ResetReviveBody()
+	public void StopReviveBody()
 	{
 		var closeReviveBodies = GetClosestReviveBody();
 		if (closeReviveBodies != null)
 		{
-			closeReviveBodies.ResetRevive();
+			closeReviveBodies.Stop(1f);
 			OnReviveProgress?.Invoke(0f);
 		}
 

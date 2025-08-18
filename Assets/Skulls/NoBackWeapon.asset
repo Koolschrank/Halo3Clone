@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879aabd9c93ff19479eef068c20221e5, type: 3}
+  m_Name: NoBackWeapon
+  m_EditorClassIdentifier: 
+  skullName: 
+  skullDescription: No back weapon
+  skullIcon: {fileID: 21300000, guid: 011ecde4360a647449e2c4a37a63f424, type: 3}
+  skullColor: {r: 0, g: 1, b: 0.14158368, a: 1}

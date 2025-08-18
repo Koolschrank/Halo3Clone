@@ -89,6 +89,31 @@ public class CharacterHealth : Health
 
     [NonSerialized]
 	public float spawnTime = 0;
+
+    [NonSerialized]
+    public bool shildGainOnMelee = false;
+    public float shildRegenMeleeDelay = 0.5f;
+
+   
+
+	public void RemoveShild()
+    {
+        currentShild = 0;
+        maxShildMultiplier = 0;
+        hasShild = false;
+        OnShildChanged?.Invoke(0);
+        OnShildDisabled?.Invoke();
+	}
+
+    public void RestoreShild()
+    {
+        currentShild = maxShild;
+        maxShildMultiplier = 1;
+        hasShild = true;
+        OnShildChanged?.Invoke(ShildPercentage);
+        OnShildEnabled?.Invoke();
+	}
+
 	public void RemoveArmor()
     {
         currentArmor = 0;
@@ -218,6 +243,14 @@ public class CharacterHealth : Health
             damageMultiplier = MapLoader.instance.GetDamageMultiplier();
     }
 
+
+    public void SetShildRegenMelee()
+    {
+		if (currentShild >= maxShild || shildRegenTimer < shildRegenMeleeDelay) return;
+        shildRegenTimer = shildRegenMeleeDelay;
+        
+	}
+
     // update
     public override void Update()
     {
@@ -226,8 +259,14 @@ public class CharacterHealth : Health
         base.Update();
         if (shildRegenTimer > 0 && hasShild)
         {
-            shildRegenTimer -= Time.deltaTime  * (1 + aura_shildRegenDelay );
-            shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            var timeReduction = Time.deltaTime * (1 + aura_shildRegenDelay);
+			if ( shildGainOnMelee && shildRegenTimer > shildRegenMeleeDelay)
+			{
+                timeReduction = 0;
+			}
+			shildRegenTimer -= timeReduction;
+
+			shildEmptySoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
             if (shildRegenTimer <= 0)
             {
                 shildRechargeSoundInstance.start();
@@ -247,8 +286,18 @@ public class CharacterHealth : Health
 
             }
             shildRechargeSoundInstance.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            var shildRegenAmount = shildRegenAmountPerSecond;
+            if (weakBody)
+            {
+                shildRegenAmount *= weakBody_ShildRegenMultiplier;
+			}
+            if (shildGainOnMelee)
+            {
+				shildRegenAmount *= 0.6f;
+			}
 
-            currentShild += shildRegenAmountPerSecond * Time.deltaTime;
+
+			currentShild += shildRegenAmount * Time.deltaTime;
             currentShild = Mathf.Clamp(currentShild, 0, MaxShild);
             OnShildChanged?.Invoke(ShildPercentage);
 
@@ -442,9 +491,16 @@ public class CharacterHealth : Health
 				}
 			}
 
+            
             if (damageAgainstShild >0)
             {
-				if (damageAgainstShild >= currentShild)
+				var shildLoss = damageAgainstShild;
+				if (weakBody)
+				{
+					shildLoss *= weakBody_ShildDamageMultiplier;
+				}
+
+				if (shildLoss >= currentShild)
 				{
 					var damageNegation = shildPopDamageNegation;
 					if (currentArmor > 0)
@@ -468,7 +524,10 @@ public class CharacterHealth : Health
 				else
 				{
 					OnShildDamageTaken?.Invoke();
-					currentShild -= damageAgainstShild;
+                    
+
+
+					currentShild -= shildLoss;
 					damage = 0;
 					OnShildChanged?.Invoke(ShildPercentage);
 

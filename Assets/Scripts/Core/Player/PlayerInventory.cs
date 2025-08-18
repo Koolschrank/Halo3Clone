@@ -13,10 +13,10 @@ public class PlayerInventory : MonoBehaviour
     public Action<Weapon_Data,int> OnAmmoChanged;
     public Action<int> OnAmmoOfWeaponInInventoryChanged;
 
+    public bool noWeaponInventory = false;
 
 
-
-    [SerializeField] int weaponInvetorySize = 1;
+	[SerializeField] int weaponInvetorySize = 1;
     List<Weapon_Arms> weapons = new List<Weapon_Arms>();
     // make an ammo dictionary weapondata -> ammo
     Dictionary<Weapon_Data,int> ammo = new Dictionary<Weapon_Data, int>();
@@ -39,13 +39,28 @@ public class PlayerInventory : MonoBehaviour
     // start
     public void Start()
     {
-        if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
+       
+        
+
+
+		if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
             characterHealth.OnDeath += DropWeapon;
 
         OnAmmoChanged += TryInvokeAmmoChangeOfInventoryWeapon;
     }
 
-    public void RefillReserveOfAllWeaponsYouOwn()
+    public void EnterNoInventoryMode()
+    {
+        noWeaponInventory = true;
+        DropWeapon();
+	}
+
+    public void ExitNoInventoryMode()
+    {
+        noWeaponInventory = false;
+	}
+
+	public void RefillReserveOfAllWeaponsYouOwn()
     {
         foreach (var weapon in weapons)
         {
@@ -65,7 +80,19 @@ public class PlayerInventory : MonoBehaviour
 
     public void DropWeapon()
     {
-        if (weapons.Count > 0)
+		bool noDrop = gameObject.tag == "AIEnemy";
+		if (noDrop && HasWeapon)
+		{
+			noDrop = noDrop && EnemySpawner.instance.enemiesDoNotDropLoot;
+            if (noDrop)
+            {
+                OnWeaponDrop?.Invoke(weapons[0]);
+				return;
+			}
+		}
+
+
+		if (weapons.Count > 0)
         {
             var weapon = weapons[0];
             if (weapon == null || (weapon.Magazine == 0 && GetAmmo(weapon.Data) == 0))
@@ -146,7 +173,7 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    public bool Full => weapons.Count >= weaponInvetorySize;
+    public bool Full => noWeaponInventory || weapons.Count >= weaponInvetorySize;
 
 
     public void AddAmmo(Weapon_Data weaponType, int ammo)

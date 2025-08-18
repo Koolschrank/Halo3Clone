@@ -20,11 +20,11 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
-    magazinsOfWeaponInHand: 4
+    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+    magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
-    sideArm: {fileID: 0}
+    sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
@@ -34,24 +34,24 @@ MonoBehaviour:
     healthOverride:
       hasHealthOverride: 1
       showHealthBar: 0
-      health: 50
-      shild: 100
+      health: 62.5
+      shild: 125
       armor: 0
       healthRegenStartTime: 2.5
       shildRegenStartTime: 4.5
-      healthRegen: 10
-      shildRegen: 25
+      healthRegen: 12.5
+      shildRegen: 31.25
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 0
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 999999
+  respawnTime: 25
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
-  looseWhenAllPlayersDead: 1
+  looseWhenAllPlayersDead: 0
   hasAiPlayers: 1
   hasAiTeamMembers: 0
   useStatSheets: 0
@@ -61,9 +61,9 @@ MonoBehaviour:
   spawnWithArmor: 1
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
-  team2PointsToWin: 200
+  team2PointsToWin: 9999
   team2LoosesScoreWhenTeam1scores: 1
-  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 99999
   useEnemyWaves: 1
   noDualWieldDamageReduction: 1
   startingEquipmentBasedOnPlayerValues: 0
@@ -91,10 +91,15 @@ MonoBehaviour:
   - {r: 1, g: 0.4431373, b: 0.92949015, a: 0.8627451}
   usedItemList: 0
   removePlayerBodyWhenRespawned: 1
-  hasRespawnTokens: 1
+  hasRespawnTokens: 0
   respawnTokens: 3
   hasReviveBodies: 1
   scoreMultiplier: 3
+  usePVEScoring: 1
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 0.5
+  pve_scoreGainOnObjectiveCompletion: 10
+  pve_pointsForObjectiveCompletion: 100
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

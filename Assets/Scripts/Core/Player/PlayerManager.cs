@@ -34,8 +34,12 @@ public class PlayerManager : MonoBehaviour
 	List<int> fpsLayers = new List<int>();
     List<int> thirdPersonLayers = new List<int>();
 
-    // Awake
-    private void Awake()
+
+    [NonSerialized]
+    public float respawnMultiplier = 1f;
+
+	// Awake
+	private void Awake()
     {
         if (instance == null)
         {

@@ -57,6 +57,14 @@ public class GameMode : ScriptableObject
     public bool hasReviveBodies = false; // if true, players can revive each other using revive bodies, otherwise they cannot
 
     public int scoreMultiplier = 1; // score multiplier for team 1, used to determine how many points team 1 gets for scoring
+
+    public bool usePVEScoring = false; // if true, PVE scoring is used, otherwise PVP scoring is used
+    public float pve_scoreLossPerSecond = 1f;
+	public float pve_scoreGainPerSecond = 1f;
+	public float pve_scoreGainOnObjectiveCompletion = 30f; // score gain on objective completion for PVE scoring
+    public float pve_pointsForObjectiveCompletion = 100f; // points for objective completion for PVE scoring
+
+    public bool useSkulls = false; // if true, skulls are used in the game mode, otherwise they are not
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;

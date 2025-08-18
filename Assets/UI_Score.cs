@@ -23,7 +23,11 @@ public class UI_Score : MonoBehaviour
 
 	private void Awake()
 	{
-        if (DEBUG_autoSpawn)
+        scoreText.text = "";
+        scoreText2.text = "";
+
+
+		if (DEBUG_autoSpawn)
         {
             StartCoroutine(AutoSpawnLoop());
         }

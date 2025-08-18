@@ -489,6 +489,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void AddHeight(float amount, float centerOffset)
+    {
+        playerStandingHitbox.Height += amount;
+        playerCrouchingHitbox.Height += amount;
+        playerStandingHitbox.Offset += centerOffset;
+        playerCrouchingHitbox.Offset += centerOffset;
+	}
+
 }
 
 

@@ -46,12 +46,12 @@ MonoBehaviour:
   timeLimitInMinutes: 10
   pointsToWin: 1000
   teamCount: 1
-  respawnTime: 999999
+  respawnTime: 20
   hasWeaponPickups: 1
   reasignsTeamsInPlayerOrder: 0
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
-  looseWhenAllPlayersDead: 1
+  looseWhenAllPlayersDead: 0
   hasAiPlayers: 1
   hasAiTeamMembers: 0
   useStatSheets: 0
@@ -61,9 +61,9 @@ MonoBehaviour:
   spawnWithArmor: 1
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
-  team2PointsToWin: 200
+  team2PointsToWin: 9999
   team2LoosesScoreWhenTeam1scores: 1
-  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 2
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 99999
   useEnemyWaves: 1
   noDualWieldDamageReduction: 1
   startingEquipmentBasedOnPlayerValues: 0
@@ -91,10 +91,15 @@ MonoBehaviour:
   - {r: 1, g: 0.4431373, b: 0.92949015, a: 0.8627451}
   usedItemList: 0
   removePlayerBodyWhenRespawned: 1
-  hasRespawnTokens: 1
+  hasRespawnTokens: 0
   respawnTokens: 6
   hasReviveBodies: 1
   scoreMultiplier: 2
+  usePVEScoring: 1
+  pve_scoreLossPerSecond: 0.8
+  pve_scoreGainPerSecond: 0.4
+  pve_scoreGainOnObjectiveCompletion: 10
+  pve_pointsForObjectiveCompletion: 100
   timeToScore: 0.4
   moveHill: 1
   hillMoveTime: 100000

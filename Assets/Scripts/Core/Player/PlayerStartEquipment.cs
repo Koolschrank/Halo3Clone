@@ -16,9 +16,11 @@ public class PlayerStartEquipment : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] bool isNonPlayer = false;
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
+    [SerializeField] GameObject playerMesh;
+    [SerializeField] CharacterController characterController;
 
 
-    private void Awake()
+	private void Awake()
     {
         playerBodyStatSheet.OnStartEquipmentEquip += OnStatSheetEquip;
     }
@@ -84,6 +86,8 @@ public class PlayerStartEquipment : MonoBehaviour
         {
             abilityInventory.AddAbility(ability3);
         }
+
+        
 
 
     }
@@ -188,7 +192,15 @@ public class PlayerStartEquipment : MonoBehaviour
         playerArms.SetCanDualWield(equipment.CanDualWield);
         playerArms.SetCanDualWield2HandedWeapons(equipment.CanDualWieldEverything);
 
-    }
+		if (equipment.PlayerSize != 1 && equipment.PlayerSize != 0)
+        {
+            playerMesh.transform.localScale = Vector3.one * equipment.PlayerSize;
+            characterController.height += equipment.PlayerSizeOffset;
+			playerMovement.AddHeight(equipment.PlayerSizeOffset, equipment.PlayerCenterOffset);
+		}
+
+
+	}
 
     public Weapon_Arms SpawnWeapon(Weapon_Data data)
     {
@@ -219,9 +231,14 @@ public class Equipment
     [SerializeField] bool canDualWield = true;
     [SerializeField] bool canDualWieldEverything = false;
     [SerializeField] float movementSpeedMultiplier = 1;
+    [SerializeField] float playerSize = 1;
+
+	[SerializeField] float playerSizeOffset = 0;
+
+	[SerializeField] float playerCenterOffset = 0;
 
 
-    [SerializeField] Weapon_Data weaponInHand;
+	[SerializeField] Weapon_Data weaponInHand;
     [SerializeField] int magazinsOfWeaponInHand = 3;
     [SerializeField] Weapon_Data weaponInLeftHand;
     [SerializeField] int magazinsOfWeaponInLeftHand = 3;
@@ -307,9 +324,19 @@ public class Equipment
     public float MovementSpeedMultiplier => movementSpeedMultiplier;
 
     public bool CanDualWieldEverything => canDualWieldEverything;
+    public float PlayerSize => playerSize;
 
+    public float PlayerSizeOffset => playerSizeOffset;
+    public float PlayerCenterOffset => playerCenterOffset;
 
-    public Equipment(Equipment equipmentToCopy)
+    public void ChangeSize(float playerSize, float playerSizeOffset, float playerCenterOffset)
+    {
+        this.playerSize = playerSize;
+        this.playerSizeOffset = playerSizeOffset;
+        this.playerCenterOffset = playerCenterOffset;
+	}
+
+	public Equipment(Equipment equipmentToCopy)
     {
         this.hasShild = equipmentToCopy.hasShild;
         this.headShotOneShot = equipmentToCopy.headShotOneShot;
@@ -327,7 +354,10 @@ public class Equipment
         this.ability2 = equipmentToCopy.ability2;
         this.ability3 = equipmentToCopy.ability3;
         this.healthOverride = equipmentToCopy.healthOverride;
-    }
+        this.playerSize = equipmentToCopy.playerSize;
+        this.playerSizeOffset = equipmentToCopy.playerSizeOffset;
+        this.playerCenterOffset = equipmentToCopy.playerCenterOffset;
+	}
 
 
 }

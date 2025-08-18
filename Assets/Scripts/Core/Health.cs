@@ -37,7 +37,14 @@ public class Health : MonoBehaviour
 
     public bool IsDead => currentHeath <= 0;
 
-    protected virtual void Start()
+
+	[NonSerialized]
+	public bool weakBody = false;
+	public float weakBody_HealthRegenMultiplier = 0.2f;
+	public float weakBody_ShildDamageMultiplier = 1.2f;
+	public float weakBody_ShildRegenMultiplier = 0.75f;
+
+	protected virtual void Start()
     {
         spawnTime = Time.time;
         if (setMaxHeathOnStart)
@@ -53,11 +60,21 @@ public class Health : MonoBehaviour
         {
             if (healthRegenTimer > 0)
             {
-                healthRegenTimer -= Time.deltaTime;
+				var regenTimerReduction = 1f;
+				if (weakBody)
+				{
+					regenTimerReduction *= weakBody_HealthRegenMultiplier;
+				}
+				healthRegenTimer -= regenTimerReduction * Time.deltaTime;
             }
             else
             {
-                Heal(healthRegenAmountPerSecond * Time.deltaTime);
+                var regenAmount = healthRegenAmountPerSecond;
+                if (weakBody)
+                {
+                    regenAmount *= weakBody_HealthRegenMultiplier;
+				}
+				Heal(regenAmount * Time.deltaTime);
             }
         }
     }

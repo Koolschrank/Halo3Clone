@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reviveCollider: {fileID: 3305912785743018966}
-  reviveTime: 4
+  reviveTime: 3
   timeToReset: 1
+  valueMultiplierWhenStoped: 0.2
 --- !u!135 &3305912785743018966
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11024,6 +11025,8 @@ MonoBehaviour:
   playerMovement: {fileID: 7400201383000877008}
   isNonPlayer: 0
   playerBodyStatSheet: {fileID: 6520564595086861149}
+  playerMesh: {fileID: 8335073051360787677}
+  characterController: {fileID: 1567991787468202011}
 --- !u!114 &4355240392448193639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11105,6 +11108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f44e285ab8c58445bb7cd2ec2d19c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noWeaponInventory: 0
   weaponInvetorySize: 1
   weaponDropPoint: {fileID: 1905413014460542580}
   characterHealth: {fileID: 782412234501442312}
@@ -11125,6 +11129,7 @@ MonoBehaviour:
   playerMovement: {fileID: 7400201383000877008}
   playerAim: {fileID: 3068919470916229809}
   playerArms: {fileID: 3232609274750972410}
+  meleeAttacker: {fileID: 8008512304446792098}
   playerPickUpScan: {fileID: 3086695294023934871}
   health: {fileID: 782412234501442312}
   bulletSpawner: {fileID: 737555415851796727}
@@ -11162,6 +11167,9 @@ MonoBehaviour:
   healthRegenDelay: 2.5
   healthRegenAmountPerSecond: 10
   spawnInvulnerabilityTime: 1
+  weakBody_HealthRegenMultiplier: 0.4
+  weakBody_ShildDamageMultiplier: 1.3
+  weakBody_ShildRegenMultiplier: 0.7
   damageMultiplier: 1
   hasShild: 1
   headShotOneShot: 1
@@ -11281,6 +11289,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  shildRegenMeleeDelay: 0.1
 --- !u!114 &6138964545677116144
 MonoBehaviour:
   m_ObjectHideFlags: 0

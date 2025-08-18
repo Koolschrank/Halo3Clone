@@ -25,7 +25,7 @@ MonoBehaviour:
   reloadTime: 1
   reloadGainAmmoTrigger: 0.9
   inaccuracy: 0
-  switchOutTime: 0.15
+  switchOutTime: 0.075
   switchInTime: 0.25
   canZoom: 0
   zoomFOV: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   bulletsPerRow: 0
   crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
   crosshairsSize: {x: 0.7, y: 0.7}
+  crosshairsSizeMultiplierWhenDualWielded: 1
   enemyAiWeaponData: {fileID: 11400000, guid: 3935029da2e725d4db216d70624c2277, type: 2}
   gunAiBehaviour:
     IdealRange: 0
