@@ -23,17 +23,21 @@ MonoBehaviour:
   magazineSize: 2
   maxAmmoInReserve: 10
   reloadTime: 2.5
+  reloadGainAmmoTrigger: 0.9
   inaccuracy: 0.25
   switchOutTime: 0.25
   switchInTime: 0.6
   canZoom: 0
   zoomFOV: 0
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: 5410cb33179973f4e8f2696bf1f697f6, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
+  autoAim: {fileID: 11400000, guid: 5410cb33179973f4e8f2696bf1f697f6, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
   hasKnockback: 1
@@ -68,6 +72,40 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1.5
   reloadTimeMultiplier: 1.5
+  bloomOnShoot: 0
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.5
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 2
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: -1842625480
@@ -85,6 +123,17 @@ MonoBehaviour:
           Data4: -855647888
         Path: event:/SFX/Guns/BaseGunSounds/Reload/MagazinPullOut
       timeOfPlay: 0.25
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -95,6 +144,17 @@ MonoBehaviour:
           Data4: 1897514351
         Path: event:/SFX/Guns/ShotGun/Reload/OpenBarrel
       timeOfPlay: 0.12
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: -771642470
@@ -103,6 +163,17 @@ MonoBehaviour:
           Data4: -1629882881
         Path: event:/SFX/Guns/ShotGun/Reload/PutInBullets
       timeOfPlay: 0.32
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: -1332733654
@@ -111,6 +182,17 @@ MonoBehaviour:
           Data4: 1883517362
         Path: event:/SFX/Guns/ShotGun/Reload/CloseBarrel
       timeOfPlay: 0.6
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: -465851604
@@ -119,6 +201,17 @@ MonoBehaviour:
           Data4: 534116276
         Path: event:/SFX/Guns/ShotGun/Reload/ChargeBolt
       timeOfPlay: 0.9
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 854037e5ea70f1e48bfdc78fe5fb2261, type: 3}
   bulletSprite: {fileID: 21300000, guid: c8fb4c1e73d92a04787384e53fd847b5, type: 3}
@@ -126,11 +219,13 @@ MonoBehaviour:
   bulletsPerRow: 6
   crosshairs: {fileID: 21300000, guid: 3f79c894eb9dcea408efd9d0684d46cb, type: 3}
   crosshairsSize: {x: 0.8, y: 0.8}
+  crosshairsSizeMultiplierWhenDualWielded: 1
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 3
-    focusGainWhenOnTarget: 0.5
-    focusLossWhenNotOnTarget: 0.5
+    focusGainWhenOnTarget: 0.7
+    focusLossWhenNotOnTarget: 0.4
     moveSpeedWithGun: 0.65
     crouchDistance: 1
     minDistanceToDogeWhenTakingDamage: 15
+  upgradedWeaponData: {fileID: 0}

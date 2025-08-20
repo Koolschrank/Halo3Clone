@@ -440,8 +440,10 @@ public class AI_Move : MonoBehaviour
 
 		if (followObjectiveThisFrame)
         {
-			targetPosition = ObjectiveIndicator.instance.GetObjective(0).Position;
-        }
+			var gamemode = GameModeSelector.gameModeManager as KingOfTheHillManager;
+			targetPosition = gamemode.currentHill.transform.position;
+
+		}
 
         Vector3 offsetPosition = targetPosition + targetOffset;
 		

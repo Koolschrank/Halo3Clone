@@ -303,9 +303,7 @@ public class EnemySpawner : MonoBehaviour
 			for (int i = 0; i < amount; i++)
             {
 				
-
-				
-				var stats = alliesForPVPGames.GetRandomEnemy();
+				var stats = activeWave.GetRandomEnemy();
 				var equipment = stats.equipment;
 				if (stats.useSpecialEquipment)
 				{
@@ -357,24 +355,18 @@ public class EnemySpawner : MonoBehaviour
 					arms.RightArm.GetBulletSpawner().SetOnlyEnemyIsPlayerTeam(true);
 				}
 
+				
+
 
 
 				if (isPvPGame)
 				{
-					if (teamId == 0)
+					team2EnemyCount++;
+
+					health.OnDeath += () =>
 					{
-						health.OnDeath += () =>
-						{
-							team1EnemyCount--;
-						};
-					}
-					else
-					{
-						health.OnDeath += () =>
-						{
-							team2EnemyCount--;
-						};
-					}
+						team2EnemyCount--;
+					};
 
 				}
 
