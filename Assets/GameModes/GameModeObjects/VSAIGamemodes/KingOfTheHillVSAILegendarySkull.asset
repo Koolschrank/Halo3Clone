@@ -24,7 +24,7 @@ MonoBehaviour:
     playerSizeOffset: 0
     playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
-    magazinsOfWeaponInHand: 3
+    magazinsOfWeaponInHand: 2
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
     sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
@@ -36,14 +36,14 @@ MonoBehaviour:
     ability3: {fileID: 0}
     healthOverride:
       hasHealthOverride: 1
-      showHealthBar: 0
-      health: 62.5
-      shild: 125
+      showHealthBar: 1
+      health: 100
+      shild: 100
       armor: 0
-      healthRegenStartTime: 2.5
+      healthRegenStartTime: 3
       shildRegenStartTime: 4.5
-      healthRegen: 12.5
-      shildRegen: 31.25
+      healthRegen: 10
+      shildRegen: 25
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 0
   timeLimitInMinutes: 10
@@ -61,7 +61,7 @@ MonoBehaviour:
   dontDropWeaponsOnDeath: 0
   startScore: 0
   playerStatsSheetBlueprint: {fileID: 0}
-  spawnWithArmor: 1
+  spawnWithArmor: 0
   EnemyTeamsWorkingTogether: 1
   team2usesOtherPointsToWin: 1
   team2PointsToWin: 9999
@@ -97,7 +97,7 @@ MonoBehaviour:
   hasRespawnTokens: 0
   respawnTokens: 3
   hasReviveBodies: 1
-  scoreMultiplier: 3
+  scoreMultiplier: 4
   usePVEScoring: 1
   pve_scoreLossPerSecond: 1
   pve_scoreGainPerSecond: 0.5

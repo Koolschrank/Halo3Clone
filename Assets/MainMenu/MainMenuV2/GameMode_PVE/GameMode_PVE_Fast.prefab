@@ -98,16 +98,13 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0f37b634946431b428964811e088e628, type: 2}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: discription
-      value: 'Secure a Zone to score points.
+      value: 'You have to suvive 10 waves of enemies.
 
-        You need to score 1000 points
-        to win,
+        If the enemies ocupy
+        the generator zone the generator looses energy,
 
-        the enemies need 200 points to win but they lose points
-        when you score points.
-
-        After every 100 points the zone moves to
-        a new place and a new enemy wave starts'
+        if it has no energy
+        left you loose.'
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: setAIAmount

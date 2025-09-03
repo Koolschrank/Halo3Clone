@@ -116,7 +116,8 @@ public class MiniMapManager : MonoBehaviour
 
     public Vector2 GetMiniMapObjectivePosition(int objectiveIndex,Vector3 position, float maxDistance)
     {
-        var objectivePosition = miniMapObjectivDatas[objectiveIndex].ObjectivePosition;
+
+		var objectivePosition = miniMapObjectivDatas[objectiveIndex].ObjectivePosition;
         var positionWithoutY = new Vector3(position.x, 0, position.z);
 
 

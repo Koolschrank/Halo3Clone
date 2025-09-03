@@ -304,12 +304,23 @@ public class EnemySpawner : MonoBehaviour
             {
 				
 				var stats = activeWave.GetRandomEnemy();
+
+				while (activeWave.enemyWave.MaxSpecialEnemies <= specialEnemyCount && stats.useSpecialEquipment) 
+				{
+					stats = alliesForPVPGames.GetRandomEnemy();
+				} 
+
+
 				var equipment = stats.equipment;
+
+				bool isSpecialEnemy = false;
 				if (stats.useSpecialEquipment)
 				{
 					var newEquipment = specialEquipments[UnityEngine.Random.Range(0, specialEquipments.Length)];
 					newEquipment.ChangeSize(equipment.PlayerSize, equipment.PlayerSizeOffset, equipment.PlayerCenterOffset);
 					equipment = newEquipment;
+					isSpecialEnemy = true;
+                    specialEnemyCount++;
 				}
 
 				Vector2 randomInCircle = UnityEngine.Random.insideUnitCircle * 4f;
@@ -368,6 +379,13 @@ public class EnemySpawner : MonoBehaviour
 						team2EnemyCount--;
 					};
 
+                    if (isSpecialEnemy)
+                    {
+						health.OnDeath += () =>
+						{
+							specialEnemyCount--;
+						};
+					}
 				}
 
 				PlayerManager.instance.UpdateTeamOfEnemyAI(enemy.GetComponent<BodyMindConnection>(), teamId);
@@ -393,7 +411,7 @@ public class EnemySpawner : MonoBehaviour
 		}
         
 	}
-
+    int specialEnemyCount = 0;
 	private void SpawnEnemy(Enemy_Stats stats)
     {
 
@@ -515,16 +533,27 @@ public class EnemySpawner : MonoBehaviour
 
         if (teamId == 0 && gamemode.team2LoosesScoreWhenTeam1scores)
         {
-            stats = alliesForPVPGames.GetRandomEnemy();
+            do
+            {
+                stats = alliesForPVPGames.GetRandomEnemy();
+            } while (activeWave.enemyWave.MaxSpecialEnemies <= specialEnemyCount && stats.useSpecialEquipment);
+
+
+				
+
+
+            
 		}
 
-
+        bool isSpecialEnemy = false;
 		var equipment = stats.equipment;
         if (stats.useSpecialEquipment)
         {
             var newEquipment = specialEquipments[UnityEngine.Random.Range(0, specialEquipments.Length)];
             newEquipment.ChangeSize(equipment.PlayerSize, equipment.PlayerSizeOffset, equipment.PlayerCenterOffset);
 			equipment = newEquipment;
+            specialEnemyCount++;
+			isSpecialEnemy = true;
 		}
 
         enemy.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
@@ -569,8 +598,18 @@ public class EnemySpawner : MonoBehaviour
                 health.OnDeath += () =>
                 {
                     team2EnemyCount--;
+                    
                 };
             }
+
+            if (isSpecialEnemy)
+            {
+				health.OnDeath += () =>
+				{
+					specialEnemyCount--;
+
+				};
+			}
 
         }
 

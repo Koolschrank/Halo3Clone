@@ -26,7 +26,7 @@ MonoBehaviour:
   reloadGainAmmoTrigger: 0.55
   inaccuracy: 0.01
   switchOutTime: 0.25
-  switchInTime: 0.9
+  switchInTime: 0.6
   canZoom: 1
   zoomFOV: 35
   zoomMoveSpeed: 1

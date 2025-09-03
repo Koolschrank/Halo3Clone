@@ -55,6 +55,8 @@ public class Objective
     public Action<int> OnTeamIndexChange;
     public Action<String> OnTextChanged;
 
+    
+
     public Objective()
     {
         

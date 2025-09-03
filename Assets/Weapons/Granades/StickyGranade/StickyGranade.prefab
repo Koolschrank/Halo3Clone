@@ -336,7 +336,7 @@ MonoBehaviour:
   startTimerOnFirstCollision: 1
   stickOnCollision: 1
   collisionCooldown: 0.05
-  explosionTime: 1.5
+  explosionTime: 1.25
   explosionEffect: {fileID: 8386559723769285559, guid: 0a1a31918aaacec429bc7dc88b857607, type: 3}
   mainGranade: {fileID: 3890480776725438845}
   gameObjectsToEnableOnTimerStart:

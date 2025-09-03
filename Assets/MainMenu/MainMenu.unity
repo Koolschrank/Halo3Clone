@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -583,6 +583,14 @@ PrefabInstance:
       propertyPath: 'SubButtons.Array.data[6]'
       value: 
       objectReference: {fileID: 6181505618347800424, guid: 820bd366ad2cd954ba4b78326b19437f, type: 3}
+    - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: 'SubButtons.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8959652978432458815, guid: 173e6ba378fc7464e8d4c4c913c9c955, type: 3}
+    - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: 'SubButtons.Array.data[8]'
+      value: 
+      objectReference: {fileID: 6181505618347800424, guid: e3787d98ec71e5a43a74b91b857124a7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15221,7 +15229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -15261,6 +15269,10 @@ PrefabInstance:
       objectReference: {fileID: 8959652978432458815, guid: a7c8f8da47287b34d84fb52a86a74a82, type: 3}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[9]'
+      value: 
+      objectReference: {fileID: 8959652978432458815, guid: c6abcc9c7c8b03d4eb3e3c712c1c9c2f, type: 3}
+    - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
+      propertyPath: 'SubButtons.Array.data[10]'
       value: 
       objectReference: {fileID: 8959652978432458815, guid: 127e4b459034ed646994d59f5a916c72, type: 3}
     m_RemovedComponents: []

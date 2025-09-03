@@ -26,8 +26,22 @@ public class KingOfTheHillManager : GameModeManager
 
 
 	
+    public bool hasFlag = false;
 
-	public override void ResetGame()
+	public GameObject team1_FlagPrefab;
+	public Transform team1_FlagSpawnPoint;
+	GameObject team1_Flag;
+	Weapon_Data team1_FlagData;
+
+
+	public float flagRecoveryTimer = 15f;
+	bool flag1_droped = false;
+	float flag1_dropedTimer = 0;
+
+
+
+
+    public override void ResetGame()
     {
         base.ResetGame();
 
@@ -40,12 +54,22 @@ public class KingOfTheHillManager : GameModeManager
         }
 
         StartHill(hillStartIndex);
-        
 
 
-
-
+        if (hasFlag)
+        {
+            EnterFlagMode();
+        }
     }
+        
+	public override void PlayerSpawned(PlayerMind player)
+	{
+        base.PlayerSpawned(player);
+		if (hasFlag)
+        {
+            SetPlayerFlagEvents(player);
+		}
+	}
 
 	public override void PlayerDied(PlayerMind player)
 	{
@@ -121,10 +145,222 @@ public class KingOfTheHillManager : GameModeManager
 		}
 
        
+        if (hasFlag)
+        {
+            FlagUpdate();
+		}
 
     }
 
-    void StartRandomHill()
+    public void FlagUpdate()
+    {
+		var objective = ObjectiveIndicator.instance.GetObjective(1);
+		if (team1_Flag != null)
+		{
+            Debug.Log("Flag position: " + team1_Flag.transform.position);
+
+			objective.SetPosition(team1_Flag.transform.position);
+			objective.SetHideDistance(1);
+            objective.SetText("Flag");
+            objective.SetTeamIndex(0);
+            objective.SetActive(true);
+		}
+
+		if (flag1_droped)
+		{
+			flag1_dropedTimer -= Time.deltaTime;
+			objective.SetText(((int)flag1_dropedTimer).ToString());
+			if (flag1_dropedTimer <= 0)
+			{
+				LogSystem.logSystem.PrintLog("Blue Flag Reset");
+				SpawnFlagPrefab_Team1();
+			}
+		}
+		else
+		{
+			flag1_dropedTimer += Time.deltaTime;
+
+		}
+
+	}
+
+
+
+	public void SpawnFlagPrefab_Team1()
+	{
+		if (team1_Flag != null)
+		{
+			Destroy(team1_Flag);
+		}
+		flag1_droped = false;
+
+
+
+		team1_Flag = Instantiate(team1_FlagPrefab, team1_FlagSpawnPoint.position, Quaternion.identity);
+		var pickUp = team1_Flag.GetComponent<Weapon_PickUp>();
+		team1_FlagData = pickUp.WeaponData;
+
+		// flag
+
+		ObjectiveIndicator.instance.GetObjective(1).SetActive(true);
+		ObjectiveIndicator.instance.GetObjective(1).SetTeamIndex(0);
+		ObjectiveIndicator.instance.GetObjective(1).SetText("Flag");
+		ObjectiveIndicator.instance.GetObjective(1).SetHideDistance(1);
+		ObjectiveIndicator.instance.GetObjective(1).SetPosition(team1_FlagSpawnPoint.position + Vector3.up * 1);
+
+	}
+
+	public void FlagPickedUp_Team1(GameObject player)
+	{
+		team1_Flag = player;
+		ObjectiveIndicator.instance.GetObjective(1).SetActive(true);
+		flag1_droped = false;
+	}
+
+	public void FlagDroped_Team1(Weapon_PickUp pickUp)
+	{
+		if (pickUp == null)
+		{
+			return;
+		}
+		team1_Flag = pickUp.gameObject;
+		flag1_droped = true;
+		flag1_dropedTimer = Mathf.Min(flag1_dropedTimer, flagRecoveryTimer);
+		var pickup = team1_Flag.GetComponent<Weapon_PickUp>();
+		
+
+	}
+
+    public void EnterFlagMode()
+    {
+        hasFlag = true;
+        SpawnFlagPrefab_Team1();
+        var allPlayers = PlayerManager.instance.GetAllPlayers();
+        foreach (var player in allPlayers)
+        {
+            SetPlayerFlagEvents(player);
+		}
+	}
+
+    public void ExitFlagMode()
+    {
+        hasFlag = false;
+        if (team1_Flag != null)
+        {
+            if (team1_Flag.CompareTag("Player"))
+            {
+                var arms = team1_Flag.GetComponent<PlayerArms>();
+                var rightWeapon = arms.RightArm.CurrentWeapon;
+                if (rightWeapon.Data == team1_FlagData)
+                {
+                    arms.RightArm.DropWeapon();
+                }
+                else
+                {
+                    arms.LeftArm.DropWeapon();
+                }
+            }
+            else
+            {
+                Destroy(team1_Flag);
+
+            }
+            team1_Flag = null;
+        }
+        ObjectiveIndicator.instance.GetObjective(1).SetActive(false);
+        ObjectiveIndicator.instance.GetObjective(1).SetHideDistance(10000);
+
+        var allPlayers = PlayerManager.instance.GetAllPlayers();
+        foreach (var player in allPlayers)
+        {
+            RemovePlayerFlagEvents(player);
+        }
+    }
+
+	public void SetPlayerFlagEvents(PlayerMind player)
+    {
+		var arms = player.PlayerBody.GetComponent<PlayerArms>();
+		arms.LeftArm.OnWeaponPickedUp += (weapon) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagPickedUp_Team1(player.PlayerBody);
+			}
+			
+		};
+
+		arms.RightArm.OnWeaponPickedUp += (weapon) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagPickedUp_Team1(player.PlayerBody);
+			}
+			
+		};
+
+		arms.LeftArm.OnWeaponDroped += (weapon, pickUp) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagDroped_Team1(pickUp);
+			}
+			
+		};
+
+		arms.RightArm.OnWeaponDroped += (weapon, pickUp) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagDroped_Team1(pickUp);
+			}
+			
+		};
+	}
+
+	public void RemovePlayerFlagEvents(PlayerMind player)
+	{
+		var arms = player.PlayerBody.GetComponent<PlayerArms>();
+		arms.LeftArm.OnWeaponPickedUp -= (weapon) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagPickedUp_Team1(player.PlayerBody);
+			}
+
+		};
+
+		arms.RightArm.OnWeaponPickedUp -= (weapon) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagPickedUp_Team1(player.PlayerBody);
+			}
+
+		};
+
+		arms.LeftArm.OnWeaponDroped -= (weapon, pickUp) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagDroped_Team1(pickUp);
+			}
+
+		};
+
+		arms.RightArm.OnWeaponDroped -= (weapon, pickUp) =>
+		{
+			if (weapon.Data == team1_FlagData)
+			{
+				FlagDroped_Team1(pickUp);
+			}
+
+		};
+	}
+
+
+
+
+	void StartRandomHill()
     {
         StartHill(GetRandomHillIndex());
         LogSystem.logSystem.PrintLog("Hill moved");
@@ -195,6 +431,10 @@ public class KingOfTheHillManager : GameModeManager
 			player.EnableObjectiveUIMarker();
 			var marker = ObjectiveIndicator.instance;
 			marker.GetObjective(0).SetHideDistance(0);
+
+
+			//marker.GetObjective(1).SetHideDistance(0);
+            //marker.GetObjective(1).SetActive(false);
 		}
     }
 

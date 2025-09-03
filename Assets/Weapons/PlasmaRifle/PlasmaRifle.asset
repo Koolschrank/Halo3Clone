@@ -68,9 +68,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.9
+  damageMultiplier: 0.85
   fireRateMultiplier: 1
-  inaccuracyMultiplier: 4.25
+  inaccuracyMultiplier: 3.75
   reloadTimeMultiplier: 1.25
   bloomOnShoot: 1
   bloomOnTakingDamage: 0

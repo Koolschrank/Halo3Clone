@@ -1,10 +1,13 @@
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class MeleeAttacker : MonoBehaviour
 {
     public Action<PlayerMeleeAttack> OnAttackStart;
     public Action<PlayerMeleeAttack> OnAttackHit;
+
+    public UnityEvent OnMeleeHitEvent;
 
     [SerializeField] PlayerMovement playerMovement; // reference to the player movement for applying force
 	[SerializeField] BodyMindConnection bodyMindConnection; // reference to the body mind connection for rumble
@@ -250,9 +253,10 @@ public class MeleeAttacker : MonoBehaviour
         if (hits > 0)
         {
             OnAttackHit?.Invoke(attackData);
+            OnMeleeHitEvent?.Invoke();
 
 
-            if (bodyMindConnection.Mind != null)
+			if (bodyMindConnection.Mind != null)
             {
                 int playerIndex = bodyMindConnection.Mind.playerID;
                 RumbleManager.Instance.TriggerRumble (meleeRumble_hit, playerIndex);

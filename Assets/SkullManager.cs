@@ -86,8 +86,9 @@ public class SkullManager : MonoBehaviour
 				do
 				{
 					randomIndex = UnityEngine.Random.Range(0, randomSkulls.Length);
-				} while (skullsUsed.Contains(randomIndex));
-				
+				} while (lastRandomSkullIndex == randomIndex || skullsUsed.Contains(randomIndex) );
+
+				lastRandomSkullIndex = randomIndex;
 				skullsUsed.Add(randomIndex);
 				skullsToActivate.Add(randomSkulls[randomIndex]);
 			}
@@ -96,6 +97,8 @@ public class SkullManager : MonoBehaviour
 		SetActiveSkulls(skullsToActivate);
 
 	}
+
+	int lastRandomSkullIndex = -1;
 
 	private void Start()
 	{

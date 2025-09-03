@@ -49,7 +49,9 @@ public class CharacterHealth : Health
 
 	[SerializeField] EventReference deathSound;
 
-    public RumbleData rumbleHit;
+	[SerializeField] EventReference deathSoundAI;
+
+	public RumbleData rumbleHit;
     public RumbleData rumbleDeath;
 
 
@@ -293,7 +295,7 @@ public class CharacterHealth : Health
 			}
             if (shildGainOnMelee)
             {
-				shildRegenAmount *= 0.6f;
+				shildRegenAmount *= 0.75f;
 			}
 
 
@@ -626,10 +628,17 @@ public class CharacterHealth : Health
 		{
 			if (GameModeSelector.gameModeManager.GameModeStats.hasReviveBodies)
 				reviveBody.Activate(body.Mind);
+
+
+			AudioManager.instance.PlayOneShot(deathSound, transform.position);
+		}
+        else
+        {
+			AudioManager.instance.PlayOneShot(deathSoundAI, transform.position);
 		}
 
 
-		base.Die();
+            base.Die();
 
 
         deathParticle.SetActive(true);

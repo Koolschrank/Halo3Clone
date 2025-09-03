@@ -7,9 +7,13 @@ public class Enemy_Wave : ScriptableObject
     public float spawnInterval = 5f;
     public float duration = 10f;
     public float waveEndBrakeTime = 5f;
+    public int maxSpecialEnemies = 1;
+
+	public int MaxSpecialEnemies => Mathf.Max (maxSpecialEnemies, PlayerManager.instance.GetAllPlayers().Count);
 
 
-    public Enemy_Stats GetRandomEnemy()
+
+	public Enemy_Stats GetRandomEnemy()
     {
         if (enemyStats.Length == 0)
         {

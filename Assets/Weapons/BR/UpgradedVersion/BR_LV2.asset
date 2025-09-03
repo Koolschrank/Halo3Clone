@@ -17,30 +17,33 @@ MonoBehaviour:
   weaponFPSModel: {fileID: 6899193775294056288, guid: 5cb21606e896598439fb79ccac2fb79b, type: 3}
   weapon3rdPersonModel: {fileID: 9212859378291490076, guid: a9540467c26ab614cae353c6a9cbee58, type: 3}
   weaponName: BR
-  shootType: 2
-  fireRate: 0.232521
+  shootType: 1
+  fireRate: 0.2
   bulletsPerShot: 1
-  magazineSize: 36
+  magazineSize: 20
   maxAmmoInReserve: 400
-  reloadTime: 2.3
+  reloadTime: 1.8
   reloadGainAmmoTrigger: 0.55
   inaccuracy: 0.01
-  switchOutTime: 0.25
-  switchInTime: 0.9
+  switchOutTime: 0.15
+  switchInTime: 0.15
   canZoom: 1
   zoomFOV: 35
+  zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
   meleeData: {fileID: 0}
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 1
   burstAmount: 3
   burstDelay: 0.06800005
   hasKnockback: 1
   gunKnockback:
-    power: 1
-    duration: 0.25
+    power: 0.8
+    duration: 0.1
     curve:
       serializedVersion: 2
       m_Curve:
@@ -78,6 +81,40 @@ MonoBehaviour:
   fireRateMultiplier: 1
   inaccuracyMultiplier: 2
   reloadTimeMultiplier: 1.4
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0.5
+  bloomTime: 0.1
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.015517533
+      value: 1.0001631
+      inSlope: 0.0155195845
+      outSlope: 0.0155195845
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9933485
+      value: 0.025448352
+      inSlope: -2.520724
+      outSlope: -2.520724
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08760626
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.25
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
       Data1: 2116415683
@@ -95,6 +132,17 @@ MonoBehaviour:
           Data4: 1066587361
         Path: event:/SFX/Guns/BR/EnableGun
       timeOfPlay: 0.7
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   reloadSounds:
     timedSounds:
     - soundReference:
@@ -105,6 +153,17 @@ MonoBehaviour:
           Data4: 2110580369
         Path: event:/SFX/Guns/BR/Reload/MagazinPullOut
       timeOfPlay: 0.23
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: 650216939
@@ -113,6 +172,17 @@ MonoBehaviour:
           Data4: 1173373093
         Path: event:/SFX/Guns/BR/Reload/MagazinPutIn
       timeOfPlay: 0.55
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
     - soundReference:
         Guid:
           Data1: 2141011032
@@ -121,13 +191,25 @@ MonoBehaviour:
           Data4: 1066587361
         Path: event:/SFX/Guns/BR/EnableGun
       timeOfPlay: 0.85
+      hasRumble: 0
+      rumbleData:
+        duration: 0
+        intensity: 0
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 0
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 195e7a45675baf9478fe37712be1f905, type: 3}
   bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
   bulletSize: {x: 1, y: 1}
-  bulletsPerRow: 18
+  bulletsPerRow: 20
   crosshairs: {fileID: 21300000, guid: b91cf2bf0144e2648bfdb19f3a675230, type: 3}
-  crosshairsSize: {x: 0.35, y: 0.35}
+  crosshairsSize: {x: 0.25, y: 0.25}
+  crosshairsSizeMultiplierWhenDualWielded: 1
   enemyAiWeaponData: {fileID: 11400000, guid: 938e4d067d71b2d408dc82fbd148ea9f, type: 2}
   gunAiBehaviour:
     IdealRange: 10

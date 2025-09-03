@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: HitScan
   m_EditorClassIdentifier: 
-  damage: 11.5
+  damage: 9.5
   damageMultiplierVSAI: 1
   force: 150
   shildDamageMultiplier: 1
   headShotMultiplier: 1
   canHeadShotShild: 0
-  range: 50
+  range: 40
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 8
+  rangeUntilDamageFalloff: 7
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -50,6 +50,8 @@ MonoBehaviour:
   trail: {fileID: 7783241535111576775, guid: 3cbb8aaea6a9bce43bd21ea425f5555d, type: 3}
   impact_body: {fileID: 100002, guid: 0f0f9fc6229e6154bb8985951c94750f, type: 3}
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
+  doesApplyForceOnLivingPlayers: 0
+  forceOnLivingPlayers: 1
   bodyHitSound:
     Guid:
       Data1: 1228804770

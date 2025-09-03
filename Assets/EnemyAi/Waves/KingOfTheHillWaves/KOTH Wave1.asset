@@ -19,3 +19,4 @@ MonoBehaviour:
   spawnInterval: 1
   duration: 999
   waveEndBrakeTime: 15
+  maxSpecialEnemies: 2

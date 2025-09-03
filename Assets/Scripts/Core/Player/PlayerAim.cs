@@ -38,6 +38,8 @@ public class PlayerAim : MonoBehaviour
 
 	[Header("Aim Correction Settings")]
     [SerializeField] bool hasAimCorrection = true;
+
+	[SerializeField] float aimCorrectionSlowDown = 0.8f;
 	[SerializeField] float aimCorrectionDistance = 10f;
     [SerializeField] float aimCorrectionWidth = 10f;
     [SerializeField] float aimCorrectionMaxAngle = 45f;
@@ -70,6 +72,19 @@ public class PlayerAim : MonoBehaviour
     bool inputSlowDown = false;
     bool noAimAssitance = false;
     public float mouseSensitivityMultiplier = 0.1f; // used for mouse sensitivity, can be set by other scripts if needed
+
+
+	[Header("RampUp")]
+	public float rampUpDeadzone = 0.5f; 
+    public float maxDifferenceFromOldInput = 0.2f;
+	public float rampUpTime = 1f;
+    public float rampUpMultiplier = 2f;
+    float rampUpTimer = 0f;
+
+	public int bufferSize = 10;
+
+	private Queue<Vector2> history = new Queue<Vector2>();
+
 	private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -144,7 +159,48 @@ public class PlayerAim : MonoBehaviour
 
 		// x rotates player y rotates camera
 		Vector2 input = aimInput; //controller.Player.Aim.ReadValue<Vector2>();
-        float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Time.deltaTime;
+
+        if (!noAimAssitance)
+        {
+			// add input to history
+			history.Enqueue(input);
+			var oldestInput = input;
+
+			if (history.Count > bufferSize)
+			{
+				oldestInput = history.Dequeue();
+
+
+			}
+
+			if (input.magnitude < rampUpDeadzone || Vector2.Distance(input, oldestInput) > maxDifferenceFromOldInput)
+			{
+				rampUpTimer -= Time.deltaTime * 2;
+				if (rampUpTimer < 0)
+				{
+					rampUpTimer = 0;
+				}
+			}
+			else
+			{
+				rampUpTimer += Time.deltaTime;
+				if (rampUpTimer > rampUpTime)
+				{
+					rampUpTimer = rampUpTime;
+				}
+
+			}
+
+			if (rampUpTimer != 0)
+			{
+				float rampUpFactor = 1 + (rampUpTimer / rampUpTime) * (rampUpMultiplier - 1);
+				input *= rampUpFactor;
+			}
+		}
+		
+
+
+		float rotationX = input.x * aimSpeed_x * sensitivityMultiplier * Time.deltaTime;
         float rotationY = input.y * aimSpeed_y * sensitivityMultiplier * Time.deltaTime;
         
 
@@ -223,6 +279,10 @@ public class PlayerAim : MonoBehaviour
                         aimCorrectionSpeed += aimCorrectionSpeed_Aim * inputMagnitude;// * directionOverlap;
 					rotationX += aimCorrectionInput.x * aimCorrectionSpeed * Time.deltaTime * aimCorrectionMultiplier;
 					rotationY += aimCorrectionInput.y * aimCorrectionSpeed * Time.deltaTime * aimCorrectionMultiplier;
+
+
+                    rotationX *= aimCorrectionSlowDown;
+                    rotationY *= aimCorrectionSlowDown;
 				}
 			}
 		}

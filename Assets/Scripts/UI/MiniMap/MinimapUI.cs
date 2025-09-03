@@ -124,6 +124,7 @@ public class MinimapUI : MonoBehaviour
             Vector2 uiDirection = GetObjectDirection(position, playerTransform);
 
             obj.RectTransform.localPosition = (uiDirection * distance * iconPositionMultiplier);
+
         }
 
 

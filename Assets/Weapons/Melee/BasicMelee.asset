@@ -18,7 +18,7 @@ MonoBehaviour:
   force: 90
   forceOnPlayers: 12
   forceOffset: 0
-  delay: 0.15
+  delay: 0.1
   meleeTime: 0.8
   meleeRadius: 0.75
   meleeDistance: 0.75
@@ -26,7 +26,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483777
   hasLaunch: 1
-  launchDistance: 3.5
+  launchDistance: 3.25
   launchAngle: 30
   launchTime: 0.15
   launchStopDistance: 1.4

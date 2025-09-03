@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour
     
     [SerializeField] float range = 5f;
     [SerializeField] float damage = 10f;
+    [SerializeField] float damageDeadzone = 10f;
 	[SerializeField] float damageMultiplierVSAI = 1f;
 	[SerializeField] float damageOnShildMultiplier = 1f;
 
@@ -137,8 +138,8 @@ public class Explosion : MonoBehaviour
                     Debug.Log("hit ai");
 					damagePackage.damageAmount *= damageMultiplierVSAI;
 				}
-
-				health.TakeDamage(damagePackage);
+                if (damagePackage.damageAmount > damageDeadzone)
+                    health.TakeDamage(damagePackage);
 
 
                 if (!health.IsDead && !obstructed)

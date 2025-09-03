@@ -666,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLifePoints: 100
   criticalModeThreshold: 25
-  speedUpLossMultiplier: 6
+  speedUpLossMultiplier: 5.5
   lifePointsLossCurve:
     serializedVersion: 2
     m_Curve:
@@ -2101,6 +2101,10 @@ MonoBehaviour:
   - {fileID: 1177260246957894900}
   checkInterval: 0.05
   teamOnHill: -1
+  hasFlag: 0
+  team1_FlagPrefab: {fileID: 9197169624787015198, guid: 4a987a1d9e563c243ac0601e16e853c7, type: 3}
+  team1_FlagSpawnPoint: {fileID: 0}
+  flagRecoveryTimer: 15
 --- !u!1 &8856300298903435038
 GameObject:
   m_ObjectHideFlags: 0

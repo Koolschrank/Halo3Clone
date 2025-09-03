@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1282482672808073234}
-  weapon_Data: {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
+  weapon_Data: {fileID: 11400000, guid: 1e05c6b75263a8942a4c754069c85016, type: 2}
   destroyParticle: {fileID: 3346045879276527138}
   weaponDeleteParticle: {fileID: 7084283216478924155, guid: c7ff8a26174dbd24fb9f74fb96a01604, type: 3}
   ammoInMagazine: 60
