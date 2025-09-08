@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f08c177aac84104eb895c68e5a6e446, type: 3}
   m_Name: PlasmaProjectile 1
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 691827347594146763, guid: f90a75e05a61eb64db8350a5260b5227, type: 3}
+  bulletPrefab: {fileID: 691827347594146763, guid: d6888ae95177e4b42bb92588c2289e9b, type: 3}
   bulletVisual: {fileID: 163348909714712760, guid: 73136035c85bce840a63164d3c70f22a, type: 3}

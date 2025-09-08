@@ -30,6 +30,7 @@ public class PlayerCamera : MonoBehaviour
     float zoomedInFOV = 40f;
     bool isZoomedIn = false;
 	CinemachineImpulseListener impulseListener;
+    public float baseBloomIntensity = 0.2f;
 
 
 
@@ -65,7 +66,9 @@ public class PlayerCamera : MonoBehaviour
 	public void ExitBloom()
     {
         bloomTimer = 0f;
-        SetBloom(0f);
+        SetBloom(baseBloomIntensity);
+		volume.profile.TryGet(out Bloom bloom);
+		bloom.tint.value = Color.white;
 	}
 
 	public void EnterHealthBloom()
@@ -177,11 +180,13 @@ public class PlayerCamera : MonoBehaviour
 		{
 			bloomTimer -= Time.deltaTime;
 			float bloomIntensity = shildBloomCurve.Evaluate(1f - (bloomTimer / shildBloomTime)) * shildBloomIntensity;
-			SetBloom(bloomIntensity);
+			SetBloom(baseBloomIntensity +bloomIntensity);
 		}
 		else
 		{
-			SetBloom(0f);
+			SetBloom(baseBloomIntensity);
+            volume.profile.TryGet(out Bloom bloom);
+			bloom.tint.value = Color.white;
 		}
 
 		// handle croma effect

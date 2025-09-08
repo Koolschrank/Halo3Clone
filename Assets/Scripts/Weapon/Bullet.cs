@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float radius = 0.1f;
 
     [SerializeField] float copyTransitionSpeed;
+    [SerializeField] bool isNedler = false;
 
     [SerializeField] GameObject bodyHitPartical;
     [SerializeField] GameObject groundHitPartical;
@@ -50,6 +51,7 @@ public class Bullet : MonoBehaviour
         damagePackage.origin = transform.position;
         damagePackage.headShotMultiplier = headShotMultiplier;
         damagePackage.shildDamageMultiplier = shildDamageMultiplier;
+        damagePackage.isNedlerDamage = isNedler;
         lastPosition = transform.position;
 
 		

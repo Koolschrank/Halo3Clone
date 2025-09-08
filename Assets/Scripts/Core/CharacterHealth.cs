@@ -21,6 +21,11 @@ public class CharacterHealth : Health
     [SerializeField] float shildRegenAmountPerSecond = 20;
     [SerializeField] float maxArmor = 100;
     [SerializeField] bool armorBeforeShild = false;
+    [SerializeField] int nedlerHealth;
+    [SerializeField] float nedlerHitStayTime = 7f;
+    float lastNedlerHitTime = -10f;
+	int nedlerHits = 0;
+	[SerializeField] GameObject nedlerExplosion;
 
 	float currentArmor = 0;
 	float shildRegenTimer;
@@ -434,6 +439,28 @@ public class CharacterHealth : Health
         {
 			damage *= (1 - playerArms.LeftArm.CurrentWeapon.Data.DamageBlock.blockPercentage * damagePackage.damageReductionAgainstBlock);
 			blocked = true;
+		}
+
+        if (damagePackage.isNedlerDamage)
+        {
+            if (Time.timeSinceLevelLoad - lastNedlerHitTime > nedlerHitStayTime)
+            {
+                nedlerHits = 0;
+			}
+            lastNedlerHitTime = Time.timeSinceLevelLoad;
+
+
+			nedlerHits++;
+            if (nedlerHits >= nedlerHealth)
+            {
+                if (nedlerExplosion != null)
+                {
+					nedlerExplosion = Instantiate(nedlerExplosion, transform.position, Quaternion.identity) as GameObject;
+                    nedlerExplosion.GetComponent<Explosion>().Activate(damagePackage.owner);
+                    return;
+				}
+            }
+            
 		}
 
 		

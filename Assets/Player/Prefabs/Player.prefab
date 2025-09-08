@@ -11761,6 +11761,8 @@ MonoBehaviour:
   shildRegenAmountPerSecond: 25
   maxArmor: 150
   armorBeforeShild: 1
+  nedlerHealth: 11
+  nedlerExplosion: {fileID: 8386559723769285559, guid: 0bf8a9327e0cadd4cb619d53a4190015, type: 3}
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
   playerArms: {fileID: 3232609274750972410}

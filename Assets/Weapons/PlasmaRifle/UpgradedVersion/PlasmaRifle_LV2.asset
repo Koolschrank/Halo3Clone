@@ -18,13 +18,13 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 674c18ae71fb5244aad2879ad81786a3, type: 3}
   weaponName: Plasma Rifle
   shootType: 1
-  fireRate: 0.05
+  fireRate: 0.06
   bulletsPerShot: 1
   magazineSize: 40
   maxAmmoInReserve: 600
-  reloadTime: 1.6
+  reloadTime: 1
   reloadGainAmmoTrigger: 0.7
-  inaccuracy: 0.04
+  inaccuracy: 0.35
   switchOutTime: 0.15
   switchInTime: 0.2
   canZoom: 1
@@ -68,10 +68,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.85
-  fireRateMultiplier: 1
-  inaccuracyMultiplier: 4.25
-  reloadTimeMultiplier: 1.5
+  damageMultiplier: 1
+  fireRateMultiplier: 0.9
+  inaccuracyMultiplier: 1.4
+  reloadTimeMultiplier: 1.25
   bloomOnShoot: 0
   bloomOnTakingDamage: 0
   bloomInaccuracyMultiplier: 0.5
@@ -181,6 +181,7 @@ MonoBehaviour:
   bulletsPerRow: 20
   crosshairs: {fileID: 21300000, guid: 726f2df23ded00148a6199fbeaadea8a, type: 3}
   crosshairsSize: {x: 0.575, y: 0.69}
+  crosshairsSizeMultiplierWhenDualWielded: 1
   enemyAiWeaponData: {fileID: 11400000, guid: cb28c8a3d5c98bc4d91d0f36becf952e, type: 2}
   gunAiBehaviour:
     IdealRange: 10

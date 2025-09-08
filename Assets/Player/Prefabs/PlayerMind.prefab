@@ -20015,7 +20015,7 @@ MonoBehaviour:
   healthBloomColor: {r: 1, g: 0, b: 0, a: 1}
   shildBloomColor: {r: 0.011440754, g: 0, b: 1, a: 0.7254902}
   armorBloomColor: {r: 1, g: 0.8619055, b: 0, a: 0.8352941}
-  shildBloomIntensity: 0.6
+  shildBloomIntensity: 1.2
   shildBloomTime: 0.2
   shildBloomCurve:
     serializedVersion: 2
@@ -20085,6 +20085,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  baseBloomIntensity: 0
 --- !u!1 &8622605998923075823
 GameObject:
   m_ObjectHideFlags: 0

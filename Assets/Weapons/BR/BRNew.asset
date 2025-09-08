@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
-  m_Name: BR
+  m_Name: BRNew
   m_EditorClassIdentifier: 
   weaponPickUp: {fileID: 1358379668584700671, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
   weaponBullet: {fileID: 11400000, guid: 4a4b0a6fd8ea8ba4d991ef58703c905d, type: 2}
