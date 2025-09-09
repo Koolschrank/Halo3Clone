@@ -441,7 +441,7 @@ public class CharacterHealth : Health
 			blocked = true;
 		}
 
-        if (damagePackage.isNedlerDamage)
+        if (damagePackage.isNedlerDamage|| damagePackage.isInstantNedler )
         {
             if (Time.timeSinceLevelLoad - lastNedlerHitTime > nedlerHitStayTime)
             {
@@ -451,13 +451,18 @@ public class CharacterHealth : Health
 
 
 			nedlerHits++;
-            if (nedlerHits >= nedlerHealth)
+            if (damagePackage.isInstantNedler)
+			{
+                nedlerHits = nedlerHealth;
+			}
+			if (nedlerHits >= nedlerHealth)
             {
                 if (nedlerExplosion != null)
                 {
 					nedlerExplosion = Instantiate(nedlerExplosion, transform.position, Quaternion.identity) as GameObject;
                     nedlerExplosion.GetComponent<Explosion>().Activate(damagePackage.owner);
-                    return;
+                    nedlerHits = 0;
+					return;
 				}
             }
             

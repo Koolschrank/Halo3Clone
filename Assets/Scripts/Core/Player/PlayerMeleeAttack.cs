@@ -16,6 +16,12 @@ public class PlayerMeleeAttack : ScriptableObject
     [SerializeField] float meleeDistance = 1f;
     [SerializeField] LayerMask enemyLayer;
 
+	public bool nedlerMelee = false;
+    public bool spawnHitObject = false;
+    public GameObject hitObject;
+    public Vector3 hitObjectOffset;
+
+
 
 	[Header("Launch")]
 	public bool hasLaunch = false;
@@ -56,6 +62,8 @@ public class PlayerMeleeAttack : ScriptableObject
 
     public EventReference SwingSound => swingSound;
     public EventReference HitSound => hitSound;
+
+    public bool NedlerMelee => nedlerMelee;
 
 
 

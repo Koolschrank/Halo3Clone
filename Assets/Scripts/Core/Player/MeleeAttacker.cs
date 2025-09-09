@@ -95,6 +95,7 @@ public class MeleeAttacker : MonoBehaviour
             }
 		}
 
+
         return closesTarget != null ? closesTarget.gameObject : null;
 	}
 
@@ -164,7 +165,15 @@ public class MeleeAttacker : MonoBehaviour
 		var goalPosition = launchInstance.target.transform.position - direction * launchInstance.meleeAttack.launchStopDistance;
 
 		var targetPosition = Vector3.Lerp(launchInstance.originalPosition, goalPosition, launchProgress);
-        self.transform.position = targetPosition;
+        var distanceToTarget = Vector3.Distance(self.transform.position, launchInstance.target.transform.position);
+
+		if ( distanceToTarget >= launchInstance.meleeAttack.launchStopDistance)
+		{
+			self.transform.position = targetPosition;
+		}
+
+
+		
 
 
 	}
@@ -190,7 +199,7 @@ public class MeleeAttacker : MonoBehaviour
             if (isDualWielding)
             {
                 damagePackage.damageAmount *= dualWieldingDamageMultiplier;
-			}
+            }
 
             if (collider.gameObject.tag == "AIEnemy")
             {
@@ -199,23 +208,24 @@ public class MeleeAttacker : MonoBehaviour
                 {
                     this.health.SetShildRegenMelee();
 
-				}
-			}
+                }
+            }
 
-            
 
-			damagePackage.origin = hitPoint;
+
+            damagePackage.origin = hitPoint;
             // direction of self move 
             var direction = transform.forward;
             damagePackage.forceVector = direction * attackData.Force;
             damagePackage.owner = self;
-           
+
             damagePackage.hitPoint = hitPoint;
             damagePackage.impactType = ImpactType.wholeBody;
             damagePackage.isMeleeDamage = true;
+            damagePackage.isInstantNedler = attackData.nedlerMelee;
 
 
-			if (collider.gameObject == self)
+            if (collider.gameObject == self)
             {
                 continue;
             }
@@ -224,25 +234,25 @@ public class MeleeAttacker : MonoBehaviour
 
             if (collider.TryGetComponent<CharacterHealth>(out CharacterHealth health))
             {
-				if (health.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex)
+                if (health.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex)
                 {
                     damagePackage.damageAmount *= attackData.DamageMultiplierAgainstTeamMates;
-				}
+                }
 
 
-				health.TakeDamage(damagePackage);
+                health.TakeDamage(damagePackage);
 
                 var playerImpact = collider.GetComponent<PlayerPhysicsImpulse>();
-				PlayerImpactStruct playerImpactStruct = new PlayerImpactStruct();
-                var forceDirection = (transform.forward  + Vector3.up * attackData.ForceOffset).normalized; //(collider.transform.position - (transform.position+ Vector3.up * attackData.ForceOffset )).normalized;
+                PlayerImpactStruct playerImpactStruct = new PlayerImpactStruct();
+                var forceDirection = (transform.forward + Vector3.up * attackData.ForceOffset).normalized; //(collider.transform.position - (transform.position+ Vector3.up * attackData.ForceOffset )).normalized;
                 playerImpactStruct.impactForce = forceDirection * attackData.ForceOnPlayers;
 
-				
 
-				playerImpactStruct.resetGravity = attackData.launchResetsGravity;
+
+                playerImpactStruct.resetGravity = attackData.launchResetsGravity;
                 playerImpact.AddImpulse(playerImpactStruct);
 
-			}
+            }
 
             if (collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
@@ -256,11 +266,11 @@ public class MeleeAttacker : MonoBehaviour
             OnMeleeHitEvent?.Invoke();
 
 
-			if (bodyMindConnection.Mind != null)
+            if (bodyMindConnection.Mind != null)
             {
                 int playerIndex = bodyMindConnection.Mind.playerID;
-                RumbleManager.Instance.TriggerRumble (meleeRumble_hit, playerIndex);
-			}
+                RumbleManager.Instance.TriggerRumble(meleeRumble_hit, playerIndex);
+            }
         }
         else
         {
@@ -268,9 +278,20 @@ public class MeleeAttacker : MonoBehaviour
             {
                 int playerIndex = bodyMindConnection.Mind.playerID;
                 RumbleManager.Instance.TriggerRumble(meleeRumble_miss, playerIndex);
-			}
-		}
+            }
+        }
 
+        if (attackData.spawnHitObject && attackData.hitObject != null)
+        {
+            var offset = transform.rotation * attackData.hitObjectOffset;
+			var hitImpact =Instantiate(attackData.hitObject, hitPoint + offset, transform.rotation) as GameObject;
+            var explosion = hitImpact.GetComponent<Explosion>();
+            if (explosion != null)
+            {
+                explosion.Activate(self);
+			}
+
+		}
     }
 
     public void CancelLaunch()

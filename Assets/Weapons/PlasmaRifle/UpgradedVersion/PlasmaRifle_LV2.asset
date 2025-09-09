@@ -32,7 +32,7 @@ MonoBehaviour:
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 0}
+  meleeData: {fileID: 11400000, guid: 7e369bf55001c50458ef482dbf955e36, type: 2}
   weaponType: 0
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0

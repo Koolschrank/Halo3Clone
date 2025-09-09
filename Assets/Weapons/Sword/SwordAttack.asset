@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SwordAttack
   m_EditorClassIdentifier: 
   damage: 175
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
   force: 140
   forceOnPlayers: 8
   forceOffset: 0.2
@@ -23,6 +25,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  nedlerMelee: 0
+  spawnHitObject: 0
+  hitObject: {fileID: 8386559723769285559, guid: 1c0cdecd10235ec43bb92c7c06fb542a, type: 3}
+  hitObjectOffset: {x: 0, y: -1, z: 0}
   hasLaunch: 0
   launchDistance: 5
   launchAngle: 45

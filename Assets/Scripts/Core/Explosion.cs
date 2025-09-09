@@ -42,6 +42,7 @@ public class Explosion : MonoBehaviour
     public LayerMask rumbleMask;
     public RumbleData rumbleData;
     public float rumbleReach = 20f;
+    public bool ignoreOwner = false;
 
 
 	public void Activate(GameObject owner)
@@ -89,10 +90,6 @@ public class Explosion : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, hitLayer);
         foreach (var collider in colliders)
         {
-            
-
-            
-
             if (collider.TryGetComponent<Health>(out Health health))
             {
 				
@@ -107,12 +104,19 @@ public class Explosion : MonoBehaviour
                 var finalForce = force * forceFalloffValue;
                 damagePackage.hitPoint = collider.transform.position;
                 damagePackage.damageAmount = finalDamage;
-                damagePackage.forceVector = forceDirection.normalized * finalForce;
+
+				
+
+				damagePackage.forceVector = forceDirection.normalized * finalForce;
                 damagePackage.impactType = ImpactType.wholeBody;
                 damagePackage.shildDamageMultiplier = damageOnShildMultiplier;
                 damagePackage.damageReductionAgainstBlock = damageReductionAgainstBlocking;
-
-				
+                bool isOwner = false;
+				if (ignoreOwner && collider.gameObject == damagePackage.owner)
+                {
+                    damagePackage.damageAmount = 0;
+                    isOwner = true;
+				}
 
 				float margin = 1f;
 				if (range < margin)
@@ -151,8 +155,12 @@ public class Explosion : MonoBehaviour
                         var playerDirection = collider.transform.position - (transform.position + transform.up * forceYOffset);
                         var forceOnPlayerFalloff = forceFalloff.Evaluate(playerDirection.magnitude / range);
 						var playerForce = playerDirection.normalized * forceOnPlayer * forceOnPlayerFalloff;
+                        if (isOwner)
+                        {
+                            playerForce *= 0.3f; // reduce force if the player is the owner
+						}
 
-                        var playerImpact = new PlayerImpactStruct
+						var playerImpact = new PlayerImpactStruct
                         {
                             impactForce = playerForce,
                             resetGravity = false 

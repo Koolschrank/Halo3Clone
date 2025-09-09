@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d4ca8d111e6fb49b8961cd268b7b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 19.7
 --- !u!114 &9207851313103302896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 4
+  damageAmount: 3
   force: 100
-  shildDamageMultiplier: 1.5
-  shildDamagMultiplierVSAI: 1.3
+  shildDamageMultiplier: 3.3
+  shildDamagMultiplierVSAI: 1
   headShotMultiplier: 1
   hitLayer:
     serializedVersion: 2
@@ -161,6 +161,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  detectionAngle: 40
+  detectionAngle: 50
   rotationSpeed: 10
   followDuration: 3
