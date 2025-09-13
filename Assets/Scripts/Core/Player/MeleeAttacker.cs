@@ -65,6 +65,7 @@ public class MeleeAttacker : MonoBehaviour
     public GameObject GetClosesLaunchTarget(PlayerMeleeAttack attackData)
     {
         if (playerMovement.inPushedState) return null;
+        if (bodyMindConnection.Mind == null) return null;
 
 		var colliders = Physics.OverlapSphere(transform.position, attackData.launchDistance, attackData.launchTargetLayer);
         Transform closesTarget = null;
@@ -90,8 +91,14 @@ public class MeleeAttacker : MonoBehaviour
 			float distance = Vector3.Distance(transform.position, collider.transform.position);
 			if (distance < closestDistance)
             {
-                closestDistance = distance;
-                closesTarget = collider.transform;
+                if (collider.gameObject.GetComponent<PlayerTeam>().TeamIndex != self.GetComponent<PlayerTeam>().TeamIndex)
+                {
+					closestDistance = distance;
+					closesTarget = collider.transform;
+				}
+
+
+                
             }
 		}
 

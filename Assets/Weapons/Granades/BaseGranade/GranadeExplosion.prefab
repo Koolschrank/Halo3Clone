@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 6.5
   damage: 220
+  damageDeadzone: 10
   damageMultiplierVSAI: 1.1
   damageOnShildMultiplier: 1
   damageReductionAgainstBlocking: 0.6
@@ -104,7 +105,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   hitLayer:
     serializedVersion: 2
-    m_Bits: 2147483777
+    m_Bits: 2147483841
   wallLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -165,6 +166,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     rumbleType: 3
   rumbleReach: 8
+  ignoreOwner: 0
 --- !u!114 &4977926167577745926
 MonoBehaviour:
   m_ObjectHideFlags: 0

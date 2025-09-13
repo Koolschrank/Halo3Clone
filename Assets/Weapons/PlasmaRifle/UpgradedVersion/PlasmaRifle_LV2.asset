@@ -16,13 +16,13 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: a6f4c256d74e94747a91c47df5170327, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: f3426bf92692ee14ea4e86f525172f99, type: 3}
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 674c18ae71fb5244aad2879ad81786a3, type: 3}
-  weaponName: Plasma Rifle
+  weaponName: Needler
   shootType: 1
   fireRate: 0.06
   bulletsPerShot: 1
-  magazineSize: 40
-  maxAmmoInReserve: 600
-  reloadTime: 1
+  magazineSize: 28
+  maxAmmoInReserve: 200
+  reloadTime: 1.6
   reloadGainAmmoTrigger: 0.7
   inaccuracy: 0.35
   switchOutTime: 0.15
@@ -32,11 +32,11 @@ MonoBehaviour:
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: 7e369bf55001c50458ef482dbf955e36, type: 2}
+  meleeData: {fileID: 0}
   weaponType: 0
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
-  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAim: {fileID: 11400000, guid: 34753e2adef5fcf478ce61109102317b, type: 2}
   autoAimType: 0
   burstAmount: 0
   burstDelay: 0
@@ -69,38 +69,47 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   damageMultiplier: 1
-  fireRateMultiplier: 0.9
-  inaccuracyMultiplier: 1.4
+  fireRateMultiplier: 0.8
+  inaccuracyMultiplier: 1.3
   reloadTimeMultiplier: 1.25
-  bloomOnShoot: 0
+  bloomOnShoot: 1
   bloomOnTakingDamage: 0
-  bloomInaccuracyMultiplier: 0.5
-  bloomTime: 0.5
+  bloomInaccuracyMultiplier: 0.003
+  bloomTime: 0.3
   bloomCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
       value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.003905392
+      outSlope: 0.003905392
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5096334
+      value: 1.0019903
+      inSlope: -0.010569545
+      outSlope: -0.010569545
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26708686
+    - serializedVersion: 3
+      time: 1.0066528
+      value: 0.0065994263
+      inSlope: -2.0027204
+      outSlope: -2.0027204
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  bloomCrosshairsSizeMultiplier: 2
+  bloomCrosshairsSizeMultiplier: 0.3
   hasBlock: 0
   block:
     blockPercentage: 0.5
@@ -108,11 +117,11 @@ MonoBehaviour:
   reduceScreenShakeWhenAiming: 0
   shootSound:
     Guid:
-      Data1: 440703412
-      Data2: 1220775816
-      Data3: -1088993891
-      Data4: -5924873
-    Path: event:/SFX/Guns/PlasmaRifle/PlasmaShot
+      Data1: -139574592
+      Data2: 1087942798
+      Data3: 910909356
+      Data4: -91960055
+    Path: event:/SFX/Guns/Needler/Shoot
   switchInSound:
     timedSounds:
     - soundReference:
@@ -176,12 +185,12 @@ MonoBehaviour:
         rumbleType: 0
   showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
-  bulletSprite: {fileID: 21300000, guid: e508ee3014e74d14eb5659e0c22bc171, type: 3}
-  bulletSize: {x: 1, y: 1}
-  bulletsPerRow: 20
-  crosshairs: {fileID: 21300000, guid: 726f2df23ded00148a6199fbeaadea8a, type: 3}
-  crosshairsSize: {x: 0.575, y: 0.69}
-  crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletSprite: {fileID: 21300000, guid: 81e87beb6b494e44781a8501e30054ea, type: 3}
+  bulletSize: {x: 1.2, y: 1.2}
+  bulletsPerRow: 14
+  crosshairs: {fileID: 21300000, guid: 121c29bafe418fd489622538d81681a8, type: 3}
+  crosshairsSize: {x: 1, y: 1}
+  crosshairsSizeMultiplierWhenDualWielded: 1.75
   enemyAiWeaponData: {fileID: 11400000, guid: cb28c8a3d5c98bc4d91d0f36becf952e, type: 2}
   gunAiBehaviour:
     IdealRange: 10

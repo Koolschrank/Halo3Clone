@@ -8,7 +8,10 @@ using NUnit.Framework.Internal;
 public class CharacterHealth : Health
 {
 
-    [SerializeField] float damageMultiplier = 1;
+
+	public Action OnRemoveNedler;
+
+	[SerializeField] float damageMultiplier = 1;
     [SerializeField] bool hasShild = true;
     [SerializeField] bool headShotOneShot = true;
 
@@ -331,8 +334,15 @@ public class CharacterHealth : Health
         {
             GainArmor(aura_armorHeal * Time.deltaTime);
 		}
-        
-    }
+
+
+		if (nedlerHits != 0 && Time.timeSinceLevelLoad - lastNedlerHitTime > nedlerHitStayTime)
+		{
+			nedlerHits = 0;
+			OnRemoveNedler?.Invoke();
+		}
+
+	}
 
     public void GainArmor(float armorGain)
     {
@@ -443,10 +453,7 @@ public class CharacterHealth : Health
 
         if (damagePackage.isNedlerDamage|| damagePackage.isInstantNedler )
         {
-            if (Time.timeSinceLevelLoad - lastNedlerHitTime > nedlerHitStayTime)
-            {
-                nedlerHits = 0;
-			}
+            
             lastNedlerHitTime = Time.timeSinceLevelLoad;
 
 
@@ -459,6 +466,7 @@ public class CharacterHealth : Health
             {
                 if (nedlerExplosion != null)
                 {
+					OnRemoveNedler?.Invoke();
 					nedlerExplosion = Instantiate(nedlerExplosion, transform.position, Quaternion.identity) as GameObject;
                     nedlerExplosion.GetComponent<Explosion>().Activate(damagePackage.owner);
                     nedlerHits = 0;

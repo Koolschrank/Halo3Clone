@@ -15,13 +15,13 @@ MonoBehaviour:
   damage: 175
   damageMultiplierVSAI: 1
   damageMultiplierAgainstTeamMates: 1
-  force: 140
+  force: 120
   forceOnPlayers: 8
   forceOffset: 0.2
   delay: 0.252
   meleeTime: 0.9072
-  meleeRadius: 1.65
-  meleeDistance: 1.65
+  meleeRadius: 1.6
+  meleeDistance: 1.6
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -30,20 +30,38 @@ MonoBehaviour:
   hitObject: {fileID: 8386559723769285559, guid: 1c0cdecd10235ec43bb92c7c06fb542a, type: 3}
   hitObjectOffset: {x: 0, y: -1, z: 0}
   hasLaunch: 0
-  launchDistance: 5
-  launchAngle: 45
-  launchTime: 0.5
-  launchStopDistance: 0.1
-  launchResetsGravity: 0
+  launchDistance: 4
+  launchAngle: 30
+  launchTime: 0.25
+  launchStopDistance: 2.28
+  launchResetsGravity: 1
   launchCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   launchTargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   swingSound:
     Guid:
       Data1: -442625259

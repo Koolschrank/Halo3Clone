@@ -7,7 +7,9 @@ public class Explosion : MonoBehaviour
     
     [SerializeField] float range = 5f;
     [SerializeField] float damage = 10f;
-    [SerializeField] float damageDeadzone = 10f;
+
+	[SerializeField] float damageMultiplierVSTeammates = 1f;
+	[SerializeField] float damageDeadzone = 10f;
 	[SerializeField] float damageMultiplierVSAI = 1f;
 	[SerializeField] float damageOnShildMultiplier = 1f;
 
@@ -142,6 +144,12 @@ public class Explosion : MonoBehaviour
                     Debug.Log("hit ai");
 					damagePackage.damageAmount *= damageMultiplierVSAI;
 				}
+
+                if (damagePackage.owner.GetComponent<PlayerTeam>().TeamIndex == health.gameObject.GetComponent<PlayerTeam>().TeamIndex)
+                {
+                    damagePackage.damageAmount *= damageMultiplierVSTeammates;
+				}
+
                 if (damagePackage.damageAmount > damageDeadzone)
                     health.TakeDamage(damagePackage);
 
@@ -157,7 +165,7 @@ public class Explosion : MonoBehaviour
 						var playerForce = playerDirection.normalized * forceOnPlayer * forceOnPlayerFalloff;
                         if (isOwner)
                         {
-                            playerForce *= 0.3f; // reduce force if the player is the owner
+                            playerForce *= 0.4f; // reduce force if the player is the owner
 						}
 
 						var playerImpact = new PlayerImpactStruct

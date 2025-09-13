@@ -13198,6 +13198,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4803738778478240511, guid: 7170e3d87deb2164fb7c4f827f4d0a3e, type: 3}
   m_PrefabInstance: {fileID: 266657414}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &268053339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268053340}
+  - component: {fileID: 268053341}
+  m_Layer: 0
+  m_Name: Nedler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &268053340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268053339}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -22.47, y: 6.13, z: -9.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1667466951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &268053341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268053339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnOnStart: 1
+  weaponPrefab: {fileID: 9197169624787015198, guid: 6b3935ecac3195a4c9d7aaba71ed9e49, type: 3}
+  spawnTime: 45
+  magazines: 4
+  weaponDistanceToAttemtRespawn: 15
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &268344415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15292,7 +15343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnOnStart: 1
   weaponPrefab: {fileID: 9197169624787015198, guid: 836a5c72553744c4c9c547956b28d9e8, type: 3}
-  spawnTime: 30
+  spawnTime: 90
   magazines: 8
   weaponDistanceToAttemtRespawn: 15
   isRandom: 0
@@ -45088,7 +45139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &975016841
 Transform:
   m_ObjectHideFlags: 0
@@ -45117,8 +45168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
-  spawnTime: 90
+  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  spawnTime: 121.2
   magazines: 4
   weaponDistanceToAttemtRespawn: 15
   isRandom: 0
@@ -45200,7 +45251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: d9fcb6493d3248744be000365d616b13, type: 3}
   spawnTime: 120
   magazines: 4
   weaponDistanceToAttemtRespawn: 15
@@ -45516,7 +45567,7 @@ PrefabInstance:
     - target: {fileID: 5450974835304227426, guid: 088d33b94eb01e944847b26950138464, type: 3}
       propertyPath: pickUpPrefab
       value: 
-      objectReference: {fileID: 4564936671672867374, guid: c383168cc1248b845917cd4be80696c7, type: 3}
+      objectReference: {fileID: 4564936671672867374, guid: e1f4f85f2d9625745a876f3ec1a121e8, type: 3}
     - target: {fileID: 8579957068508917386, guid: 088d33b94eb01e944847b26950138464, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.79
@@ -64984,7 +65035,7 @@ GameObject:
   - component: {fileID: 1451852306}
   - component: {fileID: 1451852307}
   m_Layer: 0
-  m_Name: BR
+  m_Name: Nedler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65018,8 +65069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: aab3f2211ab728346a7ef821db917aff, type: 3}
-  spawnTime: 30
+  weaponPrefab: {fileID: 9197169624787015198, guid: 6b3935ecac3195a4c9d7aaba71ed9e49, type: 3}
+  spawnTime: 45
   magazines: 4
   weaponDistanceToAttemtRespawn: 15
   isRandom: 0
@@ -65784,7 +65835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: d9fcb6493d3248744be000365d616b13, type: 3}
   spawnTime: 120
   magazines: 4
   weaponDistanceToAttemtRespawn: 15
@@ -74579,6 +74630,7 @@ Transform:
   - {fileID: 1406145167}
   - {fileID: 1609187276}
   - {fileID: 1672111408}
+  - {fileID: 268053340}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1667813545
@@ -85070,7 +85122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
   spawnTime: 90
   magazines: 4
   weaponDistanceToAttemtRespawn: 15

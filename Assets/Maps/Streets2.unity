@@ -7149,7 +7149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &285926140
 Transform:
   m_ObjectHideFlags: 0
@@ -10867,9 +10867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 2169fbb2ebbe52540bc692c155c5088d, type: 3}
-  spawnTime: 30
-  magazines: 5
+  weaponPrefab: {fileID: 9197169624787015198, guid: 6b3935ecac3195a4c9d7aaba71ed9e49, type: 3}
+  spawnTime: 90
+  magazines: 4
   weaponDistanceToAttemtRespawn: 5
   isRandom: 0
   randomWeapons: []
@@ -38511,9 +38511,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 0d2defa6d9f1ed74cae3ac7dbc442d41, type: 3}
-  spawnTime: 120
-  magazines: 2
+  weaponPrefab: {fileID: 9197169624787015198, guid: 6b3935ecac3195a4c9d7aaba71ed9e49, type: 3}
+  spawnTime: 90
+  magazines: 4
   weaponDistanceToAttemtRespawn: 5
   isRandom: 0
   randomWeapons: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
   m_Name: HammerAttack
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 5
   damageMultiplierVSAI: 1
   damageMultiplierAgainstTeamMates: 1
   force: 140

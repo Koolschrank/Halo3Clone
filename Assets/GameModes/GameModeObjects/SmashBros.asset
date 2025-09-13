@@ -20,7 +20,10 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 56ed20cb88af0284a9e8499b4b0b57ea, type: 2}
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: a91829b477b70e04c90dc9d46d57b2f2, type: 2}
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
@@ -32,15 +35,15 @@ MonoBehaviour:
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
-      hasHealthOverride: 0
+      hasHealthOverride: 1
       showHealthBar: 0
       health: 50
-      shild: 100
+      shild: 1000
       armor: 0
       healthRegenStartTime: 3
       shildRegenStartTime: 0.5
       healthRegen: 10
-      shildRegen: 25
+      shildRegen: 250
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 0
   timeLimitInMinutes: 10
@@ -53,6 +56,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 0
   startScore: 0
@@ -72,3 +76,15 @@ MonoBehaviour:
   recolerTeam1Members: 0
   team1MemberColors: []
   team1MemberColorsUI: []
+  usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0

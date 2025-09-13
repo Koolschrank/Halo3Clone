@@ -20,7 +20,10 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 2
-    weaponInHand: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: a91829b477b70e04c90dc9d46d57b2f2, type: 2}
     magazinsOfWeaponInHand: 5
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 3
@@ -53,6 +56,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 0
   startScore: 0
@@ -72,6 +76,18 @@ MonoBehaviour:
   recolerTeam1Members: 0
   team1MemberColors: []
   team1MemberColorsUI: []
+  usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0
   timeToScore: 1
   setEquipmentOnCrownPickup: 0
   equipmentOnCrownPickup:
@@ -81,6 +97,9 @@ MonoBehaviour:
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 0}
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}

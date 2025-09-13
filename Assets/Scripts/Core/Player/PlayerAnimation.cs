@@ -402,10 +402,16 @@ public class PlayerAnimation : MonoBehaviour
 
     public void Melee(Weapon_Arms weapon, float animationDuration)
     {
-        var meleeClip = GetAnimationClipByName("Melee");
+        string meleeName = "Melee";
+        if (weapon.ShootType == ShootType.Melee)
+        {
+            meleeName ="Melee2";
+		}
+
+		var meleeClip = GetAnimationClipByName(meleeName);
         var animationLenght = GetAnimationLenght(meleeClip);
         SetAnimationSpeed(meleeClip, animationLenght, animationDuration);
-        animator.SetTrigger("Melee");
+        animator.SetTrigger(meleeName);
     }
 
     public void PutWeaponInBackpack(Weapon_Arms weapon)

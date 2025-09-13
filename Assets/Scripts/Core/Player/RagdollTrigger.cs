@@ -193,6 +193,15 @@ public class RagdollTrigger : MonoBehaviour
         return closest;
     }
 
+    public Rigidbody GetRandomBodyPart
+    {
+        get
+        {
+            int index = Random.Range(0, ragdollRigidbodies.Length);
+            return ragdollRigidbodies[index];
+		}
+	}
+
     void RagdollModeOn()
     {
         Activate(Vector3.zero);

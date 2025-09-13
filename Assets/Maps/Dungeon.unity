@@ -7259,7 +7259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: d9fcb6493d3248744be000365d616b13, type: 3}
   spawnTime: 200
   magazines: 2
   weaponDistanceToAttemtRespawn: 15
@@ -12152,7 +12152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: d9fcb6493d3248744be000365d616b13, type: 3}
   spawnTime: 200
   magazines: 2
   weaponDistanceToAttemtRespawn: 15
@@ -16547,7 +16547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 4d53e4a65e385c544ac5bd4ba37a3f6d, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: d9fcb6493d3248744be000365d616b13, type: 3}
   spawnTime: 70
   magazines: 3
   weaponDistanceToAttemtRespawn: 15

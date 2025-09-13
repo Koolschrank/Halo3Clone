@@ -11762,6 +11762,7 @@ MonoBehaviour:
   maxArmor: 150
   armorBeforeShild: 1
   nedlerHealth: 11
+  nedlerHitStayTime: 7
   nedlerExplosion: {fileID: 8386559723769285559, guid: 0bf8a9327e0cadd4cb619d53a4190015, type: 3}
   headShotArea: {fileID: 2179829580235344875}
   ragdollTrigger: {fileID: 4355240392448193639}
@@ -12692,7 +12693,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8696331467768963576, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:RightHand'\n\tFrom animation clip
+        'Sword_Melee2'"
       objectReference: {fileID: 0}
     - target: {fileID: 8831616387514072461, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: m_Weight

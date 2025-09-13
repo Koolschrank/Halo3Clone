@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 6
-  damage: 230
+  damage: 210
+  damageMultiplierVSTeammates: 0.85
   damageDeadzone: 10
   damageMultiplierVSAI: 1
   damageOnShildMultiplier: 1
@@ -78,7 +79,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   force: 120
-  forceOnPlayer: 18
+  forceOnPlayer: 17
   forceYOffset: 0.5
   forceFalloff:
     serializedVersion: 2
@@ -106,7 +107,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   hitLayer:
     serializedVersion: 2
-    m_Bits: 2147483777
+    m_Bits: 2147483841
   wallLayers:
     serializedVersion: 2
     m_Bits: 1

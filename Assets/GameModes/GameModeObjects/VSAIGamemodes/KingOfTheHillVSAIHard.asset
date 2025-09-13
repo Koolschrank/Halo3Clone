@@ -36,8 +36,8 @@ MonoBehaviour:
     ability3: {fileID: 0}
     healthOverride:
       hasHealthOverride: 1
-      showHealthBar: 1
-      health: 125
+      showHealthBar: 0
+      health: 62.5
       shild: 125
       armor: 0
       healthRegenStartTime: 3

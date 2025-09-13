@@ -71,8 +71,15 @@ public class PlayerPickUpScan : MonoBehaviour
 
                 if (pickUp != null )
                 {
-                    pickUpsInRange.Add(pickUp);
-                    TrySendUpdates();
+					if (playerArms.CanDualWield2HandedWeapons
+				   || (playerArms.CanDualWield && pickUp.WeaponData.WeaponType == WeaponType.oneHanded))
+					{
+						pickUpsInRange.Add(pickUp);
+						TrySendUpdates();
+					}
+
+
+					
                 }
             }
             else
@@ -80,9 +87,11 @@ public class PlayerPickUpScan : MonoBehaviour
                 if (!pickUp.CanBePickedUpByTeam(playerTeam.TeamIndex))
                     return;
 
-                pickUpsInRange.Add(pickUp);
-                TrySendUpdates();
-            }
+
+				pickUpsInRange.Add(pickUp);
+				TrySendUpdates();
+
+			}
         }
         else if ( other.gameObject.TryGetComponent(out AutoPickUp pickUpObject))
         {

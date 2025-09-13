@@ -117,12 +117,14 @@ MonoBehaviour:
   damageAmount: 20
   force: 200
   shildDamageMultiplier: 1
+  shildDamagMultiplierVSAI: 1.5
   headShotMultiplier: 4
   hitLayer:
     serializedVersion: 2
-    m_Bits: 2147483777
+    m_Bits: 2147483841
   radius: 0.2
   copyTransitionSpeed: 2
+  isNedler: 0
   bodyHitPartical: {fileID: 0}
   groundHitPartical: {fileID: 0}
   destroyObjects:

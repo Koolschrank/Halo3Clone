@@ -20,7 +20,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject groundHitPartical;
     [SerializeField] GameObject[] destroyObjects;
 
-    [Header("Audio")]
+    [SerializeField] bool stickToSurfaces = false;
+    bool inStick = false;
+
+	[SerializeField] NedlerDelete nedlerDelet;
+
+
+
+	[Header("Audio")]
     [SerializeField] EventReference bodyHitSound;
     [SerializeField] EventReference groundHitSound;
 
@@ -68,7 +75,20 @@ public class Bullet : MonoBehaviour
         var currentPos = transform.position;
         var direction = transform.position - lastPosition;
 
-        if (bulletCopys != null)
+
+		if (inStick)
+		{
+			if (bulletCopys != null)
+			{
+				foreach (var bulletCopy in bulletCopys)
+				{
+					bulletCopy.position = transform.position;
+				}
+			}
+			return;
+		}
+
+		if (bulletCopys != null)
         {
             foreach (var bulletCopy in bulletCopys)
             {
@@ -77,6 +97,8 @@ public class Bullet : MonoBehaviour
             }
         }
 
+
+        
         
         RaycastHit hit;
         if (Physics.SphereCast(lastPosition, radius, direction, out hit, Vector3.Distance(currentPos, lastPosition), hitLayer))
@@ -148,14 +170,64 @@ public class Bullet : MonoBehaviour
                     expo.Activate(owner);
                 }
             }
-            Destroy(gameObject);
-            if (bulletCopys != null)
+            if (stickToSurfaces)
             {
-                foreach (var bulletCopys in bulletCopys)
-                {
-                    Destroy(bulletCopys.gameObject);
-                }
-            }
+                nedlerDelet.enabled = true;
+				if (hit.collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth body))
+				{
+                    if (!body.IsDead)
+                    {
+						
+						nedlerDelet.Activate(body);
+
+					}
+                    else
+                    {
+                        DestroySelf();
+					}
+					
+
+
+				}
+				else
+				{
+					// stick to the object
+                    var startPosition = transform.position - transform.forward * 3f;
+
+					// make raycast from startposition to current position
+                    if (Physics.Raycast(startPosition, (hit.point - startPosition).normalized, out RaycastHit hit2, Vector3.Distance(startPosition, hit.point) +2f, nedlerDelet.rigidBodyLayer))
+                    {
+                        transform.position = hit2.point + hit2.normal * 0.3f;
+                       
+                    }
+                    else
+                    {
+                        
+					}
+
+
+					transform.SetParent(hit.collider.transform);
+                    nedlerDelet.Activate();
+
+				}
+				inStick = true;
+
+				if (bulletCopys != null)
+				{
+					foreach (var bulletCopy in bulletCopys)
+					{
+						bulletCopy.position = transform.position;
+						
+					}
+				}
+			}
+            else
+            {
+                DestroySelf();
+			}
+
+
+                
         }
 
 
@@ -163,5 +235,17 @@ public class Bullet : MonoBehaviour
 
 
     }
+
+    public void DestroySelf()
+    {
+		Destroy(gameObject);
+		if (bulletCopys != null)
+		{
+			foreach (var bulletCopys in bulletCopys)
+			{
+				Destroy(bulletCopys.gameObject);
+			}
+		}
+	}
 
 }
