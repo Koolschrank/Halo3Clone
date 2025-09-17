@@ -50,6 +50,7 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 6415952343863270825}
   muzzleFlash: {fileID: 4880330818529426327}
   weaponAnimationIndex: 0
+  chargeObject: {fileID: 459679075273074096}
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 1151876770239608438}
   rumble_Shoot:
@@ -539,6 +540,77 @@ MonoBehaviour:
   throwPoint: {fileID: 0}
   throwForce: 5
   throwRotation: {x: 0, y: 0, z: 0}
+--- !u!1001 &4768530807603131350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4456986531830186522}
+    m_Modifications:
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.005000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.002999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.44500005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748454, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_Name
+      value: GunPlasmaCharge
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921346081555748454, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+--- !u!1 &459679075273074096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4921346081555748454, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+  m_PrefabInstance: {fileID: 4768530807603131350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &459679075273074101 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4921346081555748451, guid: 0be26cb81aaef35469eb403ce5817421, type: 3}
+  m_PrefabInstance: {fileID: 4768530807603131350}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4880330818529525041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -691,6 +763,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8332101960591973964, guid: 01b3f94dc3270f64b8c58e3f8c1ff1cf, type: 3}
       insertIndex: 0
+      addedObject: {fileID: 459679075273074101}
+    - targetCorrespondingSourceObject: {fileID: 8332101960591973964, guid: 01b3f94dc3270f64b8c58e3f8c1ff1cf, type: 3}
+      insertIndex: 1
       addedObject: {fileID: 4880330818529126327}
     - targetCorrespondingSourceObject: {fileID: 8332101960591973964, guid: 01b3f94dc3270f64b8c58e3f8c1ff1cf, type: 3}
       insertIndex: -1

@@ -11,7 +11,8 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI reserveText;
 
     [SerializeField] Color baseColor;
-    [SerializeField] Color emptyColor;
+	[SerializeField] Color tranparentColor;
+	[SerializeField] Color emptyColor;
 
     [SerializeField] TextMeshProUGUI[] reserveTextToColor;
     [SerializeField] Image weaponSprite;
@@ -25,9 +26,11 @@ public class WeaponUI : MonoBehaviour
     [SerializeField] Color BulletEmptyColor;
     [SerializeField] Color BulletsDepletedColor;
     List<Image> bullets = new List<Image>();
+    int bulletsPerSprite = 1;
+    bool showAmmoInPercent = false;
 
 
-    public void SetUp(Arm playerArm)
+	public void SetUp(Arm playerArm)
     {
         if (this.playerArm != null)
         {
@@ -99,9 +102,11 @@ public class WeaponUI : MonoBehaviour
         Enable();
 
         weapon.OnMagazineChange += UpdateMagazin;
-       
-        UpdateReserve(playerArm.AmmoOfWeaponInReserve);
-        SetUpBulletUI(weapon.BulletSpriteUI, weapon.MagazineSize, weapon.BulletsPerRowUI, weapon.BulletSizeUI);
+
+		 showAmmoInPercent = weapon.Data.showAmmoInPercent;
+
+		UpdateReserve(playerArm.AmmoOfWeaponInReserve);
+        SetUpBulletUI(weapon.BulletSpriteUI, weapon.MagazineSize, weapon.BulletsPerRowUI, weapon.BulletSizeUI,weapon.Data.bulletsPerSprite);
         UpdateMagazin(weapon.Magazine);
 
         var newSprite = weapon.GunSpriteUI;
@@ -131,7 +136,9 @@ public class WeaponUI : MonoBehaviour
     void UpdateMagazin(int magazin)
     {
         this.magazin = magazin;
-        for (int i = 0; i < bullets.Count; i++)
+        var magLocal = magazin / bulletsPerSprite;
+
+		for (int i = 0; i < bullets.Count; i++)
         {
             if (magazin == 0)
             {
@@ -139,7 +146,7 @@ public class WeaponUI : MonoBehaviour
                 continue;
             }
 
-            if (i < magazin)
+            if (i < magLocal)
             {
                 bullets[i].color = BulletColor;
             }
@@ -148,14 +155,49 @@ public class WeaponUI : MonoBehaviour
                 bullets[i].color = BulletEmptyColor;
             }
         }
+        if (showAmmoInPercent)
+        {
+            UpdateReserve(playerArm.AmmoOfWeaponInReserve);
+		}
+
         UpdateSprite();
+        
     }
 
     int reserve = 0;
     void UpdateReserve(int reserve)
     {
-        // if ammo empty change color
-        if (reserve == 0)
+        if (showAmmoInPercent)
+            {
+            if (playerArm.CurrentWeapon != null && playerArm.CurrentWeapon.MagazineSize > 0)
+            {
+                var percent = (int)(((float)playerArm.CurrentWeapon.Magazine / (float)playerArm.CurrentWeapon.MagazineSize) * 100f);
+                reserveText.text = percent.ToString() + "%";
+
+                if (percent == 0)
+                {
+                    foreach (var text in reserveTextToColor)
+                    {
+                        text.color = emptyColor;
+                    }
+                }
+                else
+                {
+                    foreach (var text in reserveTextToColor)
+                    {
+                        text.color = baseColor;
+                    }
+				}
+			}
+            else
+            {
+                reserveText.text = "0%";
+            }
+            return;
+		}
+
+		// if ammo empty change color
+		if (reserve == 0)
         {
             foreach (var text in reserveTextToColor)
             {
@@ -189,22 +231,23 @@ public class WeaponUI : MonoBehaviour
     }
 
 
-    public void SetUpBulletUI(Sprite bulletSprite, int count, int bulletsPerRow, Vector2 bulletSize)
+    public void SetUpBulletUI(Sprite bulletSprite, int count, int bulletsPerRow, Vector2 bulletSize, int bulletsPerSprite)
     {
-        var bulletUIWidth = bulletUI.rect.width;
+        this.bulletsPerSprite = bulletsPerSprite;
+		var bulletUIWidth = bulletUI.rect.width;
         var bulletUIHeight = bulletUI.rect.height;
         if (bulletsPerRow <= 0)
         {
             bulletsPerRow = 20; // default value, not important
         }
-        var rows = Mathf.CeilToInt((float)count / bulletsPerRow);
+        var rows = Mathf.CeilToInt((float)count / bulletsPerSprite / bulletsPerRow);
         // delete all bullets in list
         DeleteBulletsFromUI();
 
 
 
         // create new bullets
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count / bulletsPerSprite; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform);
 

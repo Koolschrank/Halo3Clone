@@ -17,8 +17,11 @@ public class Weapon_Arms
     public Action OnShot;
     public Action OnEnterDualWield;
     public Action OnExitDualWield;
+    public Action OnChargeStart;
+    public Action OnChargeEnd;
 
 	public Action<GameObject> OnProjectileShot;
+    public Action StopHoldingShoot;
     public Action<Vector3> OnHitscanShot;
     public Action<GameObject> OnGranadeShot;
     public Action OnWeaponDroped;
@@ -31,6 +34,7 @@ public class Weapon_Arms
 
     BulletSpawner bulletSpawner;
     float shootCooldown = 0;
+    float chargeCooldown = 0;
     float shotsLeftInBurst = 0;
     float shootCooldownInBurst = 0;
 
@@ -234,7 +238,7 @@ public class Weapon_Arms
         {
             OnShot?.Invoke();
 
-            shootCooldown += weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier / fireRateMultiplierStat; 
+            shootCooldown += weaponData.GetFireRate(isBeingDualWielded) / fireRateMultiplier / fireRateMultiplierStat * 1.1f; 
             Magazine--;
 
             if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
@@ -331,7 +335,54 @@ public class Weapon_Arms
 
     }
 
-    public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded) / reloadTimeMultiplierStat;
+	bool chargeComplet = false;
+	bool isCharging = false;
+
+    public float ChargeProgress
+    {
+        get
+        {
+            if (!isCharging) return 0;
+            return Mathf.Clamp01(1 - chargeCooldown / weaponData.ChargeTime);
+        }
+	}
+
+	public void StartCharge()
+    {
+        isCharging = true;
+        chargeComplet = false;
+        chargeCooldown = weaponData.ChargeTime;
+		OnChargeStart?.Invoke();
+	}
+	public void UpdateCharge()
+    {
+        if (chargeCooldown > 0)
+        {
+            chargeCooldown -= Time.deltaTime;
+			if (chargeCooldown <= 0 && !chargeComplet)
+            {
+                chargeComplet = true;
+                OnChargeEnd?.Invoke();
+			}
+		}
+	}
+
+    public bool CheckIfChargeFinished()
+    {
+        return chargeComplet;
+	}
+
+    public bool IsCharging => isCharging && !chargeComplet;
+
+	public void ResetCharge()
+    {
+        isCharging = false;
+        chargeComplet = false;
+        chargeCooldown = 0;
+		OnChargeEnd?.Invoke();
+	}
+
+	public float ReloadTime => weaponData.GetReloadTime(isBeingDualWielded) / reloadTimeMultiplierStat;
 
     public ShootType ShootType => weaponData.ShootType;
 

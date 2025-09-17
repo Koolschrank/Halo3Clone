@@ -12,11 +12,11 @@ public class WeaponInventoryUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI[] reserveTextToColor;
     [SerializeField] Image weaponSprite;
+    bool showInPercent = false;
 
 
 
-
-    public void SetUp(PlayerInventory playerInventory)
+	public void SetUp(PlayerInventory playerInventory)
     {
         if (this.playerInventory != null)
         {
@@ -55,11 +55,58 @@ public class WeaponInventoryUI : MonoBehaviour
         {
             weaponSprite.sprite = sprite;
         }
-    }
+
+
+        var weapon = playerInventory.GetWeapon();
+        if (weapon != null)
+        {
+            showInPercent = weapon.Data.showAmmoInPercent;
+		}
+	}
 
     public void UpdateAmmo(int ammo)
     {
-        if (reserveText != null)
+		if (showInPercent)
+        {
+            var weapon = playerInventory.GetWeapon();
+            if (weapon != null && weapon.Data != null && weapon.Data.MagazineSize > 0)
+            {
+                var percent = (int)(((float)weapon.Magazine / weapon.Data.MagazineSize) * 100);
+                reserveText.text = percent.ToString() + "%";
+
+                if (percent == 0)
+                {
+                    foreach (var text in reserveTextToColor)
+                    {
+                        text.color = emptyColor;
+                    }
+                    if (weaponSprite != null)
+                    {
+                        weaponSprite.color = emptyColor;
+                    }
+                }
+                else
+                {
+                    foreach (var text in reserveTextToColor)
+                    {
+                        text.color = baseColor;
+                    }
+                    if (weaponSprite != null)
+                    {
+                        weaponSprite.color = baseColor;
+                    }
+				}
+			}
+            else
+            {
+                reserveText.text = "0%";
+            }
+            return;
+		}
+
+
+
+		if (reserveText != null)
         {
             reserveText.text = ammo.ToString();
         }

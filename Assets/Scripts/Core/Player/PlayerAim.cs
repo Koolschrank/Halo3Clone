@@ -85,6 +85,8 @@ public class PlayerAim : MonoBehaviour
 
 	private Queue<Vector2> history = new Queue<Vector2>();
 
+    [NonSerialized] public float weaponSensitivityMultiplier = 1f; // used for weapon sensitivity, can be set by other scripts if needed
+
 	private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -287,7 +289,10 @@ public class PlayerAim : MonoBehaviour
 			}
 		}
 
-        playerXRotation += rotationX;
+		rotationX *= weaponSensitivityMultiplier;
+		rotationY *= weaponSensitivityMultiplier;
+
+		playerXRotation += rotationX;
         playerYRotation -= rotationY;
         //playerYRotation = Mathf.Clamp(playerYRotation, minAngle, maxAngle);
         

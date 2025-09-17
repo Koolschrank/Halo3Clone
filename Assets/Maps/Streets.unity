@@ -7231,57 +7231,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010230679374, guid: fee6e1da33beae9409089ab8a832464f, type: 3}
   m_PrefabInstance: {fileID: 193770365}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &285926139
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 285926140}
-  - component: {fileID: 285926141}
-  m_Layer: 0
-  m_Name: AXE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &285926140
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285926139}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.39376372, z: -0, w: 0.9192116}
-  m_LocalPosition: {x: 77.2, y: 4.01, z: 8.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1803134189}
-  m_LocalEulerAnglesHint: {x: 0, y: -46.378, z: 0}
---- !u!114 &285926141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285926139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 6b3935ecac3195a4c9d7aaba71ed9e49, type: 3}
-  spawnTime: 60
-  magazines: 4
-  weaponDistanceToAttemtRespawn: 15
-  isRandom: 0
-  randomWeapons: []
 --- !u!1001 &294196991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19628,6 +19577,7 @@ Transform:
   - {fileID: 1309899940}
   - {fileID: 1684053683}
   - {fileID: 758568193}
+  - {fileID: 1134860939}
   - {fileID: 1696436849}
   - {fileID: 1184075247}
   - {fileID: 2030397367}
@@ -20149,8 +20099,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
-  spawnTime: 30
+  weaponPrefab: {fileID: 9197169624787015198, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
+  spawnTime: 120
   magazines: 5
   weaponDistanceToAttemtRespawn: 15
   isRandom: 0
@@ -26510,6 +26460,57 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2be9b4ffc291194c96942bd60bdc25c, type: 3}
+--- !u!1 &1134860938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1134860939}
+  - component: {fileID: 1134860940}
+  m_Layer: 0
+  m_Name: SMG (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1134860939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134860938}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.39376375, z: -0, w: 0.9192117}
+  m_LocalPosition: {x: 13.73, y: 4.01, z: -11.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 866346589}
+  m_LocalEulerAnglesHint: {x: 0, y: -46.378, z: 0}
+--- !u!114 &1134860940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134860938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d0b9fc0c1587645913534ea3905eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnOnStart: 1
+  weaponPrefab: {fileID: 9197169624787015198, guid: 12684fe9eaca53a428ccd89793749b17, type: 3}
+  spawnTime: 120
+  magazines: 5
+  weaponDistanceToAttemtRespawn: 15
+  isRandom: 0
+  randomWeapons: []
 --- !u!1001 &1135152679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37108,7 +37109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1564230223
 Transform:
   m_ObjectHideFlags: 0
@@ -41595,7 +41596,6 @@ Transform:
   - {fileID: 1496256477}
   - {fileID: 926516230}
   - {fileID: 328158088}
-  - {fileID: 285926140}
   - {fileID: 432684610}
   - {fileID: 1564230223}
   - {fileID: 882427130}

@@ -54,7 +54,14 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] int burstAmount;
     [SerializeField] float burstDelay;
 
-    [Header("CameraImpact")]
+    [Header("Charge")]
+    [SerializeField] float chargeTime = 1f;
+    [SerializeField] AnimationCurve chargeMovementMultiplier = AnimationCurve.Linear(0, 1, 1, 1);
+	[SerializeField] AnimationCurve chargeAimMultiplier = AnimationCurve.Linear(0, 1, 1, 1);
+
+
+
+	[Header("CameraImpact")]
     [SerializeField] bool hasKnockback;
     [SerializeField] GunKnockback gunKnockback;
 
@@ -91,6 +98,8 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] Sprite crosshairs = null;
     [SerializeField] Vector2 crosshairsSize = Vector2.one;
     [SerializeField] float crosshairsSizeMultiplierWhenDualWielded = 1f;
+    public int bulletsPerSprite = 1;
+    public bool showAmmoInPercent = false;
 
 	[Header("AI")]
     [SerializeField] Weapon_Data enemyAiWeaponData;
@@ -114,7 +123,12 @@ public class Weapon_Data : ScriptableObject
 	public ShootType ShootType => shootType;
     public float FireRate => fireRate;
 
-    public float GetFireRate(bool isBeingDualWielded)
+	public AnimationCurve ChargeMovementMultiplier => chargeMovementMultiplier;
+
+    public AnimationCurve ChargeAimMultiploer => chargeAimMultiplier;
+	public float ChargeTime => chargeTime;
+
+	public float GetFireRate(bool isBeingDualWielded)
     {
         if (isBeingDualWielded)
         {
@@ -243,7 +257,8 @@ public enum ShootType
     Auto,
     Burst,
     Melee,
-    Zoom
+    Zoom,
+	Charge_Auto
 }
 
 public enum WeaponType

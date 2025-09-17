@@ -18,9 +18,9 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 674c18ae71fb5244aad2879ad81786a3, type: 3}
   weaponName: Needler
   shootType: 1
-  fireRate: 0.06
+  fireRate: 0.066
   bulletsPerShot: 1
-  magazineSize: 28
+  magazineSize: 30
   maxAmmoInReserve: 200
   reloadTime: 1.6
   reloadGainAmmoTrigger: 0.7
@@ -40,6 +40,55 @@ MonoBehaviour:
   autoAimType: 0
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 1
@@ -68,8 +117,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 1
-  fireRateMultiplier: 0.8
+  damageMultiplier: 0.84
+  fireRateMultiplier: 1.15
   inaccuracyMultiplier: 1.3
   reloadTimeMultiplier: 1.25
   bloomOnShoot: 1
@@ -187,10 +236,12 @@ MonoBehaviour:
   gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
   bulletSprite: {fileID: 21300000, guid: 81e87beb6b494e44781a8501e30054ea, type: 3}
   bulletSize: {x: 1.2, y: 1.2}
-  bulletsPerRow: 14
+  bulletsPerRow: 15
   crosshairs: {fileID: 21300000, guid: 121c29bafe418fd489622538d81681a8, type: 3}
   crosshairsSize: {x: 1, y: 1}
   crosshairsSizeMultiplierWhenDualWielded: 1.75
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: cb28c8a3d5c98bc4d91d0f36becf952e, type: 2}
   gunAiBehaviour:
     IdealRange: 10

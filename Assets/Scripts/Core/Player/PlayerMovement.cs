@@ -59,11 +59,12 @@ public class PlayerMovement : MonoBehaviour
 
     float ignoreGravityResetTimer = 0f; // timer to reset the ignore gravity state
 	float maxMoveSpeedMultiplier = 1f;
-    
+    public float weaponMoveSpeedMultiplier = 1f;
 
 
 
-    [Header("Sound")]
+
+	[Header("Sound")]
     [SerializeField] EventReference walkSound;
     [SerializeField] float distanceForWalkSound = 1f;
     float distanceToWalkSoundLeft = 0;
@@ -327,7 +328,7 @@ public class PlayerMovement : MonoBehaviour
                 speedMultiplier *= arms.LeftArm.CurrentWeapon.Data.ZoomMoveSpeed;
             }
 
-            var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier;
+            var ideal = move * speedMultiplier * moveSpeedStatSheetMultiplier * weaponMoveSpeedMultiplier;
             if (aura_moveSpeedReduction != 0)
             {
                 ideal *= 1 - aura_moveSpeedReduction;

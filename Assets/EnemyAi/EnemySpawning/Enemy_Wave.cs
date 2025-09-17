@@ -9,7 +9,7 @@ public class Enemy_Wave : ScriptableObject
     public float waveEndBrakeTime = 5f;
     public int maxSpecialEnemies = 1;
 
-	public int MaxSpecialEnemies => Mathf.Max (maxSpecialEnemies, PlayerManager.instance.GetAllPlayers().Count);
+	public int MaxSpecialEnemies => (maxSpecialEnemies+ PlayerManager.instance.GetAllPlayers().Count);
 
 
 

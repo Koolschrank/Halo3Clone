@@ -20,6 +20,9 @@ MonoBehaviour:
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 0
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 0}
     magazinsOfWeaponInHand: 0
     weaponInLeftHand: {fileID: 0}
@@ -44,7 +47,7 @@ MonoBehaviour:
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
   timeLimitInMinutes: 10
-  pointsToWin: 15
+  pointsToWin: 16
   teamCount: 8
   respawnTime: 4
   hasWeaponPickups: 0
@@ -53,6 +56,7 @@ MonoBehaviour:
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 1
   startScore: 0
@@ -72,6 +76,18 @@ MonoBehaviour:
   recolerTeam1Members: 0
   team1MemberColors: []
   team1MemberColorsUI: []
+  usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0
   gunGameEquipment:
   - hasShild: 1
     headShotOneShot: 1
@@ -79,6 +95,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 2ca9146ab6e00f049adb199853c84d42, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -108,6 +127,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 046e6b425dbb4c648bf0a1283b049269, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -137,6 +159,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -166,6 +191,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: cb17908b6a45b7a478e801369c9a68d7, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 11400000, guid: cb17908b6a45b7a478e801369c9a68d7, type: 2}
@@ -195,7 +223,10 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: efcebe5d52d7af841a969659fdd9092a, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
@@ -224,6 +255,41 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: a91829b477b70e04c90dc9d46d57b2f2, type: 2}
+    magazinsOfWeaponInHand: 99
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 0
+    sideArm: {fileID: 0}
+    magazinsOfSideArm: 0
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
+    ability: {fileID: 0}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      armor: 0
+      healthRegenStartTime: 0
+      shildRegenStartTime: 0
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 0
+      shildPopDamageNegation: 0
+  - hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 1
+    canDualWield: 1
+    canDualWieldEverything: 0
+    movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: b6cf8284d683ff547b0ad2420d319db1, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -253,6 +319,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
@@ -282,6 +351,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -311,7 +383,10 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 11400000, guid: 1636b14fbf5b1754c8bd0759dfe88df5, type: 2}
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: 191d3d30494d7c84287ec37567c8c509, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
@@ -340,6 +415,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 11400000, guid: 024bbdf8c6821ff4993d1b9eb7a6429f, type: 2}
@@ -369,6 +447,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 34084b4fd0c0e0241a87b7343122f44a, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -398,6 +479,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 1158a4988ef2f6a4fa8b08173834c776, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -427,6 +511,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
@@ -456,6 +543,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
@@ -485,6 +575,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 87fa76a1561c09d4cb97e5c2a8b0a5ea, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}

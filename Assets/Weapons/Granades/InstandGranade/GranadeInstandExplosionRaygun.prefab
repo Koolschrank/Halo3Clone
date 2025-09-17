@@ -48,30 +48,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  damage: 45
+  damage: 50
+  damageMultiplierVSTeammates: 1
+  damageDeadzone: 10
   damageMultiplierVSAI: 1
-  damageOnShildMultiplier: 2.35
+  damageOnShildMultiplier: 2
   damageReductionAgainstBlocking: 0.1
   damageFalloff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0066452026
-      value: 0.9970398
-      inSlope: -0.0093609905
-      outSlope: -0.0093609905
+      time: -0.016666412
+      value: 1.0023499
+      inSlope: 0.006441083
+      outSlope: 0.006441083
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.2
+      outWeight: 0.2866667
     - serializedVersion: 3
-      time: 1
-      value: -0.0027580261
-      inSlope: -3.0610328
-      outSlope: -3.0610328
+      time: 1.0041809
+      value: 0.002357483
+      inSlope: -2.5353966
+      outSlope: -2.5353966
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.033333346
+      inWeight: 0.043333277
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -148,6 +150,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     rumbleType: 0
   rumbleReach: 20
+  ignoreOwner: 0
 --- !u!114 &4977926167577745926
 MonoBehaviour:
   m_ObjectHideFlags: 0

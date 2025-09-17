@@ -533,10 +533,8 @@ public class EnemySpawner : MonoBehaviour
 
         if (teamId == 0 && gamemode.team2LoosesScoreWhenTeam1scores)
         {
-            do
-            {
-                stats = alliesForPVPGames.GetRandomEnemy();
-            } while (activeWave.enemyWave.MaxSpecialEnemies <= specialEnemyCount && stats.useSpecialEquipment);
+			stats = alliesForPVPGames.GetRandomEnemy();
+			 
 
 
 				
@@ -545,7 +543,13 @@ public class EnemySpawner : MonoBehaviour
             
 		}
 
-        bool isSpecialEnemy = false;
+		while (activeWave.enemyWave.MaxSpecialEnemies <= specialEnemyCount && stats.useSpecialEquipment) 
+            {
+            stats = activeWave.enemyWave.GetRandomEnemy();
+		}
+
+
+		bool isSpecialEnemy = false;
 		var equipment = stats.equipment;
         if (stats.useSpecialEquipment)
         {

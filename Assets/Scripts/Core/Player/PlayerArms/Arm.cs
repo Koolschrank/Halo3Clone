@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static PlayerArms;
 
 public class Arm : MonoBehaviour
 {
@@ -210,9 +209,15 @@ public class Arm : MonoBehaviour
 
     void Update()
     {
-        weaponInHand?.UpdateWeapon();
+		weaponInHand?.UpdateWeapon();
+		if ((armState == ArmState.Shooting) && weaponInHand != null && !weaponInHand.IsInShootCooldown())
+		{
+			armState = ArmState.Ready;
+		}
+		
+		
 
-        if (inRoll) return;
+		if (inRoll) return;
 
         // input buffers
         if (switchInputBufferTimer > 0 ||
@@ -296,8 +301,11 @@ public class Arm : MonoBehaviour
                 armState = ArmState.Ready;
             }
         }
+        playerMovement.weaponMoveSpeedMultiplier = 1f;
+        playerAim.weaponSensitivityMultiplier = 1f;
 
-        if (armState == ArmState.Ready && weaponInHand != null)
+
+		if (armState == ArmState.Ready && weaponInHand != null)
         {
             if (weaponInHand.Magazine == 0)
             {
@@ -384,9 +392,76 @@ public class Arm : MonoBehaviour
                     {
                         ReleaseZoomButton();
                     }
-                        break;
+                    break;
+                case ShootType.Charge_Auto:
+                    if (isTriggerPressed)
+                    {
+                        if (weaponInHand.IsCharging)
+                        {
+                            var progress = weaponInHand.ChargeProgress;
+                            var moveSpeedMultiplier = weaponInHand.Data.ChargeMovementMultiplier.Evaluate(progress);
+                            playerMovement.weaponMoveSpeedMultiplier = moveSpeedMultiplier;
+                            var aimSpeedMultiplier = weaponInHand.Data.ChargeAimMultiploer.Evaluate(progress);
+                            playerAim.weaponSensitivityMultiplier = aimSpeedMultiplier;
+							weaponInHand.UpdateCharge();
+                            if (weaponInHand.CheckIfChargeFinished())
+                            {
+								if (weaponInHand.CanShoot())
+							{
+
+									 moveSpeedMultiplier = weaponInHand.Data.ChargeMovementMultiplier.Evaluate(0.99f);
+									playerMovement.weaponMoveSpeedMultiplier = moveSpeedMultiplier;
+									 aimSpeedMultiplier = weaponInHand.Data.ChargeAimMultiploer.Evaluate(0.99f);
+									playerAim.weaponSensitivityMultiplier = aimSpeedMultiplier;
+									if (weaponInHand.TryShoot())
+								{
+									armState = ArmState.Shooting;
+									OnWeaponShoot?.Invoke(weaponInHand);
+									ApplyWeaponKnockback();
+									playerArms.TriggerBloomOnWeapons();
+								}
+							}
+							}
+						}
+                        else if (weaponInHand.CheckIfChargeFinished())
+                        {
+							var moveSpeedMultiplier = weaponInHand.Data.ChargeMovementMultiplier.Evaluate(0.99f);
+							playerMovement.weaponMoveSpeedMultiplier = moveSpeedMultiplier;
+							var aimSpeedMultiplier = weaponInHand.Data.ChargeAimMultiploer.Evaluate(0.99f);
+							playerAim.weaponSensitivityMultiplier = aimSpeedMultiplier;
+							if (weaponInHand.CanShoot())
+							{
+								if (weaponInHand.TryShoot())
+								{
+									armState = ArmState.Shooting;
+									OnWeaponShoot?.Invoke(weaponInHand);
+									ApplyWeaponKnockback();
+									playerArms.TriggerBloomOnWeapons();
+								}
+							}
+							else // if try to shoot but cannot because magazine is empty reload
+							{
+								
+								TryReload();
+								
+							}
+						}
+                        else
+                        {
+                            weaponInHand.StopHoldingShoot?.Invoke();
+
+							weaponInHand.StartCharge();
+						}
+                    }
+                    else
+                    {
+						weaponInHand.StopHoldingShoot?.Invoke();
+						weaponInHand.ResetCharge();
+					}
+                     break;
+                }
 			}
-        }
+        
         if (armState == ArmState.InBurstShooting && weaponInHand != null)
         {
             if (weaponInHand.UpdateBurstShot())
@@ -408,10 +483,7 @@ public class Arm : MonoBehaviour
         wasTriggerPressed = isTriggerPressed;
 
 
-        if ((armState == ArmState.Shooting) && weaponInHand != null && !weaponInHand.IsInShootCooldown())
-        {
-            armState = ArmState.Ready;
-        }
+        
 
     }
 
@@ -458,6 +530,7 @@ public class Arm : MonoBehaviour
             OnWeaponReloadStarted?.Invoke(weaponInHand, reloadTimer);
             weaponInHand.ReloadStart(reloadTimer);
             ammoGainedFromReload = false;
+			weaponInHand.StopHoldingShoot?.Invoke();
 		}
     }
 

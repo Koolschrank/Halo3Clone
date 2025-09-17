@@ -359,7 +359,7 @@ public class KingOfTheHillManager : GameModeManager
 
 
 
-
+    Hill lastHill;
 	void StartRandomHill()
     {
         StartHill(GetRandomHillIndex());
@@ -379,7 +379,7 @@ public class KingOfTheHillManager : GameModeManager
         }
 
         int index = UnityEngine.Random.Range(0, hills.Length);
-        while (hillsAlreadyUsed.Contains(index))
+        while (hillsAlreadyUsed.Contains(index) || hills[index] == lastHill)
         {
             index = UnityEngine.Random.Range(0, hills.Length);
         }
@@ -402,8 +402,8 @@ public class KingOfTheHillManager : GameModeManager
         var KTH_values = (GameMode_KingOfTheHill)gameModeStats;
         hillMoveTimer = KTH_values.HillMoveTime;
 
+        lastHill = currentHill;
 
-		
 
 
 	}

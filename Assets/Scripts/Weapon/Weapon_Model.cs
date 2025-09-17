@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using ZakhanSpellsPack;
 
@@ -9,7 +10,17 @@ public class Weapon_Model : MonoBehaviour
     [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol, 2 Shild 
 
     public bool IsShild => weaponAnimationIndex == 2;
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] GameObject chargeObject;
+
+
+    [SerializeField] bool activeParticalWhileShooting = false;
+
+    public Action OnShootAction;
+    public Action OnShootStopAction;
+    public Action OnChargeStartAction;
+    public Action OnChargeEndAction;
 
 	public virtual void SetUp(Weapon_Arms weapon)
     {
@@ -17,7 +28,11 @@ public class Weapon_Model : MonoBehaviour
         weapon.OnProjectileShot += SpawnProjectileClone;
         weapon.OnHitscanShot += SpawnBulletLine;
         weapon.OnGranadeShot += SpawnGranadeClone;
-    }
+
+        weapon.OnChargeStart += TriggerCharge;
+        weapon.OnChargeEnd += CancelCharge;
+        weapon.StopHoldingShoot += CancelPartical;
+	}
 
     public virtual void OnDestroy()
     {
@@ -26,11 +41,28 @@ public class Weapon_Model : MonoBehaviour
         weapon.OnProjectileShot -= SpawnProjectileClone;
         weapon.OnHitscanShot -= SpawnBulletLine;
         weapon.OnGranadeShot -= SpawnGranadeClone;
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+        weapon.OnChargeStart -= TriggerCharge;
+        weapon.OnChargeEnd -= CancelCharge;
+
+        weapon.StopHoldingShoot -= CancelPartical;
+
+	}
+
+    void CancelPartical()
+    {
+		if ( !activeParticalWhileShooting)
+		{
+            return;
+		}
+		if (muzzleFlash == null) return;
+        muzzleFlash.SetActive(false);
+
+        OnShootStopAction?.Invoke();
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         
     }
@@ -97,6 +129,9 @@ public class Weapon_Model : MonoBehaviour
     {
         if (muzzleFlash == null) return;
 
+
+        if (activeParticalWhileShooting && muzzleFlash.activeSelf) return;
+
         if (muzzleFlash.activeSelf)
         {
             muzzleFlash.SetActive(false);
@@ -104,7 +139,28 @@ public class Weapon_Model : MonoBehaviour
 
         // enable muzzle flash
         muzzleFlash.SetActive(true);
-    }
+
+        OnShootAction?.Invoke();
+	}
+
+    public void TriggerCharge()
+    {
+		if (chargeObject == null) return;
+
+
+		chargeObject.SetActive(true);
+        // action
+        OnChargeStartAction?.Invoke();
+	}
+
+    public void CancelCharge()
+    {
+		if (chargeObject == null) return;
+		chargeObject.SetActive(false);
+        // action
+        OnChargeEndAction?.Invoke();
+	}
+
 
     // get animation index
     public int WeaponAnimationIndex { get { return weaponAnimationIndex; } }

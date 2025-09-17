@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 4ee43ceabea92be4bac68d6956c65753, type: 3}
   weaponName: Plasma Rifle
   shootType: 1
-  fireRate: 0.09
+  fireRate: 0.095
   bulletsPerShot: 1
   magazineSize: 20
   maxAmmoInReserve: 80
@@ -40,6 +40,55 @@ MonoBehaviour:
   autoAimType: 0
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 1
@@ -227,6 +276,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: 726f2df23ded00148a6199fbeaadea8a, type: 3}
   crosshairsSize: {x: 0.4, y: 0.5}
   crosshairsSizeMultiplierWhenDualWielded: 1.75
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: cb28c8a3d5c98bc4d91d0f36becf952e, type: 2}
   gunAiBehaviour:
     IdealRange: 10
