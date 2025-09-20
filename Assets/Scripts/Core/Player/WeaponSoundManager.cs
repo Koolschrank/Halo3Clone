@@ -82,18 +82,23 @@ public class WeaponSoundManager : MonoBehaviour
 
     public void Shoot(Weapon_Arms weapon)
     {
-        AudioManager.instance.PlayOneShot(weapon.ShootSound, transform.position);
+        if (weapon == null) return;
+		AudioManager.instance.PlayOneShot(weapon.ShootSound, transform.position);
 
     }
 
     public void SwitchIn(Weapon_Arms weapon, float timer)
     {
-        switchInList = new TimedSoundListInstance(weapon.SwitchInSound, timer);
+
+		if (weapon == null) return;
+		switchInList = new TimedSoundListInstance(weapon.SwitchInSound, timer);
     }
 
     public void Reload(Weapon_Arms weapon, float time)
     {
-        reloadList = new TimedSoundListInstance( weapon.ReloadSounds, time);
+
+		if (weapon == null) return;
+		reloadList = new TimedSoundListInstance( weapon.ReloadSounds, time);
 
 
     }

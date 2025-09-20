@@ -18,11 +18,11 @@ MonoBehaviour:
   shildDamageMultiplier: 1.5
   headShotMultiplier: 2
   canHeadShotShild: 1
-  range: 100
+  range: 200
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 100
+  rangeUntilDamageFalloff: 200
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -52,6 +52,10 @@ MonoBehaviour:
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 0
   forceOnLivingPlayers: 1
+  penetration: 1
+  ricochet: 1
+  maxRicochetCount: 5
+  ricochetAutoAim: {fileID: 11400000, guid: 76fc3d0067ef6834c995be70ff6020a0, type: 2}
   bodyHitSound:
     Guid:
       Data1: 0

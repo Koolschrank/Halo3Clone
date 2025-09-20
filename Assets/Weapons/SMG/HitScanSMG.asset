@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: HitScanSMG
   m_EditorClassIdentifier: 
-  damage: 8.5
+  damage: 8
   damageMultiplierVSAI: 1
   force: 150
   shildDamageMultiplier: 1
@@ -52,6 +52,10 @@ MonoBehaviour:
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 0
   forceOnLivingPlayers: 1
+  penetration: 0
+  ricochet: 1
+  maxRicochetCount: 2
+  ricochetAutoAim: {fileID: 11400000, guid: 403473adc6e58884a9dadeef4b89320a, type: 2}
   bodyHitSound:
     Guid:
       Data1: 1228804770

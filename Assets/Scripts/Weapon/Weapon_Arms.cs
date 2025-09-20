@@ -23,7 +23,9 @@ public class Weapon_Arms
 	public Action<GameObject> OnProjectileShot;
     public Action StopHoldingShoot;
     public Action<Vector3> OnHitscanShot;
-    public Action<GameObject> OnGranadeShot;
+
+	public Action<Vector3[]> OnAdvancedHitscanShot;
+	public Action<GameObject> OnGranadeShot;
     public Action OnWeaponDroped;
 
 
@@ -244,10 +246,19 @@ public class Weapon_Arms
             if (weaponData.WeaponBullet is Weapon_Bullet_Hitscan)
             {
                 var hitscan = bulletSpawner.ShootHitScan(this);
-                foreach (var hit in hitscan)
+                var bulletData = weaponData.WeaponBullet as Weapon_Bullet_Hitscan;
+                if (bulletData.penetration || bulletData.ricochet)
                 {
-                    OnHitscanShot?.Invoke(hit);
+                    OnAdvancedHitscanShot?.Invoke(hitscan);
                 }
+				else
+                {
+					foreach (var hit in hitscan)
+					{
+						OnHitscanShot?.Invoke(hit);
+					}
+				}
+					
             }
             else if (weaponData.WeaponBullet is Weapon_Bullet_Projectile)
             {

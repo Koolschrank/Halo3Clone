@@ -22,6 +22,11 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
 
     [SerializeField] bool doesApplyForceOnLivingPlayers = false;
     [SerializeField] float forceOnLivingPlayers = 1f;
+    public bool penetration = false;
+    public bool ricochet = false;
+    public int maxRicochetCount = 0;
+    public AutoAim ricochetAutoAim;
+
 
 	[Header("Sound")]
     [SerializeField] EventReference bodyHitSound;

@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using ZakhanSpellsPack;
 
@@ -27,7 +29,8 @@ public class Weapon_Model : MonoBehaviour
         this.weapon = weapon;
         weapon.OnProjectileShot += SpawnProjectileClone;
         weapon.OnHitscanShot += SpawnBulletLine;
-        weapon.OnGranadeShot += SpawnGranadeClone;
+        weapon.OnAdvancedHitscanShot += SpawnBulletLineAdvanced;
+		weapon.OnGranadeShot += SpawnGranadeClone;
 
         weapon.OnChargeStart += TriggerCharge;
         weapon.OnChargeEnd += CancelCharge;
@@ -41,11 +44,13 @@ public class Weapon_Model : MonoBehaviour
         weapon.OnProjectileShot -= SpawnProjectileClone;
         weapon.OnHitscanShot -= SpawnBulletLine;
         weapon.OnGranadeShot -= SpawnGranadeClone;
+        weapon.OnAdvancedHitscanShot -= SpawnBulletLineAdvanced;
 
-        weapon.OnChargeStart -= TriggerCharge;
+		weapon.OnChargeStart -= TriggerCharge;
         weapon.OnChargeEnd -= CancelCharge;
 
         weapon.StopHoldingShoot -= CancelPartical;
+        CancelPartical();
 
 	}
 
@@ -105,7 +110,33 @@ public class Weapon_Model : MonoBehaviour
         TriggerPartical();
     }
 
-    public void SpawnGranadeClone(GameObject granade)
+	public void SpawnBulletLineAdvanced(Vector3[] targets)
+	{
+		var bulletData = weapon.Bullet as Weapon_Bullet_Hitscan;
+		if (bulletData.Trail != null)
+		{
+			var bulletRay = Instantiate(bulletData.Trail, bulletSpawnPoint.position, Quaternion.identity) as GameObject;
+			var bulletScript = bulletRay.GetComponent<BulletTrail>();
+
+			bulletRay.layer = gameObject.layer;
+            List<Vector3> points = new List<Vector3>();
+            points.Add(Vector3.zero);
+            foreach (var point in targets)
+            {
+                points.Add(point - bulletSpawnPoint.position);
+			}
+
+			bulletScript.ShowTrail(points.ToArray());
+			bulletRay.layer = gameObject.layer;
+		}
+
+
+		TriggerPartical();
+	}
+
+
+
+	public void SpawnGranadeClone(GameObject granade)
     {
         var granadeData = weapon.Bullet as Weapon_Bullet_Granade;
         var granadeClone = Instantiate(granadeData.GranadeStats.GranadeClonePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);

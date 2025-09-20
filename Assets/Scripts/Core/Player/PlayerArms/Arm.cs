@@ -406,13 +406,14 @@ public class Arm : MonoBehaviour
 							weaponInHand.UpdateCharge();
                             if (weaponInHand.CheckIfChargeFinished())
                             {
+								moveSpeedMultiplier = weaponInHand.Data.ChargeMovementMultiplier.Evaluate(0.99f);
+								playerMovement.weaponMoveSpeedMultiplier = moveSpeedMultiplier;
+								aimSpeedMultiplier = weaponInHand.Data.ChargeAimMultiploer.Evaluate(0.99f);
+								playerAim.weaponSensitivityMultiplier = aimSpeedMultiplier;
 								if (weaponInHand.CanShoot())
 							{
 
-									 moveSpeedMultiplier = weaponInHand.Data.ChargeMovementMultiplier.Evaluate(0.99f);
-									playerMovement.weaponMoveSpeedMultiplier = moveSpeedMultiplier;
-									 aimSpeedMultiplier = weaponInHand.Data.ChargeAimMultiploer.Evaluate(0.99f);
-									playerAim.weaponSensitivityMultiplier = aimSpeedMultiplier;
+									 
 									if (weaponInHand.TryShoot())
 								{
 									armState = ArmState.Shooting;

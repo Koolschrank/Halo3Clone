@@ -12764,6 +12764,8 @@ GameObject:
   - component: {fileID: 1760892623}
   - component: {fileID: 1760892625}
   - component: {fileID: 1760892624}
+  - component: {fileID: 1760892627}
+  - component: {fileID: 1760892626}
   m_Layer: 5
   m_Name: Spotify
   m_TagString: Untagged
@@ -12804,6 +12806,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28f32f5aeb5805429745f808d216bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clientId: 082f099b38b4409289670ef7ac6142cc
+  redirectUri: https://example.com/callback
+  scopes:
+  - user-modify-playback-state
+  - user-read-playback-state
+  - user-read-currently-playing
 --- !u!114 &1760892625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12864,6 +12872,56 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1760892626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760892622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e35b30bc0eb2ca40ab19f36bbb5e9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClientID: 082f099b38b4409289670ef7ac6142cc
+  APIScopes:
+  - app-remote-control
+  - playlist-modify-private
+  - playlist-modify-public
+  - playlist-read-collaborative
+  - playlist-read-private
+  - streaming
+  - ugc-image-upload
+  - user-follow-modify
+  - user-follow-read
+  - user-library-modify
+  - user-library-read
+  - user-modify-playback-state
+  - user-read-currently-playing
+  - user-read-email
+  - user-read-playback-position
+  - user-read-playback-state
+  - user-read-private
+  - user-read-recently-played
+  - user-top-read
+  RedirectUri: https://example.com/callback
+  ServerPort: 5000
+--- !u!114 &1760892627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760892622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89aa3cd9589e984391abe1cde2d76ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AuthorizeUserOnStart: 1
+  AuthType: 0
+  _authMethodConfig: {fileID: 0}
 --- !u!1 &1778256000
 GameObject:
   m_ObjectHideFlags: 0
