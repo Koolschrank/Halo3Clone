@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53125d4ba8cd8f54281af4b856b90b13, type: 3}
-  m_Name: SMGBounceAutoAim
+  m_Name: AIAutoAim_Raygun 1
   m_EditorClassIdentifier: 
   raycastLenght: 20
-  radius: 1
-  aimLerp: 0.2
+  radius: 3
+  aimLerp: 0

@@ -11562,6 +11562,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   physicsImpactIgnoreGravityResetTime: 0.8
+  weaponMoveSpeedMultiplier: 1
   walkSound:
     Guid:
       Data1: -890825783
@@ -12515,6 +12516,10 @@ PrefabInstance:
       propertyPath: playerInventory
       value: 
       objectReference: {fileID: 7573040687501960069}
+    - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
+      propertyPath: powerMultiplier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 762168637897727766, guid: a30f8588204e0324eab3d2da725014f5, type: 3}
       propertyPath: maxShildStrength
       value: 10

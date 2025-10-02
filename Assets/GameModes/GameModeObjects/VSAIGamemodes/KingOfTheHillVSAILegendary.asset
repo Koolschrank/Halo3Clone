@@ -101,7 +101,7 @@ MonoBehaviour:
   usePVEScoring: 1
   pve_scoreLossPerSecond: 1
   pve_scoreGainPerSecond: 0.5
-  pve_scoreGainOnObjectiveCompletion: 10
+  pve_scoreGainOnObjectiveCompletion: 25
   pve_pointsForObjectiveCompletion: 100
   useSkulls: 0
   timeToScore: 0.4

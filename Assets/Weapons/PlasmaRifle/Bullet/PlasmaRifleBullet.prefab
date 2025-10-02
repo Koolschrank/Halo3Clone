@@ -116,7 +116,7 @@ MonoBehaviour:
   damageAmount: 5
   force: 100
   shildDamageMultiplier: 4.1
-  shildDamagMultiplierVSAI: 1.3
+  shildDamagMultiplierVSAI: 1.6
   headShotMultiplier: 1
   hitLayer:
     serializedVersion: 2

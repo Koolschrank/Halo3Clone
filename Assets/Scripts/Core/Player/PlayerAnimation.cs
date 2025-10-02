@@ -61,11 +61,11 @@ public class PlayerAnimation : MonoBehaviour
 
     Vector3 localIdealDirection = Vector3.forward;
 
+    public float powerMultiplier = 1;
 
 
-
-    // start
-    public void Start()
+	// start
+	public void Start()
     {
         playerMovement.OnJump += Jump;
         playerMovement.OnCrouch += () => UpdateCrouch(true);
@@ -574,7 +574,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SetShildVisualPower(float power)
     {
-        float truePower = shildVisualRecoveryCurve.Evaluate(power);
+        float truePower = shildVisualRecoveryCurve.Evaluate(power) * powerMultiplier;
 
         foreach (var smr in playerMeshes)
         {

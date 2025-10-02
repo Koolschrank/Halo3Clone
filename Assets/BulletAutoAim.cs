@@ -31,7 +31,7 @@ public class BulletAutoAim : MonoBehaviour
     void DetectEnemy()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
-        float closestDistance = Mathf.Infinity;
+        float closestAngle = Mathf.Infinity;
         GameObject closestEnemy = null;
         foreach (var hit in hits)
         {
@@ -46,15 +46,15 @@ public class BulletAutoAim : MonoBehaviour
 					continue;
 				}
 
-
-				float distanceToEnemy = Vector3.Distance(transform.position, hit.transform.position);
-                if (distanceToEnemy < closestDistance)
+				// angle to enemy is within detection angle
+                if (angleToEnemy < closestAngle)
                 {
-                    closestDistance = distanceToEnemy;
+                    closestAngle = angleToEnemy;
                     closestEnemy = hit.gameObject;
-                }
-            }
-        }
+				}
+
+			}
+		}
         if (closestEnemy != null )
         {
             targetEnemy = closestEnemy;

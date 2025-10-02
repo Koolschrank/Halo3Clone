@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameModeName: Catch
   startingEquipment:
-    hasShild: 0
+    hasShild: 1
     headShotOneShot: 0
     hasMiniMap: 0
     canDualWield: 1

@@ -261,7 +261,7 @@ public class BulletSpawner : MonoBehaviour
 					hitIndex++; 
 					break;
 				}
-				if (hit.collider.gameObject == playerTeam.gameObject && hitIndex == 0) // hit self
+				if (hit.collider.gameObject == playerTeam.gameObject) // hit self
 				{
                     continue;
 				}

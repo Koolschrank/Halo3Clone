@@ -18,11 +18,11 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 43472cc0bb0af404aa547ab04554588f, type: 3}
   weaponName: Fire Granade Launcher
   shootType: 0
-  fireRate: 0.9
+  fireRate: 0.7
   bulletsPerShot: 1
   magazineSize: 3
   maxAmmoInReserve: 6
-  reloadTime: 3
+  reloadTime: 2.6
   reloadGainAmmoTrigger: 0.65
   inaccuracy: 0
   switchOutTime: 0.3
@@ -40,6 +40,55 @@ MonoBehaviour:
   autoAimType: 2
   burstAmount: 3
   burstDelay: 0.3
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 1
   gunKnockback:
     power: 3
@@ -410,6 +459,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: ee579ce34746d084682cedad1f645b0a, type: 3}
   crosshairsSize: {x: 0.5, y: 0.5}
   crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 10
