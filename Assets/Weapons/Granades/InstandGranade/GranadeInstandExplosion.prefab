@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 4.5
   damage: 50
+  damageMultiplierVSTeammates: 1
+  damageDeadzone: 10
   damageMultiplierVSAI: 1
   damageOnShildMultiplier: 2.4
-  damageReductionAgainstBlocking: 0.8
+  damageReductionAgainstBlocking: 1
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -148,6 +150,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     rumbleType: 0
   rumbleReach: 20
+  ignoreOwner: 0
 --- !u!114 &4977926167577745926
 MonoBehaviour:
   m_ObjectHideFlags: 0

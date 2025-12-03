@@ -45,9 +45,12 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   healthMultiplier: 1
   shildMultiplier: 1
   speedMultiplier: 1
-  teamIdOverrride: 1
+  teamIdOverrride: 3
   scoreForKill: 10
   useSpecialEquipment: 0

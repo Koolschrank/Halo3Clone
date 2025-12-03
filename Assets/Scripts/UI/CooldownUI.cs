@@ -72,7 +72,6 @@ public class CooldownUI : MonoBehaviour
 		
 		if (chargeText != null)
         {
-			Debug.Log("UpdateCharge: " + ability.charges.ToString());
 			chargeText.text = ability.charges.ToString();
 
 		}

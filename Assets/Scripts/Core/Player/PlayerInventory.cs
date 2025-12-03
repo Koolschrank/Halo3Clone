@@ -257,10 +257,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void TryInvokeAmmoChangeOfInventoryWeapon(Weapon_Data weaponType, int amount)
     {
-        Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon");
         if (weapons.Count > 0 &&weapons[0] != null && weapons[0].Data == weaponType)
         {
-            Debug.Log("TryInvokeAmmoChangeOfInventoryWeapon 2");
             OnAmmoOfWeaponInInventoryChanged?.Invoke(amount + weapons[0].Magazine);
         }
     }

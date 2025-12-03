@@ -227,7 +227,15 @@ public class PlayerAim : MonoBehaviour
             rotationY *= zoomAimSpeedMultiplier;
         }
 
-        if (hasAimCorrection && !noAimAssitance && playerArms.RightArm.CurrentWeapon != null)
+        if (meleeAttacker.inAttack && playerArms.RightArm.CurrentWeapon.MeleeAttack != null && playerArms.RightArm.CurrentWeapon.MeleeAttack.slowDownAim && playerArms.RightArm.CurrentWeapon.MeleeAttack.slowDownAim)
+        {
+            float progress = meleeAttacker.AttackProgress;
+            float slowDownFactor = meleeAttacker.currentAttackData.slowDownCurve.Evaluate(progress);
+            rotationX *= slowDownFactor;
+            rotationY *= slowDownFactor;
+		}
+
+			if (hasAimCorrection && !noAimAssitance && playerArms.RightArm.CurrentWeapon != null)
         {
             var autoAimType = playerArms.RightArm.CurrentWeapon.Data.AutoAimType;
             if (autoAimType != AutoAimType.none || meleeAttacker.InLaunch)

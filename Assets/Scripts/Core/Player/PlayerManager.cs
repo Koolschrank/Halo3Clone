@@ -38,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     [NonSerialized]
     public float respawnMultiplier = 1f;
 
+    public float playerOutlineStrength = 0f;
+
 	// Awake
 	private void Awake()
     {
@@ -163,6 +165,7 @@ public class PlayerManager : MonoBehaviour
 
 
             p.EnableLayerInCamera(fpsLayers[i]);
+            p.SetFPSLayer(fpsLayers[i]);
             p.DisableLayerInCamera(thirdPersonLayers[i]);
             p.PlayerBody.GetComponent<BodyMindConnection>().SetCameras(playerCameras[i], spectatorCameras[i]);
 
@@ -283,6 +286,15 @@ public class PlayerManager : MonoBehaviour
     public void RespawnPlayer(PlayerMind player)
     {
 		var spawnPoint = GameModeSelector.gameModeManager.GetFarthestSpawnPointFromEnemeies(player);
+
+        if (GameModeSelector.gameModeManager is LastManStandingManager)
+        {
+            var lastManManager = GameModeSelector.gameModeManager as LastManStandingManager;
+			int spawnPointIndex = lastManManager.GetSpawnPoint(player.TeamIndex);
+            spawnPoint = GameModeSelector.gameModeManager.GetSpawnPointByIndex(spawnPointIndex);
+
+		}
+
 		if (GameModeSelector.gameModeManager.GameModeStats.UseStatSheet)
 		{
 			spawnPoint = GameModeSelector.gameModeManager.GetStartingSpawnPoint(player.TeamIndex);
@@ -348,7 +360,7 @@ public class PlayerManager : MonoBehaviour
         foreach (var player in players)
         {
             newPlayers.Add(player);
-            indexList.Add(player.PlayerIndex);
+            indexList.Add(player.playerSettings.playerIndex);
         }
 
 
@@ -359,7 +371,7 @@ public class PlayerManager : MonoBehaviour
             bool inserted = false;
             for (int i = 0; i < players.Count; i++)
             {
-                if (player.PlayerIndex < players[i].PlayerIndex)
+                if (player.playerSettings.playerIndex < players[i].playerSettings.playerIndex)
                 {
                     players.Insert(i, player);
                     inserted = true;
@@ -372,11 +384,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        Debug.Log("playerIndexOrder");
-        foreach (var player in players)
-        {
-            Debug.Log(player.PlayerIndex);
-        }
+        
 
 
 

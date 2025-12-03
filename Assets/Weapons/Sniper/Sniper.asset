@@ -36,6 +36,10 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
   autoAimType: 2
   burstAmount: 0
@@ -141,7 +145,7 @@ MonoBehaviour:
   reloadTimeMultiplier: 1.4
   bloomOnShoot: 1
   bloomOnTakingDamage: 1
-  bloomInaccuracyMultiplier: 0.13
+  bloomInaccuracyMultiplier: 0.16
   bloomTime: 0.77
   bloomCurve:
     serializedVersion: 2

@@ -47,7 +47,16 @@ public class Weapon_PickUp : MonoBehaviour
         destroyParticle.SetActive(true);
     }
 
-    private void Update()
+	private void Start()
+	{
+        if (GameModeSelector.gameModeManager as LastManStandingManager)
+		{
+            var lastManStandingManager = GameModeSelector.gameModeManager as LastManStandingManager;
+            lastManStandingManager.OnPreNewRoundStarted += DestroyObject;
+		}
+	}
+
+	private void Update()
     {
         if (inDeleteState)
         {
@@ -134,7 +143,16 @@ public class Weapon_PickUp : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public WeaponType WeaponType => weapon_Data.WeaponType;
+	private void OnDestroy()
+	{
+		if (GameModeSelector.gameModeManager as LastManStandingManager)
+		{
+			var lastManStandingManager = GameModeSelector.gameModeManager as LastManStandingManager;
+			lastManStandingManager.OnPreNewRoundStarted -= DestroyObject;
+		}
+	}
+
+	public WeaponType WeaponType => weapon_Data.WeaponType;
 
     public void BlockPickUpForTeam(int teamIndex)
     {

@@ -16,7 +16,7 @@ MonoBehaviour:
   damageMultiplierVSAI: 1
   force: 270
   shildDamageMultiplier: 1
-  headShotMultiplier: 1.5
+  headShotMultiplier: 2
   canHeadShotShild: 0
   range: 200
   hitLayer:
@@ -52,6 +52,11 @@ MonoBehaviour:
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 0
   forceOnLivingPlayers: 1
+  penetration: 0
+  ricochet: 0
+  maxRicochetCount: 0
+  ricochetAutoAim: {fileID: 0}
+  noHitMarker: 0
   bodyHitSound:
     Guid:
       Data1: 1228804770

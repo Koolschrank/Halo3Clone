@@ -32,14 +32,67 @@ MonoBehaviour:
   zoomMoveSpeed: 0.6
   moveSpeedMultiplier: 1
   damageReduction: 0
-  meleeData: {fileID: 11400000, guid: b0f7d55f885509b43ba9505c9f3408fd, type: 2}
+  meleeData: {fileID: 11400000, guid: 1c42be917f186fa48ba914a992f8c370, type: 2}
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: 23bc095f26cab904c878bfd7d95f0df9, type: 2}
-  autoAimType: 0
+  autoAimType: 2
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 0
@@ -85,7 +138,7 @@ MonoBehaviour:
   bloomCrosshairsSizeMultiplier: 2
   hasBlock: 1
   block:
-    blockPercentage: 0.7
+    blockPercentage: 0.74
     blockAngle: 180
   reduceScreenShakeWhenAiming: 0
   shootSound:
@@ -126,6 +179,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
   crosshairsSize: {x: 1, y: 1}
   crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 0}
   gunAiBehaviour:
     IdealRange: 0.5

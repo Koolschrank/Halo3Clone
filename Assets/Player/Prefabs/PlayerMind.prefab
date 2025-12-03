@@ -7651,10 +7651,10 @@ MonoBehaviour:
       inWeight: 0.859878
       outWeight: 0.1678999
     - serializedVersion: 3
-      time: 0.9958806
-      value: 0.4988113
-      inSlope: 0.41451702
-      outSlope: 0.41451702
+      time: 0.97554666
+      value: 0.55486435
+      inSlope: 0.4955552
+      outSlope: 0.4955552
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -9385,6 +9385,7 @@ MonoBehaviour:
   playerArm: {fileID: 0}
   reserveText: {fileID: 6762077434863878552}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
+  tranparentColor: {r: 0, g: 0, b: 0, a: 0}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
   reserveTextToColor:
   - {fileID: 1689044560381789208}
@@ -9451,6 +9452,7 @@ MonoBehaviour:
   playerArm: {fileID: 0}
   reserveText: {fileID: 6740363100829498205}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
+  tranparentColor: {r: 0, g: 0, b: 0, a: 0}
   emptyColor: {r: 0.7137255, g: 0.03529412, b: 0.03529412, a: 0.57254905}
   reserveTextToColor:
   - {fileID: 1670162605835321053}
@@ -10203,6 +10205,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   image: {fileID: 7014864327944767944}
+  noUpdate: 1
 --- !u!1 &4684744511271229820
 GameObject:
   m_ObjectHideFlags: 0
@@ -13045,6 +13048,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   image: {fileID: 6008797196477800845}
+  noUpdate: 0
 --- !u!1 &5555128183893633163
 GameObject:
   m_ObjectHideFlags: 0
@@ -14550,6 +14554,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   image: {fileID: 1100092921700465015}
+  noUpdate: 0
 --- !u!1 &6215487302493808562
 GameObject:
   m_ObjectHideFlags: 0
@@ -17822,6 +17827,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   image: {fileID: 3347146791364833595}
+  noUpdate: 0
 --- !u!1 &7741980246946088861
 GameObject:
   m_ObjectHideFlags: 0
@@ -17907,6 +17913,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   image: {fileID: 529998464815871538}
+  noUpdate: 0
 --- !u!1 &7766257857441414094
 GameObject:
   m_ObjectHideFlags: 0
@@ -17925,7 +17932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2217254967390604120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17967,14 +17974,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.39999998, b: 0.41739357, a: 0.15294118}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: adb81d2da4e8fd540985ec25f4e70964, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 187944d9e96a4b147a5ce38ffa1ee0a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21507,6 +21514,7 @@ MonoBehaviour:
   playerArm: {fileID: 0}
   reserveText: {fileID: 1851515850772090411}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
+  tranparentColor: {r: 0, g: 0, b: 0, a: 0}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
   reserveTextToColor:
   - {fileID: 5987235911487015851}
@@ -23192,6 +23200,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   nameText: {fileID: 7450391280110206204}
+  oxygenColor: {r: 0, g: 0.7114978, b: 1, a: 1}
 --- !u!224 &7448553739812338355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3132888451202367425, guid: ccade49a851eeec49b7c3976039a6237, type: 3}

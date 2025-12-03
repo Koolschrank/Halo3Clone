@@ -31,7 +31,7 @@ MonoBehaviour:
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
-    ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability: {fileID: 11400000, guid: ed3407efd303cd645986383d4e7f389e, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:

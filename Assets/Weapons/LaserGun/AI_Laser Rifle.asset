@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 6065395483224059402, guid: e7540095be4d7b44a8400b3c6b6eb650, type: 3}
   weaponName: Laser Rifle
   shootType: 5
-  fireRate: 0.01
+  fireRate: 1
   bulletsPerShot: 1
   magazineSize: 1300
   maxAmmoInReserve: 0

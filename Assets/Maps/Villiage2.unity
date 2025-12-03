@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 94446a0527ca0f4498da7c0f420b5e5a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 55b8bbc5a0d794a4c9500439de1123fd, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 6ce0121f75f9a674d93f0608527340cf, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2613,7 +2613,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -11362,7 +11362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: hills.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8195818992727454778, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: 'hills.Array.data[1]'
@@ -12040,6 +12040,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 2
   hasPlayerGravity: 0
   playerGravityChange: 0.3
+  restoreOxygen: 0
 --- !u!65 &1312425998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12287,7 +12288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnOnStart: 1
-  weaponPrefab: {fileID: 9197169624787015198, guid: 2372ee853742b6245b95ba6959f3652d, type: 3}
+  weaponPrefab: {fileID: 9197169624787015198, guid: 5b4f886a9212f594885a9b1300619fa7, type: 3}
   spawnTime: 60
   magazines: 4
   weaponDistanceToAttemtRespawn: 5
@@ -12304,6 +12305,10 @@ PrefabInstance:
     - target: {fileID: 1241730005603676667, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
       propertyPath: m_Name
       value: Hill (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241730005603676667, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2547045619424711877, guid: 31b6fca6c165e9044a4182e9305f2d9d, type: 3}
       propertyPath: m_LocalScale.x
@@ -14857,6 +14862,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 2
   hasPlayerGravity: 1
   playerGravityChange: 0.4
+  restoreOxygen: 0
 --- !u!65 &1690131980
 BoxCollider:
   m_ObjectHideFlags: 0

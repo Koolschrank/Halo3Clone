@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: WeakBody
   m_EditorClassIdentifier: 
   skullName: 
-  skullDescription: 'Slower health regen
-
-    weaker shild'
+  skullDescription: Slower health regen
   skullIcon: {fileID: 0}
   skullColor: {r: 0.5018867, g: 0.5018867, b: 0.5018867, a: 1}

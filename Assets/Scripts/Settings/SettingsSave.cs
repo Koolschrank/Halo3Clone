@@ -9,7 +9,19 @@ public class SettingsSave : MonoBehaviour
 
     List<PlayerSettings> playerSettings = new List<PlayerSettings>();
 
-    public void Awake()
+    public bool CheckIfNameTaken(string name)
+    {
+        for (int i = 0; i < playerSettings.Count; i++)
+        {
+            if (playerSettings[i].playerName == name)
+            {
+                return true;
+            }
+        }
+        return false;
+	}
+
+	public void Awake()
     {
         // destroy if there is already an instance
         if (instance != null)
@@ -74,18 +86,28 @@ public class PlayerSettings
     public void SetRandomName()
     {
 
-        Debug.Log("Old name: " + playerName);
 
-        playerName = NameList.instance.GetRandomNameBasic();
-        Debug.Log("New name: " + playerName);
-    }
+        var settingsInstance = SettingsSave.instance;
+        var currentName = playerName;
+		while (settingsInstance.CheckIfNameTaken(currentName))
+        {
+			currentName = NameList.instance.GetRandomNameBasic();
+		}
+        playerName = currentName;
+
+
+	}
 
     public void SetRandomNameAdvanced()
     {
-        Debug.Log("Old name: " + playerName);
-        playerName = NameList.instance.GetRandomNameAdvanced();
-        Debug.Log("New name: " + playerName);
-    }
+        var settingsInstance = SettingsSave.instance;
+        var currentName = playerName;
+        while (settingsInstance.CheckIfNameTaken(currentName))
+        {
+			currentName = NameList.instance.GetRandomNameAdvanced();
+        }
+        playerName = currentName;
+	}
 
     public void SetPlayerName(string name)
     {

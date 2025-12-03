@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1535552099913994392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0.25, z: 0.55}
+  m_LocalPosition: {x: -0.11, y: 0.3, z: 0.55}
   m_LocalScale: {x: 1.6, y: 1.6, z: 0.93333334}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -51,6 +51,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 4880330818529426327}
   weaponAnimationIndex: 0
   chargeObject: {fileID: 459679075273074096}
+  activeParticalWhileShooting: 0
+  ManualAnimationControl: 0
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 1151876770239608438}
   rumble_Shoot:
@@ -540,6 +542,10 @@ MonoBehaviour:
   throwPoint: {fileID: 0}
   throwForce: 5
   throwRotation: {x: 0, y: 0, z: 0}
+  baseRotation: {fileID: 0}
+  useScriptToCallTrow: 0
+  visual: {fileID: 0}
+  delay: 0.05
 --- !u!1001 &4768530807603131350
 PrefabInstance:
   m_ObjectHideFlags: 0

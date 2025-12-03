@@ -23,6 +23,7 @@ public struct DamagePackage
     public bool isMeleeDamage;
     public bool isNedlerDamage;
     public bool isInstantNedler;
+    public bool ignoreShild;
 
 	// construtor
 	public DamagePackage(float damageAmount)
@@ -46,6 +47,7 @@ public struct DamagePackage
         isMeleeDamage = false;
         isNedlerDamage = false;
         isInstantNedler = false;
+        ignoreShild = false;
 	}
 
     public DamagePackage(float damageAmount, Vector3 hitPoint, Vector3 origin, Vector3 force, ImpactType impactType, GameObject owner, bool canHeadShot, float headShotMultiplier, bool hasHitMarkerEffect,bool canHeadShotShild)
@@ -69,6 +71,7 @@ public struct DamagePackage
         OnKill = null;
         isNedlerDamage = false;
         isInstantNedler = false;
+        ignoreShild = false;
 	}
 }
 

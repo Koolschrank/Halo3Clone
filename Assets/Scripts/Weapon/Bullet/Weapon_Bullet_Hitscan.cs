@@ -26,6 +26,7 @@ public class Weapon_Bullet_Hitscan : Weapon_Bullet
     public bool ricochet = false;
     public int maxRicochetCount = 0;
     public AutoAim ricochetAutoAim;
+    public bool noHitMarker = false;
 
 
 	[Header("Sound")]

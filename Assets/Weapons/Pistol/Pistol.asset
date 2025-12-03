@@ -18,7 +18,7 @@ MonoBehaviour:
   weapon3rdPersonModel: {fileID: 4848280889717057939, guid: ce66241696224c84db4a9032c83ff6a2, type: 3}
   weaponName: Pistol
   shootType: 0
-  fireRate: 0.27
+  fireRate: 0.3175
   bulletsPerShot: 1
   magazineSize: 10
   maxAmmoInReserve: 60
@@ -36,6 +36,10 @@ MonoBehaviour:
   weaponType: 0
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: b1220f81241b91d478ae61ae3dae0db5, type: 2}
   autoAimType: 1
   burstAmount: 0
@@ -135,7 +139,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.85
+  damageMultiplier: 0.8
   fireRateMultiplier: 1
   inaccuracyMultiplier: 1
   reloadTimeMultiplier: 1.35

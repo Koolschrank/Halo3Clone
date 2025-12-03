@@ -46,12 +46,15 @@ MonoBehaviour:
       shildRegen: 25
       spawnInvulnerabilityTime: 2
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 20
   teamCount: 2
   respawnTime: 4
   hasWeaponPickups: 1
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0

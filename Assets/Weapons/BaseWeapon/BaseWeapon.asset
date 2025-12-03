@@ -24,11 +24,11 @@ MonoBehaviour:
   maxAmmoInReserve: 210
   reloadTime: 2
   reloadGainAmmoTrigger: 0.7
-  inaccuracy: 0.035
+  inaccuracy: 0.042
   switchOutTime: 0.25
   switchInTime: 0.4
   canZoom: 1
-  zoomFOV: 35
+  zoomFOV: 50
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
   damageReduction: 0
@@ -36,10 +36,63 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 0
   burstAmount: 3
   burstDelay: 0.1
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 0.6
@@ -236,6 +289,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
   crosshairsSize: {x: 0.45, y: 0.45}
   crosshairsSizeMultiplierWhenDualWielded: 1.5
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: 921ef2f94fd4b634eb62fccf8b211169, type: 2}
   gunAiBehaviour:
     IdealRange: 10

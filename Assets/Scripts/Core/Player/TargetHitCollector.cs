@@ -20,7 +20,8 @@ public class TargetHitCollector : MonoBehaviour
     {
         if (ignoreHit) return;
 
-        if (damage.hasHitMarkerEffect && target.GetComponent<PlayerTeam>().TeamIndex != playerTeam.TeamIndex)
+
+		if (damage.hasHitMarkerEffect && target.GetComponent<PlayerTeam>().TeamIndex != playerTeam.TeamIndex)
         {
             OnCharacterHit?.Invoke(target);
         }

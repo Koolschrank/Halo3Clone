@@ -137,6 +137,11 @@ public class PlayerCamera : MonoBehaviour
         else
         {
 			zoomedInFOV = weapon.ZoomFOV;
+            if (baseFOV < 60)
+            {
+				zoomedInFOV -= 10f;
+
+			}
 		}
 
         if (weapon.Data.ReduceScreenShakeWhenAiming)
@@ -202,6 +207,27 @@ public class PlayerCamera : MonoBehaviour
         }
         
 
+	}
+
+    int fpsLayer = -1;
+
+    public void SetFPSLayer(int layer)
+    {
+        fpsLayer = layer;
+	}
+
+    public void EnableFPSLayer()
+    {
+        if (fpsLayer == -1)
+            return;
+        playerCamera.cullingMask |= 1 << fpsLayer;
+	}
+
+    public void DisableFPSLayer()
+    {
+        if (fpsLayer == -1)
+            return;
+        playerCamera.cullingMask &= ~(1 << fpsLayer);
 	}
 
 	public void EnableLayerInCamera(int layer)

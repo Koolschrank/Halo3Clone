@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8027a638a6b5a34fa59f9599c7b7327, type: 3}
+  m_Name: LastManStanding
+  m_EditorClassIdentifier: 
+  gameModeName: 
+  startingEquipment:
+    hasShild: 1
+    headShotOneShot: 1
+    hasMiniMap: 1
+    canDualWield: 1
+    canDualWieldEverything: 0
+    movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: fbbb629c047133541b07741eb3d6e116, type: 2}
+    magazinsOfWeaponInHand: 2
+    weaponInLeftHand: {fileID: 0}
+    magazinsOfWeaponInLeftHand: 2
+    sideArm: {fileID: 11400000, guid: 28aca60a3d7e7ef4997b727b9e8937e0, type: 2}
+    magazinsOfSideArm: 2
+    sideArmLeft: {fileID: 0}
+    magazinsOfSideArmLeft: 0
+    ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability2: {fileID: 0}
+    ability3: {fileID: 0}
+    healthOverride:
+      hasHealthOverride: 0
+      showHealthBar: 0
+      health: 0
+      shild: 0
+      armor: 0
+      healthRegenStartTime: 0.5
+      shildRegenStartTime: 0.5
+      healthRegen: 0
+      shildRegen: 0
+      spawnInvulnerabilityTime: 5
+      shildPopDamageNegation: 30
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
+  timeLimitInMinutes: 10
+  pointsToWin: 3
+  teamCount: 8
+  respawnTime: 9999
+  hasWeaponPickups: 1
+  reasignsTeamsInPlayerOrder: 1
+  pointsToWinMultiplier_MoreThan4Players: 1
+  pointsToWinMultiplier_smallMap: 1
+  looseWhenAllPlayersDead: 0
+  hasAiPlayers: 0
+  hasAiTeamMembers: 0
+  useStatSheets: 0
+  dontDropWeaponsOnDeath: 0
+  startScore: 0
+  playerStatsSheetBlueprint: {fileID: 0}
+  spawnWithArmor: 0
+  EnemyTeamsWorkingTogether: 0
+  team2usesOtherPointsToWin: 0
+  team2PointsToWin: 0
+  team2LoosesScoreWhenTeam1scores: 0
+  amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 0
+  useEnemyWaves: 0
+  noDualWieldDamageReduction: 0
+  startingEquipmentBasedOnPlayerValues: 0
+  cannotDropSwitchOrPickupWeapons: 0
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 0
+  team1MemberColors: []
+  team1MemberColorsUI: []
+  usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0
+  hasStorm: 0

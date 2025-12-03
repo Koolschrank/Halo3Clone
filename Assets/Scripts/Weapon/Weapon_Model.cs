@@ -6,8 +6,10 @@ using ZakhanSpellsPack;
 
 public class Weapon_Model : MonoBehaviour
 {
-    protected Weapon_Arms weapon;
-    [SerializeField] protected Transform bulletSpawnPoint;
+
+	public Action OnStartManuelAnimations;
+	protected Weapon_Arms weapon;
+    [SerializeField] public Transform bulletSpawnPoint;
     [SerializeField] protected GameObject muzzleFlash;
     [SerializeField] int weaponAnimationIndex; // 0 rifle, 1 pistol, 2 Shild 
 
@@ -19,10 +21,14 @@ public class Weapon_Model : MonoBehaviour
 
     [SerializeField] bool activeParticalWhileShooting = false;
 
-    public Action OnShootAction;
+	public bool ManualAnimationControl = false;
+
+	public Action OnShootAction;
     public Action OnShootStopAction;
     public Action OnChargeStartAction;
     public Action OnChargeEndAction;
+    public Action OnMeleeAttack;
+    public Action<bool> OnZoomUpdate;
 
 	public virtual void SetUp(Weapon_Arms weapon)
     {
@@ -35,9 +41,28 @@ public class Weapon_Model : MonoBehaviour
         weapon.OnChargeStart += TriggerCharge;
         weapon.OnChargeEnd += CancelCharge;
         weapon.StopHoldingShoot += CancelPartical;
+        weapon.OnMeleeStart += OnMeleeStart;
+        weapon.UpdateZoom += UpdateZoomLevel;
+
+
+		if (ManualAnimationControl)
+		{
+			OnStartManuelAnimations?.Invoke();
+		}
+
 	}
 
-    public virtual void OnDestroy()
+    public void UpdateZoomLevel(bool val)
+    {
+        OnZoomUpdate?.Invoke(val);
+    }
+
+	public void OnMeleeStart(float val)
+            {
+        OnMeleeAttack?.Invoke();
+	}
+
+	public virtual void OnDestroy()
     {
 
         if (weapon == null) return;
@@ -50,7 +75,8 @@ public class Weapon_Model : MonoBehaviour
         weapon.OnChargeEnd -= CancelCharge;
 
         weapon.StopHoldingShoot -= CancelPartical;
-        CancelPartical();
+        weapon.OnMeleeStart -= OnMeleeStart;
+		CancelPartical();
 
 	}
 

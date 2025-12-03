@@ -442,6 +442,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
+    - target: {fileID: 2688855458021090592, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: playerSlide3D
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688855458021090592, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: playerRigidbody
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2740021786223124839, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: m_Layer
       value: 31
@@ -719,12 +727,20 @@ PrefabInstance:
       value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: canSlide
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: rollTime
       value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: jumpPower
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+      propertyPath: playerSlide3D
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7400201383000877008, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
       propertyPath: acceleration_air
@@ -838,7 +854,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 31
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4858631681777976749, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
+    - {fileID: 7284378001806366848, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1183729009145540778, guid: 402bf9c1fad3cdf41b6ffee8a86fbcf5, type: 3}
     m_AddedGameObjects:

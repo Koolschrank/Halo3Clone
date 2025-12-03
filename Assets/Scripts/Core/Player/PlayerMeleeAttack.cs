@@ -20,6 +20,10 @@ public class PlayerMeleeAttack : ScriptableObject
     public bool spawnHitObject = false;
     public GameObject hitObject;
     public Vector3 hitObjectOffset;
+    public LayerMask wallMask = 1 << 0;
+    public bool checkForWidth = false;
+    public float widthCheckRadius = 0.5f;
+
 
 
 
@@ -33,10 +37,19 @@ public class PlayerMeleeAttack : ScriptableObject
 	public AnimationCurve launchCurve;
 	public LayerMask launchTargetLayer;
 
-	[Header("Sound")]
-    [SerializeField] EventReference swingSound;
-    [SerializeField] EventReference hitSound;
+    [Header("SlowDown")]
+    public bool hasSlowDown = false;
+    public AnimationCurve slowDownCurve;
+    public bool slowDownAim = false;
 
+	[Header("PwerArmor")]
+    public bool hasPowerArmor = false;
+    public float damageMultiplierInPowerArmor = 0.5f;
+
+	[Header("Sound")]
+    [SerializeField] public bool alwaysPlayHitSound = false;
+	[SerializeField] EventReference swingSound;
+    [SerializeField] EventReference hitSound;
 
 
 	public float Damage => damage;

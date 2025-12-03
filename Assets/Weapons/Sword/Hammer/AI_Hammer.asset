@@ -20,8 +20,8 @@ MonoBehaviour:
   shootType: 3
   fireRate: 1
   bulletsPerShot: 1
-  magazineSize: 1
-  maxAmmoInReserve: 1
+  magazineSize: 100
+  maxAmmoInReserve: 0
   reloadTime: 1
   reloadGainAmmoTrigger: 0.9
   inaccuracy: 0
@@ -36,6 +36,10 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: b40b5ba1c559fe841b5eec58ba0ac85a, type: 2}
   autoAimType: 0
   burstAmount: 0

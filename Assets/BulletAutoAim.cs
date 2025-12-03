@@ -1,3 +1,4 @@
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 public class BulletAutoAim : MonoBehaviour
@@ -7,17 +8,34 @@ public class BulletAutoAim : MonoBehaviour
 
 	public LayerMask groundLayer;
 	public float detectionAngle = 45f;
+    float originalDetectionAngle;
+	public float angleIncreaseSpeed = 30f;
+
+	public float detectionAngleMax = 45f;
 
 
-    public float rotationSpeed = 5f;
+	public float rotationSpeed = 5f;
+
+    public Bullet bullet;
 
     GameObject targetEnemy = null;
     public float followDuration = 3f;
     float followTimer = -10f;
+    Vector3 originPosition;
+    Vector3 originRotation;
 
+	private void Start()
+	{
+		originalDetectionAngle =detectionAngle;
+        originPosition = transform.position;
+        originRotation = bullet.Owner.GetComponent<BodyMindConnection>().BulletSpawner.transform.forward;
 
+	}
 	private void Update()
 	{
+        if (bullet.inStick) return;
+
+		detectionAngle = Mathf.Min(detectionAngle + (angleIncreaseSpeed * Time.deltaTime), detectionAngleMax);
 		if (targetEnemy == null)
         {
             DetectEnemy();
@@ -30,18 +48,24 @@ public class BulletAutoAim : MonoBehaviour
 
     void DetectEnemy()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
+
+
+		Collider[] hits = Physics.OverlapSphere(originPosition, detectionRadius, detectionLayer);
         float closestAngle = Mathf.Infinity;
         GameObject closestEnemy = null;
         foreach (var hit in hits)
         {
-            Vector3 directionToEnemy = (hit.transform.position - transform.position).normalized;
-            float distranceToHit = Vector3.Distance(transform.position, hit.transform.position);
-			float angleToEnemy = Vector3.Angle(transform.forward, directionToEnemy);
+           
+			Vector3 directionToEnemy = (hit.transform.position - originPosition).normalized;
+            float distranceToHit = Vector3.Distance(originPosition, hit.transform.position);
+			float angleToEnemy = Vector3.Angle(originRotation, directionToEnemy);
             if (angleToEnemy < detectionAngle / 2)
             {
+				
+
+
 				// make raycast to check if there is a wall in the way
-                if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit wallHit, distranceToHit, groundLayer))
+				if (Physics.Raycast(transform.position, directionToEnemy, out RaycastHit wallHit, distranceToHit, groundLayer) || hit.gameObject == bullet.Owner)
                 {
 					continue;
 				}

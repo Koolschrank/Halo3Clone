@@ -9,6 +9,8 @@ public class PickUpSpawn : MonoBehaviour
 	bool isPickUpActive = false;
 
 	bool started = false;
+
+	bool onlySpawnAtStart = false;
 	public void Start()
 	{
 		
@@ -29,12 +31,34 @@ public class PickUpSpawn : MonoBehaviour
 			Destroy(gameObject);
 			return;
 		}
+
+		if ((GameModeSelector.gameModeManager as LastManStandingManager))
+		{
+			onlySpawnAtStart = true;
+			RespawnPickUpIfPossible();
+			var lastManStandingManager = GameModeSelector.gameModeManager as LastManStandingManager;
+			lastManStandingManager.OnNewRoundStarted += RespawnPickUpIfPossible;
+		}
+
 		started = true; // Set started to true to indicate the spawn has begun
+	}
+
+	public void RespawnPickUpIfPossible()
+	{
+		if ( !isPickUpActive)
+		{
+			SpawnPickUp();
+
+		}
 	}
 
 
 	private void Update()
 	{
+		if (onlySpawnAtStart)
+		{
+			return; // Exit if only spawning at start
+		}
 		if (!started)
 		{
 			return; // Exit if the spawn has not started yet
@@ -54,6 +78,11 @@ public class PickUpSpawn : MonoBehaviour
 
 
 
+	}
+
+	public bool IsPickUpActive()
+	{
+		return isPickUpActive;
 	}
 
 	private void SpawnPickUp()

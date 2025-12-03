@@ -10,6 +10,10 @@ public class GravityOverrider : MonoBehaviour
 	public float playerGravityMultiplier = 0.5f;
 	Vector3 baseGravity;
 
+
+	public bool hasOxygen = false;
+
+
 	void OnEnable()
 	{
 		// Ensure singleton instance

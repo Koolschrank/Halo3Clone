@@ -103,10 +103,24 @@ public class PlayerStartEquipment : MonoBehaviour
     public void GetEquipment(Equipment equipment)
     {
         var weaponInHand = equipment.WeaponInHand;
-        var sideArm = equipment.SideArm;
+
+        
+
+		var sideArm = equipment.SideArm;
         var weaponInLeftHand = equipment.WeaponInLeftHand;
 
-        if (isNonPlayer)
+		if (equipment.hasRandomWeaponLoadouts)
+		{
+			Debug.Log("Randomizing Weapon Loadout");
+			var randomIndex = UnityEngine.Random.Range(0, equipment.possiblePrimaryWeapons.Length);
+			weaponInHand = equipment.possiblePrimaryWeapons[randomIndex];
+            if (equipment.randomWeaponIsDualWielded)
+            {
+                weaponInLeftHand = equipment.possiblePrimaryWeapons[randomIndex];
+			}
+		}
+
+		if (isNonPlayer)
         {
             if (weaponInHand != null &&weaponInHand.HasEnemyAiWeaponData)
             {
@@ -253,8 +267,12 @@ public class Equipment
 
     [SerializeField] HealthOverride healthOverride;
 
+	public bool hasRandomWeaponLoadouts = false; // if true, players have random weapon loadouts, otherwise they do not
+    public bool randomWeaponIsDualWielded = false;
+	public Weapon_Data[] possiblePrimaryWeapons; // possible primary weapons for random weapon loadouts
 
-    public HealthOverride HealthOverride => healthOverride;
+
+	public HealthOverride HealthOverride => healthOverride;
 
     public bool HasShild => hasShild;
     public bool HeadShotOneShot => headShotOneShot;
@@ -357,6 +375,9 @@ public class Equipment
         this.playerSize = equipmentToCopy.playerSize;
         this.playerSizeOffset = equipmentToCopy.playerSizeOffset;
         this.playerCenterOffset = equipmentToCopy.playerCenterOffset;
+        this.hasRandomWeaponLoadouts = equipmentToCopy.hasRandomWeaponLoadouts;
+        this.randomWeaponIsDualWielded = equipmentToCopy.randomWeaponIsDualWielded;
+        this.possiblePrimaryWeapons = equipmentToCopy.possiblePrimaryWeapons;
 	}
 
 

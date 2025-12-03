@@ -4,12 +4,14 @@ using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.Events;
 using NUnit.Framework.Internal;
+using Unity.VisualScripting;
 
 public class CharacterHealth : Health
 {
 
-
+    public Action OnGranadeStick;
 	public Action OnRemoveNedler;
+    public Action OnFlinch;
 
 	[SerializeField] float damageMultiplier = 1;
     [SerializeField] bool hasShild = true;
@@ -43,6 +45,7 @@ public class CharacterHealth : Health
     [SerializeField] BodyMindConnection body;
     [SerializeField] PlayerBuffs playerBuffs;
     [SerializeField] ReviveBody reviveBody;
+    [SerializeField] MeleeAttacker meleeAttacker;
 
 
 
@@ -77,7 +80,10 @@ public class CharacterHealth : Health
     public Action OnInHealthAura;
     public Action OnMeleeHit;
 
-    public Action<float> OnArmorChanged;
+    public Action OnOxygenEnabled;
+    public Action<float> OnOxygenChanged;
+
+	public Action<float> OnArmorChanged;
 
 
 
@@ -103,25 +109,42 @@ public class CharacterHealth : Health
     [NonSerialized]
     public bool shildGainOnMelee = false;
     public float shildRegenMeleeDelay = 0.5f;
+    [SerializeField] float minDamageForFlinch = 10f;
 
-   
+	public bool HasNedlerHits => nedlerHits > 0;
+
+    [NonSerialized]
+    public bool hasOxygen = false;
+    
+	public float maxOxygenTime = 35f;
+    [NonSerialized]
+    public float currentOxygen = 35f;
+    [NonSerialized]
+    public bool inOxygenRecoveryZone = false;
+    
+    public float oxygenRecoveryRate = 5f;
+    
+    public float damagePerSecondWithNoOxygen = 4f;
+
 
 	public void RemoveShild()
     {
         currentShild = 0;
-        maxShildMultiplier = 0;
-        hasShild = false;
-        OnShildChanged?.Invoke(0);
-        OnShildDisabled?.Invoke();
+        maxShildMultiplier = 0.4f;
+		OnMaxShildChanged?.Invoke(MaxShild * maxShildMultiplier);
+		//hasShild = false;
+		//OnShildChanged?.Invoke(0);
+		//OnShildDisabled?.Invoke();
 	}
 
     public void RestoreShild()
     {
         currentShild = maxShild;
         maxShildMultiplier = 1;
-        hasShild = true;
-        OnShildChanged?.Invoke(ShildPercentage);
-        OnShildEnabled?.Invoke();
+		OnMaxShildChanged?.Invoke(MaxShild * maxShildMultiplier);
+		//hasShild = true;
+		//OnShildChanged?.Invoke(ShildPercentage);
+		//OnShildEnabled?.Invoke();
 	}
 
 	public void RemoveArmor()
@@ -145,7 +168,7 @@ public class CharacterHealth : Health
         maxShild *= multiplier;
         currentShild = maxShild;
 
-        OnMaxShildChanged?.Invoke(MaxShild);
+        OnMaxShildChanged?.Invoke(MaxShild * maxShildMultiplier);
     }
 
     public void SetDamageMultiplier(float value)
@@ -153,6 +176,10 @@ public class CharacterHealth : Health
         damageMultiplier = value;
 	}
 
+    public bool HasShild()
+    {
+        return hasShild;
+	}
 	public void SetHasShild(bool hasShild)
     {
         if (this.hasShild == hasShild)
@@ -215,7 +242,19 @@ public class CharacterHealth : Health
 
         spawnTime = Time.timeSinceLevelLoad;
 
+
+        var gravityOverrider = GravityOverrider.Instance;
+        if (gravityOverrider != null&&gravityOverrider.hasOxygen)
+        {
+            hasOxygen = true;
+            currentOxygen = maxOxygenTime;
+            OnOxygenEnabled?.Invoke();
+		}
+
+
+
 	}
+    
 
     public void SetStatSheet()
     {
@@ -235,7 +274,7 @@ public class CharacterHealth : Health
         shildRegenAmountPerSecond = statSheetInstance.shieldRegenPerSecond;
         shildRegenDelay = statSheetInstance.shieldRegenDelay;
 
-        OnMaxShildChanged?.Invoke(MaxShild);
+        OnMaxShildChanged?.Invoke(MaxShild * maxShildMultiplier);
         OnMaxHealthChanged?.Invoke(maxHeath);
     }
 
@@ -251,7 +290,15 @@ public class CharacterHealth : Health
 
 		if (MapLoader.instance != null && body.Mind != null)
             damageMultiplier = MapLoader.instance.GetDamageMultiplier();
-    }
+
+
+
+		if (MapLoader.instance.IsSwat() && body.Mind != null)
+		{
+			maxShild = 40f;
+			currentShild = maxShild;
+		}
+	}
 
 
     public void SetShildRegenMelee()
@@ -264,9 +311,9 @@ public class CharacterHealth : Health
     // update
     public override void Update()
     {
-        
+        if (dead) return;
 
-        base.Update();
+		base.Update();
         if (shildRegenTimer > 0 && hasShild)
         {
             var timeReduction = Time.deltaTime * (1 + aura_shildRegenDelay);
@@ -342,6 +389,43 @@ public class CharacterHealth : Health
 			OnRemoveNedler?.Invoke();
 		}
 
+
+        if (hasOxygen)
+        {
+            if (inOxygenRecoveryZone)
+            {
+                currentOxygen += oxygenRecoveryRate * Time.deltaTime;
+                currentOxygen = Mathf.Clamp(currentOxygen, 0, maxOxygenTime);
+                OnOxygenChanged?.Invoke(currentOxygen / maxOxygenTime);
+			}
+            else
+            {
+                currentOxygen -= Time.deltaTime;
+                currentOxygen = Mathf.Clamp(currentOxygen, 0, maxOxygenTime);
+                OnOxygenChanged?.Invoke(currentOxygen / maxOxygenTime);
+
+                if (currentOxygen <= 0)
+                {
+                    currentOxygen = 0;
+					var damagePackage = new DamagePackage
+					{
+						damageAmount = damagePerSecondWithNoOxygen * Time.deltaTime,
+						owner = ownerOfLastDamage,
+						canHeadShotShild = false,
+						headShotMultiplier = 1f,
+						shildDamageMultiplier = 1f
+
+					};
+					damagePackage.damageReductionAgainstBlock = 0;
+					damagePackage.noScreenShake = true;
+                    damagePackage.ignoreShild = true;
+
+                    TakeDamage(damagePackage);
+				}
+
+			}
+        }
+
 	}
 
     public void GainArmor(float armorGain)
@@ -377,6 +461,8 @@ public class CharacterHealth : Health
         maxArmor = newHealth.armor;
 		currentHeath = maxHeath;
         currentShild = maxShild;
+        OnShildChanged?.Invoke(1);
+        OnHealthChanged?.Invoke(1);
         hasShild = maxShild > 0;
         healthRegenAmountPerSecond = newHealth.healthRegen;
         hasHealthRegen = healthRegenAmountPerSecond > 0;
@@ -394,7 +480,7 @@ public class CharacterHealth : Health
             Debug.Log("Health bar shown for " + gameObject.name);
         }
 
-        OnMaxShildChanged?.Invoke(MaxShild);
+        OnMaxShildChanged?.Invoke(MaxShild * maxShildMultiplier);
 
 
     }
@@ -422,6 +508,8 @@ public class CharacterHealth : Health
 
     public override void TakeDamage(DamagePackage damagePackage)
     {
+        if (dead) return;
+
         if (currentShild == maxShild)
         {
             firstShotTime = Time.time;
@@ -430,6 +518,11 @@ public class CharacterHealth : Health
 		float damageReduction = playerArms.DamageReduction;
 		
 		float damage = damagePackage.damageAmount * damageMultiplier *(1 - damageReduction - aura_DamageReduction);
+
+        if (meleeAttacker.hasPowerArmor)
+        {
+            damage *= meleeAttacker.powerArmorDamageMultiplier;
+		}
         bool blocked = false;
 		if (
             playerArms.RightArm.IsInZoom 
@@ -508,14 +601,19 @@ public class CharacterHealth : Health
 		{
 			playerArms.RightArm.CurrentWeapon.TriggerBloom();
 		}
-       
+		if (damage >= minDamageForFlinch)
+		{
+			OnFlinch?.Invoke();
+		}
 
 
 		shildRechargeSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        if (hasShild && currentShild > 0)
+        if (hasShild && !damagePackage.ignoreShild && currentShild > 0)
         {
 
             var damageAgainstShild = damage * damagePackage.shildDamageMultiplier;
+
+			
 
 			if ( currentArmor > 0 && armorBeforeShild)
 			{
@@ -602,12 +700,14 @@ public class CharacterHealth : Health
 			{
 				hasHealthDamage = true;
 				currentHeath -= damage;
+                if (currentHeath <=0 && damagePackage.isNedlerDamage)
+                {
+                    currentHeath = 1;
+				}
+
 				OnHealthChanged?.Invoke(HealthPercentage);
 				OnHealthDamageTaken?.Invoke();
 			}
-
-
-			
         }
 
 		if (damagePackage.isMeleeDamage)
@@ -650,6 +750,8 @@ public class CharacterHealth : Health
 
         OnDamageTaken?.Invoke(damagePackage);
 		ownerOfLastDamage = damagePackage.owner;
+
+        
 
 
 	}
@@ -701,7 +803,7 @@ public class CharacterHealth : Health
     {
         get
         {
-            return currentShild / maxShild;
+            return currentShild / (maxShild * maxShildMultiplier);
         }
     }
 

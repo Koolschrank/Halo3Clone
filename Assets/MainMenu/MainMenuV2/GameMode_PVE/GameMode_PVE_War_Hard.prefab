@@ -122,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -131,19 +131,27 @@ PrefabInstance:
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[1]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 7cb625597c01b4c4da40854a2946f3f1, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 86d41c8628353184da0e162adcc74594, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[2]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 86d41c8628353184da0e162adcc74594, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: a8c1aa3e73cb94b469dd769b80e26403, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[3]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: a8c1aa3e73cb94b469dd769b80e26403, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: f0b980e161f13114b9ac2dded87b699d, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[4]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 86d41c8628353184da0e162adcc74594, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 7cb625597c01b4c4da40854a2946f3f1, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[5]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: ca2c16eec0c4c14478e369e71aadd8a7, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[6]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 43d241698e9d736408cf674aafc651a2, type: 3}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
       value: Single Player HARD

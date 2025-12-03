@@ -18,11 +18,11 @@ MonoBehaviour:
   shildDamageMultiplier: 1
   headShotMultiplier: 1
   canHeadShotShild: 0
-  range: 40
+  range: 50
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 7
+  rangeUntilDamageFalloff: 10
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -30,16 +30,16 @@ MonoBehaviour:
       time: 0
       value: 1
       inSlope: 0
-      outSlope: -1
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.9866638
+      value: 0.2657776
       inSlope: -1
-      outSlope: 0
+      outSlope: -1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -52,6 +52,11 @@ MonoBehaviour:
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 0
   forceOnLivingPlayers: 1
+  penetration: 0
+  ricochet: 0
+  maxRicochetCount: 0
+  ricochetAutoAim: {fileID: 0}
+  noHitMarker: 0
   bodyHitSound:
     Guid:
       Data1: 1228804770

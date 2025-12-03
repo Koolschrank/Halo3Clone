@@ -48,10 +48,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 6.5
   damage: 220
+  damageMultiplierVSTeammates: 1
   damageDeadzone: 10
   damageMultiplierVSAI: 1.1
   damageOnShildMultiplier: 1
-  damageReductionAgainstBlocking: 0.6
+  damageReductionAgainstBlocking: 0.9
   damageFalloff:
     serializedVersion: 2
     m_Curve:

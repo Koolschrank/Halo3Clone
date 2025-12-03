@@ -15,6 +15,8 @@ public class PhysicsForceArea : MonoBehaviour
 	List<Rigidbody> affectedRigidbodies = new List<Rigidbody>();
     List<PlayerPhysicsImpulse> affectedPlayers = new List<PlayerPhysicsImpulse>();
 
+	public bool restoreOxygen = false;
+
 	private void FixedUpdate()
 	{
 		var deltaTime = Time.deltaTime;
@@ -64,14 +66,8 @@ public class PhysicsForceArea : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
-		{
-			if (!affectedRigidbodies.Contains(rb))
-			{
-				affectedRigidbodies.Add(rb);
-			}
-		}
-		else if (other.gameObject.TryGetComponent<PlayerPhysicsImpulse>(out PlayerPhysicsImpulse player))
+		
+		 if (other.gameObject.TryGetComponent<PlayerPhysicsImpulse>(out PlayerPhysicsImpulse player))
 		{
 			if (!affectedPlayers.Contains(player))
 			{
@@ -80,6 +76,18 @@ public class PhysicsForceArea : MonoBehaviour
 				{
 					player.ChangeGravity(playerGravityChange);
 				}
+				var health = other.gameObject.GetComponent<CharacterHealth>();
+				if (restoreOxygen && health != null)
+				{
+					health.inOxygenRecoveryZone = true;
+				}
+			}
+		}
+		else if(other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+		{
+			if (!affectedRigidbodies.Contains(rb))
+			{
+				affectedRigidbodies.Add(rb);
 			}
 		}
 
@@ -87,14 +95,8 @@ public class PhysicsForceArea : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
-		{
-			if (affectedRigidbodies.Contains(rb))
-			{
-				affectedRigidbodies.Remove(rb);
-			}
-		}
-		else if (other.gameObject.TryGetComponent<PlayerPhysicsImpulse>(out PlayerPhysicsImpulse player))
+		
+		if (other.gameObject.TryGetComponent<PlayerPhysicsImpulse>(out PlayerPhysicsImpulse player))
 		{
 			if (affectedPlayers.Contains(player))
 			{
@@ -108,9 +110,24 @@ public class PhysicsForceArea : MonoBehaviour
 						baseGravity = gravityOverride.playerGravityMultiplier;
 					}
 					player.ChangeGravity(baseGravity);
+
+
+				}
+
+				var health = other.gameObject.GetComponent<CharacterHealth>();
+				if (restoreOxygen && health != null)
+				{
+					health.inOxygenRecoveryZone = false;
 				}
 			}
 
+		}
+		else if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+		{
+			if (affectedRigidbodies.Contains(rb))
+			{
+				affectedRigidbodies.Remove(rb);
+			}
 		}
 	}
 }

@@ -203,7 +203,7 @@ public class BulletSpawner : MonoBehaviour
 			return new Vector3[0];
 		}
 		Weapon_Bullet_Hitscan bullet = weapon.Bullet as Weapon_Bullet_Hitscan;
-		
+
 		var autoAim = weapon.AutoAim;
 		var autoAimRaycastLenght = autoAim.RaycastLenght;
 		var autoAimRadius = autoAim.Radius;
@@ -231,6 +231,13 @@ public class BulletSpawner : MonoBehaviour
 		damagePackage.headShotMultiplier = bullet.HeadShotMultiplier;
 		damagePackage.shildDamageMultiplier = bullet.ShildDamageMultiplier;
 		damagePackage.canHeadShotShild = bullet.CanHeadShotShild;
+
+		if (bullet.noHitMarker)
+        {
+            
+			damagePackage.hasHitMarkerEffect = false;
+            
+		}
 
 		Transform cameraTransform = transform;
 		var forward = cameraTransform.forward;
@@ -386,10 +393,15 @@ public class BulletSpawner : MonoBehaviour
         var forward = cameraTransform.forward;
         var target = GetAutoAimTarget(transform.position, transform.forward, autoAimRadius, autoAimRaycastLenght);
 
+		if (bullet.noHitMarker)
+		{
+
+			damagePackage.hasHitMarkerEffect = false;
+
+		}
 
 
-
-        if (target)
+		if (target)
         {
             forward = Vector3.Lerp(forward, (target.position - cameraTransform.position), autoAimLerp).normalized;
         }

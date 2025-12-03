@@ -18,8 +18,8 @@ MonoBehaviour:
   force: 140
   forceOnPlayers: 8
   forceOffset: 0.2
-  delay: 0.45
-  meleeTime: 1.3608
+  delay: 0.495
+  meleeTime: 1.49688
   meleeRadius: 1.65
   meleeDistance: 1.65
   enemyLayer:
@@ -29,6 +29,11 @@ MonoBehaviour:
   spawnHitObject: 1
   hitObject: {fileID: 8386559723769285559, guid: 1c0cdecd10235ec43bb92c7c06fb542a, type: 3}
   hitObjectOffset: {x: 0, y: -1, z: -0.6}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1
+  checkForWidth: 0
+  widthCheckRadius: 0.5
   hasLaunch: 1
   launchDistance: 4
   launchAngle: 30
@@ -62,6 +67,16 @@ MonoBehaviour:
   launchTargetLayer:
     serializedVersion: 2
     m_Bits: 128
+  hasSlowDown: 0
+  slowDownCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hasPowerArmor: 0
+  damageMultiplierInPowerArmor: 0.5
+  alwaysPlayHitSound: 1
   swingSound:
     Guid:
       Data1: 1900586345

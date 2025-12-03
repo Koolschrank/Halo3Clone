@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -27,7 +28,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] SkinnedMeshRenderer[] playerMeshes;
     [SerializeField] Transform[] shildBrakeParticals;
     [SerializeField] GameObject shildDepletedVisual;
-    [SerializeField] float minShildStrength = 3;
+
+	[SerializeField] GameObject[] shildRechageVisual;
+	[SerializeField] float minShildStrength = 3;
     [SerializeField] float maxShildStrength = 12;
     [SerializeField] AnimationCurve shildStrengthCurve;
 
@@ -63,6 +66,9 @@ public class PlayerAnimation : MonoBehaviour
 
     public float powerMultiplier = 1;
 
+    [Header("Flinch")]
+    [SerializeField] float flinchWithShild = 0.4f;
+    [SerializeField] float flinchWithoutShild = 0.9f;
 
 	// start
 	public void Start()
@@ -72,10 +78,11 @@ public class PlayerAnimation : MonoBehaviour
         playerMovement.OnStandUp += () => UpdateCrouch(false);
         playerMovement.OnRollStarted += Roll;
         playerMovement.OnRollEnded += RollEnd;
+		characterHealth.OnFlinch += Flinch;
 
 
-        // connect reload
-        playerArms.RightArm.OnWeaponReloadStarted += Reload;
+		// connect reload
+		playerArms.RightArm.OnWeaponReloadStarted += Reload;
         // connect switch weapon
         playerArms.RightArm.OnWeaponUnequipStarted += SwitchOutWeapon;
         playerArms.RightArm.OnWeaponEquipStarted += SwitchInWeapon;
@@ -100,7 +107,8 @@ public class PlayerAnimation : MonoBehaviour
 		characterHealth.OnShildDamageTaken += ShildDamageTaken;
         characterHealth.OnShildDepleted += ShildDepleted;
         characterHealth.OnShildRechargeStarted += ShildRechargeStarted;
-        characterHealth.OnDeath += DisableShildpPartical;
+        characterHealth.OnShildHealStarted += ShildRechargeParticle;
+		characterHealth.OnDeath += DisableShildpPartical;
         characterHealth.OnShildChanged += UpdateShildStrength;
 
         if (weaponVisual == null)
@@ -125,7 +133,13 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void ChangeLocalIdealDirection(Vector3 direction)
+	private void Flinch()
+	{
+        animator.SetFloat("FlinchIndex", UnityEngine.Random.Range(0f, 1f));
+        animator.Play("Flinch", 4,0);
+	}
+
+	public void ChangeLocalIdealDirection(Vector3 direction)
     {
         localIdealDirection = direction.normalized;
     }
@@ -523,7 +537,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         shildVisualRecoveryTimer = shildVisualRecoveryTime;
         SetShildVisualPower(1);
-    }
+        foreach (var partical in shildRechageVisual)
+        {
+            partical.gameObject.SetActive(false);
+		}
+	}
 
     public void ShildDepleted()
     {
@@ -534,15 +552,28 @@ public class PlayerAnimation : MonoBehaviour
         //    partical.gameObject.SetActive(true);
         //}
         shildDepletedVisual.SetActive(true);
+        DisableOutline();
+
+
+
     }
 
     public void ShildRechargeStarted()
     {
         shildDepletedVisual.SetActive(false);
+		
 
-    }
+	}
 
-    public void DisableShildpPartical()
+    public void ShildRechargeParticle()
+    {
+		foreach (var partical in shildRechageVisual)
+		{
+			partical.gameObject.SetActive(true);
+		}
+	}
+
+	public void DisableShildpPartical()
     {
         shildDepletedVisual.SetActive(false);
     }
@@ -554,13 +585,45 @@ public class PlayerAnimation : MonoBehaviour
             Material materialInstance = smr.material;
             materialInstance.SetColor("_ArmorColor", color);
         }
-    }
+		
+	}
+    float outlineStrength = 1f;
+	public void SetPlayerOutlineStrength(float strength)
+        {
+        outlineStrength = strength;
+        var shildStrenght = characterHealth.ShildPercentage;
+        if (!characterHealth.HasShild())
+            shildStrenght = 0f;
+		foreach (var smr in playerMeshes)
+        {
+            Material materialInstance = smr.material;
+            materialInstance.SetFloat("_OutlinePower", strength * shildStrenght);
+		}
+	}
 
-    public void UpdateShildStrength(float percentage)
-    {
-        float percentageCurved = shildStrengthCurve.Evaluate(percentage);
-        float shildStrength = Mathf.Lerp(maxShildStrength, minShildStrength, percentageCurved);
+    public void DisableOutline()
+        {
         foreach (var smr in playerMeshes)
+        {
+            Material materialInstance = smr.material;
+            materialInstance.SetFloat("_OutlinePower", 0f);
+        }
+	}
+    float lastShildPercentage = -1f;
+	public void UpdateShildStrength(float percentage)
+    {
+        if (percentage >= lastShildPercentage )
+        {
+			shildVisualRecoveryTimer = shildVisualRecoveryTime;
+			SetShildVisualPower(1f);
+
+		}
+        lastShildPercentage = percentage;
+
+		float percentageCurved = shildStrengthCurve.Evaluate(percentage);
+        float shildStrength = Mathf.Lerp(maxShildStrength, minShildStrength, percentageCurved);
+        var tempOutlineStrength = outlineStrength * percentage;
+		foreach (var smr in playerMeshes)
         {
             Material materialInstance = smr.material;
 
@@ -569,8 +632,20 @@ public class PlayerAnimation : MonoBehaviour
                 return;
             }
             materialInstance.SetFloat("_Strength", shildStrength);
-        }
-    }
+            materialInstance.SetFloat("_OutlinePower", tempOutlineStrength);
+		}
+
+        if (percentage <= 0.01)
+        {
+            var flinchLayer = 4;
+			animator.SetLayerWeight(flinchLayer, flinchWithoutShild);
+		}
+        else
+        {
+            var flinchLayer = 4;
+            animator.SetLayerWeight(flinchLayer, flinchWithShild);
+		}
+	}
 
     public void SetShildVisualPower(float power)
     {

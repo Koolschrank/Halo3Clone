@@ -16,6 +16,7 @@ public class AI_Stun : MonoBehaviour
     {
         health.OnShildDepleted += Stun;
         health.OnMeleeHit += Stun;
+        health.OnGranadeStick += Stun;
 	}
 
     public void OnMeleeHit()

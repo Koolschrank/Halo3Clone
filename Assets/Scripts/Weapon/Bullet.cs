@@ -2,6 +2,8 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using FMODUnity;
+using System;
+
 
 public class Bullet : MonoBehaviour
 {
@@ -15,13 +17,15 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] float copyTransitionSpeed;
     [SerializeField] bool isNedler = false;
+    [SerializeField] bool ignoreShilds = false;
 
-    [SerializeField] GameObject bodyHitPartical;
+	[SerializeField] GameObject bodyHitPartical;
     [SerializeField] GameObject groundHitPartical;
     [SerializeField] GameObject[] destroyObjects;
 
     [SerializeField] bool stickToSurfaces = false;
-    bool inStick = false;
+    [NonSerialized]
+	public bool inStick = false;
 
 	[SerializeField] NedlerDelete nedlerDelet;
 
@@ -41,9 +45,10 @@ public class Bullet : MonoBehaviour
     GameObject owner;
     DamagePackage damagePackage;
 
+    public GameObject Owner => owner;
 
-    // set bullet copy
-    public void AddBulletCopy(Transform bulletCopy)
+	// set bullet copy
+	public void AddBulletCopy(Transform bulletCopy)
     {
 
         bulletCopys.Add(bulletCopy);
@@ -78,6 +83,7 @@ public class Bullet : MonoBehaviour
 
 		if (inStick)
 		{
+            
 			if (bulletCopys != null)
 			{
 				foreach (var bulletCopy in bulletCopys)
@@ -110,7 +116,8 @@ public class Bullet : MonoBehaviour
 
             damagePackage.forceVector = direction.normalized * force;
             damagePackage.hitPoint = hit.point;
-            bool bodyHit = false;
+            damagePackage.ignoreShild = ignoreShilds;
+			bool bodyHit = false;
             if (hit.collider.TryGetComponent<Health>(out Health health))
             {
 				if (GameModeSelector.gameModeManager.GameModeStats.team2LoosesScoreWhenTeam1scores && owner.GetComponent<BodyMindConnection>().Mind != null)
@@ -172,7 +179,14 @@ public class Bullet : MonoBehaviour
             }
             if (stickToSurfaces)
             {
-                nedlerDelet.enabled = true;
+				inStick = true;
+				nedlerDelet.enabled = true;
+                // try get fly forward
+                if (gameObject.TryGetComponent<FlyForward>(out FlyForward flyForward))
+                {
+                    flyForward.enabled = false;
+				}
+
 				if (hit.collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth body))
 				{
                     if (!body.IsDead)
@@ -197,7 +211,12 @@ public class Bullet : MonoBehaviour
 					// make raycast from startposition to current position
                     if (Physics.Raycast(startPosition, (hit.point - startPosition).normalized, out RaycastHit hit2, Vector3.Distance(startPosition, hit.point) +2f, nedlerDelet.rigidBodyLayer))
                     {
-                        transform.position = hit2.point + hit2.normal * 0.3f;
+                        transform.position = hit2.point + hit2.normal * 0.1f;
+                        foreach (var bulletCopy in bulletCopys)
+                        {
+							bulletCopy.transform.localScale *= 1.5f;
+						}
+						
                        
                     }
                     else
@@ -210,7 +229,7 @@ public class Bullet : MonoBehaviour
                     nedlerDelet.Activate();
 
 				}
-				inStick = true;
+				
 
 				if (bulletCopys != null)
 				{

@@ -34,7 +34,9 @@ public class BodyMindConnection : MonoBehaviour
 
     public PlayerMind Mind => mind;
 
-    public async Task ConnectMind(PlayerMind mind)
+    public BulletSpawner BulletSpawner => bulletSpawner;
+
+	public async Task ConnectMind(PlayerMind mind)
     {
         
 
@@ -152,8 +154,7 @@ public class BodyMindConnection : MonoBehaviour
         {
             //equipment.SetWeapons(ItemList.instance.GetPistol(), null, null);
             //equipment.SetMagazins(4, 0, 0);
-            equipment.SetHasShild(false);
-            equipment.SetHeadShotOneShot(false);
+            
         }
         if (brStart)
         {
@@ -235,7 +236,11 @@ public class BodyMindConnection : MonoBehaviour
 	public void SetPlayerColor(Color color)
     {
         playerAnimation.SetPlayerColor(color);
-    }
+        var strength = PlayerManager.instance.playerOutlineStrength;
+        playerAnimation.SetPlayerOutlineStrength(strength);
+	}
+
+
 
     public GameObject GetPlayerHead()
     {

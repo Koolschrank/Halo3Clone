@@ -51,7 +51,12 @@ MonoBehaviour:
   impact_body: {fileID: 100002, guid: 0f0f9fc6229e6154bb8985951c94750f, type: 3}
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 1
-  forceOnLivingPlayers: 2
+  forceOnLivingPlayers: 3.5
+  penetration: 0
+  ricochet: 0
+  maxRicochetCount: 0
+  ricochetAutoAim: {fileID: 0}
+  noHitMarker: 0
   bodyHitSound:
     Guid:
       Data1: 0

@@ -65,6 +65,8 @@ public class GameMode : ScriptableObject
     public float pve_pointsForObjectiveCompletion = 100f; // points for objective completion for PVE scoring
 
     public bool useSkulls = false; // if true, skulls are used in the game mode, otherwise they are not
+
+    
 	public virtual Equipment GetEquipmentBasedOnPoints(int points)
     {
         return StartingEquipment;

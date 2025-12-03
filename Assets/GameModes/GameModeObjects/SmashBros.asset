@@ -27,7 +27,7 @@ MonoBehaviour:
     magazinsOfWeaponInHand: 3
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
-    sideArm: {fileID: 0}
+    sideArm: {fileID: 11400000, guid: 56ed20cb88af0284a9e8499b4b0b57ea, type: 2}
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
@@ -46,12 +46,15 @@ MonoBehaviour:
       shildRegen: 250
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 10
   teamCount: 8
-  respawnTime: 4
+  respawnTime: 3
   hasWeaponPickups: 1
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0

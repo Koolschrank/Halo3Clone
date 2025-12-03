@@ -102,13 +102,13 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: cab6e37abb3e63e48be6062d9f3c91e6, type: 3}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_text
-      value: 'Streets
+      value: 'LV2: Streets
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_fontSize
-      value: 45.15
+      value: 39.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

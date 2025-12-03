@@ -107,7 +107,7 @@ public class AI_Move : MonoBehaviour
 
 	public void RollAwayFromDanger(Vector3 dangerPosition)
     {
-        
+        if (aiStun.IsStunned()) return;
 
         if (aiShoot.hasShild) return;
         if (rollCooldownTimer > 0) return;
@@ -270,10 +270,11 @@ public class AI_Move : MonoBehaviour
 
     public void Start()
     {
-        if (GameModeSelector.gameModeManager is KingOfTheHillManager || GameModeSelector.gameModeManager is CrownManager)
+        var gamemode = GameModeSelector.gameModeManager as KingOfTheHillManager;
+		if (gamemode != null || GameModeSelector.gameModeManager is CrownManager)
         {
             // check probability to follow objective
-            if (aiTeam.TeamIndex == 0 || UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
+            if (gamemode.teamOnHill != 1 &&aiTeam.TeamIndex == 0 || UnityEngine.Random.Range(0f, 1f) < followObjectiveChance)
             {
                 followObjective = true;
                 if (GameModeSelector.gameModeManager is CrownManager)

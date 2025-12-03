@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: WeakBaseBallBatAttack
   m_EditorClassIdentifier: 
   damage: 10
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
   force: 130
   forceOnPlayers: 20
   forceOffset: 0.3
@@ -23,8 +25,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2147483777
+  nedlerMelee: 0
+  spawnHitObject: 0
+  hitObject: {fileID: 0}
+  hitObjectOffset: {x: 0, y: 0, z: 0}
   hasLaunch: 1
-  launchDistance: 5
+  launchDistance: 6
   launchAngle: 30
   launchTime: 0.1764
   launchStopDistance: 1.4

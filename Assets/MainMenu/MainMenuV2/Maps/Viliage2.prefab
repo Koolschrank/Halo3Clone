@@ -102,7 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: dcc9495ec44f2bd4a9aede811c7d04ca, type: 3}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_text
-      value: Viliage
+      value: 'LV1: Village'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
+      propertyPath: m_fontSize
+      value: 39.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

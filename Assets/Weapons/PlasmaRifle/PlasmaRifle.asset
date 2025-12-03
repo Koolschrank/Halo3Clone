@@ -16,15 +16,15 @@ MonoBehaviour:
   weaponBullet: {fileID: 11400000, guid: 50da6cff0c231cb4095c42d7be1db310, type: 2}
   weaponFPSModel: {fileID: 6899193775294056288, guid: 0d9c57fd4f837c6439cc103ada733fe4, type: 3}
   weapon3rdPersonModel: {fileID: 8712849249800013046, guid: 4ee43ceabea92be4bac68d6956c65753, type: 3}
-  weaponName: Plasma Rifle
+  weaponName: Plasma SMG
   shootType: 1
-  fireRate: 0.095
+  fireRate: 0.102
   bulletsPerShot: 1
   magazineSize: 24
   maxAmmoInReserve: 80
   reloadTime: 1.6
   reloadGainAmmoTrigger: 0.7
-  inaccuracy: 0.025
+  inaccuracy: 0.0175
   switchOutTime: 0.15
   switchInTime: 0.2
   canZoom: 1
@@ -36,6 +36,10 @@ MonoBehaviour:
   weaponType: 0
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 0
   burstAmount: 0
@@ -117,7 +121,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  damageMultiplier: 0.85
+  damageMultiplier: 0.8
   fireRateMultiplier: 1
   inaccuracyMultiplier: 3.75
   reloadTimeMultiplier: 1.25

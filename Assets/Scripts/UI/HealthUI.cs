@@ -71,8 +71,10 @@ public class HealthUI : MonoBehaviour
 
         UpdateMaxHealth(health.MaxHeath);
 
+		shildEffectUI.UpdateAlphaValue(0);
 
-    }
+
+	}
 
     public void UpdateMaxHealth(float maxHealth)
     {
@@ -102,7 +104,7 @@ public class HealthUI : MonoBehaviour
         if (healthValue < lastHealthValue)
         {
             playerCam.EnterHealthBloom();
-            shildEffectUI.TriggerEffect();
+            //shildEffectUI.TriggerEffect();
 
 		}
 
@@ -136,10 +138,11 @@ public class HealthUI : MonoBehaviour
             healthBar.color = color;
         }
         
+        var bloodValue = blodyScreenCurve.Evaluate(valueLost);
+		playerCam.SetVignetteIntensity(bloodValue);
+        shildEffectUI.UpdateAlphaValue(bloodValue);
 
-        playerCam.SetVignetteIntensity(blodyScreenCurve.Evaluate(valueLost));
-
-        lastHealthValue = healthValue;
+		lastHealthValue = healthValue;
 
 
 	}
@@ -147,5 +150,6 @@ public class HealthUI : MonoBehaviour
     public void Clear()
     {
         playerCam.SetVignetteIntensity(0);
-    }
+		shildEffectUI.UpdateAlphaValue(0);
+	}
 }

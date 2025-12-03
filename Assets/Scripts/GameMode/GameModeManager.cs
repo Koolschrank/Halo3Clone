@@ -47,7 +47,19 @@ public class GameModeManager : MonoBehaviour
         return spawnSystem.GetRandomSpawnPoint();
     }
 
-    public virtual Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
+    public Transform GetSpawnPointByIndex(int index)
+    {
+        if (index >= 0 && index < spawnSystem.basicSpawnPoints.Length)
+        {
+            return spawnSystem.basicSpawnPoints[index];
+        }
+        else
+        {
+            return spawnSystem.GetRandomSpawnPoint();
+        }
+	}
+
+	public virtual Transform GetFarthestSpawnPointFromEnemeies(PlayerMind playerMind)
     {
         return GetFarthestSpawnPointInCludingAIEnemies(playerMind.TeamIndex);
         
@@ -345,33 +357,78 @@ public class GameModeManager : MonoBehaviour
 
     public void ReorderPlayerTeams()
     {
-        var allPlayers = new List<PlayerMind>();
-        allPlayers.AddRange(PlayerManager.instance.GetAllPlayers());
+		var allPlayersTemp = new List<PlayerMind>();
+        
+		allPlayersTemp.AddRange(PlayerManager.instance.GetAllPlayers());
+		var playerCount = allPlayersTemp.Count;
+		var allPlayers = new PlayerMind[8];
 
-        foreach (var team in teams)
-        {
-            team.Clear();
-        }
-
-        int playerCount = allPlayers.Count;
-
-        float teamSplit = (playerCount-1) / 2;
-        // order players so that first half of players are team 0 and second half are team 1
         for (int i = 0; i < playerCount; i++)
         {
+            var playerSettings = allPlayersTemp[i].playerSettings;
+            if (playerSettings.playerIndex < 0 || playerSettings.playerIndex >= allPlayers.Length)
+            {
+                Debug.LogError("Player index out of range: " + playerSettings.playerIndex);
+                continue;
+			}
+			allPlayers[playerSettings.playerIndex] = allPlayersTemp[i];
+        }
+
+		// remove null entries from allPlayers
+        allPlayersTemp.Clear();
+        for (int i = 0; i < allPlayers.Length; i++)
+        {
+            if (allPlayers[i] != null)
+            {
+                allPlayersTemp.Add(allPlayers[i]);
+            }
+		}
+        allPlayers = allPlayersTemp.ToArray();
+
+
+
+		bool onlyTwoTeams = gameModeStats.TeamCount <= 2;
+
+		// clear teams
+        for (int i = 0; i < teams.Count; i++)
+        {
+            teams[i].Clear();
+		}
+
+		if (onlyTwoTeams)
+        {
+            int halfCount = Mathf.CeilToInt((float)allPlayers.Length / 2f);
+            for (int i = 0; i < allPlayers.Length; i++)
+            {
+                var player = allPlayers[i];
+                int teamIndex = i < halfCount ? 0 : 1;
+                teams[teamIndex].Add(player);
+                player.AssignTeam(teamIndex);
+                ChangeTeamOfBody(player, teamIndex);
+            }
+
+	    }
+        else
+        {
+            for (int i = 0; i < allPlayers.Length; i++)
+            {
+				var player = allPlayers[i];
+                teams[i].Add(player);
+                player.AssignTeam(i);
+                ChangeTeamOfBody(player, i);
+
+
+			}
+		}
+
+
+
+
             
 
 
-            var player = allPlayers[i];
-            // first half of player (rounded up) are in team 0 the rest are in team 1
-            // if index is higher than teamSplit then player is in team 1
-            int teamIndex = (float)i > teamSplit ? 1 : 0;
 
-            teams[teamIndex].Add(player);
-
-            player.AssignTeam(teamIndex);
-            ChangeTeamOfBody(player, teamIndex);
-        }
+		
     }
 
     public virtual void PlayerSwitchTeams(PlayerMind player)

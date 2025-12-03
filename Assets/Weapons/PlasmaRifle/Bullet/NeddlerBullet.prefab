@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db58933635f166140a0359fa0672032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1.5
+  damageAmount: 4.6
   force: 100
   shildDamageMultiplier: 3.3
   shildDamagMultiplierVSAI: 1
@@ -126,6 +126,7 @@ MonoBehaviour:
   radius: 0.2
   copyTransitionSpeed: 1
   isNedler: 1
+  ignoreShilds: 1
   bodyHitPartical: {fileID: 0}
   groundHitPartical: {fileID: 0}
   destroyObjects: []
@@ -157,15 +158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfa64801908442498a87c7f8a7531ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 25
+  detectionRadius: 30
   detectionLayer:
     serializedVersion: 2
     m_Bits: 128
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  detectionAngle: 50
+  detectionAngle: 1
+  angleIncreaseSpeed: 250
+  detectionAngleMax: 30
   rotationSpeed: 10
+  bullet: {fileID: 9207851313103302896}
   followDuration: 3
 --- !u!114 &7240806878897375013
 MonoBehaviour:

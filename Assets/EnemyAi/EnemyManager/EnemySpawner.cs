@@ -98,13 +98,17 @@ public class EnemySpawner : MonoBehaviour
 
 				kingOfTheHillManager.OnNextHillPlaced += () =>
                 {
-                    waveIndex++;
-                    if (waveIndex >= enemyWaves.Length)
+                    if (GameModeSelector.gameModeManager.GetTeamPoints()[0] % 100 == 0)
                     {
-                        waveIndex = 0; // Reset to the first wave if we reach the end
+						waveIndex++;
+						if (waveIndex >= enemyWaves.Length)
+						{
+							waveIndex = 0; // Reset to the first wave if we reach the end
+						}
+						activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
+						OnWaveStart?.Invoke(waveIndex);
 					}
-					activeWave = new EnemyWaveInstance(enemyWaves[waveIndex]);
-                    OnWaveStart?.Invoke(waveIndex);
+                    
 
                     SpawnEnemiesAtObjective(enemiesThatSpawnAtStartOfWave);
 
@@ -254,6 +258,9 @@ public class EnemySpawner : MonoBehaviour
         waveIndex++;
     }
 
+    public float noSpawnSlowDownTimerAfterHillMove = 15f;
+    float noSpawnSlowDownTimer = 0;
+
     private void Update()
     {
         if (tutorialMode) return;
@@ -270,7 +277,8 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             float delta = Time.deltaTime * spawnRateCooldownMultiplier;
-			if (kingOfTheHillManager != null && kingOfTheHillManager.teamOnHill == 1)
+            noSpawnSlowDownTimer -= Time.deltaTime;
+			if (kingOfTheHillManager != null && noSpawnSlowDownTimer<=0 && kingOfTheHillManager.teamOnHill == 1)
             {
                 delta *= 0.05f;
 
@@ -293,6 +301,7 @@ public class EnemySpawner : MonoBehaviour
 
 	public void SpawnEnemiesAtObjective(int amount)
 	{
+		noSpawnSlowDownTimer = noSpawnSlowDownTimerAfterHillMove;
 
 		var gamemode = GameModeSelector.gameModeManager;
         var gameModeKOTH = gamemode as KingOfTheHillManager;
@@ -411,6 +420,8 @@ public class EnemySpawner : MonoBehaviour
 		}
         
 	}
+
+    public int possibleSpawnPointsWhenSpawningEnemy = 2;
     int specialEnemyCount = 0;
 	private void SpawnEnemy(Enemy_Stats stats)
     {
@@ -503,7 +514,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
             if (PlayerManager.instance.PlayersInTeam2() == 0 && teamId ==1)
-				spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, 2);
+				spawnPoint = GameModeSelector.gameModeManager.GetRandomFarthestSpawnPoint(enemyTeamId, possibleSpawnPointsWhenSpawningEnemy);
 			else
 			{
                 if (PlayerManager.instance.forceSpawnTeam1OnSpawnPoint1 && teamId == 0)

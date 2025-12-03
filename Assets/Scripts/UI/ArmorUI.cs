@@ -22,14 +22,19 @@ public class ArmorUI : MonoBehaviour
 	[SerializeField] AnimationCurve damageBarVisibilityCurve;
 
 	[SerializeField] TextMeshProUGUI nameText;
+
+	[SerializeField] Color oxygenColor;
 	float damageBarTimer = 0f;
 
 	bool isArmor = true;
-
+	bool isOxygen = false;
 
 	PlayerBuffs playerBuff;
 
 	Color defaultColor;
+
+
+
 	private void Awake()
 	{
 		defaultColor = armorBarColor.color;
@@ -87,6 +92,28 @@ public class ArmorUI : MonoBehaviour
 		this.health = health;
 		health.OnArmorChanged += UpdateValues;
 		UpdateValues(health.ArmorValue); // update values on start
+
+
+		if (health.hasOxygen)
+		{
+			SetUpOxygen();
+		}
+		else
+		{
+			health.OnOxygenEnabled += SetUpOxygen;
+		}
+	}
+
+	public void SetUpOxygen()
+	{
+		SetColor(oxygenColor);
+		nameText.text = "Oxygen";
+		UpdateValues(1); 
+
+		health.OnOxygenChanged += UpdateValues;
+
+		isOxygen = true;
+
 	}
 
 	float lastArmorValue = 0f;
@@ -94,7 +121,7 @@ public class ArmorUI : MonoBehaviour
 	{
 		if (lastArmorValue > armorValue)
 		{
-			if (isArmor)
+			if (isArmor && !isOxygen)
 			{
 				armorEffect.TriggerEffect();
 			}
@@ -107,12 +134,18 @@ public class ArmorUI : MonoBehaviour
 
 			if (isArmor)
 			{
-				playerCam.EnterArmorBloom(); // trigger bloom effect on shild change
+				if (!isOxygen)
+					playerCam.EnterArmorBloom(); // trigger bloom effect on shild change
 
 				if (damageBarTimer <= 0f)
 					armorBar_damage.fillAmount = lastArmorValue;
 
-				damageBarTimer = damageBarTime;
+				if (armorBar_damage.fillAmount > armorValue +0.015f)
+				{
+					armorBar_damage.fillAmount = armorValue + 0.015f;
+				}
+
+					damageBarTimer = damageBarTime;
 			}
 			else
 			{
@@ -121,7 +154,7 @@ public class ArmorUI : MonoBehaviour
 
 			
 		}
-		else if (lastArmorValue < armorValue)
+		else if (lastArmorValue < armorValue && !isOxygen)
 		{
 			armorGainEffect.TriggerEffect();
 		}

@@ -27,7 +27,7 @@ MonoBehaviour:
   inaccuracy: 0.055
   switchOutTime: 0.25
   switchInTime: 0.4
-  canZoom: 1
+  canZoom: 0
   zoomFOV: 35
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
@@ -36,10 +36,63 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
   autoAimType: 0
   burstAmount: 2
   burstDelay: 0.01
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 0.6
@@ -191,6 +244,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: febb06c1f20a4c842bc7e3be476c2e26, type: 3}
   crosshairsSize: {x: 0.55, y: 0.55}
   crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: c3ff571aa9887d0498b6ac7a0cf1454c, type: 2}
   gunAiBehaviour:
     IdealRange: 10

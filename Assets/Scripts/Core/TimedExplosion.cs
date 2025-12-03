@@ -54,7 +54,28 @@ public class TimedExplosion : MonoBehaviour
             return;
         }
         RuntimeManager.PlayOneShot(bounceSound, transform.position);
-        if (startTimerOnFirstCollision)
+
+		if (stickOnCollision)
+		{
+			GetComponent<Rigidbody>().isKinematic = true;
+			if (collision.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth body))
+			{
+				var bodyPart = body.RagdollTrigger.GetClosesRigidbody(transform.position);
+				transform.SetParent(bodyPart.transform);
+				body.OnGranadeStick?.Invoke();
+
+
+			}
+			else
+			{
+				// stick to the object
+				transform.SetParent(collision.transform);
+
+			}
+
+		}
+
+		if (startTimerOnFirstCollision)
         {
             if (!timerActive)
             {
@@ -72,23 +93,7 @@ public class TimedExplosion : MonoBehaviour
 
         }
 
-        if (stickOnCollision)
-        {
-			GetComponent<Rigidbody>().isKinematic = true;
-			if (collision.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth body))
-            {
-               var bodyPart = body.RagdollTrigger.GetClosesRigidbody(transform.position);
-                transform.SetParent(bodyPart.transform);
-
-			}
-            else
-            {
-				// stick to the object
-				transform.SetParent(collision.transform);
-				
-			}
-                
-        }
+       
         
 	}
 

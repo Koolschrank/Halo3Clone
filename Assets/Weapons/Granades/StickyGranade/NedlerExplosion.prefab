@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  damage: 200
+  damage: 250
   damageMultiplierVSTeammates: 1
   damageDeadzone: 10
   damageMultiplierVSAI: 1

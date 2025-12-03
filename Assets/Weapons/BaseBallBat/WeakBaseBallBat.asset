@@ -36,10 +36,63 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
-  autoAim: {fileID: 11400000, guid: 6b38bf2801b579e47ad56fb5ebb273f6, type: 2}
-  autoAimType: 1
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
+  autoAim: {fileID: 11400000, guid: f7fa00e35450cc04dbc6584282682dc9, type: 2}
+  autoAimType: 0
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 0
@@ -106,6 +159,9 @@ MonoBehaviour:
   bulletsPerRow: 0
   crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
   crosshairsSize: {x: 0.7, y: 0.7}
+  crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: 3935029da2e725d4db216d70624c2277, type: 2}
   gunAiBehaviour:
     IdealRange: 0

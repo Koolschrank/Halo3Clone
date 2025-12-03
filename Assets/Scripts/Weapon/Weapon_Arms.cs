@@ -8,6 +8,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon_Arms
 {
+
+    public Action<bool> UpdateZoom;
     public Action<float> OnReloadStart;
     public Action<float> OnSwitchOutStart;
     public Action<float> OnSwitchInStart;

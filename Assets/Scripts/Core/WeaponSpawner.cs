@@ -16,6 +16,8 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] bool isRandom;
     [SerializeField] GameObject[] randomWeapons;
 
+    bool onlySpawnAtStart;
+
 	public void Start()
     {
         StartCoroutine(StartDelay());
@@ -38,9 +40,20 @@ public class WeaponSpawner : MonoBehaviour
             return;
         }
 
+		if (GameModeSelector.gameModeManager as LastManStandingManager)
+		{
+            var lastManStandingManager = GameModeSelector.gameModeManager as LastManStandingManager;
+            onlySpawnAtStart = true;
+            lastManStandingManager.OnNewRoundStarted += () =>
+            {
+                
+                SpawnWeapon();
+            };
+		}
 
 
-        if (spawnOnStart)
+
+		if (spawnOnStart)
         {
             SpawnWeapon();
         }
@@ -49,7 +62,10 @@ public class WeaponSpawner : MonoBehaviour
 
     public void Update()
     {
-        if (weapon == null)
+        if (onlySpawnAtStart)
+            return;
+
+		if (weapon == null)
         {
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnTime)

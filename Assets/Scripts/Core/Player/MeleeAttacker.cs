@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using UnityEngine.Events;
+using System.Collections;
 
 public class MeleeAttacker : MonoBehaviour
 {
@@ -33,7 +34,33 @@ public class MeleeAttacker : MonoBehaviour
 	[NonSerialized]
 	public float launchTimer = 0f; // timer for launch, can be set by other scripts if needed
 	[NonSerialized]
-	public bool shildGainOnMelee = false; 
+	public bool shildGainOnMelee = false;
+
+    [NonSerialized]
+	public bool hasPowerArmor;
+    [NonSerialized]
+    public float powerArmorDamageMultiplier = 1f;
+
+    [NonSerialized]
+    public bool inAttack = false;
+
+    float attackStartTime = 0f;
+	[NonSerialized]
+	public PlayerMeleeAttack currentAttackData;
+
+    public float AttackProgress
+    {
+        get
+        {
+            if (currentAttackData == null)
+            {
+                return 0f;
+            }
+            float elapsed = Time.time - attackStartTime;
+            return Mathf.Clamp01(elapsed / currentAttackData.MeleeTime);
+        }
+	}
+
 
 	private void Awake()
     {
@@ -119,29 +146,76 @@ public class MeleeAttacker : MonoBehaviour
 	}
     
 
-
+    bool hasSlowDown = false;
+    float slowDownTimer = 0f;
+    float slowDownProgress = 0f;
 	bool isDualWielding = false;
-	public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier, bool isDualWielding)
+    public void AttackStart(PlayerMeleeAttack attackData, float timeMultiplier, bool isDualWielding)
     {
         meleeData = attackData;
         attackDelay = meleeData.Delay * timeMultiplier;
         this.isDualWielding = isDualWielding;
-		OnAttackStart?.Invoke(attackData);
-
-        if (attackData.hasLaunch)
+        OnAttackStart?.Invoke(attackData);
+        inAttack = true;
+        attackStartTime = Time.time;
+        currentAttackData = attackData;
+		StartCoroutine(GoOutOfAttack(meleeData.MeleeTime * timeMultiplier));
+		if (attackData.hasLaunch)
         {
-			var launchTarget = GetClosesLaunchTarget(attackData);
-			if (launchTarget != null)
-			{
-				SetUpLaunch(launchTarget, attackData);
-			}
+            var launchTarget = GetClosesLaunchTarget(attackData);
+            if (launchTarget != null)
+            {
+                SetUpLaunch(launchTarget, attackData);
+            }
+        }
+
+        if (attackData.hasSlowDown)
+        {
+            hasSlowDown = true;
+            slowDownProgress = 0f;
+            slowDownTimer = meleeData.MeleeTime;
+        }
+        else
+        {
+            hasSlowDown = false;
+        }
+
+        if (attackData.hasPowerArmor)
+        {
+			powerArmorDamageMultiplier = attackData.damageMultiplierInPowerArmor;
+            hasPowerArmor = true;
 		}
-	}
+    }
+
+    IEnumerator GoOutOfAttack(float duration)
+    {
+        float timer = 0f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        inAttack = false;
+    }
 
     // update
     public void Update()
     {
-        if (attackDelay > 0)
+        if (hasSlowDown)
+        {
+
+            slowDownProgress += Time.deltaTime;
+            float moveSpeed = meleeData.slowDownCurve.Evaluate(slowDownProgress/ slowDownTimer);
+            playerMovement.SetMovementSpeedMultiplier(moveSpeed);
+            if (slowDownTimer <= 0f)
+            {
+                hasSlowDown = false;
+                playerMovement.SetMovementSpeedMultiplier(1f);
+
+            }
+        }
+
+				if (attackDelay > 0)
         {
             attackDelay -= Time.deltaTime;
             if (attackDelay <= 0)
@@ -192,8 +266,8 @@ public class MeleeAttacker : MonoBehaviour
         var hitPoint = transform.position + transform.forward * attackData.MeleeDistance;
         var radius = attackData.MeleeRadius;
         var colliders = Physics.OverlapSphere(hitPoint, radius, attackData.EnemyLayer);
-
-        if (colliders.Length == 0)
+        hasPowerArmor = false;
+		if (colliders.Length == 0)
         {
             return;
         }
@@ -208,15 +282,7 @@ public class MeleeAttacker : MonoBehaviour
                 damagePackage.damageAmount *= dualWieldingDamageMultiplier;
             }
 
-            if (collider.gameObject.tag == "AIEnemy")
-            {
-                damagePackage.damageAmount *= attackData.DamageMultiplierVSAI;
-                if (shildGainOnMelee)
-                {
-                    this.health.SetShildRegenMelee();
-
-                }
-            }
+           
 
 
 
@@ -231,8 +297,18 @@ public class MeleeAttacker : MonoBehaviour
             damagePackage.isMeleeDamage = true;
             damagePackage.isInstantNedler = attackData.nedlerMelee;
 
+			if (collider.gameObject.tag == "AIEnemy")
+			{
+				damagePackage.damageAmount *= attackData.DamageMultiplierVSAI;
+				if (shildGainOnMelee)
+				{
+					this.health.SetShildRegenMelee();
 
-            if (collider.gameObject == self)
+				}
+			}
+
+
+			if (collider.gameObject == self)
             {
                 continue;
             }
@@ -241,7 +317,37 @@ public class MeleeAttacker : MonoBehaviour
 
             if (collider.TryGetComponent<CharacterHealth>(out CharacterHealth health))
             {
-                if (health.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex)
+				// check if wall between
+                RaycastHit hitInfo;
+                Vector3 origin = transform.position;
+                Vector3 target = collider.transform.position;
+                Vector3 directionToTarget = (target - origin).normalized;
+                float distanceToTarget = Vector3.Distance(origin, target);
+                if (Physics.Raycast(origin, directionToTarget, out hitInfo, distanceToTarget, attackData.wallMask))
+                {
+                    hits--;
+
+					continue;
+				}
+
+                if (attackData.checkForWidth)
+                {
+					float width = attackData.widthCheckRadius;
+
+					Vector3 attackerPos = transform.position;
+					Vector3 toTarget = collider.transform.position - attackerPos;
+
+					// distance left/right of the attacker
+					float sideDistance = Mathf.Abs(Vector3.Dot(toTarget, transform.right));
+
+					if (sideDistance > width)
+					{
+                        hits--;
+						continue;
+					}
+				}
+
+				if (health.gameObject.GetComponent<PlayerTeam>().TeamIndex == playerTeam.TeamIndex)
                 {
                     damagePackage.damageAmount *= attackData.DamageMultiplierAgainstTeamMates;
                 }
@@ -259,7 +365,8 @@ public class MeleeAttacker : MonoBehaviour
                 playerImpactStruct.resetGravity = attackData.launchResetsGravity;
                 playerImpact.AddImpulse(playerImpactStruct);
 
-            }
+				
+			}
 
             if (collider.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
@@ -281,6 +388,11 @@ public class MeleeAttacker : MonoBehaviour
         }
         else
         {
+            if (meleeData.alwaysPlayHitSound)
+            {
+				OnAttackHit?.Invoke(attackData);
+			}
+
             if (bodyMindConnection.Mind != null)
             {
                 int playerIndex = bodyMindConnection.Mind.playerID;

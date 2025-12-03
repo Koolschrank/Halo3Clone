@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NoShild
   m_EditorClassIdentifier: 
   skullName: 
-  skullDescription: 'No shild
+  skullDescription: 'players have weaker shilds
 
-    but more damage'
+    but deal more damage'
   skullIcon: {fileID: 21300000, guid: 011ecde4360a647449e2c4a37a63f424, type: 3}
   skullColor: {r: 1, g: 0, b: 0, a: 1}
-  damageReduction: 1.35
+  damageReduction: 1.25

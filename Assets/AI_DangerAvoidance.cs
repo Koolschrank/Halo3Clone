@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AI_DangerAvoidance : MonoBehaviour
@@ -22,6 +23,8 @@ public class AI_DangerAvoidance : MonoBehaviour
         }
 
     }
+
+    
 
 
 

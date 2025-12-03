@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
+  m_Name: HammerAttackNoAmmo
+  m_EditorClassIdentifier: 
+  damage: 125
+  damageMultiplierVSAI: 1
+  damageMultiplierAgainstTeamMates: 1
+  force: 140
+  forceOnPlayers: 16
+  forceOffset: 0.2
+  delay: 0.45
+  meleeTime: 1.3608
+  meleeRadius: 0.9
+  meleeDistance: 0.9
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2147483777
+  nedlerMelee: 0
+  spawnHitObject: 0
+  hitObject: {fileID: 8386559723769285559, guid: 1c0cdecd10235ec43bb92c7c06fb542a, type: 3}
+  hitObjectOffset: {x: 0, y: -1, z: -0.6}
+  hasLaunch: 1
+  launchDistance: 4
+  launchAngle: 30
+  launchTime: 0.3
+  launchStopDistance: 1.4
+  launchResetsGravity: 1
+  launchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  swingSound:
+    Guid:
+      Data1: 1900586345
+      Data2: 1182994739
+      Data3: 1048287909
+      Data4: 1114652637
+    Path: event:/SFX/Guns/Hammer/MeleeSwing
+  hitSound:
+    Guid:
+      Data1: 126295664
+      Data2: 1168739592
+      Data3: 113948330
+      Data4: -301254074
+    Path: event:/SFX/Guns/BaseGunSounds/Melee/Hit

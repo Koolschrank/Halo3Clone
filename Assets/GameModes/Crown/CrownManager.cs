@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CrownManager : GameModeManager
@@ -137,10 +138,22 @@ public class CrownManager : GameModeManager
 
         if (gameMode.SetEquipmentOnCrownPickup)
         {
-            player.GetComponent<PlayerStartEquipment>().GetEquipment(gameMode.EquipmentOnCrownPickup);
+            StartCoroutine(CrownWeaponEquip(player, gameMode.EquipmentOnCrownPickup, 0.35f));
+            //player.GetComponent<PlayerStartEquipment>().GetEquipment(gameMode.EquipmentOnCrownPickup);
         }
         
     }
+
+    IEnumerator CrownWeaponEquip(GameObject player, Equipment equipment, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        var playerHealth = player.GetComponent<CharacterHealth>();
+		if (!playerHealth.IsDead)
+		{
+			player.GetComponent<PlayerStartEquipment>().GetEquipment(equipment);
+		}
+		
+	}
 
     
 

@@ -53,7 +53,7 @@ MonoBehaviour:
   damageDeadzone: 10
   damageMultiplierVSAI: 1
   damageOnShildMultiplier: 1
-  damageReductionAgainstBlocking: 0.1
+  damageReductionAgainstBlocking: 0.9
   damageFalloff:
     serializedVersion: 2
     m_Curve:

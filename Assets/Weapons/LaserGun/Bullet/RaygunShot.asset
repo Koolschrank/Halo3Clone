@@ -15,14 +15,14 @@ MonoBehaviour:
   damage: 2.5
   damageMultiplierVSAI: 1
   force: 50
-  shildDamageMultiplier: 1.1
+  shildDamageMultiplier: 1
   headShotMultiplier: 1
   canHeadShotShild: 0
-  range: 75
+  range: 100
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
-  rangeUntilDamageFalloff: 10
+  rangeUntilDamageFalloff: 15
   damageFalloff:
     serializedVersion: 2
     m_Curve:
@@ -48,13 +48,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   trail: {fileID: 7783241535111576775, guid: 86cdd261e60cfcb47abf1a0f8e521b20, type: 3}
-  impact_body: {fileID: 1998750652454270, guid: 64e1b5974dc5f4449ba97d8790093533, type: 3}
+  impact_body: {fileID: 1998750652454270, guid: 00a9ec5462bace64b8f8413b61012175, type: 3}
   impact_ground: {fileID: 1998750652454270, guid: 64e1b5974dc5f4449ba97d8790093533, type: 3}
   doesApplyForceOnLivingPlayers: 0
   forceOnLivingPlayers: 1
   penetration: 0
   ricochet: 0
   maxRicochetCount: 0
+  ricochetAutoAim: {fileID: 0}
+  noHitMarker: 1
   bodyHitSound:
     Guid:
       Data1: 0

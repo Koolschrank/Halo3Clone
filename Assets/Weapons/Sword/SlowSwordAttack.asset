@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93359fe920259cd4b84d923da480e5ba, type: 3}
+  m_Name: SlowSwordAttack
+  m_EditorClassIdentifier: 
+  damage: 200
+  damageMultiplierVSAI: 1.45
+  damageMultiplierAgainstTeamMates: 1
+  force: 160
+  forceOnPlayers: 8
+  forceOffset: 0.2
+  delay: 0.7
+  meleeTime: 1.4
+  meleeRadius: 2.25
+  meleeDistance: 2.25
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2147483841
+  nedlerMelee: 0
+  spawnHitObject: 1
+  hitObject: {fileID: 7351751404848141981, guid: dcb0fa8aa14a1794ea51288ee51837a7, type: 3}
+  hitObjectOffset: {x: 0, y: -0.5, z: -1.5}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1
+  checkForWidth: 1
+  widthCheckRadius: 0.65
+  hasLaunch: 0
+  launchDistance: 4
+  launchAngle: 30
+  launchTime: 0.25
+  launchStopDistance: 2.28
+  launchResetsGravity: 1
+  launchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  launchTargetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  hasSlowDown: 1
+  slowDownCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.016666412
+      value: 0.9953003
+      inSlope: -1.6837429
+      outSlope: -1.6837429
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.37327927
+      value: 0.39485592
+      inSlope: -0.045466945
+      outSlope: -0.045466945
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5759987
+    - serializedVersion: 3
+      time: 0.6020578
+      value: 0.38387692
+      inSlope: 0.019321907
+      outSlope: 0.019321907
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5145056
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.5482728
+      outSlope: 1.5482728
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowDownAim: 1
+  hasPowerArmor: 1
+  damageMultiplierInPowerArmor: 0.5
+  alwaysPlayHitSound: 1
+  swingSound:
+    Guid:
+      Data1: -442625259
+      Data2: 1145663432
+      Data3: -618696009
+      Data4: 1637804598
+    Path: event:/SFX/Guns/Sword/MeleeSwing
+  hitSound:
+    Guid:
+      Data1: -758178558
+      Data2: 1120973161
+      Data3: -210108287
+      Data4: -1443322066
+    Path: event:/SFX/Guns/Sword/MeleeHit

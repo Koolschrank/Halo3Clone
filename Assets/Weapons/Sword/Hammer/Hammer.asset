@@ -20,8 +20,8 @@ MonoBehaviour:
   shootType: 3
   fireRate: 1
   bulletsPerShot: 1
-  magazineSize: 1
-  maxAmmoInReserve: 1
+  magazineSize: 100
+  maxAmmoInReserve: 0
   reloadTime: 1
   reloadGainAmmoTrigger: 0.9
   inaccuracy: 0
@@ -36,10 +36,63 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 1
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 11400000, guid: e176fdae648c3884abccb85ad79cbe4e, type: 2}
+  cannotPickUpAmmoFromGround: 1
   autoAim: {fileID: 11400000, guid: 1c0b36f4908944e4497d7fe28c560c46, type: 2}
   autoAimType: 0
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 0
   gunKnockback:
     power: 0
@@ -118,14 +171,16 @@ MonoBehaviour:
         rumbleType: 0
   reloadSounds:
     timedSounds: []
-  showAmmo: 0
+  showAmmo: 1
   gunSprite: {fileID: 21300000, guid: 1a203ac6cee467d49ba83bbf5ba1b18f, type: 3}
   bulletSprite: {fileID: 0}
-  bulletSize: {x: 1, y: 1}
-  bulletsPerRow: 0
+  bulletSize: {x: 0.06, y: 0.4}
+  bulletsPerRow: 100
   crosshairs: {fileID: 21300000, guid: eb0d1ac54211ac74bb3dcf13a040f9a3, type: 3}
   crosshairsSize: {x: 1, y: 1}
   crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 1
   enemyAiWeaponData: {fileID: 11400000, guid: c44a1b746d716c0449f8f0b5dc6f82ca, type: 2}
   gunAiBehaviour:
     IdealRange: 0.5

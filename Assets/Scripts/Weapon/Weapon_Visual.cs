@@ -9,6 +9,9 @@ using UnityEngine.Rendering;
 
 public class Weapon_Visual : Weapon_Model
 {
+   
+    public Action OnShootWeapons;
+
     [SerializeField] Animator animator;
     [SerializeField] Transform aimPosition;
 
@@ -19,6 +22,8 @@ public class Weapon_Visual : Weapon_Model
     [NonSerialized]
     public int PlayerID = 0;
 
+   
+
 	public override void SetUp(Weapon_Arms weapon)
     {
         base.SetUp(weapon);
@@ -28,7 +33,10 @@ public class Weapon_Visual : Weapon_Model
         weapon.OnShot += Shoot;
         weapon.OnMeleeStart += MeleeAttackStart;
         weapon.OnRollStart += Roll;
-    }
+
+
+
+	}
 
     public override void OnDestroy()
     {
@@ -62,6 +70,8 @@ public class Weapon_Visual : Weapon_Model
         RumbleManager.Instance.TriggerRumble(rumble_Shoot, PlayerID);
 
 		OnShoot.Invoke();
+
+        OnShootWeapons?.Invoke();
 
 
     }

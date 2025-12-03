@@ -20,8 +20,11 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
-    weaponInHand: {fileID: 0}
-    magazinsOfWeaponInHand: 3
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
+    weaponInHand: {fileID: 11400000, guid: 8c964e6bfc5470848b78a854239a7a9d, type: 2}
+    magazinsOfWeaponInHand: 1
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 2
     sideArm: {fileID: 0}
@@ -36,26 +39,32 @@ MonoBehaviour:
       showHealthBar: 0
       health: 20
       shild: 100
+      armor: 0
       healthRegenStartTime: 0.5
       shildRegenStartTime: 0.5
       healthRegen: 20
       shildRegen: 30
       spawnInvulnerabilityTime: 1
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 10
   teamCount: 8
   respawnTime: 3
   hasWeaponPickups: 0
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
   hasAiPlayers: 0
+  hasAiTeamMembers: 0
   useStatSheets: 0
   dontDropWeaponsOnDeath: 1
   startScore: 0
   playerStatsSheetBlueprint: {fileID: 0}
+  spawnWithArmor: 0
   EnemyTeamsWorkingTogether: 0
   team2usesOtherPointsToWin: 0
   team2PointsToWin: 0
@@ -63,3 +72,22 @@ MonoBehaviour:
   amountOfPointsTeam1NeedsToScoreToMakeTeam2LoosePoints: 0
   useEnemyWaves: 0
   noDualWieldDamageReduction: 0
+  startingEquipmentBasedOnPlayerValues: 0
+  cannotDropSwitchOrPickupWeapons: 0
+  ai_damageMultiplier: 1
+  weaponRespawnTimeMultiplier: 1
+  recolerTeam1Members: 0
+  team1MemberColors: []
+  team1MemberColorsUI: []
+  usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0

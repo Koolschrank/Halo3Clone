@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerArms arms;
     [SerializeField] PlayerBodyStatSheet statSheet;
     [SerializeField] MeleeAttacker meleeAttacker;
+    [SerializeField] PlayerSlide3D playerSlide3D;
 	[Header("Settings")]
 
 
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float deceleration_air = 5f;
     [SerializeField] float acceleration_roll = 5f;
 	[SerializeField] float acceleration_pushed = 5f;
+	[SerializeField] float acceleration_slideJump = 0f;
 
 	[SerializeField] float minPushTime = 0.1f;
 
@@ -61,7 +63,8 @@ public class PlayerMovement : MonoBehaviour
 	float maxMoveSpeedMultiplier = 1f;
     public float weaponMoveSpeedMultiplier = 1f;
 
-
+    public float slideJumpPlayerInputStrength = 1.5f;
+    public float slideJumpPlayerInputStrenghtScaledByMoveSpeed = 0.2f;
 
 
 	[Header("Sound")]
@@ -72,14 +75,15 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
-    Vector3 moveVelocity = Vector3.zero;
+    [NonSerialized]
+    public Vector3 moveVelocity = Vector3.zero;
     [NonSerialized]
     public float gravityVelocity = 0;
     Vector2 moveInput = Vector2.zero;
 
     public float MaxMoveSpeed => maxMoveSpeed * maxMoveSpeedMultiplier;
-    bool inCrouch = false;
+    [NonSerialized]
+    public bool inCrouch = false;
 
 	[NonSerialized]
 	public float gravityMultiplier = 1f;
@@ -100,8 +104,24 @@ public class PlayerMovement : MonoBehaviour
     float pushedTimer = 0f; // timer for the pushed state, used to determine if the player can move or not
 
     public LayerMask GroundLayer;
+
+    public bool canSlide;
+    public float slideCancelMultiplier = 1.3f;
+    [NonSerialized]
+	public bool inSlide = false;
+    bool inSlideJump = false;
+
+    public void MultiplyJumpForce(float multiplier)
+        {
+        jumpPower *= multiplier;
+	}
 	public void ApplyImpact(PlayerImpactStruct impact)
     {
+        if (meleeAttacker.hasPowerArmor)
+        {
+            impact.impactForce *= meleeAttacker.powerArmorDamageMultiplier;
+		}
+
 		if ( impact.resetGravity)
 		{
 			gravityVelocity = 0;
@@ -141,6 +161,9 @@ public class PlayerMovement : MonoBehaviour
 		{
             gravityMultiplier = GravityOverrider.Instance.playerGravityMultiplier;
 		}
+
+        if (playerSlide3D != null)
+			playerSlide3D.OnStopSlide += CancelSlide;
 	}
 
     public void UpdateStatSheet()
@@ -180,12 +203,20 @@ public class PlayerMovement : MonoBehaviour
 
         var moveVector = new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z);
         
+        if (!inSlide)
+        {
+			cc.Move(moveVector * Time.deltaTime);
+			OnMoveUpdated?.Invoke(moveVector);
+		}
+        else
+        {
+			OnMoveUpdated?.Invoke(playerSlide3D.GetVelocity());
+		}
 
-        cc.Move(moveVector * Time.deltaTime);
 
-        OnMoveUpdated?.Invoke(moveVector);
 
-        
+
+
 
         if (cc.isGrounded)
         {
@@ -209,6 +240,40 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 	}
+
+    public void CancelSlide(Vector3 rigidbodySlideForce)
+    {
+        if (inSlide)
+        {
+            
+            inSlide = false;
+
+			moveVelocity = new Vector3(rigidbodySlideForce.x, moveVelocity.y, rigidbodySlideForce.z)* slideCancelMultiplier;
+
+            gravityVelocity = rigidbodySlideForce.y;
+
+			if (inCrouch)
+			{
+				ToggleCrouch();
+			}
+
+			if (gravityVelocity > 0)
+            {
+				AudioManager.instance.PlayOneShot(jumpSound, transform.position);
+				jumpCooldownTimer = jumpCooldown;
+				OnJump?.Invoke();
+				inSlideJump = true;
+
+
+			}
+            if (rigidbodySlideForce.magnitude > 3f)
+            {
+				inPushedState = true; // set the player in a pushed state
+				pushedTimer = minPushTime; // set the pushed timer to the minimum push time
+			}
+			
+		}
+	}
     
 
 
@@ -225,6 +290,13 @@ public class PlayerMovement : MonoBehaviour
                 cc.height = playerCrouchingHitbox.Height;
                 cc.center = new Vector3(0, playerCrouchingHitbox.Offset, 0);
             }
+            if (canSlide && playerSlide3D.CanStartSlide() && !inSlide)
+            {
+                playerSlide3D.StartSlide(new Vector3(moveVelocity.x, gravityVelocity, moveVelocity.z));
+                inSlide = true;
+			}
+
+
         }
         else
         {
@@ -243,9 +315,9 @@ public class PlayerMovement : MonoBehaviour
         
 
     }
+    bool slopeGravityApplied = false;
 
-
-    private void UpdateMove()
+	private void UpdateMove()
     {
         Vector2 input = this.moveInput;//controller.Player.Move.ReadValue<Vector2>();
         Vector3 moveInput = new Vector3(input.x, 0, input.y);
@@ -271,6 +343,7 @@ public class PlayerMovement : MonoBehaviour
 		if (inPushedState)
 		{
 			acceleration = acceleration_pushed;
+            
 			pushedTimer -= Time.deltaTime;
 			if (pushedTimer <= 0 && (cc.isGrounded || moveVelocity.magnitude < maxMoveSpeed))
 			{
@@ -282,11 +355,19 @@ public class PlayerMovement : MonoBehaviour
 			moveVelocity = Vector3.MoveTowards(moveVelocity, Vector2.zero, deceleration_ground * Time.deltaTime);
             return;
 		}
-
-
-        if (move.magnitude == 0)
+		if (inSlideJump)
         {
-            if (!inPushedState)
+            Debug.Log("SlideJump");
+            acceleration = acceleration_slideJump;
+
+            moveVelocity += move.normalized * (slideJumpPlayerInputStrength + slideJumpPlayerInputStrenghtScaledByMoveSpeed * moveVelocity.magnitude) * Time.deltaTime;
+
+		}
+
+
+		if (move.magnitude == 0)
+        {
+            if (!inPushedState && !inSlideJump)
                 acceleration = cc.isGrounded ? deceleration_ground : deceleration_air;
 
 
@@ -338,10 +419,51 @@ public class PlayerMovement : MonoBehaviour
             moveVelocity = Vector3.MoveTowards(moveVelocity, ideal, acceleration * Time.deltaTime);
         }
 
+        slopeGravityApplied = false;
+		if (isGrounded && jumpCooldownTimer <=0)
+        {
+            inSlideJump = false;
+
+			float slopeDot = CheckIfGoingDownASlope(moveVelocity);
+
+			if (slopeDot > 0f)
+			{
+				slopeGravityApplied = true;
+				// Apply additional downward pull proportional to how much we are moving down the slope
+				gravityVelocity = Mathf.Lerp(gravityVelocity, Physics.gravity.y, slopeDot);
+			}
+		}
+
         
     }
 
-    public void SetMovementSpeedMultiplier(float multiplier)
+
+	public float CheckIfGoingDownASlope(Vector3 moveVelocity)
+	{
+		if (cc.isGrounded)
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(transform.position, Vector3.down, out hit, cc.height / 2 + 0.5f, GroundLayer))
+			{
+				// Project the ground normal onto the XZ plane to get slope direction
+				Vector3 slopeDir = Vector3.Cross(Vector3.Cross(Vector3.up, hit.normal), hit.normal);
+				slopeDir.Normalize();
+
+				// Flatten move velocity to XZ plane (ignore vertical)
+				Vector3 moveDir = new Vector3(moveVelocity.x, 0f, moveVelocity.z).normalized;
+
+				// Check alignment (dot product) between movement and downslope
+				float dot = Vector3.Dot(moveDir, slopeDir);
+
+				// Optional: return dot only if positive (means moving down the slope)
+				return dot > 0f ? dot : 0f;
+			}
+		}
+
+		return 0f;
+	}
+
+	public void SetMovementSpeedMultiplier(float multiplier)
     {
         maxMoveSpeedMultiplier = multiplier;
     }
@@ -352,8 +474,10 @@ public class PlayerMovement : MonoBehaviour
 
 		if (cc.isGrounded && jumpCooldownTimer <= 0 && ignoreGravityResetTimer <= 0 && !inPushedState)
         {
-            gravityVelocity = -0.1f;
-        }
+            if (!slopeGravityApplied)
+				gravityVelocity = -0.1f;
+
+		}
         else
         {
             gravityVelocity -= gravity * gravityMultiplier * Time.deltaTime;
@@ -367,21 +491,38 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanJump()
     {
+        if (inSlide)
+        {
+            return playerSlide3D.IsGrounded();
+		}
+
         return isGrounded && !inRoll && jumpCooldownTimer <= 0;
 	}
 
 	public void TryJump()
     {
-        if (isGrounded && !inRoll && jumpCooldownTimer <= 0)
+		if(inSlide && CanJump())
         {
-            AudioManager.instance.PlayOneShot(jumpSound, transform.position);
+            playerSlide3D.TryJump();
+			
+			return;
+		}
+
+
+
+		if (isGrounded && !inRoll && jumpCooldownTimer <= 0)
+        {
+            
             gravityVelocity = jumpPower;
-            jumpCooldownTimer = jumpCooldown;
+
+			AudioManager.instance.PlayOneShot(jumpSound, transform.position);
+			jumpCooldownTimer = jumpCooldown;
             OnJump?.Invoke();
             if (inCrouch)
             {
                 ToggleCrouch();
             }
+            
         }
     }
 
@@ -451,10 +592,15 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
     public void ToggleCrouch()
     {
-
+        if (inSlide)
+        {
+            playerSlide3D.StopSlide();
+			inCrouch = false;
+			OnStandUp?.Invoke();
+			return;
+		}
 
         
         if (inCrouch)
@@ -463,10 +609,17 @@ public class PlayerMovement : MonoBehaviour
             OnStandUp?.Invoke();
             
         }
-        else if(cc.isGrounded)
+        else 
         {
-            inCrouch = true;
-            OnCrouch?.Invoke();
+            // do raycast down 
+            bool raycastHit = Physics.Raycast(transform.position, Vector3.down, 1, GroundLayer);
+
+			if (cc.isGrounded || raycastHit)
+			{
+				inCrouch = true;
+				OnCrouch?.Invoke();
+			}
+				
         }
     }
 

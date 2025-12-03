@@ -74,6 +74,8 @@ Material:
     - _EmissionStrenght: 6
     - _FlickerSpeed: 1
     - _FresnelPower: 2
+    - _OutLineFresnel: 3
+    - _OutlinePower: 0
     - _Power: 0
     - _QueueControl: 0
     - _QueueOffset: 0

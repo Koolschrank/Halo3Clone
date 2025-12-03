@@ -41,7 +41,11 @@ public class Weapon_Data : ScriptableObject
     [SerializeField] WeaponType weaponType;
     [SerializeField] bool canNotBeInInventory = false;
     [SerializeField] bool canOnlyBeHeldInLeftHand = false;
-    
+    [SerializeField] bool useAmmoOnMeleeHit = false;
+    [SerializeField] int bulletsPerMeleeHit = 7;
+	[SerializeField] PlayerMeleeAttack meleeDataWhenNoAmmo;
+    [SerializeField] bool cannotPickUpAmmoFromGround = false;
+
 
 
 
@@ -108,9 +112,15 @@ public class Weapon_Data : ScriptableObject
     [Header("Upgrade")]
     [SerializeField] Weapon_Data upgradedWeaponData = null;
 
+    public bool CannotPickUpAmmoFromGround => cannotPickUpAmmoFromGround;
 
-    
-    public bool BloomOnShoot => bloomOnShoot;
+	public bool UseAmmoOnMeleeHit => useAmmoOnMeleeHit;
+
+    public int BulletsPerMeleeHit => bulletsPerMeleeHit;
+
+	public PlayerMeleeAttack MeleeDataWhenNoAmmo => meleeDataWhenNoAmmo;
+
+	public bool BloomOnShoot => bloomOnShoot;
     public bool BloomOnTakingDamage => bloomOnTakingDamage;
     public float BloomInaccuracyMultiplier => bloomInaccuracyMultiplier;
     public float BloomTime => bloomTime;
@@ -258,7 +268,8 @@ public enum ShootType
     Burst,
     Melee,
     Zoom,
-	Charge_Auto
+	Charge_Auto,
+    Hook
 }
 
 public enum WeaponType

@@ -36,11 +36,15 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 1
   autoAim: {fileID: 11400000, guid: bd38fe62701b7b84090fd7644c247417, type: 2}
   autoAimType: 0
   burstAmount: 20
   burstDelay: 0.016
-  chargeTime: 1
+  chargeTime: 0.85
   chargeMovementMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -54,8 +58,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.0375
     - serializedVersion: 3
-      time: 0.9874878
-      value: 0.33019027
+      time: 1.0183187
+      value: 0.30082226
       inSlope: -0.050363295
       outSlope: -0.050363295
       tangentMode: 0

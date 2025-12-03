@@ -19,6 +19,9 @@ MonoBehaviour:
     canDualWield: 0
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
     magazinsOfWeaponInHand: 6
     weaponInLeftHand: {fileID: 0}
@@ -46,5 +49,5 @@ MonoBehaviour:
   shildMultiplier: 1
   speedMultiplier: 1
   teamIdOverrride: 1
-  scoreForKill: 35
+  scoreForKill: 36
   useSpecialEquipment: 0

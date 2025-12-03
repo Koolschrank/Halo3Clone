@@ -1,0 +1,120 @@
+fileFormatVersion: 2
+guid: b7a7e5f86eaa4e94a8e694da64532259
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 804e1ce4c496647cfa3f1a1134187c71, type: 3}
+  _removeEmptyRootObjects: 1
+  _scaleFactor: 1
+  _deduplicateResources: 0
+  _maximumLod: 300
+  _readWriteEnabled: 1
+  _generateColliders: 0
+  _addColliders: 0
+  _swapUvs: 0
+  _generateLightmapUVs: 1
+  _importBlendShapeNames: 1
+  _blendShapeFrameWeight:
+    _option: 0
+    _multiplier: 1
+  _importNormals: 0
+  _importTangents: 0
+  _importCamera: 2
+  _importAnimations: 2
+  _mecanimHumanoidFlip: 0
+  _addAnimatorComponent: 0
+  _animationLoopTime: 1
+  _animationLoopPose: 0
+  _importMaterials: 1
+  _enableGpuInstancing: 0
+  _texturesReadWriteEnabled: 1
+  _generateMipMaps: 1
+  _useSceneNameIdentifier: 1
+  _textureCompression: -50
+  _gltfAsset: '<b>Generator: </b>Khronos glTF Blender I/O v4.5.48
+
+    <b>Version:
+    </b>2.0
+
+    
+
+    <b>Extras: </b>
+
+'
+  optimizeGameObjects: 0
+  materials:
+  - {fileID: -2113103768163227974, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -3806083957207069037, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 8865083959792801751, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -8825415347457255086, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 5195438838771418615, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -5394271224981892160, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -6377675536251042890, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -2641728591029849098, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -1293887620268828351, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -7984389340311980801, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  textures:
+  - {fileID: -4983647648019446560, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 1063101243352363805, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -5188044604315622035, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 5970530782367723166, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -992502898908202930, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: -3909293041809520202, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 4528073045782869260, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 6092056604744790916, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  - {fileID: 6445362624617162616, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+  hasSceneData: 1
+  hasAnimationData: 0
+  hasMaterialData: 1
+  hasTextureData: 1
+  animations: []
+  _extensions:
+  - name: KHR_materials_clearcoat
+    supported: 1
+    used: 1
+    required: 0
+  - name: KHR_materials_specular
+    supported: 1
+    used: 1
+    required: 0
+  - name: KHR_materials_ior
+    supported: 1
+    used: 1
+    required: 0
+  _textures:
+  - texture: {fileID: -4983647648019446560, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 1063101243352363805, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -5188044604315622035, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 5970530782367723166, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -992502898908202930, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -3909293041809520202, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 4528073045782869260, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 6092056604744790916, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 6445362624617162616, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 6445362624617162616, guid: b7a7e5f86eaa4e94a8e694da64532259, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  _mainAssetIdentifier: scenes/Scene
+  _importPlugins: []

@@ -72,6 +72,38 @@ MonoBehaviour:
   throwPoint: {fileID: 7020828589825837930}
   throwForce: 4
   throwRotation: {x: 50, y: 180, z: 0}
+  baseRotation: {fileID: 3571687983089962223}
+--- !u!1 &2411768529991053907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3571687983089962223}
+  m_Layer: 0
+  m_Name: Rotation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3571687983089962223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411768529991053907}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7225515, z: -0.000000051688406, w: 0.69131714}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7020828589825837930}
+  m_LocalEulerAnglesHint: {x: 0, y: -92.531, z: 0}
 --- !u!1 &2488820647671226711
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +495,8 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 5172114726302232939}
   muzzleFlash: {fileID: 3738979420024718973}
   weaponAnimationIndex: 0
+  chargeObject: {fileID: 0}
+  activeParticalWhileShooting: 0
   animator: {fileID: 113404401569806681}
   aimPosition: {fileID: 3202228740422227814}
   rumble_Shoot:
@@ -536,7 +570,8 @@ Transform:
   m_LocalPosition: {x: 0.009700006, y: 0.047299996, z: 0.017999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3571687983089962223}
   m_Father: {fileID: 4129093151239165336}
   m_LocalEulerAnglesHint: {x: -32.683, y: -81.143, z: 73.903}
 --- !u!1001 &3738979420024619227

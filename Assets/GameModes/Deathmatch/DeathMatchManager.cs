@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class DeathMatchManager : GameModeManager
 {
@@ -19,8 +20,8 @@ public class DeathMatchManager : GameModeManager
 
     void TeamKill(GameObject killedPlayer, PlayerMind playerWhoElimnated)
     {
-        int teamIndex = playerWhoElimnated.TeamIndex;
-        GainPoints(teamIndex, -1);
+        //int teamIndex = playerWhoElimnated.TeamIndex;
+        //GainPoints(teamIndex, -1);
     }
 
 	protected override void GainPoints(int teamIndex, int points)
@@ -36,14 +37,29 @@ public class DeathMatchManager : GameModeManager
             {
                 if (player.TeamIndex == teamIndex && player.PlayerBody != null && !player.PlayerBody.GetComponent<CharacterHealth>().IsDead)
                 {
-                    var startEquipment = player.PlayerBody.GetComponent<PlayerStartEquipment>();
-					startEquipment.ClearEquipment();
-                    startEquipment.GetEquipment(newEquipment);
+                    StartCoroutine(DelayGainNewWeapon(player.PlayerBody, newEquipment, 0.35f));
 				}
 			}
 
 
             
+		}
+	}
+
+    IEnumerator DelayGainNewWeapon(GameObject player, Equipment equipment, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (player != null)
+        {
+            var health = player.GetComponent<CharacterHealth>();
+			if ( !health.IsDead)
+			{
+				var startEquipment = player.GetComponent<PlayerStartEquipment>();
+				startEquipment.ClearEquipment();
+				startEquipment.GetEquipment(equipment);
+			}
+
+			
 		}
 	}
 

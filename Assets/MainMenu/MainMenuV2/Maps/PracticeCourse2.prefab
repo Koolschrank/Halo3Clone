@@ -102,11 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 60790b862055b64478a2379559438111, type: 3}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_text
-      value: Practice Course
+      value: 'LV4: Practice Course'
       objectReference: {fileID: 0}
     - target: {fileID: 6406057646031534847, guid: 207643a41ff0336409ee8faedaeb511c, type: 3}
       propertyPath: m_fontSize
-      value: 39.65
+      value: 28.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

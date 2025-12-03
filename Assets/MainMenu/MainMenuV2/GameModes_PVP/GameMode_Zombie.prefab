@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[3]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 73adc67650af18140b2b395a2fdab467, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 00bd64095a751204f8e1bcdc3ff1ffec, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[4]'
       value: 
@@ -134,11 +134,19 @@ PrefabInstance:
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[6]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: e699930b6b9b9964eb613986d6c7bd81, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: 73adc67650af18140b2b395a2fdab467, type: 3}
     - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: 'SubButtons.Array.data[7]'
       value: 
-      objectReference: {fileID: 6885655614118209522, guid: 9d9edc11f607e8048ba0d3f68954b226, type: 3}
+      objectReference: {fileID: 6885655614118209522, guid: e699930b6b9b9964eb613986d6c7bd81, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[8]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: a31e7d06d8812424a95c1909e3034b6f, type: 3}
+    - target: {fileID: 2338349456936361647, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
+      propertyPath: 'SubButtons.Array.data[9]'
+      value: 
+      objectReference: {fileID: 6885655614118209522, guid: 43d241698e9d736408cf674aafc651a2, type: 3}
     - target: {fileID: 5277944690854337453, guid: a8471c69312326e42b4d9aa3a104bcdf, type: 3}
       propertyPath: m_text
       value: Zombie

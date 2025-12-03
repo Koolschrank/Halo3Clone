@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7eb14e0b1bda8744b573086ac4d3f3c, type: 3}
   m_Name: ShotGunBullet
   m_EditorClassIdentifier: 
-  damage: 14.25
-  damageMultiplierVSAI: 1.25
+  damage: 14.5
+  damageMultiplierVSAI: 1.55
   force: 275
   shildDamageMultiplier: 1
   headShotMultiplier: 1
   canHeadShotShild: 0
-  range: 20
+  range: 50
   hitLayer:
     serializedVersion: 2
     m_Bits: 2147483777
@@ -36,8 +36,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.18874237
     - serializedVersion: 3
-      time: 0.99125916
-      value: 0.6039221
+      time: 0.97474915
+      value: 0.6995032
       inSlope: -0.23011935
       outSlope: -0.23011935
       tangentMode: 0
@@ -52,6 +52,10 @@ MonoBehaviour:
   impact_ground: {fileID: 8030697463898779624, guid: 7bc0e66e3f20fdf438bc1745e3b821f8, type: 3}
   doesApplyForceOnLivingPlayers: 1
   forceOnLivingPlayers: 0.7
+  penetration: 0
+  ricochet: 0
+  maxRicochetCount: 0
+  ricochetAutoAim: {fileID: 0}
   bodyHitSound:
     Guid:
       Data1: 0

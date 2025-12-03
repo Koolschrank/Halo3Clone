@@ -38,10 +38,14 @@ public class KingOfTheHillManager : GameModeManager
 	bool flag1_droped = false;
 	float flag1_dropedTimer = 0;
 
+    public Transform GetRandomHill()
+    {
+        int index = UnityEngine.Random.Range(0, hills.Length);
+        return hills[index].transform;
+	}
 
 
-
-    public override void ResetGame()
+	public override void ResetGame()
     {
         base.ResetGame();
 

@@ -145,13 +145,22 @@ public class PlayerMind : MonoBehaviour
 
     public void Start()
     {
+
+
+		string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
+        if (PlayerManager.instance.GetAllPlayers().Count > 0 && (playerInput.devices[0] is Keyboard || playerInput.devices[0] is Mouse))
+        {
+            gameObject.gameObject.SetActive(false);
+			return;
+        }
+
+
 		playerID = RumbleManager.Instance.OnPlayerMindJoined(playerInput);
 
 
 
 		GameModeSelector.gameModeManager.OnTeamWon += teamWinUI.TeamWon;
 
-        string deviceName = playerInput.devices[0].displayName + " " + playerInput.devices[0].deviceId;
         
         playerSettings = SettingsSave.instance.GetPlayerSettings(deviceName);
         playerName.text = playerSettings.playerName;
@@ -182,7 +191,6 @@ public class PlayerMind : MonoBehaviour
         if (gameObject.GetComponent<PlayerInput>().currentControlScheme == "KeyboardAndMouse")
         {
 
-			Debug.Log("Setting keyboard icon for respawn token button");
 			pickUpUI.SetKeyboard();
 			respawnTokenMenu.SetKeyboardIcon();
 
@@ -240,8 +248,31 @@ public class PlayerMind : MonoBehaviour
 
 			}
         }
+
+
+        if (playerMovement != null)
+        {
+			if (wasCrouching && !playerMovement.inCrouch)
+			{
+				lastStandUp = Time.timeSinceLevelLoad;
+			}
+			if (crouchHeld && !playerMovement.inCrouch && lastStandUp + crouchHoldCooldown < Time.timeSinceLevelLoad)
+            {
+                playerMovement.ToggleCrouch();
+            }
+
+            
+
+            wasCrouching = playerMovement.inCrouch;
+        }
 	}
 
+
+	bool wasCrouching;
+	float crouchHoldCooldown = 0.3f;
+	float lastStandUp;
+
+	bool crouchHeld;
 	public int PlayerIndex { get { return playerSettings.playerIndex; } }
 
     public void SetPlayerBody(GameObject body)
@@ -371,6 +402,10 @@ public class PlayerMind : MonoBehaviour
                 crosshairUI2.DisableCrosshair();
             };
 
+
+			OnPlayerDied -= (mind) => crosshairUI.DisableCrosshair();
+			OnPlayerDied  -= (mind) => crosshairUI2.DisableCrosshair();
+
 		}
 
 
@@ -399,6 +434,9 @@ public class PlayerMind : MonoBehaviour
         {
             crosshairUI2.DisableCrosshair();
         };
+
+		OnPlayerDied += (mind) => crosshairUI.DisableCrosshair();
+		OnPlayerDied += (mind) => crosshairUI2.DisableCrosshair();
 
 		if (arms.LeftArm.CurrentWeapon != null)
         {
@@ -741,12 +779,19 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    public void Crouch(InputAction.CallbackContext context)
+	
+
+	public void Crouch(InputAction.CallbackContext context)
     {
         if (playerArms == null) return;
         if (context.performed)
         {
             playerMovement.ToggleCrouch();
+            crouchHeld = true;
+        }
+       if (context.canceled)
+        {
+            crouchHeld = false;
         }
     }
 
@@ -934,7 +979,12 @@ public class PlayerMind : MonoBehaviour
         playerCamera.EnableLayerInCamera(layer);
     }
 
-    public void DisableLayerInCamera(int layer)
+    public void SetFPSLayer(int layer)
+        {
+		playerCamera.SetFPSLayer(layer);
+	}
+
+	public void DisableLayerInCamera(int layer)
     {
         playerCamera.DisableLayerInCamera(layer);
     }
@@ -969,7 +1019,13 @@ public class PlayerMind : MonoBehaviour
 		UIContainer_death.gameObject.SetActive(true);
 
 		spectatorCamera.Priority = 100;
-    }
+
+        rightArmView.gameObject.SetActive(false);
+        leftArmView.gameObject.SetActive(false);
+
+
+
+	}
 
     public void SwitchToPlayerCamera()
     {
@@ -981,9 +1037,13 @@ public class PlayerMind : MonoBehaviour
 
 		UIContainer_death.gameObject.SetActive(false);
 		spectatorCamera.Priority = 0;
+        playerCamera.EnableFPSLayer();
+
+		rightArmView.gameObject.SetActive(true);
+		leftArmView.gameObject.SetActive(true);
 
 
-    }
+	}
 	//IEnumerator RespawnDelay(float delay)
 	//{
 	//    SwitchToSpectatorCamera();

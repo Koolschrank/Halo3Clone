@@ -22,12 +22,12 @@ MonoBehaviour:
   bulletsPerShot: 20
   magazineSize: 2
   maxAmmoInReserve: 12
-  reloadTime: 2.5
+  reloadTime: 2.2
   reloadGainAmmoTrigger: 0.35
   inaccuracy: 0.2
   switchOutTime: 0.25
   switchInTime: 0.6
-  canZoom: 1
+  canZoom: 0
   zoomFOV: 35
   zoomMoveSpeed: 1
   moveSpeedMultiplier: 1
@@ -36,10 +36,63 @@ MonoBehaviour:
   weaponType: 1
   canNotBeInInventory: 0
   canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
   autoAim: {fileID: 11400000, guid: b685c08d74048b14791f82d8445dc5d0, type: 2}
   autoAimType: 2
   burstAmount: 0
   burstDelay: 0
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hasKnockback: 1
   gunKnockback:
     power: 13
@@ -319,6 +372,8 @@ MonoBehaviour:
   crosshairs: {fileID: 21300000, guid: 3f79c894eb9dcea408efd9d0684d46cb, type: 3}
   crosshairsSize: {x: 0.8, y: 0.8}
   crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
   enemyAiWeaponData: {fileID: 11400000, guid: ddb6ce711463cf148a5c68df7925fd34, type: 2}
   gunAiBehaviour:
     IdealRange: 10

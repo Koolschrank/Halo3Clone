@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 94446a0527ca0f4498da7c0f420b5e5a, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: b4a1e3b7c01c7f840b8b06e24a8644d8, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 6ce0121f75f9a674d93f0608527340cf, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -6384,7 +6384,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
@@ -19465,6 +19465,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 25.409998
       objectReference: {fileID: 0}
+    - target: {fileID: 1118809956407129750, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118809956407129750, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118809956407129750, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 1669615057878615205, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.92
@@ -19580,6 +19592,10 @@ PrefabInstance:
     - target: {fileID: 4219503754727054592, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479370161914184669, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: minStormScale
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4742262639001859997, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: smallMap
@@ -19789,6 +19805,74 @@ PrefabInstance:
       propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[7]'
       value: 
       objectReference: {fileID: 1718718532}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: spawnSystem.basicSpawnPoints.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1214640493}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 278836824}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1983575483}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1751143621}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 842656403}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1277692065}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 1718718532}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.basicSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1718718532}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1214640493}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 278836824}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1983575483}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1751143621}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 842656403}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1277692065}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 1718718532}
+    - target: {fileID: 6263293076332211351, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: 'spawnSystem.teamStartSpawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1718718532}
     - target: {fileID: 6287100024015536485, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.74
@@ -19840,6 +19924,10 @@ PrefabInstance:
     - target: {fileID: 7175996642347170180, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.z
       value: 7.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317224710894575072, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7528383088536497644, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21620,6 +21708,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 2
   hasPlayerGravity: 1
   playerGravityChange: 0.5
+  restoreOxygen: 0
 --- !u!64 &1444454936
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24120,6 +24209,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 1
   hasPlayerGravity: 1
   playerGravityChange: 0.5
+  restoreOxygen: 0
 --- !u!65 &1467767892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25785,6 +25875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customGravity: {x: 0, y: 0, z: 0}
   playerGravityMultiplier: 0.5
+  hasOxygen: 0
 --- !u!4 &1641896918
 Transform:
   m_ObjectHideFlags: 0
@@ -26150,6 +26241,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 2
   hasPlayerGravity: 1
   playerGravityChange: 0.4
+  restoreOxygen: 0
 --- !u!65 &1737434271
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26322,6 +26414,7 @@ MonoBehaviour:
   forceMultiplierIfYVelocityIsNegative: 2
   hasPlayerGravity: 1
   playerGravityChange: 0.4
+  restoreOxygen: 0
 --- !u!65 &1793345857
 BoxCollider:
   m_ObjectHideFlags: 0

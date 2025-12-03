@@ -46,12 +46,15 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 16
   teamCount: 8
   respawnTime: 4
   hasWeaponPickups: 0
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
@@ -121,6 +124,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -153,6 +159,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -185,6 +194,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -217,6 +229,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -249,6 +264,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -281,6 +299,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -313,6 +334,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -345,6 +369,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -354,7 +381,7 @@ MonoBehaviour:
     playerSize: 0
     playerSizeOffset: 0
     playerCenterOffset: 0
-    weaponInHand: {fileID: 11400000, guid: 14cf0785e5b893a4990379b95ead5a8c, type: 2}
+    weaponInHand: {fileID: 11400000, guid: ea958c31727ac1e4f902f2111e5c0623, type: 2}
     magazinsOfWeaponInHand: 99
     weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 0
@@ -377,6 +404,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -409,6 +439,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -418,9 +451,9 @@ MonoBehaviour:
     playerSize: 0
     playerSizeOffset: 0
     playerCenterOffset: 0
-    weaponInHand: {fileID: 11400000, guid: 61611f51727ea2c4497d746ff2c2b847, type: 2}
+    weaponInHand: {fileID: 11400000, guid: 555a6cfecb7b7f44d956caf318a62b18, type: 2}
     magazinsOfWeaponInHand: 99
-    weaponInLeftHand: {fileID: 11400000, guid: 024bbdf8c6821ff4993d1b9eb7a6429f, type: 2}
+    weaponInLeftHand: {fileID: 0}
     magazinsOfWeaponInLeftHand: 99
     sideArm: {fileID: 0}
     magazinsOfSideArm: 0
@@ -441,6 +474,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -473,6 +509,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -505,6 +544,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -537,6 +579,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -569,6 +614,9 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   - hasShild: 1
     headShotOneShot: 1
     hasMiniMap: 1
@@ -601,3 +649,6 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 0
       shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []

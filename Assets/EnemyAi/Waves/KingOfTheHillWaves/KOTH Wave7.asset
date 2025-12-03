@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 827d570780a601e4b8d1282b70c7c947, type: 2}
   - {fileID: 11400000, guid: 02cab846f5ab0514ea8810c2df9508fc, type: 2}
   - {fileID: 11400000, guid: fdf65de87c379ce448b2611afda50ccb, type: 2}
-  spawnInterval: 0.4
+  spawnInterval: 0.5
   duration: 999
   waveEndBrakeTime: 15
   maxSpecialEnemies: 2

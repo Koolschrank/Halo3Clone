@@ -56,6 +56,7 @@ MonoBehaviour:
   ricochet: 0
   maxRicochetCount: 0
   ricochetAutoAim: {fileID: 0}
+  noHitMarker: 1
   bodyHitSound:
     Guid:
       Data1: 0

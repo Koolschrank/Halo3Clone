@@ -31,7 +31,7 @@ MonoBehaviour:
     magazinsOfSideArm: 3
     sideArmLeft: {fileID: 0}
     magazinsOfSideArmLeft: 0
-    ability: {fileID: 11400000, guid: 6d0c43fe16865824da3d9c0e19dbd9f0, type: 2}
+    ability: {fileID: 11400000, guid: ed3407efd303cd645986383d4e7f389e, type: 2}
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
@@ -101,12 +101,12 @@ MonoBehaviour:
   usePVEScoring: 1
   pve_scoreLossPerSecond: 1
   pve_scoreGainPerSecond: 0.5
-  pve_scoreGainOnObjectiveCompletion: 25
+  pve_scoreGainOnObjectiveCompletion: 30
   pve_pointsForObjectiveCompletion: 100
   useSkulls: 1
   timeToScore: 0.5
   moveHill: 1
   hillMoveTime: 100000
   moveHillWhenScoreReached: 1
-  scoreToMoveHill: 100
+  scoreToMoveHill: 50
   keepLastTeamOnHill: 1

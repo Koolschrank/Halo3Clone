@@ -115,13 +115,13 @@ public class PlayerPickUpScan : MonoBehaviour
         var weaponData = pickup.WeaponData;
 
         var weaponInHand = playerArms.RightArm.GetWeaponInHand();
-        if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData))
+        if (weaponInHand != null && weaponInHand.IsSameWeapon(weaponData) && !weaponInHand.Data.CannotPickUpAmmoFromGround)
             return true;
         var weaponInLeftHand = playerArms.LeftArm.GetWeaponInHand();
-        if (weaponInLeftHand != null && weaponInLeftHand.IsSameWeapon(weaponData))
+        if (weaponInLeftHand != null && weaponInLeftHand.IsSameWeapon(weaponData) && !weaponInLeftHand.Data.CannotPickUpAmmoFromGround)
             return true;
         var weaponInInventory = playerInventory.GetWeapon();
-        if (weaponInInventory != null && weaponInInventory.IsSameWeapon(weaponData))
+        if (weaponInInventory != null && weaponInInventory.IsSameWeapon(weaponData) && !weaponInInventory.Data.CannotPickUpAmmoFromGround)
             return true;
         return false;
 

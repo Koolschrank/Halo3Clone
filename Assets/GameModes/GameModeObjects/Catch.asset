@@ -35,23 +35,26 @@ MonoBehaviour:
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
-      hasHealthOverride: 0
+      hasHealthOverride: 1
       showHealthBar: 0
-      health: 0
-      shild: 0
+      health: 50
+      shild: 40
       armor: 0
-      healthRegenStartTime: 0.5
-      shildRegenStartTime: 0.5
-      healthRegen: 0
-      shildRegen: 0
+      healthRegenStartTime: 3
+      shildRegenStartTime: 4.5
+      healthRegen: 10
+      shildRegen: 25
       spawnInvulnerabilityTime: 5
-      shildPopDamageNegation: 30
+      shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 40
   teamCount: 8
   respawnTime: 1
   hasWeaponPickups: 0
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
@@ -112,14 +115,17 @@ MonoBehaviour:
     ability2: {fileID: 0}
     ability3: {fileID: 0}
     healthOverride:
-      hasHealthOverride: 0
+      hasHealthOverride: 1
       showHealthBar: 0
-      health: 0
-      shild: 0
+      health: 50
+      shild: 40
       armor: 0
-      healthRegenStartTime: 0.5
-      shildRegenStartTime: 0.5
-      healthRegen: 0
-      shildRegen: 0
+      healthRegenStartTime: 3
+      shildRegenStartTime: 4.5
+      healthRegen: 10
+      shildRegen: 25
       spawnInvulnerabilityTime: 5
-      shildPopDamageNegation: 30
+      shildPopDamageNegation: 0
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []

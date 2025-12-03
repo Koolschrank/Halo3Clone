@@ -20,6 +20,9 @@ MonoBehaviour:
     canDualWield: 1
     canDualWieldEverything: 0
     movementSpeedMultiplier: 1
+    playerSize: 0
+    playerSizeOffset: 0
+    playerCenterOffset: 0
     weaponInHand: {fileID: 11400000, guid: cd1e6fe7f7c34a94dac836675eed9e82, type: 2}
     magazinsOfWeaponInHand: 10
     weaponInLeftHand: {fileID: 0}
@@ -43,12 +46,15 @@ MonoBehaviour:
       shildRegen: 0
       spawnInvulnerabilityTime: 5
       shildPopDamageNegation: 30
+    hasRandomWeaponLoadouts: 0
+    randomWeaponIsDualWielded: 0
+    possiblePrimaryWeapons: []
   timeLimitInMinutes: 10
   pointsToWin: 15
   teamCount: 8
   respawnTime: 2
   hasWeaponPickups: 0
-  reasignsTeamsInPlayerOrder: 0
+  reasignsTeamsInPlayerOrder: 1
   pointsToWinMultiplier_MoreThan4Players: 1
   pointsToWinMultiplier_smallMap: 1
   looseWhenAllPlayersDead: 0
@@ -74,3 +80,14 @@ MonoBehaviour:
   team1MemberColors: []
   team1MemberColorsUI: []
   usedItemList: 0
+  removePlayerBodyWhenRespawned: 0
+  hasRespawnTokens: 0
+  respawnTokens: 3
+  hasReviveBodies: 0
+  scoreMultiplier: 1
+  usePVEScoring: 0
+  pve_scoreLossPerSecond: 1
+  pve_scoreGainPerSecond: 1
+  pve_scoreGainOnObjectiveCompletion: 30
+  pve_pointsForObjectiveCompletion: 100
+  useSkulls: 0

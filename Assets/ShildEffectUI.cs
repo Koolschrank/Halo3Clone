@@ -11,6 +11,8 @@ public class ShildEffectUI : MonoBehaviour
 	
 	float timer = 0f;
 
+	public bool noUpdate = false;
+
 	public void Stop()
 	{
 		
@@ -33,6 +35,7 @@ public class ShildEffectUI : MonoBehaviour
 
 	private void Update()
 	{
+		if (noUpdate) return;
 		if (timer > 0f)
 		{
 			timer -= Time.deltaTime;

@@ -1,0 +1,476 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd11a546efb87046ab40cb87da539d3, type: 3}
+  m_Name: PlasmaGranadeLauncher
+  m_EditorClassIdentifier: 
+  weaponPickUp: {fileID: 1358379668584700671, guid: 414589b4b5f90f9478166c9b3acb06f9, type: 3}
+  weaponBullet: {fileID: 11400000, guid: 63344640069bcae45b1f05ec362807bc, type: 2}
+  weaponFPSModel: {fileID: 6899193775294056288, guid: 93d51d876d4993d49960b9682186ea07, type: 3}
+  weapon3rdPersonModel: {fileID: 3803833170785497763, guid: 0dd98caeaf1bfdc4aa6f3c40c04b42f7, type: 3}
+  weaponName: Plasma Granade Launcher
+  shootType: 0
+  fireRate: 0.55
+  bulletsPerShot: 1
+  magazineSize: 3
+  maxAmmoInReserve: 9
+  reloadTime: 2.2
+  reloadGainAmmoTrigger: 0.65
+  inaccuracy: 0
+  switchOutTime: 0.3
+  switchInTime: 0.6
+  canZoom: 1
+  zoomFOV: 35
+  zoomMoveSpeed: 1
+  moveSpeedMultiplier: 1
+  damageReduction: 0
+  meleeData: {fileID: 0}
+  weaponType: 1
+  canNotBeInInventory: 0
+  canOnlyBeHeldInLeftHand: 0
+  useAmmoOnMeleeHit: 0
+  bulletsPerMeleeHit: 7
+  meleeDataWhenNoAmmo: {fileID: 0}
+  cannotPickUpAmmoFromGround: 0
+  autoAim: {fileID: 11400000, guid: ca813f2b8ca1ebf4eb5b71a2d3025ac9, type: 2}
+  autoAimType: 2
+  burstAmount: 3
+  burstDelay: 0.3
+  chargeTime: 1
+  chargeMovementMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chargeAimMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hasKnockback: 1
+  gunKnockback:
+    power: 3
+    duration: 0.5
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 8.444545
+        outSlope: 8.444545
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11797333
+        value: 0.9962311
+        inSlope: -0.10924992
+        outSlope: -0.10924992
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.3700746
+      - serializedVersion: 3
+        time: 0.98666674
+        value: 0.0065975916
+        inSlope: -1.1392207
+        outSlope: -1.1392207
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  damageMultiplier: 1
+  fireRateMultiplier: 1.2
+  inaccuracyMultiplier: 1
+  reloadTimeMultiplier: 1.5
+  bloomOnShoot: 1
+  bloomOnTakingDamage: 0
+  bloomInaccuracyMultiplier: 0
+  bloomTime: 0.7
+  bloomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00999999
+      value: 0.50047123
+      inSlope: 3.1102736
+      outSlope: 3.1102736
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.19444478
+    - serializedVersion: 3
+      time: 0.04631424
+      value: 0.997036
+      inSlope: -0.02473777
+      outSlope: -0.02473777
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.69564605
+    - serializedVersion: 3
+      time: 0.99331665
+      value: 0.07654953
+      inSlope: -0.9720001
+      outSlope: -0.9720001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bloomCrosshairsSizeMultiplier: 0.75
+  hasBlock: 0
+  block:
+    blockPercentage: 0.5
+    blockAngle: 0
+  reduceScreenShakeWhenAiming: 0
+  shootSound:
+    Guid:
+      Data1: 728853818
+      Data2: 1211351120
+      Data3: 631168438
+      Data4: -744795755
+    Path: event:/SFX/Guns/GranadeTrower/Shoot
+  switchInSound:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 205059569
+          Data2: 1135460609
+          Data3: -1246379088
+          Data4: -133436094
+        Path: event:/SFX/Guns/GranadeTrower/SwitchIn
+      timeOfPlay: 0.4
+      hasRumble: 0
+      rumbleData:
+        duration: 0.3
+        intensity: 0.3
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: -0.0037699274
+            outSlope: -0.0037699274
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.45000002
+            value: 0.99830353
+            inSlope: -0.00034272054
+            outSlope: -0.00034272054
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.0030844864
+            outSlope: 0.0030844864
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+  reloadSounds:
+    timedSounds:
+    - soundReference:
+        Guid:
+          Data1: 1968341117
+          Data2: 1319590580
+          Data3: 1583735957
+          Data4: -1423667669
+        Path: event:/SFX/Guns/GranadeTrower/Reload/OpenGranadeLauncher
+      timeOfPlay: 0.1
+      hasRumble: 1
+      rumbleData:
+        duration: 0.1
+        intensity: 0.5
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.35
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.5
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+    - soundReference:
+        Guid:
+          Data1: 929565689
+          Data2: 1128068008
+          Data3: -2083747198
+          Data4: -506691005
+        Path: event:/SFX/Guns/GranadeTrower/Reload/PutGranadeIn
+      timeOfPlay: 0.65
+      hasRumble: 1
+      rumbleData:
+        duration: 0.125
+        intensity: 1
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+    - soundReference:
+        Guid:
+          Data1: 424646063
+          Data2: 1191360246
+          Data3: 1892993195
+          Data4: -879277789
+        Path: event:/SFX/Guns/GranadeTrower/Reload/CloseGranadeLauncher
+      timeOfPlay: 0.85
+      hasRumble: 1
+      rumbleData:
+        duration: 1
+        intensity: 0.8
+        intensityCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.020000458
+            value: 0.60508347
+            inSlope: -0.006087043
+            outSlope: -0.006087043
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.28783268
+            value: 0.60345316
+            inSlope: 0.017588787
+            outSlope: 0.017588787
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 1
+          - serializedVersion: 3
+            time: 0.40345702
+            value: 0.013024092
+            inSlope: -0.1324251
+            outSlope: -0.1324251
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.67445767
+            value: 0.024298787
+            inSlope: -0.10697288
+            outSlope: -0.10697288
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 1
+          - serializedVersion: 3
+            time: 0.7186172
+            value: 0.9995147
+            inSlope: -0.013281272
+            outSlope: -0.013281272
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.93163276
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0.0017247003
+            outSlope: 0.0017247003
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        rumbleType: 4
+  showAmmo: 1
+  gunSprite: {fileID: 21300000, guid: 004082883cb340e4992a406dd4d3ad72, type: 3}
+  bulletSprite: {fileID: 21300000, guid: a57755ac7edc91347bbe92ba8fdd481e, type: 3}
+  bulletSize: {x: 1.9, y: 1.9}
+  bulletsPerRow: 5
+  crosshairs: {fileID: 21300000, guid: ee579ce34746d084682cedad1f645b0a, type: 3}
+  crosshairsSize: {x: 0.5, y: 0.5}
+  crosshairsSizeMultiplierWhenDualWielded: 1
+  bulletsPerSprite: 1
+  showAmmoInPercent: 0
+  enemyAiWeaponData: {fileID: 0}
+  gunAiBehaviour:
+    IdealRange: 10
+    focusGainWhenOnTarget: 1
+    focusLossWhenNotOnTarget: 0.5
+    moveSpeedWithGun: 1
+    crouchDistance: 1
+    minDistanceToDogeWhenTakingDamage: 20
+  upgradedWeaponData: {fileID: 11400000, guid: d4f977b8fba00d64c8f38e35c7d86c82, type: 2}

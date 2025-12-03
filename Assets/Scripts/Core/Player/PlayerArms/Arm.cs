@@ -41,8 +41,9 @@ public class Arm : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerBodyStatSheet playerBodyStatSheet;
     [SerializeField] protected PlayerInteractableTrigger playerInteractableTrigger;
+    [SerializeField] PlayerGrappleHook playerGrappleHook;
 
-    bool isTriggerPressed;
+	bool isTriggerPressed;
      bool wasTriggerPressed;
      float reloadTimer;
     protected float switchOutTimer;
@@ -66,9 +67,11 @@ public class Arm : MonoBehaviour
     [SerializeField] float meleeAttackTimeMultiplierInDualWielding = 1.5f;
     [SerializeField] float granadeThrowTimeMultiplierInDualWielding = 1.5f;
     [SerializeField] bool reloadWeaponWhenDroped = false;
+    [SerializeField] float triggerInputBuffer = 0.1f;
+    float lastTriggerPressedTime = -10f;
 
 
-    int extraBulletsInMagazine = 0;
+	int extraBulletsInMagazine = 0;
 
     float bulletRecoveryChance = 0;
     float reloadWeaponSpeedMultiplier = 1;
@@ -320,7 +323,7 @@ public class Arm : MonoBehaviour
             {
                 case ShootType.Single:
 
-                    if (!wasTriggerPressed && isTriggerPressed)
+                    if ((!wasTriggerPressed && isTriggerPressed) ||(Time.timeSinceLevelLoad < lastTriggerPressedTime + triggerInputBuffer))
                     {
                         if (weaponInHand.CanShoot())
                         {
@@ -393,7 +396,13 @@ public class Arm : MonoBehaviour
                         ReleaseZoomButton();
                     }
                     break;
-                case ShootType.Charge_Auto:
+                case ShootType.Hook:
+                    if (!wasTriggerPressed && isTriggerPressed)
+                    {
+                        playerGrappleHook.ToggleGrappel(transform);
+                    }
+                    break;
+				case ShootType.Charge_Auto:
                     if (isTriggerPressed)
                     {
                         if (weaponInHand.IsCharging)
@@ -479,8 +488,10 @@ public class Arm : MonoBehaviour
         }
 
 
-
-
+        if (isTriggerPressed && !wasTriggerPressed)
+        {
+            lastTriggerPressedTime = Time.timeSinceLevelLoad;
+		}
         wasTriggerPressed = isTriggerPressed;
 
 
@@ -606,11 +617,14 @@ public class Arm : MonoBehaviour
             {
                 inZoom = true;
                 OnZoomIn?.Invoke(weaponInHand);
-            }
+                weaponInHand.UpdateZoom(true);
+
+			}
             else
             {
                 inZoom = false;
                 OnZoomOut?.Invoke(weaponInHand);
+                weaponInHand.UpdateZoom(false);
             }
         }
     }
@@ -671,6 +685,13 @@ public class Arm : MonoBehaviour
             OnWeaponUnequipStarted?.Invoke(weaponInHand, weaponInHand.SwitchOutTime);
             weaponInHand.SwitchOutStart(switchOutTimer);
 
+            if (weaponInHand.ShootType == ShootType.Hook)
+            {
+                if (playerGrappleHook.isGrappling)
+                {
+                    playerGrappleHook.ToggleGrappel(transform);
+				}
+			}
         }
     }
 
@@ -758,7 +779,6 @@ public class Arm : MonoBehaviour
         var weapon = weaponInHand;
         weaponInHand = null;
 
-        Debug.Log("Dropping weapon5");
         IfZoomedInExitZoom();
         weapon.SetExtraBulletsInMagazine(0);
 
@@ -894,10 +914,22 @@ public class Arm : MonoBehaviour
         if (CurrentWeapon == null) return;
         IfZoomedInExitZoom();
         var meleeAttack = weaponInHand.MeleeAttack;
-        if (meleeAttack == null)
+		if (weaponInHand.Data.UseAmmoOnMeleeHit)
+		{
+            if (weaponInHand.Magazine == 0)
+                meleeAttack = weaponInHand.Data.MeleeDataWhenNoAmmo;
+            else
+            {
+                int ammoUsed = Mathf.Min(weaponInHand.Magazine, weaponInHand.Data.BulletsPerMeleeHit);
+                weaponInHand.Magazine -= ammoUsed;
+			}
+                
+		}
+		if (meleeAttack == null)
         {
             meleeAttack = basicMeleeAttack;
         }
+        
         armState = ArmState.InMeleeAttack;
         float timeMultiplier = 1;
         bool isDualWielding = playerArms.IsDualWielding;

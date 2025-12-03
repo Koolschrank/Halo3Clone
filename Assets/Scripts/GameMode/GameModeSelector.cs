@@ -11,6 +11,7 @@ public class GameModeSelector : MonoBehaviour
     [SerializeField] KingOfTheHillManager kingOfTheHillManager;
     [SerializeField] CrownManager crownManager;
     [SerializeField] CaptureTheFlagManager captureTheFlagManager;
+    [SerializeField] LastManStandingManager lastManStandingManager;
 
 
     public static GameModeManager gameModeManager;
@@ -45,8 +46,13 @@ public class GameModeSelector : MonoBehaviour
             captureTheFlagManager.StartGame(gameMode);
             gameModeManager = captureTheFlagManager;
         }
+        else if (gameMode is GameMode_LastManStanding)
+        {
+            lastManStandingManager.StartGame(gameMode);
+            gameModeManager = lastManStandingManager;
+		}
 
-        gameModeManager.OnTeamWon += StartReloadGameWithTimer;
+		gameModeManager.OnTeamWon += StartReloadGameWithTimer;
 
         EnemySpawner.instance.StartEnemySpawner();
     }
