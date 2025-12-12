@@ -11,8 +11,10 @@ public class Weapon_Visual : Weapon_Model
 {
    
     public Action OnShootWeapons;
+    public Action OnReloadWeaponStart;
+    public Action OnReloadWeaponEnd;
 
-    [SerializeField] Animator animator;
+	[SerializeField] Animator animator;
     [SerializeField] Transform aimPosition;
 
     [SerializeField] RumbleData rumble_Shoot;
@@ -24,6 +26,9 @@ public class Weapon_Visual : Weapon_Model
 
     public Transform rightArmAnker;
     public Transform leftArmAnker;
+    public Transform reloadAnker;
+
+
 
 
 
@@ -58,7 +63,17 @@ public class Weapon_Visual : Weapon_Model
 
     public Transform AimPosition => aimPosition;
 
-    public void Shoot()
+
+    public void StartReload ()
+    {
+        OnReloadWeaponStart?.Invoke();
+	}
+
+    public void EndReload()
+    {
+        OnReloadWeaponEnd?.Invoke();
+	}
+	public void Shoot()
     {
         // if current animation is shoot reset it
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))

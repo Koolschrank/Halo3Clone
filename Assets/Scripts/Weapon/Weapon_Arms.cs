@@ -11,6 +11,7 @@ public class Weapon_Arms
 
     public Action<bool> UpdateZoom;
     public Action<float> OnReloadStart;
+    public Action OnReloadEnd;
     public Action<float> OnSwitchOutStart;
     public Action<float> OnSwitchInStart;
     public Action<float> OnMeleeStart;

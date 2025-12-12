@@ -166,6 +166,7 @@ public class Arm : MonoBehaviour
     {
         granadeThrower.OnGranadeThrow += SendGranadeThrowSignal;
 
+        OnReloadCanceld += OnReloadCancelAction;
 		
 
 		if (!GameModeSelector.gameModeManager.GameModeStats.DontDropWeaponsOnDeath)
@@ -193,7 +194,16 @@ public class Arm : MonoBehaviour
 
     }
 
-    public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
+    public void OnReloadCancelAction()
+    {
+        if (weaponInHand != null)
+        {
+            weaponInHand.OnReloadEnd?.Invoke();
+		}
+	}
+
+
+	public void TrySendEventToUpdateReserve(Weapon_Data weaponAmmoChanged, int ammo)
     {
         if (weaponInHand != null && weaponInHand.Data == weaponAmmoChanged)
         {
@@ -560,8 +570,9 @@ public class Arm : MonoBehaviour
 	void ReloadFinished()
     {
         armState = ArmState.Ready;
-           
-    }
+        OnReloadCanceld?.Invoke();
+
+	}
 
 
     protected bool zoomButtonPressed = false;

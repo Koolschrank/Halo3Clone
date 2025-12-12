@@ -20,8 +20,9 @@ public class PlayerMind : MonoBehaviour
     //[SerializeField] Camera playerCamera;
     [SerializeField] Arm_FPSView rightArmView;
     [SerializeField] Arm_FPSView leftArmView;
-    
-    [SerializeField] WeaponSway weaponSway1;
+    [SerializeField] GranadeAnker granadeAnker;
+
+	[SerializeField] WeaponSway weaponSway1;
 
     [SerializeField] WeaponSway weaponSway2;
     //[SerializeField] PlayerFOV playerFOV;
@@ -411,7 +412,9 @@ public class PlayerMind : MonoBehaviour
 
         playerArms = arms;
         rightArmView.SetUp(arms.RightArm);
-        leftArmView.SetUp(arms.LeftArm);
+		granadeAnker.SetUp(arms.RightArm);
+
+		leftArmView.SetUp(arms.LeftArm);
         weaponUI_RightArm.SetUp(arms.RightArm);
         weaponUI_LeftArm.SetUp(arms.LeftArm);
         arms.OnDualWieldingExited += weaponUI_LeftArm.Disable;

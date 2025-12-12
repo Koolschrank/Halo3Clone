@@ -8859,6 +8859,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.33
       objectReference: {fileID: 0}
+    - target: {fileID: 7027635940359024719, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
+      propertyPath: timeSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7063945528381591942, guid: c34bc35188e285a4484ff95a0dd8ec83, type: 3}
       propertyPath: gameMode
       value: 

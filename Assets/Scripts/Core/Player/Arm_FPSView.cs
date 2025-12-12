@@ -64,6 +64,8 @@ public class Arm_FPSView : MonoBehaviour
         {
             EquipWeapon(playerArm.CurrentWeapon);
         }
+
+        
     }
 
 
@@ -76,6 +78,7 @@ public class Arm_FPSView : MonoBehaviour
     {
         if (weaponVisual != null)
         {
+            
             Destroy(weaponVisual.gameObject);
         }
 		baseArm.localPosition = Vector3.zero;
@@ -102,11 +105,19 @@ public class Arm_FPSView : MonoBehaviour
 			}
 		}
 
+        weapon.OnReloadStart += (weapon) => weaponVisual.StartReload();
+		weapon.OnReloadEnd += weaponVisual.EndReload;
 
-        if (weaponVisual.rightArmAnker != null)
+        weaponVisual.OnReloadWeaponStart += fps_Arms.StartReload;
+        weaponVisual.OnReloadWeaponEnd += fps_Arms.StopReload;
+
+
+		if (weaponVisual.rightArmAnker != null)
             fps_Arms.SetRightAnker(weaponVisual.rightArmAnker);
         if (weaponVisual.leftArmAnker != null)
             fps_Arms.SetLeftAnker(weaponVisual.leftArmAnker);
+        if (weaponVisual.reloadAnker != null)
+            fps_Arms.SetReloadAnker(weaponVisual.reloadAnker);
 
 
 	}
