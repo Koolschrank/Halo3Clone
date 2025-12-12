@@ -21,6 +21,8 @@ public class GranadeAnker : MonoBehaviour
 
     public void PlayThrowAnimation(GranadeStats granade, float throwTime)
     {
+		// forec play IdleAnimtion
+		animator.Play("Idle", 0, 0f);
 
 		float delayPercent = granade.ThrowDelay / granade.ThrowTime;
 		float animationDuration =  throwTime;

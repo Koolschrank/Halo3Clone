@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1423fe4473e976743b6227e4eadadff6, type: 3}
   m_Name: HealGranade
   m_EditorClassIdentifier: 
-  throwDelay: 0.24
-  throwTime: 0.6
+  throwDelay: 0.312
+  throwTime: 0.78
   throwAngle: 0.25
   throwForce: 5
   granadePrefab: {fileID: 5187455782990611905, guid: 2c5ef37b5ed16214794fca2c19f679ee, type: 3}
   granadeClonePrefab: {fileID: 5187455782990611905, guid: e94f0a4d8d998de4d977c228a7fd9c84, type: 3}
+  throwSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  throwSoundDelay: 0

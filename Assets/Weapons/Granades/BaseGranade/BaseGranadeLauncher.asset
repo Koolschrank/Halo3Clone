@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1423fe4473e976743b6227e4eadadff6, type: 3}
   m_Name: BaseGranadeLauncher
   m_EditorClassIdentifier: 
-  throwDelay: 0.4
-  throwTime: 1
+  throwDelay: 0.52
+  throwTime: 1.3
   throwAngle: 0.1
   throwForce: 13
   granadePrefab: {fileID: 5187455782990611905, guid: ca6c05d7d422c8c499db3b36cae014fa, type: 3}

@@ -21,6 +21,7 @@ public class PlayerMind : MonoBehaviour
     [SerializeField] Arm_FPSView rightArmView;
     [SerializeField] Arm_FPSView leftArmView;
     [SerializeField] GranadeAnker granadeAnker;
+    [SerializeField] FPS_Arms playerArmsView;
 
 	[SerializeField] WeaponSway weaponSway1;
 
@@ -413,6 +414,7 @@ public class PlayerMind : MonoBehaviour
         playerArms = arms;
         rightArmView.SetUp(arms.RightArm);
 		granadeAnker.SetUp(arms.RightArm);
+        playerArmsView.SetUp(arms.GetComponentInChildren<PlayerAnimation>());
 
 		leftArmView.SetUp(arms.LeftArm);
         weaponUI_RightArm.SetUp(arms.RightArm);

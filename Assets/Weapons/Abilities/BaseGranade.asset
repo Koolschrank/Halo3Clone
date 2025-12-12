@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BaseGranade
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 3370b011756b5a64a90acaddd0e9852b, type: 3}
-  cooldownTime: 12
+  cooldownTime: 2
   maxCharges: 1
   removeWhenEmpty: 0
+  cannotUse: 0
   granadeStats: {fileID: 11400000, guid: 1f761572d1be2a047a383a091b9adc17, type: 2}

@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using System.Collections.Generic;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class PlayerAnimation : MonoBehaviour
 
 
     [Header("Shild")]
-    [SerializeField] SkinnedMeshRenderer[] playerMeshes;
-    [SerializeField] Transform[] shildBrakeParticals;
+    [SerializeField] List<SkinnedMeshRenderer> playerMeshes = new List<SkinnedMeshRenderer>();
+	[SerializeField] Transform[] shildBrakeParticals;
     [SerializeField] GameObject shildDepletedVisual;
 
 	[SerializeField] GameObject[] shildRechageVisual;
@@ -109,7 +110,8 @@ public class PlayerAnimation : MonoBehaviour
         characterHealth.OnShildRechargeStarted += ShildRechargeStarted;
         characterHealth.OnShildHealStarted += ShildRechargeParticle;
 		characterHealth.OnDeath += DisableShildpPartical;
-        characterHealth.OnShildChanged += UpdateShildStrength;
+        characterHealth.OnDeath += RemoveExtraMesh;
+		characterHealth.OnShildChanged += UpdateShildStrength;
 
         if (weaponVisual == null)
         {
@@ -132,6 +134,28 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
     }
+
+    public void RemoveExtraMesh()
+    {
+        if (meshAdded)
+        {
+            var extraMesh = playerMeshes[playerMeshes.Count - 1];
+            extraMesh.enabled = false;
+			// remove last added mesh
+			playerMeshes.RemoveAt(playerMeshes.Count - 1);
+            meshAdded = false;
+
+		}
+	}
+
+    bool meshAdded = false;
+	public void AddMesh(SkinnedMeshRenderer mesh)
+    {
+        playerMeshes.Add(mesh);
+        meshAdded = true;
+
+        SetPlayerColor(colorSaved);
+	}
 
 	private void Flinch()
 	{
@@ -578,8 +602,10 @@ public class PlayerAnimation : MonoBehaviour
         shildDepletedVisual.SetActive(false);
     }
 
+    Color colorSaved;
     public void SetPlayerColor(Color color)
     {
+        colorSaved = color;
         foreach (var smr in playerMeshes)
         {
             Material materialInstance = smr.material;

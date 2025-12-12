@@ -17,7 +17,16 @@ public class FPS_Arms : MonoBehaviour
     Transform reloadAnker;
     public GranadeAnker granadeAnker; 
 
-    public void SetRightAnker(Transform rightAnker)
+    public SkinnedMeshRenderer armsMeshRenderer;
+
+    public void SetUp(PlayerAnimation animation)
+    {
+        armsMeshRenderer.enabled = true;
+		animation.AddMesh(armsMeshRenderer);
+    }
+
+
+	public void SetRightAnker(Transform rightAnker)
         {
         this.rightAnker = rightAnker;
 	}
@@ -86,7 +95,7 @@ public class FPS_Arms : MonoBehaviour
         }
         else
         {
-			granadeTransitionProgress -= Time.deltaTime;
+			granadeTransitionProgress -= Time.deltaTime /2;
             granadeTransitionProgress = Mathf.Max(granadeTransitionProgress, 0f);
 			granadeProgress = granadeTransitionProgress / granadeTransitionTime;
 

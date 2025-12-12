@@ -4160,7 +4160,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.28, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6744675577476121729}
@@ -4187,6 +4187,7 @@ MonoBehaviour:
   reloadTransitionTime: 0.2
   granadeTransitionTime: 0.15
   granadeAnker: {fileID: 7035369352611602052}
+  armsMeshRenderer: {fileID: 8985296879924005614}
 --- !u!1 &1869168866856267930
 GameObject:
   m_ObjectHideFlags: 0
@@ -16878,6 +16879,7 @@ MonoBehaviour:
   rightArmView: {fileID: 4409982759675025528}
   leftArmView: {fileID: 3936630368718065048}
   granadeAnker: {fileID: 7035369352611602052}
+  playerArmsView: {fileID: 8589125648466883179}
   weaponSway1: {fileID: 101173681999680801}
   weaponSway2: {fileID: 2127263124048056043}
   playerInput: {fileID: 2923737641940389727}
