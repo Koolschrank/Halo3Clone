@@ -22,7 +22,10 @@ public class Weapon_Visual : Weapon_Model
     [NonSerialized]
     public int PlayerID = 0;
 
-   
+    public Transform rightArmAnker;
+    public Transform leftArmAnker;
+
+
 
 	public override void SetUp(Weapon_Arms weapon)
     {

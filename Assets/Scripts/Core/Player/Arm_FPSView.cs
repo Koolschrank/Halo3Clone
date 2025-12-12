@@ -19,7 +19,9 @@ public class Arm_FPSView : MonoBehaviour
     [SerializeField] bool autoAim;
     [SerializeField] bool reverseX;
 
-    bool hasAimPosition;
+    [SerializeField] FPS_Arms fps_Arms;
+
+	bool hasAimPosition;
     bool inAim;
 
 	private void Update()
@@ -99,7 +101,13 @@ public class Arm_FPSView : MonoBehaviour
 
 			}
 		}
-		
+
+
+        if (weaponVisual.rightArmAnker != null)
+            fps_Arms.SetRightAnker(weaponVisual.rightArmAnker);
+        if (weaponVisual.leftArmAnker != null)
+            fps_Arms.SetLeftAnker(weaponVisual.leftArmAnker);
+
 
 	}
 

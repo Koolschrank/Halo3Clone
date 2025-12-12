@@ -48,6 +48,11 @@ public class RightArm : Arm
 					inventory.AddWeapon(newWeapon);
 					TrySwitchWeapon();
 				}
+
+                if (newWeapon.WeaponType == WeaponType.oneHanded)
+                {
+                    playerArms.LeftArm.TryPickUpWeapon();
+				}
 			}
 		}
         else
@@ -137,7 +142,7 @@ public class RightArm : Arm
     {
 		if (cannotDropSwapOrPickUpWeapons) return;
 		base.TryThrowGranade();
-        playerArms.LeftArm.DropWeapon();
+        //playerArms.LeftArm.DropWeapon();
     }
 
 

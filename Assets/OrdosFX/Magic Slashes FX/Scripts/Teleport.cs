@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour {
 
+
+
     public Vector3 Range = new Vector3();
     Vector3 startPos;
 

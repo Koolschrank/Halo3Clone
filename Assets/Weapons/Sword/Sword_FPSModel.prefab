@@ -5058,7 +5058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponModel: {fileID: 6899193775294056288}
-  delay: 0.7
+  delay: 0.63
   swordParticle: {fileID: 994214551394124791}
 --- !u!1 &2248992806393367667
 GameObject:

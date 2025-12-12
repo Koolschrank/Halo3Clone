@@ -18,8 +18,8 @@ MonoBehaviour:
   force: 160
   forceOnPlayers: 8
   forceOffset: 0.2
-  delay: 0.7
-  meleeTime: 1.4
+  delay: 0.63
+  meleeTime: 1.26
   meleeRadius: 2.25
   meleeDistance: 2.25
   enemyLayer:
@@ -33,7 +33,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   checkForWidth: 1
-  widthCheckRadius: 0.65
+  widthCheckRadius: 1.4
   hasLaunch: 0
   launchDistance: 4
   launchAngle: 30
@@ -74,15 +74,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.016666412
       value: 0.9953003
-      inSlope: -1.6837429
-      outSlope: -1.6837429
+      inSlope: -1.3026532
+      outSlope: -1.3026532
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.37327927
-      value: 0.39485592
+      time: 0.36344498
+      value: 0.5435681
       inSlope: -0.045466945
       outSlope: -0.045466945
       tangentMode: 0
@@ -90,8 +90,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.5759987
     - serializedVersion: 3
-      time: 0.6020578
-      value: 0.38387692
+      time: 0.5889505
+      value: 0.5349084
       inSlope: 0.019321907
       outSlope: 0.019321907
       tangentMode: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.5482728
-      outSlope: 1.5482728
+      inSlope: 1.1314734
+      outSlope: 1.1314734
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

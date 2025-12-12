@@ -879,9 +879,12 @@ public class Arm : MonoBehaviour
             granadeThrowTimer = ability.granadeStats.ThrowTime * timeMultiplier;
             OnGranadeThrowStarted?.Invoke(ability.granadeStats, granadeThrowTimer);
             
-           
-           
-        }
+
+            var leftArm = playerArms.LeftArm;
+            leftArm.OnGranadeThrowStarted?.Invoke(ability.granadeStats, granadeThrowTimer);
+
+
+		}
     }
 
     public bool InGranadeThrow

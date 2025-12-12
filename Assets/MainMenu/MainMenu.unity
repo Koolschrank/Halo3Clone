@@ -15812,7 +15812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: SubButtons.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9122789514552621488, guid: 54b8ebb2cd72ead4f8e9e104a4c0c926, type: 3}
       propertyPath: 'SubButtons.Array.data[0]'
