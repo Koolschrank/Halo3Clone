@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &567268924833116466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5821082091681350666}
+  m_Layer: 0
+  m_Name: Anker (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5821082091681350666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567268924833116466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.48515773, y: -0.4991163, z: -0.46495458, w: 0.5471034}
+  m_LocalPosition: {x: 0.04, y: -0.018, z: -0.301}
+  m_LocalScale: {x: 0.7703727, y: 0.770371, z: 0.7703708}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8849700579768075982}
+  m_Father: {fileID: 5305153929957044805}
+  m_LocalEulerAnglesHint: {x: 3.826, y: -88.219, z: -84.428}
+--- !u!1 &1210488236601912484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4234871442293898179}
+  m_Layer: 0
+  m_Name: Anker (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4234871442293898179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210488236601912484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.3225847, y: 0.82545394, z: 0.38740298, w: -0.25393686}
+  m_LocalPosition: {x: -0.065, y: 0.009, z: 0.039}
+  m_LocalScale: {x: 0.77036977, y: 0.7703728, z: 0.7703721}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 367892286221334230}
+  m_Father: {fileID: 5305153929957044805}
+  m_LocalEulerAnglesHint: {x: 233.456, y: 736.51697, z: -145.67}
 --- !u!1 &1535552099913994392
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,8 +90,8 @@ Transform:
   m_GameObject: {fileID: 1535552099913994392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0.18, z: 0.55}
-  m_LocalScale: {x: 1.8000001, y: 1.8000001, z: 1.05}
+  m_LocalPosition: {x: -0.15, y: 0.18, z: 0.67}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 0.8749999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2256082244036481574}
@@ -50,6 +114,9 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 4559946241965233676}
   muzzleFlash: {fileID: 0}
   weaponAnimationIndex: 0
+  chargeObject: {fileID: 0}
+  activeParticalWhileShooting: 0
+  ManualAnimationControl: 0
   animator: {fileID: 8242606572955927572}
   aimPosition: {fileID: 2256082244036481574}
   rumble_Shoot:
@@ -95,6 +162,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  rightArmAnker: {fileID: 5821082091681350666}
+  leftArmAnker: {fileID: 4234871442293898179}
+  reloadAnker: {fileID: 4234871442293898179}
+--- !u!1 &5170933465579248583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367892286221334230}
+  m_Layer: 0
+  m_Name: AnimAnker (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &367892286221334230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170933465579248583}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4234871442293898179}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5998098791626851032
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,13 +220,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5998098791626851032}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0017434361, y: -0.00008054118, z: 0.046147518, w: 0.99893314}
-  m_LocalPosition: {x: -0.11666667, y: 0.033333335, z: 0.27261904}
-  m_LocalScale: {x: 0.8333333, y: 0.83333194, z: 0.8333357}
+  m_LocalRotation: {x: 0.0017438834, y: -0.00007019399, z: 0.040218912, w: 0.9991894}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0.27261904}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8779458109269781644}
-  m_LocalEulerAnglesHint: {x: 0.2, y: 0, z: 5.29}
+  m_LocalEulerAnglesHint: {x: 0.2, y: 0, z: 4.61}
+--- !u!1 &6227605856261214041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8849700579768075982}
+  m_Layer: 0
+  m_Name: AnimAnker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8849700579768075982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6227605856261214041}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5821082091681350666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7209932956221202042
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +321,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2945611838612417790}
+  - {fileID: 5821082091681350666}
+  - {fileID: 4234871442293898179}
   - {fileID: 8182151279575704823}
   m_Father: {fileID: 8779458109269781644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,6 +364,10 @@ MonoBehaviour:
   throwPoint: {fileID: 0}
   throwForce: 5
   throwRotation: {x: 0, y: 0, z: 0}
+  baseRotation: {fileID: 0}
+  useScriptToCallTrow: 0
+  visual: {fileID: 0}
+  delay: 0.05
 --- !u!1 &9156430593858845570
 GameObject:
   m_ObjectHideFlags: 0
