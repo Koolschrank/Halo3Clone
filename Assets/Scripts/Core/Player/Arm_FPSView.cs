@@ -24,6 +24,8 @@ public class Arm_FPSView : MonoBehaviour
 	bool hasAimPosition;
     bool inAim;
 
+    public bool isLeftArm;
+
 	private void Update()
 	{
 		UpdateAim();
@@ -111,21 +113,31 @@ public class Arm_FPSView : MonoBehaviour
         weaponVisual.OnReloadWeaponStart += fps_Arms.StartReload;
         weaponVisual.OnReloadWeaponEnd += fps_Arms.StopReload;
 
-
-		if (weaponVisual.rightArmAnker != null)
-            fps_Arms.SetRightAnker(weaponVisual.rightArmAnker);
-        if (weaponVisual.leftArmAnker != null)
-            fps_Arms.SetLeftAnker(weaponVisual.leftArmAnker);
-        if (weaponVisual.reloadAnker != null)
-            fps_Arms.SetReloadAnker(weaponVisual.reloadAnker);
-
+        if (!isLeftArm)
+        {
+			if (weaponVisual.rightArmAnker != null)
+				fps_Arms.SetRightAnker(weaponVisual.rightArmAnker);
+			if (weaponVisual.leftArmAnker != null)
+				fps_Arms.SetLeftAnker(weaponVisual.leftArmAnker);
+			if (weaponVisual.reloadAnker != null)
+				fps_Arms.SetReloadAnker(weaponVisual.reloadAnker);
+		}
+		else
+		{
+			if (weaponVisual.rightArmAnker != null)
+				fps_Arms.SetLeftWeaponAnker(weaponVisual.rightArmAnker);
+		}
 
 	}
 
     public void RemoveWeapon(Weapon_Arms weapon_Arms)
     {
         if (weaponVisual == null) return;
-        Destroy(weaponVisual.gameObject);
+		if (isLeftArm)
+        {
+            fps_Arms.RemoveLeftWeaponAnker();
+		}
+		Destroy(weaponVisual.gameObject);
     }
 
 

@@ -11,10 +11,16 @@ public class FPS_Arms : MonoBehaviour
     bool inGranade;
     float granadeTransitionProgress = 0f;
 
+    public float leftHandTransitionTime = 0.1f;
+	bool hasLeftWeapon;
+    float leftHandTransitionProgress = 0f; 
+
 
 	Transform rightAnker;
     Transform leftAnker;
     Transform reloadAnker;
+    Transform leftWeaponAnker;
+    
     public GranadeAnker granadeAnker; 
 
     public SkinnedMeshRenderer armsMeshRenderer;
@@ -23,6 +29,18 @@ public class FPS_Arms : MonoBehaviour
     {
         armsMeshRenderer.enabled = true;
 		animation.AddMesh(armsMeshRenderer);
+    }
+
+    public void SetLeftWeaponAnker(Transform leftAnker)
+    {
+        this.leftWeaponAnker = leftAnker;
+        hasLeftWeapon = true;
+    }
+
+    public void RemoveLeftWeaponAnker()
+    {
+        this.leftWeaponAnker = null;
+        hasLeftWeapon = false;
     }
 
 
@@ -102,11 +120,31 @@ public class FPS_Arms : MonoBehaviour
 
 		}
 
-            Vector3 currentLeftPos = Vector3.Lerp(leftAnker.position, reloadAnker.position, reloadProgress);
+        float leftHandProgress = 0f;
+        if (hasLeftWeapon)
+        {
+            leftHandTransitionProgress += Time.deltaTime;
+            leftHandTransitionProgress = Mathf.Min(leftHandTransitionProgress, leftHandTransitionTime);
+            leftHandProgress = leftHandTransitionProgress / leftHandTransitionTime;
+        }
+        else
+        {
+            leftHandTransitionProgress -= Time.deltaTime;
+            leftHandTransitionProgress = Mathf.Max(leftHandTransitionProgress, 0f);
+            leftHandProgress = leftHandTransitionProgress / leftHandTransitionTime;
+		}
+
+		Vector3 currentLeftPos = Vector3.Lerp(leftAnker.position, reloadAnker.position, reloadProgress);
         Quaternion currentLeftRot = Quaternion.Slerp(leftAnker.rotation, reloadAnker.rotation, reloadProgress);
 
         currentLeftPos = Vector3.Lerp(currentLeftPos, granadeAnker.anker.position, granadeProgress);
         currentLeftRot = Quaternion.Slerp(currentLeftRot, granadeAnker.anker.rotation, granadeProgress);
+
+        if (leftWeaponAnker != null)
+        {
+            currentLeftPos = Vector3.Lerp(currentLeftPos, leftWeaponAnker.position, leftHandProgress);
+            currentLeftRot = Quaternion.Slerp(currentLeftRot, leftWeaponAnker.rotation, leftHandProgress);
+		}
 
 
 		// copy position and rotation from ankerts to targets
