@@ -37,8 +37,8 @@ MonoBehaviour:
     healthOverride:
       hasHealthOverride: 1
       showHealthBar: 0
-      health: 50
-      shild: 40
+      health: 60
+      shild: 100
       armor: 0
       healthRegenStartTime: 3
       shildRegenStartTime: 4.5

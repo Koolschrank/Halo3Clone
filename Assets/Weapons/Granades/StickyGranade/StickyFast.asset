@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1423fe4473e976743b6227e4eadadff6, type: 3}
   m_Name: StickyFast
   m_EditorClassIdentifier: 
-  throwDelay: 0.075
-  throwTime: 0.1875
+  throwDelay: 0.225
+  throwTime: 0.5625
   throwAngle: 0.05
   throwForce: 20
   granadePrefab: {fileID: 5187455782990611905, guid: 9b8288614a15d114eb42fa9ff7746a3b, type: 3}

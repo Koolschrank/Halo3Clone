@@ -14,8 +14,18 @@ public class HitMarkerUI : MonoBehaviour
     float awsomeSkullTimer = 0;
     [SerializeField] AnimationCurve awsomeSkullFadeCurve;
 
+    public float killMarkerScale;
+    public AnimationCurve killMarkerScaleCurve;
+    public AnimationCurve killMarkerFadeCurve;
 
-    public void ShowHitMarker(GameObject target)
+    RawImage killImiage;
+
+	private void Awake()
+	{
+		killImiage = killMarker.GetComponent<RawImage>();
+	}
+
+	public void ShowHitMarker(GameObject target)
     {
         if (!showHitMarker)
             return;
@@ -27,7 +37,10 @@ public class HitMarkerUI : MonoBehaviour
         Invoke("HideHitMarker", hitMarkerTime);
     }
 
-    public void ShowKillMarker(GameObject target)
+    float killMarkerStartTime;
+    bool killMarkerActive = false;
+
+	public void ShowKillMarker(GameObject target)
     {
         if (!showKillMarker)
             return;
@@ -40,9 +53,10 @@ public class HitMarkerUI : MonoBehaviour
 
         killMarker.SetActive(true);
         awsomeSkull.gameObject.SetActive(true);
-        Invoke("HideKillMarker", killMarkerTime);
         awsomeSkullTimer = awsomeSkullTime;
-    }
+        killMarkerStartTime = Time.time;
+        killMarkerActive = true;
+	}
 
     private void Update()
     {
@@ -60,7 +74,24 @@ public class HitMarkerUI : MonoBehaviour
                 awsomeSkull.gameObject.SetActive(false);
             }
         }
-    }
+
+        if (killMarkerActive)
+        {
+            float t = Time.time - killMarkerStartTime;
+            float percent = t / killMarkerTime;
+			float scale = killMarkerScaleCurve.Evaluate(percent);
+            Color color = killImiage.color;
+            color.a = killMarkerFadeCurve.Evaluate(percent);
+			killImiage.color = color;
+            killMarker.transform.localScale = Vector3.one * scale * killMarkerScale;
+            
+			// Hide kill marker after time ove
+            if (t > killMarkerTime)
+            {
+                HideKillMarker();
+			}
+		}
+	}
 
     void HideHitMarker()
     {
