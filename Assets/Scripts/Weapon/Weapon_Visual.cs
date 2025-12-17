@@ -28,7 +28,7 @@ public class Weapon_Visual : Weapon_Model
     public Transform leftArmAnker;
     public Transform reloadAnker;
 
-
+    public float handIndex;
 
 
 

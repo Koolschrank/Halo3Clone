@@ -121,11 +121,16 @@ public class Arm_FPSView : MonoBehaviour
 				fps_Arms.SetLeftAnker(weaponVisual.leftArmAnker);
 			if (weaponVisual.reloadAnker != null)
 				fps_Arms.SetReloadAnker(weaponVisual.reloadAnker);
+
+			fps_Arms.SetRightHandIndex(weaponVisual.handIndex);
 		}
 		else
 		{
 			if (weaponVisual.rightArmAnker != null)
 				fps_Arms.SetLeftWeaponAnker(weaponVisual.rightArmAnker);
+
+
+            
 		}
 
 	}

@@ -4183,6 +4183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee052a48ec10a9a4b80e480f9d0befad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5697026260415210863}
   rightTarget: {fileID: 9178651917589067505}
   leftTarget: {fileID: 2942550709372341394}
   reloadTransitionTime: 0.2

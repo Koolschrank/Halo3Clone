@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class FPS_Arms : MonoBehaviour
 {
-    public Transform rightTarget;
+    public Animator animator;
+	public Transform rightTarget;
     public Transform leftTarget;
     public float reloadTransitionTime = 0.1f;
     bool inReload;
@@ -31,7 +32,13 @@ public class FPS_Arms : MonoBehaviour
 		animation.AddMesh(armsMeshRenderer);
     }
 
-    public void SetLeftWeaponAnker(Transform leftAnker)
+    public void SetRightHandIndex(float index)
+    {
+               animator.SetFloat("RightHand", index);
+	}
+
+
+	public void SetLeftWeaponAnker(Transform leftAnker)
     {
         this.leftWeaponAnker = leftAnker;
         hasLeftWeapon = true;

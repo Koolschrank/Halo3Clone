@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4d673e1631c0a48ac4936c59d9f861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponVisual: {fileID: 0}
+  weaponVisual: {fileID: 3192954955445254701}
 --- !u!1 &945509811993127241
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +657,7 @@ MonoBehaviour:
   rightArmAnker: {fileID: 857589939672935946}
   leftArmAnker: {fileID: 2638426451138845154}
   reloadAnker: {fileID: 2889005559456032053}
+  handIndex: 0
 --- !u!1 &7618526555920133240
 GameObject:
   m_ObjectHideFlags: 0
